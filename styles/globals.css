@@ -61,8 +61,8 @@ body {
       }
 
       .swiper-pagination-bullet {
-        width: 55px !important;
-        height: 55px !important;
+        width: 48px !important;
+        height: 48px !important;
         text-align: center;
         line-height: 20px;
         opacity: 1 !important;
@@ -76,7 +76,7 @@ body {
 
       .swiper-pagination-bullet-active {
         color: #fff;
-        background-image: radial-gradient(75% 75% at 21.87% 25%, #FFCC77 18.94%, #FF612F 89.59%) !important;
+        background: linear-gradient(180deg, #FA7A5B 28.23%, #FF612F 66.9%) !important;
         /* border: 1px solid transparent !important; */
         border-width: 0;
       }
@@ -99,4 +99,8 @@ body {
     margin-left: 120px;
     width: 100% !important;
   }
+}
+.absolute{
+  position: absolute;
+  inset: 0;
 }

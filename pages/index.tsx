@@ -10,14 +10,15 @@ import "swiper/css/bundle";
 import 'swiper/css';
 import "swiper/css/pagination";
 import logoItem1 from "../public/logoitem1.png"
+import itemImage from "../public/item.png"
 const Home: NextPage = () => {
   const [indexActive, setIndexActive] = useState(0);
-  const listIcon = [
-    <Image key="1" src={logoItem1.src} width={32} height={32} />,
-    <Image key="1" src={logoItem1.src} width={32} height={32} />,
-    <Image key="1" src={logoItem1.src} width={32} height={32} />,
-    <Image key="1" src={logoItem1.src} width={32} height={32} />,
-  ]
+  // const listIcon = [
+  //   <Image key="1" src={logoItem1.src} width={32} height={32} />,
+  //   <Image key="1" src={logoItem1.src} width={32} height={32} />,
+  //   <Image key="1" src={logoItem1.src} width={32} height={32} />,
+  //   <Image key="1" src={logoItem1.src} width={32} height={32} />,
+  // ]
   const pagination = {
     clickable: true,
     renderBullet: function (index: any, className: any) {
@@ -37,7 +38,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.png" />
       </Head>
       <div className={styles.wrapperContent} >
-        <div style={{ transition: ".5s all", transform: `translateY(-${indexActive * 20}%)` }}>
+        <div style={{ transition: ".5s all cubic-bezier(.88,-0.68,.17,1.48)", transform: `translateY(-${indexActive * 20}%)` }}>
 
           <div className={styles.content}>
 
@@ -85,33 +86,19 @@ const Home: NextPage = () => {
         className="mySwiper"
       >
         <SwiperSlide >
-          <div className={styles.item} style={{ backgroundImage: "url(/item.png)" }}>
-
-          </div>
+          <img src="/item.png" className='absolute' alt="" />
         </SwiperSlide>
         <SwiperSlide >
-          <div className={styles.item} style={{ backgroundImage: "url(/item2.png)" }}>
-            {/* <img src="/logomain.png" style={{ width: "225.5px", height: "48px", marginTop: "40px", marginLeft: "120px" }} alt="" />
-            <button className={styles.button}>PITCH DECK</button> */}
-          </div>
+          <img src="/item2.png" className='absolute' alt="" />
         </SwiperSlide>
         <SwiperSlide >
-          <div className={styles.item} style={{ backgroundImage: "url(/item.png)" }}>
-            {/* <img src="/logomain.png" style={{ width: "225.5px", height: "48px", marginTop: "40px", marginLeft: "120px" }} alt="" />
-            <button className={styles.button}>PITCH DECK</button> */}
-          </div>
+          <img src="/item.png" className='absolute' alt="" />
         </SwiperSlide>
         <SwiperSlide >
-          <div className={styles.item} style={{ backgroundImage: "url(/item.png)" }}>
-            {/* <img src="/logomain.png" style={{ width: "225.5px", height: "48px", marginTop: "40px", marginLeft: "120px" }} alt="" />
-            <button className={styles.button}>PITCH DECK</button> */}
-          </div>
+          <img src="/item.png" className='absolute' alt="" />
         </SwiperSlide>
         <SwiperSlide >
-          <div className={styles.item} style={{ backgroundImage: "url(/item.png)" }}>
-            {/* <img src="/logomain.png" style={{ width: "225.5px", height: "48px", marginTop: "40px", marginLeft: "120px" }} alt="" />
-            <button className={styles.button}>PITCH DECK</button> */}
-          </div>
+          <img src="/item.png" className='absolute' alt="" />
         </SwiperSlide>
       </Swiper>
     </div>
