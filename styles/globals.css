@@ -2,7 +2,8 @@
 @font-face {
 	font-family: Electrofied;
 	font-weight: 700;
-	src: url('../public/fonts/Electrofied Bold.ttf');
+	src: local('Electrofied Bold'),
+		url('../public/fonts/Electrofied Bold.ttf') format('woff');
 	font-display: swap;
 }
 
