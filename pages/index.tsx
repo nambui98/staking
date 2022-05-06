@@ -13,10 +13,10 @@ import logoItem1 from "../public/logoitem1.png"
 const Home: NextPage = () => {
   const [indexActive, setIndexActive] = useState(0);
   const listIcon = [
-    <Image src={logoItem1.src} width={32} height={32} />,
-    <Image src={logoItem1.src} width={32} height={32} />,
-    <Image src={logoItem1.src} width={32} height={32} />,
-    <Image src={logoItem1.src} width={32} height={32} />,
+    <Image key="1" src={logoItem1.src} width={32} height={32} />,
+    <Image key="1" src={logoItem1.src} width={32} height={32} />,
+    <Image key="1" src={logoItem1.src} width={32} height={32} />,
+    <Image key="1" src={logoItem1.src} width={32} height={32} />,
   ]
   const pagination = {
     clickable: true,
@@ -49,7 +49,7 @@ const Home: NextPage = () => {
 
             <h1>Run2Earn</h1>
             <p>Exercising with a friend is a great way to keep
-              you motivated. Let's jog and run and earn tokens.</p>
+              you motivated. Let&apos;s jog and run and earn tokens.</p>
           </div>
           <div className={styles.content}>
 
