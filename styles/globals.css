@@ -1,16 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600&display=swap');
+#app { height: 100% }
 html,
 body {
-  padding: 0;
+  position: relative;
+  height: 100%;
+
+}
+
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  padding: 0;
+  color: #fff;
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
+*{
+  margin: 0;
+  padding: 0;
 }
+.swiper {
+        width: 100%;
+        height: 100%;
+      }
 
-* {
-  box-sizing: border-box;
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .swiper-pagination-bullet {
+        width: 55px !important;
+        height: 55px !important;
+        text-align: center;
+        line-height: 20px;
+        opacity: 1 !important;
+        background: rgba(255, 255, 255, 0.2) !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border: 1px solid #fff;
+        margin-left: 32px !important;
+      }
+
+      .swiper-pagination-bullet-active {
+        color: #fff;
+        background-image: radial-gradient(75% 75% at 21.87% 25%, #FFCC77 18.94%, #FF612F 89.59%) !important;
+        /* border: 1px solid transparent !important; */
+        border-width: 0;
+      }
+
+.mySwiper .swiper-pagination{
+  position: absolute;
+  bottom: 80px !important;
+  right: 120px;
+  left: 100% !important;
+  height: fit-content;
+  width: fit-content !important;
+  transform: translateX( calc(-100% - 120px));
 }
