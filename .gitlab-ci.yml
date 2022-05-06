@@ -1,0 +1,18 @@
+stages:
+  - deploy
+
+deploy_production:
+  stage: deploy
+  image: node:4.2.2
+  script:
+    # - yarn remove eslint && yarn add --dev eslint@"<8.0.0"
+    - yarn install
+    - yarn build
+    - kill -9 $(ps -ef | grep -i 'next start' | grep -v grep | awk '{print $2}') || true
+    - kill -9 $(ps -ef | grep -i 'yarn start' | grep -v grep | awk '{print $2}') || true
+    - yarn start > /dev/null 2>&1 &
+    - 'curl -X POST "https://api.cloudflare.com/client/v4/zones/a2df40bc458243b60608a5ebbb5f36f2/purge_cache" -H "Authorization: Bearer $CF_CACHE_TOKEN"  -H "Content-Type:application/json" --data "{\"purge_everything\":true}"'
+  tags:
+    - nextverse-prod-only
+  only:
+    - master
