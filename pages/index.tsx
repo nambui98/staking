@@ -36,6 +36,8 @@ const Home: NextPage = () => {
         <title>Move to earn</title>
         <meta name="description" content="Make by Versehub" />
         <link rel="icon" href="/favicon.png" />
+
+        <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500&display=swap" rel="stylesheet" />
       </Head>
       <div className={styles.wrapperContent} >
         <div style={{ transition: ".5s all cubic-bezier(.88,-0.68,.17,1.48)", transform: `translateY(-${indexActive * 20}%)` }}>
