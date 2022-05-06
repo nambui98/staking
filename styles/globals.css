@@ -3,10 +3,14 @@
 	font-family: Electrofied;
 	font-weight: 700;
 	src: local('Electrofied Bold'),
-		url('../public/fonts/Electrofied Bold.ttf') format('woff');
-	font-display: swap;
+		url('../public/fonts/Electrofied\ Bold.ttf') format('truetype');
 }
-
+@font-face {
+	font-family: Electrofied;
+	font-weight: 300;
+	src: local('Electrofied Bold'),
+		url('../public/fonts/Electrofied\ Regular.ttf') format('truetype');
+}
 #app { height: 100% }
 html,
 body {
