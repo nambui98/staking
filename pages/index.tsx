@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import React, { useState } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import styles from '../styles/Home.module.css'
@@ -10,16 +9,8 @@ import "swiper/css/bundle";
 import 'swiper/css';
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
-import logoItem1 from "../public/logoitem1.png"
-import itemImage from "../public/item.png"
 const Home: NextPage = () => {
   const [indexActive, setIndexActive] = useState(0);
-  // const listIcon = [
-  //   <Image key="1" src={logoItem1.src} width={32} height={32} />,
-  //   <Image key="1" src={logoItem1.src} width={32} height={32} />,
-  //   <Image key="1" src={logoItem1.src} width={32} height={32} />,
-  //   <Image key="1" src={logoItem1.src} width={32} height={32} />,
-  // ]
   const pagination = {
     clickable: true,
     renderBullet: function (index: any, className: any) {
@@ -27,10 +18,6 @@ const Home: NextPage = () => {
       return '<span class="' + className + '">' + '<img src="/icon' + idx + '.png"/>' + "</span>";
     },
   };
-  // useEffect(() => {
-
-  // }, [indexActive])
-
   return (
     <div className={styles.container}>
       <Head>
