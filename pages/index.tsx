@@ -5,9 +5,10 @@ import Image from 'next/image'
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import styles from '../styles/Home.module.css'
-import { Pagination, Autoplay } from "swiper";
+import { Pagination, Autoplay, EffectFade } from "swiper";
 import "swiper/css/bundle";
 import 'swiper/css';
+import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import logoItem1 from "../public/logoitem1.png"
 import itemImage from "../public/item.png"
@@ -79,9 +80,11 @@ const Home: NextPage = () => {
       <Swiper
         autoplay={{
           "delay": 2500,
+          disableOnInteraction: false,
         }}
+        effect={"fade"}
         pagination={pagination}
-        modules={[Pagination, Autoplay]}
+        modules={[Pagination, Autoplay, EffectFade]}
         onSlideChange={(e) => {
           setIndexActive(e.activeIndex)
         }}
