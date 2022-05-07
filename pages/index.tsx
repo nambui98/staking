@@ -22,9 +22,23 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <Head>
         <title>Befitter</title>
-        <meta name="description" content="Make by Versehub" />
-        <meta property="og:title" content="Move to earn" />
+        <meta name="description" content="In Befitter, your steps are worth more than you think -- exercising and moving outdoors
+  can now earn anyone tokens anytime, anywhere. We believe this simple design can nudge millions into healthier
+  lifestyles and bring them to the Web3 world." />
+        <meta property="og:title" content="Befitter is a Web3 lifestyle app with Social-Fi and Game-Fi elements" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.befitter.io/" />
         <meta property="og:image" content="https://befitter.io/item.png" />
+        <meta property="og:description" content="In Befitter, your steps are worth more than you think -- exercising and moving outdoors
+  can now earn anyone tokens anytime, anywhere. We believe this simple design can nudge millions into healthier
+  lifestyles and bring them to the Web3 world." />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content="Befitter is a Web3 lifestyle app with Social-Fi and Game-Fi elements" />
+        <meta property="twitter:description" content="In Befitter, your steps are worth more than you think -- exercising and moving outdoors
+  can now earn anyone tokens anytime, anywhere. We believe this simple design can nudge millions into healthier
+  lifestyles and bring them to the Web3 world." />
+        <meta property="twitter:image" content="https://befitter.io/item.png" />
         <link rel="icon" href="/favicon.png" />
 
         <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500&display=swap" rel="stylesheet" />
