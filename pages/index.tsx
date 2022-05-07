@@ -21,8 +21,10 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Move to earn</title>
+        <title>Befitter</title>
         <meta name="description" content="Make by Versehub" />
+        <meta property="og:title" content="Move to earn" />
+        <meta property="og:image" content="/item.png" />
         <link rel="icon" href="/favicon.png" />
 
         <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500&display=swap" rel="stylesheet" />
