@@ -9,6 +9,7 @@ import "swiper/css/bundle";
 import 'swiper/css';
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
+import { toast } from 'react-toastify';
 const Home: NextPage = () => {
   const [indexActive, setIndexActive] = useState(0);
   const pagination = {
@@ -79,7 +80,18 @@ const Home: NextPage = () => {
         </div>
       </div>
       <img src="/logomain.png" className={styles.logo} alt="" />
-      <button className={styles.button}>PITCH DECK</button>
+      <button className={styles.button} onClick={() => {
+        toast('COMING SOON!', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+
+        });
+      }}>PITCH DECK</button>
       <Swiper
         autoplay={{
           "delay": 2500,
