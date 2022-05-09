@@ -10,6 +10,10 @@ import 'swiper/css';
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import { toast } from 'react-toastify';
+enum typeSlide {
+  img = 1,
+  video = 2,
+}
 const Home: NextPage = () => {
   const [indexActive, setIndexActive] = useState(0);
   const pagination = {
@@ -19,6 +23,28 @@ const Home: NextPage = () => {
       return '<span class="' + className + '">' + '<img src="/icon' + idx + '.png"/>' + "</span>";
     },
   };
+  const dataSlide = [
+    {
+      link: "/walking.mp4",
+      type: typeSlide.video
+    },
+    {
+      link: "/item4.mp4",
+      type: typeSlide.video
+    },
+    {
+      link: "/item3.mp4",
+      type: typeSlide.video
+    },
+    {
+      link: "/item2.mp4",
+      type: typeSlide.video
+    },
+    {
+      link: "/item.png",
+      type: typeSlide.img
+    }
+  ]
   return (
     <div className={styles.container}>
       <Head>
@@ -94,7 +120,7 @@ const Home: NextPage = () => {
       }}>PITCH DECK</button>
       <Swiper
         autoplay={{
-          "delay": 2500,
+          "delay": 4500,
           disableOnInteraction: false,
         }}
         effect={"fade"}
@@ -105,8 +131,32 @@ const Home: NextPage = () => {
         }}
         className="mySwiper"
       >
-        <SwiperSlide >
-          <img src="/item.png" className='absolute' alt="" />
+        {
+          dataSlide.map((slide) => slide.type === typeSlide.video ? <SwiperSlide >
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className='absolute'
+            >
+              <source src={slide.link} type='video/mp4; codecs="hvc1"' />
+              <source src={slide.link} type="video/webm" />
+            </video>
+          </SwiperSlide> : <SwiperSlide >
+            <img src={slide.link} className='absolute' alt="" />
+          </SwiperSlide>)
+        }
+        {/* <SwiperSlide >
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+          >
+            <source src={"/walking.mp4"} type='video/mp4; codecs="hvc1"' />
+            <source src={"/walking.mp4"} type="video/webm" />
+          </video>
         </SwiperSlide>
         <SwiperSlide >
           <img src="/item2.png" className='absolute' alt="" />
@@ -119,7 +169,7 @@ const Home: NextPage = () => {
         </SwiperSlide>
         <SwiperSlide >
           <img src="/item.png" className='absolute' alt="" />
-        </SwiperSlide>
+        </SwiperSlide> */}
       </Swiper>
     </div>
   )
