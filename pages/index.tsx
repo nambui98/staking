@@ -92,28 +92,28 @@ const Home: NextPage = () => {
 
             <div className={styles.content}>
 
-              <h1>Walk2Earn</h1>
+              <h1>Walk<span>2</span>Earn</h1>
               <p>Starting your day with a short walk can
                 offer a number of health benefits & tokens.</p>
             </div>
             <div className={styles.content}>
 
-              <h1>Run2Earn</h1>
+              <h1>Run<span>2</span>Earn</h1>
               <p>Exercising with a friend is a great way to keep
                 you motivated. Let&apos;s jog and run and earn tokens.</p>
             </div>
             <div className={styles.content}>
-              <h1>Cycle2Earn</h1>
+              <h1>Cycle<span>2</span>Earn</h1>
               <p>Regular cycling provides numerous health benefits
                 as your heart, blood vessels and lungs all get a workout.</p>
             </div>
             <div className={styles.content}>
-              <h1>Draw2Earn</h1>
+              <h1>Draw<span>2</span>Earn</h1>
               <p>Move and draw amazing artworks on the map.
                 Then you may sell it on the market to get tokens.</p>
             </div>
             <div className={styles.content}>
-              <h1>Sleep2Earn</h1>
+              <h1>Sleep<span>2</span>Earn</h1>
               <p>End your daily routine by a deep sleep.
                 We pay you to sleep scientifically.</p>
             </div>
