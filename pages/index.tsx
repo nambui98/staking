@@ -16,7 +16,12 @@ enum typeSlide {
 }
 const Home: NextPage = () => {
   const [indexActive, setIndexActive] = useState(0);
-  const refListSlide = useRef(null);
+  const [durationActive, setDurationActive] = useState(11000);
+  const refSlide1 = useRef<any>(null);
+  const refSlide2 = useRef<any>(null);
+  const refSlide3 = useRef<any>(null);
+  const refSlide4 = useRef<any>(null);
+  const refSlide5 = useRef<any>(null);
   const pagination = {
     clickable: true,
     renderBullet: function (index: any, className: any) {
@@ -27,27 +32,30 @@ const Home: NextPage = () => {
   const dataSlide = [
     {
       link: "/walking.mp4",
-      type: typeSlide.video
+      type: typeSlide.video,
+      ref: refSlide1
     },
     {
       link: "/item4.mp4",
-      type: typeSlide.video
+      type: typeSlide.video,
+      ref: refSlide2
     },
     {
       link: "/cycle.mp4",
-      type: typeSlide.video
+      type: typeSlide.video,
+      ref: refSlide3
     },
     {
       link: "/item2.mp4",
-      type: typeSlide.video
+      type: typeSlide.video,
+      ref: refSlide4
     },
     {
       link: "/item5.jpg",
-      type: typeSlide.img
+      type: typeSlide.img,
+      // ref: refSlide5
     }
   ]
-  console.log(indexActive);
-
 
   return (
     <div className={styles.container}>
@@ -74,6 +82,9 @@ const Home: NextPage = () => {
 
         <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500&display=swap" rel="stylesheet" />
       </Head>
+      <div className='mobile'>
+        <h1>Phone devices are not supported yet</h1>
+      </div>
       <div className={styles.wrapperContent} >
         <div style={{ transition: ".7s all cubic-bezier(.88,-0.68,.17,1.48)", transform: `translateY(-${indexActive * 20}%)` }}>
 
@@ -90,19 +101,16 @@ const Home: NextPage = () => {
               you motivated. Let&apos;s jog and run and earn tokens.</p>
           </div>
           <div className={styles.content}>
-
             <h1>Cycle2Earn</h1>
             <p>Regular cycling provides numerous health benefits
               as your heart, blood vessels and lungs all get a workout.</p>
           </div>
           <div className={styles.content}>
-
             <h1>Draw2Earn</h1>
             <p>Move and draw amazing artworks on the map.
               Then you may sell it on the market to get tokens.</p>
           </div>
           <div className={styles.content}>
-
             <h1>Sleep2Earn</h1>
             <p>End your daily routine by a deep sleep.
               We pay you to sleep scientifically.</p>
@@ -124,35 +132,39 @@ const Home: NextPage = () => {
       }}>PITCH DECK</button>
       <Swiper
         autoplay={{
-          "delay": 4500,
+          "delay": dataSlide[indexActive].type === typeSlide.img ? 3000 : 6000,
           disableOnInteraction: false,
         }}
         effect={"fade"}
         pagination={pagination}
         modules={[Pagination, Autoplay, EffectFade]}
         onSlideChange={(e) => {
+          dataSlide[e.previousIndex].ref?.current?.pause();
+          dataSlide[e.activeIndex].ref?.current?.play();
+          setTimeout(() => { dataSlide[e.previousIndex].ref?.current?.load(); }, 500)
+          // setDurationActive(dataSlide[e.activeIndex].ref?.current?.duration * 1000 || 3000)
           setIndexActive(e.activeIndex)
         }}
         className="mySwiper"
       >
-        <div ref={refListSlide}>
-          {
-            dataSlide.map((slide, index) => slide.type === typeSlide.video ? <SwiperSlide >
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className='absolute'
-              >
-                <source src={slide.link} type='video/mp4; codecs="hvc1"' />
-                <source src={slide.link} type="video/webm" />
-              </video>
-            </SwiperSlide> : <SwiperSlide >
-              <img src={slide.link} className='absolute' alt="" />
-            </SwiperSlide>)
-          }
-        </div>
+        {
+          dataSlide.map((slide, index) => slide.type === typeSlide.video ? <SwiperSlide >
+            <video
+              id={`video${index}`}
+              ref={slide.ref}
+              autoPlay={index === 0}
+              loop
+              muted
+              playsInline
+              className='absolute'
+            >
+              <source src={slide.link} type='video/mp4; codecs="hvc1"' />
+              <source src={slide.link} type="video/webm" />
+            </video>
+          </SwiperSlide> : <SwiperSlide >
+            <img src={slide.link} className='absolute' alt="" />
+          </SwiperSlide>)
+        }
       </Swiper>
     </div>
   )
