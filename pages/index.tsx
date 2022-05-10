@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Head from 'next/head'
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.scss'
 import { Pagination, Autoplay, EffectFade } from "swiper";
 import "swiper/css/bundle";
 import 'swiper/css';
@@ -16,6 +16,7 @@ enum typeSlide {
 }
 const Home: NextPage = () => {
   const [indexActive, setIndexActive] = useState(0);
+  const refListSlide = useRef(null);
   const pagination = {
     clickable: true,
     renderBullet: function (index: any, className: any) {
@@ -33,7 +34,7 @@ const Home: NextPage = () => {
       type: typeSlide.video
     },
     {
-      link: "/item3.mp4",
+      link: "/cycle.mp4",
       type: typeSlide.video
     },
     {
@@ -41,10 +42,13 @@ const Home: NextPage = () => {
       type: typeSlide.video
     },
     {
-      link: "/item.png",
+      link: "/item5.jpg",
       type: typeSlide.img
     }
   ]
+  console.log(indexActive);
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -71,7 +75,7 @@ const Home: NextPage = () => {
         <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500&display=swap" rel="stylesheet" />
       </Head>
       <div className={styles.wrapperContent} >
-        <div style={{ transition: ".5s all cubic-bezier(.88,-0.68,.17,1.48)", transform: `translateY(-${indexActive * 20}%)` }}>
+        <div style={{ transition: ".7s all cubic-bezier(.88,-0.68,.17,1.48)", transform: `translateY(-${indexActive * 20}%)` }}>
 
           <div className={styles.content}>
 
@@ -87,7 +91,7 @@ const Home: NextPage = () => {
           </div>
           <div className={styles.content}>
 
-            <h1>Bycle2Earn</h1>
+            <h1>Cycle2Earn</h1>
             <p>Regular cycling provides numerous health benefits
               as your heart, blood vessels and lungs all get a workout.</p>
           </div>
@@ -131,45 +135,24 @@ const Home: NextPage = () => {
         }}
         className="mySwiper"
       >
-        {
-          dataSlide.map((slide) => slide.type === typeSlide.video ? <SwiperSlide >
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className='absolute'
-            >
-              <source src={slide.link} type='video/mp4; codecs="hvc1"' />
-              <source src={slide.link} type="video/webm" />
-            </video>
-          </SwiperSlide> : <SwiperSlide >
-            <img src={slide.link} className='absolute' alt="" />
-          </SwiperSlide>)
-        }
-        {/* <SwiperSlide >
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-          >
-            <source src={"/walking.mp4"} type='video/mp4; codecs="hvc1"' />
-            <source src={"/walking.mp4"} type="video/webm" />
-          </video>
-        </SwiperSlide>
-        <SwiperSlide >
-          <img src="/item2.png" className='absolute' alt="" />
-        </SwiperSlide>
-        <SwiperSlide >
-          <img src="/item.png" className='absolute' alt="" />
-        </SwiperSlide>
-        <SwiperSlide >
-          <img src="/item.png" className='absolute' alt="" />
-        </SwiperSlide>
-        <SwiperSlide >
-          <img src="/item.png" className='absolute' alt="" />
-        </SwiperSlide> */}
+        <div ref={refListSlide}>
+          {
+            dataSlide.map((slide, index) => slide.type === typeSlide.video ? <SwiperSlide >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className='absolute'
+              >
+                <source src={slide.link} type='video/mp4; codecs="hvc1"' />
+                <source src={slide.link} type="video/webm" />
+              </video>
+            </SwiperSlide> : <SwiperSlide >
+              <img src={slide.link} className='absolute' alt="" />
+            </SwiperSlide>)
+          }
+        </div>
       </Swiper>
     </div>
   )
