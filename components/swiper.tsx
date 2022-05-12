@@ -15,76 +15,17 @@ type slide = {
     content: ReactNode
 }
 
-type Props = { indexActive: number, setIndexActive: Function }
+type Props = { indexActive: number, setIndexActive: Function, data: slide[] }
 
-const SwiperDynamic = ({ indexActive, setIndexActive }: Props) => {
-    // const [indexActive, setIndexActive] = useState(0);
+const SwiperDynamic = ({ indexActive, setIndexActive, data }: Props) => {
     const isMobile = useMediaQuery({ maxWidth: 700 })
-    // const [isMobile, setIsMobile] = useState<boolean>(false);
-    const refSlide1 = useRef<any>(null);
-    const refSlide2 = useRef<any>(null);
-    const refSlide3 = useRef<any>(null);
-    const refSlide4 = useRef<any>(null);
-    const refSlide5 = useRef<any>(null);
-
     const pagination = {
         clickable: true,
         renderBullet: function (index: any, className: any) {
             return '<span class="' + className + '">' + '<img src="' + data[index]?.icon + '"/>' + "</span>";
         },
     };
-    const data = [
-        {
-            link: "/videos/walking.mp4",
-            type: typeSlide.video,
-            ref: refSlide1,
-            icon: "/images/walk.svg",
-            content: <>
-                <h1>Walk<span>2</span>Earn</h1>
-                <p>Starting your day with a short walk can
-                    offer a number of health benefits & tokens.</p>
-            </>
-        },
-        {
-            link: "/videos/item4.mp4",
-            linkMB: "/videos/runMobile.mkv",
-            type: typeSlide.video,
-            ref: refSlide2,
-            icon: "/images/run.svg",
-            content: <><h1>Run<span>2</span>Earn</h1>
-                <p>Exercising with a friend is a great way to keep
-                    you motivated. Let&apos;s jog and run and earn tokens.</p></>
-        },
-        {
-            link: "/videos/cycle.mp4",
-            linkMB: "/videos/cycleMobile.mkv",
-            type: typeSlide.video,
-            ref: refSlide3,
-            icon: "/images/cycle.svg",
-            content: <> <h1>Cycle<span>2</span>Earn</h1>
-                <p>Regular cycling provides numerous health benefits
-                    as your heart, blood vessels and lungs all get a workout.</p></>
-        },
-        {
-            link: "/videos/item2.mp4",
-            type: typeSlide.video,
-            ref: refSlide4,
-            icon: "/images/draw.svg",
-            content: <>
-                <h1>Draw<span>2</span>Earn</h1>
-                <p>Move and draw amazing artworks on the map.
-                    Then you may sell it on the market to get tokens.</p></>
-        },
-        {
-            link: "/images/item5.jpg",
-            linkMB: "/images/sleepMobile.png",
-            type: typeSlide.img,
-            icon: "/images/sleep.svg",
-            content: <><h1>Sleep<span>2</span>Earn</h1>
-                <p>End your daily routine by a deep sleep.
-                    We pay you to sleep scientifically.</p></>
-        }
-    ]
+
 
 
     return (

@@ -27,95 +27,63 @@ type slide = {
 
 const Home: NextPage = () => {
   const [indexActive, setIndexActive] = useState(0);
-  const [durationActive, setDurationActive] = useState(11000);
-  const [data, setData] = useState<slide[]>([]);
-  const [isMobile, setIsMobile] = useState<boolean>(true);
   const refSlide1 = useRef<any>(null);
   const refSlide2 = useRef<any>(null);
   const refSlide3 = useRef<any>(null);
   const refSlide4 = useRef<any>(null);
   const refSlide5 = useRef<any>(null);
-  // const isDesktopOrLaptop = useMediaQuery({ maxWidth: 700 })
-  // console.log(isDesktopOrLaptop, "isDesktopOrLaptop");
-
-  useEffect(() => {
-    if (window.innerWidth < 700) {
-      // debugger
-      setIsMobile(true)
-    } else {
-      setIsMobile(false)
-
+  const data = [
+    {
+      link: "/videos/walking.mp4",
+      type: typeSlide.video,
+      ref: refSlide1,
+      icon: "/images/walk.svg",
+      content: <>
+        <h1>Walk<span>2</span>Earn</h1>
+        <p>Starting your day with a short walk can
+          offer a number of health benefits & tokens.</p>
+      </>
+    },
+    {
+      link: "/videos/item4.mp4",
+      linkMB: "/videos/runMobile.mkv",
+      type: typeSlide.video,
+      ref: refSlide2,
+      icon: "/images/run.svg",
+      content: <><h1>Run<span>2</span>Earn</h1>
+        <p>Exercising with a friend is a great way to keep
+          you motivated. Let&apos;s jog and run and earn tokens.</p></>
+    },
+    {
+      link: "/videos/cycle.mp4",
+      linkMB: "/videos/cycleMobile.mkv",
+      type: typeSlide.video,
+      ref: refSlide3,
+      icon: "/images/cycle.svg",
+      content: <> <h1>Cycle<span>2</span>Earn</h1>
+        <p>Regular cycling provides numerous health benefits
+          as your heart, blood vessels and lungs all get a workout.</p></>
+    },
+    {
+      link: "/videos/item2.mp4",
+      type: typeSlide.video,
+      ref: refSlide4,
+      icon: "/images/draw.svg",
+      content: <>
+        <h1>Draw<span>2</span>Earn</h1>
+        <p>Move and draw amazing artworks on the map.
+          Then you may sell it on the market to get tokens.</p></>
+    },
+    {
+      link: "/images/item5.jpg",
+      linkMB: "/images/sleepMobile.png",
+      type: typeSlide.img,
+      icon: "/images/sleep.svg",
+      content: <><h1>Sleep<span>2</span>Earn</h1>
+        <p>End your daily routine by a deep sleep.
+          We pay you to sleep scientifically.</p></>
     }
-    window.addEventListener('resize', (e) => {
-      console.log(window.innerWidth);
-      if (window.innerWidth < 700) {
-        setIsMobile(true)
-      }
-    })
-    return () => {
-      window.removeEventListener('resize', () => {
-
-      })
-    }
-  }, [])
-  useEffect(() => {
-    let data: slide[];
-
-    data = [
-      {
-        link: "/videos/walking.mp4",
-        type: typeSlide.video,
-        ref: refSlide1,
-        icon: "/images/walk.svg",
-        content: <>
-          <h1>Walk<span>2</span>Earn</h1>
-          <p>Starting your day with a short walk can
-            offer a number of health benefits & tokens.</p>
-        </>
-      },
-      {
-        link: "/videos/item4.mp4",
-        linkMB: "/videos/runMobile.mp4",
-        type: typeSlide.video,
-        ref: refSlide2,
-        icon: "/images/run.svg",
-        content: <><h1>Run<span>2</span>Earn</h1>
-          <p>Exercising with a friend is a great way to keep
-            you motivated. Let&apos;s jog and run and earn tokens.</p></>
-      },
-      {
-        link: "/videos/cycle.mp4",
-        type: typeSlide.video,
-        ref: refSlide3,
-        icon: "/images/cycle.svg",
-        content: <> <h1>Cycle<span>2</span>Earn</h1>
-          <p>Regular cycling provides numerous health benefits
-            as your heart, blood vessels and lungs all get a workout.</p></>
-      },
-      {
-        link: "/videos/item2.mp4",
-        type: typeSlide.video,
-        ref: refSlide4,
-        icon: "/images/draw.svg",
-        content: <>
-          <h1>Draw<span>2</span>Earn</h1>
-          <p>Move and draw amazing artworks on the map.
-            Then you may sell it on the market to get tokens.</p></>
-      },
-      {
-        link: "/images/item5.jpg",
-        type: typeSlide.img,
-        icon: "/images/sleep.svg",
-        content: <><h1>Sleep<span>2</span>Earn</h1>
-          <p>End your daily routine by a deep sleep.
-            We pay you to sleep scientifically.</p></>
-      }
-    ]
-    setData(data)
-  }, [isMobile])
-
-
-
+  ]
   return (
     <div className={styles.container}>
       <Head>
@@ -166,7 +134,7 @@ const Home: NextPage = () => {
             progress: undefined,
           });
         }}>PITCH DECK</button>
-        <DynamicSwiper indexActive={indexActive} setIndexActive={setIndexActive} />
+        <DynamicSwiper indexActive={indexActive} setIndexActive={setIndexActive} data={data} />
       </div>
     </div>
   )
