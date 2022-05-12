@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import React, { useRef, useState } from 'react'
+import React, { ReactNode, useRef, useState } from 'react'
 import Head from 'next/head'
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -14,6 +14,14 @@ enum typeSlide {
   img = 1,
   video = 2,
 }
+type slide = {
+  link: string,
+  type: typeSlide,
+  ref?: any,
+  icon: string,
+  content: ReactNode
+}
+
 const Home: NextPage = () => {
   const [indexActive, setIndexActive] = useState(0);
   const [durationActive, setDurationActive] = useState(11000);
@@ -22,40 +30,62 @@ const Home: NextPage = () => {
   const refSlide3 = useRef<any>(null);
   const refSlide4 = useRef<any>(null);
   const refSlide5 = useRef<any>(null);
-  const pagination = {
-    clickable: true,
-    renderBullet: function (index: any, className: any) {
-      const idx = index + 1;
-      return '<span class="' + className + '">' + '<img src="/images/icon' + idx + '.png"/>' + "</span>";
-    },
-  };
-  const dataSlide = [
+  const dataSlide: slide[] = [
     {
       link: "/videos/walking.mp4",
       type: typeSlide.video,
-      ref: refSlide1
+      ref: refSlide1,
+      icon: "/images/walk.svg",
+      content: <>
+        <h1>Walk<span>2</span>Earn</h1>
+        <p>Starting your day with a short walk can
+          offer a number of health benefits & tokens.</p>
+      </>
     },
     {
       link: "/videos/item4.mp4",
       type: typeSlide.video,
-      ref: refSlide2
+      ref: refSlide2,
+      icon: "/images/run.svg",
+      content: <><h1>Run<span>2</span>Earn</h1>
+        <p>Exercising with a friend is a great way to keep
+          you motivated. Let&apos;s jog and run and earn tokens.</p></>
     },
     {
       link: "/videos/cycle.mp4",
       type: typeSlide.video,
-      ref: refSlide3
+      ref: refSlide3,
+      icon: "/images/cycle.svg",
+      content: <> <h1>Cycle<span>2</span>Earn</h1>
+        <p>Regular cycling provides numerous health benefits
+          as your heart, blood vessels and lungs all get a workout.</p></>
     },
     {
       link: "/videos/item2.mp4",
       type: typeSlide.video,
-      ref: refSlide4
+      ref: refSlide4,
+      icon: "/images/draw.svg",
+      content: <>
+        <h1>Draw<span>2</span>Earn</h1>
+        <p>Move and draw amazing artworks on the map.
+          Then you may sell it on the market to get tokens.</p></>
     },
     {
       link: "/images/item5.jpg",
       type: typeSlide.img,
-      // ref: refSlide5
+      icon: "/images/sleep.svg",
+      content: <><h1>Sleep<span>2</span>Earn</h1>
+        <p>End your daily routine by a deep sleep.
+          We pay you to sleep scientifically.</p></>
     }
   ]
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index: any, className: any) {
+      return '<span class="' + className + '">' + '<img src="' + dataSlide[index].icon + '"/>' + "</span>";
+    },
+  };
+
 
   return (
     <div className={styles.container}>
@@ -89,34 +119,13 @@ const Home: NextPage = () => {
 
         <div className={styles.wrapperContent} >
           <div style={{ transition: ".7s all cubic-bezier(.88,-0.68,.17,1.48)", transform: `translateY(-${indexActive * 20}%)` }}>
+            {
+              dataSlide.map((item: slide, index: number) => <div key={index} className={styles.content}>
+                {item.content}
 
-            <div className={styles.content}>
+              </div>)
+            }
 
-              <h1>Walk<span>2</span>Earn</h1>
-              <p>Starting your day with a short walk can
-                offer a number of health benefits & tokens.</p>
-            </div>
-            <div className={styles.content}>
-
-              <h1>Run<span>2</span>Earn</h1>
-              <p>Exercising with a friend is a great way to keep
-                you motivated. Let&apos;s jog and run and earn tokens.</p>
-            </div>
-            <div className={styles.content}>
-              <h1>Cycle<span>2</span>Earn</h1>
-              <p>Regular cycling provides numerous health benefits
-                as your heart, blood vessels and lungs all get a workout.</p>
-            </div>
-            <div className={styles.content}>
-              <h1>Draw<span>2</span>Earn</h1>
-              <p>Move and draw amazing artworks on the map.
-                Then you may sell it on the market to get tokens.</p>
-            </div>
-            <div className={styles.content}>
-              <h1>Sleep<span>2</span>Earn</h1>
-              <p>End your daily routine by a deep sleep.
-                We pay you to sleep scientifically.</p>
-            </div>
           </div>
         </div>
         <img src="/images/logomain.png" className={styles.logo} alt="" />
@@ -129,7 +138,6 @@ const Home: NextPage = () => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-
           });
         }}>PITCH DECK</button>
         <Swiper
