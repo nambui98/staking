@@ -46,7 +46,7 @@ const Home: NextPage = () => {
     },
     {
       link: "/videos/item4.mp4",
-      linkMB: "/videos/runMobile.mkv",
+      linkMB: "/videos/runMobile.mp4",
       type: typeSlide.video,
       ref: refSlide2,
       icon: "/images/run.svg",
@@ -56,7 +56,7 @@ const Home: NextPage = () => {
     },
     {
       link: "/videos/cycle.mp4",
-      linkMB: "/videos/cycleMobile.mkv",
+      linkMB: "/videos/cycleMobile.mp4",
       type: typeSlide.video,
       ref: refSlide3,
       icon: "/images/cycle.svg",
