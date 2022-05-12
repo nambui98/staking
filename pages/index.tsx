@@ -27,6 +27,7 @@ type slide = {
 
 const Home: NextPage = () => {
   const [indexActive, setIndexActive] = useState(0);
+  const [height, setHeight] = useState<string>();
   const refSlide1 = useRef<any>(null);
   const refSlide2 = useRef<any>(null);
   const refSlide3 = useRef<any>(null);
@@ -84,8 +85,20 @@ const Home: NextPage = () => {
           We pay you to sleep scientifically.</p></>
     }
   ]
+  const windowHeight = () => {
+    const doc = document.documentElement
+    setHeight(`${window.innerHeight}px`)
+    // doc.style.setProperty('--window-height', `${window.innerHeight}px`)
+  }
+  useEffect(() => {
+    window.addEventListener("resize", windowHeight)
+    windowHeight()
+    return () => {
+      window.removeEventListener('resize', () => { })
+    }
+  }, [])
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{ height: height }}>
       <Head>
         <title>Befitter</title>
         <meta name="description" content="In Befitter, your steps are worth more than you think -- exercising and moving outdoors
@@ -111,7 +124,7 @@ const Home: NextPage = () => {
       </div>
       <div className={styles.main}>
 
-        <div className={styles.wrapperContent} >
+        <div className={styles.wrapperContent}  >
           <div style={{ transition: ".7s all cubic-bezier(.88,-0.68,.17,1.48)", transform: `translateY(-${indexActive * 20}%)` }}>
             {
               data.map((item: slide, index: number) => <div key={index} className={styles.content}>

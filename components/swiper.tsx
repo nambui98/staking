@@ -40,7 +40,7 @@ const SwiperDynamic = ({ indexActive, setIndexActive, data }: Props) => {
             onSlideChange={(e) => {
                 // data[e.previousIndex].ref?.current?.pause();
                 data[e.activeIndex].ref?.current?.play();
-                setTimeout(() => { data[e.previousIndex].ref?.current?.load(); }, 200)
+                // setTimeout(() => { data[e.previousIndex].ref?.current?.load(); }, 200)
                 // setDurationActive(dataSlide[e.activeIndex].ref?.current?.duration * 1000 || 3000)
                 setIndexActive(e.activeIndex)
             }}
