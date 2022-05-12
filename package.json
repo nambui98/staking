@@ -13,6 +13,7 @@
     "notistack": "^2.0.4",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-responsive": "^9.0.0-beta.8",
     "react-toastify": "^9.0.1",
     "swiper": "^8.1.4"
   },
