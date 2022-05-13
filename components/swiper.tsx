@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react'
+import React, { ReactNode, Suspense, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'react-responsive';
 import { Autoplay, EffectFade, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -29,6 +29,7 @@ const SwiperDynamic = ({ indexActive, setIndexActive, data }: Props) => {
 
 
     return (
+
         <Swiper
             autoplay={{
                 "delay": data[indexActive]?.type === typeSlide.img ? 3000 : 6000,
@@ -48,7 +49,6 @@ const SwiperDynamic = ({ indexActive, setIndexActive, data }: Props) => {
         >
             {
                 data.map((slide: slide, index: number) => {
-
                     return slide.type === typeSlide.video ? <SwiperSlide key={index}>
                         <video
                             id={`video${index}`}

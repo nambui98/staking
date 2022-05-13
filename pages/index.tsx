@@ -86,9 +86,9 @@ const Home: NextPage = () => {
     }
   ]
   const windowHeight = () => {
-    const doc = document.documentElement
+    console.log("aaaaaaaaaa");
+
     setHeight(`${window.innerHeight}px`)
-    // doc.style.setProperty('--window-height', `${window.innerHeight}px`)
   }
   useEffect(() => {
     window.addEventListener("resize", windowHeight)
@@ -129,10 +129,8 @@ const Home: NextPage = () => {
             {
               data.map((item: slide, index: number) => <div key={index} className={styles.content}>
                 {item.content}
-
               </div>)
             }
-
           </div>
         </div>
         <img src="/images/logomain.png" className={styles.logo} alt="" />
