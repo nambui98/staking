@@ -110,6 +110,9 @@ body {
   width: fit-content !important;
   transform: translateX( calc(-100% - 120px));
   z-index: 2;
+  @media only screen and (min-width: 600px) and (max-width: 1440px) {
+    transform: translateX( calc(-100% - 80px));
+  }
   @media only screen and (min-width: 600px) and(max-width: 900px) {
     bottom: 20px !important;
   }

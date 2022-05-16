@@ -25,12 +25,15 @@
   transform: translateY(100%);
 }
 .wrapperContent{
-  height: 230px;
+  height: 250px;
   overflow: hidden;
   position: absolute;
   bottom: 50px;
   left: 120px;
   z-index: 2;
+  @media only screen and (max-width: 1440px) {
+    left: 80px;
+  }
   @media only screen and (max-width: 1200px) {
     bottom: 150px;
     left: 60px;
@@ -58,6 +61,9 @@
   font-weight: 500;
   span{
     font-size: 130px;
+  }
+  @media only screen and (max-width: 1440px) {
+    font-size: 80px;
   }
   @media only screen and (max-width: 1200px) {
     font-size: 70px;
@@ -100,6 +106,9 @@
   right: 120px;
   top:40px;
   z-index: 2;
+  @media only screen and (max-width: 1440px) {
+    right: 80px;
+  }
 }
 .button:hover{
   background-color: #FF6D24;
@@ -113,6 +122,9 @@
   z-index: 2;
   margin-top: 40px;
   margin-left: 120px;
+  @media only screen and (max-width: 1440px) {
+    margin-left: 80px;
+  }
 }
 
 @media only screen and (max-width: 900px) {
