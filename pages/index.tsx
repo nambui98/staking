@@ -40,7 +40,7 @@ const Home: NextPage = () => {
       ref: refSlide1,
       icon: "/images/walk.svg",
       content: <>
-        <h1>Walk<span>2</span>Earn</h1>
+        <h1>Walking</h1>
         <p>Starting your day with a short walk can
           offer a number of health benefits & tokens.</p>
       </>
@@ -51,7 +51,7 @@ const Home: NextPage = () => {
       type: typeSlide.video,
       ref: refSlide2,
       icon: "/images/run.svg",
-      content: <><h1>Run<span>2</span>Earn</h1>
+      content: <><h1>Running</h1>
         <p>Exercising with a friend is a great way to keep
           you motivated. Let&apos;s jog and run and earn tokens.</p></>
     },
@@ -61,7 +61,7 @@ const Home: NextPage = () => {
       type: typeSlide.video,
       ref: refSlide3,
       icon: "/images/cycle.svg",
-      content: <> <h1>Cycle<span>2</span>Earn</h1>
+      content: <> <h1>Cycling</h1>
         <p>Regular cycling provides numerous health benefits
           as your heart, blood vessels and lungs all get a workout.</p></>
     },
@@ -71,16 +71,16 @@ const Home: NextPage = () => {
       ref: refSlide4,
       icon: "/images/draw.svg",
       content: <>
-        <h1>Draw<span>2</span>Earn</h1>
-        <p>Move and draw amazing artworks on the map.
-          Then you may sell it on the market to get tokens.</p></>
+        <h1>Socializing</h1>
+        <p>Move, checkin and draw amazing artworks on the map.
+          Then share your proof of work-out and inspire the work!</p></>
     },
     {
       link: "/images/item5.jpg",
       linkMB: "/images/sleepMobile.png",
       type: typeSlide.img,
       icon: "/images/sleep.svg",
-      content: <><h1>Sleep<span>2</span>Earn</h1>
+      content: <><h1>Sleeping</h1>
         <p>End your daily routine by a deep sleep.
           We pay you to sleep scientifically.</p></>
     }
