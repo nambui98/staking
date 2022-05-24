@@ -73,7 +73,7 @@ const Home: NextPage = () => {
       content: <>
         <h1>Socializing</h1>
         <p>Move, checkin and draw amazing artworks on the map.
-          Then share your proof of work-out and inspire the work!</p></>
+          Then share your proof of work-out and inspire the world!</p></>
     },
     {
       link: "/images/item5.jpg",
