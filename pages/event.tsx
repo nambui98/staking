@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import {
 	Box,
@@ -10,11 +9,18 @@ import {
 	InputBase,
 	Button,
 	Icon,
+	Snackbar,
+	Alert,
+	Backdrop,
+	CircularProgress,
+	InputLabel,
 	styled,
 } from '@mui/material';
 
 import MainLayout from '../components/layouts/MainLayout';
 import { IMG, QUESTIONS, SOCIAL } from '../constants/event';
+
+
 
 const IconImage = styled('img')({
 	display: 'flex',
@@ -31,6 +37,20 @@ const CustomInput = styled(InputBase)({
 		background: '#F8F9FB',
 	},
 });
+
+const CustomHelperText = ({ children }: any) => (
+	<InputLabel
+		shrink
+		sx={{
+			mt: 1,
+			color: "#F00",
+			fontSize: 14,
+			// fontWeight: "bold",
+		}}
+	>
+		{children}
+	</InputLabel>
+);
 
 const EventName: React.FC<any> = ({ sxProps }) => (
 	<Box
@@ -150,8 +170,73 @@ const Countdown: React.FC<any> = ({ sxProps, endDate }) => {
 };
 
 const Form: React.FC<any> = ({ sxProps }) => {
+	const [textEmail, setTextEmail] = useState("");
+	const [textWallet, setTextWallet] = useState("");
+	const [textTelegram, setTextTelegram] = useState("");
+	const [errorEmail, setErrorEmail] = useState(false);
+	const [errorWallet, setErrorWallet] = useState(false);
+	const [errorTelegram, setErrorTelegram] = useState(false);
+	const [showSnack, setShowSnack] = useState(false);
+	const [showBackdrop, setShowBackdrop] = useState(false);
+
+	const handleSubmit = async (event: any) => {
+		event.preventDefault();
+		console.log(textEmail, textWallet, textTelegram);
+		if (!textEmail || !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(textEmail)) {
+			setErrorEmail(true);
+			setTimeout(() => setErrorEmail(false), 2000);
+			return;
+		}
+		if (!textWallet) {
+			setErrorWallet(true);
+			setTimeout(() => setErrorWallet(false), 2000);
+			return;
+		}
+		if (!textTelegram) {
+			setErrorTelegram(true);
+			setTimeout(() => setErrorTelegram(false), 2000);
+			return;
+		}
+		setShowBackdrop(true);
+		const response = await fetch("/api/submit", {
+			method: "POST",
+			body: JSON.stringify({
+				email: textEmail,
+				wallet: textWallet,
+				telegram: textTelegram,
+			}),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		setShowBackdrop(false);
+		setShowSnack(true);
+		setTextEmail("");
+		setTextWallet("");
+		setTextTelegram("");
+	};
+
 	return (
 		<Box sx={{ ...sxProps }}>
+			<Backdrop
+				sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+				open={showBackdrop}
+			>
+				<CircularProgress color="inherit" />
+			</Backdrop>
+			<Snackbar
+				open={showSnack}
+				onClose={() => setShowSnack(false)}
+				autoHideDuration={2000}
+			>
+				<Alert
+					severity="success"
+					onClose={() => setShowSnack(false)}
+					sx={{ width: "100%" }}
+				>
+					Sent
+				</Alert>
+			</Snackbar>
 			<Typography fontSize={18} color="#31373E">
 				Fill in your information to join the first{' '}
 				<span style={{ color: '#FF6D24' }}>10,000 people</span> that
@@ -163,11 +248,39 @@ const Form: React.FC<any> = ({ sxProps }) => {
 			</Typography>
 			<Box component="form" sx={{ maxWidth: 448 }}>
 				<Stack spacing={1} mb={2}>
-					<CustomInput placeholder="BEP20 Wallet"></CustomInput>
-					<CustomInput placeholder="Your ID Telegram"></CustomInput>
-					<CustomInput placeholder="Your email"></CustomInput>
+					<Stack spacing={0}>
+						<CustomInput
+							fullWidth
+							required
+							placeholder="Your email"
+							value={textEmail}
+							onChange={(e) => setTextEmail(e.target.value)}
+						/>
+						<CustomHelperText>{errorEmail && "Incorrect email"}</CustomHelperText>
+					</Stack>
+					<Stack spacing={0}>
+						<CustomInput
+							fullWidth
+							required
+							placeholder="BEP20 Wallet"
+							value={textWallet}
+							onChange={(e) => setTextWallet(e.target.value)}
+						/>
+						<CustomHelperText>{errorWallet && "Empty value"}</CustomHelperText>
+					</Stack>
+					<Stack spacing={0}>
+						<CustomInput
+							fullWidth
+							required
+							placeholder="Your ID Telegram"
+							value={textTelegram}
+							onChange={(e) => setTextTelegram(e.target.value)}
+						/>
+						<CustomHelperText>{errorTelegram && "Empty value"}</CustomHelperText>
+					</Stack>
 				</Stack>
 				<Button
+					onClick={handleSubmit}
 					sx={{
 						background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
 						borderRadius: '16px',
