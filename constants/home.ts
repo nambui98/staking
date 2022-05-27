@@ -13,19 +13,19 @@ export const EVENT = {
 export const SOCIAL = [
 	{
 		icon: 'assets/home/social.svg',
-		href: '#',
+		href: 'https://www.facebook.com/beFITTER.io',
 	},
 	{
 		icon: 'assets/home/social-1.svg',
-		href: '#',
+		href: 'https://www.instagram.com/befitter.io',
 	},
 	{
 		icon: 'assets/home/social-2.svg',
-		href: '#',
+		href: 'https://twitter.com/beFITTER_io',
 	},
 	{
 		icon: 'assets/home/social-3.svg',
-		href: '#',
+		href: 'https://t.me/befitter_chat',
 	},
 ];
 

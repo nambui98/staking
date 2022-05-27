@@ -322,8 +322,11 @@ const Form: React.FC<any> = ({ sxProps }) => {
 
 const Questions: React.FC<any> = ({ sxProps }) => (
 	<Stack spacing={3} sx={{ ...sxProps, maxWidth: 448 }}>
-		{QUESTIONS.map(({ title, icon, href }) => (
-			<Link href={href} key={href}>
+		{QUESTIONS.map(({ title, icon, href }, idx) => (
+			// <Link href={href} key={href}>
+			<Box component="a" href={href} key={idx} target="_blank" sx={{
+				textDecoration: 'none'
+			}}>
 				<Stack
 					direction="row"
 					spacing={1}
@@ -338,7 +341,8 @@ const Questions: React.FC<any> = ({ sxProps }) => (
 						{title}
 					</Typography>
 				</Stack>
-			</Link>
+			</Box>
+			// </Link>
 		))}
 	</Stack>
 );
@@ -359,27 +363,32 @@ const Social: React.FC<any> = ({ sxProps }) => {
 				fontWeight="900"
 				color="#5A6178"
 				align='center'
+				px={2}
 			>
 				STAY IN TOUCH WITH <span style={{ color: '#FF6D24' }}>beFITTER</span>
 			</Typography>
 			{!isTablet && <Stack direction="row" spacing={10} alignItems="center">
 				{SOCIAL.map(({ icon, href }, idx) => (
-					<Link href={href} key={idx}>
+					// <Link href={href} key={idx}>
+					<Box component="a" href={href} key={idx} target="_blank">
 						<Icon sx={{ cursor: 'pointer', width: 56, height: 48 }}>
 							<IconImage src={icon} />
 						</Icon>
-					</Link>
+					</Box>
+					// </Link>
 				))}
 			</Stack>}
 			{isTablet && <Grid container justifyContent="center" rowSpacing={3}>
 				{SOCIAL.map(({ icon, href }, idx) => (
 					<Grid item xs={3} key={idx}>
 						<Stack alignItems="center">
-							<Link href={href} key={idx}>
+							{/* <Link href={href} key={idx}> */}
+							<Box component="a" href={href} target="_blank">
 								<Icon sx={{ cursor: 'pointer', width: 56, height: 48 }}>
 									<IconImage src={icon} />
 								</Icon>
-							</Link>
+							</Box>
+							{/* </Link> */}
 						</Stack>
 					</Grid>
 				))}

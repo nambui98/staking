@@ -317,11 +317,13 @@ const Social: React.FC<any> = () => (
 				textShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)'
 			}}>Follow us on</Typography>
 			{SOCIAL.map(({ icon, href }, idx) => (
-				<Link href={href} key={idx}>
+				// <Link href={href} key={idx}>
+				<Box component="a" href={href} key={idx} target="_blank">
 					<Icon sx={{ cursor: 'pointer', width: 56, height: 48 }}>
 						<IconImage src={icon} />
 					</Icon>
-				</Link>
+				</Box>
+				// </Link>
 			))}
 		</Stack>
 	</Box>

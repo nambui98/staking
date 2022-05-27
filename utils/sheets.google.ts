@@ -22,7 +22,8 @@ interface eventBody {
 
 export async function appendEvent(body: eventBody) {
 	const data = {
-		createdAt: new Date().toLocaleString("en-GB"),
+		// createdAt: new Date().toLocaleString("en-GB"),
+		createdAt: new Date().toLocaleString(),
 		...body,
 	};
 	return sheets.spreadsheets.values.append({
