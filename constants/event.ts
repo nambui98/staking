@@ -12,7 +12,8 @@ export const QUESTIONS = [
 	{
 		title: 'Format & Rules',
 		icon: 'assets/event/message-question.svg',
-		href: '/documents/format-and-rules.pdf',
+		// href: '/documents/format-and-rules.pdf',
+		href: 'https://cdn.befitter.io/format'
 	},
 	{
 		title: 'How to create your own Testnet Wallet',
