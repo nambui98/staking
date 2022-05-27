@@ -9,13 +9,24 @@ import {
 	Avatar,
 	Button,
 	Stack,
+	useMediaQuery,
 } from '@mui/material';
 import { toast } from 'react-toastify';
 
-import { HOME_LOGO, HOME_BG_LOGO, ITEMS } from '../../constants/header';
+import {
+	HOME_LOGO,
+	HOME_BG_LOGO,
+	HOME_MENU,
+	ITEMS,
+} from '../../constants/header';
 
 const HomeHeader: React.FC<any> = ({ sxProps, children }) => {
+	const isTablet = useMediaQuery('(max-width:960px)');
+	const isMobile = useMediaQuery('(max-width:600px)');
+	const [showMenu, setShowMenu] = React.useState<boolean>(false);
+
 	function handleMenuItemClick() {
+		setShowMenu(false);
 		toast('COMING SOON!', {
 			position: 'top-center',
 			autoClose: 3000,
@@ -26,6 +37,8 @@ const HomeHeader: React.FC<any> = ({ sxProps, children }) => {
 			progress: undefined,
 		});
 	}
+
+	function handleOpenMenu() {setShowMenu(true)}
 
 	return (
 		<Box component={'header'}>
@@ -48,8 +61,8 @@ const HomeHeader: React.FC<any> = ({ sxProps, children }) => {
 									display: 'flex',
 									// alignItems: 'center',
 									cursor: 'pointer',
-									width: 357,
-									height: 165,
+									width: isMobile ? 357/4 : isTablet ? 357/2 : 357,
+									height: isMobile ? 165/4 : isTablet ? 165/2 : 165,
 									backgroundImage: `url(${HOME_BG_LOGO})`,
 									backgroundRepeat: 'no-repeat',
 									backgroundSize: 'contain',
@@ -57,49 +70,56 @@ const HomeHeader: React.FC<any> = ({ sxProps, children }) => {
 									pl: 6,
 								}}
 							>
-								<img src={HOME_LOGO} alt="Logo" width={'auto'} height={64} />
+								<img src={HOME_LOGO} alt="Logo" width={'auto'} height={isMobile ? 16 : isTablet ? 32 : 64} />
 							</Box>
 						</Link>
-						{/* <IconButton onClick={handleOpenMenu} sx={{ p: 0 }}>
-							<Avatar alt="Menu" src={MENU} sx={{ width: 48, height: 48 }} />
-						</IconButton> */}
-						<Box
-							sx={{
-								position: 'relative',
-								width: 192,
-								height: 176,
-							}}
-						>
+						{isTablet && !showMenu && (
+							<IconButton onClick={handleOpenMenu} sx={{ p: 0 }}>
+								<Avatar
+									alt="Menu"
+									src={HOME_MENU}
+									sx={{ width: 48, height: 48 }}
+								/>
+							</IconButton>
+						)}
+						{(!isTablet || showMenu) && (
 							<Box
 								sx={{
-									position: 'absolute',
+									position: 'relative',
 									width: 192,
 									height: 176,
-									borderRadius: '16px',
-									border: '2px solid #FFFFFF',
-									top: 4,
-									left: 4,
-								}}
-							></Box>
-							<Box
-								sx={{
-									position: 'absolute',
-									width: 192,
-									height: 176,
-									background: '#FFF',
-									opacity: 0.8,
-									backdropFilter: 'blur(24px)',
-									borderRadius: '16px',
 								}}
 							>
-								<Stack
-									spacing={0}
-									alignItems="center"
-									justifyContent="center"
-									sx={{ height: '100%' }}
+								<Box
+									sx={{
+										position: 'absolute',
+										width: 192,
+										height: 176,
+										borderRadius: '16px',
+										border: '2px solid #FFFFFF',
+										top: 4,
+										left: 4,
+									}}
+								></Box>
+								<Box
+									sx={{
+										position: 'absolute',
+										width: 192,
+										height: 176,
+										background: '#FFF',
+										opacity: 0.8,
+										backdropFilter: 'blur(24px)',
+										borderRadius: '16px',
+									}}
 								>
-									{ITEMS.map(({ title, href }) => (
-										// <Link href={href} key={title}>
+									<Stack
+										spacing={0}
+										alignItems="center"
+										justifyContent="center"
+										sx={{ height: '100%' }}
+									>
+										{ITEMS.map(({ title, href }) => (
+											// <Link href={href} key={title}>
 											<Button
 												key={title}
 												variant="text"
@@ -114,11 +134,12 @@ const HomeHeader: React.FC<any> = ({ sxProps, children }) => {
 											>
 												{title}
 											</Button>
-										// </Link>
-									))}
-								</Stack>
+											// </Link>
+										))}
+									</Stack>
+								</Box>
 							</Box>
-						</Box>
+						)}
 					</Container>
 				</Toolbar>
 			</AppBar>

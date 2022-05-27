@@ -4,8 +4,9 @@ import Link from 'next/link';
 import {
 	Box,
 	Container,
-	Typography,
 	Stack,
+	Grid,
+	Typography,
 	InputBase,
 	Button,
 	Icon,
@@ -15,7 +16,9 @@ import {
 	CircularProgress,
 	InputLabel,
 	styled,
+	useMediaQuery,
 } from '@mui/material';
+import { toast } from 'react-toastify';
 
 import MainLayout from '../components/layouts/MainLayout';
 import { IMG, QUESTIONS, SOCIAL } from '../constants/event';
@@ -30,7 +33,7 @@ const IconImage = styled('img')({
 
 const CustomInput = styled(InputBase)({
 	'& .MuiInputBase-input': {
-		fontSize: 16,
+		fontSize: 14,
 		padding: '14px 24px',
 		borderRadius: '8px',
 		border: '1px solid #E9EAEF',
@@ -38,57 +41,61 @@ const CustomInput = styled(InputBase)({
 	},
 });
 
-const CustomHelperText = ({ children }: any) => (
+const CustomHelperText: React.FC<any> = ({ children }) => (
 	<InputLabel
 		shrink
 		sx={{
 			mt: 1,
 			color: "#F00",
 			fontSize: 14,
-			// fontWeight: "bold",
 		}}
 	>
 		{children}
 	</InputLabel>
 );
 
-const EventName: React.FC<any> = ({ sxProps }) => (
-	<Box
-		sx={{
-			...sxProps,
-			position: 'relative',
-			height: 220,
-		}}
-	>
+const EventName: React.FC<any> = ({ sxProps }) => {
+	const isTablet = useMediaQuery('(max-width:959px)');
+	const isMobile = useMediaQuery('(max-width:599px)');
+
+	return (
 		<Box
 			sx={{
-				position: 'absolute',
-				top: 30,
-				left: -60,
+				...sxProps,
+				position: 'relative',
+				height: 220,
 			}}
 		>
-			<img src={IMG.BG_ITEM1} width={'auto'} />
+			<Box
+				sx={{
+					position: 'absolute',
+					top: {xs: 20, sm: 30},
+					left: {xs: -175, sm: -260, md: -60},
+				}}
+			>
+				<img src={IMG.BG_ITEM1} width={isMobile ? 440/2 : isTablet ? 440/4*3 : 440} height={'auto'}/>
+			</Box>
+			<Box
+				sx={{
+					position: 'absolute',
+					top: 10,
+					left: {xs: -145, sm: -210, md: 0},
+				}}
+			>
+				<img src={IMG.CUP} width={isMobile ? 175/2 : isTablet ? 175/4*3 : 175} height={'auto'}/>
+			</Box>
+			<Box
+				sx={{
+					position: 'absolute',
+					top: 0,
+					left: {xs: -70, sm: -100, md: 140},
+				}}
+			>
+				<img src={IMG.NAME} width={isMobile ? 480/2 : isTablet ? 480/4*3 : 480} height={'auto'}/>
+			</Box>
 		</Box>
-		<Box
-			sx={{
-				position: 'absolute',
-				top: 10,
-				left: 0,
-			}}
-		>
-			<img src={IMG.CUP} width={'auto'} />
-		</Box>
-		<Box
-			sx={{
-				position: 'absolute',
-				top: 0,
-				left: 140,
-			}}
-		>
-			<img src={IMG.NAME} width={'auto'} />
-		</Box>
-	</Box>
-);
+	)
+};
 
 const Countdown: React.FC<any> = ({ sxProps, endDate }) => {
 	const end = Date.parse(endDate);
@@ -123,10 +130,12 @@ const Countdown: React.FC<any> = ({ sxProps, endDate }) => {
 
 	return (
 		<Box sx={{ ...sxProps }}>
-			<Typography fontStyle="italic" fontSize={24} color="#5A6178">
+			<Typography fontStyle="italic" fontSize={{xs: 16, sm: 18, md: 24}} color="#5A6178" sx={{
+				textAlign: {xs: 'center', md: 'left'}
+			}}>
 				Begins in
 			</Typography>
-			<Stack direction="row" spacing={1.5} mt={1.5}>
+			<Stack direction="row" spacing={{xs: .75, md: 1.5}} mt={1.5}>
 				{[
 					{ count: dayText, title: 'days' },
 					{ count: hrText, title: 'hours' },
@@ -148,14 +157,14 @@ const Countdown: React.FC<any> = ({ sxProps, endDate }) => {
 					>
 						<Typography
 							fontFamily="Electrofied"
-							fontSize={40}
+							fontSize={{xs: 24, md: 40}}
 							fontStyle="italic"
 							color="#31373E"
 						>
 							{count}
 						</Typography>
 						<Typography
-							fontSize={16}
+							fontSize={{xs: 12, md: 16}}
 							fontStyle="italic"
 							color="#31373E"
 							fontWeight="bold"
@@ -170,6 +179,8 @@ const Countdown: React.FC<any> = ({ sxProps, endDate }) => {
 };
 
 const Form: React.FC<any> = ({ sxProps }) => {
+	const isTablet = useMediaQuery('(max-width:959px)');
+
 	const [textEmail, setTextEmail] = useState("");
 	const [textWallet, setTextWallet] = useState("");
 	const [textTelegram, setTextTelegram] = useState("");
@@ -210,7 +221,16 @@ const Form: React.FC<any> = ({ sxProps }) => {
 			},
 		});
 		setShowBackdrop(false);
-		setShowSnack(true);
+		// setShowSnack(true);
+		toast('SUCCESS', {
+			position: 'top-center',
+			autoClose: 3000,
+			hideProgressBar: true,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		});
 		setTextEmail("");
 		setTextWallet("");
 		setTextTelegram("");
@@ -224,7 +244,7 @@ const Form: React.FC<any> = ({ sxProps }) => {
 			>
 				<CircularProgress color="inherit" />
 			</Backdrop>
-			<Snackbar
+			{/* <Snackbar
 				open={showSnack}
 				onClose={() => setShowSnack(false)}
 				autoHideDuration={2000}
@@ -236,19 +256,19 @@ const Form: React.FC<any> = ({ sxProps }) => {
 				>
 					Sent
 				</Alert>
-			</Snackbar>
-			<Typography fontSize={18} color="#31373E">
+			</Snackbar> */}
+			<Typography fontSize={{xs: 14, md: 18}} color="#31373E">
 				Fill in your information to join the first{' '}
 				<span style={{ color: '#FF6D24' }}>10,000 people</span> that
-				<br />
+				{!isTablet && <br />}
 				receive free rare items
 			</Typography>
-			<Typography fontSize={14} color="#FF6D24" mt={1} mb={1}>
+			<Typography fontSize={{xs: 12, md: 14}} color="#FF6D24" mt={1} mb={1}>
 				*Make sure you fill in the correct information
 			</Typography>
-			<Box component="form" sx={{ maxWidth: 448 }}>
-				<Stack spacing={1} mb={2}>
-					<Stack spacing={0}>
+			<Box component="form" sx={{ maxWidth: {md: 448} }}>
+				<Stack spacing={1} mb={2} alignItems={{xs: "center", md: "start"}}>
+					<Stack spacing={0} sx={{width: '100%'}}>
 						<CustomInput
 							fullWidth
 							required
@@ -258,7 +278,7 @@ const Form: React.FC<any> = ({ sxProps }) => {
 						/>
 						<CustomHelperText>{errorEmail && "Incorrect email"}</CustomHelperText>
 					</Stack>
-					<Stack spacing={0}>
+					<Stack spacing={0} sx={{width: '100%'}}>
 						<CustomInput
 							fullWidth
 							required
@@ -268,7 +288,7 @@ const Form: React.FC<any> = ({ sxProps }) => {
 						/>
 						<CustomHelperText>{errorWallet && "Empty value"}</CustomHelperText>
 					</Stack>
-					<Stack spacing={0}>
+					<Stack spacing={0} sx={{width: '100%'}}>
 						<CustomInput
 							fullWidth
 							required
@@ -284,12 +304,13 @@ const Form: React.FC<any> = ({ sxProps }) => {
 					sx={{
 						background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
 						borderRadius: '16px',
-						fontSize: 18,
+						fontSize: {xs: 16, md: 18},
 						color: '#fff',
-						py: 3,
+						py: {xs: 1.5, md: 3},
 						px: 6,
 						border: 'none',
 						boxShadow: 'none',
+						width: {xs: '100%', md: 'unset'}
 					}}
 				>
 					SUBMIT
@@ -313,7 +334,7 @@ const Questions: React.FC<any> = ({ sxProps }) => (
 					<Icon>
 						<IconImage src={icon} />
 					</Icon>
-					<Typography fontSize={18} color="#31373E">
+					<Typography fontSize={{xs: 16, md: 18}} color="#31373E">
 						{title}
 					</Typography>
 				</Stack>
@@ -322,32 +343,50 @@ const Questions: React.FC<any> = ({ sxProps }) => (
 	</Stack>
 );
 
-const Social: React.FC<any> = ({ sxProps }) => (
-	<Stack
-		justifyContent="center"
-		alignItems="center"
-		spacing={6}
-		sx={{ ...sxProps, background: '#F8F9FB', py: 10 }}
-	>
-		<Typography
-			fontSize={32}
-			fontStyle="italic"
-			fontWeight="900"
-			color="#5A6178"
+const Social: React.FC<any> = ({ sxProps }) => {
+	const isTablet = useMediaQuery('(max-width:960px)');
+
+	return (
+		<Stack
+			justifyContent="center"
+			alignItems="center"
+			spacing={{xs: 1, md: 6}}
+			sx={{ ...sxProps, background: '#F8F9FB', py: {xs: 5, md: 10} }}
 		>
-			STAY IN TOUCH WITH <span style={{ color: '#FF6D24' }}>beFITTER</span>
-		</Typography>
-		<Stack direction="row" spacing={10} alignItems="center">
-			{SOCIAL.map(({ icon, href }, idx) => (
-				<Link href={href} key={idx}>
-					<Icon sx={{ cursor: 'pointer', width: 56, height: 48 }}>
-						<IconImage src={icon} />
-					</Icon>
-				</Link>
-			))}
+			<Typography
+				fontSize={{xs: 24, sm: 32}}
+				fontStyle="italic"
+				fontWeight="900"
+				color="#5A6178"
+				align='center'
+			>
+				STAY IN TOUCH WITH <span style={{ color: '#FF6D24' }}>beFITTER</span>
+			</Typography>
+			{!isTablet && <Stack direction="row" spacing={10} alignItems="center">
+				{SOCIAL.map(({ icon, href }, idx) => (
+					<Link href={href} key={idx}>
+						<Icon sx={{ cursor: 'pointer', width: 56, height: 48 }}>
+							<IconImage src={icon} />
+						</Icon>
+					</Link>
+				))}
+			</Stack>}
+			{isTablet && <Grid container justifyContent="center" rowSpacing={3}>
+				{SOCIAL.map(({ icon, href }, idx) => (
+					<Grid item xs={3} key={idx}>
+						<Stack alignItems="center">
+							<Link href={href} key={idx}>
+								<Icon sx={{ cursor: 'pointer', width: 56, height: 48 }}>
+									<IconImage src={icon} />
+								</Icon>
+							</Link>
+						</Stack>
+					</Grid>
+				))}
+			</Grid>}
 		</Stack>
-	</Stack>
-);
+	)
+};
 
 const BgItems: React.FC<any> = () => (
 	<Box sx={{
@@ -395,6 +434,8 @@ const BgItems: React.FC<any> = () => (
 )
 
 const EventDetail: NextPage = () => {
+	const isTablet = useMediaQuery('(max-width:959px)');
+
 	return (
 		<MainLayout sxProps={{ background: '#FFF' }}>
 			<Stack
@@ -406,12 +447,14 @@ const EventDetail: NextPage = () => {
 					overflow: 'hidden',
 				}}
 			>
-				<BgItems />
+				{!isTablet && <BgItems />}
 				<Container sx={{ position: 'relative' }}>
-					<EventName sxProps={{ mb: 5 }} />
-					<Countdown sxProps={{ mb: 5 }} endDate={'2022-06-01'} />
-					<Form sxProps={{ mb: 5 }} />
-					<Questions sxProps={{ mb: 5 }} />
+					<Stack alignItems={{xs: 'center', md: 'start'}}>
+						<EventName sxProps={{ mb: {xs: -10, sm: 0, md: 5} }} />
+						<Countdown sxProps={{ mb: 5 }} endDate={'2022-06-01'} />
+						<Form sxProps={{ mb: 5 }} />
+						<Questions sxProps={{ mb: 10 }} />
+					</Stack>
 				</Container>
 			</Stack>
 			<Social />

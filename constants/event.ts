@@ -19,16 +19,16 @@ export const QUESTIONS = [
 		icon: 'assets/event/message-question.svg',
 		href: '/documents/create-a-testnet-wallet.pdf',
 	},
-	{
-		title: 'How to download beFitter app for iOS',
-		icon: 'assets/event/message-question.svg',
-		href: '/documents/guide-ios.pdf',
-	},
-	{
-		title: 'How to download beFitter app for Android',
-		icon: 'assets/event/message-question.svg',
-		href: '/documents/guide-android.pdf',
-	},
+	// {
+	// 	title: 'How to download beFitter app for iOS',
+	// 	icon: 'assets/event/message-question.svg',
+	// 	href: '/documents/guide-ios.pdf',
+	// },
+	// {
+	// 	title: 'How to download beFitter app for Android',
+	// 	icon: 'assets/event/message-question.svg',
+	// 	href: '/documents/guide-android.pdf',
+	// },
 ];
 
 export const SOCIAL = [
