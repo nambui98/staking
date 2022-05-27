@@ -34,30 +34,30 @@ export const QUESTIONS = [
 export const SOCIAL = [
 	{
 		icon: 'assets/event/social.svg',
-		href: '#',
+		href: 'https://www.facebook.com/beFITTER.io',
 	},
 	{
 		icon: 'assets/event/social-1.svg',
-		href: '#',
+		href: 'https://www.instagram.com/befitter.io',
 	},
 	{
 		icon: 'assets/event/social-2.svg',
-		href: '#',
+		href: 'https://twitter.com/beFITTER_io',
 	},
 	{
 		icon: 'assets/event/social-3.svg',
-		href: '#',
+		href: 'https://www.youtube.com/channel/UCWHlMEIroTPlHS6fukq5pyw',
 	},
 	{
 		icon: 'assets/event/social-4.svg',
-		href: '#',
+		href: 'https://discord.gg/hSfajgQkzh',
 	},
 	{
 		icon: 'assets/event/social-5.svg',
-		href: '#',
+		href: 'https://t.me/befitter_chat',
 	},
 	{
 		icon: 'assets/event/social-6.svg',
-		href: '#',
+		href: 'https://medium.com/@beFITTER',
 	},
 ]
