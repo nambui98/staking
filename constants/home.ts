@@ -1,3 +1,34 @@
+export const EVENT = {
+	IMAGE: 'assets/home/event_name.png',
+	DESC: 'Join our challenge, test your limit and earn a special reward',
+	COUNTDOWN: 'Begins in',
+	BUTTON: {
+		title: 'REGISTER NOW',
+		icon: 'assets/home/arrow-right.svg',
+		href: '/event',
+		mobileIcon: 'assets/home/arrow-up.svg',
+	}
+};
+
+export const SOCIAL = [
+	{
+		icon: 'assets/home/social.svg',
+		href: '#',
+	},
+	{
+		icon: 'assets/home/social-1.svg',
+		href: '#',
+	},
+	{
+		icon: 'assets/home/social-2.svg',
+		href: '#',
+	},
+	{
+		icon: 'assets/home/social-3.svg',
+		href: '#',
+	},
+];
+
 type VideoSlide = {
 	src?: string,
 	mobileSrc?: string,
