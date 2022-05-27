@@ -73,7 +73,7 @@ const HomeHeader: React.FC<any> = ({ sxProps, children }) => {
 								<img src={HOME_LOGO} alt="Logo" width={'auto'} height={isMobile ? 16 : isTablet ? 32 : 64} />
 							</Box>
 						</Link>
-						{isTablet && !showMenu && (
+						{isMobile && !showMenu && (
 							<IconButton onClick={handleOpenMenu} sx={{ p: 0 }}>
 								<Avatar
 									alt="Menu"
@@ -82,19 +82,19 @@ const HomeHeader: React.FC<any> = ({ sxProps, children }) => {
 								/>
 							</IconButton>
 						)}
-						{(!isTablet || showMenu) && (
+						{(!isMobile || showMenu) && (
 							<Box
 								sx={{
 									position: 'relative',
 									width: 192,
-									height: 176,
+									height: 176/3,
 								}}
 							>
 								<Box
 									sx={{
 										position: 'absolute',
 										width: 192,
-										height: 176,
+										height: 176/3,
 										borderRadius: '16px',
 										border: '2px solid #FFFFFF',
 										top: 4,
@@ -105,7 +105,7 @@ const HomeHeader: React.FC<any> = ({ sxProps, children }) => {
 									sx={{
 										position: 'absolute',
 										width: 192,
-										height: 176,
+										height: 176/3,
 										background: '#FFF',
 										opacity: 0.8,
 										backdropFilter: 'blur(24px)',
@@ -123,7 +123,9 @@ const HomeHeader: React.FC<any> = ({ sxProps, children }) => {
 											<Button
 												key={title}
 												variant="text"
-												onClick={handleMenuItemClick}
+												// onClick={handleMenuItemClick}
+												href={href}
+												target={"_blank"}
 												sx={{
 													fontFamily: 'Electrofied',
 													fontStyle: 'italic',

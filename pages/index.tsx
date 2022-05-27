@@ -46,6 +46,9 @@ const VideoSwiper: React.FC<any> = () => {
 		refSlide4,
 		refSlide5,
 	]);
+	// useEffect(() => {    
+  //   videoRef.current?.load();
+  // }, [url]);
 	return (
 		<Swiper
 			autoplay={{
@@ -64,7 +67,7 @@ const VideoSwiper: React.FC<any> = () => {
 				return slide.unplayable ? (
 					<SwiperSlide key={index}>
 						<img
-							src={(isMobile && slide.mobileSrc) || slide.src}
+							src={isMobile && slide.mobileSrc ? slide.mobileSrc : slide.src}
 							className="absolute"
 							alt=""
 						/>
@@ -72,6 +75,7 @@ const VideoSwiper: React.FC<any> = () => {
 				) : (
 					<SwiperSlide key={index}>
 						<video
+							key={isMobile && slide.mobileSrc ? slide.mobileSrc : slide.src}
 							id={`video${index}`}
 							ref={slide.ref}
 							autoPlay={index === 0}
@@ -81,11 +85,11 @@ const VideoSwiper: React.FC<any> = () => {
 							className="absolute"
 						>
 							<source
-								src={(isMobile && slide.mobileSrc) || slide.src}
+								src={isMobile && slide.mobileSrc ? slide.mobileSrc : slide.src}
 								type='video/mp4; codecs="hvc1"'
 							/>
 							<source
-								src={(isMobile && slide.mobileSrc) || slide.src}
+								src={isMobile && slide.mobileSrc ? slide.mobileSrc : slide.src}
 								type="video/webm"
 							/>
 						</video>
