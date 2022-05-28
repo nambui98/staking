@@ -2,12 +2,11 @@ import type { NextPage } from 'next';
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import { Autoplay, EffectFade, Pagination } from 'swiper';
+import { Autoplay, EffectFade } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/bundle';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
-import 'swiper/css/pagination';
 import {
 	Box,
 	Container,
@@ -19,17 +18,13 @@ import {
 	Icon,
 	styled,
 	useMediaQuery,
+	Theme,
 } from '@mui/material';
 
 import styles from '../styles/Home.module.scss';
 import HomeLayout from '../components/layouts/HomeLayout';
 import { videoSlides, EVENT, SOCIAL } from '../constants/home';
-
-const IconImage = styled('img')({
-	display: 'flex',
-	height: 'inherit',
-	width: 'inherit',
-});
+import { IconImage } from '../components/styled';
 
 const VideoSwiper: React.FC<any> = () => {
 	const isMobile = useMediaQuery('(max-width:700px)');
@@ -46,9 +41,16 @@ const VideoSwiper: React.FC<any> = () => {
 		refSlide4,
 		refSlide5,
 	]);
-	// useEffect(() => {    
-  //   videoRef.current?.load();
-  // }, [url]);
+
+	useEffect(() => {
+		// videoRef.current?.load();
+		refSlide1.current?.load();
+		refSlide2.current?.load();
+		refSlide3.current?.load();
+		refSlide4.current?.load();
+		refSlide5.current?.load();
+	}, [isMobile]);
+
 	return (
 		<Swiper
 			autoplay={{
@@ -75,7 +77,7 @@ const VideoSwiper: React.FC<any> = () => {
 				) : (
 					<SwiperSlide key={index}>
 						<video
-							key={isMobile && slide.mobileSrc ? slide.mobileSrc : slide.src}
+							// key={isMobile && slide.mobileSrc ? slide.mobileSrc : slide.src}
 							id={`video${index}`}
 							ref={slide.ref}
 							autoPlay={index === 0}
@@ -135,12 +137,10 @@ const Event: React.FC<any> = ({ endDate }) => {
 		<Box
 			sx={{
 				position: 'absolute',
-				// height: parseFloat(`${windowHeight}`)/3,
-				// width: parseFloat(`${windowHeight}`)/3 * 624/425,
-				height: 425,
+				height: 425-160,
 				width: 624,
-				top: `${100 / 4}%`,
-				left: 160,
+				bottom: 0,
+				left: 80,
 				zIndex: 99,
 			}}
 		>
@@ -157,32 +157,8 @@ const Event: React.FC<any> = ({ endDate }) => {
 						height: '100%',
 						background: 'rgba(255, 255, 255, 0.4)',
 						backdropFilter: 'blur(40px)',
-						borderRadius: '16px',
+						borderRadius: '16px 16px 0px 0px',
 						transform: 'skewX(-10deg)',
-					}}
-				/>
-				<Box
-					sx={{
-						position: 'absolute',
-						height: `${(210 / 425) * 100}%`,
-						width: `${(109 / 624) * 100}%`,
-						bottom: '5%',
-						left: '-7.5%',
-						backgroundImage: `url(assets/home/neon-stroke1.png)`,
-						backgroundRepeat: 'no-repeat',
-						backgroundSize: 'contain',
-					}}
-				/>
-				<Box
-					sx={{
-						position: 'absolute',
-						height: `${(273 / 425) * 100}%`,
-						width: `${(144 / 624) * 100}%`,
-						top: '5%',
-						right: '-7.5%',
-						backgroundImage: `url(assets/home/neon-stroke2.png)`,
-						backgroundRepeat: 'no-repeat',
-						backgroundSize: 'contain',
 					}}
 				/>
 				<Stack
@@ -190,31 +166,21 @@ const Event: React.FC<any> = ({ endDate }) => {
 					sx={{
 						position: 'absolute',
 						width: '100%',
-						height: '100%',
-						top: 0,
+						height: 'calc(100%-8px)',
+						top: 8,
 						left: 0,
-						px: 10,
+						pl: 8,
+						pr: 12,
 					}}
 				>
 					<img src={EVENT.IMAGE} width={'70%'} height={'auto'} />
-					<Typography
-						fontStyle="italic"
-						fontSize={20}
-						color="#31373E"
-						fontWeight={600}
-						sx={{
-							pr: 20,
-							mt: 2,
-						}}
-					>
-						{EVENT.DESC}
-					</Typography>
 					<Stack
 						direction="row"
 						spacing={1.5}
 						mt={1.5}
 						alignItems="center"
-						justifyContent="start"
+						justifyContent="end"
+						sx={{width: '100%'}}
 					>
 						<Typography
 							fontStyle="italic"
@@ -266,31 +232,34 @@ const Event: React.FC<any> = ({ endDate }) => {
 				<Box
 					sx={{
 						position: 'absolute',
-						bottom: '-7.5%',
-						right: '2.5%',
+						top: 16,
+						right: 0,
 					}}
 				>
 					<Link href={EVENT.BUTTON.href}>
-						<Button
-							endIcon={
-								<Icon sx={{ width: 40, height: 40 }}>
-									<IconImage src={EVENT.BUTTON.icon} />
-								</Icon>
-							}
+						<IconButton
 							sx={{
-								fontSize: 18,
-								fontWeight: 600,
-								color: '#FFF',
-								background:
-									'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
-								borderRadius: '16px',
-								boxShadow: 'none',
-								px: 3,
+								background: '#FFE2D3',
+								borderRadius: '40px',
+								px: 2,
 								py: 2,
+								'&:hover': {
+									background: '#FFE2D3',
+									borderRadius: '24px',
+									transition: 'all ease 1s',
+									animation: 'blink 1s linear',
+								},
+								"@keyframes blink": {
+									"0%": { boxShadow: 'none' },
+									"50%": { boxShadow: 'rgba(255, 109, 36, 0.5) -8px -8px 8px, rgba(255, 109, 36, 0.5) 0px -8px 4px, rgba(255, 109, 36, 0.5) 4px 0px 4px, rgba(255, 109, 36, 0.5) -8px 0px 4px' },
+									"100%": { boxShadow: 'none' },
+								}
 							}}
 						>
-							{EVENT.BUTTON.title}
-						</Button>
+							<Icon>
+								<IconImage src={EVENT.BUTTON.icon} />
+							</Icon>
+						</IconButton>
 					</Link>
 				</Box>
 			</Box>
@@ -302,36 +271,68 @@ const Social: React.FC<any> = () => (
 	<Box
 		sx={{
 			position: 'absolute',
-			// height: 425,
-			// width: 624,
 			bottom: 40,
 			right: 66,
 			zIndex: 99,
-			pb: .5,
 			backgroundImage: `url(assets/home/social_bg.png)`,
 			backgroundRepeat: 'no-repeat',
 			backgroundSize: 'contain',
 			backgroundPosition: 'center right',
 		}}
 	>
-		<Stack direction="row" spacing={2} alignItems="center" justifyContent="end" sx={{
-			width: 655
-		}}>
-			<Typography fontSize={16} fontWeight={600} sx={{
-				textShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)'
-			}}>Follow us on</Typography>
-			{SOCIAL.map(({ icon, href }, idx) => (
-				// <Link href={href} key={idx}>
-				<Box component="a" href={href} key={idx} target="_blank">
-					<Icon sx={{ cursor: 'pointer', width: 56, height: 48 }}>
+		<Stack
+			direction="row"
+			spacing={2}
+			alignItems="center"
+			justifyContent="end"
+			sx={{
+				width: 655,
+				py: 1,
+			}}
+		>
+			<Typography
+				fontSize={16}
+				fontWeight={600}
+				sx={{
+					textShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
+				}}
+			>
+				Follow us on
+			</Typography>
+			{SOCIAL.map(({ icon, iconHover, href }, idx) => (
+				<Stack
+					component="a"
+					href={href}
+					key={idx}
+					target="_blank"
+					alignItems="center"
+					sx={{
+						width: 56,
+						height: 48,
+						background: `url(${icon}) no-repeat center`,
+						'&:hover': {
+							transition: ".3s all cubic-bezier(0.7, -0.4, 0.4, 1.4)", 
+							transform: `translateY(-8px)`,
+							background: `url(${iconHover}) no-repeat center`,
+							// boxShadow: `0 8px 6px -8px #31373E`,
+							// filter: 'drop-shadow(0px 4px 2px #31373E)',
+						}
+					}}
+				>
+					{/* <Icon
+						sx={{
+							cursor: 'pointer',
+							width: 40,
+							height: 40,
+						}}
+					>
 						<IconImage src={icon} />
-					</Icon>
-				</Box>
-				// </Link>
+					</Icon> */}
+				</Stack>
 			))}
 		</Stack>
 	</Box>
-)
+);
 
 const MobileEvent: React.FC<any> = () => {
 	const isMobile = useMediaQuery('(max-width:600px)');
@@ -374,22 +375,24 @@ const MobileEvent: React.FC<any> = () => {
 				</Box>
 			</Stack>
 		</Box>
-	)
-}
+	);
+};
 
 const Home: NextPage = () => {
-	const [height, setHeight] = useState<string>();
-	const isTablet = useMediaQuery('(max-width:960px)');
+	const [height, setHeight] = useState<number>();
+	const isTablet = useMediaQuery((theme: Theme) =>
+		theme.breakpoints.down('md')
+	);
 
-	const windowHeight = () => {
-		setHeight(`${window.innerHeight}px`);
+	const windowHeightListener = () => {
+		setHeight(window.innerHeight);
 	};
 
 	useEffect(() => {
-		window.addEventListener('resize', windowHeight);
-		windowHeight();
+		windowHeightListener();
+		window.addEventListener('resize', windowHeightListener);
 		return () => {
-			window.removeEventListener('resize', () => {});
+			window.removeEventListener('resize', windowHeightListener);
 		};
 	}, []);
 	return (
@@ -409,6 +412,204 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+// const Event: React.FC<any> = ({ endDate }) => {
+// 	const end = Date.parse(endDate);
+// 	const _second = 1000;
+// 	const _minute = _second * 60;
+// 	const _hour = _minute * 60;
+// 	const _day = _hour * 24;
+
+// 	const [dayText, setDayText] = useState('');
+// 	const [hrText, setHrText] = useState('');
+// 	const [minText, setMinText] = useState('');
+// 	const [secText, setSecText] = useState('');
+
+// 	useEffect(() => {
+// 		const counter = setInterval(() => {
+// 			const distance = end - Date.now();
+// 			if (distance < 0) {
+// 				clearInterval(counter);
+// 			} else {
+// 				let days = Math.floor(distance / _day);
+// 				let hrs = Math.floor((distance % _day) / _hour);
+// 				let mins = Math.floor((distance % _hour) / _minute);
+// 				let secs = Math.floor((distance % _minute) / _second);
+// 				setDayText(days < 0 ? '' : days < 10 ? `0${days}` : `${days}`);
+// 				setHrText(hrs < 0 ? '' : hrs < 10 ? `0${hrs}` : `${hrs}`);
+// 				setMinText(mins < 0 ? '' : mins < 10 ? `0${mins}` : `${mins}`);
+// 				setSecText(secs < 0 ? '' : secs < 10 ? `0${secs}` : `${secs}`);
+// 			}
+// 		}, 1000);
+// 		return () => clearInterval(counter);
+// 	}, []);
+
+// 	return (
+// 		<Box
+// 			sx={{
+// 				position: 'absolute',
+// 				// height: parseFloat(`${windowHeight}`)/3,
+// 				// width: parseFloat(`${windowHeight}`)/3 * 624/425,
+// 				height: 425,
+// 				width: 624,
+// 				top: `${100 / 4}%`,
+// 				left: 160,
+// 				zIndex: 99,
+// 			}}
+// 		>
+// 			<Box
+// 				sx={{
+// 					width: '100%',
+// 					height: '100%',
+// 					position: 'relative',
+// 				}}
+// 			>
+// 				<Box
+// 					sx={{
+// 						width: '100%',
+// 						height: '100%',
+// 						background: 'rgba(255, 255, 255, 0.4)',
+// 						backdropFilter: 'blur(40px)',
+// 						borderRadius: '16px',
+// 						transform: 'skewX(-10deg)',
+// 					}}
+// 				/>
+// 				<Box
+// 					sx={{
+// 						position: 'absolute',
+// 						height: `${(210 / 425) * 100}%`,
+// 						width: `${(109 / 624) * 100}%`,
+// 						bottom: '5%',
+// 						left: '-7.5%',
+// 						backgroundImage: `url(assets/home/neon-stroke1.png)`,
+// 						backgroundRepeat: 'no-repeat',
+// 						backgroundSize: 'contain',
+// 					}}
+// 				/>
+// 				<Box
+// 					sx={{
+// 						position: 'absolute',
+// 						height: `${(273 / 425) * 100}%`,
+// 						width: `${(144 / 624) * 100}%`,
+// 						top: '5%',
+// 						right: '-7.5%',
+// 						backgroundImage: `url(assets/home/neon-stroke2.png)`,
+// 						backgroundRepeat: 'no-repeat',
+// 						backgroundSize: 'contain',
+// 					}}
+// 				/>
+// 				<Stack
+// 					alignItems="start"
+// 					sx={{
+// 						position: 'absolute',
+// 						width: '100%',
+// 						height: '100%',
+// 						top: 0,
+// 						left: 0,
+// 						px: 10,
+// 					}}
+// 				>
+// 					<img src={EVENT.IMAGE} width={'70%'} height={'auto'} />
+// 					<Typography
+// 						fontStyle="italic"
+// 						fontSize={20}
+// 						color="#31373E"
+// 						fontWeight={600}
+// 						sx={{
+// 							pr: 20,
+// 							mt: 2,
+// 						}}
+// 					>
+// 						{EVENT.DESC}
+// 					</Typography>
+// 					<Stack
+// 						direction="row"
+// 						spacing={1.5}
+// 						mt={1.5}
+// 						alignItems="center"
+// 						justifyContent="start"
+// 					>
+// 						<Typography
+// 							fontStyle="italic"
+// 							fontSize={18}
+// 							color="#31373E"
+// 							fontWeight={500}
+// 						>
+// 							{EVENT.COUNTDOWN}
+// 						</Typography>
+// 						{[
+// 							{ count: dayText, title: 'days' },
+// 							{ count: hrText, title: 'hours' },
+// 							{ count: minText, title: 'mins' },
+// 							{ count: secText, title: 'secs' },
+// 						].map(({ count, title }) => (
+// 							<Stack
+// 								key={title}
+// 								alignItems="center"
+// 								spacing={-1}
+// 								sx={{
+// 									pl: 1,
+// 									pr: 1.5,
+// 									pt: 1,
+// 									pb: 2,
+// 									border: '1px solid #31373E',
+// 									borderRadius: '8px',
+// 								}}
+// 							>
+// 								<Typography
+// 									fontFamily="Electrofied"
+// 									fontSize={24}
+// 									fontStyle="italic"
+// 									color="#31373E"
+// 								>
+// 									{count}
+// 								</Typography>
+// 								<Typography
+// 									fontSize={14}
+// 									fontStyle="italic"
+// 									color="#31373E"
+// 									fontWeight="bold"
+// 								>
+// 									{title}
+// 								</Typography>
+// 							</Stack>
+// 						))}
+// 					</Stack>
+// 				</Stack>
+// 				<Box
+// 					sx={{
+// 						position: 'absolute',
+// 						bottom: '-7.5%',
+// 						right: '2.5%',
+// 					}}
+// 				>
+// 					<Link href={EVENT.BUTTON.href}>
+// 						<Button
+// 							endIcon={
+// 								<Icon sx={{ width: 40, height: 40 }}>
+// 									<IconImage src={EVENT.BUTTON.icon} />
+// 								</Icon>
+// 							}
+// 							sx={{
+// 								fontSize: 18,
+// 								fontWeight: 600,
+// 								color: '#FFF',
+// 								background:
+// 									'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
+// 								borderRadius: '16px',
+// 								boxShadow: 'none',
+// 								px: 3,
+// 								py: 2,
+// 							}}
+// 						>
+// 							{EVENT.BUTTON.title}
+// 						</Button>
+// 					</Link>
+// 				</Box>
+// 			</Box>
+// 		</Box>
+// 	);
+// };
 
 // import type { NextPage } from 'next'
 // import React, { ReactNode, useEffect, useRef, useState } from 'react'

@@ -1,24 +1,38 @@
-import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import * as gtag from "../utils/gtag";
+import { useEffect } from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ToastContainer } from 'react-toastify';
+import { ThemeProvider } from '@mui/material';
+import NextNProgress from 'nextjs-progressbar';
+import theme from '../utils/theme';
+import { pageView } from "../utils/gtag";
+
+import 'react-toastify/dist/ReactToastify.css';
+import '../styles/globals.scss';
+
+
 function MyApp({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-  // useEffect(() => {
-  //   const handleRouteChange = (url: URL) => {
-  //     gtag.pageview(url);
-  //   };
-  //   router.events.on("routeChangeComplete", handleRouteChange);
-  //   return () => {
-  //     router.events.off("routeChangeComplete", handleRouteChange);
-  //   };
-  // }, [router.events]);
-  return <>
-    <Component {...pageProps} />
-    <ToastContainer />
-  </>
+	const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = (url: URL) => {
+      pageView(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
+  
+	return (
+		<ThemeProvider theme={theme}>
+			{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+			<CssBaseline />
+			<NextNProgress color="#FF6D24"/>
+			<Component {...pageProps} />
+    	<ToastContainer />
+		</ThemeProvider>
+	)
 }
 export default MyApp

@@ -4,7 +4,7 @@ export const EVENT = {
 	COUNTDOWN: 'Begins in',
 	BUTTON: {
 		title: 'REGISTER NOW',
-		icon: 'assets/home/arrow-right.svg',
+		icon: 'assets/icons/arrow-color.svg',
 		href: '/event',
 		mobileIcon: 'assets/home/arrow-up.svg',
 	}
@@ -12,19 +12,23 @@ export const EVENT = {
 
 export const SOCIAL = [
 	{
-		icon: 'assets/home/social.svg',
+		icon: 'assets/icons/fb-white.svg',
+		iconHover: 'assets/icons/fb-color.svg',
 		href: 'https://www.facebook.com/beFITTER.io',
 	},
 	{
-		icon: 'assets/home/social-1.svg',
+		icon: 'assets/icons/ig-white.svg',
+		iconHover: 'assets/icons/ig-color.svg',
 		href: 'https://www.instagram.com/befitter.io',
 	},
 	{
-		icon: 'assets/home/social-2.svg',
+		icon: 'assets/icons/tw-white.svg',
+		iconHover: 'assets/icons/tw-color.svg',
 		href: 'https://twitter.com/beFITTER_io',
 	},
 	{
-		icon: 'assets/home/social-3.svg',
+		icon: 'assets/icons/tl-white.svg',
+		iconHover: 'assets/icons/tl-color.svg',
 		href: 'https://t.me/befitter_chat',
 	},
 ];

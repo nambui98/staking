@@ -1,18 +1,18 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Html, Head, Main, NextScript } from 'next/document';
 import { GA_TRACKING_ID } from '../utils/gtag';
 export default function Document() {
-    return (
-        <Html>
-            <Head>
-                <link rel="icon" href="/favicon.png" />
-                <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500&display=swap" rel="stylesheet" />
-                <script
-                    async
-                    src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-                />
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
+	return (
+		<Html lang="en">
+			<Head>
+				<meta name="viewport" content="initial-scale=1, width=device-width" />
+				<link rel="icon" href="/favicon.ico" />
+				<script
+					async
+					src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+				/>
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `
 						window.dataLayer = window.dataLayer || [];
 						function gtag(){dataLayer.push(arguments);}
 						gtag('js', new Date());
@@ -20,13 +20,13 @@ export default function Document() {
 							page_path: window.location.pathname,
 						});
 				`,
-                    }}
-                />
-            </Head>
-            <body>
-                <Main />
-                <NextScript />
-            </body>
-        </Html>
-    )
+					}}
+				/>
+			</Head>
+			<body>
+				<Main />
+				<NextScript />
+			</body>
+		</Html>
+	);
 }
