@@ -103,7 +103,7 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 					<Icon>
 						<IconImage src={ICON.SMS} />
 					</Icon>
-					<Typography fontSize={16}>{EMAIL}</Typography>
+					<Typography fontSize={16} color="#fff">{EMAIL}</Typography>
 				</Stack>
 				{isTablet && (
 					<>
