@@ -386,11 +386,13 @@ const Home: NextPage = () => {
 	);
 
 	const windowHeightListener = () => {
+		// console.log('window.innerHeight', window.innerHeight);
 		setHeight(window.innerHeight);
 	};
 
 	useEffect(() => {
 		windowHeightListener();
+		setTimeout(() => {windowHeightListener();}, 100);
 		window.addEventListener('resize', windowHeightListener);
 		return () => {
 			window.removeEventListener('resize', windowHeightListener);
