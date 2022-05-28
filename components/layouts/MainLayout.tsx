@@ -1,8 +1,6 @@
 import Head from 'next/head';
-import { Box, ThemeProvider } from '@mui/material';
+import { Box } from '@mui/material';
 
-import theme from '../../utils/theme';
-import { GA_TRACKING_ID } from '../../utils/gtag';
 import { META_TITLE, META_DESC } from '../../constants/head';
 import MainHeader from '../headers/MainHeader';
 import MainFooter from '../footers/MainFooter';
@@ -29,40 +27,22 @@ const MainLayout: React.FC<any> = ({ sxProps, children }) => {
 					property="twitter:image"
 					content="https://befitter.io/images/item.png"
 				/>
-				{/* <script
-					async
-					src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-				/>
-				<script
-					dangerouslySetInnerHTML={{
-						__html: `
-						window.dataLayer = window.dataLayer || [];
-						function gtag(){dataLayer.push(arguments);}
-						gtag('js', new Date());
-						gtag('config', '${GA_TRACKING_ID}', {
-							page_path: window.location.pathname,
-						});
-				`,
-					}}
-				/> */}
 			</Head>
-			<ThemeProvider theme={theme}>
-				<Box
-					sx={{
-						width: '100%',
-						height: '100%',
-						minHeight: '100vh',
-						display: 'flex',
-						flexDirection: 'column',
-					}}
-				>
-					<MainHeader />
-					<Box component="main" flexGrow={1} sx={{...sxProps}}>
-						{children}
-					</Box>
-					<MainFooter />
+			<Box
+				sx={{
+					width: '100%',
+					height: '100%',
+					minHeight: '100vh',
+					display: 'flex',
+					flexDirection: 'column',
+				}}
+			>
+				<MainHeader />
+				<Box component="main" flexGrow={1} sx={{...sxProps}}>
+					{children}
 				</Box>
-			</ThemeProvider>
+				<MainFooter />
+			</Box>
 		</>
 	);
 };
