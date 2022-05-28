@@ -11,6 +11,7 @@ const MainLayout: React.FC<any> = ({ sxProps, children }) => {
 		<>
 			<Head>
 				<title>Befitter</title>
+				<meta name="viewport" content="initial-scale=1, width=device-width" />
 				<meta name="description" content={META_DESC} />
 				<meta property="og:title" content={META_TITLE} />
 				<meta property="og:type" content="website" />

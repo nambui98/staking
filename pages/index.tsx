@@ -293,6 +293,7 @@ const Social: React.FC<any> = () => (
 			<Typography
 				fontSize={16}
 				fontWeight={600}
+				color="#fff"
 				sx={{
 					textShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
 				}}
