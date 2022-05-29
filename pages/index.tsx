@@ -407,7 +407,7 @@ const Home: NextPage = () => {
 			>
 				<VideoSwiper />
 			</Box>
-			{!isTablet && <Event endDate="2022-06-01" />}
+			{!isTablet && <Event endDate="2022-06-06" />}
 			{!isTablet && <Social />}
 			{isTablet && <MobileEvent />}
 		</HomeLayout>

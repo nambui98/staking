@@ -460,7 +460,7 @@ const EventDetail: NextPage = () => {
 				<Container sx={{ position: 'relative' }}>
 					<Stack alignItems={{xs: 'center', md: 'start'}}>
 						<EventName sxProps={{ mb: {xs: -10, sm: 0, md: 5} }} />
-						<Countdown sxProps={{ mb: 5 }} endDate={'2022-06-01'} />
+						<Countdown sxProps={{ mb: 5 }} endDate={'2022-06-06'} />
 						<Form sxProps={{ mb: 5 }} />
 						<Questions sxProps={{ mb: 10 }} />
 					</Stack>
