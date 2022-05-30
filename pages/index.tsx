@@ -531,7 +531,7 @@ const ChallengeSection: React.FC<any> = ({ sxProps }) => {
 						direction={{ xs: 'column-reverse', md: 'row' }}
 						alignItems={{ xs: 'center', md: 'start' }}
 						spacing={4.5}
-						sx={{ width: '100%', pt: 2, pb: 10 }}
+						sx={{ width: '100%', pt: 2, pb: 25 }}
 					>
 						<Link href={CHALLENGE.REGISTER.BUTTON.href}>
 							<Button
@@ -971,8 +971,8 @@ const Home: NextPage = () => {
 				{isTablet && <MobileBannerEvent />}
 			</Box>
 			<AppSection sxProps={{ py: 8 }} />
-			<ChallengeSection sxProps={{ pb: 15 }} />
-			<NumberSection sxProps={{ pb: 15 }} />
+			<ChallengeSection />
+			{/* <NumberSection sxProps={{ pb: 15 }} /> */}
 			<HowItWorks sxProps={{ pb: 15 }} />
 			<FoundedBy sxProps={{ mb: 15 }} />
 			<Team sxProps={{ mb: 15 }} />
