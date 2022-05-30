@@ -6,14 +6,17 @@ import {
 	AppBar,
 	Toolbar,
 	IconButton,
-	Avatar,
+	Icon,
 	Button,
 	Stack,
 	useMediaQuery,
+	useScrollTrigger,
 } from '@mui/material';
 import { toast } from 'react-toastify';
-
+import { IconImage } from '../styled';
 import {
+	LOGO,
+	MENU,
 	HOME_LOGO,
 	HOME_BG_LOGO,
 	HOME_MENU,
@@ -24,6 +27,10 @@ const HomeHeader: React.FC<any> = ({ sxProps, children }) => {
 	const isTablet = useMediaQuery('(max-width:960px)');
 	const isMobile = useMediaQuery('(max-width:600px)');
 	const [showMenu, setShowMenu] = React.useState<boolean>(false);
+	const stickTrigger = useScrollTrigger({
+		disableHysteresis: true,
+		threshold: 200,
+	});
 
 	function handleMenuItemClick() {
 		setShowMenu(false);
@@ -38,51 +45,117 @@ const HomeHeader: React.FC<any> = ({ sxProps, children }) => {
 		});
 	}
 
-	function handleOpenMenu() {setShowMenu(true)}
+	function handleOpenMenu() {
+		setShowMenu(true);
+	}
 
 	return (
 		<Box component={'header'}>
-			<AppBar color="transparent" square elevation={0}>
-				<Toolbar>
+			<AppBar
+				color="transparent"
+				square
+				elevation={0}
+				sx={{
+					background: stickTrigger ? '#fff' : 'transparent',
+					transition: 'all ease 0.2s ',
+				}}
+			>
+				<Toolbar
+					sx={{
+						height: stickTrigger ? 80 : 'unset',
+						borderBottom: stickTrigger ? '1px solid #E9EAEF' : 'unset',
+					}}
+				>
 					<Container
 						disableGutters
 						sx={{
 							py: 0,
-							pt: 3,
+							pt: stickTrigger ? 'unset' : 3,
 							display: 'flex',
 							justifyContent: 'space-between',
-							maxWidth: { xl: 1920 - 240 },
+							maxWidth: { xl: 'unset' },
+							px: { xl: 7 },
 						}}
 					>
-						<Link href={'/'}>
-							<Box
-								component={'a'}
+						{stickTrigger ? (
+							<Link href={'/'}>
+								<Box
+									component={'a'}
+									sx={{
+										display: 'flex',
+										alignItems: 'center',
+										cursor: 'pointer',
+									}}
+								>
+									<img src={LOGO} alt="Logo" width={'auto'} height={40} />
+								</Box>
+							</Link>
+						) : (
+							<Link href={'/'}>
+								<Box
+									component={'a'}
+									sx={{
+										display: 'flex',
+										// alignItems: 'center',
+										cursor: 'pointer',
+										width: isMobile ? 357 / 2.5 : isTablet ? 357 / 2 : 357,
+										height: isMobile ? 165 / 2.5 : isTablet ? 165 / 2 : 165,
+										backgroundImage: `url(${HOME_BG_LOGO})`,
+										backgroundRepeat: 'no-repeat',
+										backgroundSize: 'contain',
+										pt: { xs: 1, md: 3 },
+										pl: { xs: 3, md: 6 },
+									}}
+								>
+									<img
+										src={HOME_LOGO}
+										alt="Logo"
+										width={'auto'}
+										height={isMobile ? 24 : isTablet ? 32 : 64}
+									/>
+								</Box>
+							</Link>
+						)}
+						{isMobile ? (
+							<IconButton onClick={handleOpenMenu}>
+								<Icon sx={{ width: 48, height: 48 }}>
+									<IconImage src={HOME_MENU} />
+								</Icon>
+							</IconButton>
+						) : stickTrigger ? (
+							<IconButton onClick={handleOpenMenu}>
+								<Icon sx={{ width: 48, height: 48 }}>
+									<IconImage src={MENU} />
+								</Icon>
+							</IconButton>
+						) : (
+							<Button
+								href={ITEMS[0].href}
+								target="_blank"
 								sx={{
-									display: 'flex',
-									// alignItems: 'center',
-									cursor: 'pointer',
-									width: isMobile ? 357/4 : isTablet ? 357/2 : 357,
-									height: isMobile ? 165/4 : isTablet ? 165/2 : 165,
-									backgroundImage: `url(${HOME_BG_LOGO})`,
-									backgroundRepeat: 'no-repeat',
-									backgroundSize: 'contain',
-									pt: 3,
-									pl: 6,
+									height: 53,
+									fontFamily: 'Electrofied',
+									fontSize: 20,
+									color: '#fff',
+									px: 3,
+									py: 2,
+									background: 'rgba(255, 255, 255, 0.2)',
+									border: '2px solid #FFFFFF',
+									boxShadow: '0px 0px 12px rgba(255, 255, 255, 0.5)',
+									'&:hover': {
+										background:
+											'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
+										color: '#fff',
+										border: 'none',
+										px: '26px',
+										py: '18px',
+									},
 								}}
 							>
-								<img src={HOME_LOGO} alt="Logo" width={'auto'} height={isMobile ? 16 : isTablet ? 32 : 64} />
-							</Box>
-						</Link>
-						{isMobile && !showMenu && (
-							<IconButton onClick={handleOpenMenu} sx={{ p: 0 }}>
-								<Avatar
-									alt="Menu"
-									src={HOME_MENU}
-									sx={{ width: 48, height: 48 }}
-								/>
-							</IconButton>
+								{ITEMS[0].title}
+							</Button>
 						)}
-						{(!isMobile || showMenu) && (
+						{/* {(!isMobile || showMenu) && (
 							<Box
 								sx={{
 									position: 'relative',
@@ -141,7 +214,7 @@ const HomeHeader: React.FC<any> = ({ sxProps, children }) => {
 									</Stack>
 								</Box>
 							</Box>
-						)}
+						)} */}
 					</Container>
 				</Toolbar>
 			</AppBar>
