@@ -15,7 +15,7 @@ export const APP = {
 	SUBTITLE: 'Make healthy lifestyle',
 	TITLE: 'irresistible',
 	TITLE_BG: 'assets/backgrounds/home-app.png',
-	DESC: 'beFITTER is a fitnessfi and socialfi app that aims to build a healthier ecosystem helping users balance their life, improve mental & physical health, gain achievements and still get monetary incentives.',
+	DESC: 'beFITTER is a web3 fitnessfi and socialfi app that aims to build a healthier ecosystem helping users balance their life, improve mental & physical health, gain achievements and still get monetary incentives.',
 	BUTTON: [
 		{
 			subtitle0: 'Coming soon',
@@ -44,7 +44,7 @@ export const APP = {
 export const CHALLENGE = {
 	TITLE: 'DUAL TOP',
 	SUBTITLE: 'challenge',
-	DESC: `Participate in 3 types of activities which are walking, running and cycling, then each category takes the top 30 people according to the set criteria to give prizes!`,
+	DESC: `Participate in 3 types of activities which are walking, running and cycling, then each category takes the top 300 people according to the set criteria to give prizes!`,
 	REGISTER: {
 		DESC: 'SIGN UP FOR THE FIRST PRE-SALE',
 		BUTTON: {
