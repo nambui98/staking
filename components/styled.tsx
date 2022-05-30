@@ -1,11 +1,4 @@
 import {
-	Box,
-	Container,
-	Typography,
-	Stack,
-	InputBase,
-	Button,
-	IconButton,
 	Icon,
 	styled,
 } from '@mui/material';

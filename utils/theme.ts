@@ -8,14 +8,20 @@ const theme = createTheme({
 	  }
 	},
 	typography: {
-		// fontFamily: 'Electrofied',
-		fontFamily: 'Be Vietnam Pro',
+		fontFamily: 'BeVietnamPro',
 		fontSize: 14,
 		// fontWeightLight: 300,
 		// fontWeightRegular: 400,
 		// fontWeightMedium: 500,
+		subtitle1: {
+			fontFamily: 'Electrofied',
+      lineHeight: 1.2,
+		},
+		body1: {
+			fontWeight: 400,
+			lineHeight: 1.2,
+    },
 		button: {
-			// fontFamily: 'Be Vietnam Pro',
 			fontSize: 16,
 		},
 	},

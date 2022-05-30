@@ -7,7 +7,9 @@ import {
 	Toolbar,
 	IconButton,
 	Avatar,
+	Icon,
 } from '@mui/material';
+import { IconImage } from '../styled';
 
 import { LOGO, MENU } from '../../constants/header';
 
@@ -17,12 +19,10 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 	return (
 		<Box component={'header'} mb={10}>
 			<AppBar
-				// position="static"
 				color="transparent"
 				square
 				elevation={0}
 				sx={{
-					// background: (theme) => theme.palette.primary.main,
 					background: '#fff',
 				}}
 			>
@@ -48,8 +48,11 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 								<img src={LOGO} alt="Logo" width={'auto'} height={40} />
 							</Box>
 						</Link>
-						<IconButton onClick={handleOpenMenu} sx={{ p: 0 }}>
+						{/* <IconButton onClick={handleOpenMenu} sx={{ p: 0 }}>
 							<Avatar alt="Menu" src={MENU} sx={{ width: 48, height: 48 }} />
+						</IconButton> */}
+						<IconButton onClick={handleOpenMenu}>
+							<Icon sx={{ width: 48, height: 48 }}><IconImage src={MENU} /></Icon>
 						</IconButton>
 					</Container>
 				</Toolbar>

@@ -12,17 +12,33 @@ import {
 } from '@mui/material';
 
 import { LOGO, BG1, BG2, ICON, EMAIL, BUTTON } from '../../constants/footer';
-
-const IconImage = styled('img')({
-	display: 'flex',
-	height: 'inherit',
-	width: 'inherit',
-});
+import { IconImage } from '../styled';
 
 const DownloadIcon: React.FC<any> = () => (
 	<Icon>
 		<IconImage src={ICON.DOWNLOAD} />
 	</Icon>
+);
+
+const SmsIcon: React.FC<any> = () => (
+	<Icon>
+		<IconImage src={ICON.SMS} />
+	</Icon>
+);
+
+const TextIconButton: React.FC<any> = ({ icon, children }) => (
+	<Button
+		variant="text"
+		startIcon={icon}
+		sx={{
+			'&:hover': {
+				textDecoration: 'underline',
+				background: 'transparent',
+			},
+		}}
+	>
+		{children}
+	</Button>
 );
 
 const MainFooter: React.FC<any> = ({ sxProps, children }) => {
@@ -34,7 +50,7 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 			sx={{
 				background: '#272B3F',
 				position: 'relative',
-				height: {xs: 'unset', md: 215},
+				height: { xs: 'unset', md: 215 },
 			}}
 		>
 			<Box
@@ -81,13 +97,22 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 					</Link>
 					{!isTablet && (
 						<Stack direction="row" spacing={4}>
-							<Button variant="text" startIcon={<DownloadIcon />}>
+							<TextIconButton icon={<DownloadIcon />}>
 								{BUTTON.DOCS.title}
-							</Button>
-							<Button variant="text" startIcon={<DownloadIcon />}>
+							</TextIconButton>
+							<TextIconButton icon={<DownloadIcon />}>
 								{BUTTON.MEDIA.title}
-							</Button>
-							<Button variant="outlined" sx={{ borderRadius: '16px' }}>
+							</TextIconButton>
+							<Button
+								variant="outlined"
+								sx={{
+									borderRadius: '16px',
+									'&:hover': {
+										background: '#fff',
+										color: '#000',
+									},
+								}}
+							>
 								{BUTTON.SUPPORT.title}
 							</Button>
 						</Stack>
@@ -100,27 +125,49 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 					my={4}
 					spacing={1}
 				>
-					<Icon>
-						<IconImage src={ICON.SMS} />
-					</Icon>
-					<Typography fontSize={16} color="#fff">{EMAIL}</Typography>
+					<SmsIcon />
+					<Typography
+						fontSize={16}
+						color="#fff"
+						sx={{
+							'&:hover': {
+								textDecoration: 'underline',
+							},
+						}}
+					>
+						{EMAIL}
+					</Typography>
 				</Stack>
 				{isTablet && (
 					<>
 						<Stack direction="row" spacing={4} justifyContent="center">
-							<Button variant="text" startIcon={<DownloadIcon />}>
+							<TextIconButton icon={<DownloadIcon />}>
 								{BUTTON.DOCS.title}
-							</Button>
-							<Button variant="text" startIcon={<DownloadIcon />}>
+							</TextIconButton>
+							<TextIconButton icon={<DownloadIcon />}>
 								{BUTTON.MEDIA.title}
-							</Button>
+							</TextIconButton>
 						</Stack>
 						<Stack spacing={2} alignItems="center" mt={4}>
-							<Button variant="outlined" sx={{ borderRadius: '16px', width: 340 }}>
+							<Button
+								variant="outlined"
+								sx={{
+									borderRadius: '16px',
+									width: 340,
+									'&:hover': {
+										background: '#fff',
+										color: '#000',
+									},
+								}}
+							>
 								{BUTTON.SUPPORT.title}
 							</Button>
-							<Box sx={{ width: '100%', height: 1.5, background: '#4E5472' }}></Box>
-							<Typography fontSize={14} color="#898E9E">Copyright @2022 beFITTER</Typography>
+							<Box
+								sx={{ width: '100%', height: 1.5, background: '#4E5472' }}
+							></Box>
+							<Typography fontSize={14} color="#898E9E">
+								Copyright @2022 beFITTER
+							</Typography>
 						</Stack>
 					</>
 				)}

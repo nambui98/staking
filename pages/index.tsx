@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import { Autoplay, EffectFade } from 'swiper';
+import { Autoplay, EffectFade, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/bundle';
 import 'swiper/css';
@@ -10,23 +10,43 @@ import 'swiper/css/effect-fade';
 import {
 	Box,
 	Container,
-	Typography,
+	Grid,
 	Stack,
+	Typography,
 	InputBase,
 	Button,
 	IconButton,
 	Icon,
-	styled,
-	useMediaQuery,
 	Theme,
+	useMediaQuery,
 } from '@mui/material';
 
 import styles from '../styles/Home.module.scss';
 import HomeLayout from '../components/layouts/HomeLayout';
-import { videoSlides, EVENT, SOCIAL } from '../constants/home';
+import {
+	videoSlides,
+	BANNER,
+	SOCIAL,
+	APP,
+	CHALLENGE,
+	NUMBER,
+	WORKS,
+	FOUNDED,
+	TEAM,
+} from '../constants/home';
 import { IconImage } from '../components/styled';
+import {
+	IconButtonBounceUpOnHover,
+	AppStoreButton,
+} from '../components/buttons';
+import {
+	SocialSection,
+	SectionTitle,
+	CountdownClock,
+	NumberBox,
+} from '../components/sections';
 
-const VideoSwiper: React.FC<any> = () => {
+const BannerSwiper: React.FC<any> = () => {
 	const isMobile = useMediaQuery('(max-width:700px)');
 	const [indexActive, setIndexActive] = useState(0);
 	const refSlide1 = useRef<any>(null);
@@ -102,42 +122,12 @@ const VideoSwiper: React.FC<any> = () => {
 	);
 };
 
-const Event: React.FC<any> = ({ endDate }) => {
-	const end = Date.parse(endDate);
-	const _second = 1000;
-	const _minute = _second * 60;
-	const _hour = _minute * 60;
-	const _day = _hour * 24;
-
-	const [dayText, setDayText] = useState('');
-	const [hrText, setHrText] = useState('');
-	const [minText, setMinText] = useState('');
-	const [secText, setSecText] = useState('');
-
-	useEffect(() => {
-		const counter = setInterval(() => {
-			const distance = end - Date.now();
-			if (distance < 0) {
-				clearInterval(counter);
-			} else {
-				let days = Math.floor(distance / _day);
-				let hrs = Math.floor((distance % _day) / _hour);
-				let mins = Math.floor((distance % _hour) / _minute);
-				let secs = Math.floor((distance % _minute) / _second);
-				setDayText(days < 0 ? '' : days < 10 ? `0${days}` : `${days}`);
-				setHrText(hrs < 0 ? '' : hrs < 10 ? `0${hrs}` : `${hrs}`);
-				setMinText(mins < 0 ? '' : mins < 10 ? `0${mins}` : `${mins}`);
-				setSecText(secs < 0 ? '' : secs < 10 ? `0${secs}` : `${secs}`);
-			}
-		}, 1000);
-		return () => clearInterval(counter);
-	}, []);
-
+const BannerEvent: React.FC<any> = () => {
 	return (
 		<Box
 			sx={{
 				position: 'absolute',
-				height: 425-160,
+				height: 425 - 160,
 				width: 624,
 				bottom: 0,
 				left: 80,
@@ -173,14 +163,14 @@ const Event: React.FC<any> = ({ endDate }) => {
 						pr: 12,
 					}}
 				>
-					<img src={EVENT.IMAGE} width={'70%'} height={'auto'} />
+					<img src={BANNER.IMAGE} width={'70%'} height={'auto'} />
 					<Stack
 						direction="row"
 						spacing={1.5}
 						mt={1.5}
 						alignItems="center"
 						justifyContent="end"
-						sx={{width: '100%'}}
+						sx={{ width: '100%' }}
 					>
 						<Typography
 							fontStyle="italic"
@@ -188,45 +178,9 @@ const Event: React.FC<any> = ({ endDate }) => {
 							color="#31373E"
 							fontWeight={500}
 						>
-							{EVENT.COUNTDOWN}
+							{BANNER.COUNTDOWN}
 						</Typography>
-						{[
-							{ count: dayText, title: 'days' },
-							{ count: hrText, title: 'hours' },
-							{ count: minText, title: 'mins' },
-							{ count: secText, title: 'secs' },
-						].map(({ count, title }) => (
-							<Stack
-								key={title}
-								alignItems="center"
-								spacing={-1}
-								sx={{
-									pl: 1,
-									pr: 1.5,
-									pt: 1,
-									pb: 2,
-									border: '1px solid #31373E',
-									borderRadius: '8px',
-								}}
-							>
-								<Typography
-									fontFamily="Electrofied"
-									fontSize={24}
-									fontStyle="italic"
-									color="#31373E"
-								>
-									{count}
-								</Typography>
-								<Typography
-									fontSize={14}
-									fontStyle="italic"
-									color="#31373E"
-									fontWeight="bold"
-								>
-									{title}
-								</Typography>
-							</Stack>
-						))}
+						<CountdownClock />
 					</Stack>
 				</Stack>
 				<Box
@@ -236,7 +190,7 @@ const Event: React.FC<any> = ({ endDate }) => {
 						right: 0,
 					}}
 				>
-					<Link href={EVENT.BUTTON.href}>
+					<Link href={BANNER.BUTTON.href}>
 						<IconButton
 							sx={{
 								background: '#FFE2D3',
@@ -249,15 +203,18 @@ const Event: React.FC<any> = ({ endDate }) => {
 									transition: 'all ease 1s',
 									animation: 'blink 1s linear',
 								},
-								"@keyframes blink": {
-									"0%": { boxShadow: 'none' },
-									"50%": { boxShadow: 'rgba(255, 109, 36, 0.5) -8px -8px 8px, rgba(255, 109, 36, 0.5) 0px -8px 4px, rgba(255, 109, 36, 0.5) 4px 0px 4px, rgba(255, 109, 36, 0.5) -8px 0px 4px' },
-									"100%": { boxShadow: 'none' },
-								}
+								'@keyframes blink': {
+									'0%': { boxShadow: 'none' },
+									'50%': {
+										boxShadow:
+											'rgba(255, 109, 36, 0.5) -8px -8px 8px, rgba(255, 109, 36, 0.5) 0px -8px 4px, rgba(255, 109, 36, 0.5) 4px 0px 4px, rgba(255, 109, 36, 0.5) -8px 0px 4px',
+									},
+									'100%': { boxShadow: 'none' },
+								},
 							}}
 						>
 							<Icon>
-								<IconImage src={EVENT.BUTTON.icon} />
+								<IconImage src={BANNER.BUTTON.icon} />
 							</Icon>
 						</IconButton>
 					</Link>
@@ -267,75 +224,64 @@ const Event: React.FC<any> = ({ endDate }) => {
 	);
 };
 
-const Social: React.FC<any> = () => (
-	<Box
-		sx={{
-			position: 'absolute',
-			bottom: 40,
-			right: 66,
-			zIndex: 99,
-			backgroundImage: `url(assets/home/social_bg.png)`,
-			backgroundRepeat: 'no-repeat',
-			backgroundSize: 'contain',
-			backgroundPosition: 'center right',
-		}}
-	>
-		<Stack
-			direction="row"
-			spacing={2}
-			alignItems="center"
-			justifyContent="end"
+const BannerSocial: React.FC<any> = () => {
+	const maxWidthLg = useMediaQuery((theme: Theme) =>
+		theme.breakpoints.down('lg')
+	);
+
+	return (
+		<Box
 			sx={{
-				width: 655,
-				py: 1,
+				position: 'absolute',
+				bottom: 40,
+				right: 66,
+				zIndex: 99,
+				backgroundImage: !maxWidthLg
+					? `url(assets/home/social_bg.png)`
+					: 'none',
+				backgroundRepeat: 'no-repeat',
+				backgroundSize: 'contain',
+				backgroundPosition: 'center right',
 			}}
 		>
-			<Typography
-				fontSize={16}
-				fontWeight={600}
-				color="#fff"
+			<Stack
+				direction={{ xs: 'column', lg: 'row' }}
+				spacing={{ xs: 1, lg: 4 }}
+				alignItems={{ xs: 'end', lg: 'center' }}
+				justifyContent="end"
 				sx={{
-					textShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
+					width: 655,
+					pt: 1.5,
+					pb: 1,
 				}}
 			>
-				Follow us on
-			</Typography>
-			{SOCIAL.map(({ icon, iconHover, href }, idx) => (
-				<Stack
-					component="a"
-					href={href}
-					key={idx}
-					target="_blank"
-					alignItems="center"
-					sx={{
-						width: 56,
-						height: 48,
-						background: `url(${icon}) no-repeat center`,
-						'&:hover': {
-							transition: ".3s all cubic-bezier(0.7, -0.4, 0.4, 1.4)", 
-							transform: `translateY(-8px)`,
-							background: `url(${iconHover}) no-repeat center`,
-							// boxShadow: `0 8px 6px -8px #31373E`,
-							// filter: 'drop-shadow(0px 4px 2px #31373E)',
-						}
-					}}
-				>
-					{/* <Icon
+				{!maxWidthLg && (
+					<Typography
+						fontSize={16}
+						fontWeight={600}
+						color="#fff"
 						sx={{
-							cursor: 'pointer',
-							width: 40,
-							height: 40,
+							textShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
+							mb: 0.5,
 						}}
 					>
-						<IconImage src={icon} />
-					</Icon> */}
-				</Stack>
-			))}
-		</Stack>
-	</Box>
-);
+						Follow us on
+					</Typography>
+				)}
+				{SOCIAL.map(({ icon, iconActive, href }, idx) => (
+					<IconButtonBounceUpOnHover
+						key={idx}
+						href={href}
+						icon={icon}
+						iconActive={iconActive}
+					/>
+				))}
+			</Stack>
+		</Box>
+	);
+};
 
-const MobileEvent: React.FC<any> = () => {
+const MobileBannerEvent: React.FC<any> = () => {
 	const isMobile = useMediaQuery('(max-width:600px)');
 	return (
 		<Box
@@ -359,23 +305,635 @@ const MobileEvent: React.FC<any> = () => {
 					backdropFilter: 'blur(40px)',
 				}}
 			>
-				<img src={EVENT.IMAGE} width={isMobile ? 300 : 350} height={'auto'} />
+				<img src={BANNER.IMAGE} width={isMobile ? 300 : 350} height={'auto'} />
 				<Box
 					sx={{
 						position: 'absolute',
 						top: -32,
 					}}
 				>
-					<Link href={EVENT.BUTTON.href}>
+					<Link href={BANNER.BUTTON.href}>
 						<IconButton>
 							<Icon sx={{ width: 40, height: 40 }}>
-								<IconImage src={EVENT.BUTTON.mobileIcon} />
+								<IconImage src={BANNER.BUTTON.mobileIcon} />
 							</Icon>
 						</IconButton>
 					</Link>
 				</Box>
 			</Stack>
 		</Box>
+	);
+};
+
+const AppSection: React.FC<any> = ({ sxProps }) => {
+	const isMd = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+	return (
+		<Container sx={{ ...sxProps }}>
+			<Grid container>
+				<Grid item xs={12} md={4}>
+					{!isMd && (
+						<Box
+							sx={{
+								width: '100%',
+								height: 0,
+								pt: `${(470 / 448) * 100}%`,
+								backgroundImage: `url(${APP.POSTER})`,
+								backgroundRepeat: 'no-repeat',
+								backgroundSize: 'cover',
+							}}
+						/>
+					)}
+				</Grid>
+				<Grid item xs>
+					<Stack
+						px={{ xs: 0, sm: 2, md: 4 }}
+						justifyContent="center"
+						sx={{ height: '100%' }}
+					>
+						<Typography
+							variant="subtitle1"
+							fontSize={{ xs: 32, sm: 40 }}
+							fontStyle="italic"
+							color="#31373E"
+							sx={{
+								textTransform: 'uppercase',
+								textShadow: '1px 1px 0 #FFF, 2px 2px 0 #31373E',
+							}}
+						>
+							{APP.SUBTITLE}
+						</Typography>
+						<Box
+							sx={{
+								maxWidth: 'fit-content',
+								pr: { xs: 0, md: '3.5%' },
+								backgroundImage: { xs: 'none', md: `url(${APP.TITLE_BG})` },
+								backgroundRepeat: 'no-repeat',
+								backgroundSize: '80%',
+								backgroundPosition: 'bottom right',
+							}}
+						>
+							<Typography
+								variant="subtitle1"
+								component="span"
+								fontSize={{ xs: 42, sm: 64 }}
+								fontStyle="italic"
+								color="#FF6D24"
+								sx={{
+									textTransform: 'uppercase',
+									textShadow: '1px 1px 0 #FFF, 2px 2px 0 #FF6D24',
+								}}
+							>
+								{APP.TITLE}
+							</Typography>
+						</Box>
+						<Typography
+							fontSize={{ xs: 16, sm: 18 }}
+							fontWeight={500}
+							color="#5A6178"
+							lineHeight={1.5}
+							my={3}
+						>
+							{APP.DESC}
+						</Typography>
+						{isMd && (
+							<Box
+								sx={{
+									width: '90%',
+									height: 0,
+									pt: `${(470 / 448) * 100}%`,
+									backgroundImage: `url(${APP.POSTER})`,
+									backgroundRepeat: 'no-repeat',
+									backgroundSize: 'contain',
+								}}
+							/>
+						)}
+						<Grid container spacing={2}>
+							{APP.BUTTON.map((el, idx) => (
+								<Grid key={idx} item xs={6} lg={4}>
+									<AppStoreButton
+										disabled={!el.href}
+										subtitle={el.href ? el.subtitle : el.subtitle0}
+										title={el.title}
+										icon={el.icon}
+										href={el.href}
+									/>
+								</Grid>
+							))}
+						</Grid>
+					</Stack>
+				</Grid>
+			</Grid>
+		</Container>
+	);
+};
+
+const ChallengeSection: React.FC<any> = ({ sxProps }) => {
+	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+	const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+
+	return (
+		<Stack
+			alignItems="center"
+			sx={{
+				position: 'relative',
+				pt: 8,
+				overflow: 'hidden',
+				backgroundImage: { xs: `url(${CHALLENGE.BG})`, md: 'none' },
+				backgroundRepeat: 'no-repeat',
+				backgroundSize: 'contain',
+				backgroundPosition: 'center',
+			}}
+		>
+			{!isSm && (
+				<Box
+					sx={{
+						position: 'relative',
+						width: '100%',
+						minWidth: 1920,
+					}}
+				>
+					<Box
+						sx={{
+							position: 'absolute',
+							top: 190,
+							left: '11%',
+						}}
+					>
+						<img src={CHALLENGE.BG_ITEM1} width={'auto'}></img>
+					</Box>
+					<Box
+						sx={{
+							position: 'absolute',
+							top: 0,
+							right: 0,
+						}}
+					>
+						<img src={CHALLENGE.BG_ITEM5} width={'auto'}></img>
+					</Box>
+					<Box
+						sx={{
+							position: 'absolute',
+							top: -62,
+							right: `${25}%`,
+						}}
+					>
+						<img src={CHALLENGE.BG_ITEM2} width={'auto'}></img>
+					</Box>
+					<Box
+						sx={{
+							position: 'absolute',
+							top: 40,
+							right: `${21.5}%`,
+						}}
+					>
+						<img src={CHALLENGE.BG_ITEM3} width={'auto'}></img>
+					</Box>
+				</Box>
+			)}
+			<Container sx={{ position: 'relative' }}>
+				<Stack alignItems={{ xs: 'center', md: 'start' }} spacing={1}>
+					<img
+						src={CHALLENGE.BG_TITLE}
+						alt=""
+						width={isXs ? '100%' : 'auto'}
+						height={'auto'}
+					/>
+					<img
+						src={CHALLENGE.BG_SUBTITLE}
+						alt=""
+						width={isXs ? '80%' : 'auto'}
+						height={'auto'}
+					/>
+					<Typography
+						fontSize={{ xs: 16, sm: 18 }}
+						fontWeight={500}
+						color="#5A6178"
+						lineHeight={1.5}
+						sx={{
+							pt: 3,
+							pb: { xs: 3, md: 7 },
+							maxWidth: 545,
+						}}
+					>
+						{CHALLENGE.DESC}
+					</Typography>
+					<Typography
+						fontSize={{ xs: 24, sm: 24 }}
+						fontWeight={700}
+						color="#31373E"
+						sx={{
+							textAlign: { xs: 'center', md: 'left' },
+						}}
+					>
+						{CHALLENGE.REGISTER.DESC}
+					</Typography>
+					<Stack
+						direction={{ xs: 'column-reverse', md: 'row' }}
+						alignItems={{ xs: 'center', md: 'start' }}
+						spacing={4.5}
+						sx={{ width: '100%', pt: 2, pb: 10 }}
+					>
+						<Link href={CHALLENGE.REGISTER.BUTTON.href}>
+							<Button
+								endIcon={
+									<Icon sx={{ width: 40, height: 40 }}>
+										<IconImage src={CHALLENGE.REGISTER.BUTTON.icon} />
+									</Icon>
+								}
+								sx={{
+									fontSize: 18,
+									fontWeight: 600,
+									color: '#FFF',
+									background:
+										'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
+									borderRadius: '16px',
+									boxShadow: 'none',
+									px: 3.5,
+									py: 2,
+									maxHeight: 72,
+								}}
+							>
+								{CHALLENGE.REGISTER.BUTTON.title}
+							</Button>
+						</Link>
+						<Box>
+							<Typography
+								fontStyle="italic"
+								fontSize={18}
+								color="#31373E"
+								fontWeight={500}
+								sx={{
+									textAlign: { xs: 'center', md: 'left' },
+								}}
+							>
+								{BANNER.COUNTDOWN}
+							</Typography>
+							<CountdownClock />
+						</Box>
+					</Stack>
+				</Stack>
+			</Container>
+		</Stack>
+	);
+};
+
+const NumberSection: React.FC<any> = ({ sxProps }) => {
+	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+
+	return (
+		<Stack
+			alignItems="center"
+			sx={{
+				position: 'relative',
+				overflow: 'hidden',
+				...sxProps,
+			}}
+		>
+			{!isSm && (
+				<Box
+					sx={{
+						position: 'relative',
+						width: '100%',
+						minWidth: 1920,
+					}}
+				>
+					<Box
+						sx={{
+							position: 'absolute',
+							top: 557,
+							left: 0,
+						}}
+					>
+						<img src={NUMBER.BG_ITEM} width={'auto'}></img>
+					</Box>
+				</Box>
+			)}
+			<Container sx={{ position: 'relative' }}>
+				<SectionTitle title={NUMBER.TITLE} subtitle={NUMBER.SUBTITLE} />
+				<Grid container mt={7}>
+					<Grid item xs={12} md={5}>
+						<Stack
+							justifyContent="center"
+							alignItems="center"
+							sx={{ height: '100%' }}
+						>
+							<Box
+								sx={{
+									width: { xs: '75%', sm: '50%', md: '100%' },
+									height: 0,
+									pt: {
+										xs: `${(352 / 449) * 75}%`,
+										sm: `${(352 / 449) * 50}%`,
+										md: `${(352 / 449) * 100}%`,
+									},
+									backgroundImage: `url(${NUMBER.POSTER})`,
+									backgroundRepeat: 'no-repeat',
+									backgroundSize: 'cover',
+								}}
+							/>
+						</Stack>
+					</Grid>
+					<Grid item xs={12} md={7}>
+						<Stack
+							spacing={5}
+							pl={{ md: 12, lg: 24 }}
+							pt={{ xs: 4, md: 0 }}
+							alignItems={{ xs: 'center', md: 'start' }}
+						>
+							{NUMBER.ITEMS.map((el, idx) => (
+								<NumberBox
+									key={idx}
+									icon={el.icon}
+									count={el.count}
+									title={el.title}
+								/>
+							))}
+						</Stack>
+					</Grid>
+				</Grid>
+			</Container>
+		</Stack>
+	);
+};
+
+const HowItWorks: React.FC<any> = ({ sxProps }) => {
+	return (
+		<Container
+			sx={{
+				'& .swiper-pagination-bullets.swiper-pagination-horizontal': {
+					width: { xs: '100%', md: 'unset' },
+					bottom: { xs: 0, md: '8%' },
+					left: { xs: 0, md: '65%' },
+				},
+				'& .swiper-pagination-bullet': {
+					width: 12,
+					height: 12,
+					border: '2px solid #FF6D24',
+					background: '#fff',
+				},
+				'& .swiper-pagination-bullet-active': {
+					background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
+				},
+				...sxProps,
+			}}
+		>
+			<SectionTitle
+				title={WORKS.TITLE}
+				subtitle={WORKS.SUBTITLE}
+				sxProps={{
+					mb: 7,
+				}}
+			/>
+			<Swiper
+				autoplay={{
+					delay: 6000,
+					disableOnInteraction: false,
+				}}
+				effect={'fade'}
+				pagination={{ clickable: true }}
+				modules={[Autoplay, EffectFade, Pagination]}
+				// onSlideChange={(e) => {}}
+				className="mySwiper"
+			>
+				{WORKS.SLIDES.map((el, idx) => (
+					<SwiperSlide key={idx}>
+						<Box
+							sx={{
+								position: 'relative',
+								width: '100%',
+								px: { xs: 0, md: 5 },
+							}}
+						>
+							<Box
+								sx={{
+									height: 0,
+									width: '100%',
+									pt: `${(732 / 1173) * 100}%`,
+									backgroundImage: `url(${el.image})`,
+									backgroundRepeat: 'no-repeat',
+									backgroundSize: 'contain',
+									backgroundPosition: 'left center',
+								}}
+							/>
+							<Box
+								sx={{
+									position: { xs: 'unset', md: 'absolute' },
+									right: { xs: 'unset', md: el.right },
+									bottom: { xs: 'unset', md: el.bottom },
+									pt: { xs: 3, md: 0 },
+									pb: { xs: 5, md: 0 },
+								}}
+							>
+								<Typography
+									variant="subtitle1"
+									fontSize={{
+										xs: 20,
+										sm: 24,
+										md: el.subtitleSize - 8,
+										lg: el.subtitleSize,
+									}}
+									fontStyle="italic"
+									color="#31373E"
+									sx={{
+										textTransform: 'uppercase',
+										textAlign: { xs: 'center', md: 'left' },
+									}}
+								>
+									{el.subtitle}
+									{el.icon && (
+										<Icon
+											sx={{
+												width: { xs: 12, md: 32 },
+												height: { xs: 12, md: 32 },
+												mb: { xs: 1, md: 3 },
+												ml: { xs: 0.25, md: 1 },
+											}}
+										>
+											<IconImage src={el.icon} />
+										</Icon>
+									)}
+								</Typography>
+								<Typography
+									variant="subtitle1"
+									fontSize={{
+										xs: 24,
+										sm: 32,
+										md: el.titleSize - 8,
+										lg: el.titleSize,
+									}}
+									fontStyle="italic"
+									color="#FF6D24"
+									sx={{
+										textTransform: 'uppercase',
+										textAlign: { xs: 'center', md: 'left' },
+										textShadow: {
+											xs: '1px 1px 0 #FFF, 2px 2px 0 #FF6D24',
+											md: '3px 3px 0 #FFF, 4px 4px 0 #FF6D24',
+										},
+									}}
+								>
+									{el.title}
+								</Typography>
+							</Box>
+							{/* {isSm ? (
+								<Box>
+
+								</Box>
+							) : ()} */}
+						</Box>
+					</SwiperSlide>
+				))}
+			</Swiper>
+		</Container>
+	);
+};
+
+const FoundedBy: React.FC<any> = ({ sxProps }) => {
+	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+	const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+
+	return (
+		<Box
+			sx={{
+				position: 'relative',
+				width: { xs: '100%', md: '90%', xl: '80%' },
+				mx: 'auto',
+				background: { xs: '#F8F9FB', md: 'none' },
+				...sxProps,
+			}}
+		>
+			<Box
+				sx={{
+					display: { xs: 'none', md: 'block' },
+					position: 'absolute',
+					height: 550,
+					width: '100%',
+					background: '#F8F9FB',
+					borderRadius: '24px',
+					transform: 'skewX(-10deg)',
+				}}
+			/>
+			<Container sx={{ position: 'relative', py: 5 }}>
+				<SectionTitle
+					title={FOUNDED.TITLE}
+					subtitle={FOUNDED.SUBTITLE}
+					swap={true}
+				/>
+				<Grid container columnSpacing={10} rowSpacing={5}>
+					<Grid item xs={12} md={5}>
+						<Stack
+							spacing={2}
+							mt={3}
+							alignItems={{ xs: 'center', md: 'start' }}
+						>
+							<img
+								src={FOUNDED.ICETEA}
+								width={isXs ? '100%' : isSm ? '75%' : 'auto'}
+							/>
+							<Stack direction="row" alignItems="center" spacing={2}>
+								<Typography fontSize={24} fontWeight={500} color="#5A6178">
+									Creator of
+								</Typography>
+								<img src={FOUNDED.GAMEFI} width={'auto'} />
+							</Stack>
+						</Stack>
+					</Grid>
+					<Grid item xs={12} md={7}>
+						<Stack
+							spacing={3}
+							sx={{
+								pt: 5,
+								pr: 2,
+								backgroundImage: `url(${FOUNDED.BG})`,
+								backgroundRepeat: 'no-repeat',
+								backgroundSize: 'contain',
+								backgroundPosition: 'top right',
+							}}
+						>
+							{FOUNDED.ITEMS.map((text, idx) => (
+								<Typography
+									key={idx}
+									fontSize={{ xs: 16, sm: 22 }}
+									fontWeight={500}
+									color="#5A6178"
+								>
+									<Icon sx={{ mr: 2 }}>
+										<IconImage src={FOUNDED.LIST_ITEM} />
+									</Icon>
+									{text}
+								</Typography>
+							))}
+						</Stack>
+					</Grid>
+				</Grid>
+			</Container>
+		</Box>
+	);
+};
+
+const Team: React.FC<any> = ({ sxProps }) => {
+	return (
+		<Container sx={{ ...sxProps }}>
+			<SectionTitle
+				title={TEAM.TITLE}
+				subtitle={TEAM.SUBTITLE}
+				sxProps={{ mb: 7 }}
+			/>
+			<Grid container spacing={4} rowSpacing={6}>
+				{TEAM.ITEMS.map(({ name, role, desc, image }, idx) => (
+					<Grid key={idx} item xs={12} md={6}>
+						<Grid container spacing={2}>
+							<Grid item xs={6} sm={4} sx={{ mx: 'auto' }}>
+								<Box
+									sx={{
+										width: '100%',
+										height: 0,
+										pt: `${(160 / 174) * 100}%`,
+										backgroundImage: `url(${image})`,
+										backgroundRepeat: 'no-repeat',
+										backgroundSize: 'cover',
+									}}
+								/>
+							</Grid>
+							<Grid item xs={12} sm={8}>
+								<Typography
+									fontSize={24}
+									fontWeight={700}
+									color="#31373E"
+									sx={{
+										textAlign: { xs: 'center', sm: 'left' },
+									}}
+								>
+									{name}
+								</Typography>
+								<Typography
+									variant="subtitle1"
+									fontSize={14}
+									fontStyle="italic"
+									sx={{
+										mt: 1,
+										mb: 3,
+										textAlign: { xs: 'center', sm: 'left' },
+										textTransform: 'uppercase',
+										background:
+											'linear-gradient(270deg, #FF5C35 3.42%, #FF612F 98.2%)',
+										'-webkit-background-clip': 'text',
+										'-webkit-text-fill-color': 'transparent',
+										'background-clip': 'text',
+										'text-fill-color': 'transparent',
+									}}
+								>
+									{role}
+								</Typography>
+								<Typography fontSize={14} fontWeight={500} color="#5A6178">
+									{desc}
+								</Typography>
+							</Grid>
+						</Grid>
+					</Grid>
+				))}
+			</Grid>
+		</Container>
 	);
 };
 
@@ -386,30 +944,39 @@ const Home: NextPage = () => {
 	);
 
 	const windowHeightListener = () => {
-		// console.log('window.innerHeight', window.innerHeight);
 		setHeight(window.innerHeight);
 	};
 
 	useEffect(() => {
 		windowHeightListener();
-		setTimeout(() => {windowHeightListener();}, 100);
+		setTimeout(() => {
+			windowHeightListener();
+		}, 100);
 		window.addEventListener('resize', windowHeightListener);
 		return () => {
 			window.removeEventListener('resize', windowHeightListener);
 		};
 	}, []);
 	return (
-		<HomeLayout>
+		<HomeLayout sxProps={{ background: '#fff' }}>
 			<Box
 				sx={{
 					height: height,
+					position: 'relative',
 				}}
 			>
-				<VideoSwiper />
+				<BannerSwiper />
+				{!isTablet && <BannerSocial />}
+				{!isTablet && <BannerEvent />}
+				{isTablet && <MobileBannerEvent />}
 			</Box>
-			{!isTablet && <Event endDate="2022-06-06" />}
-			{!isTablet && <Social />}
-			{isTablet && <MobileEvent />}
+			<AppSection sxProps={{ py: 8 }} />
+			<ChallengeSection sxProps={{ pb: 15 }} />
+			<NumberSection sxProps={{ pb: 15 }} />
+			<HowItWorks sxProps={{ pb: 15 }} />
+			<FoundedBy sxProps={{ mb: 15 }} />
+			<Team sxProps={{ mb: 15 }} />
+			<SocialSection />
 		</HomeLayout>
 	);
 };
@@ -512,7 +1079,7 @@ export default Home;
 // 						px: 10,
 // 					}}
 // 				>
-// 					<img src={EVENT.IMAGE} width={'70%'} height={'auto'} />
+// 					<img src={BANNER.IMAGE} width={'70%'} height={'auto'} />
 // 					<Typography
 // 						fontStyle="italic"
 // 						fontSize={20}
@@ -523,7 +1090,7 @@ export default Home;
 // 							mt: 2,
 // 						}}
 // 					>
-// 						{EVENT.DESC}
+// 						{BANNER.DESC}
 // 					</Typography>
 // 					<Stack
 // 						direction="row"
@@ -538,7 +1105,7 @@ export default Home;
 // 							color="#31373E"
 // 							fontWeight={500}
 // 						>
-// 							{EVENT.COUNTDOWN}
+// 							{BANNER.COUNTDOWN}
 // 						</Typography>
 // 						{[
 // 							{ count: dayText, title: 'days' },
@@ -586,11 +1153,11 @@ export default Home;
 // 						right: '2.5%',
 // 					}}
 // 				>
-// 					<Link href={EVENT.BUTTON.href}>
+// 					<Link href={BANNER.BUTTON.href}>
 // 						<Button
 // 							endIcon={
 // 								<Icon sx={{ width: 40, height: 40 }}>
-// 									<IconImage src={EVENT.BUTTON.icon} />
+// 									<IconImage src={BANNER.BUTTON.icon} />
 // 								</Icon>
 // 							}
 // 							sx={{
@@ -605,7 +1172,7 @@ export default Home;
 // 								py: 2,
 // 							}}
 // 						>
-// 							{EVENT.BUTTON.title}
+// 							{BANNER.BUTTON.title}
 // 						</Button>
 // 					</Link>
 // 				</Box>

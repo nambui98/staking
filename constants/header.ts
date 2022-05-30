@@ -1,12 +1,12 @@
-export const LOGO = 'assets/header/logo.png';
+export const LOGO = 'assets/logo/logo-text-black.png';
 
-export const MENU = 'assets/header/menu_button.png';
+export const MENU = 'assets/icons/menu-dark.svg';
 
-export const HOME_LOGO = 'assets/header/logo_white_text.png';
+export const HOME_LOGO = 'assets/logo/logo-text-white.png';
 
-export const HOME_BG_LOGO = 'assets/header/logo_bg.png';
+export const HOME_BG_LOGO = 'assets/backgrounds/header-1.png';
 
-export const HOME_MENU = 'assets/header/menu_button_white.svg';
+export const HOME_MENU = 'assets/icons/menu-white.svg';
 
 export const ITEMS = [
 	{ title: 'LiTEpaper', href: 'https://cdn.befitter.io/lp' },

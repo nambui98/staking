@@ -1,11 +1,11 @@
 export const IMG = {
-	CUP: 'assets/event/cup.png',
-	NAME: 'assets/event/event_name.png',
-	BG_ITEM1: 'assets/event/bg_item1.png',
-	BG_ITEM2: 'assets/event/bg_item2.png',
-	BG_ITEM3: 'assets/event/bg_item3.png',
-	BG_ITEM4: 'assets/event/bg_item4.png',
-	BG_ITEM5: 'assets/event/bg_item5.png',
+	CUP: 'assets/alpha-challenge-cup.png',
+	NAME: 'assets/alpha-challenge-title.png',
+	BG_ITEM1: 'assets/backgrounds/alpha-challenge-1.png',
+	BG_ITEM2: 'assets/alpha-challenge-logo.png',
+	BG_ITEM3: 'assets/alpha-challenge-items.png',
+	BG_ITEM4: 'assets/backgrounds/alpha-challenge-3.png',
+	BG_ITEM5: 'assets/backgrounds/alpha-challenge-2.png',
 };
 
 export const QUESTIONS = [
@@ -19,7 +19,7 @@ export const QUESTIONS = [
 		title: 'How to create your own Testnet Wallet',
 		icon: 'assets/event/message-question.svg',
 		// href: '/documents/create-a-testnet-wallet.pdf',
-		href: 'https://cdn.befitter.io/testnet/',
+		href: 'https://cdn.befitter.io/testnet',
 	},
 	// {
 	// 	title: 'How to download beFitter app for iOS',
