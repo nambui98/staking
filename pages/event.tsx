@@ -19,11 +19,14 @@ import {
 	useMediaQuery,
 } from '@mui/material';
 import { toast } from 'react-toastify';
+import ReCAPTCHA from "react-google-recaptcha";
 
 import MainLayout from '../components/layouts/MainLayout';
-import { IMG, QUESTIONS, SOCIAL } from '../constants/event';
+import { IMG, QUESTIONS } from '../constants/event';
 import { IconImage } from '../components/styled';
 import { SocialSection } from '../components/sections';
+
+const RECAPTCHA_SITE_KEY = "6LfVxzAgAAAAAEFPNTeG6d8xqKifrYhwVZ4VAKtd";
 
 const CustomInput = styled(InputBase)({
 	'& .MuiInputBase-input': {
@@ -191,7 +194,8 @@ const Countdown: React.FC<any> = ({ sxProps, endDate }) => {
 
 const Form: React.FC<any> = ({ sxProps }) => {
 	const isTablet = useMediaQuery('(max-width:959px)');
-
+	const recaptchaRef = React.createRef<any>();
+	
 	const [textEmail, setTextEmail] = useState('');
 	const [textWallet, setTextWallet] = useState('');
 	const [textTelegram, setTextTelegram] = useState('');
@@ -201,9 +205,61 @@ const Form: React.FC<any> = ({ sxProps }) => {
 	const [showSnack, setShowSnack] = useState(false);
 	const [showBackdrop, setShowBackdrop] = useState(false);
 
+	const onReCAPTCHAChange = async (captchaCode: any) => {
+		// If the reCAPTCHA code is null or undefined indicating that
+		// the reCAPTCHA was expired then return early
+		if(!captchaCode) {
+			return;
+		}
+		// Else reCAPTCHA was executed successfully so proceed with the 
+		// alert
+		try {
+			setShowBackdrop(true);
+      const response = await fetch("/api/submit", {
+        method: "POST",
+        body: JSON.stringify({
+					email: textEmail,
+					wallet: textWallet,
+					telegram: textTelegram,
+					captcha: captchaCode,
+				}),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+			setShowBackdrop(false);
+      if (response.ok) {
+        // If the response is ok than show the success alert
+        toast('SUCCESS', {
+					position: 'top-center',
+					autoClose: 3000,
+					hideProgressBar: true,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+				});
+      } else {
+        // Else throw an error with the message returned
+        // from the API
+        const error = await response.json();
+        throw new Error(error.message)
+      }
+    } catch (error: any) {
+      alert(error?.message || "Something went wrong");
+    } finally {
+      // Reset the reCAPTCHA when the request has failed or succeeeded
+      // so that it can be executed again if user submits another email.
+      recaptchaRef.current?.reset();
+			setTextEmail('');
+			setTextWallet('');
+			setTextTelegram('');
+    }
+	}
+
 	const handleSubmit = async (event: any) => {
 		event.preventDefault();
-		console.log(textEmail, textWallet, textTelegram);
+
 		if (!textEmail || !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(textEmail)) {
 			setErrorEmail(true);
 			setTimeout(() => setErrorEmail(false), 2000);
@@ -219,32 +275,34 @@ const Form: React.FC<any> = ({ sxProps }) => {
 			setTimeout(() => setErrorTelegram(false), 2000);
 			return;
 		}
-		setShowBackdrop(true);
-		const response = await fetch('/api/submit', {
-			method: 'POST',
-			body: JSON.stringify({
-				email: textEmail,
-				wallet: textWallet,
-				telegram: textTelegram,
-			}),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
-		setShowBackdrop(false);
-		// setShowSnack(true);
-		toast('SUCCESS', {
-			position: 'top-center',
-			autoClose: 3000,
-			hideProgressBar: true,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-		});
-		setTextEmail('');
-		setTextWallet('');
-		setTextTelegram('');
+		recaptchaRef.current?.execute();
+		
+		// setShowBackdrop(true);
+		// const response = await fetch('/api/submit', {
+		// 	method: 'POST',
+		// 	body: JSON.stringify({
+		// 		email: textEmail,
+		// 		wallet: textWallet,
+		// 		telegram: textTelegram,
+		// 	}),
+		// 	headers: {
+		// 		'Content-Type': 'application/json',
+		// 	},
+		// });
+		// setShowBackdrop(false);
+		// // setShowSnack(true);
+		// toast('SUCCESS', {
+		// 	position: 'top-center',
+		// 	autoClose: 3000,
+		// 	hideProgressBar: true,
+		// 	closeOnClick: true,
+		// 	pauseOnHover: true,
+		// 	draggable: true,
+		// 	progress: undefined,
+		// });
+		// setTextEmail('');
+		// setTextWallet('');
+		// setTextTelegram('');
 	};
 
 	return (
@@ -278,6 +336,12 @@ const Form: React.FC<any> = ({ sxProps }) => {
 				*Make sure you fill in the correct information
 			</Typography>
 			<Box component="form" sx={{ maxWidth: { md: 448 } }}>
+				<ReCAPTCHA
+					ref={recaptchaRef}
+					size="invisible"
+					sitekey={RECAPTCHA_SITE_KEY}
+					onChange={onReCAPTCHAChange}
+				/>
 				<Stack spacing={1} mb={2} alignItems={{ xs: 'center', md: 'start' }}>
 					<Stack spacing={0} sx={{ width: '100%' }}>
 						<CustomInput
