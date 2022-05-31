@@ -5,9 +5,16 @@ export const EMAIL = 'team@befitter.io';
 export const ICON = {
 	DOWNLOAD: 'assets/icons/document-download.svg',
 	SMS: 'assets/icons/sms.svg',
+	UPLOAD: 'assets/icons/document-upload.svg',
+	CLOSE: 'assets/icons/close.svg',
 };
 export const BUTTON = {
-	DOCS: { title: 'Documents' },
-	MEDIA: { title: 'Media Kits' },
+	DOCS: { title: 'Documents', href: '#' },
+	MEDIA: {
+		title: 'Media Kits',
+		href: 'https://drive.google.com/drive/folders/1mU2BqE7DCHDIvDJ7-lZ2YdpsT9H-Lpgd',
+	},
 	SUPPORT: { title: 'Support' },
+	ATTACH: { title: 'Attach an image' },
+	SEND: { title: 'Send support request' },
 };

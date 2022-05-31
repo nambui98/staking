@@ -8,6 +8,31 @@ export const BANNER = {
 		href: '/event',
 		mobileIcon: 'assets/icons/arrow-up.svg',
 	},
+	SOCIAL: {
+		BG: 'assets/backgrounds/home-banner-social.png',
+		ITEMS: [
+			{
+				icon: 'assets/icons/fb-white.svg',
+				iconActive: 'assets/icons/fb-color.svg',
+				href: 'https://www.facebook.com/beFITTER.io',
+			},
+			{
+				icon: 'assets/icons/ig-white.svg',
+				iconActive: 'assets/icons/ig-color.svg',
+				href: 'https://www.instagram.com/befitter.io',
+			},
+			{
+				icon: 'assets/icons/tw-white.svg',
+				iconActive: 'assets/icons/tw-color.svg',
+				href: 'https://twitter.com/beFITTER_io',
+			},
+			{
+				icon: 'assets/icons/tl-white.svg',
+				iconActive: 'assets/icons/tl-color.svg',
+				href: 'https://t.me/befitter_chat',
+			},
+		]
+	},
 };
 
 export const APP = {
@@ -189,29 +214,6 @@ export const TEAM = {
 		},
 	],
 };
-
-export const SOCIAL = [
-	{
-		icon: 'assets/icons/fb-white.svg',
-		iconActive: 'assets/icons/fb-color.svg',
-		href: 'https://www.facebook.com/beFITTER.io',
-	},
-	{
-		icon: 'assets/icons/ig-white.svg',
-		iconActive: 'assets/icons/ig-color.svg',
-		href: 'https://www.instagram.com/befitter.io',
-	},
-	{
-		icon: 'assets/icons/tw-white.svg',
-		iconActive: 'assets/icons/tw-color.svg',
-		href: 'https://twitter.com/beFITTER_io',
-	},
-	{
-		icon: 'assets/icons/tl-white.svg',
-		iconActive: 'assets/icons/tl-color.svg',
-		href: 'https://t.me/befitter_chat',
-	},
-];
 
 type VideoSlide = {
 	src?: string;

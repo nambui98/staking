@@ -26,7 +26,6 @@ import HomeLayout from '../components/layouts/HomeLayout';
 import {
 	videoSlides,
 	BANNER,
-	SOCIAL,
 	APP,
 	CHALLENGE,
 	NUMBER,
@@ -237,7 +236,7 @@ const BannerSocial: React.FC<any> = () => {
 				right: 66,
 				zIndex: 99,
 				backgroundImage: !maxWidthLg
-					? `url(assets/home/social_bg.png)`
+					? `url(${BANNER.SOCIAL.BG})`
 					: 'none',
 				backgroundRepeat: 'no-repeat',
 				backgroundSize: 'contain',
@@ -268,7 +267,7 @@ const BannerSocial: React.FC<any> = () => {
 						Follow us on
 					</Typography>
 				)}
-				{SOCIAL.map(({ icon, iconActive, href }, idx) => (
+				{BANNER.SOCIAL.ITEMS.map(({ icon, iconActive, href }, idx) => (
 					<IconButtonBounceUpOnHover
 						key={idx}
 						href={href}
@@ -917,15 +916,19 @@ const Team: React.FC<any> = ({ sxProps }) => {
 										textTransform: 'uppercase',
 										background:
 											'linear-gradient(270deg, #FF5C35 3.42%, #FF612F 98.2%)',
-										'-webkit-background-clip': 'text',
-										'-webkit-text-fill-color': 'transparent',
-										'background-clip': 'text',
-										'text-fill-color': 'transparent',
+										// '-webkit-background-clip': 'text',
+										// '-webkit-text-fill-color': 'transparent',
+										// 'background-clip': 'text',
+										// 'text-fill-color': 'transparent',
+										WebkitBackgroundClip: 'text',
+										WebkitTextFillColor: 'transparent',
+										backgroundClip: 'text',
+										textFillColor: 'transparent',
 									}}
 								>
 									{role}
 								</Typography>
-								<Typography fontSize={14} fontWeight={500} color="#5A6178">
+								<Typography fontSize={14} fontWeight={500} lineHeight={1.5} color="#5A6178">
 									{desc}
 								</Typography>
 							</Grid>
@@ -971,7 +974,7 @@ const Home: NextPage = () => {
 				{isTablet && <MobileBannerEvent />}
 			</Box>
 			<AppSection sxProps={{ py: 8 }} />
-			<ChallengeSection />
+			{/* <ChallengeSection /> */}
 			{/* <NumberSection sxProps={{ pb: 15 }} /> */}
 			<HowItWorks sxProps={{ pb: 15 }} />
 			<FoundedBy sxProps={{ mb: 15 }} />
