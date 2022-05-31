@@ -11,24 +11,24 @@ export const IMG = {
 export const QUESTIONS = [
 	{
 		title: 'Format & Rules',
-		icon: 'assets/event/message-question.svg',
+		icon: 'assets/icons/message-question.svg',
 		// href: '/documents/format-and-rules.pdf',
 		href: 'https://cdn.befitter.io/format',
 	},
 	{
 		title: 'How to create your own Testnet Wallet',
-		icon: 'assets/event/message-question.svg',
+		icon: 'assets/icons/message-question.svg',
 		// href: '/documents/create-a-testnet-wallet.pdf',
 		href: 'https://cdn.befitter.io/testnet',
 	},
 	// {
 	// 	title: 'How to download beFitter app for iOS',
-	// 	icon: 'assets/event/message-question.svg',
+	// 	icon: 'assets/icons/message-question.svg',
 	// 	href: '/documents/guide-ios.pdf',
 	// },
 	// {
 	// 	title: 'How to download beFitter app for Android',
-	// 	icon: 'assets/event/message-question.svg',
+	// 	icon: 'assets/icons/message-question.svg',
 	// 	href: '/documents/guide-android.pdf',
 	// },
 ];

@@ -10,6 +10,6 @@ export const HOME_MENU = 'assets/icons/menu-white.svg';
 
 export const ITEMS = [
 	{ title: 'LiTEpaper', href: 'https://cdn.befitter.io/lp' },
-	// { title: 'PITCH DECK', href: '#' },
-	// { title: 'WHITEPAPER', href: '#' },
+	{ title: 'PITCH DECK', href: '' },
+	{ title: 'WHITEPAPER', href: '' },
 ];

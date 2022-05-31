@@ -7,29 +7,38 @@ import {
 	Icon,
 	Button,
 	Typography,
+	Slide,
+	InputBase,
+	TextField,
 	styled,
 	useMediaQuery,
+	IconButton,
 } from '@mui/material';
 
 import { LOGO, BG1, BG2, ICON, EMAIL, BUTTON } from '../../constants/footer';
 import { IconImage } from '../styled';
 
-const DownloadIcon: React.FC<any> = () => (
-	<Icon>
-		<IconImage src={ICON.DOWNLOAD} />
-	</Icon>
-);
+const SupportInput = styled(InputBase)({
+	borderRadius: '16px',
+	border: '1px solid #E9EAEF',
+	background: '#FFF',
+	'& .MuiInputBase-input': {
+		fontSize: 16,
+		fontWeight: 500,
+		color: '#31373E',
+		padding: '20px 24px',
+	},
+});
 
-const SmsIcon: React.FC<any> = () => (
-	<Icon>
-		<IconImage src={ICON.SMS} />
-	</Icon>
-);
-
-const TextIconButton: React.FC<any> = ({ icon, children }) => (
+const DocumentsDownloadButton: React.FC<any> = () => (
 	<Button
 		variant="text"
-		startIcon={icon}
+		// href={BUTTON.DOCS.href}
+		startIcon={
+			<Icon>
+				<IconImage src={ICON.DOWNLOAD} />
+			</Icon>
+		}
 		sx={{
 			'&:hover': {
 				textDecoration: 'underline',
@@ -37,12 +46,154 @@ const TextIconButton: React.FC<any> = ({ icon, children }) => (
 			},
 		}}
 	>
-		{children}
+		{BUTTON.DOCS.title}
 	</Button>
 );
 
+const DocumentsUploadButton: React.FC<any> = ({ onClick }) => (
+	<Button
+		variant="text"
+		onClick={onClick}
+		startIcon={
+			<Icon>
+				<IconImage src={ICON.UPLOAD} />
+			</Icon>
+		}
+		sx={{
+			color: '#55C8FC',
+			fontSize: 14,
+			fontWeight: 500,
+			textTransform: 'none',
+			'&:hover': {
+				textDecoration: 'underline',
+				background: 'transparent',
+			},
+		}}
+	>
+		{BUTTON.ATTACH.title}
+	</Button>
+);
+
+const MediaButton: React.FC<any> = () => (
+	<Button
+		variant="text"
+		href={BUTTON.MEDIA.href}
+		target="_blank"
+		startIcon={
+			<Icon>
+				<IconImage src={ICON.DOWNLOAD} />
+			</Icon>
+		}
+		sx={{
+			'&:hover': {
+				textDecoration: 'underline',
+				background: 'transparent',
+			},
+		}}
+	>
+		{BUTTON.MEDIA.title}
+	</Button>
+);
+
+const SupportButton: React.FC<any> = ({ onClick }) => (
+	<Button
+		variant="outlined"
+		onClick={onClick}
+		sx={{
+			width: { xs: '100%', sm: 'unset' },
+			borderRadius: '16px',
+			'&:hover': {
+				background: '#fff',
+				color: '#000',
+			},
+		}}
+	>
+		{BUTTON.SUPPORT.title}
+	</Button>
+);
+
+const SendButton: React.FC<any> = ({ onClick }) => (
+	<Button
+		variant="outlined"
+		fullWidth
+		onClick={onClick}
+		sx={{
+			border: '1px solid #FF6D24',
+			borderRadius: '16px',
+			background: '#FFF',
+			color: '#FF6D24',
+			fontSize: 16,
+			fontWeight: 500,
+			py: 2,
+			px: 2,
+			mt: 2,
+			'&:hover': {
+				background: '#FF6D24',
+				color: '#FFF',
+			},
+		}}
+	>
+		{BUTTON.SEND.title}
+	</Button>
+);
+
+const SupportForm: React.FC<any> = ({ handleClose }) => {
+	return (
+		<Box
+			component="form"
+			sx={{
+				position: 'relative',
+				width: '100%',
+				background: '#FFFFFF',
+				borderRadius: '16px',
+				border: '1px solid #FF6D24',
+				px: 3,
+				py: 3,
+			}}
+		>
+			<IconButton onClick={handleClose} sx={{
+				width: 24,
+				height: 24,
+				position: 'absolute',
+				top: 24,
+				right: 24,
+			}}>
+				<Icon>
+					<IconImage src={ICON.CLOSE} />
+				</Icon>
+			</IconButton>
+			<Typography fontSize={24} fontWeight={500} color="#31373E" align="center" mb={3}>
+				Support request
+			</Typography>
+			<SupportInput fullWidth placeholder="Your email address" sx={{mb: 2}} />
+			<SupportInput
+				fullWidth
+				placeholder="Just ask us anything"
+				multiline
+				rows={4}
+				sx={{mb: 2}}
+				// value={textEmail}
+				// onChange={(e) => setTextEmail(e.target.value)}
+				// error={errorEmail}
+				// helperText={errorEmail && "Incorrect email"}
+			/>
+			<DocumentsUploadButton />
+			<SendButton />
+		</Box>
+	);
+};
+
 const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 	const isTablet = useMediaQuery('(max-width:960px)');
+	const [showForm, setShowForm] = React.useState<boolean>(false);
+
+	const handleShowForm = () => {
+		setShowForm(true);
+	};
+
+	const handleHideForm = () => {
+		setShowForm(false);
+	};
 
 	return (
 		<Box
@@ -53,6 +204,18 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 				height: { xs: 'unset', md: 215 },
 			}}
 		>
+			<Slide direction="up" in={showForm} mountOnEnter unmountOnExit>
+				<Box
+					sx={{
+						position: 'absolute',
+						right: 0,
+						bottom: '100%',
+						width: 544,
+					}}
+				>
+					<SupportForm handleClose={handleHideForm}/>
+				</Box>
+			</Slide>
 			<Box
 				sx={{
 					position: 'absolute',
@@ -97,24 +260,9 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 					</Link>
 					{!isTablet && (
 						<Stack direction="row" spacing={4}>
-							<TextIconButton icon={<DownloadIcon />}>
-								{BUTTON.DOCS.title}
-							</TextIconButton>
-							<TextIconButton icon={<DownloadIcon />}>
-								{BUTTON.MEDIA.title}
-							</TextIconButton>
-							<Button
-								variant="outlined"
-								sx={{
-									borderRadius: '16px',
-									'&:hover': {
-										background: '#fff',
-										color: '#000',
-									},
-								}}
-							>
-								{BUTTON.SUPPORT.title}
-							</Button>
+							<DocumentsDownloadButton />
+							<MediaButton />
+							<SupportButton onClick={handleShowForm} />
 						</Stack>
 					)}
 				</Stack>
@@ -122,10 +270,13 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 					direction="row"
 					justifyContent={{ xs: 'center', md: 'start' }}
 					ml={{ xs: 0, md: 3 }}
-					my={4}
+					mt={4}
+					mb={{ xs: 4, md: 0 }}
 					spacing={1}
 				>
-					<SmsIcon />
+					<Icon>
+						<IconImage src={ICON.SMS} />
+					</Icon>
 					<Typography
 						fontSize={16}
 						color="#fff"
@@ -138,38 +289,31 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 						{EMAIL}
 					</Typography>
 				</Stack>
-				{isTablet && (
+				{isTablet ? (
 					<>
 						<Stack direction="row" spacing={4} justifyContent="center">
-							<TextIconButton icon={<DownloadIcon />}>
-								{BUTTON.DOCS.title}
-							</TextIconButton>
-							<TextIconButton icon={<DownloadIcon />}>
-								{BUTTON.MEDIA.title}
-							</TextIconButton>
+							<DocumentsDownloadButton />
+							<MediaButton />
 						</Stack>
 						<Stack spacing={2} alignItems="center" mt={4}>
-							<Button
-								variant="outlined"
-								sx={{
-									borderRadius: '16px',
-									width: 340,
-									'&:hover': {
-										background: '#fff',
-										color: '#000',
-									},
-								}}
-							>
-								{BUTTON.SUPPORT.title}
-							</Button>
+							<SupportButton onClick={handleShowForm} />
 							<Box
 								sx={{ width: '100%', height: 1.5, background: '#4E5472' }}
 							></Box>
-							<Typography fontSize={14} color="#898E9E">
+							<Typography fontSize={14} color="#898E9E" pb={3}>
 								Copyright @2022 beFITTER
 							</Typography>
 						</Stack>
 					</>
+				) : (
+					<Stack spacing={2} mt={2}>
+						<Box
+							sx={{ width: '100%', height: 1.5, background: '#4E5472' }}
+						></Box>
+						<Typography fontSize={14} color="#898E9E">
+							Copyright @2022 beFITTER
+						</Typography>
+					</Stack>
 				)}
 			</Container>
 		</Box>
