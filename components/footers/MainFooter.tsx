@@ -3,13 +3,16 @@ import Link from 'next/link';
 import {
 	Box,
 	Container,
+	Grid,
 	Stack,
 	Icon,
 	Button,
 	Typography,
 	Slide,
 	InputBase,
-	TextField,
+	Chip,
+	CircularProgress,
+	Backdrop,
 	styled,
 	useMediaQuery,
 	IconButton,
@@ -17,6 +20,20 @@ import {
 
 import { LOGO, BG1, BG2, ICON, EMAIL, BUTTON } from '../../constants/footer';
 import { IconImage } from '../styled';
+
+const LIMIT_UPLOAD_SIZE = 25; // MB
+
+function isSupportedFile(file: any) {
+	return (
+		file.size &&
+		file.type &&
+		file.type.includes('image/')
+		// (file.type.includes('pdf') ||
+		// 	file.type.includes('doc') ||
+		// 	file.type.includes('video/') ||
+		// 	file.type.includes('image/'))
+	);
+}
 
 const SupportInput = styled(InputBase)({
 	borderRadius: '16px',
@@ -50,10 +67,10 @@ const DocumentsDownloadButton: React.FC<any> = () => (
 	</Button>
 );
 
-const DocumentsUploadButton: React.FC<any> = ({ onClick }) => (
+const DocumentsUploadButton: React.FC<any> = ({ onFileChange }) => (
 	<Button
 		variant="text"
-		onClick={onClick}
+		component="label"
 		startIcon={
 			<Icon>
 				<IconImage src={ICON.UPLOAD} />
@@ -64,6 +81,7 @@ const DocumentsUploadButton: React.FC<any> = ({ onClick }) => (
 			fontSize: 14,
 			fontWeight: 500,
 			textTransform: 'none',
+			pl: 0.25,
 			'&:hover': {
 				textDecoration: 'underline',
 				background: 'transparent',
@@ -71,6 +89,13 @@ const DocumentsUploadButton: React.FC<any> = ({ onClick }) => (
 		}}
 	>
 		{BUTTON.ATTACH.title}
+		<input
+			type="file"
+			hidden
+			multiple
+			accept="image/*"
+			onChange={onFileChange}
+		/>
 	</Button>
 );
 
@@ -126,7 +151,6 @@ const SendButton: React.FC<any> = ({ onClick }) => (
 			fontWeight: 500,
 			py: 2,
 			px: 2,
-			mt: 2,
 			'&:hover': {
 				background: '#FF6D24',
 				color: '#FFF',
@@ -138,6 +162,71 @@ const SendButton: React.FC<any> = ({ onClick }) => (
 );
 
 const SupportForm: React.FC<any> = ({ handleClose }) => {
+	const [showBackdrop, setShowBackdrop] = React.useState<boolean>(false);
+	const [textEmail, setTextEmail] = React.useState<string>('');
+	const [textDesc, setTextDesc] = React.useState<string>('');
+	const [textError, setTextError] = React.useState<string>('');
+	const [attachFiles, setAttachFiles] = React.useState<any>([]);
+
+	const handleFileChange = (event: any) => {
+		const files = event.target.files;
+		let totalSize = attachFiles
+			.map((el: any) => el.size)
+			.reduce((pre: any, cur: any) => pre + cur, 0);
+		for (let i = 0; i < files.length; i++) {
+			const file = files[i];
+			if (!isSupportedFile(file)) {
+				setTextError('Unsupported media type');
+				setTimeout(() => setTextError(''), 2000);
+				return;
+			}
+			totalSize += file.size;
+			if (totalSize > LIMIT_UPLOAD_SIZE * 1024 * 1024) {
+				setTextError('Payload too large');
+				setTimeout(() => setTextError(''), 2000);
+				return;
+			}
+		}
+		setAttachFiles([...attachFiles, ...files]);
+	};
+
+	const handleRemoveFile = (fileIndex: number) => {
+		setAttachFiles(
+			attachFiles.filter((el: any, idx: number) => idx !== fileIndex)
+		);
+	};
+
+	const handleSubmit = async (event: any) => {
+		event.preventDefault();
+		if (!textDesc || !textEmail) {
+			setTextError('All fields are required');
+			setTimeout(() => setTextError(''), 2000);
+			return;
+		}
+		if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(textEmail)) {
+			setTextError('Invalid email format');
+			setTimeout(() => setTextError(''), 2000);
+			return;
+		}
+		setShowBackdrop(true);
+		const formData = new FormData();
+		formData.append('email', textEmail);
+		formData.append('desc', textDesc);
+		for (let i = 0; i < attachFiles.length; i++) {
+			formData.append(`attachment[${i}]`, attachFiles[i]);
+		}
+		const response = await fetch('/api/support', {
+			method: 'POST',
+			body: formData,
+		});
+		setShowBackdrop(false);
+		// setShowSnack(true);
+		setTextEmail('');
+		setTextDesc('');
+		setAttachFiles([]);
+		handleClose();
+	};
+
 	return (
 		<Box
 			component="form"
@@ -151,34 +240,73 @@ const SupportForm: React.FC<any> = ({ handleClose }) => {
 				py: 3,
 			}}
 		>
-			<IconButton onClick={handleClose} sx={{
-				width: 24,
-				height: 24,
-				position: 'absolute',
-				top: 24,
-				right: 24,
-			}}>
+			<Backdrop
+				sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+				open={showBackdrop}
+			>
+				<CircularProgress color="inherit" />
+			</Backdrop>
+			<IconButton
+				onClick={handleClose}
+				sx={{
+					width: 24,
+					height: 24,
+					position: 'absolute',
+					top: 24,
+					right: 24,
+				}}
+			>
 				<Icon>
 					<IconImage src={ICON.CLOSE} />
 				</Icon>
 			</IconButton>
-			<Typography fontSize={24} fontWeight={500} color="#31373E" align="center" mb={3}>
+			<Typography
+				fontSize={24}
+				fontWeight={500}
+				color="#31373E"
+				align="center"
+				mb={3}
+			>
 				Support request
 			</Typography>
-			<SupportInput fullWidth placeholder="Your email address" sx={{mb: 2}} />
+			<SupportInput
+				fullWidth
+				placeholder="Your email address"
+				value={textEmail}
+				onChange={(e: any) => setTextEmail(e.target.value)}
+				sx={{ mb: 1 }}
+			/>
 			<SupportInput
 				fullWidth
 				placeholder="Just ask us anything"
 				multiline
 				rows={4}
-				sx={{mb: 2}}
-				// value={textEmail}
-				// onChange={(e) => setTextEmail(e.target.value)}
-				// error={errorEmail}
-				// helperText={errorEmail && "Incorrect email"}
+				value={textDesc}
+				onChange={(e: any) => setTextDesc(e.target.value)}
+				sx={{ mb: 1 }}
 			/>
-			<DocumentsUploadButton />
-			<SendButton />
+			<DocumentsUploadButton onFileChange={handleFileChange}/>
+			{textError && <Typography
+				fontSize={16}
+				fontWeight={500}
+				color="#FF6F61"
+				mt={0.5}
+				mb={2}
+			>
+				{textError}
+			</Typography>}
+			<Grid container mb={2} spacing={1}>
+				{attachFiles.map((el: any, idx: number) => (
+					<Grid item key={idx} xs={'auto'}>
+						<Chip
+							variant="outlined"
+							label={el.name.slice(0, 3) + '...' + el.name.slice(-7)}
+							onDelete={() => handleRemoveFile(idx)}
+						/>
+					</Grid>
+				))}
+			</Grid>
+			<SendButton onClick={handleSubmit} />
 		</Box>
 	);
 };
@@ -208,12 +336,12 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 				<Box
 					sx={{
 						position: 'absolute',
-						right: 0,
-						bottom: '100%',
-						width: 544,
+						right: 8,
+						bottom: '104%',
+						width: 343,
 					}}
 				>
-					<SupportForm handleClose={handleHideForm}/>
+					<SupportForm handleClose={handleHideForm} />
 				</Box>
 			</Slide>
 			<Box
