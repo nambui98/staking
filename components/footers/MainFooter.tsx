@@ -19,15 +19,14 @@ import {
 } from '@mui/material';
 
 import { LOGO, BG1, BG2, ICON, EMAIL, BUTTON } from '../../constants/footer';
+import { ITEMS } from '../../constants/header';
 import { IconImage } from '../styled';
 
 const LIMIT_UPLOAD_SIZE = 25; // MB
 
 function isSupportedFile(file: any) {
 	return (
-		file.size &&
-		file.type &&
-		file.type.includes('image/')
+		file.size && file.type && file.type.includes('image/')
 		// (file.type.includes('pdf') ||
 		// 	file.type.includes('doc') ||
 		// 	file.type.includes('video/') ||
@@ -125,7 +124,8 @@ const SupportButton: React.FC<any> = ({ onClick }) => (
 		variant="outlined"
 		onClick={onClick}
 		sx={{
-			width: { xs: '100%', sm: 'unset' },
+			width: { xs: '100%', md: 'unset' },
+			maxWidth: 343,
 			borderRadius: '16px',
 			'&:hover': {
 				background: '#fff',
@@ -224,7 +224,7 @@ const SupportForm: React.FC<any> = ({ handleClose }) => {
 		setTextEmail('');
 		setTextDesc('');
 		setAttachFiles([]);
-		handleClose();
+		handleClose(true);
 	};
 
 	return (
@@ -238,16 +238,17 @@ const SupportForm: React.FC<any> = ({ handleClose }) => {
 				border: '1px solid #FF6D24',
 				px: 3,
 				py: 3,
+				transition: 'all ease .3s',
 			}}
 		>
 			<Backdrop
-				sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+				sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
 				open={showBackdrop}
 			>
 				<CircularProgress color="inherit" />
 			</Backdrop>
 			<IconButton
-				onClick={handleClose}
+				onClick={() => handleClose(false)}
 				sx={{
 					width: 24,
 					height: 24,
@@ -285,16 +286,18 @@ const SupportForm: React.FC<any> = ({ handleClose }) => {
 				onChange={(e: any) => setTextDesc(e.target.value)}
 				sx={{ mb: 1 }}
 			/>
-			<DocumentsUploadButton onFileChange={handleFileChange}/>
-			{textError && <Typography
-				fontSize={16}
-				fontWeight={500}
-				color="#FF6F61"
-				mt={0.5}
-				mb={2}
-			>
-				{textError}
-			</Typography>}
+			<DocumentsUploadButton onFileChange={handleFileChange} />
+			{textError && (
+				<Typography
+					fontSize={16}
+					fontWeight={500}
+					color="#FF6F61"
+					mt={0.5}
+					mb={2}
+				>
+					{textError}
+				</Typography>
+			)}
 			<Grid container mb={2} spacing={1}>
 				{attachFiles.map((el: any, idx: number) => (
 					<Grid item key={idx} xs={'auto'}>
@@ -311,16 +314,69 @@ const SupportForm: React.FC<any> = ({ handleClose }) => {
 	);
 };
 
+const SupportPopup: React.FC<any> = ({ handleClose }) => (
+	<Stack
+		justifyContent="center"
+		alignItems="center"
+		spacing={2}
+		sx={{
+			position: 'relative',
+			width: '100%',
+			background: '#FFFFFF',
+			borderRadius: '16px',
+			border: '1px solid #FF6D24',
+			px: 3,
+			py: 3,
+			transition: 'all ease .3s',
+		}}
+	>
+		<Icon sx={{ width: 64, height: 64 }}>
+			<IconImage src={ICON.CHECKED} />
+		</Icon>
+		<Typography fontSize={24} fontWeight={500} color="#31373E" align="center">
+			Support request sent!
+		</Typography>
+		<Button
+			fullWidth
+			onClick={handleClose}
+			sx={{
+				borderRadius: '16px',
+				background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
+				color: '#FFF',
+				fontSize: 16,
+				fontWeight: 500,
+				py: 2,
+				px: 2,
+			}}
+		>
+			{BUTTON.CONFIRM.title}
+		</Button>
+	</Stack>
+);
+
 const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 	const isTablet = useMediaQuery('(max-width:960px)');
 	const [showForm, setShowForm] = React.useState<boolean>(false);
+	const [showPopup, setShowPopup] = React.useState<boolean>(false);
 
 	const handleShowForm = () => {
 		setShowForm(true);
 	};
 
-	const handleHideForm = () => {
+	const handleHidePopup = () => {
+		setShowPopup(false);
+	};
+
+	const handleHideForm = (submitted: boolean) => {
 		setShowForm(false);
+		if (submitted) {
+			setTimeout(() => {
+				setShowPopup(true);
+				setTimeout(() => {
+					handleHidePopup();
+				}, 3000);
+			}, 500);
+		}
 	};
 
 	return (
@@ -329,7 +385,7 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 			sx={{
 				background: '#272B3F',
 				position: 'relative',
-				height: { xs: 'unset', md: 215 },
+				height: { xs: 'unset', md: 263 },
 			}}
 		>
 			<Slide direction="up" in={showForm} mountOnEnter unmountOnExit>
@@ -338,10 +394,22 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 						position: 'absolute',
 						right: 8,
 						bottom: '104%',
-						width: 343,
+						width: 360,
 					}}
 				>
 					<SupportForm handleClose={handleHideForm} />
+				</Box>
+			</Slide>
+			<Slide direction="up" in={showPopup} mountOnEnter unmountOnExit>
+				<Box
+					sx={{
+						position: 'absolute',
+						right: 8,
+						bottom: '104%',
+						width: 360,
+					}}
+				>
+					<SupportPopup handleClose={handleHidePopup} />
 				</Box>
 			</Slide>
 			<Box
@@ -370,54 +438,99 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 				}}
 			>
 				<Stack
-					direction="row"
+					direction={{ xs: 'column', md: 'row' }}
 					justifyContent={{ xs: 'center', md: 'space-between' }}
 					mt={5}
 				>
-					<Link href={'/'}>
-						<Box
-							component={'a'}
-							sx={{
-								display: 'flex',
-								alignItems: 'center',
-								cursor: 'pointer',
-							}}
+					<Box>
+						<Link href={'/'}>
+							<Box
+								component={'a'}
+								sx={{
+									display: 'flex',
+									alignItems: 'center',
+									justifyContent: { xs: 'center', md: 'flex-start' },
+									cursor: 'pointer',
+								}}
+							>
+								<img src={LOGO} alt="Logo" width={'auto'} height={48} />
+							</Box>
+						</Link>
+						<Stack
+							direction="row"
+							justifyContent={{ xs: 'center', md: 'start' }}
+							ml={{ xs: 0, md: 3 }}
+							mt={4}
+							mb={{ xs: 4, md: 0 }}
+							spacing={1}
 						>
-							<img src={LOGO} alt="Logo" width={'auto'} height={48} />
-						</Box>
-					</Link>
-					{!isTablet && (
-						<Stack direction="row" spacing={4}>
-							<DocumentsDownloadButton />
-							<MediaButton />
-							<SupportButton onClick={handleShowForm} />
+							<Icon>
+								<IconImage src={ICON.SMS} />
+							</Icon>
+							<Typography
+								fontSize={16}
+								color="#fff"
+								sx={{
+									'&:hover': {
+										textDecoration: 'underline',
+									},
+								}}
+							>
+								{EMAIL}
+							</Typography>
 						</Stack>
-					)}
-				</Stack>
-				<Stack
-					direction="row"
-					justifyContent={{ xs: 'center', md: 'start' }}
-					ml={{ xs: 0, md: 3 }}
-					mt={4}
-					mb={{ xs: 4, md: 0 }}
-					spacing={1}
-				>
-					<Icon>
-						<IconImage src={ICON.SMS} />
-					</Icon>
-					<Typography
-						fontSize={16}
-						color="#fff"
-						sx={{
-							'&:hover': {
-								textDecoration: 'underline',
-							},
-						}}
+					</Box>
+					<Stack
+						direction={{ xs: 'column', md: 'row' }}
+						spacing={4}
+						alignItems={{ xs: 'center', md: "flex-start" }}
 					>
-						{EMAIL}
-					</Typography>
+						<Box sx={{ pt: 1.5 }}>
+							<Typography fontSize={14} color="#898E9E" sx={{
+								textAlign: {xs: 'center', md: 'left'}
+							}}>
+								{BUTTON.DOCS.title}
+							</Typography>
+							<Stack direction={{ xs: 'row', md: 'column' }} spacing={{xs: 3, md: 0.5}} mt={{ xs: 3, md: 1 }}>
+								{ITEMS.map((el, idx) => (
+									<Button
+										key={idx}
+										variant="text"
+										disabled={!el.href}
+										href={el.href}
+										sx={{
+											px: 0,
+											py: 0,
+											justifyContent: 'flex-start',
+											textTransform: 'capitalize',
+											color: '#FFF',
+											fontSize: 16,
+											fontWeight: 500,
+											'&:hover': {
+												textDecoration: 'underline',
+												background: 'transparent',
+											},
+											'&.Mui-disabled': {
+												color: 'rgba(255,255,255,0.5)',
+											},
+										}}
+									>
+										{el.title}
+									</Button>
+								))}
+							</Stack>
+						</Box>
+						<MediaButton />
+						<SupportButton onClick={handleShowForm} />
+					</Stack>
 				</Stack>
-				{isTablet ? (
+				<Box
+					sx={{ width: '100%', height: 1.5, background: '#4E5472', my: 2 }}
+				></Box>
+				<Typography fontSize={14} color="#898E9E" mb={3}>
+					Copyright @2022 beFITTER
+				</Typography>
+				{/* {isTablet ? (
 					<>
 						<Stack direction="row" spacing={4} justifyContent="center">
 							<DocumentsDownloadButton />
@@ -442,7 +555,7 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 							Copyright @2022 beFITTER
 						</Typography>
 					</Stack>
-				)}
+				)} */}
 			</Container>
 		</Box>
 	);

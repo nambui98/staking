@@ -215,6 +215,87 @@ export const TEAM = {
 	],
 };
 
+export const ROADMAP = {
+	TITLE: 'MAP',
+	SUBTITLE: 'ROAD',
+	MAP: 'assets/home-roadmap-map.png',
+	ROAD: 'assets/home-roadmap-road.png',
+	ICON_LIST: 'assets/icons/list.svg',
+	MILESTONES: [
+		{ 
+			title: 'Early 2022',
+			items: [
+				`Idea & Concept`,
+				`Form a team (Art, BA,\nEngineer, BD)`,
+			],
+			top: 514,
+			ml: -883,
+		},
+		{ 
+			title: 'May - 2022',
+			items: [
+				`Seed Fund Raising`,
+				`Launch Testnet`,
+				`Bug Bounty`,
+				`NFTs Airdrop Campaign`,
+			],
+			top: 225,
+			ml: -585,
+		},
+		{ 
+			title: 'June - 2022',
+			items: [
+				`Launch Mainnet V1`,
+				`Coop w/ All-in-one\ndiscovery Gaming Hub`,
+			],
+			top: 668,
+			ml: -435,
+		},
+		{ 
+			title: 'Q3 - 2022',
+			items: [
+				`Launch Mainnet V2 (Rent system)`,
+				`In-app system optimization`,
+				`Co-branding Partnerships`,
+			],
+			top: 480,
+			ml: 18,
+		},
+		{ 
+			title: 'Q4 - 2022',
+			items: [
+				`Mainnet V3 (Challenge)`,
+				`Wearable (Sleep)`,
+				`In-app system optimization`,
+				`Advertising`,
+			],
+			top: 156,
+			ml: 104,
+		},
+		{ 
+			title: 'Q1 - 2023',
+			items: [
+				`Wearables (Swim)`,
+				`Health analysis`,
+				`In-app system optimization`,
+			],
+			top: 597,
+			ml: 580,
+		},
+		{ 
+			title: 'Q2 - 2023',
+			items: [
+				`Training Plan`,
+				`Web3 SocialFi elements`,
+				`Marathons and Triathlon Events`,
+				`In-app system optimization`,
+			],
+			top: 128,
+			ml: 807,
+		},
+	]
+}
+
 type VideoSlide = {
 	src?: string;
 	mobileSrc?: string;

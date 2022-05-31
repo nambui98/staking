@@ -194,18 +194,23 @@ const Countdown: React.FC<any> = ({ sxProps, endDate }) => {
 
 const Form: React.FC<any> = ({ sxProps }) => {
 	const isTablet = useMediaQuery('(max-width:959px)');
-	const recaptchaRef = React.createRef<any>();
-	
+
 	const [textEmail, setTextEmail] = useState('');
 	const [textWallet, setTextWallet] = useState('');
 	const [textTelegram, setTextTelegram] = useState('');
 	const [errorEmail, setErrorEmail] = useState(false);
 	const [errorWallet, setErrorWallet] = useState(false);
 	const [errorTelegram, setErrorTelegram] = useState(false);
+	const [errorCaptcha, setErrorCaptcha] = useState(false);
 	const [showSnack, setShowSnack] = useState(false);
 	const [showBackdrop, setShowBackdrop] = useState(false);
 
+	// const recaptchaRef = React.createRef<ReCAPTCHA>();
+	const recaptchaRef = React.useRef<ReCAPTCHA>(null);
+	const [captchaToken, setCaptchaToken] = useState('');
+
 	const onReCAPTCHAChange = async (captchaCode: any) => {
+		// console.log('onReCAPTCHAChange', captchaCode);
 		// If the reCAPTCHA code is null or undefined indicating that
 		// the reCAPTCHA was expired then return early
 		if(!captchaCode) {
@@ -213,7 +218,44 @@ const Form: React.FC<any> = ({ sxProps }) => {
 		}
 		// Else reCAPTCHA was executed successfully so proceed with the 
 		// alert
+		setCaptchaToken(captchaCode);
+		// Reset the reCAPTCHA so that it can be executed again if user 
+		// submits another email.
+		// if (recaptchaRef.current) {
+		// 	recaptchaRef.current.reset();
+		// } else {
+		// 	window.location.reload();
+		// }
+	}
+
+	const handleSubmit = async (event: any) => {
+		event.preventDefault();
+
+		if (!textEmail || !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(textEmail)) {
+			setErrorEmail(true);
+			setTimeout(() => setErrorEmail(false), 2000);
+			return;
+		}
+		if (!textWallet) {
+			setErrorWallet(true);
+			setTimeout(() => setErrorWallet(false), 2000);
+			return;
+		}
+		if (!textTelegram) {
+			setErrorTelegram(true);
+			setTimeout(() => setErrorTelegram(false), 2000);
+			return;
+		}
+		if (!captchaToken) {
+			setErrorCaptcha(true);
+			setTimeout(() => setErrorCaptcha(false), 2000);
+			return;
+		}
+
 		try {
+			// const token = await recaptchaRef.current.executeAsync();
+			// console.log('token', token);
+			// console.log('recaptchaRef', recaptchaRef.current);
 			setShowBackdrop(true);
       const response = await fetch("/api/submit", {
         method: "POST",
@@ -221,7 +263,7 @@ const Form: React.FC<any> = ({ sxProps }) => {
 					email: textEmail,
 					wallet: textWallet,
 					telegram: textTelegram,
-					captcha: captchaCode,
+					captcha: captchaToken,
 				}),
         headers: {
           "Content-Type": "application/json",
@@ -248,61 +290,18 @@ const Form: React.FC<any> = ({ sxProps }) => {
     } catch (error: any) {
       alert(error?.message || "Something went wrong");
     } finally {
-      // Reset the reCAPTCHA when the request has failed or succeeeded
-      // so that it can be executed again if user submits another email.
-      recaptchaRef.current?.reset();
 			setTextEmail('');
 			setTextWallet('');
 			setTextTelegram('');
+      // Reset the reCAPTCHA when the request has failed or succeeded
+      // so that it can be executed again if user submits another email.
+			if (recaptchaRef.current) {
+      	recaptchaRef.current.reset();
+				// recaptchaRef.current.execute();
+			} else {
+				window.location.reload();
+			}
     }
-	}
-
-	const handleSubmit = async (event: any) => {
-		event.preventDefault();
-
-		if (!textEmail || !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(textEmail)) {
-			setErrorEmail(true);
-			setTimeout(() => setErrorEmail(false), 2000);
-			return;
-		}
-		if (!textWallet) {
-			setErrorWallet(true);
-			setTimeout(() => setErrorWallet(false), 2000);
-			return;
-		}
-		if (!textTelegram) {
-			setErrorTelegram(true);
-			setTimeout(() => setErrorTelegram(false), 2000);
-			return;
-		}
-		recaptchaRef.current?.execute();
-		
-		// setShowBackdrop(true);
-		// const response = await fetch('/api/submit', {
-		// 	method: 'POST',
-		// 	body: JSON.stringify({
-		// 		email: textEmail,
-		// 		wallet: textWallet,
-		// 		telegram: textTelegram,
-		// 	}),
-		// 	headers: {
-		// 		'Content-Type': 'application/json',
-		// 	},
-		// });
-		// setShowBackdrop(false);
-		// // setShowSnack(true);
-		// toast('SUCCESS', {
-		// 	position: 'top-center',
-		// 	autoClose: 3000,
-		// 	hideProgressBar: true,
-		// 	closeOnClick: true,
-		// 	pauseOnHover: true,
-		// 	draggable: true,
-		// 	progress: undefined,
-		// });
-		// setTextEmail('');
-		// setTextWallet('');
-		// setTextTelegram('');
 	};
 
 	return (
@@ -313,19 +312,6 @@ const Form: React.FC<any> = ({ sxProps }) => {
 			>
 				<CircularProgress color="inherit" />
 			</Backdrop>
-			{/* <Snackbar
-				open={showSnack}
-				onClose={() => setShowSnack(false)}
-				autoHideDuration={2000}
-			>
-				<Alert
-					severity="success"
-					onClose={() => setShowSnack(false)}
-					sx={{ width: "100%" }}
-				>
-					Sent
-				</Alert>
-			</Snackbar> */}
 			<Typography fontSize={{ xs: 14, md: 18 }} color="#31373E">
 				Fill in your information to join the first{' '}
 				<span style={{ color: '#FF6D24' }}>10,000 people</span> that
@@ -336,12 +322,6 @@ const Form: React.FC<any> = ({ sxProps }) => {
 				*Make sure you fill in the correct information
 			</Typography>
 			<Box component="form" sx={{ maxWidth: { md: 448 } }}>
-				<ReCAPTCHA
-					ref={recaptchaRef}
-					size="invisible"
-					sitekey={RECAPTCHA_SITE_KEY}
-					onChange={onReCAPTCHAChange}
-				/>
 				<Stack spacing={1} mb={2} alignItems={{ xs: 'center', md: 'start' }}>
 					<Stack spacing={0} sx={{ width: '100%' }}>
 						<CustomInput
@@ -377,6 +357,15 @@ const Form: React.FC<any> = ({ sxProps }) => {
 							{errorTelegram && 'Empty value'}
 						</CustomHelperText>
 					</Stack>
+					<ReCAPTCHA
+						ref={recaptchaRef}
+						// size="invisible"
+						sitekey={RECAPTCHA_SITE_KEY}
+						onChange={onReCAPTCHAChange}
+					/>
+					<CustomHelperText>
+						{errorCaptcha && 'Please verify the ReCaptcha'}
+					</CustomHelperText>
 				</Stack>
 				<Button
 					onClick={handleSubmit}

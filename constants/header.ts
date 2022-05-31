@@ -9,7 +9,7 @@ export const HOME_BG_LOGO = 'assets/backgrounds/header-1.png';
 export const HOME_MENU = 'assets/icons/menu-white.svg';
 
 export const ITEMS = [
-	{ title: 'LiTEpaper', href: 'https://cdn.befitter.io/lp' },
-	{ title: 'PITCH DECK', href: '' },
-	{ title: 'WHITEPAPER', href: '' },
+	{ title: 'Litepaper', href: 'https://cdn.befitter.io/lp' },
+	{ title: 'Pitch deck', href: '' },
+	{ title: 'Whitepaper', href: '' },
 ];
