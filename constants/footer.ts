@@ -7,6 +7,7 @@ export const ICON = {
 	SMS: 'assets/icons/sms.svg',
 	UPLOAD: 'assets/icons/document-upload.svg',
 	CLOSE: 'assets/icons/close.svg',
+	CHECKED: 'assets/icons/tick-circle.svg',
 };
 export const BUTTON = {
 	DOCS: { title: 'Documents', href: '#' },
@@ -17,4 +18,5 @@ export const BUTTON = {
 	SUPPORT: { title: 'Support' },
 	ATTACH: { title: 'Attach an image' },
 	SEND: { title: 'Send support request' },
+	CONFIRM: { title: 'Confirm' }
 };

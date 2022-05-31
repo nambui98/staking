@@ -32,6 +32,7 @@ import {
 	WORKS,
 	FOUNDED,
 	TEAM,
+	ROADMAP,
 } from '../constants/home';
 import { IconImage } from '../components/styled';
 import {
@@ -656,6 +657,11 @@ const NumberSection: React.FC<any> = ({ sxProps }) => {
 };
 
 const HowItWorks: React.FC<any> = ({ sxProps }) => {
+	const [activeIndex, setActiveIndex] = React.useState<number>(0);
+	function handleSlideChange(e: any) {
+		console.log(e.activeIndex);
+		setActiveIndex(e.activeIndex);
+	}
 	return (
 		<Container
 			sx={{
@@ -691,7 +697,7 @@ const HowItWorks: React.FC<any> = ({ sxProps }) => {
 				effect={'fade'}
 				pagination={{ clickable: true }}
 				modules={[Autoplay, EffectFade, Pagination]}
-				// onSlideChange={(e) => {}}
+				onSlideChange={handleSlideChange}
 				className="mySwiper"
 			>
 				{WORKS.SLIDES.map((el, idx) => (
@@ -721,6 +727,13 @@ const HowItWorks: React.FC<any> = ({ sxProps }) => {
 									bottom: { xs: 'unset', md: el.bottom },
 									pt: { xs: 3, md: 0 },
 									pb: { xs: 5, md: 0 },
+									animation: activeIndex === idx ? 'shake .25s linear' : 'none',
+									'@keyframes shake': {
+										'0%,100%': { transform: `translateX(0)` },
+										'30%': { transform: 'translateX(-50px)' },
+										'60%': { transform: 'translateX(50px)' },
+										'90%': { transform: 'translateX(-50px)' },
+									},
 								}}
 							>
 								<Typography
@@ -774,11 +787,6 @@ const HowItWorks: React.FC<any> = ({ sxProps }) => {
 									{el.title}
 								</Typography>
 							</Box>
-							{/* {isSm ? (
-								<Box>
-
-								</Box>
-							) : ()} */}
 						</Box>
 					</SwiperSlide>
 				))}
@@ -818,7 +826,7 @@ const FoundedBy: React.FC<any> = ({ sxProps }) => {
 					subtitle={FOUNDED.SUBTITLE}
 					swap={true}
 				/>
-				<Grid container columnSpacing={10} rowSpacing={5}>
+				<Grid container spacing={5}>
 					<Grid item xs={12} md={5}>
 						<Stack
 							spacing={2}
@@ -842,7 +850,7 @@ const FoundedBy: React.FC<any> = ({ sxProps }) => {
 							spacing={3}
 							sx={{
 								pt: 5,
-								pr: 2,
+								pr: 0,
 								backgroundImage: `url(${FOUNDED.BG})`,
 								backgroundRepeat: 'no-repeat',
 								backgroundSize: 'contain',
@@ -916,10 +924,6 @@ const Team: React.FC<any> = ({ sxProps }) => {
 										textTransform: 'uppercase',
 										background:
 											'linear-gradient(270deg, #FF5C35 3.42%, #FF612F 98.2%)',
-										// '-webkit-background-clip': 'text',
-										// '-webkit-text-fill-color': 'transparent',
-										// 'background-clip': 'text',
-										// 'text-fill-color': 'transparent',
 										WebkitBackgroundClip: 'text',
 										WebkitTextFillColor: 'transparent',
 										backgroundClip: 'text',
@@ -940,9 +944,123 @@ const Team: React.FC<any> = ({ sxProps }) => {
 	);
 };
 
+const Milestone: React.FC<any> = ({ sxProps, title, items }) => {
+	return (
+		<Box>
+			<Box sx={{
+				background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
+				padding: '2px',
+				width: 'max-content',
+			}}>
+				<Box sx={{
+					background: '#FFF',
+					p: .5,
+					width: 'max-content',
+				}}>
+					<Typography fontSize={{ xs: 20, sm: 24, md: 18, lg: 24 }} fontWeight={700} color="#31373E">{title}</Typography>
+				</Box>
+			</Box>
+			<Box sx={{ pl: 2, mt: 1 }}>
+				{items.map((text: string, idx: number) => (
+					<Stack key={idx} direction="row" spacing={1} sx={{mb: 1}}>
+						<Icon sx={{ 
+							width: {xs: 14, sm: 14*1.25, md: 14, lg: 14*1.25}, 
+							height: {xs: 12, sm: 12*1.25, md: 12, lg: 12*1.25}, 
+						}}>
+							<IconImage src={ROADMAP.ICON_LIST} />
+						</Icon>
+						<Typography
+							fontSize={{ xs: 16, sm: 18, md: 14, lg: 18 }}
+							fontWeight={400}
+							lineHeight="23px"
+							color="#5A6178"
+							mb={1}
+						>
+							{text.split('\n').map((el, idx) => (
+								<span key={idx}>
+									{el}
+									<br />
+								</span>
+							))}
+						</Typography>
+					</Stack>
+					
+				))}
+			</Box>
+		</Box>
+	)
+};
+
+const Roadmap: React.FC<any> = () => {
+	return (
+		<Stack
+			alignItems="center"
+			sx={{
+				position: 'relative',
+				overflow: 'hidden',
+				height: 895,
+			}}
+		>
+			<Container sx={{ position: 'relative' }}>
+				<SectionTitle
+					title={ROADMAP.TITLE}
+					subtitle={ROADMAP.SUBTITLE}
+				/>
+			</Container>
+			<Box sx={{
+				position: 'absolute',
+				backgroundImage: `url(${ROADMAP.MAP})`,
+				backgroundRepeat: 'no-repeat',
+				backgroundSize: 'cover',
+				backgroundPosition: 'center',
+				width: { md: 1920*0.8, lg: 1920 },
+				height: { md: 895*0.8, lg: 895 },
+			}}/>
+			<Box sx={{
+				position: 'absolute',
+				backgroundImage: `url(${ROADMAP.ROAD})`,
+				backgroundRepeat: 'no-repeat',
+				backgroundSize: 'cover',
+				backgroundPosition: 'center',
+				width: { md: 1020*0.8, lg: 1020 },
+				height: { md: 325*0.8, lg: 325 },
+				top: { md: 329*0.8, lg: 329 },
+				ml: { md: `${29*0.8}px`, lg: `${29}px` },
+			}}/>
+			{ROADMAP.MILESTONES.map((el, idx) => (
+				<Box key={idx} sx={{
+					position: 'absolute',
+					top: { md: el.top*0.8, lg: el.top },
+					ml: { md: `${el.ml*0.8}px`, lg: `${el.ml}px` },
+				}}>
+					<Milestone title={el.title} items={el.items} />
+				</Box>
+			))}
+		</Stack>
+	)
+}
+
+const RoadmapMobile: React.FC<any> = ({ sxProps }) => {
+	return (
+		<Container sx={{ ...sxProps }}>
+			<SectionTitle
+				title={ROADMAP.TITLE}
+				subtitle={ROADMAP.SUBTITLE}
+			/>
+			<Grid container spacing={3} mt={5}>
+				{ROADMAP.MILESTONES.map((el, idx) => (
+					<Grid item key={idx} xs={12} sm={6}>
+						<Milestone  title={el.title} items={el.items} />
+					</Grid>
+				))}
+			</Grid>
+		</Container>
+	)
+};
+
 const Home: NextPage = () => {
 	const [height, setHeight] = useState<number>();
-	const isTablet = useMediaQuery((theme: Theme) =>
+	const isSm = useMediaQuery((theme: Theme) =>
 		theme.breakpoints.down('md')
 	);
 
@@ -969,9 +1087,9 @@ const Home: NextPage = () => {
 				}}
 			>
 				<BannerSwiper />
-				{!isTablet && <BannerSocial />}
-				{!isTablet && <BannerEvent />}
-				{isTablet && <MobileBannerEvent />}
+				{!isSm && <BannerSocial />}
+				{!isSm && <BannerEvent />}
+				{isSm && <MobileBannerEvent />}
 			</Box>
 			<AppSection sxProps={{ py: 8 }} />
 			{/* <ChallengeSection /> */}
@@ -979,6 +1097,7 @@ const Home: NextPage = () => {
 			<HowItWorks sxProps={{ pb: 15 }} />
 			<FoundedBy sxProps={{ mb: 15 }} />
 			<Team sxProps={{ mb: 15 }} />
+			{isSm ? <RoadmapMobile sxProps={{ mb: 10 }} /> : <Roadmap />}
 			<SocialSection />
 		</HomeLayout>
 	);
