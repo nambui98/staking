@@ -13,13 +13,14 @@ import {
 	Chip,
 	CircularProgress,
 	Backdrop,
+	Theme,
 	styled,
 	useMediaQuery,
 	IconButton,
 } from '@mui/material';
 
 import { LOGO, BG1, BG2, ICON, EMAIL, BUTTON } from '../../constants/footer';
-import { ITEMS } from '../../constants/header';
+import { MENU_ITEMS } from '../../constants/common';
 import { IconImage } from '../styled';
 
 const LIMIT_UPLOAD_SIZE = 25; // MB
@@ -109,6 +110,7 @@ const MediaButton: React.FC<any> = () => (
 			</Icon>
 		}
 		sx={{
+			textTransform: 'none',
 			'&:hover': {
 				textDecoration: 'underline',
 				background: 'transparent',
@@ -127,6 +129,7 @@ const SupportButton: React.FC<any> = ({ onClick }) => (
 			width: { xs: '100%', md: 'unset' },
 			maxWidth: 343,
 			borderRadius: '16px',
+			textTransform: 'none',
 			'&:hover': {
 				background: '#fff',
 				color: '#000',
@@ -355,7 +358,7 @@ const SupportPopup: React.FC<any> = ({ handleClose }) => (
 );
 
 const MainFooter: React.FC<any> = ({ sxProps, children }) => {
-	const isTablet = useMediaQuery('(max-width:960px)');
+	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	const [showForm, setShowForm] = React.useState<boolean>(false);
 	const [showPopup, setShowPopup] = React.useState<boolean>(false);
 
@@ -388,30 +391,61 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 				height: { xs: 'unset', md: 263 },
 			}}
 		>
-			<Slide direction="up" in={showForm} mountOnEnter unmountOnExit>
-				<Box
-					sx={{
-						position: 'absolute',
-						right: 8,
-						bottom: '104%',
-						width: 360,
-					}}
+			{isSm ? <>
+				<Backdrop
+					sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+					open={showForm}
 				>
-					<SupportForm handleClose={handleHideForm} />
-				</Box>
-			</Slide>
-			<Slide direction="up" in={showPopup} mountOnEnter unmountOnExit>
-				<Box
-					sx={{
-						position: 'absolute',
-						right: 8,
-						bottom: '104%',
-						width: 360,
-					}}
+					<Slide direction="up" in={showForm} mountOnEnter unmountOnExit>
+						<Box
+							sx={{
+								width: 360,
+							}}
+						>
+							<SupportForm handleClose={handleHideForm} />
+						</Box>
+					</Slide>
+				</Backdrop>
+				<Backdrop
+					sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+					open={showPopup}
 				>
-					<SupportPopup handleClose={handleHidePopup} />
-				</Box>
-			</Slide>
+					<Slide direction="up" in={showPopup} mountOnEnter unmountOnExit>
+						<Box
+							sx={{
+								width: 360,
+							}}
+						>
+							<SupportPopup handleClose={handleHidePopup} />
+						</Box>
+					</Slide>
+				</Backdrop>
+			</> : <>
+				<Slide direction="up" in={showForm} mountOnEnter unmountOnExit>
+					<Box
+						sx={{
+							position: 'absolute',
+							right: 8,
+							bottom: { xs: '50%', md: '104%' },
+							width: 360,
+						}}
+					>
+						<SupportForm handleClose={handleHideForm} />
+					</Box>
+				</Slide>
+				<Slide direction="up" in={showPopup} mountOnEnter unmountOnExit>
+					<Box
+						sx={{
+							position: 'absolute',
+							right: 8,
+							bottom: { xs: '50%', md: '104%' },
+							width: 360,
+						}}
+					>
+						<SupportPopup handleClose={handleHidePopup} />
+					</Box>
+				</Slide>
+			</>}
 			<Box
 				sx={{
 					position: 'absolute',
@@ -421,7 +455,7 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 			>
 				<img src={BG1} width={'auto'}></img>
 			</Box>
-			{!isTablet && (
+			{!isSm && (
 				<Box
 					sx={{
 						position: 'absolute',
@@ -470,11 +504,7 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 							<Typography
 								fontSize={16}
 								color="#fff"
-								sx={{
-									'&:hover': {
-										textDecoration: 'underline',
-									},
-								}}
+								pt={.25}
 							>
 								{EMAIL}
 							</Typography>
@@ -483,16 +513,24 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 					<Stack
 						direction={{ xs: 'column', md: 'row' }}
 						spacing={4}
-						alignItems={{ xs: 'center', md: "flex-start" }}
+						alignItems={{ xs: 'center', md: 'flex-start' }}
 					>
 						<Box sx={{ pt: 1.5 }}>
-							<Typography fontSize={14} color="#898E9E" sx={{
-								textAlign: {xs: 'center', md: 'left'}
-							}}>
+							<Typography
+								fontSize={14}
+								color="#898E9E"
+								sx={{
+									textAlign: { xs: 'center', md: 'left' },
+								}}
+							>
 								{BUTTON.DOCS.title}
 							</Typography>
-							<Stack direction={{ xs: 'row', md: 'column' }} spacing={{xs: 3, md: 0.5}} mt={{ xs: 3, md: 1 }}>
-								{ITEMS.map((el, idx) => (
+							<Stack
+								direction={{ xs: 'row', md: 'column' }}
+								spacing={{ xs: 3, md: 0.5 }}
+								mt={{ xs: 3, md: 1 }}
+							>
+								{MENU_ITEMS.map((el, idx) => (
 									<Button
 										key={idx}
 										variant="text"
@@ -530,32 +568,6 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 				<Typography fontSize={14} color="#898E9E" mb={3}>
 					Copyright @2022 beFITTER
 				</Typography>
-				{/* {isTablet ? (
-					<>
-						<Stack direction="row" spacing={4} justifyContent="center">
-							<DocumentsDownloadButton />
-							<MediaButton />
-						</Stack>
-						<Stack spacing={2} alignItems="center" mt={4}>
-							<SupportButton onClick={handleShowForm} />
-							<Box
-								sx={{ width: '100%', height: 1.5, background: '#4E5472' }}
-							></Box>
-							<Typography fontSize={14} color="#898E9E" pb={3}>
-								Copyright @2022 beFITTER
-							</Typography>
-						</Stack>
-					</>
-				) : (
-					<Stack spacing={2} mt={2}>
-						<Box
-							sx={{ width: '100%', height: 1.5, background: '#4E5472' }}
-						></Box>
-						<Typography fontSize={14} color="#898E9E">
-							Copyright @2022 beFITTER
-						</Typography>
-					</Stack>
-				)} */}
 			</Container>
 		</Box>
 	);
