@@ -19,6 +19,7 @@ interface eventBody {
 	email: string;
 	wallet: string;
 	telegram: string;
+	device: string;
 }
 
 export async function appendEvent(body: eventBody) {

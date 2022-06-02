@@ -6,6 +6,8 @@ export const IMG = {
 	BG_ITEM3: 'assets/alpha-challenge-items.png',
 	BG_ITEM4: 'assets/backgrounds/alpha-challenge-3.png',
 	BG_ITEM5: 'assets/backgrounds/alpha-challenge-2.png',
+	ICON_RADIO: 'assets/icons/radio-circle.svg',
+	ICON_TICK: 'assets/icons/radio-tick.svg',
 };
 
 export const QUESTIONS = [

@@ -16,6 +16,12 @@ import {
 	CircularProgress,
 	InputLabel,
 	styled,
+	Radio,
+	RadioProps,
+	RadioGroup,
+	FormControl,
+	FormLabel,
+	FormControlLabel,
 	useMediaQuery,
 } from '@mui/material';
 import { toast } from 'react-toastify';
@@ -24,7 +30,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import MainLayout from '../components/layouts/MainLayout';
 import { IMG, QUESTIONS } from '../constants/event';
 import { IconImage } from '../components/styled';
-import { SocialSection } from '../components/sections';
+import StayInTouch from '../components/sections/StayInTouch';
 
 const RECAPTCHA_SITE_KEY = "6LfVxzAgAAAAAEFPNTeG6d8xqKifrYhwVZ4VAKtd";
 
@@ -159,7 +165,7 @@ const Countdown: React.FC<any> = ({ sxProps, endDate }) => {
 					<Stack
 						key={title}
 						alignItems="center"
-						spacing={-1}
+						spacing={0}
 						sx={{
 							pl: 1,
 							pr: 1.5,
@@ -192,6 +198,23 @@ const Countdown: React.FC<any> = ({ sxProps, endDate }) => {
 	);
 };
 
+function BpRadio(props: RadioProps) {
+  return (
+    <Radio
+      sx={{
+        '&:hover': {
+          bgcolor: 'transparent',
+        },
+      }}
+      disableRipple
+      color="default"
+      icon={<Icon><IconImage src={IMG.ICON_RADIO} /></Icon>}
+      checkedIcon={<Icon><IconImage src={IMG.ICON_TICK} /></Icon>}
+      {...props}
+    />
+  );
+}
+
 const Form: React.FC<any> = ({ sxProps }) => {
 	const isTablet = useMediaQuery('(max-width:959px)');
 
@@ -202,12 +225,17 @@ const Form: React.FC<any> = ({ sxProps }) => {
 	const [errorWallet, setErrorWallet] = useState(false);
 	const [errorTelegram, setErrorTelegram] = useState(false);
 	const [errorCaptcha, setErrorCaptcha] = useState(false);
+	const [textDevice, setTextDevice] = useState('iOS');
 	const [showSnack, setShowSnack] = useState(false);
 	const [showBackdrop, setShowBackdrop] = useState(false);
 
 	// const recaptchaRef = React.createRef<ReCAPTCHA>();
 	const recaptchaRef = React.useRef<ReCAPTCHA>(null);
 	const [captchaToken, setCaptchaToken] = useState('');
+
+	const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTextDevice((event.target as HTMLInputElement).value);
+  };
 
 	const onReCAPTCHAChange = async (captchaCode: any) => {
 		// console.log('onReCAPTCHAChange', captchaCode);
@@ -263,6 +291,7 @@ const Form: React.FC<any> = ({ sxProps }) => {
 					email: textEmail,
 					wallet: textWallet,
 					telegram: textTelegram,
+					device: textDevice,
 					captcha: captchaToken,
 				}),
         headers: {
@@ -293,6 +322,7 @@ const Form: React.FC<any> = ({ sxProps }) => {
 			setTextEmail('');
 			setTextWallet('');
 			setTextTelegram('');
+			setTextDevice('iOS');
       // Reset the reCAPTCHA when the request has failed or succeeded
       // so that it can be executed again if user submits another email.
 			if (recaptchaRef.current) {
@@ -356,6 +386,23 @@ const Form: React.FC<any> = ({ sxProps }) => {
 						<CustomHelperText>
 							{errorTelegram && 'Empty value'}
 						</CustomHelperText>
+					</Stack>
+					<Stack sx={{ width: '100%' }}>
+						<FormControl sx={{
+							flexDirection: 'row',
+							alignItems: 'center',
+							color: '#31373E',
+						}}>
+							<FormLabel sx={{mr: 3, color: '#31373E !important'}}>Register for</FormLabel>
+							<RadioGroup
+								row
+								defaultValue="iOS"
+								onChange={handleRadioChange}
+							>
+								<FormControlLabel value="iOS" control={<BpRadio />} label="iOS" />
+								<FormControlLabel value="Android" control={<BpRadio />} label="Android" />
+							</RadioGroup>
+						</FormControl>
 					</Stack>
 					<ReCAPTCHA
 						ref={recaptchaRef}
@@ -488,8 +535,7 @@ const EventDetail: NextPage = () => {
 					</Stack>
 				</Container>
 			</Stack>
-			{/* <Social /> */}
-			<SocialSection />
+			<StayInTouch />
 		</MainLayout>
 	);
 };
