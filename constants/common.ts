@@ -111,8 +111,8 @@ export const ROADMAP = {
 			title: 'May - 2022',
 			items: [
 				`Seed Fund Raising`,
-				`Launch Testnet`,
-				`Bug Bounty`,
+				// `Launch Testnet`,
+				// `Bug Bounty`,
 				`NFTs Airdrop Campaign`,
 			],
 			top: 225,
@@ -120,7 +120,12 @@ export const ROADMAP = {
 		},
 		{
 			title: 'June - 2022',
-			items: [`Launch Mainnet V1`, `Coop w/ All-in-one\ndiscovery Gaming Hub`],
+			items: [
+				// `Launch Mainnet V1`, 
+				`Launch Testnet`, 
+				`Coop w/All-in-one\ndiscovery Gaming Hub`,
+				`Launch Mainnet V1`, 
+			],
 			top: 668,
 			ml: -435,
 		},
