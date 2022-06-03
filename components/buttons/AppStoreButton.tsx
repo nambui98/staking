@@ -53,21 +53,23 @@ const AppStoreButton: React.FC<any> = ({
 				</Stack>
 			</Grid>
 			<Grid item xs={'auto'}>
-				<Typography
-					fontSize={{ xs: 10, sm: 14 }}
-					fontWeight={500}
-					color="#5A6178"
-					mb={0.5}
-				>
-					{subtitle}
-				</Typography>
-				<Typography
-					fontSize={{ xs: 14, sm: 20 }}
-					fontWeight={600}
-					color="#5A6178"
-				>
-					{title}
-				</Typography>
+				<Stack alignItems="flex-start">
+					<Typography
+						fontSize={{ xs: 10, sm: 14 }}
+						fontWeight={500}
+						color="#5A6178"
+						mb={0.5}
+					>
+						{subtitle}
+					</Typography>
+					<Typography
+						fontSize={{ xs: 14, sm: 20 }}
+						fontWeight={600}
+						color="#5A6178"
+					>
+						{title}
+					</Typography>
+				</Stack>
 			</Grid>
 		</Grid>
 	</Button>
