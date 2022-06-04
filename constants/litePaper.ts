@@ -265,25 +265,25 @@ export const THE_TOKEN = {
 			{
 				title: 'SPEND/STAKE',
 				items: [
-					`Buy Pet`,
-					`Lend NFT items`,
-					`Stake to be whitelisted in limited NFT collection, create challenges`,
-				],
-			},
-			{
-				title: 'EARN',
-				items: [
-					`Staking/ yield farming`,
-					`Walk or Sell Pet`,
-					`Win Challenge (1v1 and tournaments)`,
+					`Join Challenge`,
+					`Stake to be whitelisted in limited NFT collection, create challenge`,
 				],
 			},
 			{
 				title: 'BURN',
 				items: [
 					`Mint NFT items`,
-					`Join Challenge`,
-					`Burning Event (Ecosystem Fund)`,
+					`Part of Challenge Rewards Pool`,
+					`Part of NFT Renting Rewards`,
+					`Burning events`,
+				],
+			},
+			{
+				title: 'EARN',
+				items: [
+					`Staking/ yield farming`,
+					`Do activities With Pet`,
+					`Win Challenge (1v1 and tournaments)`,
 				],
 			},
 		],
@@ -294,25 +294,24 @@ export const THE_TOKEN = {
 		IMG: 'assets/litePaper-token-hee.png',
 		BG: 'assets/litePaper-token-hee-bg.png',
 		ITEMS: [
+			// {
+			// 	title: 'SPEND',
+			// 	items: [`Buy NFT items`, `Level up`],
+			// },
 			{
-				title: 'SPEND',
-				items: [`Buy NFT items`, `Level up`],
+				title: 'BURN',
+				items: [
+					`Mint NFT items`,
+					`Level up NFT items`,
+					`Repair NFT items`,
+					`Burning events`,
+				],
 			},
 			{
 				title: 'EARN',
 				items: [
-					`Sell NFT items`,
 					`Solo mode`,
 					`Win Challenge (1v1 and tournaments)`,
-				],
-			},
-			{
-				title: 'BURN',
-				items: [
-					`Unlock Wearable Device Activities`,
-					`Mint NFT items`,
-					`Renovate NFT items`,
-					`Burning Event (Ecosystem Fund)`,
 				],
 			},
 		],

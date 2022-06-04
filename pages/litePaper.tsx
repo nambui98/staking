@@ -851,7 +851,7 @@ const StackAreaChart: React.FC<any> = ({ sxProps, isXs }) => {
 	return (
 		<ReactEcharts
 			style={{ 
-				height: '800px', 
+				height: isXs ? '500px' : '800px', 
 				width: '100%',
 				// fontFamily: 'BeVietnamPro',
 				// fontWeight: 500,
@@ -866,6 +866,12 @@ const StackAreaChart: React.FC<any> = ({ sxProps, isXs }) => {
 							backgroundColor: '#6a7985',
 						},
 					},
+				},
+				grid: {
+					left: isXs ? '2%' : 0,
+					right: isXs ? '2%' : 0,
+					bottom: isXs ? '22%' : '7%',
+					containLabel: true
 				},
 				legend: {
 					show: true,
@@ -1073,6 +1079,8 @@ const TheToken: React.FC<any> = ({ sxProps, isXs }) => (
 		</Typography>
 		<Stack justifyContent="center">
 			<PieChart isXs={isXs} />
+		</Stack>
+		<Stack justifyContent="center">
 			<StackAreaChart isXs={isXs} />
 		</Stack>
 	</Container>
