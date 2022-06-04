@@ -215,7 +215,7 @@ const Form: React.FC<any> = ({isTablet, sxProps}) => {
 							onChange={(e) => setTextEmail(e.target.value)}
 						/>
 						<CustomHelperText>
-							{errorEmail && 'Incorrect Apple ID!'}
+							{errorEmail && 'Incorrect Apple ID'}
 						</CustomHelperText>
 					</Stack>
 					<Stack spacing={0} sx={{width: '100%'}}>
@@ -274,7 +274,7 @@ const CustomHelperText: React.FC<any> = ({children}) => (
 		shrink
 		sx={{
 			mt: 1,
-			color: '#F00',
+			color: '#FF6F61',
 			fontSize: 14,
 		}}
 	>
