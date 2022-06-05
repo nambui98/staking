@@ -60,7 +60,7 @@ const Banner: React.FC<any> = ({ isXs }) => (
 			}}
 		/>
 		<Stack alignItems="center" sx={{ position: 'relative', px: '10%' }}>
-			<img src={TITLE} width={isXs ? '100%' : 'auto'}/>
+			<img src={TITLE} width={isXs ? '100%' : 'auto'} />
 			{/* <img src={isXs ? TITLE_MOBILE : TITLE} width={'auto'}/> */}
 		</Stack>
 	</Stack>
@@ -780,7 +780,7 @@ const PieChart: React.FC<any> = ({ sxProps, isXs }) => {
 				// 	x: "center"
 				// },
 				tooltip: {
-					show: isXs,
+					show: true,
 					trigger: 'item',
 					// formatter: "{a} <br/>{b} : {c} ({d}%)",
 					formatter: '{b} {d}%',
@@ -820,12 +820,10 @@ const PieChart: React.FC<any> = ({ sxProps, isXs }) => {
 							},
 						},
 						labelLine: {
+							show: false,
 							length: 5,
 							length2: 0,
 							maxSurfaceAngle: 80,
-							// normal: {
-							// 	show: !isXs
-							// }
 						},
 						itemStyle: {
 							borderColor: '#fff',
@@ -853,8 +851,8 @@ const PieChart: React.FC<any> = ({ sxProps, isXs }) => {
 const StackAreaChart: React.FC<any> = ({ sxProps, isXs }) => {
 	return (
 		<ReactEcharts
-			style={{ 
-				height: isXs ? '600px' : '800px', 
+			style={{
+				height: isXs ? '500px' : '800px',
 				width: '100%',
 				// fontFamily: 'BeVietnamPro',
 				// fontWeight: 500,
@@ -862,29 +860,47 @@ const StackAreaChart: React.FC<any> = ({ sxProps, isXs }) => {
 			}}
 			option={{
 				tooltip: {
-					show: !isXs,
+					show: true,
 					trigger: 'axis',
 					axisPointer: {
 						type: 'cross',
+						axis: 'auto',
 						label: {
 							backgroundColor: '#6a7985',
 						},
 					},
-					// textStyle: {
-					// 	fontSize: 10,
-					// }
+					position: function (
+						pos: any,
+						params: any,
+						dom: any,
+						rect: any,
+						size: any
+					) {
+						// tooltip will be fixed on the right if mouse hovering on the left,
+						// and on the left if hovering on the right.
+						var obj: any = {};
+						obj[['top', 'bottom'][+(pos[1] < size.viewSize[1] / 2)]] = 5;
+						obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
+						return obj;
+					},
+					textStyle: {
+						fontSize: 10,
+					},
 				},
 				grid: {
-					left: isXs ? '2%' : 0,
-					right: isXs ? '2%' : 0,
+					left: isXs ? '3%' : 0,
+					right: isXs ? '4%' : 0,
 					bottom: isXs ? '22%' : '7%',
-					containLabel: true
+					containLabel: true,
 				},
 				legend: {
 					show: true,
 					orient: 'horizontal',
 					bottom: 0,
 					data: THE_TOKEN.DISTRIBUTION.STACK.series.map((el) => el.name),
+					textStyle: {
+						// fontFamily: 'BeVietnamPro',
+					},
 				},
 				xAxis: [
 					{
