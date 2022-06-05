@@ -21,7 +21,7 @@ const CountdownClock: React.FC<any> = ({ endDate = END_DATE_EVENT }) => {
 				clearInterval(counter);
 			} else {
 				let days = Math.floor(distance / _day);
-				let hrs = Math.floor((distance % _day) / _hour);
+				let hrs = Math.floor((distance % _day) / _hour) + 8;
 				let mins = Math.floor((distance % _hour) / _minute);
 				let secs = Math.floor((distance % _minute) / _second);
 				setDayText(days < 0 ? '' : days < 10 ? `0${days}` : `${days}`);

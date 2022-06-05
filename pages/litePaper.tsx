@@ -27,6 +27,7 @@ import StayInTouch from '../components/sections/StayInTouch';
 import AppStoreButton from '../components/buttons/AppStoreButton';
 import {
 	TITLE,
+	TITLE_MOBILE,
 	BANNER,
 	TOKEN,
 	MISSION,
@@ -59,7 +60,8 @@ const Banner: React.FC<any> = ({ isXs }) => (
 			}}
 		/>
 		<Stack alignItems="center" sx={{ position: 'relative', px: '10%' }}>
-			<img src={TITLE} width={isXs ? '100%' : 'auto'} height={'auto'} />
+			{/* <img src={TITLE} width={isXs ? '100%' : 'auto'}/> */}
+			<img src={isXs ? TITLE_MOBILE : TITLE} width={'auto'}/>
 		</Stack>
 	</Stack>
 );
@@ -770,6 +772,7 @@ const Charity: React.FC<any> = ({ sxProps }) => (
 const PieChart: React.FC<any> = ({ sxProps, isXs }) => {
 	return (
 		<ReactEcharts
+			style={{ height: '500px', width: '100%' }}
 			option={{
 				// title: {
 				// 	text: "某站点用户访问来源",
@@ -795,7 +798,7 @@ const PieChart: React.FC<any> = ({ sxProps, isXs }) => {
 					{
 						// name: "访问来源",
 						type: 'pie',
-						radius: ['60%', '100%'],
+						radius: ['55%', '90%'],
 						center: ['50%', '50%'],
 						animationDuration: 5000,
 						data: THE_TOKEN.DISTRIBUTION.PIE.data,
@@ -842,7 +845,6 @@ const PieChart: React.FC<any> = ({ sxProps, isXs }) => {
 				],
 				color: THE_TOKEN.DISTRIBUTION.PIE.color,
 			}}
-			style={{ height: '500px', width: '100%' }}
 		/>
 	);
 };
@@ -851,7 +853,7 @@ const StackAreaChart: React.FC<any> = ({ sxProps, isXs }) => {
 	return (
 		<ReactEcharts
 			style={{ 
-				height: isXs ? '500px' : '800px', 
+				height: isXs ? '600px' : '800px', 
 				width: '100%',
 				// fontFamily: 'BeVietnamPro',
 				// fontWeight: 500,
@@ -859,6 +861,7 @@ const StackAreaChart: React.FC<any> = ({ sxProps, isXs }) => {
 			}}
 			option={{
 				tooltip: {
+					show: !isXs,
 					trigger: 'axis',
 					axisPointer: {
 						type: 'cross',
@@ -866,6 +869,9 @@ const StackAreaChart: React.FC<any> = ({ sxProps, isXs }) => {
 							backgroundColor: '#6a7985',
 						},
 					},
+					// textStyle: {
+					// 	fontSize: 10,
+					// }
 				},
 				grid: {
 					left: isXs ? '2%' : 0,

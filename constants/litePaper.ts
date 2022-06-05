@@ -1,4 +1,5 @@
 export const TITLE = 'assets/litePaper-title.png';
+export const TITLE_MOBILE = 'assets/litePaper-title-mobile.png';
 export const BANNER = 'assets/litePaper-banner.png';
 export const TOKEN = {
 	POSTER: 'assets/home-app.png',
@@ -131,7 +132,7 @@ export const APP = {
 			subtitle0: 'Coming soon',
 			subtitle: 'Download for',
 			title: 'Wearable',
-			icon: 'assets/logo/watch.png',
+			icon: 'assets/logo/watch.svg',
 			href: '',
 		},
 	],
