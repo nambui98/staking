@@ -60,8 +60,8 @@ const Banner: React.FC<any> = ({ isXs }) => (
 			}}
 		/>
 		<Stack alignItems="center" sx={{ position: 'relative', px: '10%' }}>
-			{/* <img src={TITLE} width={isXs ? '100%' : 'auto'}/> */}
-			<img src={isXs ? TITLE_MOBILE : TITLE} width={'auto'}/>
+			<img src={TITLE} width={isXs ? '100%' : 'auto'}/>
+			{/* <img src={isXs ? TITLE_MOBILE : TITLE} width={'auto'}/> */}
 		</Stack>
 	</Stack>
 );
@@ -770,6 +770,24 @@ const Charity: React.FC<any> = ({ sxProps }) => (
 );
 
 const PieChart: React.FC<any> = ({ sxProps, isXs }) => {
+	let seriesLabel: any = {
+		show: !isXs,
+		// position: 'center',
+		alignTo: isXs ? 'center' : 'edge',
+		formatter: '{b} {d}%',
+		// formatter: '{name|{b}}\n{time|{c}%}',
+		minMargin: 5,
+		edgeDistance: 5,
+		textStyle: {
+			fontSize: isXs ? 10 : 16,
+			fontFamily: 'BeVietnamPro',
+			color: '#5A6178',
+		},
+	};
+	// if (isXs) seriesLabel.position = 'center';
+	// else seriesLabel.alignTo = 'edge';
+	// if (!isXs) seriesLabel.alignTo = 'edge';
+
 	return (
 		<ReactEcharts
 			style={{ height: '500px', width: '100%' }}
@@ -780,6 +798,7 @@ const PieChart: React.FC<any> = ({ sxProps, isXs }) => {
 				// 	x: "center"
 				// },
 				tooltip: {
+					// show: !isXs,
 					trigger: 'item',
 					// formatter: "{a} <br/>{b} : {c} ({d}%)",
 					formatter: '{b} {d}%',
@@ -804,20 +823,7 @@ const PieChart: React.FC<any> = ({ sxProps, isXs }) => {
 						data: THE_TOKEN.DISTRIBUTION.PIE.data,
 						avoidLabelOverlap: true,
 						bottom: '25%',
-						label: {
-							show: !isXs,
-							// position: 'center',
-							alignTo: isXs ? 'center' : 'edge',
-							formatter: '{b} {d}%',
-							// formatter: '{name|{b}}\n{time|{c}%}',
-							minMargin: 5,
-							edgeDistance: 5,
-							textStyle: {
-								fontSize: isXs ? 14 : 16,
-								fontFamily: 'BeVietnamPro',
-								color: '#5A6178',
-							},
-						},
+						label: seriesLabel,
 						labelLine: {
 							length: 5,
 							length2: 0,

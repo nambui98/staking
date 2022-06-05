@@ -1,4 +1,4 @@
-export const LOGO = 'assets/logo/logo-white-text-white.png';
+export const LOGO = 'assets/logo/logo-white-text-white.svg';
 export const BG1 = 'assets/backgrounds/footer-1.png';
 export const BG2 = 'assets/backgrounds/footer-2.png';
 export const EMAIL = 'team@befitter.io';
