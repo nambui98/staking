@@ -31,6 +31,7 @@ import MainLayout from '../components/layouts/MainLayout';
 import { IMG, QUESTIONS } from '../constants/event';
 import { IconImage } from '../components/styled';
 import StayInTouch from '../components/sections/StayInTouch';
+import { END_DATE_EVENT } from '../constants/common';
 
 const RECAPTCHA_SITE_KEY = "6LfVxzAgAAAAAEFPNTeG6d8xqKifrYhwVZ4VAKtd";
 
@@ -131,7 +132,7 @@ const Countdown: React.FC<any> = ({ sxProps, endDate }) => {
 				clearInterval(counter);
 			} else {
 				let days = Math.floor(distance / _day);
-				let hrs = Math.floor((distance % _day) / _hour);
+				let hrs = Math.floor((distance % _day) / _hour) + 8;
 				let mins = Math.floor((distance % _hour) / _minute);
 				let secs = Math.floor((distance % _minute) / _second);
 				setDayText(days < 0 ? '' : days < 10 ? `0${days}` : `${days}`);
@@ -529,7 +530,7 @@ const EventDetail: NextPage = () => {
 				<Container sx={{ position: 'relative' }}>
 					<Stack alignItems={{ xs: 'center', md: 'start' }}>
 						<EventName sxProps={{ mb: { xs: -10, sm: 0, md: 5 } }} />
-						<Countdown sxProps={{ mb: 5 }} endDate={'2022-06-06'} />
+						<Countdown sxProps={{ mb: 5 }} endDate={END_DATE_EVENT} />
 						<Form sxProps={{ mb: 5 }} />
 						<Questions sxProps={{ mb: 10 }} />
 					</Stack>
