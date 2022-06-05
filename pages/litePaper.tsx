@@ -770,24 +770,6 @@ const Charity: React.FC<any> = ({ sxProps }) => (
 );
 
 const PieChart: React.FC<any> = ({ sxProps, isXs }) => {
-	let seriesLabel: any = {
-		show: !isXs,
-		// position: 'center',
-		alignTo: isXs ? 'center' : 'edge',
-		formatter: '{b} {d}%',
-		// formatter: '{name|{b}}\n{time|{c}%}',
-		minMargin: 5,
-		edgeDistance: 5,
-		textStyle: {
-			fontSize: isXs ? 10 : 16,
-			fontFamily: 'BeVietnamPro',
-			color: '#5A6178',
-		},
-	};
-	// if (isXs) seriesLabel.position = 'center';
-	// else seriesLabel.alignTo = 'edge';
-	// if (!isXs) seriesLabel.alignTo = 'edge';
-
 	return (
 		<ReactEcharts
 			style={{ height: '500px', width: '100%' }}
@@ -798,12 +780,12 @@ const PieChart: React.FC<any> = ({ sxProps, isXs }) => {
 				// 	x: "center"
 				// },
 				tooltip: {
-					// show: !isXs,
+					show: isXs,
 					trigger: 'item',
 					// formatter: "{a} <br/>{b} : {c} ({d}%)",
 					formatter: '{b} {d}%',
 					textStyle: {
-						fontSize: 14,
+						fontSize: isXs ? 10 : 14,
 						fontFamily: 'BeVietnamPro',
 					},
 				},
@@ -823,7 +805,20 @@ const PieChart: React.FC<any> = ({ sxProps, isXs }) => {
 						data: THE_TOKEN.DISTRIBUTION.PIE.data,
 						avoidLabelOverlap: true,
 						bottom: '25%',
-						label: seriesLabel,
+						label: {
+							show: !isXs,
+							position: 'outside',
+							alignTo: 'none',
+							formatter: '{b} {d}%',
+							// formatter: '{name|{b}}\n{time|{c}%}',
+							minMargin: 5,
+							edgeDistance: 5,
+							textStyle: {
+								fontSize: isXs ? 10 : 16,
+								fontFamily: 'BeVietnamPro',
+								color: '#5A6178',
+							},
+						},
 						labelLine: {
 							length: 5,
 							length2: 0,
@@ -837,7 +832,7 @@ const PieChart: React.FC<any> = ({ sxProps, isXs }) => {
 							borderWidth: 1,
 							emphasis: {
 								label: {
-									show: true,
+									show: false,
 									fontSize: 18,
 									fontWeight: 600,
 									fontFamily: 'BeVietnamPro',
