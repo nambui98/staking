@@ -1,4 +1,4 @@
-export const LOGO = 'assets/logo/logo-text-black.png';
+export const LOGO = 'assets/logo/logo-text-black.svg';
 
 export const HOME_LOGO = 'assets/logo/logo-text-white.png';
 

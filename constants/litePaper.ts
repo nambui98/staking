@@ -1,4 +1,4 @@
-export const TITLE = 'assets/litePaper-title.png';
+export const TITLE = 'assets/litePaper-title.svg';
 export const TITLE_MOBILE = 'assets/litePaper-title-mobile.png';
 export const BANNER = 'assets/litePaper-banner.png';
 export const TOKEN = {
@@ -111,7 +111,7 @@ export const MISSION = {
 };
 export const APP = {
 	POSTER: 'assets/litePaper-app.png',
-	TITLE: 'assets/litePaper-app-title.png',
+	TITLE: 'assets/litePaper-app-title.svg',
 	BG: 'assets/backgrounds/litePaper-app.png',
 	BUTTON: [
 		{
