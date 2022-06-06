@@ -1,6 +1,5 @@
-export const END_DATE_EVENT = '2022-06-07'; // 00:00:00
-// export const END_DATE_EVENT_EXTRA_HOURS = 0;
-export const END_DATE_EVENT_EXTRA_HOURS = 14;
+export const END_DATE_EVENT = '2022-06-07T14:00:00';
+export const END_DATE_EVENT_EXTRA_HOURS = 0;
 
 export const SECTION_TITLE_BG = 'assets/backgrounds/section-title.png';
 
