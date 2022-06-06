@@ -60,7 +60,7 @@ export const APP = {
 			subtitle0: 'Coming soon',
 			subtitle: 'Download for',
 			title: 'Wearable',
-			icon: 'assets/logo/watch.png',
+			icon: 'assets/logo/watch.svg',
 			href: '',
 		},
 	],

@@ -16,12 +16,12 @@ const CountdownClock: React.FC<any> = ({ endDate = END_DATE_EVENT }) => {
 
 	React.useEffect(() => {
 		const counter = setInterval(() => {
-			const distance = end - Date.now();
+			const distance = end - Date.now() + 8 * _hour;
 			if (distance < 0) {
 				clearInterval(counter);
 			} else {
 				let days = Math.floor(distance / _day);
-				let hrs = Math.floor((distance % _day) / _hour) + 8;
+				let hrs = Math.floor((distance % _day) / _hour);
 				let mins = Math.floor((distance % _hour) / _minute);
 				let secs = Math.floor((distance % _minute) / _second);
 				setDayText(days < 0 ? '' : days < 10 ? `0${days}` : `${days}`);
