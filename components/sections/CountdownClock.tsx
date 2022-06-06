@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack, Typography } from '@mui/material';
-import { END_DATE_EVENT } from '../../constants/common';
+import { END_DATE_EVENT, END_DATE_EVENT_EXTRA_HOURS } from '../../constants/common';
 
 const CountdownClock: React.FC<any> = ({ endDate = END_DATE_EVENT }) => {
 	const end = Date.parse(endDate);
@@ -9,16 +9,20 @@ const CountdownClock: React.FC<any> = ({ endDate = END_DATE_EVENT }) => {
 	const _hour = _minute * 60;
 	const _day = _hour * 24;
 
-	const [dayText, setDayText] = React.useState('');
-	const [hrText, setHrText] = React.useState('');
-	const [minText, setMinText] = React.useState('');
-	const [secText, setSecText] = React.useState('');
+	const [dayText, setDayText] = React.useState('00');
+	const [hrText, setHrText] = React.useState('00');
+	const [minText, setMinText] = React.useState('00');
+	const [secText, setSecText] = React.useState('00');
 
 	React.useEffect(() => {
 		const counter = setInterval(() => {
-			const distance = end - Date.now() + 8 * _hour;
+			const distance = end - Date.now() + END_DATE_EVENT_EXTRA_HOURS * _hour;
 			if (distance < 0) {
 				clearInterval(counter);
+				setDayText('00');
+				setHrText('00');
+				setMinText('00');
+				setSecText('00');
 			} else {
 				let days = Math.floor(distance / _day);
 				let hrs = Math.floor((distance % _day) / _hour);
