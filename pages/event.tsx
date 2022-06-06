@@ -31,7 +31,7 @@ import MainLayout from '../components/layouts/MainLayout';
 import { IMG, QUESTIONS } from '../constants/event';
 import { IconImage } from '../components/styled';
 import StayInTouch from '../components/sections/StayInTouch';
-import { END_DATE_EVENT } from '../constants/common';
+import { END_DATE_EVENT, END_DATE_EVENT_EXTRA_HOURS } from '../constants/common';
 
 const RECAPTCHA_SITE_KEY = "6LfVxzAgAAAAAEFPNTeG6d8xqKifrYhwVZ4VAKtd";
 
@@ -120,17 +120,20 @@ const Countdown: React.FC<any> = ({ sxProps, endDate }) => {
 	const _hour = _minute * 60;
 	const _day = _hour * 24;
 
-	const [dayText, setDayText] = useState('');
-	const [hrText, setHrText] = useState('');
-	const [minText, setMinText] = useState('');
-	const [secText, setSecText] = useState('');
+	const [dayText, setDayText] = React.useState('00');
+	const [hrText, setHrText] = React.useState('00');
+	const [minText, setMinText] = React.useState('00');
+	const [secText, setSecText] = React.useState('00');
 
 	useEffect(() => {
 		const counter = setInterval(() => {
-			const distance = end - Date.now() + 8 * _hour;
-			// const distance = end - Date.now();
+			const distance = end - Date.now() + END_DATE_EVENT_EXTRA_HOURS * _hour;
 			if (distance < 0) {
 				clearInterval(counter);
+				setDayText('00');
+				setHrText('00');
+				setMinText('00');
+				setSecText('00');
 			} else {
 				let days = Math.floor(distance / _day);
 				let hrs = Math.floor((distance % _day) / _hour);
@@ -346,7 +349,7 @@ const Form: React.FC<any> = ({ sxProps }) => {
 			</Backdrop>
 			<Typography fontSize={{ xs: 14, md: 18 }} color="#31373E">
 				Fill in your information to join the first{' '}
-				<span style={{ color: '#FF6D24' }}>10,000 people</span> that
+				<span style={{ color: '#FF6D24' }}>30,000 people</span> that
 				{!isTablet && <br />}
 				receive free rare items
 			</Typography>
