@@ -51,7 +51,7 @@ export const SOCIAL = [
 ];
 
 export const FOUNDED = {
-	TITLE: 'FOUNDED',
+	TITLE: 'INCUBATED', 
 	SUBTITLE: 'BY',
 	BG: 'assets/backgrounds/home-founded.png',
 	ICETEA: 'assets/logo/icetea.png',
