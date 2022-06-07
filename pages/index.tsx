@@ -159,7 +159,10 @@ const BannerEvent: React.FC<any> = () => {
 						pr: 12,
 					}}
 				>
-					<img src={BANNER.IMAGE} width={'70%'} height={'auto'} />
+					<Box>
+						<img src={BANNER.IMAGECUP} width={'25%'} height={'auto'} style={{zIndex: 2, position: 'relative'}} />
+						<img src={BANNER.IMAGE} width={'70%'} height={'auto'} style={{marginLeft: "-20px"}} />
+					</Box>
 					<Stack
 						direction="row"
 						spacing={1.5}
@@ -301,11 +304,19 @@ const MobileBannerEvent: React.FC<any> = () => {
 						backdropFilter: 'blur(40px)',
 					}}
 				>
-					<img
-						src={BANNER.IMAGE}
-						width={isMobile ? 300 : 350}
-						height={'auto'}
-					/>
+					<Box sx={{
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center'
+					}}>
+						<img src={BANNER.IMAGECUP} width={isMobile ? '90px' : '150px'} height={'auto'} style={{zIndex: 2, position: 'relative'}} />
+						<img
+							src={BANNER.IMAGE}
+							width={isMobile ? 250 : 350}
+							height={'auto'}
+							style={{marginLeft: isMobile ? "-15px" : "-20px"}}
+						/>
+					</Box>					
 					<Box
 						sx={{
 							position: 'absolute',

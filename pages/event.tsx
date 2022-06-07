@@ -158,7 +158,7 @@ const Countdown: React.FC<any> = ({ sxProps, endDate }) => {
 					textAlign: { xs: 'center', md: 'left' },
 				}}
 			>
-				Begins in
+				Challenge ends in
 			</Typography>
 			<Stack direction="row" spacing={{ xs: 0.75, md: 1.5 }} mt={1.5}>
 				{[
