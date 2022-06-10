@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Box, Checkbox, Container, FormControlLabel, FormGroup, Stack, Typography } from "@mui/material"
+import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup, Stack, Typography } from "@mui/material"
 import { useState } from "react";
 import { FILTER } from "../../../constants/marketplace";
 
@@ -12,25 +12,25 @@ const Filter = () => {
   return (
     <Stack sx={filterBox}>
       <Stack sx={categoryBox}>
-        <Box sx={[categoryItem, categoryActiveItem === 'all' ? categoryActive : {}]} onClick={() => handleFilterCategory('all')}>
+        <Button variant="outlined" sx={[categoryItem, categoryActiveItem === 'all' ? categoryActive : {}]} onClick={() => handleFilterCategory('all')} >
           <Typography sx={[categoryTitle, { marginLeft: 0 }]}>All Item</Typography>
-        </Box>
-        <Box sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.daily.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.daily.title)}>
-          <img src={FILTER.CATEGORY.daily.image} /> <Typography sx={[categoryTitle]}>{FILTER.CATEGORY.daily.title}</Typography>
-        </Box>
-        <Box sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.fitness.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.fitness.title)}>
-          <img src={FILTER.CATEGORY.fitness.image} /> <Typography sx={[categoryTitle]}>{FILTER.CATEGORY.fitness.title}</Typography>
-        </Box>
-        <Box sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.racer.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.racer.title)}>
-          <img src={FILTER.CATEGORY.racer.image} /> <Typography sx={[categoryTitle]}>{FILTER.CATEGORY.racer.title}</Typography>
-        </Box>
+        </Button>
+        <Button variant="outlined" startIcon={<img src={FILTER.CATEGORY.daily.image} />} sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.daily.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.daily.title)}>
+          <Typography sx={[categoryTitle]}>{FILTER.CATEGORY.daily.title}</Typography>
+        </Button>
+        <Button variant="outlined" startIcon={<img src={FILTER.CATEGORY.fitness.image} />} sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.fitness.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.fitness.title)}>
+          <Typography sx={[categoryTitle]}>{FILTER.CATEGORY.fitness.title}</Typography>
+        </Button>
+        <Button variant="outlined" startIcon={<img src={FILTER.CATEGORY.racer.image} />} sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.racer.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.racer.title)}>
+          <Typography sx={[categoryTitle]}>{FILTER.CATEGORY.racer.title}</Typography>
+        </Button>
       </Stack>
       <Stack sx={rarityBox}>
         <Typography sx={rarityTitle}>Rarity</Typography>
         <FormGroup>
-          <FormControlLabel sx={rarityItem} control={<Checkbox icon={<BpIcon/>} checkedIcon={<BpCheckedIcon/>} sx={filterCheckbox} defaultChecked />} label={FILTER.RARITY.CLASSIC} />
-          <FormControlLabel sx={rarityItem} control={<Checkbox icon={<BpIcon/>} checkedIcon={<BpCheckedIcon/>} sx={filterCheckbox} defaultChecked />} label={FILTER.RARITY.RARE} />
-          <FormControlLabel sx={rarityItem} control={<Checkbox icon={<BpIcon/>} checkedIcon={<BpCheckedIcon/>} sx={filterCheckbox} defaultChecked />} label={FILTER.RARITY.ICONIC} />
+          <FormControlLabel sx={rarityItem} control={<Checkbox icon={<BpIcon />} checkedIcon={<BpCheckedIcon />} sx={filterCheckbox} defaultChecked />} label={FILTER.RARITY.CLASSIC} />
+          <FormControlLabel sx={rarityItem} control={<Checkbox icon={<BpIcon />} checkedIcon={<BpCheckedIcon />} sx={filterCheckbox} defaultChecked />} label={FILTER.RARITY.RARE} />
+          <FormControlLabel sx={rarityItem} control={<Checkbox icon={<BpIcon />} checkedIcon={<BpCheckedIcon />} sx={filterCheckbox} defaultChecked />} label={FILTER.RARITY.ICONIC} />
         </FormGroup>
       </Stack>
     </Stack>
@@ -83,14 +83,20 @@ const filterCheckbox = {
 }
 
 const categoryItem = {
-  display: 'flex',
   alignItems: 'center',
+  justifyContent: 'flex-start',
   marginBottom: '8px',
   padding: '6px 15px',
   border: '1px solid #FFE2D3',
   borderRadius: '16px',
   cursor: 'pointer',
   minHeight: '56px',
+  "&:hover": {
+    background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%);',
+    '& p': {
+      color: '#ffffff'
+    }
+  }
 }
 
 const categoryTitle = {
@@ -99,7 +105,7 @@ const categoryTitle = {
   fontSize: '16px',
   fontStyle: 'italic',
   fontFamily: 'Electrofied',
-  marginLeft: '16px',
+  marginLeft: '4px',
   fontWeight: 'bold'
 }
 

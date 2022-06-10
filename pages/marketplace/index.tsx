@@ -1,11 +1,16 @@
 import { Box, Container, Stack } from "@mui/material";
 import type { NextPage } from "next";
+import { useState } from "react";
 import MainLayout from '../../components/layouts/MainLayout';
 import { Banner } from "./container/Banner";
 import Filter from "./container/Filter";
-import ListItem from "./container/ListItem";
+import ListProduct from "./container/ListProduct";
+import { ProductDetail } from "./container/ProductDetail";
 
 const Marketplace: NextPage = () => {
+  const [productDetailActive, setProductDetailActive] = useState<boolean>(false);
+  const [currentProductDetail, setCurrentProductDetail] = useState<any>();
+
   return (
     <MainLayout sxProps={{backgroundColor: "#FFFFFF"}}>
       <Banner />
@@ -13,7 +18,8 @@ const Marketplace: NextPage = () => {
         <Container disableGutters sx={container}>
           <Stack sx={body}>
             <Filter/>
-            <ListItem/>
+            <ListProduct handleSetProductDetail={setCurrentProductDetail} handleToggleDrawer={setProductDetailActive} />
+            <ProductDetail dataProduct={{}} drawerStatus={productDetailActive} handleToggleDrawer={setProductDetailActive} />
           </Stack>
         </Container>
       </Box>
