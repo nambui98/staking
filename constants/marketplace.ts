@@ -43,5 +43,10 @@ export const PRODUCT_DETAIL_ICON = {
   CLOSE: 'assets/icons/close-circle.svg',
   METAMASK: 'assets/icons/metamask.svg',
   BNBCOINYELLOW: 'assets/icons/bnbCoinYellow.svg',
-  BNBCOINGRAY: 'assets/icons/bnbCoinGray.svg'
+  BNBCOINGRAY: 'assets/icons/bnbCoinGray.svg',
+  TICK: 'assets/icons/tick-circle.svg',
+}
+
+export const BACKGROUND = {
+  SUCCESS: 'assets/backgrounds/union.png'
 }

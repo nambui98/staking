@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material"
+import { Box, Stack, styled, Typography } from "@mui/material"
 import { MarketplaceButton } from "../../../components/buttons/MarketplaceButton"
 import { Popup } from "../../../components/popup"
 import { PRODUCT_DETAIL_ICON } from "../../../constants/marketplace"
@@ -28,6 +28,7 @@ export const Checkout: React.FC<IProps> = ({ status, handleToggleStatus }) => {
               <Typography sx={infoPriceItem}><img src={PRODUCT_DETAIL_ICON.BNBCOINYELLOW} />0.01</Typography>
               <Typography sx={convertDollar}>0.00$</Typography>
             </Stack>
+            <ErrorMessage>You need to approve more token to complete this transaction</ErrorMessage>
           </Stack>
         </Stack>
       </Stack>
@@ -99,3 +100,9 @@ const convertDollar = {
   width: '100%',
   textAlign: 'right'
 }
+const ErrorMessage = styled(Typography)({
+  color: '#FB2F2F',
+  fontSize: '14px',
+  fontWeight: '400',
+  marginTop: 'auto'
+})

@@ -1,87 +1,82 @@
 import styled from "@emotion/styled";
-import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup, Stack, Typography } from "@mui/material"
+import { Box, Button, Checkbox, Container, FormControl, FormControlLabel, FormGroup, MenuItem, Select, SelectChangeEvent, Stack, Typography } from "@mui/material"
 import { useState } from "react";
 import { CheckboxMarketplace } from "../../checkbox/CheckboxMarketplace";
 import { FILTER } from "../../../constants/marketplace";
+import { useMediaQuery } from "react-responsive";
 
-const Filter = () => {
+export const Filter = () => {
   const [categoryActiveItem, setCategoryActiveItem] = useState<string>();
+  const [rarityValue, setRarityValue] = useState<any>();
+  const isMobile = useMediaQuery({ maxWidth: 767 })
 
   const handleFilterCategory = (category: string) => {
     setCategoryActiveItem(category)
   }
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setRarityValue(event.target.value as string);
+  };
+
+  const listRarityMobile = (
+    <FormControl fullWidth>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={rarityValue}
+        label="Age"
+        onChange={handleChange}
+      >
+        <MenuItem value={10}><CheckboxMarketplace label={FILTER.RARITY.CLASSIC} /></MenuItem>
+        <MenuItem value={20}><CheckboxMarketplace label={FILTER.RARITY.RARE} /></MenuItem>
+        <MenuItem value={30}><CheckboxMarketplace label={FILTER.RARITY.ICONIC} /></MenuItem>
+      </Select>
+    </FormControl>
+  )
   return (
-    <Stack sx={filterBox}>
-      <Stack sx={categoryBox}>
+    <FilterBox>
+      <CategoryBox>
         <Button variant="outlined" sx={[categoryItem, categoryActiveItem === 'all' ? categoryActive : {}]} onClick={() => handleFilterCategory('all')} >
           <Typography sx={[categoryTitle, { marginLeft: 0 }]}>All Item</Typography>
         </Button>
-        <Button variant="outlined" startIcon={<img src={FILTER.CATEGORY.daily.image} />} sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.daily.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.daily.title)}>
+        <Button variant="outlined" startIcon={isMobile ? false : <img src={FILTER.CATEGORY.daily.image} />} sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.daily.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.daily.title)}>
           <Typography sx={[categoryTitle]}>{FILTER.CATEGORY.daily.title}</Typography>
         </Button>
-        <Button variant="outlined" startIcon={<img src={FILTER.CATEGORY.fitness.image} />} sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.fitness.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.fitness.title)}>
+        <Button variant="outlined" startIcon={isMobile ? false : <img src={FILTER.CATEGORY.fitness.image} />} sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.fitness.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.fitness.title)}>
           <Typography sx={[categoryTitle]}>{FILTER.CATEGORY.fitness.title}</Typography>
         </Button>
-        <Button variant="outlined" startIcon={<img src={FILTER.CATEGORY.racer.image} />} sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.racer.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.racer.title)}>
+        <Button variant="outlined" startIcon={isMobile ? false : <img src={FILTER.CATEGORY.racer.image} />} sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.racer.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.racer.title)}>
           <Typography sx={[categoryTitle]}>{FILTER.CATEGORY.racer.title}</Typography>
         </Button>
-      </Stack>
-      <Stack sx={rarityBox}>
-        <Typography sx={rarityTitle}>Rarity</Typography>
-        <FormGroup>
-          <CheckboxMarketplace label={FILTER.RARITY.CLASSIC} />
-          <CheckboxMarketplace label={FILTER.RARITY.RARE} />
-          <CheckboxMarketplace label={FILTER.RARITY.ICONIC} />
-        </FormGroup>
-      </Stack>
-    </Stack>
+      </CategoryBox>
+      <RarityBox>
+        {isMobile ? listRarityMobile : (
+          <Box>
+            <Typography sx={rarityTitle}>Rarity</Typography>
+            <FormGroup>
+              <CheckboxMarketplace label={FILTER.RARITY.CLASSIC} />
+              <CheckboxMarketplace label={FILTER.RARITY.RARE} />
+              <CheckboxMarketplace label={FILTER.RARITY.ICONIC} />
+            </FormGroup>
+          </Box>
+        )}
+      </RarityBox>
+    </FilterBox>
   )
 }
 
-export default Filter;
-
-const BpIcon = styled('span')(({ theme }: any) => ({
-  borderRadius: "7px",
-  width: '20px',
-  height: '20px',
-  boxShadow: 'inset 0 0 0 2px #5A6178, inset 0 -2px 0 #5A6178',
-  '.Mui-focusVisible &': {
-    outlineOffset: 2,
-  },
-  'input:disabled ~ &': {
-    boxShadow: 'none',
-    background: '#ff8a506e',
-  },
-}));
-
-const BpCheckedIcon = styled(BpIcon)({
-  backgroundColor: '#ff8a506e',
-  boxShadow: 'none',
-  backgroundImage: '#ff8a506e',
-  '&:before': {
-    display: 'block',
-    width: 14,
-    height: 14,
-    backgroundImage: 'url(/assets/icons/tick.svg)',
-    content: '""',
-    backgroundRepeat: 'no-repeat',
-    margin: 'auto',
-    marginTop: '3px',
-    backgroundPosition: 'center',
-  },
-});
-
-const filterBox = {
-  width: '256px',
-}
-
-const filterCheckbox = {
-  color: '#5A6178',
-  '&.Mui-checked': {
-    color: '#FF8A50',
-  },
-  '& .MuiSvgIcon-root': { fontSize: 22, borderRadius: 20 },
-}
+const FilterBox = styled(Stack)({
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  marginBottom: '8px',
+  '@media (min-width: 768px)': {
+    flexDirection: 'column',
+    width: '256px',
+    marginBottom: 0,
+    justifyContent: 'unset'
+  }
+})
 
 const categoryItem = {
   alignItems: 'center',
@@ -97,6 +92,9 @@ const categoryItem = {
     '& p': {
       color: '#ffffff'
     }
+  },
+  '@media (max-width: 767px)': {
+    marginRight: '8px'
   }
 }
 
@@ -117,15 +115,23 @@ const categoryActive = {
   }
 }
 
-const categoryBox = {
-  marginBottom: '16px'
-}
-
-const rarityBox = {
+const CategoryBox = styled(Stack)({
+  display: 'flex',
+  flexDirection: 'row',
+  '@media (min-width: 768px)': {
+    flexDirection: 'column',
+    marginBottom: '16px',
+    width: '100%'
+  }
+})
+const RarityBox = styled(Stack)({
   padding: '16px',
   borderRadius: '16px',
-  border: '1px solid #E9EAEF'
-}
+  border: '1px solid #E9EAEF',
+  '@media (min-width: 768px)': {
+    width: '100%'
+  }
+})
 const rarityTitle = {
   color: '#31373E',
   fontSize: '16px',

@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material"
+import { Box, Stack, styled, Typography, TypographyProps } from "@mui/material"
 import { useState } from "react"
 
 const data = {
@@ -6,7 +6,7 @@ const data = {
   title: '#Daily12420',
   price: '4620',
   category: 'Daily',
-  tag: 'Adidas'
+  tag: 'A'
 }
 
 interface IProps {
@@ -18,15 +18,15 @@ const ListProduct: React.FC<IProps> = ({handleToggleDrawer, handleSetProductDeta
   return (
     <Stack sx={listItemBox}>
       {Array.apply(null, Array(10))?.map((item: any, index: number) => (
-        <Stack sx={shoesItem} key={index} onClick={() => handleToggleDrawer(true)}>
+        <ShoesItem key={index} onClick={() => handleToggleDrawer(true)}>
           <Stack sx={boxImage}>
-            <Typography sx={tag}>{data.tag}</Typography>
-            <Typography sx={type}>{data.category}</Typography>
+            <Tag background="linear-gradient(268.2deg, #EC0CB7 0%, #C740D1 100%)">{data.tag}</Tag>
+            <Type>{data.category}</Type>
             <img src={data.image} />
           </Stack>
           <Typography sx={titleItem}>{data.title}</Typography>
           <Box sx={{ display: 'flex', alignItems: 'center' }}><img src={'assets/logo/bnbCoin.svg'} /><Typography sx={priceItem}>{data.price}</Typography></Box>
-        </Stack>
+        </ShoesItem>
       ))}
     </Stack>
   )
@@ -37,21 +37,25 @@ export default ListProduct;
 const listItemBox = {
   flexWrap: 'wrap',
   justifyContent: 'space-between',
-  width: 'calc(100% - 256px - 32px)',
+  width: '100%',
   flexDirection: 'row',
+  '@media (min-width: 768px)': {
+    width: 'calc(100% - 256px - 32px)',
+  }
 }
-const shoesItem = {
+const ShoesItem = styled(Stack)({
   cursor: 'pointer',
   transition: '.4s',
   borderRadius: '12px',
+  width: 'calc(50% - 16px)',
+  '@media (min-width: 1024px)': {
+    width: 'calc(25% - 16px)'
+  },
   '@media(min-width: 1280px)': {
     width: 'calc(20% - 16px)',
     marginBottom: '32px'
   },
-  '&:hover': {
-    boxShadow: 'rgb(0 0 0 / 16%) 0px 2px 24px',
-  }
-}
+})
 const boxImage = {
   position: 'relative',
   padding: '24px 20px',
@@ -63,17 +67,21 @@ const boxImage = {
     width: '100%'
   },
 }
-const tag = {
-  position: 'absolute',
-  top: '7px',
-  right: '7px',
-  padding: '4px 12px',
-  borderRadius: '16px',
-  background: '#31373E',
-  fontSize: '14px',
-  color: '#ffffff'
+type TagProp = TypographyProps & {
+  background: string
 }
-const type = {
+const Tag = styled(Typography)((props: TagProp) => ({
+  position: 'absolute',
+  bottom: '0',
+  right: '0',
+  background: props.background,
+  fontSize: '14px',
+  color: '#ffffff',
+  textDecoration: 'underline',
+  padding: '4px 11px',
+  borderRadius: '12px 0px'
+}))
+const Type = styled(Typography)({
   position: 'absolute',
   bottom: 0,
   left: 0,
@@ -81,7 +89,7 @@ const type = {
   borderRadius: '0px 12px 0px 11px',
   background: '#55C8FC',
   color: '#ffffff'
-}
+})
 const titleItem = {
   margin: '16px 0',
   color: "#31373E",

@@ -1,4 +1,4 @@
-import { Box, Container, Stack } from "@mui/material";
+import { Box, Container, Stack, styled, Typography } from "@mui/material";
 import type { NextPage } from "next";
 import { useState } from "react";
 import MainLayout from '../../components/layouts/MainLayout';
@@ -6,8 +6,10 @@ import { ApproveToken } from "../../components/pageComponent/marketplace/Approve
 import { Banner } from "../../components/pageComponent/marketplace/Banner";
 import { Checkout } from "../../components/pageComponent/marketplace/Checkout";
 import { ConnectWallet } from "../../components/pageComponent/marketplace/ConnectWallet";
-import Filter from "../../components/pageComponent/marketplace/Filter";
+import {Filter} from "../../components/pageComponent/marketplace/Filter";
 import ListProduct from "../../components/pageComponent/marketplace/ListProduct";
+import { PaymentSuccess } from "../../components/pageComponent/marketplace/PaymentSuccess";
+import { PopupMessage } from "../../components/pageComponent/marketplace/PopupMessage";
 import { ProductDetail } from "../../components/pageComponent/marketplace/ProductDetail";
 
 const Marketplace: NextPage = () => {
@@ -16,23 +18,24 @@ const Marketplace: NextPage = () => {
   const [popupConnectWallet, setPopupConnectWallet] = useState<boolean>(false);
   const [popupCheckout, setpopupCheckout] = useState<boolean>(false);
   const [popupApproveToken, setpopupApproveToken] = useState<boolean>(false)
-
+  const [popupPaymentSuccess, setPopupPaymentSuccess] = useState<boolean>(false)
 
   return (
     <MainLayout sxProps={{backgroundColor: "#FFFFFF"}}>
       <Banner />
       <Box sx={{margin: '0 24px'}}>
         <Container disableGutters sx={container}>
-          <Stack sx={body}>
+          <Body>
             <Filter/>
             <ListProduct handleSetProductDetail={setCurrentProductDetail} handleToggleDrawer={setProductDetailActive} />
             <ProductDetail dataProduct={{}} drawerStatus={productDetailActive} handleToggleDrawer={setProductDetailActive} />
-          </Stack>
+          </Body>
         </Container>
       </Box>
       <ConnectWallet status={popupConnectWallet} handleToggleStatus={setPopupConnectWallet} />
       <Checkout status={popupCheckout} handleToggleStatus={setpopupCheckout} />
       <ApproveToken status={popupApproveToken} handleToggleStatus={setpopupApproveToken} />
+      <PaymentSuccess status={popupPaymentSuccess} handleToggleStatus={setPopupPaymentSuccess} />
     </MainLayout>
   )
 }
@@ -44,8 +47,10 @@ const container = {
   marginTop: '25px'
 } 
 
-const body = {
+const Body = styled(Stack)({
   justifyContent: 'space-between',
-  flexDirection: 'row',
-  color: '#31373E'
-}
+  color: '#31373E',
+  '@media (min-width: 768px)': {
+    flexDirection: 'row',
+  }
+})
