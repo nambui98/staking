@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup, Stack, Typography } from "@mui/material"
 import { useState } from "react";
+import { CheckboxMarketplace } from "../../../components/checkbox/CheckboxMarketplace";
 import { FILTER } from "../../../constants/marketplace";
 
 const Filter = () => {
@@ -28,9 +29,9 @@ const Filter = () => {
       <Stack sx={rarityBox}>
         <Typography sx={rarityTitle}>Rarity</Typography>
         <FormGroup>
-          <FormControlLabel sx={rarityItem} control={<Checkbox icon={<BpIcon />} checkedIcon={<BpCheckedIcon />} sx={filterCheckbox} defaultChecked />} label={FILTER.RARITY.CLASSIC} />
-          <FormControlLabel sx={rarityItem} control={<Checkbox icon={<BpIcon />} checkedIcon={<BpCheckedIcon />} sx={filterCheckbox} defaultChecked />} label={FILTER.RARITY.RARE} />
-          <FormControlLabel sx={rarityItem} control={<Checkbox icon={<BpIcon />} checkedIcon={<BpCheckedIcon />} sx={filterCheckbox} defaultChecked />} label={FILTER.RARITY.ICONIC} />
+          <CheckboxMarketplace label={FILTER.RARITY.CLASSIC} />
+          <CheckboxMarketplace label={FILTER.RARITY.RARE} />
+          <CheckboxMarketplace label={FILTER.RARITY.ICONIC} />
         </FormGroup>
       </Stack>
     </Stack>
