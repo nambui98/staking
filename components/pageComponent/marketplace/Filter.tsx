@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup, Stack, Typography } from "@mui/material"
 import { useState } from "react";
-import { CheckboxMarketplace } from "../../../components/checkbox/CheckboxMarketplace";
+import { CheckboxMarketplace } from "../../checkbox/CheckboxMarketplace";
 import { FILTER } from "../../../constants/marketplace";
 
 const Filter = () => {

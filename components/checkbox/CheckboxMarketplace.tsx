@@ -4,14 +4,20 @@ import { FILTER } from "../../constants/marketplace";
 
 interface IProps {
   label: string
-  type?: 'block'
+  type?: 'blue' | 'green'
 }
 
-export const CheckboxMarketplace: React.FC<IProps> = ({label}) => {
+export const CheckboxMarketplace: React.FC<IProps> = ({label, type}) => {
+  const greenStyle = {
+    backgroundColor: '#4FD19066',
+    '&:before': {
+      backgroundImage: 'url(assets/icons/tickGreen.svg)'
+    }
+  }
   return (
     <FormGroup>
       <CheckboxMarket 
-        control={<Checkbox icon={<BpIcon />} checkedIcon={<BpCheckedIcon />} sx={filterCheckbox} defaultChecked />} 
+        control={<Checkbox icon={<BpIcon />} checkedIcon={<BpCheckedIcon sx={type === 'green' ? greenStyle : {}} />} sx={filterCheckbox} defaultChecked />} 
         label={label} 
       />
     </FormGroup>
@@ -38,14 +44,14 @@ const BpIcon = styled('span')(({ theme }: any) => ({
 }));
 
 const BpCheckedIcon = styled(BpIcon)({
-  backgroundColor: '#55C8FC',
+  backgroundColor: '#55C8FC66',
   boxShadow: 'none',
   backgroundImage: '#ff8a506e',
   '&:before': {
     display: 'block',
     width: 14,
     height: 14,
-    backgroundImage: 'url(/assets/icons/tick.svg)',
+    backgroundImage: 'url(assets/icons/tickBlue.svg)',
     content: '""',
     backgroundRepeat: 'no-repeat',
     margin: 'auto',

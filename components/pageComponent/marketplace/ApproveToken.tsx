@@ -1,7 +1,8 @@
 import { Box, ButtonProps, Checkbox, FormControlLabel, FormGroup, Stack, Typography, TypographyProps } from "@mui/material"
-import { Popup } from "../../../components/popup"
+import { Popup } from "../../popup"
 import { styled } from '@mui/system';
 import { PRODUCT_DETAIL_ICON } from "../../../constants/marketplace";
+import { CheckboxMarketplace } from "../../checkbox/CheckboxMarketplace";
 
 interface IProps {
   status: boolean
@@ -27,9 +28,7 @@ export const ApproveToken: React.FC<IProps> = ({ status, handleToggleStatus }) =
             <InfoTitleItem>Increase</InfoTitleItem>
             <IncreaseBnb gray={false}><img src={PRODUCT_DETAIL_ICON.BNBCOINYELLOW} />200</IncreaseBnb>
           </Increase>
-          <FormGroup>
-            <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
-          </FormGroup>
+          <CheckboxMarketplace type="green" label="WithDraw all" />
         </Stack>
       </Wrap>
     </Popup>

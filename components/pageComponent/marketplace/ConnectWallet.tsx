@@ -1,5 +1,5 @@
 import { Box, Button, Link, Stack, Typography } from "@mui/material";
-import { Popup } from "../../../components/popup";
+import { Popup } from "../../popup";
 import { PRODUCT_DETAIL_ICON } from "../../../constants/marketplace";
 
 interface IProps {

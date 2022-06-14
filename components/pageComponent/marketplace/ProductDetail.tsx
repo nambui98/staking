@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import { alertTitleClasses, Stack, SvgIcon, Typography } from '@mui/material';
 import { useState } from 'react';
 import { PRODUCT_DETAIL_ICON } from '../../../constants/marketplace';
-import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
+import { MarketplaceButton } from '../../buttons/MarketplaceButton';
 
 interface IProps {
   drawerStatus: boolean;
