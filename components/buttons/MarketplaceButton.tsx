@@ -26,14 +26,18 @@ const ButtonMarketPlace = styled(Button)((props: ButtonMarketPlace) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: props.price ? 'space-between' : 'center',
-  padding: '14px 24px',
+  padding: '10px 16px',
   boxShadow: 'none',
   borderRadius: '12px',
   background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
   color: '#ffffff',
-  fontSize: '16px',
+  fontSize: '14px',
   fontWeight: '600',
   textTransform: 'none',
+  '@media (min-width: 768px)': {
+    fontSize: '16px',
+    padding: '14px 24px'
+  }
 }))
 const flex = {
   display: 'flex',

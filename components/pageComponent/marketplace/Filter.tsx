@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Box, Button, Checkbox, Container, FormControl, FormControlLabel, FormGroup, MenuItem, Select, SelectChangeEvent, Stack, Typography } from "@mui/material"
 import { useState } from "react";
 import { CheckboxMarketplace } from "../../checkbox/CheckboxMarketplace";
-import { FILTER } from "../../../constants/marketplace";
+import { FILTER, PRODUCT_DETAIL_ICON } from "../../../constants/marketplace";
 import { useMediaQuery } from "react-responsive";
 
 export const Filter = () => {
@@ -19,17 +19,15 @@ export const Filter = () => {
   };
 
   const listRarityMobile = (
-    <FormControl fullWidth>
+    <FormControl sx={selectRarityBox}>
       <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
         value={rarityValue}
-        label="Age"
         onChange={handleChange}
+        sx={selectRarity}
       >
-        <MenuItem value={10}><CheckboxMarketplace label={FILTER.RARITY.CLASSIC} /></MenuItem>
-        <MenuItem value={20}><CheckboxMarketplace label={FILTER.RARITY.RARE} /></MenuItem>
-        <MenuItem value={30}><CheckboxMarketplace label={FILTER.RARITY.ICONIC} /></MenuItem>
+        <MenuItem sx={checkBoxMobile} value={10}><CheckboxMarketplace label={FILTER.RARITY.CLASSIC} /></MenuItem>
+        <MenuItem sx={checkBoxMobile} value={20}><CheckboxMarketplace label={FILTER.RARITY.RARE} /></MenuItem>
+        <MenuItem sx={checkBoxMobile} value={30}><CheckboxMarketplace label={FILTER.RARITY.ICONIC} /></MenuItem>
       </Select>
     </FormControl>
   )
@@ -37,16 +35,16 @@ export const Filter = () => {
     <FilterBox>
       <CategoryBox>
         <Button variant="outlined" sx={[categoryItem, categoryActiveItem === 'all' ? categoryActive : {}]} onClick={() => handleFilterCategory('all')} >
-          <Typography sx={[categoryTitle, { marginLeft: 0 }]}>All Item</Typography>
+          <CategoryTitle sx={{ marginLeft: 0 }}>All Item</CategoryTitle>
         </Button>
-        <Button variant="outlined" startIcon={isMobile ? false : <img src={FILTER.CATEGORY.daily.image} />} sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.daily.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.daily.title)}>
-          <Typography sx={[categoryTitle]}>{FILTER.CATEGORY.daily.title}</Typography>
+        <Button variant="outlined" startIcon={<img src={FILTER.CATEGORY.daily.image} />} sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.daily.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.daily.title)}>
+          <CategoryTitle >{FILTER.CATEGORY.daily.title}</CategoryTitle>
         </Button>
-        <Button variant="outlined" startIcon={isMobile ? false : <img src={FILTER.CATEGORY.fitness.image} />} sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.fitness.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.fitness.title)}>
-          <Typography sx={[categoryTitle]}>{FILTER.CATEGORY.fitness.title}</Typography>
+        <Button variant="outlined" startIcon={<img src={FILTER.CATEGORY.fitness.image} />} sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.fitness.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.fitness.title)}>
+          <CategoryTitle >{FILTER.CATEGORY.fitness.title}</CategoryTitle>
         </Button>
-        <Button variant="outlined" startIcon={isMobile ? false : <img src={FILTER.CATEGORY.racer.image} />} sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.racer.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.racer.title)}>
-          <Typography sx={[categoryTitle]}>{FILTER.CATEGORY.racer.title}</Typography>
+        <Button variant="outlined" startIcon={<img src={FILTER.CATEGORY.racer.image} />} sx={[categoryItem, categoryActiveItem === FILTER.CATEGORY.racer.title ? categoryActive : {}]} onClick={() => handleFilterCategory(FILTER.CATEGORY.racer.title)}>
+          <CategoryTitle >{FILTER.CATEGORY.racer.title}</CategoryTitle>
         </Button>
       </CategoryBox>
       <RarityBox>
@@ -86,7 +84,7 @@ const categoryItem = {
   border: '1px solid #FFE2D3',
   borderRadius: '16px',
   cursor: 'pointer',
-  minHeight: '56px',
+  height: '56px',
   "&:hover": {
     background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%);',
     '& p': {
@@ -94,19 +92,34 @@ const categoryItem = {
     }
   },
   '@media (max-width: 767px)': {
-    marginRight: '8px'
+    marginRight: '8px',
+    padding: '6px 8px',
+    height: '34px',
+    borderRadius: '8px',
+    justifyContent: 'center',
+    borderColor: '#E9EAEF',
+    '& img, .MuiButton-startIcon': {
+      display: 'none'
+    },
+    marginBottom: '0',
   }
 }
 
-const categoryTitle = {
-  color: '#31373E',
-  textTransform: 'uppercase',
-  fontSize: '16px',
-  fontStyle: 'italic',
-  fontFamily: 'Electrofied',
-  marginLeft: '4px',
-  fontWeight: 'bold'
-}
+const CategoryTitle = styled(Typography)({
+  fontSize: '14px',
+  fontFamily: 'BeVietnamPro',
+  color: '#5A6178',
+  fontWeight: '600',
+  textTransform: 'initial',
+  '@media (min-width: 768px)': {
+    marginLeft: '4px',
+    fontSize: '16px',
+    fontFamily: 'Electrofied',
+    color: '#31373E',
+    fontStyle: 'italic',
+    fontWeight: '700'
+  }
+})
 
 const categoryActive = {
   background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%);',
@@ -125,12 +138,12 @@ const CategoryBox = styled(Stack)({
   }
 })
 const RarityBox = styled(Stack)({
-  padding: '16px',
-  borderRadius: '16px',
-  border: '1px solid #E9EAEF',
   '@media (min-width: 768px)': {
-    width: '100%'
-  }
+    width: '100%',
+    padding: '16px',
+    borderRadius: '16px',
+    border: '1px solid #E9EAEF',
+  },
 })
 const rarityTitle = {
   color: '#31373E',
@@ -141,4 +154,30 @@ const rarityTitle = {
 const rarityItem = {
   padding: '3px 0',
   color: '#5A6178'
+}
+const selectRarity = {
+  '& .MuiSelect-select': {
+    width: '34px',
+    height: '38px !important',
+    padding: '0 !important'
+  },
+}
+const selectRarityBox = {
+  width: '34px',
+  height: '34px !important',
+  borderRadius: '8px',
+  border: '1px solid #E9EAEF',
+  padding: '0 !important',
+  backgroundImage: `url(${PRODUCT_DETAIL_ICON.STAR})`,
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center',
+  '& .MuiOutlinedInput-root': {
+    opacity: 0
+  },
+}
+const checkBoxMobile = {
+  '& .MuiCheckbox-root': {
+    paddingTop: 0,
+    paddingBottom: 0
+  }
 }

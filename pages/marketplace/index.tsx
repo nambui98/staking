@@ -18,12 +18,12 @@ const Marketplace: NextPage = () => {
   const [popupConnectWallet, setPopupConnectWallet] = useState<boolean>(false);
   const [popupCheckout, setpopupCheckout] = useState<boolean>(false);
   const [popupApproveToken, setpopupApproveToken] = useState<boolean>(false)
-  const [popupPaymentSuccess, setPopupPaymentSuccess] = useState<boolean>(false)
+  const [popupPaymentSuccess, setPopupPaymentSuccess] = useState<boolean>(true)
 
   return (
     <MainLayout sxProps={{backgroundColor: "#FFFFFF"}}>
       <Banner />
-      <Box sx={{margin: '0 24px'}}>
+      <Wrap>
         <Container disableGutters sx={container}>
           <Body>
             <Filter/>
@@ -31,7 +31,7 @@ const Marketplace: NextPage = () => {
             <ProductDetail dataProduct={{}} drawerStatus={productDetailActive} handleToggleDrawer={setProductDetailActive} />
           </Body>
         </Container>
-      </Box>
+      </Wrap>
       <ConnectWallet status={popupConnectWallet} handleToggleStatus={setPopupConnectWallet} />
       <Checkout status={popupCheckout} handleToggleStatus={setpopupCheckout} />
       <ApproveToken status={popupApproveToken} handleToggleStatus={setpopupApproveToken} />
@@ -42,9 +42,14 @@ const Marketplace: NextPage = () => {
 
 export default Marketplace;
 
+const Wrap = styled(Box)({
+  margin: '0 16px',
+  '@media (min-width: 768px)': {
+    margin: '0 24px'
+  }
+})
 const container = {
   maxWidth: { xl: 1920 - 240 },
-  marginTop: '25px'
 } 
 
 const Body = styled(Stack)({

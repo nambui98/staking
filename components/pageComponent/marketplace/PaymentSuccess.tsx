@@ -25,6 +25,7 @@ const Message = styled(Typography)({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  textAlign: 'center',
   '& span': {
     color: '#31373E',
     fontSize: '16px',

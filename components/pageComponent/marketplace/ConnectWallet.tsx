@@ -1,4 +1,4 @@
-import { Box, Button, Link, Stack, Typography } from "@mui/material";
+import { Box, Button, Link, Stack, styled, Typography } from "@mui/material";
 import { Popup } from "../../popup";
 import { PRODUCT_DETAIL_ICON } from "../../../constants/marketplace";
 
@@ -11,15 +11,15 @@ export const ConnectWallet: React.FC<IProps> = ({status, handleToggleStatus}) =>
   return (
     <Popup title="Connect wallet" status={status} handleToggle={() => handleToggleStatus(false)} >
       <Stack sx={wrap}>
-        <Stack sx={item}>
+        <Item>
           <Typography sx={titleConnect}>Recommended wallet</Typography>
-          <Box sx={itemConnect}><Box sx={flex}><img src={PRODUCT_DETAIL_ICON.METAMASK} /><Typography sx={itemTitle}>MetaMask</Typography></Box> <Button sx={button}>Connect</Button></Box>
-        </Stack>
-        <Stack sx={item}>
+          <Box sx={itemConnect}><Box sx={flex}><img src={PRODUCT_DETAIL_ICON.METAMASK} /><ItemTitle>MetaMask</ItemTitle></Box> <ButtonConnect>Connect</ButtonConnect></Box>
+        </Item>
+        <Item>
           <Typography sx={titleConnect}>Recommended wallet</Typography>
-          <Box sx={itemConnect}><Box sx={flex}><img src={PRODUCT_DETAIL_ICON.METAMASK} /><Typography sx={itemTitle}>MetaMask</Typography></Box> <Button sx={button}>Connect</Button></Box>
-        </Stack>
-        <Link href="#">How to connect wallet?</Link>
+          <Box sx={itemConnect}><Box sx={flex}><img src={PRODUCT_DETAIL_ICON.METAMASK} /><ItemTitle>MetaMask</ItemTitle></Box> <ButtonConnect>Connect</ButtonConnect></Box>
+        </Item>
+        <LinkConnect href="#">How to connect wallet?</LinkConnect>
       </Stack>
     </Popup>
   )
@@ -28,9 +28,9 @@ export const ConnectWallet: React.FC<IProps> = ({status, handleToggleStatus}) =>
 const wrap = {
 
 }
-const item = {
+const Item = styled(Stack)({
   marginBottom: '32px'
-}
+})
 const titleConnect = {
   fontSize: '14px',
   color: '#5A6178',
@@ -42,21 +42,34 @@ const itemConnect = {
   justifyContent: 'space-between',
   marginTop: '24px',
 }
-const itemTitle = {
+const ItemTitle = styled(Typography)({
   marginLeft: '8px',
-  fontSize: '16px',
+  fontSize: '14px',
   color: '#31373E',
-  fontWeight: '500'
-}
-const button = {
+  fontWeight: '500',
+  '@media (min-width: 768px)': {
+    fontSize: '16px',
+  }
+})
+const ButtonConnect = styled(Button)({
   background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
   borderRadius: '8px',
-  fontSize: '16px',
+  fontSize: '14px',
   fontWeight: '600',
   color: '#ffffff',
   boxShadow: 'none',
-}
+  '@media (min-width: 768px)': {
+    fontSize: '16px'
+  }
+})
 const flex = {
   display: 'flex',
   alignItems: 'center',
 }
+const LinkConnect = styled(Link)({
+  fontSize: '16px',
+  fontWeight: '500',
+  color: '#5A6178',
+  textDecoration: 'underline',
+  textAlign: 'center',
+})

@@ -24,7 +24,7 @@ const ListProduct: React.FC<IProps> = ({handleToggleDrawer, handleSetProductDeta
             <Type>{data.category}</Type>
             <img src={data.image} />
           </Stack>
-          <Typography sx={titleItem}>{data.title}</Typography>
+          <TitleItem>{data.title}</TitleItem>
           <Box sx={{ display: 'flex', alignItems: 'center' }}><img src={'assets/logo/bnbCoin.svg'} /><Typography sx={priceItem}>{data.price}</Typography></Box>
         </ShoesItem>
       ))}
@@ -47,13 +47,14 @@ const ShoesItem = styled(Stack)({
   cursor: 'pointer',
   transition: '.4s',
   borderRadius: '12px',
-  width: 'calc(50% - 16px)',
+  width: 'calc(50% - 4.5px)',
+  marginBottom: '18px',
   '@media (min-width: 1024px)': {
-    width: 'calc(25% - 16px)'
+    width: 'calc(25% - 16px)',
+    marginBottom: '32px'
   },
   '@media(min-width: 1280px)': {
     width: 'calc(20% - 16px)',
-    marginBottom: '32px'
   },
 })
 const boxImage = {
@@ -79,7 +80,7 @@ const Tag = styled(Typography)((props: TagProp) => ({
   color: '#ffffff',
   textDecoration: 'underline',
   padding: '4px 11px',
-  borderRadius: '12px 0px'
+  borderRadius: '12px 0px',
 }))
 const Type = styled(Typography)({
   position: 'absolute',
@@ -88,17 +89,25 @@ const Type = styled(Typography)({
   padding: '4px 12px',
   borderRadius: '0px 12px 0px 11px',
   background: '#55C8FC',
-  color: '#ffffff'
+  color: '#ffffff',
+  fontSize: '14px',
 })
-const titleItem = {
-  margin: '16px 0',
+const TitleItem = styled(Typography)({
+  margin: '8px 0 6px',
   color: "#31373E",
-  fontSize: '18px',
-  fontWeight: 700
-}
+  fontSize: '16px',
+  fontWeight: 700,
+  '@media (min-width: 768px)': {
+    margin: '16px 0',
+    fontSize: '18px'
+  }
+})
 const priceItem = {
   marginLeft: '4px',
   color: '#5A6178',
-  fontSize: '16px',
-  fontWeight: 600
+  fontSize: '14px',
+  fontWeight: 600,
+  '@media (min-width: 768px)': {
+    fontSize: '16px'
+  }
 }

@@ -1,6 +1,7 @@
 export const BANNER = {
-  image: 'assets/backgrounds/bannerShop.jpg',
-  titleTop: 'BOO’S STORE',
+  imageDesktop: 'assets/backgrounds/bannerShop.png',
+  imageMobile: 'assets/backgrounds/bannerShopMobile.png',
+  titleTop: "BEFITTER'S STORE",
   titleBot: 'COLLECTION 2022'
 }
 
@@ -45,6 +46,7 @@ export const PRODUCT_DETAIL_ICON = {
   BNBCOINYELLOW: 'assets/icons/bnbCoinYellow.svg',
   BNBCOINGRAY: 'assets/icons/bnbCoinGray.svg',
   TICK: 'assets/icons/tick-circle.svg',
+  STAR: 'assets/icons/star.svg',
 }
 
 export const BACKGROUND = {

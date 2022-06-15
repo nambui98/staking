@@ -45,14 +45,18 @@ const info = {
   justifyContent: 'space-between',
 }
 const boxImage = {
-  width: '190px',
-  height: '190px',
+  width: '130px',
+  height: '130px',
   backgroundColor: '#F8F9FB',
   borderRadius: '12px',
   position: 'relative',
   padding: '35px 20px',
   '& img': {
     width: '100%',
+  },
+  '@media (min-width: 768px)': {
+    width: '190px',
+    height: '190px',
   }
 }
 const type = {
@@ -67,7 +71,7 @@ const type = {
   padding: '4px 12px'
 }
 const boxItem = {
-  width: 'calc(100% - 190px - 16px)'
+  width: 'calc(100% - 130px - 16px)'
 }
 const infoItem = {
   flexWrap: 'wrap',
@@ -77,14 +81,17 @@ const infoItem = {
 }
 const infoTitleItem = {
   color: '#5A6178',
-  fontSize: '16px',
+  fontSize: '14px',
   fontWeight: '500',
-  width: '60%'
+  width: '60%',
+  '@media (min-width: 768px)': {
+    fontSize: '16px'
+  }
 }
 const infoPriceItem = {
   color: '#31373E',
   fontWeight: '600',
-  fontSize: '16px',
+  fontSize: '14px',
   width: '40%',
   alignItems: 'center',
   display: 'flex',
@@ -92,6 +99,9 @@ const infoPriceItem = {
   marginBottom: '9px',
   '& img': {
     marginRight: '4px'
+  },
+  '@media (min-width: 768px)': {
+    fontSize: '16px'
   }
 }
 const convertDollar = {
@@ -102,7 +112,10 @@ const convertDollar = {
 }
 const ErrorMessage = styled(Typography)({
   color: '#FB2F2F',
-  fontSize: '14px',
+  fontSize: '12px',
   fontWeight: '400',
-  marginTop: 'auto'
+  marginTop: 'auto',
+  '@media (min-width: 768px)': {
+    fontSize: '14px'
+  }
 })

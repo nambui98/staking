@@ -1,32 +1,47 @@
-import { Box, Container, Stack, Typography } from "@mui/material"
+import { Box, Container, Stack, Typography, styled } from "@mui/material"
 import { BANNER } from "../../../constants/marketplace"
 
 export const Banner = () => {
   return (
-    <Stack sx={{padding: '0 24px'}}>
+    <Wrap>
       <Container disableGutters sx={container} >
-        <Stack sx={bannerBox}>
-          <Box><img src={BANNER.image} width="100%" /></Box>
-          <Typography variant="h1" component="h1" sx={title}>{BANNER.titleTop}<br/>{BANNER.titleBot}</Typography>
-        </Stack>
+        <BannerInner>
+          <Title variant="h1"><span>{BANNER.titleTop}</span><br/><span>{BANNER.titleBot}</span></Title>
+        </BannerInner>
       </Container>
-    </Stack>
+    </Wrap>
   )
 }
 
+const Wrap = styled(Stack)({
+  margin: '0 16px'
+})
+
 const container = {
   maxWidth: { xl: 1920 - 240 },
-  marginTop: '25px'
 } 
-const bannerBox = {
-  position: 'relative',
-}
-const title = {
-  position: 'absolute',
-  top: 'calc(50% - 12px)',
-  left: 40,
-  transform: 'translateY(-50%)',
-  fontSize: '40px !important',
+const BannerInner = styled(Stack)({
+  margin: '24px 0', 
+  backgroundImage: `url(${BANNER.imageMobile})`,
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
+  borderRadius: '16px',
+  backgroundPosition: 'center',
+  '@media (min-width: 768px)': {
+    margin: '24px 0 52px',    
+    backgroundImage: `url(${BANNER.imageDesktop})`,
+  },
+})
+const Title = styled(Typography)({
+  padding: '56px 0',
+  fontSize: '23px !important',
   fontStyle: 'italic',
-  fontFamily: 'Electrofied'
-}
+  fontFamily: 'Electrofied',
+  textAlign: 'center',
+  '@media (min-width: 768px)': {
+    marginLeft: '40px',
+    padding: '62px 0',
+    textAlign: 'left',    
+    fontSize: '40px !important',
+  }
+})

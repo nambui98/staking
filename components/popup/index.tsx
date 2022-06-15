@@ -19,27 +19,34 @@ interface IProps {
 export const Popup: React.FC<IProps> = ({status, handleToggle, title, children, titleButton, priceButton, handleClickButton, customStyleButton, titleCustomStyle}) => {
   return (
     <Dialog sx={borderRadius} onClose={handleToggle} open={status}>
-      <Stack sx={wrap}>
+      <Wrap>
         <Box onClick={handleToggle} sx={closeIcon}><img src={PRODUCT_DETAIL_ICON.CLOSE} /></Box>
         {title && <TitlePopup sx={titleCustomStyle}>{title}</TitlePopup>}
         {children}
         {titleButton && <MarketplaceButton title={titleButton} price={priceButton} handleOnClick={handleClickButton} customStyle={customStyleButton} />}
-      </Stack>
+      </Wrap>
     </Dialog>
   )
 }
 
-const wrap = {
+const Wrap = styled(Stack)({
   position: 'relative',
-  padding: '0 24px 24px',
-  minWidth: '544px'
-}
+  padding: '0 16px 16px',
+  width: 'calc(100vw - 32px)',
+  '@media (min-width: 650px)': {
+    width: '544px',
+    padding: '0 24px 24px',
+  }
+})
 const TitlePopup = styled(DialogTitle)({
-  fontSize: '24px !important',
+  fontSize: '22px !important',
   fontWeight: '500',
   color: '#31373E',
   marginBottom: '17px',
   textAlign: 'center',
+  '@media (min-width: 768px)': {
+    fontSize: '24px !important'
+  }
 })
 const closeIcon = {
   position: 'absolute',
@@ -47,8 +54,9 @@ const closeIcon = {
   right: '18px',
   cursor: 'pointer',
 }
-const borderRadius = {
+const borderRadius = { 
   '& .MuiDialog-paper': {
-    borderRadius: '16px'
+    borderRadius: '16px',
+    margin: '0 !important',
   }
 }
