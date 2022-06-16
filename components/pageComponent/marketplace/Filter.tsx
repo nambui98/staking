@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Box, Button, Checkbox, Container, FormControl, FormControlLabel, FormGroup, MenuItem, Select, SelectChangeEvent, Stack, Typography } from "@mui/material"
 import { useState } from "react";
 import { CheckboxMarketplace } from "../../checkbox/CheckboxMarketplace";
-import { FILTER, PRODUCT_DETAIL_ICON } from "../../../constants/marketplace";
+import { FILTER, MARKETPLACE_ICON } from "../../../constants/marketplace";
 import { useMediaQuery } from "react-responsive";
 
 export const Filter = () => {
@@ -168,7 +168,7 @@ const selectRarityBox = {
   borderRadius: '8px',
   border: '1px solid #E9EAEF',
   padding: '0 !important',
-  backgroundImage: `url(${PRODUCT_DETAIL_ICON.STAR})`,
+  backgroundImage: `url(${MARKETPLACE_ICON.STAR})`,
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
   '& .MuiOutlinedInput-root': {

@@ -1,5 +1,5 @@
 import { Box, styled, Typography } from "@mui/material"
-import { BACKGROUND, PRODUCT_DETAIL_ICON } from "../../../constants/marketplace"
+import { BACKGROUND, MARKETPLACE_ICON } from "../../../constants/marketplace"
 import { Popup } from "../../popup"
 
 interface IProps {
@@ -11,7 +11,7 @@ export const PaymentSuccess: React.FC<IProps> = ({status, handleToggleStatus}) =
   return (
     <Popup title="Success!!" status={status} handleToggle={() => handleToggleStatus(false)}>
       <Message>Your items have successfully purchased!</Message>
-      <Message>Total price: <img src={PRODUCT_DETAIL_ICON.BNBCOINYELLOW} /><span>400</span></Message>
+      <Message>Total price: <img src={MARKETPLACE_ICON.BNBCOINYELLOW} /><span>400</span></Message>
       <ImageShoe><img src={'assets/shoes/imageSuccess.png'} /></ImageShoe>
     </Popup>
   )

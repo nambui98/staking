@@ -18,7 +18,7 @@ export const FILTER = {
   }
 }
 
-export const PRODUCT_DETAIL_ICON = {
+export const MARKETPLACE_ICON = {
   LEVEL1_5: 'assets/icons/triangle.svg',
   LEVEL6_14: 'assets/icons/triangle1.svg',
   LEVEL15_20: 'assets/icons/triangle2.svg',

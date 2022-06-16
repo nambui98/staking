@@ -10,29 +10,34 @@ import { pageView } from "../utils/gtag";
 
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/globals.scss';
+import { WalletProvider } from '../contexts/WalletContext.tsx';
 
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const router = useRouter();
 
-  useEffect(() => {
-    const handleRouteChange = (url: URL) => {
-      pageView(url);
-    };
-    router.events.on("routeChangeComplete", handleRouteChange);
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router.events]);
-  
+	useEffect(() => {
+		const handleRouteChange = (url: URL) => {
+			pageView(url);
+		};
+		router.events.on("routeChangeComplete", handleRouteChange);
+		return () => {
+			router.events.off("routeChangeComplete", handleRouteChange);
+		};
+	}, [router.events]);
+
 	return (
+
 		<ThemeProvider theme={theme}>
-			{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-			<CssBaseline />
-			<NextNProgress color="#FF6D24"/>
-			<Component {...pageProps} />
-    	<ToastContainer />
-		</ThemeProvider>
+			<WalletProvider>
+				{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+				<CssBaseline />
+				<NextNProgress color="#FF6D24" />
+				<Component {...pageProps} />
+				<ToastContainer />
+			</WalletProvider>
+		</ThemeProvider >
+
 	)
 }
 export default MyApp

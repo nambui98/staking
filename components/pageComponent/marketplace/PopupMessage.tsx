@@ -1,5 +1,5 @@
 import { Box, styled, Typography } from "@mui/material"
-import { PRODUCT_DETAIL_ICON } from "../../../constants/marketplace"
+import { MARKETPLACE_ICON } from "../../../constants/marketplace"
 import { Popup } from "../../popup"
 
 interface IProps {
@@ -14,7 +14,7 @@ interface IProps {
 
 export const PopupMessage: React.FC<IProps> = ({title, message, status, handleToggleStatus, titleCustomColor, titleButton, popupType}) => {
   const checkIcon = <TitleSuccess>
-      <img src={PRODUCT_DETAIL_ICON.TICK} />
+      <img src={MARKETPLACE_ICON.TICK} />
       {title}
     </TitleSuccess>
   

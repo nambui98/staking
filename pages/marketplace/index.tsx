@@ -15,10 +15,10 @@ import { ProductDetail } from "../../components/pageComponent/marketplace/Produc
 const Marketplace: NextPage = () => {
   const [productDetailActive, setProductDetailActive] = useState<boolean>(false);
   const [currentProductDetail, setCurrentProductDetail] = useState<any>();
-  const [popupConnectWallet, setPopupConnectWallet] = useState<boolean>(false);
+  const [popupConnectWallet, setPopupConnectWallet] = useState<boolean>(true);
   const [popupCheckout, setpopupCheckout] = useState<boolean>(false);
   const [popupApproveToken, setpopupApproveToken] = useState<boolean>(false)
-  const [popupPaymentSuccess, setPopupPaymentSuccess] = useState<boolean>(true)
+  const [popupPaymentSuccess, setPopupPaymentSuccess] = useState<boolean>(false)
 
   return (
     <MainLayout sxProps={{backgroundColor: "#FFFFFF"}}>

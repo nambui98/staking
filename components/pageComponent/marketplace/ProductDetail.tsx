@@ -4,7 +4,7 @@ import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import { alertTitleClasses, Stack, styled, SvgIcon, Typography } from '@mui/material';
 import { useState } from 'react';
-import { PRODUCT_DETAIL_ICON } from '../../../constants/marketplace';
+import { MARKETPLACE_ICON } from '../../../constants/marketplace';
 import { MarketplaceButton } from '../../buttons/MarketplaceButton';
 
 interface IProps {
@@ -29,7 +29,7 @@ export const ProductDetail: React.FC<IProps> = ({ drawerStatus, handleToggleDraw
       onClose={() => handleToggleDrawer(false)}
     >
       <BoxDetail>
-        <Box sx={closeIcon} onClick={() => handleToggleDrawer(false)}><img src={PRODUCT_DETAIL_ICON.CLOSE} /></Box>
+        <Box sx={closeIcon} onClick={() => handleToggleDrawer(false)}><img src={MARKETPLACE_ICON.CLOSE} /></Box>
         <Shoe3d>
           <iframe src={data.link3d} />
         </Shoe3d>
@@ -42,18 +42,18 @@ export const ProductDetail: React.FC<IProps> = ({ drawerStatus, handleToggleDraw
         </Boxtitle>
 
         <Stack sx={parameters}>
-          <Box sx={parametersItem}><img src={PRODUCT_DETAIL_ICON.LEVEL1_5} /> <Typography><span>Level</span>2</Typography></Box>
-          <Box sx={parametersItem}><img src={PRODUCT_DETAIL_ICON.SHIELDGREEN} /> <Typography><span>Condition</span>89%</Typography></Box>
-          <Box sx={parametersItem}><img src={PRODUCT_DETAIL_ICON.SHOEMINT3} /> <Typography><span>Shoe Mint</span>3/7</Typography></Box>
+          <Box sx={parametersItem}><img src={MARKETPLACE_ICON.LEVEL1_5} /> <Typography><span>Level</span>2</Typography></Box>
+          <Box sx={parametersItem}><img src={MARKETPLACE_ICON.SHIELDGREEN} /> <Typography><span>Condition</span>89%</Typography></Box>
+          <Box sx={parametersItem}><img src={MARKETPLACE_ICON.SHOEMINT3} /> <Typography><span>Shoe Mint</span>3/7</Typography></Box>
         </Stack>
         <Stats>
           <Typography sx={statsTitle}>Item stats</Typography>
           <Stack>
-            <Box sx={statsItem}><Box sx={flex}><img src={PRODUCT_DETAIL_ICON.ENERGY} /> <Typography sx={statsItemTitle}>Energy</Typography></Box> <Typography sx={statsItemText}>3</Typography></Box>
-            <Box sx={statsItem}><Box sx={flex}><img src={PRODUCT_DETAIL_ICON.DURABILITY} /> <Typography sx={statsItemTitle}>Durability</Typography><Box sx={process}></Box></Box> <Typography sx={statsItemText}>30</Typography></Box>
-            <Box sx={statsItem}><Box sx={flex}><img src={PRODUCT_DETAIL_ICON.SUPPORT} /> <Typography sx={statsItemTitle}>Support</Typography><Box sx={process}></Box></Box> <Typography sx={statsItemText}>3</Typography></Box>
-            <Box sx={statsItem}><Box sx={flex}><img src={PRODUCT_DETAIL_ICON.LUCK} /> <Typography sx={statsItemTitle}>Luck</Typography><Box sx={process}></Box></Box> <Typography sx={statsItemText}>15</Typography></Box>
-            <Box sx={statsItem}><Box sx={flex}><img src={PRODUCT_DETAIL_ICON.RANGE} /> <Typography sx={statsItemTitle}>Range</Typography><Box sx={process}></Box></Box> <Typography sx={statsItemText}>3</Typography></Box>
+            <Box sx={statsItem}><Box sx={flex}><img src={MARKETPLACE_ICON.ENERGY} /> <Typography sx={statsItemTitle}>Energy</Typography></Box> <Typography sx={statsItemText}>3</Typography></Box>
+            <Box sx={statsItem}><Box sx={flex}><img src={MARKETPLACE_ICON.DURABILITY} /> <Typography sx={statsItemTitle}>Durability</Typography><Box sx={process}></Box></Box> <Typography sx={statsItemText}>30</Typography></Box>
+            <Box sx={statsItem}><Box sx={flex}><img src={MARKETPLACE_ICON.SUPPORT} /> <Typography sx={statsItemTitle}>Support</Typography><Box sx={process}></Box></Box> <Typography sx={statsItemText}>3</Typography></Box>
+            <Box sx={statsItem}><Box sx={flex}><img src={MARKETPLACE_ICON.LUCK} /> <Typography sx={statsItemTitle}>Luck</Typography><Box sx={process}></Box></Box> <Typography sx={statsItemText}>15</Typography></Box>
+            <Box sx={statsItem}><Box sx={flex}><img src={MARKETPLACE_ICON.RANGE} /> <Typography sx={statsItemTitle}>Range</Typography><Box sx={process}></Box></Box> <Typography sx={statsItemText}>3</Typography></Box>
           </Stack>
         </Stats>
         <MarketplaceButton title="Proceed to payment" price={4620} handleOnClick={() => null} customStyle={{ margin: 'auto 16px 16px' }} />

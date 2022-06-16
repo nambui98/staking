@@ -1,6 +1,6 @@
 import { Box, Button, ButtonProps } from "@mui/material"
 import { styled } from "@mui/system"
-import { PRODUCT_DETAIL_ICON } from "../../constants/marketplace"
+import { MARKETPLACE_ICON } from "../../constants/marketplace"
 
 interface IProps {
   price?: number,
@@ -12,8 +12,8 @@ interface IProps {
 export const MarketplaceButton: React.FC<IProps> = ({price, title, handleOnClick, customStyle}) => {
   return (
     <ButtonMarketPlace variant="contained" onClick={handleOnClick} sx={customStyle} price={price} >
-      {price &&  <Box sx={flex}><img style={{marginRight: 8}} src={PRODUCT_DETAIL_ICON.BNBCOIN} /> {price}</Box>}
-      <Box sx={flex}>{title} {price && <img style={{marginLeft: 8}} src={PRODUCT_DETAIL_ICON.ARROWRIGHT} />}</Box>
+      {price &&  <Box sx={flex}><img style={{marginRight: 8}} src={MARKETPLACE_ICON.BNBCOIN} /> {price}</Box>}
+      <Box sx={flex}>{title} {price && <img style={{marginLeft: 8}} src={MARKETPLACE_ICON.ARROWRIGHT} />}</Box>
     </ButtonMarketPlace>
   )
 }

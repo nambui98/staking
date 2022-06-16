@@ -1,7 +1,7 @@
 import { Box, Stack, styled } from "@mui/material"
 import Dialog from "@mui/material/Dialog"
 import DialogTitle from "@mui/material/DialogTitle"
-import { PRODUCT_DETAIL_ICON } from "../../constants/marketplace"
+import { MARKETPLACE_ICON } from "../../constants/marketplace"
 import { MarketplaceButton } from "../buttons/MarketplaceButton"
 
 interface IProps {
@@ -20,7 +20,7 @@ export const Popup: React.FC<IProps> = ({status, handleToggle, title, children, 
   return (
     <Dialog sx={borderRadius} onClose={handleToggle} open={status}>
       <Wrap>
-        <Box onClick={handleToggle} sx={closeIcon}><img src={PRODUCT_DETAIL_ICON.CLOSE} /></Box>
+        <Box onClick={handleToggle} sx={closeIcon}><img src={MARKETPLACE_ICON.CLOSE} /></Box>
         {title && <TitlePopup sx={titleCustomStyle}>{title}</TitlePopup>}
         {children}
         {titleButton && <MarketplaceButton title={titleButton} price={priceButton} handleOnClick={handleClickButton} customStyle={customStyleButton} />}

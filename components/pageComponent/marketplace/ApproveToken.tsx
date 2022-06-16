@@ -1,7 +1,7 @@
 import { Box, ButtonProps, Checkbox, FormControlLabel, FormGroup, Stack, Typography, TypographyProps } from "@mui/material"
 import { Popup } from "../../popup"
 import { styled } from '@mui/system';
-import { PRODUCT_DETAIL_ICON } from "../../../constants/marketplace";
+import { MARKETPLACE_ICON } from "../../../constants/marketplace";
 import { CheckboxMarketplace } from "../../checkbox/CheckboxMarketplace";
 
 interface IProps {
@@ -16,17 +16,17 @@ export const ApproveToken: React.FC<IProps> = ({ status, handleToggleStatus }) =
         <Stack>
           <InfoItem>
             <InfoTitleItem >Amount to buy</InfoTitleItem>
-            <InfoPriceItem ><img src={PRODUCT_DETAIL_ICON.BNBCOINYELLOW} />400</InfoPriceItem>
+            <InfoPriceItem ><img src={MARKETPLACE_ICON.BNBCOINYELLOW} />400</InfoPriceItem>
             <ConvertDollar >0.00$</ConvertDollar>
           </InfoItem>
           <InfoItem>
             <InfoTitleItem >Current allowances</InfoTitleItem>
-            <InfoPriceItem ><img src={PRODUCT_DETAIL_ICON.BNBCOINYELLOW} />0.01</InfoPriceItem>
+            <InfoPriceItem ><img src={MARKETPLACE_ICON.BNBCOINYELLOW} />0.01</InfoPriceItem>
             <ConvertDollar >0.00$</ConvertDollar>
           </InfoItem>
           <Increase>
             <InfoTitleItem>Increase</InfoTitleItem>
-            <IncreaseBnb gray={false}><img src={PRODUCT_DETAIL_ICON.BNBCOINYELLOW} />200</IncreaseBnb>
+            <IncreaseBnb gray={false}><img src={MARKETPLACE_ICON.BNBCOINYELLOW} />200</IncreaseBnb>
           </Increase>
           <CheckboxMarketplace type="green" label="WithDraw all" />
         </Stack>

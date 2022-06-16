@@ -1,6 +1,9 @@
 import { Box, Button, Link, Stack, styled, Typography } from "@mui/material";
 import { Popup } from "../../popup";
-import { PRODUCT_DETAIL_ICON } from "../../../constants/marketplace";
+import { MARKETPLACE_ICON } from "../../../constants/marketplace";
+import { ethers } from "ethers";
+import { useWalletContext } from "../../../contexts/WalletContext.tsx";
+import { UserService } from "../../../services/user.service";
 
 interface IProps {
   status: boolean;
@@ -8,16 +11,38 @@ interface IProps {
 }
 
 export const ConnectWallet: React.FC<IProps> = ({status, handleToggleStatus}) => {
+  const {provider, setWalletAccount, setToggleActivePopup, walletAccount, metaMaskIsInstalled, activePopup } = useWalletContext();
+
+  const handleConnectWallet = async () => {
+    if (!metaMaskIsInstalled) {
+      let a = document.createElement('a');
+      a.target = '_blank';
+      a.href = 'https://metamask.io/download';
+      a.click();
+    } else if(!walletAccount){
+      const address = await provider.send("eth_requestAccounts", []);
+      const signer = provider.getSigner();
+      const signature = await signer.signMessage("Hello World");
+      if(address && signature){
+        setWalletAccount(address[0]);
+        UserService.setCurrentUser({walletAddress: address[0]});
+        setToggleActivePopup(false);
+      }
+    }
+    
+  }
   return (
-    <Popup title="Connect wallet" status={status} handleToggle={() => handleToggleStatus(false)} >
+    <Popup title="Connect wallet" status={activePopup} handleToggle={() => setToggleActivePopup(false)} >
       <Stack sx={wrap}>
         <Item>
           <Typography sx={titleConnect}>Recommended wallet</Typography>
-          <Box sx={itemConnect}><Box sx={flex}><img src={PRODUCT_DETAIL_ICON.METAMASK} /><ItemTitle>MetaMask</ItemTitle></Box> <ButtonConnect>Connect</ButtonConnect></Box>
+          <Box sx={itemConnect}><Box sx={flex}><img src={MARKETPLACE_ICON.METAMASK} /><ItemTitle>MetaMask</ItemTitle></Box> 
+            <ButtonConnect onClick={handleConnectWallet}>Connect</ButtonConnect>
+          </Box>
         </Item>
         <Item>
           <Typography sx={titleConnect}>Recommended wallet</Typography>
-          <Box sx={itemConnect}><Box sx={flex}><img src={PRODUCT_DETAIL_ICON.METAMASK} /><ItemTitle>MetaMask</ItemTitle></Box> <ButtonConnect>Connect</ButtonConnect></Box>
+          <Box sx={itemConnect}><Box sx={flex}><img src={MARKETPLACE_ICON.METAMASK} /><ItemTitle>MetaMask</ItemTitle></Box> <ButtonConnect>Connect</ButtonConnect></Box>
         </Item>
         <LinkConnect href="#">How to connect wallet?</LinkConnect>
       </Stack>

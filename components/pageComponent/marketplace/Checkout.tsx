@@ -1,7 +1,7 @@
 import { Box, Stack, styled, Typography } from "@mui/material"
 import { MarketplaceButton } from "../../../components/buttons/MarketplaceButton"
 import { Popup } from "../../../components/popup"
-import { PRODUCT_DETAIL_ICON } from "../../../constants/marketplace"
+import { MARKETPLACE_ICON } from "../../../constants/marketplace"
 
 interface IProps {
   status: boolean
@@ -20,12 +20,12 @@ export const Checkout: React.FC<IProps> = ({ status, handleToggleStatus }) => {
           <Stack sx={boxItem}>
             <Stack sx={infoItem}>
               <Typography sx={infoTitleItem}>You will pay</Typography>
-              <Typography sx={infoPriceItem}><img src={PRODUCT_DETAIL_ICON.BNBCOINYELLOW} />400</Typography>
+              <Typography sx={infoPriceItem}><img src={MARKETPLACE_ICON.BNBCOINYELLOW} />400</Typography>
               <Typography sx={convertDollar}>0.00$</Typography>
             </Stack>
             <Stack sx={infoItem}>
               <Typography sx={infoTitleItem}>Estimated gas free</Typography>
-              <Typography sx={infoPriceItem}><img src={PRODUCT_DETAIL_ICON.BNBCOINYELLOW} />0.01</Typography>
+              <Typography sx={infoPriceItem}><img src={MARKETPLACE_ICON.BNBCOINYELLOW} />0.01</Typography>
               <Typography sx={convertDollar}>0.00$</Typography>
             </Stack>
             <ErrorMessage>You need to approve more token to complete this transaction</ErrorMessage>
