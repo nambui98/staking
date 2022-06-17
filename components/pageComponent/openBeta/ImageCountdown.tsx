@@ -14,7 +14,7 @@ export const ImageCountdown = () => {
             <Body>
               <BoxCountdown>
                 <CountdownClock endDate={IMAGE_COUNTDOWN.countDown.time} sxTitle={40} sxSubTitle={16} />
-                <Link href=''><CountdownButton active={IMAGE_COUNTDOWN.countDown.leadboard.active}>{IMAGE_COUNTDOWN.countDown.leadboard.title}</CountdownButton></Link>
+                <Link href=''><CountdownButton active={IMAGE_COUNTDOWN.countDown.leadboard.active}><img src={IMAGE_COUNTDOWN.countDown.leadboard.imageGray} /> {IMAGE_COUNTDOWN.countDown.leadboard.title}</CountdownButton></Link>
               </BoxCountdown>
               <BoxQuestion>
                 {IMAGE_COUNTDOWN.countDown.Questions?.map((item, index) => (
@@ -30,7 +30,7 @@ export const ImageCountdown = () => {
 }
 
 const Wrap = styled(Stack)({
-  marginBottom: '24px',
+  marginBottom: '5px',
   '@media (min-width: 768px)': {
     marginBottom: '80px',
   }
@@ -82,6 +82,9 @@ const CountdownButton = styled(Button)((props: CountdownButton) => ({
   margin: '24px 0 0',
   maxWidth: '176px',
   textTransform: 'initial',
+  '& img': {
+    marginRight: 8,
+  },
   '@media (max-width: 767px)': {
     marginBottom: '28px',
     maxWidth: '100%',

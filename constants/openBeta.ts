@@ -7,7 +7,9 @@ export const IMAGE_COUNTDOWN = {
     leadboard: {
       title: 'Leadboard',
       link: '/',
-      active: false
+      active: false,
+      image: 'assets/icons/ranking.svg',
+      imageGray: 'assets/icons/rankingGray.svg',
     },
     Questions: [
       {title: 'How to create your own Testnet Wallet', link: '/', imageIcon: 'assets/icons/message-question.svg'},
@@ -18,7 +20,8 @@ export const IMAGE_COUNTDOWN = {
 }
 
 export const TAB_BODY = {
-  tab1: {
+  summary: {
+    titleImage: 'assets/title1.png',
     list: [
       {title: 'Location', data: 'Global'},
       {title: 'Duration', data: 'Jun 20, 2022 - Jun 30, 2022'},
@@ -30,9 +33,15 @@ export const TAB_BODY = {
     ],
     contact: {
       title: 'If you have any related concerns, contact beFITTER for answers',
+      email: 'team@befitter.io',
+      mailIcon: 'assets/icons/smsIcon.svg',
+      backgroundImage: 'assets/border3.png'
     }
   },
-  tab2: {
+  reward: {
+    titleImage: 'assets/title3.png',
+    titleImage2: 'assets/title4.png',
+    listIcon: 'assets/icons/list.svg',
     list: [
       {
         title: '200 NFT Prizes',
@@ -69,17 +78,24 @@ export const TAB_BODY = {
     ],
     total: {
       title: 'Total prize value',
+      background: 'assets/border1.png'
     },
-    keyNote: [
-      'Any accumulated 10 tickets of any users will be qualified to join the Grand Prizes draw automatically.',
-      'The total distance users have traveled will be automatically synced to the app after each 15 mins.',
-      'If users join more than 01 categories, only one with the highest result will be taken into account.',
-      'Winners of the challenge will need to download the beFITTER Application (Mainnet version when available) and successfully register, then the rewards will be sent into their spending wallet and users must create an account on the Mainnet application after the reward time.'
-    ]
+    keyNote: {
+      title: '*Keynote:',
+      data: [
+        'Any accumulated 10 tickets of any users will be qualified to join the Grand Prizes draw automatically.',
+        'The total distance users have traveled will be automatically synced to the app after each 15 mins.',
+        'If users join more than 01 categories, only one with the highest result will be taken into account.',
+        'Winners of the challenge will need to download the beFITTER Application (Mainnet version when available) and successfully register, then the rewards will be sent into their spending wallet and users must create an account on the Mainnet application after the reward time.'
+      ]
+    },
+    bodyGetReward: 'Rewards will be delivered directly to participants’ Spending wallet after the Mainnet launch.'
   },
-  tab3: {
-    imageTitle: '',
-    imageTitleEvent: '',
+  rules: {
+    titleImage: 'assets/title5.png',
+    titleImage2: 'assets/title6.png',
+    warningIcon: 'assets/icons/warning-2.svg',
+    listIcon: 'assets/icons/list2.svg',
     list: [
       'Users will receive a FREE GENESIS NFT SHOE to participate in the challenge via the wallet ID they have provided. Rewards for the winners are also credited to the given wallet address.',
       'If any signs of cheating are detected, beFITTER will reserve the right to disqualify accountable participants. The final decision will rest on the organizer as well.',
@@ -87,4 +103,13 @@ export const TAB_BODY = {
       'beFITTER has no responsibilities for users’ accidents, injuries, and other health and economic problems (if any) during the challenge.'
     ]
   }
+}
+export const BOX_DOWNLOAD = {
+  image: 'assets/litePaper-app.png',
+  backgroundImage: 'assets/bgOpenBeta.png',
+  titleImage: 'assets/title2.png',
+  appleIcon: 'assets/icons/applelogo.svg',
+  googleIcon: 'assets/icons/gplaylogo.svg',
+  linkIos: 'https://befitter.io/ios-register',
+  linkAndroid: 'http://cdn.befitter.io/app.apk'
 }

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
-import { Box, Container, Stack, Tab, Tabs, Typography } from "@mui/material"
+import { Box, Container, Link, Stack, Tab, Tabs, Typography } from "@mui/material"
 import { useState } from "react";
+import { TAB_BODY } from "../../../constants/openBeta";
 
 function TabPanel(props: any) {
   const { children, value, index, ...other } = props;
@@ -14,9 +15,9 @@ function TabPanel(props: any) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <BoxBodyTab>
           <Typography>{children}</Typography>
-        </Box>
+        </BoxBodyTab>
       )}
     </div>
   );
@@ -40,20 +41,61 @@ export const TabBody = () => {
     <Wrap>
       <Container>
         <Box>
-          <Tabs value={value} onChange={handleChange}>
-            <TabItem label="Item One" {...a11yProps(0)} />
-            <TabItem label="Item Two" {...a11yProps(1)} />
-            <TabItem label="Item Three" {...a11yProps(2)} />
-          </Tabs>
+          <BoxTabs value={value} onChange={handleChange}>
+            <TabItem label="SUMMARY" {...a11yProps(0)} />
+            <TabItem label="REWARD" {...a11yProps(1)} />
+            <TabItem label="RULES" {...a11yProps(2)} />
+          </BoxTabs>
         </Box>
-        <TabBodyItem value={value} index={0}>
-          Item One
+        <TabBodyItem value={value} index={0} sx={{ padding: 0 }}>
+          <TitleImage><img src={TAB_BODY.summary.titleImage} /></TitleImage>
+          <Stack>
+            {TAB_BODY.summary.list?.map((item, index) => (
+              <SummaryTitleItem key={index}><Typography>{item.title}</Typography> <span>{item.data}</span></SummaryTitleItem>
+            ))}
+          </Stack>
+          <BoxEmail>
+            <Typography>{TAB_BODY.summary.contact.title}</Typography>
+            <BoxEmailItem><img src={TAB_BODY.summary.contact.mailIcon} /> <Link href={`mailto:${TAB_BODY.summary.contact.email}`}>{TAB_BODY.summary.contact.email}</Link></BoxEmailItem>
+          </BoxEmail>
         </TabBodyItem>
         <TabBodyItem value={value} index={1}>
-          Item Two
+          <TitleImage><img src={TAB_BODY.reward.titleImage} /></TitleImage>
+          {TAB_BODY.reward.list?.map((item, index) => (
+            <BoxRewardItem key={index}>
+              <Box><RewardTitleItem>{item.title}</RewardTitleItem><RewardSubtitleItem>{item.subtitle}</RewardSubtitleItem></Box>
+              <Box>{item.data?.map((data, key) => <RewardBodyItem key={key}><img src={TAB_BODY.reward.listIcon} />{data}</RewardBodyItem>)}</Box>
+            </BoxRewardItem>
+          ))}
+          <TotalPrize>
+            <TotalPrizeTitle>{TAB_BODY.reward.total.title}</TotalPrizeTitle>
+            <TotalPrizeBody><span>10,000 $FIU</span> and <span>350 shoe NFTs</span>, each NFT could worth up to 1,000 USD</TotalPrizeBody>
+          </TotalPrize>
+          <KeyNote>
+            <KeyNoteTitle>{TAB_BODY.reward.keyNote.title}</KeyNoteTitle>
+            <Stack>
+              {TAB_BODY.reward.keyNote.data?.map((item, index) => <KeyNoteItem key={index}><Typography>•</Typography> {item}</KeyNoteItem>)}
+            </Stack>
+          </KeyNote>
+          <TitleImage><img src={TAB_BODY.reward.titleImage2} /></TitleImage>
+          <BodyGetReward>{TAB_BODY.reward.bodyGetReward}</BodyGetReward>
         </TabBodyItem>
         <TabBodyItem value={value} index={2}>
-          Item Three
+          <TitleImage><img src={TAB_BODY.rules.titleImage} /></TitleImage>
+          <RuleJoin>
+            <Typography>Event participants need to do at least 1 physical activity with beFITTER app to earn a ticket: </Typography>  
+             <span>• Walking and running: Earn 1 ticket every 3km</span>
+             <span>• Cycling: Earn 1 ticket every 6 km</span>
+            <Typography>This challenge will take place on Binance Smart Chain, so make sure you provide the EXACT BEP-20 wallet address, or else your rewards and NFTs can not be delivered to you.</Typography>
+            <Typography sx={{color: '#31373E !important', fontWeight: '600 !important'}}>For iOS users:</Typography>
+            <Typography>- Submit your email and wallet address <Link href='https://befitter.io/ios-register'>HERE</Link> (Make sure to submit the same information you have registered on our website)</Typography>
+            <Typography>- Check the instruction sent to your mailbox</Typography>
+            <Typography sx={{color: '#31373E !important', fontWeight: '600 !important'}}>For Android users:</Typography>
+            <Typography>- Download <Link href='http://cdn.befitter.io/app.apk'> APK </Link></Typography>
+            <Typography>How to transfer your testnet Genesis Shoe NFT to your beFITTER spending wallet? Just follow the instructions <Link href='https://cdn.befitter.io/transfer/'>HERE</Link>.</Typography>
+          </RuleJoin>
+          <TitleImage><img src={TAB_BODY.rules.warningIcon} />&nbsp; &nbsp;<img src={TAB_BODY.rules.titleImage2} /></TitleImage>
+          {TAB_BODY.rules.list?.map((item, index) => <EventRuleITem key={index}><img src={TAB_BODY.rules.listIcon} /> {item}</EventRuleITem>)}
         </TabBodyItem>
       </Container>
     </Wrap>
@@ -61,19 +103,267 @@ export const TabBody = () => {
 }
 
 const Wrap = styled(Stack)({
+  marginBottom: 60
+})
+const font16 = {
+  fontSize: 16,
+  fontWeight: 500
+}
+const font18_600 = {
+  fontSize: 18,
+  fontWeight: 600
+}
+const colorGradient = {
+  '-webkit-background-clip': 'text !important',
+  '-webkit-text-fill-color': 'transparent',
+  background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)'
+}
+const BoxEarn = styled(Stack)({
 
+})
+const EventRuleITem = styled(Typography)({
+  marginBottom: 30,
+  ...font18_600,
+  color: '#31373E',
+  display: 'flex',
+  alignItems: 'flex-start',
+  '& img': {
+    paddingTop: 5,
+    marginRight: 16
+  },
+  '@media (max-width: 767px)': {
+    fontSize: 16,
+    marginBottom: 20
+  }
+})
+const RuleJoin = styled(Typography)({
+  marginBottom: 40,
+  '& p': {
+    color: '#5A6178',
+    fontSize: 16,
+    fontWeight: '500',
+    marginBottom: 17,
+    '@media (min-width: 768px)': {
+      fontSize: 18,
+    }
+  },
+  '& span': {
+    color: '#31373E',
+    fontSize: 16,
+    fontWeight: '600',
+    display: 'block',
+    '@media (min-width: 768px)': {
+      fontSize: 18,
+    }
+  },
+  '& span:nth-child(2)': {
+    marginBottom: 5
+  },
+  '& span:nth-child(3)': {
+    marginBottom: 17
+  },
+  '& a': {
+    color: '#FF8A50',
+    textDecoration: 'underline'
+  }
+})
+const BodyGetReward = styled(Typography)({
+  fontSize: 16,
+  fontWeight: 500,
+  color: '#5A6178',
+  marginBottom: 10,
+  '@media (min-width: 768px)': {
+    marginBottom: 40,
+    fontSize: 18,
+  }
+})
+const KeyNote = styled(Stack)({
+  marginBottom: 26
+})
+const KeyNoteTitle = styled(Typography)({
+  fontSize: 14,
+  fontWeight: 500,
+  color: '#31373E',
+  marginBottom: 15
+})
+const KeyNoteItem = styled(Typography)({
+  marginBottom: 14,
+  fontSize: 14,
+  fontWeight: '500',
+  color: '#5A6178',
+  flexDirection: 'row',
+  display: 'flex',
+  '& p': {
+    marginRight: 6
+  }
+})
+const TotalPrize = styled(Stack)({
+  backgroundImage: `url(${TAB_BODY.reward.total.background})`,
+  backgroundRepeat: 'no-repeat',
+  padding: '24px 40px',
+  marginBottom: 24,
+  '@media (max-width: 1023px)': {
+    backgroundPosition: '100%',
+    backgroundSize: 'cover'
+  },
+  '@media (max-width: 767px)': {
+    backgroundImage: "none",
+    marginBottom: 10,
+    padding: '10px 0'
+  }
+})
+const TotalPrizeTitle = styled(Typography)({
+  fontSize: 20,
+  fontWeight: 400,
+  fontStyle: 'italic',
+  fontFamily: 'Electrofied',
+  marginBottom: 10,
+  color: '#31373E',
+  '@media (min-width: 768px)': {
+    fontSize: 24,
+    marginBottom: 16,
+  }
+})
+const TotalPrizeBody = styled(Typography)({
+  fontSize: 19,
+  fontWeight: 500,
+  color: '#31373E',
+  '& span': {
+    ...colorGradient,
+    fontWeight: 700,
+  },
+  '@media (min-width: 768px)': {
+    fontSize: 24,
+  }
+})
+const BoxRewardItem = styled(Stack)({
+  marginBottom: 20, 
+  '@media (min-width: 768px)': {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 40, 
+  }
+})
+const RewardBodyItem = styled(Typography)({
+  ...font16,
+  color: '#5A6178',
+  '&:first-child': {
+    marginBottom: 16
+  },
+  '& img': {
+    marginRight: 8
+  }
+})
+const RewardTitleItem = styled(Typography)({
+  ...colorGradient,
+  fontSize: 20,
+  fontWeight: 600,
+  width: 195,
+  marginRight: 92,
+  marginBottom: 5,
+  '@media (min-width: 768px)': {
+    fontSize: 24,
+  }
+})
+const RewardSubtitleItem = styled(Typography)({
+  fontSize: 16,
+  fontWeight: 500,
+  color: '#31373E',
+  '@media (max-width: 767px)': {
+    marginBottom: 20,
+    fontSize: 14,
+  }
+})
+const BoxTabs = styled(Tabs)({
+  marginBottom: 42,
+  '& .MuiTabs-flexContainer': {
+    justifyContent: 'center',
+  },
+  '@media (max-width: 767px)': {
+    paddingBottom: 5,
+    borderBottom: '1px solid #E9EAEF',
+    marginBottom: 16,
+    '& .MuiTabs-flexContainer': {
+      overflow: 'auto',
+      width: '100%',
+      justifyContent: 'initial',
+    },
+  }
 })
 const TabItem = styled(Tab)({
   fontFamily: 'Electrofied',
   fontStyle: 'italic',
-  fontSize: '32px',
+  fontSize: '24px',
   fontWeight: '400',
   textTransform: 'uppercase',
+  padding: '0 13.5px',
   color: '#5A6178',
+  '&:first-child': {
+    paddingLeft: 0
+  },
   '&.Mui-selected': {
     color: '#FF6D24',
+  },
+  '@media (min-width: 768px)': {
+    padding: '0 37px',
+    fontSize: '32px',
+  }
+})
+const TitleImage = styled(Box)({
+  marginBottom: 27,
+  '& img': {
+    maxWidth: '100%'
   }
 })
 const TabBodyItem = styled(TabPanel)({
-  
+
+})
+const SummaryTitleItem = styled(Typography)({
+  color: '#31373E',
+  fontSize: '18px',
+  fontWeight: '600',
+  marginBottom: '20px',
+  '& p': {
+    fontWeight: '500',
+    color: '#5A6178',
+    width: '206px',
+    marginRight: '40px',
+    display: 'inline-block'
+  },
+  '@media (max-width: 767px)': {
+    display: 'flex',
+    fontSize: '16px',
+    flexDirection: 'column',
+    '& span': {
+      margin: '8px 0 0 16px'
+    }
+  }
+})
+const BoxBodyTab = styled(Box)({
+  marginBottom: 4
+})
+const BoxEmail = styled(Stack)({
+  padding: '32px 24px',
+  backgroundImage: `url(${TAB_BODY.summary.contact.backgroundImage})`,
+  backgroundRepeat: 'no-repeat',
+  '& p, & a': {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#31373E',
+    '@media (min-width: 768px)': {
+      fontSize: 18,
+    }
+  },
+  '@media (max-width: 767px)': {
+    backgroundSize: 'cover',
+    backgroundPosition: '100%'
+  }
+})
+const BoxEmailItem = styled(Typography)({
+  display: 'flex',
+  alignItems: 'center',
+  marginTop: 20,
+  '& img': {
+    marginRight: 8,
+  }
 })
