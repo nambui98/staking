@@ -2,7 +2,7 @@ import { Box, Button, Link, Stack, styled, Typography } from "@mui/material";
 import { Popup } from "../../popup";
 import { MARKETPLACE_ICON } from "../../../constants/marketplace";
 import { ethers } from "ethers";
-import { useWalletContext } from "../../../contexts/WalletContext.tsx";
+import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext";
 import { UserService } from "../../../services/user.service";
 
 interface IProps {
@@ -11,7 +11,7 @@ interface IProps {
 }
 
 export const ConnectWallet: React.FC<IProps> = ({status, handleToggleStatus}) => {
-  const {provider, setWalletAccount, setToggleActivePopup, walletAccount, metaMaskIsInstalled, activePopup } = useWalletContext();
+  const {provider, setWalletAccount, setToggleActivePopup, walletAccount, metaMaskIsInstalled, activePopup, chainIdIsSupported } = useWalletContext();
 
   const handleConnectWallet = async () => {
     if (!metaMaskIsInstalled) {
@@ -20,13 +20,17 @@ export const ConnectWallet: React.FC<IProps> = ({status, handleToggleStatus}) =>
       a.href = 'https://metamask.io/download';
       a.click();
     } else if(!walletAccount){
-      const address = await provider.send("eth_requestAccounts", []);
-      const signer = provider.getSigner();
+      const providerEthers = await new ethers.providers.Web3Provider(provider);
+      const address = await providerEthers.send("eth_requestAccounts", []);
+      const signer = providerEthers.getSigner();
       const signature = await signer.signMessage("Hello World");
       if(address && signature){
         setWalletAccount(address[0]);
-        UserService.setCurrentUser({walletAddress: address[0]});
+        UserService.setCurrentUser(address[0]);
         setToggleActivePopup(false);
+      }
+      if(!chainIdIsSupported) {
+        await changeNetwork(provider)
       }
     }
     

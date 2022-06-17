@@ -7,7 +7,10 @@ export const UserService = {
     const userInfo = localStorage.getItem('user');
     if(userInfo) return JSON.parse(userInfo);
   },
-  setCurrentUser: (userInfo: currentProps) => {
+  setCurrentUser: (userInfo: string) => {
     return localStorage.setItem('user', JSON.stringify(userInfo));
+  },
+  removeCurrentUser: () => {
+    return localStorage.removeItem('user');
   }
 }
