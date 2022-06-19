@@ -2,8 +2,14 @@ import React from 'react';
 import { Stack, Typography } from '@mui/material';
 import { END_DATE_EVENT, END_DATE_EVENT_EXTRA_HOURS } from '../../constants/common';
 
-const CountdownClock: React.FC<any> = ({ endDate = END_DATE_EVENT }) => {
-	const end = Date.parse(endDate);
+interface IProps {
+	endDate?: string
+	sxTitle?: any
+	sxSubTitle?: any
+}
+
+const CountdownClock: React.FC<IProps> = ({ endDate, sxTitle, sxSubTitle }) => {
+	const end = Date.parse(endDate || END_DATE_EVENT);
 	const _second = 1000;
 	const _minute = _second * 60;
 	const _hour = _minute * 60;
@@ -38,7 +44,7 @@ const CountdownClock: React.FC<any> = ({ endDate = END_DATE_EVENT }) => {
 	}, []);
 
 	return (
-		<Stack direction="row" spacing={1.5} mt={1.5} alignItems="center">
+		<Stack direction="row" spacing={1.5} mt={1.5} alignItems="center" justifyContent="center">
 			{[
 				{ count: dayText, title: 'days' },
 				{ count: hrText, title: 'hours' },
@@ -60,14 +66,14 @@ const CountdownClock: React.FC<any> = ({ endDate = END_DATE_EVENT }) => {
 				>
 					<Typography
 						variant="subtitle1"
-						fontSize={24}
+						fontSize={sxTitle || 24}
 						fontStyle="italic"
 						color="#31373E"
 					>
 						{count}
 					</Typography>
 					<Typography
-						fontSize={14}
+						fontSize={sxSubTitle || 14}
 						fontStyle="italic"
 						color="#31373E"
 						fontWeight="bold"

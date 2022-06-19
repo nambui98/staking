@@ -5,9 +5,10 @@ import {
 	Container,
 	AppBar,
 	Toolbar,
+	styled,
 } from '@mui/material';
 import MenuButton from '../buttons/MenuButton';
-import { LOGO } from '../../constants/header';
+import { LOGO, SECURICHAIN_LOGO } from '../../constants/header';
 
 const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 	return (
@@ -42,6 +43,7 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 								<img src={LOGO} alt="Logo" width={'auto'} height={40} />
 							</Box>
 						</Link>
+						<BoxSecurichain>{<img src={SECURICHAIN_LOGO} />}</BoxSecurichain>
 						<MenuButton />
 					</Container>
 				</Toolbar>
@@ -51,3 +53,10 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 };
 
 export default MainHeader;
+
+const BoxSecurichain = styled(Box)({
+	margin: 'auto auto auto 24px',
+	'@media (max-width: 465px)': {
+		display: 'none',
+	}
+})
