@@ -3,7 +3,7 @@ export const IMAGE_COUNTDOWN = {
   imageMobile: 'assets/bannerOpenBetaMobile.png',
   countDown: {
     title: 'Begins in',
-    time: '2022-06-30T23:59:00',
+    time: '2022-06-22T10:00',
     leadboard: {
       title: 'Leadboard',
       link: '/',
@@ -12,7 +12,7 @@ export const IMAGE_COUNTDOWN = {
       imageGray: 'assets/icons/rankingGray.svg',
     },
     Questions: [
-      {title: 'How to join challenge', link: '/', imageIcon: 'assets/icons/message-question.svg'},
+      {title: 'How to join challenge', link: '/howToJoinChain', imageIcon: 'assets/icons/message-question.svg'},
     ]
   }
 }
@@ -22,7 +22,7 @@ export const TAB_BODY = {
     titleImage: 'assets/title1.png',
     list: [
       {title: 'Location', data: 'Global'},
-      {title: 'Duration', data: 'Jun 20, 2022 - Jun 30, 2022'},
+      {title: 'Duration', data: '3:00 UTC Jun 20, 2022 - 23:59 UTC Jun 30, 2022'},
       {title: 'Reward Announcement', data: 'July 07, 2022'},
       {title: 'Activities included', data: 'Walking, Running, Cycling'},
       {title: 'Total rewards', data: '10,000 $FIU and 370 shoe NFT boxes, each NFT could be worth up to 1,000 USD'},
@@ -62,7 +62,7 @@ export const TAB_BODY = {
         subtitle: '(need 1 ticket to draw)',
         data: [
           '60 $FIU + 1 genesis shoe NFT',
-          'For 40 random participants who accumulate tickets during the event'
+          'For 50 random participants who accumulate tickets during the event'
         ]
       },
       {
@@ -107,6 +107,6 @@ export const BOX_DOWNLOAD = {
   titleImage: 'assets/title2.png',
   appleIcon: 'assets/icons/applelogo.svg',
   googleIcon: 'assets/icons/gplaylogo.svg',
-  linkIos: 'https://befitter.io/ios-register',
-  linkAndroid: 'http://cdn.befitter.io/app.apk'
+  linkIos: '#',
+  linkAndroid: '#'
 }

@@ -15,8 +15,8 @@ const JoinChain = () => {
               <StepTitleItem>STEP 1</StepTitleItem>
               <GuideItem>
                 Download <span>beFitter</span> App
-                <Typography sx={{ margin: '10px 0' }}><Link href='http://cdn.befitter.io/app.apk' target="_blank">For Android</Link></Typography>
-                <Typography><Link href='https://befitter.io/ios-register' target="_blank">For iOS</Link></Typography>
+                <Typography sx={{ margin: '10px 0' }}><Link href='#' target="_blank">For Android</Link></Typography>
+                <Typography><Link href='#' target="_blank">For iOS</Link></Typography>
               </GuideItem>
             </BoxBody>
           </StepItem>

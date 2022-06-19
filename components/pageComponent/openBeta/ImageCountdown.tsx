@@ -14,13 +14,16 @@ export const ImageCountdown = () => {
             <Body>
               <BoxCountdown>
                 <CountdownClock endDate={IMAGE_COUNTDOWN.countDown.time} sxTitle={40} sxSubTitle={16} />
-                <Link href=''><CountdownButton active={IMAGE_COUNTDOWN.countDown.leadboard.active}><img src={IMAGE_COUNTDOWN.countDown.leadboard.imageGray} /> {IMAGE_COUNTDOWN.countDown.leadboard.title}</CountdownButton></Link>
-              </BoxCountdown>
-              <BoxQuestion>
+                <Link href='#'><CountdownButton active={IMAGE_COUNTDOWN.countDown.leadboard.active}><img src={IMAGE_COUNTDOWN.countDown.leadboard.imageGray} /> {IMAGE_COUNTDOWN.countDown.leadboard.title}</CountdownButton></Link>
                 {IMAGE_COUNTDOWN.countDown.Questions?.map((item, index) => (
                   <QuestionsItem key={index}><img src={item.imageIcon} /><Link href={item.link}>{item.title}</Link></QuestionsItem>
                 ))}
-              </BoxQuestion>
+              </BoxCountdown>
+              {/* <BoxQuestion>
+                {IMAGE_COUNTDOWN.countDown.Questions?.map((item, index) => (
+                  <QuestionsItem key={index}><img src={item.imageIcon} /><Link href={item.link}>{item.title}</Link></QuestionsItem>
+                ))}
+              </BoxQuestion> */}
             </Body>
           </Stack>
         </Inner>
@@ -103,6 +106,7 @@ const BoxQuestion = styled(Stack)({
 const QuestionsItem = styled(Typography)({
   marginBottom: '16px',
   alignItems: 'center',
+  marginTop: 20,
   display: 'flex',
   '@media (min-width: 768px)': {
     marginBottom: '24px',

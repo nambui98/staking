@@ -6,7 +6,7 @@ export const BANNER = {
 	BUTTON: {
 		title: 'REGISTER NOW',
 		icon: 'assets/icons/arrow-color.svg',
-		href: '/event',
+		href: '/openBeta',
 		mobileIcon: 'assets/icons/arrow-up.svg',
 	},
 	SOCIAL: {

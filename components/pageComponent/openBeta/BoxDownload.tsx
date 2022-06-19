@@ -12,8 +12,8 @@ export const BoxDownload = () => {
           <BoxRight>
             <Title><img src={BOX_DOWNLOAD.titleImage} /></Title>
             <BoxDownloadRight>
-              <DownloadItem href={BOX_DOWNLOAD.linkIos}><img src={BOX_DOWNLOAD.appleIcon} /> <Typography>Download on <span>App Store</span></Typography></DownloadItem>
-              <DownloadItem href={BOX_DOWNLOAD.linkAndroid}><img src={BOX_DOWNLOAD.googleIcon} /> <Typography>Download on <span>Google Play</span></Typography></DownloadItem>
+              <DownloadItem href={BOX_DOWNLOAD.linkIos}><img src={BOX_DOWNLOAD.appleIcon} /> <Typography>Coming soon <span>App Store</span></Typography></DownloadItem>
+              <DownloadItem href={BOX_DOWNLOAD.linkAndroid}><img src={BOX_DOWNLOAD.googleIcon} /> <Typography>Coming soon <span>Google Play</span></Typography></DownloadItem>
             </BoxDownloadRight>
           </BoxRight>
         </Inner>
