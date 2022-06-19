@@ -67,7 +67,7 @@ export const TAB_BODY = {
       },
       {
         title: '20 Grand Prizes',
-        subtitle: '(need 1 ticket to draw)',
+        subtitle: '(need 10 ticket to draw)',
         data: [
           '200 $FIU + 1 genesis shoe NFT',
           'For 10 random participants who accumulate packs of 10 tickets during the event'
