@@ -160,8 +160,8 @@ const BannerEvent: React.FC<any> = () => {
 					}}
 				>
 					<Box>
-						<img src={BANNER.IMAGECUP} width={'25%'} height={'auto'} style={{zIndex: 2, position: 'relative'}} />
-						<img src={BANNER.IMAGE} width={'70%'} height={'auto'} style={{marginLeft: "-20px"}} />
+						{/* <img src={BANNER.IMAGECUP} width={'25%'} height={'auto'} style={{zIndex: 2, position: 'relative'}} /> */}
+						<img src={BANNER.IMAGE} width={'100%'} height={'auto'} style={{marginTop: 5}} />
 					</Box>
 					<Stack
 						direction="row"
@@ -309,12 +309,11 @@ const MobileBannerEvent: React.FC<any> = () => {
 						justifyContent: 'center',
 						alignItems: 'center'
 					}}>
-						<img src={BANNER.IMAGECUP} width={isMobile ? '90px' : '150px'} height={'auto'} style={{zIndex: 2, position: 'relative'}} />
+						{/* <img src={BANNER.IMAGECUP} width={isMobile ? '90px' : '150px'} height={'auto'} style={{zIndex: 2, position: 'relative'}} /> */}
 						<img
 							src={BANNER.IMAGE}
-							width={isMobile ? 250 : 350}
+							width={isMobile ? 300 : 350}
 							height={'auto'}
-							style={{marginLeft: isMobile ? "-15px" : "-20px"}}
 						/>
 					</Box>					
 					<Box

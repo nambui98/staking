@@ -18,7 +18,7 @@ export const ImageCountdown = () => {
               </BoxCountdown>
               <BoxQuestion>
                 {IMAGE_COUNTDOWN.countDown.Questions?.map((item, index) => (
-                  <QuestionsItem><img src={item.imageIcon} /><Link href={item.link}>{item.title}</Link></QuestionsItem>
+                  <QuestionsItem key={index}><img src={item.imageIcon} /><Link href={item.link}>{item.title}</Link></QuestionsItem>
                 ))}
               </BoxQuestion>
             </Body>

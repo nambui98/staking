@@ -41,11 +41,13 @@ const Inner = styled(Stack)({
 const BoxImage = styled(Box)({
   marginRight: 36,
   marginBottom: 17,
+  textAlign: 'center',
   '& img': {
-    width: '100%'
+    maxWidth: '100%'
   },
   '@media (min-width: 1024px)': {
-    marginBottom: 0
+    marginBottom: 0,
+    textAlign: 'left'
   }
 })
 const BoxRight = styled(Stack)({
@@ -53,11 +55,15 @@ const BoxRight = styled(Stack)({
 })
 const Title = styled(Box)({
   marginBottom: 17,
+  textAlign: 'center',
   '& img': {
-    width: '100%'
+    maxWidth: '100%'
   },
   '@media (min-width: 768px)': {
     marginBottom: 44
+  },
+  '@media (min-width: 1024px)': {
+    textAlign: 'left'
   }
 })
 const BoxDownloadRight = styled(Stack)({

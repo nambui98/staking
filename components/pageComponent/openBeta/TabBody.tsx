@@ -69,7 +69,7 @@ export const TabBody = () => {
           ))}
           <TotalPrize>
             <TotalPrizeTitle>{TAB_BODY.reward.total.title}</TotalPrizeTitle>
-            <TotalPrizeBody><span>10,000 $FIU</span> and <span>350 shoe NFTs</span>, each NFT could worth up to 1,000 USD</TotalPrizeBody>
+            <TotalPrizeBody><span>10,000 $FIU</span> and <span>370 shoe NFTs</span>, each NFT could worth up to 1,000 USD</TotalPrizeBody>
           </TotalPrize>
           <KeyNote>
             <KeyNoteTitle>{TAB_BODY.reward.keyNote.title}</KeyNoteTitle>
@@ -83,16 +83,17 @@ export const TabBody = () => {
         <TabBodyItem value={value} index={2}>
           <TitleImage><img src={TAB_BODY.rules.titleImage} /></TitleImage>
           <RuleJoin>
-            <Typography>Event participants need to do at least 1 physical activity with beFITTER app to earn a ticket: </Typography>  
-             <span>• Walking and running: Earn 1 ticket every 3km</span>
-             <span>• Cycling: Earn 1 ticket every 6 km</span>
-            <Typography>This challenge will take place on Binance Smart Chain, so make sure you provide the EXACT BEP-20 wallet address, or else your rewards and NFTs can not be delivered to you.</Typography>
-            <Typography sx={{color: '#31373E !important', fontWeight: '600 !important'}}>For iOS users:</Typography>
-            <Typography>- Submit your email and wallet address <Link href='https://befitter.io/ios-register'>HERE</Link> (Make sure to submit the same information you have registered on our website)</Typography>
-            <Typography>- Check the instruction sent to your mailbox</Typography>
-            <Typography sx={{color: '#31373E !important', fontWeight: '600 !important'}}>For Android users:</Typography>
-            <Typography>- Download <Link href='http://cdn.befitter.io/app.apk'> APK </Link></Typography>
+            <Typography sx={{ color: '#31373E !important', fontWeight: '600 !important' }}>For iOS users:</Typography>
+            <Typography>- Download Testflight and follow <Link href='https://befitter.io/ios-register'>THIS LINK</Link></Typography>
+            <Typography sx={{ color: '#31373E !important', fontWeight: '600 !important' }}>For Android users:</Typography>
+            <Typography>- Download <Link href='http://cdn.befitter.io/app.apk'> HERE </Link></Typography>
+            <Typography>Users who took part in beFITTER Alpha Test and already have an account will need to log in.</Typography>
+            <Typography>Users who didn’t take part in beFITTER Alpha Test and don’t have an account will need to create an account. </Typography>
+            <Typography>To be qualified to take part in beFITTER’s Open Beta Testnet, event participants need to go to the Wallet section in beFITTER app and claim their Testnet shoe NFT. </Typography>
             <Typography>How to transfer your testnet Genesis Shoe NFT to your beFITTER spending wallet? Just follow the instructions <Link href='https://cdn.befitter.io/transfer/'>HERE</Link>.</Typography>
+            <Typography>Event participants need to do at least 1 physical activity with beFITTER app to earn a ticket: </Typography>
+            <span>• Walking and running: Earn 1 ticket every 3km</span>
+            <span>• Cycling: Earn 1 ticket every 6 km</span>
           </RuleJoin>
           <TitleImage><img src={TAB_BODY.rules.warningIcon} />&nbsp; &nbsp;<img src={TAB_BODY.rules.titleImage2} /></TitleImage>
           {TAB_BODY.rules.list?.map((item, index) => <EventRuleITem key={index}><img src={TAB_BODY.rules.listIcon} /> {item}</EventRuleITem>)}
@@ -237,11 +238,11 @@ const TotalPrizeBody = styled(Typography)({
   }
 })
 const BoxRewardItem = styled(Stack)({
-  marginBottom: 20, 
+  marginBottom: 20,
   '@media (min-width: 768px)': {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 40, 
+    marginBottom: 40,
   }
 })
 const RewardBodyItem = styled(Typography)({

@@ -10,10 +10,10 @@ export const BOX_LIST_ITEM = [
   },
   {
     image: 'assets/box1.png',
-    body: 'When your NFT item is shown your wallet > transfer it from wallet to your spending for unboxing process.'
+    body: 'When your NFT item is shown your wallet > transfer it from wallet to your spending in beFITTER app for unboxing process'
   },
   {
     image: 'assets/shoe.png',
-    body: 'Transfer succeed > your box will appear in your Inventory > click to the box for unboxing and receive your shoe with the detailed attributions.'
+    body: 'Transfer succeed > your box will appear in your Inventory > click to the box for unboxing and receive your shoes with the detailed attributions.'
   }
 ]

@@ -43,7 +43,7 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 								<img src={LOGO} alt="Logo" width={'auto'} height={40} />
 							</Box>
 						</Link>
-						{/* <BoxSecurichain>{<img src={SECURICHAIN_LOGO} />}</BoxSecurichain> */}
+						<BoxSecurichain>{<img src={SECURICHAIN_LOGO} />}</BoxSecurichain>
 						<MenuButton />
 					</Container>
 				</Toolbar>

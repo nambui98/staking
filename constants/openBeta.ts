@@ -12,9 +12,7 @@ export const IMAGE_COUNTDOWN = {
       imageGray: 'assets/icons/rankingGray.svg',
     },
     Questions: [
-      {title: 'How to create your own Testnet Wallet', link: '/', imageIcon: 'assets/icons/message-question.svg'},
       {title: 'How to join challenge', link: '/', imageIcon: 'assets/icons/message-question.svg'},
-      {title: 'How to download beFitter app', link: '/', imageIcon: 'assets/icons/message-question.svg'}
     ]
   }
 }
@@ -27,7 +25,7 @@ export const TAB_BODY = {
       {title: 'Duration', data: 'Jun 20, 2022 - Jun 30, 2022'},
       {title: 'Reward Announcement', data: 'July 07, 2022'},
       {title: 'Activities included', data: 'Walking, Running, Cycling'},
-      {title: 'Total rewards', data: '3 NFTs with total value up to 3,000 USD'},
+      {title: 'Total rewards', data: '10,000 $FIU and 370 shoe NFT boxes, each NFT could be worth up to 1,000 USD'},
       {title: 'Max slots', data: 'Unlimited'},
       {title: 'Format', data: 'Do activities, travel distances, earn tickets to draw prizes'}
     ],
@@ -97,10 +95,9 @@ export const TAB_BODY = {
     warningIcon: 'assets/icons/warning-2.svg',
     listIcon: 'assets/icons/list2.svg',
     list: [
-      'Users will receive a FREE GENESIS NFT SHOE to participate in the challenge via the wallet ID they have provided. Rewards for the winners are also credited to the given wallet address.',
       'If any signs of cheating are detected, beFITTER will reserve the right to disqualify accountable participants. The final decision will rest on the organizer as well.',
       'By registering to participate in the challenge, you agree to beFITTER’s terms and conditions.',
-      'beFITTER has no responsibilities for users’ accidents, injuries, and other health and economic problems (if any) during the challenge.'
+      'beFITTER has no responsibilities for users’ accidents, injuries, and other health and economic problems (if any) during the challenge.',
     ]
   }
 }

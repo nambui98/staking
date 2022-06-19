@@ -11,7 +11,7 @@ const OpenBetaTestnet: NextPage = () => {
         <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage>
         <ListBox>
           {BOX_LIST_ITEM?.map((item, index) => (
-            <BoxItem key={index}><img src={item.image} /><BoxItemBody>{index === 0 ? <span>Go to website <Link href='https://gamefi.org/'>Gamefi.org</Link> for buying our mystery boxes.</span> : item.body}</BoxItemBody> </BoxItem>
+            <BoxItem key={index}><img src={item.image} /><BoxItemBody>{index === 0 ? <span>Go to website <Link target={'_blank'} href='https://gamefi.org/'>Gamefi.org</Link> for buying our mystery boxes.</span> : item.body}</BoxItemBody> </BoxItem>
           ))}
         </ListBox>
       </Wrap>
