@@ -24,7 +24,7 @@ const JoinChain = () => {
             <BoxBody>
               <StepTitleItem>STEP 2</StepTitleItem>
               <GuideItem>
-                Open <span>beFITTER</span> app, go to your <b>Profile</b>, choose <b>Wallet</b>. You'll automatically be landed on the <b>Spending</b> tab, switch it to <b>Wallet</b> tab and choose <b>Import a wallet</b>.
+                Open <span>beFITTER</span> app, go to your <b>Profile</b>, choose <b>Wallet</b>. You’ll automatically be landed on the <b>Spending</b> tab, switch it to <b>Wallet</b> tab and choose <b>Import a wallet</b>.
               </GuideItem>
             </BoxBody>
             <GuideImageItem><img src={isMobile ? STEPS_IMAGE.step2Mobile : STEPS_IMAGE.step2} /></GuideImageItem>
@@ -42,7 +42,7 @@ const JoinChain = () => {
             <BoxBody>
               <StepTitleItem>STEP 4</StepTitleItem>
               <GuideItem>
-                <Typography sx={{ marginBottom: '10px' }}>You need BNB Testnet to claim shoes. Go to <Link href=''>this website</Link> to claim BNB testnet</Typography>
+                <Typography sx={{ marginBottom: '10px' }}>You need BNB Testnet to claim shoes. Go to <Link href='/'>this website</Link> to claim BNB testnet</Typography>
                 Paste/input your wallet address in and click <b>Give me BNB</b>, choose the amount allowed by the website. Your Testnet wallet should receive that amount within seconds.
               </GuideItem>
             </BoxBody>
@@ -52,7 +52,7 @@ const JoinChain = () => {
             <BoxBody>
               <StepTitleItem>STEP 5</StepTitleItem>
               <GuideItem>
-                After finishing setting up your wallet, you'll see the number of Shoes available in your Testnet wallet. Choose <b>Shoes</b>  and you'll see a list of those assets that you own. Choose the item that you have been rewarded and send it <b>To Inventory</b>.
+                After finishing setting up your wallet, you’ll see the number of Shoes available in your Testnet wallet. Choose <b>Shoes</b>  and you’ll see a list of those assets that you own. Choose the item that you have been rewarded and send it <b>To Inventory</b>.
               </GuideItem>
             </BoxBody>
             <GuideImageItem><img src={isMobile ? STEPS_IMAGE.step5Mobile : STEPS_IMAGE.step5} /></GuideImageItem>
