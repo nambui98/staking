@@ -41,6 +41,7 @@ import FoundedBy from '../components/sections/FoundedBy';
 import Team from '../components/sections/Team';
 import Roadmap from '../components/sections/Roadmap';
 import StayInTouch from '../components/sections/StayInTouch';
+import OpenIno from '../components/pageComponent/home/openIno';
 
 const BannerSwiper: React.FC<any> = () => {
 	const isMobile = useMediaQuery('(max-width:700px)');
@@ -844,6 +845,7 @@ const Home: NextPage = () => {
 				{isSm && <MobileBannerEvent />}
 			</Box>
 			<AppSection sxProps={{ py: 8 }} />
+			<OpenIno/>
 			{/* <ChallengeSection /> */}
 			{/* <NumberSection sxProps={{ pb: 15 }} /> */}
 			<HowItWorks sxProps={{ pb: 15 }} />

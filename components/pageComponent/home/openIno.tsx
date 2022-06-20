@@ -1,26 +1,23 @@
 import { Box, Link, Stack, styled, Typography } from "@mui/material";
 import { NextPage } from "next";
-import MainLayout from "../components/layouts/MainLayout";
-import StayInTouch from "../components/sections/StayInTouch";
-import { BOX_IMAGE, BOX_LIST_ITEM } from "../constants/openIno";
+import MainLayout from "../../layouts/MainLayout";
+import StayInTouch from "../../sections/StayInTouch";
+import { BOX_IMAGE, BOX_LIST_ITEM } from "../../../constants/openIno";
 
-const OpenBetaTestnet: NextPage = () => {
+const OpenIno: NextPage = () => {
   return (
-    <MainLayout sxProps={{ background: '#ffffff' }}>
-      <Wrap>
-        <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage>
-        <ListBox>
-          {BOX_LIST_ITEM?.map((item, index) => (
-            <BoxItem key={index}><img src={item.image} /><BoxItemBody>{index === 0 ? <span>Go to website <Link target={'_blank'} href='https://gamefi.org/'>Gamefi.org</Link> for buying our mystery boxes.</span> : item.body}</BoxItemBody> </BoxItem>
-          ))}
-        </ListBox>
-      </Wrap>
-      <StayInTouch/>
-    </MainLayout>
+    <Wrap>
+      <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage>
+      <ListBox>
+        {BOX_LIST_ITEM?.map((item, index) => (
+          <BoxItem key={index}><img src={item.image} /><BoxItemBody>{index === 0 ? <span>Go to website <Link target={'_blank'} href='https://gamefi.org/'>Gamefi.org</Link> for buying our mystery boxes.</span> : item.body}</BoxItemBody> </BoxItem>
+        ))}
+      </ListBox>
+    </Wrap>
   )
 }
 
-export default OpenBetaTestnet;
+export default OpenIno;
 
 const Wrap = styled(Stack)({
   padding: '0 16px',
