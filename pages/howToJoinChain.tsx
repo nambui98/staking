@@ -42,7 +42,7 @@ const JoinChain = () => {
             <BoxBody>
               <StepTitleItem>STEP 4</StepTitleItem>
               <GuideItem>
-                <Typography sx={{ marginBottom: '10px' }}>You need BNB Testnet to claim shoes. Go to <Link href='/'>this website</Link> to claim BNB testnet</Typography>
+                <Typography sx={{ marginBottom: '10px' }}>You need BNB Testnet to claim shoes. Go to <Link href='https://testnet.binance.org/faucet-smart'>this website</Link> to claim BNB testnet</Typography>
                 Paste/input your wallet address in and click <b>Give me BNB</b>, choose the amount allowed by the website. Your Testnet wallet should receive that amount within seconds.
               </GuideItem>
             </BoxBody>
