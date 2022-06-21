@@ -36,8 +36,9 @@ export const LeaderboardTab = () => {
       setStatusLoading(true)
       // const res = await getLeaderboardData({ type: pagination.type, limit: 10000, offset: pagination.offset })
       // if (res?.data?.meta?.code === 0) {
-        const newData = data && data[pagination.type]?.filter((item: any, index: number) => index < pagination.limit && item);
-        setLeaderboardData(newData);
+        let newData: any = data;
+        const dataTab = newData[pagination.type]?.filter((item: any, index: number) => index < pagination.limit && item);
+        dataTab && setLeaderboardData(dataTab);
         // setLeaderboardDataRank(res.data.data.sort((a: any, b: any) => parseFloat(b.Total_Distance) - parseFloat(a.Total_Distance)));
       // } else {
         // setLeaderboardData([])
