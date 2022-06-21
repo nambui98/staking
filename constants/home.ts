@@ -3,6 +3,10 @@ export const BANNER = {
 	IMAGECUP: 'assets/alpha-challenge-cup.png',
 	DESC: 'Join our challenge, test your limit and earn a special reward',
 	COUNTDOWN: 'Begins in',
+	BUTTON_LEADERBOARD: {
+		title: 'assets/buttonLeaderboard.png',
+		href: '/leaderboard'
+	},
 	BUTTON: {
 		title: 'REGISTER NOW',
 		icon: 'assets/icons/arrow-color.svg',
