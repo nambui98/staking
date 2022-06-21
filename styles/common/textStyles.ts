@@ -18,5 +18,9 @@ export const TEXT_STYLE = {
   text_14_400: {
     fontSize: 14,
     fontWeight: 400
+  },
+  text_10_500: {
+    fontSize: 10,
+    fontWeight: 500
   }
 }

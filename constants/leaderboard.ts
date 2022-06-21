@@ -13,5 +13,5 @@ export const TAB = {
 }
 
 export const avatar = (hair: number) => {
-  return `assets/avatar_${hair + 1}.jpg`
+  return `assets/avatar_${hair}.jpg`
 }
