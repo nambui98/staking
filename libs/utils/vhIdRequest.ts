@@ -43,6 +43,7 @@ vhIdRequest.interceptors.response.use(
         }
       } else {
         // ToastUtils.error(err.response.meta.message)
+        return false;
       }
     }
 

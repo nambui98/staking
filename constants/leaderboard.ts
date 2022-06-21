@@ -11,3 +11,7 @@ export const TAB = {
   number2: 'assets/icons/st2.svg',
   number3: 'assets/icons/st3.svg'
 }
+
+export const avatar = (hair: number) => {
+  return `assets/avatar_${hair + 1}.jpg`
+}
