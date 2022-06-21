@@ -1,4 +1,4 @@
-import { Box, Stack, styled, Tab, Tabs, Typography, SvgIcon, Icon, CircularProgress, Backdrop, useMediaQuery } from "@mui/material"
+import { Box, Stack, styled, Tab, Tabs, Typography, SvgIcon, Icon, CircularProgress, Backdrop, useMediaQuery, Tooltip } from "@mui/material"
 import { useEffect, useState } from "react";
 import { avatar, TAB } from "../../../constants/leaderboard";
 import { getLeaderboardData } from "../../../libs/apis/statistical";
@@ -7,7 +7,7 @@ import data from '../../../dataLeaderbroad/dataLeaderbroad.json'
 
 export const LeaderboardTab = () => {
   const limit = 10;
-  const isMobile = useMediaQuery('(max-width: 767px)');
+  const isMobile = useMediaQuery('(max-width: 550px)');
   const [currentTab, setCurrentTab] = useState<number>(0);
   const [leaderboardData, setLeaderboardData] = useState<any>([]);
   const [leaderboardDataRank, setLeaderboardDataRank] = useState<any>([]);
@@ -36,8 +36,7 @@ export const LeaderboardTab = () => {
       setStatusLoading(true)
       // const res = await getLeaderboardData({ type: pagination.type, limit: 10000, offset: pagination.offset })
       // if (res?.data?.meta?.code === 0) {
-        let newData: any = data;
-        const dataTab = newData[pagination.type]?.filter((item: any, index: number) => index < pagination.limit && item);
+        const dataTab = (data as any)[pagination.type]?.filter((item: any, index: number) => index < pagination.limit && item);
         dataTab && setLeaderboardData(dataTab);
         // setLeaderboardDataRank(res.data.data.sort((a: any, b: any) => parseFloat(b.Total_Distance) - parseFloat(a.Total_Distance)));
       // } else {
@@ -80,10 +79,14 @@ export const LeaderboardTab = () => {
         {leaderboardData?.map((item: any, index: number) => (
           index > 2 && <Item key={index}><Stt sx={{minWidth: leaderboardData.length >= 100 ? 29 : 23 }}>{index + 1}</Stt>
           <img src={avatar(Math.floor(Math.random() * 3) + 1)} />
-          <Box><Name>{item?.Nickname}</Name><AddressWallet>{item?.Wallet_Address}</AddressWallet></Box><KmDetails>{parseFloat(item.Total_Distance).toFixed(2)} km</KmDetails></Item>
+          <Box><Name>{item?.Nickname}</Name>
+          <Tooltip title="Copy">
+            <AddressWallet onClick={() => navigator.clipboard.writeText(item?.Wallet_Address || '')}>{isMobile ? item?.Wallet_Address.slice(0, 10) + '...' + item?.Wallet_Address.slice(-10) : item?.Wallet_Address}</AddressWallet>
+          </Tooltip>
+          </Box><KmDetails>{parseFloat(item.Total_Distance).toFixed(2)} km</KmDetails></Item>
         ))}
       </ListDataTab>
-      {<LoadMore onClick={handleLoadMore}>Load more</LoadMore>}
+      {(data as any)[pagination.type]?.length !== leaderboardData.length && <LoadMore onClick={handleLoadMore}>Load more</LoadMore>}
       <Backdrop
         sx={{ color: '#FF6D24', zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: 'transparent' }}
         open={statusLoading}
