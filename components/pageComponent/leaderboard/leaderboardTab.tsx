@@ -1,17 +1,12 @@
-import { Box, Stack, styled, Tab, Tabs, Typography, SvgIcon, Icon, CircularProgress, Backdrop } from "@mui/material"
+import { Box, Stack, styled, Tab, Tabs, Typography, SvgIcon, Icon, CircularProgress, Backdrop, useMediaQuery } from "@mui/material"
 import { useEffect, useState } from "react";
 import { avatar, TAB } from "../../../constants/leaderboard";
 import { getLeaderboardData } from "../../../libs/apis/statistical";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
 export const LeaderboardTab = () => {
   const limit = 10;
+  const isMobile = useMediaQuery('(max-width: 767px)');
   const [currentTab, setCurrentTab] = useState<number>(0);
   const [leaderboardData, setLeaderboardData] = useState<any>();
   const [leaderboardDataRank, setLeaderboardDataRank] = useState<any>([]);
@@ -62,17 +57,17 @@ export const LeaderboardTab = () => {
         </Tabs>
       </TabsBox>
       <RankBox>
-        <RankItem>
+        <RankItem sx={{minWidth: 93}}>
           <RankAvatar><img src={TAB.number2} /> <RankFrames sx={{ top: 5 }}><img style={width47} src={avatar(leaderboardDataRank[1]?.avatar?.hair)} /></RankFrames></RankAvatar>
           <TitleRank>{leaderboardDataRank[1]?.nickname}</TitleRank>
           <KM>{leaderboardDataRank[1] && parseFloat(leaderboardDataRank[1]?.distance).toFixed(2)} km</KM>
         </RankItem>
-        <RankItem>
+        <RankItem sx={{minWidth: 116}}>
           <RankAvatar><img src={TAB.number1} /><RankFrames sx={{ top: 17 }}><img style={width68} src={avatar(leaderboardDataRank[0]?.avatar?.hair)} /></RankFrames></RankAvatar>
           <TitleRank>{leaderboardDataRank[0]?.nickname}</TitleRank>
           <KM>{leaderboardDataRank[0] && parseFloat(leaderboardDataRank[0]?.distance).toFixed(2)} km</KM>
         </RankItem>
-        <RankItem>
+        <RankItem sx={{minWidth: 93}}>
           <RankAvatar><img src={TAB.number3} /><RankFrames sx={{ top: 10 }}><img style={width40} src={avatar(leaderboardDataRank[2]?.avatar?.hair)} /></RankFrames></RankAvatar>
           <TitleRank>{leaderboardDataRank[2]?.nickname}</TitleRank>
           <KM>{leaderboardDataRank[2] && parseFloat(leaderboardDataRank[2]?.distance).toFixed(2)} km</KM>
@@ -80,7 +75,7 @@ export const LeaderboardTab = () => {
       </RankBox>
       <ListDataTab>
         {leaderboardData?.map((item: any, index: number) => (
-          index > 2 && <Item key={index}><Stt>{index + 1}</Stt><img src={avatar(item?.avatar?.hair)} /><Name>{item.nickname}</Name><KmDetails>{parseFloat(item.distance).toFixed(2)} km</KmDetails></Item>
+          index > 2 && <Item key={index}><Stt sx={{minWidth: leaderboardData.length >= 100 ? 29 : 23 }}>{index + 1}</Stt><img src={avatar(item?.avatar?.hair)} /><Name>{item.nickname}</Name><KmDetails>{parseFloat(item.distance).toFixed(2)} km</KmDetails></Item>
         ))}
       </ListDataTab>
       {<LoadMore onClick={handleLoadMore}>Load more</LoadMore>}
@@ -123,7 +118,7 @@ const KmDetails = styled(Typography)({
 })
 const Stt = styled(Typography)({
   ...TEXT_STYLE.text_16_600,
-  color: '#000000'
+  color: '#000000',
 })
 const Name = styled(Typography)({
   ...TEXT_STYLE.text_14_600
