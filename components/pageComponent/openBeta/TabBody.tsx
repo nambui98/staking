@@ -84,9 +84,9 @@ export const TabBody = () => {
           <TitleImage><img src={TAB_BODY.rules.titleImage} /></TitleImage>
           <RuleJoin>
             <Typography sx={{ color: '#31373E !important', fontWeight: '600 !important' }}>For iOS users:</Typography>
-            <Typography>- Download Testflight and follow <Link href='#'>Coming soon</Link></Typography>
+            <Typography>- Download Testflight and follow <Link href='https://testflight.apple.com/join/7ZprWPng'>THIS LINK</Link></Typography>
             <Typography sx={{ color: '#31373E !important', fontWeight: '600 !important' }}>For Android users:</Typography>
-            <Typography>- Download <Link href='#'> Coming soon </Link></Typography>
+            <Typography>- Download <Link href='#'> HERE </Link></Typography>
             <Typography>Users who took part in beFITTER Alpha Test and already have an account will need to log in.</Typography>
             <Typography>Users who didn’t take part in beFITTER Alpha Test and don’t have an account will need to create an account. </Typography>
             <Typography>To be qualified to take part in beFITTER’s Open Beta Testnet, event participants need to go to the Wallet section in beFITTER app and claim their Testnet shoe NFT. </Typography>
