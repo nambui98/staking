@@ -88,12 +88,16 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
   const [metaMaskIsInstalled, setMetaMaskIsInstalled] = useState<boolean>(false); 
   const [chainIdIsSupported, setChainIdIsSupported] = useState<boolean>(false);
 
+  const handleDisconnectWallet = () => {
+    UserService.removeCurrentUser();
+  }
+
   const handleWalletAccountsChanged = async (accounts: any) => {
     if (accounts.length > 0) {
       setWalletAccount(utils.getAddress(accounts[0]))
       UserService.setCurrentUser(utils.getAddress(accounts[0]))
     } else {
-      UserService.removeCurrentUser();
+      handleDisconnectWallet();
       window.location.reload();
     }
   }
@@ -114,7 +118,7 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
       }
       // Check if a MetaMask account has permission to connect to app
       const accounts = await _ethereumProvider.request({ method: 'eth_accounts' });
-      if (accounts.length > 0) {
+      if (accounts.length > 0 && UserService.getCurrentUser()) {
         setWalletAccount(utils.getAddress(accounts[0]));
       };
       const _ethersProvider = await new ethers.providers.Web3Provider(_ethereumProvider);
@@ -146,6 +150,10 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
       }
     }
   }, []);
+
+  useEffect(() => {
+    walletAccount === null && handleDisconnectWallet()
+  }, [walletAccount])
 
   const value = {
     activePopup,

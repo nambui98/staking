@@ -10,7 +10,7 @@ import { pageView } from "../utils/gtag";
 
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/globals.scss';
-import { WalletProvider } from '../contexts/WalletContext.tsx';
+import { WalletProvider } from '../contexts/WalletContext';
 
 
 function MyApp({ Component, pageProps }: AppProps) {

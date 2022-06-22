@@ -19,7 +19,7 @@ export const ConnectWallet: React.FC<IProps> = ({status, handleToggleStatus}) =>
       a.target = '_blank';
       a.href = 'https://metamask.io/download';
       a.click();
-    } else if(!walletAccount){
+    } else if(!walletAccount && !UserService.getCurrentUser()){
       const providerEthers = await new ethers.providers.Web3Provider(provider);
       const address = await providerEthers.send("eth_requestAccounts", []);
       const signer = providerEthers.getSigner();

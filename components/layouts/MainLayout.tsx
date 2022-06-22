@@ -4,9 +4,12 @@ import { Box } from '@mui/material';
 import { META_TITLE, META_DESC } from '../../constants/head';
 import MainHeader from '../headers/MainHeader';
 import MainFooter from '../footers/MainFooter';
+import { ConnectWallet } from '../pageComponent/marketplace/ConnectWallet';
+import { useWalletContext } from '../../contexts/WalletContext';
 
 
 const MainLayout: React.FC<any> = ({ sxProps, children }) => {
+	const {setToggleActivePopup, activePopup} = useWalletContext();
 	return (
 		<>
 			<Head>
@@ -42,6 +45,7 @@ const MainLayout: React.FC<any> = ({ sxProps, children }) => {
 				<Box component="main" flexGrow={1} sx={{...sxProps}}>
 					{children}
 				</Box>
+				<ConnectWallet status={activePopup} handleToggleStatus={setToggleActivePopup} />
 				<MainFooter />
 			</Box>
 		</>

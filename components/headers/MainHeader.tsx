@@ -9,30 +9,46 @@ import {
 	styled,
 	Button,
 	Typography,
-	Tooltip
+	Tooltip,
+	useMediaQuery,
+	Popover
 } from '@mui/material';
 import MenuButton from '../buttons/MenuButton';
-import { HEADER_ICON_BNB, LOGO, PAGE } from '../../constants/header';
+import { HEADER_ICON, HEADER_ICON_BNB, LOGO, MAIN_PAGE, PAGE } from '../../constants/header';
 import { useRouter } from 'next/router';
 import { useWalletContext } from '../../contexts/WalletContext';
 import { isBoxedPrimitive } from 'util/types';
 import { UserService } from '../../services/user.service';
 import { SECURICHAIN_LOGO } from '../../constants/header';
+import { MainMenuButton } from '../buttons/MainMenuButton';
+import { TEXT_STYLE } from '../../styles/common/textStyles';
+import { convertWalletAddress } from '../../libs/utils/utils';
 
 const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 	const { asPath } = useRouter();
-	const { setToggleActivePopup, walletAccount } = useWalletContext();
-	const [userInfo, setUserInfo] = useState({walletAddress: walletAccount});
+	const isMobile = useMediaQuery('(max-width: 767px)');
+	const { setToggleActivePopup, walletAccount, setWalletAccount } = useWalletContext();
+	const [userInfo, setUserInfo] = useState({ walletAddress: walletAccount });
+	const [activePopoverAddress, setActiveProverAddress] = React.useState<HTMLButtonElement | null>(null);
+	const open = Boolean(activePopoverAddress);
+
+	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+		setActiveProverAddress(event.currentTarget);
+	};
+
+	const handleClose = () => {
+		setActiveProverAddress(null);
+	};
 
 	useEffect(() => {
-		if(UserService.getCurrentUser()){
+		if (UserService.getCurrentUser()) {
 			setUserInfo(UserService.getCurrentUser())
 		}
 	}, [])
 
 
 	return (
-		<Box component={'header'} mb={10}>
+		<Box component={'header'} sx={{ marginBottom: '62px' }}>
 			<AppBar
 				color="transparent"
 				square
@@ -41,45 +57,59 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 					background: '#fff',
 				}}
 			>
-				<Toolbar sx={{ height: 80, borderBottom: '1px solid #E9EAEF' }}>
+				<Toolbar sx={{ height: 62 }}>
 					<Container
 						disableGutters
 						sx={{
 							py: 0,
 							display: 'flex',
 							justifyContent: 'space-between',
-							maxWidth: { xl: 1920 - 240 },
+							maxWidth: { xl: 1120 },
 						}}
 					>
-						<Link href={PAGE.HOME.link}>
-							<Box
-								component={'a'}
-								sx={{
-									display: 'flex',
-									alignItems: 'center',
-									cursor: 'pointer',
-								}}
-							>
-								<img src={LOGO} alt="Logo" width={'auto'} height={40} />
-							</Box>
-						</Link>
+						<Box sx={{ display: 'flex' }}>
+							<Link href={PAGE.HOME.link}>
+								<Box
+									component={'a'}
+									sx={{
+										display: 'flex',
+										alignItems: 'center',
+										cursor: 'pointer',
+									}}
+								>
+									<img src={LOGO} alt="Logo" width={'auto'} height={40} />
+								</Box>
+							</Link>
+							<BoxSecurichain>{<img src={SECURICHAIN_LOGO} />}</BoxSecurichain>
+						</Box>
 						<BoxMenuItem>
-							<MenuItem sx={asPath === PAGE.PRE_SALES.link ? activeLink : {}}><Link href={PAGE.PRE_SALES.link}>{PAGE.PRE_SALES.title}</Link></MenuItem>
-							<MenuItem sx={asPath === PAGE.DOCUMENT.link ? activeLink : {}}><Link href={PAGE.DOCUMENT.link}>{PAGE.DOCUMENT.title}</Link></MenuItem>
+							{MAIN_PAGE.map((item, index) => (
+								<Link href={item.link}>
+									<MenuItem key={index}><MainMenuButton active={asPath === item.link ? true : false} title={item.title} iconLink={item.icon} /></MenuItem>
+								</Link>
+							))}
 						</BoxMenuItem>
 						{walletAccount ?
 							<WalletAccount>
 								<WalletAccountChain>BSC Mainnet</WalletAccountChain>
-								<WalletAccountAddress>10 <img src={HEADER_ICON_BNB} /> 
-								<Tooltip title="Copy">
-									<ButtonAddress onClick={() => navigator.clipboard.writeText(walletAccount || '')}>{walletAccount.slice(0, 5) + '...' + walletAccount.slice(-6)}</ButtonAddress>
-								</Tooltip>
+								<WalletAccountAddress>10 <img src={HEADER_ICON_BNB} />									
+									<ButtonAddress onClick={handleClick}>{convertWalletAddress(walletAccount, 6, 3)}</ButtonAddress>
+									<ActiveProver
+										open={open}
+										anchorEl={activePopoverAddress}
+										onClose={handleClose}
+										anchorOrigin={{
+											vertical: 'bottom',
+											horizontal: 'left',
+										}}
+									>
+										<ProverItem sx={{marginBottom: '20px'}}><img style={{marginRight: 10}} src={HEADER_ICON.user} /> Link account</ProverItem>
+										<ProverItem onClick={() => setWalletAccount(null)} sx={{color: '#FF6F61'}}><img style={{marginRight: 10}} src={HEADER_ICON.logout} /> Disconnect wallet</ProverItem>
+									</ActiveProver>
 								</WalletAccountAddress>
 							</WalletAccount> : <ConnectButton variant="contained" onClick={() => setToggleActivePopup(true)}>Connect wallet</ConnectButton>
 						}
-						{/* <MenuButton /> */}
-						<BoxSecurichain>{<img src={SECURICHAIN_LOGO} />}</BoxSecurichain>
-						<MenuButton />
+						{isMobile && <MenuButton />}
 					</Container>
 				</Toolbar>
 			</AppBar>
@@ -91,37 +121,28 @@ export default MainHeader;
 
 const BoxMenuItem = styled(Stack)({
 	flexDirection: 'row',
-	alignItems: 'center',
-	marginLeft: 'auto'
+	alignItems: 'center'
 })
 const MenuItem = styled(Box)({
-	position: 'relative',
+	marginRight: 8
+})
+
+const ActiveProver = styled(Popover)({
+	'& .MuiPaper-root': {
+		border: '1px solid #E9EAEF',
+		borderRadius: 8,
+		padding: '10px 18px',
+		boxShadow: 'none',
+		marginTop: 5,
+		cursor: 'pointer',
+	}
+})
+const ProverItem = styled(Typography)({
 	display: 'flex',
 	alignItems: 'center',
-	marginRight: '32px',
-	'& a': {
-		textDecoration: 'none',
-		color: '#5A6178',
-		fontSize: 16,
-		fontWeight: 600,
-	},
-	height: '100%',
-	padding: '0 16px'
+	color: '#5A6178',
+	...TEXT_STYLE(14, 500)
 })
-const activeLink = {
-	'& a': {
-		color: '#31373E'
-	},
-	'&:before': {
-		content: `''`,
-		position: 'absolute',
-		bottom: '-14px',
-		left: 0,
-		width: '100%',
-		height: 2,
-		backgroundColor: '#FF8A50'
-	}
-}
 const ConnectButton = styled(Button)({
 	boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.25)',
 	background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
@@ -135,23 +156,18 @@ const ConnectButton = styled(Button)({
 	color: '#ffffff'
 })
 const WalletAccount = styled(Stack)({
-	alignItems: 'center',
-	flexDirection: 'row',
+
 })
 const WalletAccountChain = styled(Typography)({
-	marginRight: '16px',
-	fontSize: '12px',
-	fontWeight: '600',
-	color: '#31373E'
+	...TEXT_STYLE(12, 600),
+	color: '#31373E',
+	textAlign: 'right',
+	marginBottom: 4
 })
 const WalletAccountAddress = styled(Typography)({
 	color: '#31373E',
-	fontSize: '14px',
-	fontWeight: '600',
-	padding: '8px',
+	...TEXT_STYLE(12, 600),
 	borderRadius: '8px',
-	border: '1px solid #E9EAEF',
-	background: '#F8F9FB',
 	alignItems: 'center',
 	display: 'flex',
 	'& img': {

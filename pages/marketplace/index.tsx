@@ -32,7 +32,6 @@ const Marketplace: NextPage = () => {
           </Body>
         </Container>
       </Wrap>
-      <ConnectWallet status={popupConnectWallet} handleToggleStatus={setPopupConnectWallet} />
       <Checkout status={popupCheckout} handleToggleStatus={setpopupCheckout} />
       <ApproveToken status={popupApproveToken} handleToggleStatus={setpopupApproveToken} />
       <PaymentSuccess status={popupPaymentSuccess} handleToggleStatus={setPopupPaymentSuccess} />
