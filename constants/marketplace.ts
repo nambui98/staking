@@ -46,7 +46,7 @@ export const MARKETPLACE_ICON = {
   BNBCOINYELLOW: 'assets/icons/bnbCoinYellow.svg',
   BNBCOINGRAY: 'assets/icons/bnbCoinGray.svg',
   TICK: 'assets/icons/tick-circle.svg',
-  STAR: 'assets/icons/star.svg',
+  STAR: 'assets/icons/star2.svg',
 }
 
 export const BACKGROUND = {

@@ -14,9 +14,10 @@ import {
 import MenuButton from '../buttons/MenuButton';
 import { HEADER_ICON_BNB, LOGO, PAGE } from '../../constants/header';
 import { useRouter } from 'next/router';
-import { useWalletContext } from '../../contexts/WalletContext.tsx';
+import { useWalletContext } from '../../contexts/WalletContext';
 import { isBoxedPrimitive } from 'util/types';
 import { UserService } from '../../services/user.service';
+import { SECURICHAIN_LOGO } from '../../constants/header';
 
 const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 	const { asPath } = useRouter();
@@ -77,6 +78,8 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 							</WalletAccount> : <ConnectButton variant="contained" onClick={() => setToggleActivePopup(true)}>Connect wallet</ConnectButton>
 						}
 						{/* <MenuButton /> */}
+						<BoxSecurichain>{<img src={SECURICHAIN_LOGO} />}</BoxSecurichain>
+						<MenuButton />
 					</Container>
 				</Toolbar>
 			</AppBar>
@@ -163,4 +166,11 @@ const ButtonAddress = styled(Button)({
 	padding: '3px 8px',
 	fontSize: '12px',
 	fontWeight: '500',
+})
+
+const BoxSecurichain = styled(Box)({
+	margin: 'auto auto auto 24px',
+	'@media (max-width: 465px)': {
+		display: 'none',
+	}
 })

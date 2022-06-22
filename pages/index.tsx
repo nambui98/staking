@@ -19,6 +19,7 @@ import {
 	Icon,
 	Theme,
 	useMediaQuery,
+	styled,
 } from '@mui/material';
 
 import styles from '../styles/Home.module.scss';
@@ -41,6 +42,7 @@ import FoundedBy from '../components/sections/FoundedBy';
 import Team from '../components/sections/Team';
 import Roadmap from '../components/sections/Roadmap';
 import StayInTouch from '../components/sections/StayInTouch';
+import OpenIno from '../components/pageComponent/home/openIno';
 
 const BannerSwiper: React.FC<any> = () => {
 	const isMobile = useMediaQuery('(max-width:700px)');
@@ -119,6 +121,12 @@ const BannerSwiper: React.FC<any> = () => {
 };
 
 const BannerEvent: React.FC<any> = () => {
+	const ButtonLeaderboard =  styled(Box)({
+		cursor: 'pointer',
+		position: 'absolute',
+		bottom: 35,
+		right: -35
+	})
 	return (
 		<Box
 			sx={{
@@ -160,15 +168,15 @@ const BannerEvent: React.FC<any> = () => {
 					}}
 				>
 					<Box>
-						<img src={BANNER.IMAGECUP} width={'25%'} height={'auto'} style={{zIndex: 2, position: 'relative'}} />
-						<img src={BANNER.IMAGE} width={'70%'} height={'auto'} style={{marginLeft: "-20px"}} />
+						{/* <img src={BANNER.IMAGECUP} width={'25%'} height={'auto'} style={{zIndex: 2, position: 'relative'}} /> */}
+						<img src={BANNER.IMAGE} width={'100%'} height={'auto'} style={{marginTop: 5}} />
 					</Box>
 					<Stack
 						direction="row"
 						spacing={1.5}
 						mt={1.5}
 						alignItems="center"
-						justifyContent="end"
+						justifyContent="start"
 						sx={{ width: '100%' }}
 					>
 						<Typography
@@ -178,7 +186,7 @@ const BannerEvent: React.FC<any> = () => {
 							fontWeight={500}
 						>
 							{BANNER.COUNTDOWN}
-						</Typography>
+						</Typography>						
 						<CountdownClock />
 					</Stack>
 				</Stack>
@@ -219,6 +227,7 @@ const BannerEvent: React.FC<any> = () => {
 					</Link>
 				</Box>
 			</Box>
+			<ButtonLeaderboard><Link href={BANNER.BUTTON_LEADERBOARD.href}><img src={BANNER.BUTTON_LEADERBOARD.title} /></Link></ButtonLeaderboard>
 		</Box>
 	);
 };
@@ -279,6 +288,9 @@ const BannerSocial: React.FC<any> = () => {
 };
 
 const MobileBannerEvent: React.FC<any> = () => {
+	const ButtonLeaderboard =  styled(Box)({
+		cursor: 'pointer',
+	})
 	const isMobile = useMediaQuery('(max-width:600px)');
 	return (
 		<Link href={BANNER.BUTTON.href}>
@@ -309,14 +321,14 @@ const MobileBannerEvent: React.FC<any> = () => {
 						justifyContent: 'center',
 						alignItems: 'center'
 					}}>
-						<img src={BANNER.IMAGECUP} width={isMobile ? '90px' : '150px'} height={'auto'} style={{zIndex: 2, position: 'relative'}} />
+						{/* <img src={BANNER.IMAGECUP} width={isMobile ? '90px' : '150px'} height={'auto'} style={{zIndex: 2, position: 'relative'}} /> */}
 						<img
 							src={BANNER.IMAGE}
-							width={isMobile ? 250 : 350}
+							width={isMobile ? 300 : 350}
 							height={'auto'}
-							style={{marginLeft: isMobile ? "-15px" : "-20px"}}
 						/>
-					</Box>					
+					</Box>		
+					<ButtonLeaderboard><Link href={BANNER.BUTTON_LEADERBOARD.href}><img src={BANNER.BUTTON_LEADERBOARD.title} /></Link></ButtonLeaderboard>			
 					<Box
 						sx={{
 							position: 'absolute',
@@ -845,6 +857,7 @@ const Home: NextPage = () => {
 				{isSm && <MobileBannerEvent />}
 			</Box>
 			<AppSection sxProps={{ py: 8 }} />
+			<OpenIno/>
 			{/* <ChallengeSection /> */}
 			{/* <NumberSection sxProps={{ pb: 15 }} /> */}
 			<HowItWorks sxProps={{ pb: 15 }} />

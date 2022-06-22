@@ -12,3 +12,4 @@ export const PAGE = {
   DOCUMENT: {title: 'Documentation', link: '/'},
   LITEPAPER: {title: 'litePaper', link: '/litePaper'},
 }
+export const SECURICHAIN_LOGO = 'assets/securichain.png';
