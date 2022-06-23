@@ -1,16 +1,61 @@
 import { Box, Button, ButtonProps, FormControl, InputLabel, MenuItem, Select, Stack, styled, Typography } from "@mui/material"
-import { useEffect, useState } from "react";
+import { ethers } from "ethers";
+import { useEffect, useRef, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import { CLAIM_IMAGE } from "../../../constants/claim";
 import { useWalletContext } from "../../../contexts/WalletContext"
+import { getClaimedBox, handleClaimBox } from "../../../libs/claim";
 import { convertWalletAddress } from "../../../libs/utils/utils";
-import { TEXT_STYLE } from "../../../styles/common/textStyles"
+import { TEXT_STYLE } from "../../../styles/common/textStyles";
+import { PopupMessage } from "./PopupMessage";
+
+const RECAPTCHA_SITE_KEY = "6LfVxzAgAAAAAEFPNTeG6d8xqKifrYhwVZ4VAKtd"
 
 export const TabClaim = () => {
-  const { walletAccount } = useWalletContext();
+  const { walletAccount, claimBoxContract, ethersProvider } = useWalletContext();
   const [currentTab, setCUrrentTab] = useState<'box' | 'token'>('box');
   const [selecItem, setSelectItem] = useState<{title: string, value: string}[]>([]);
   const [dataSelected, setDataSelected] = useState<string>('');
-  const [statusClaim, setStatusClaim] = useState<boolean>(false);
+  const [captchaToken, setCaptchaToken] = useState('');
+  const [dataClaim, setDataClaim] = useState<{totalBox: number, claimed: number}>({
+    totalBox: 15, claimed: 5
+  })
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  const onReCAPTCHAChange = async (captchaCode: any) => {
+		if(!captchaCode) {
+			return;
+		}
+		setCaptchaToken(captchaCode);
+	}
+
+  const handleChangeTab = (tab: 'box' | 'token') => {
+    setDataSelected('')
+    setCUrrentTab(tab)
+  }
+
+  const checkStatusButton = () => {
+    if(dataClaim.totalBox > dataClaim.claimed && captchaToken.length && dataSelected.length){
+      return true
+    }
+    return false;
+  }
+
+  const handleClaimButton = async () => {
+    const resultClaim: any = await handleClaimBox(walletAccount, claimBoxContract, captchaToken);
+    const status = await ethersProvider.getTransactionReceipt(resultClaim.hash);
+    const status2 = await ethersProvider.getTransactionReceipt(resultClaim.hash);
+
+    console.log(status, status2)
+  }
+
+  useEffect(() => {
+    const getClaimedBoxNumber = async () => {
+      const dataBox = await getClaimedBox(walletAccount, claimBoxContract);
+      dataBox && setDataClaim({...dataClaim, claimed: parseInt(ethers.utils.formatEther(dataBox))})
+    }
+    getClaimedBoxNumber();
+  }, [])
 
   useEffect(() => {
     if(currentTab === 'token') {
@@ -31,7 +76,7 @@ export const TabClaim = () => {
 
   return (
     <Wrap>
-      <Title>BeFitter Claim Portal</Title>
+      <Title>beFitter Claim Portal</Title>
       {walletAccount && <Account>
         <Address>{convertWalletAddress(walletAccount, 8, 6)}</Address>
         <Disconnect>Disconnect</Disconnect>
@@ -39,12 +84,12 @@ export const TabClaim = () => {
       <Typography sx={{ ...TEXT_STYLE(14, 500), marginBottom: '12px', color: '#5A6178' }}>I want to claim</Typography>
       <BoxTab>
         <Box>
-          <TabItem sx={{ marginRight: '4px' }} onClick={() => setCUrrentTab('token')} active={currentTab === 'token' ? true : false}>Token</TabItem>
-          <TabItem onClick={() => setCUrrentTab('box')} active={currentTab === 'box' ? true : false}>Box</TabItem>
+          <TabItem onClick={() => handleChangeTab('box')} active={currentTab === 'box' ? true : false}>Box</TabItem>
+          <TabItem sx={{ marginRight: '4px' }} onClick={() => handleChangeTab('token')} active={currentTab === 'token' ? true : false}>Token</TabItem>
         </Box>
       </BoxTab>
       <LabelSelect>Select your Vesting Round</LabelSelect>
-      <FormControl fullWidth>
+      <FormControl>
         <BoxSelect
           value={dataSelected}
           label="Select round"
@@ -53,8 +98,18 @@ export const TabClaim = () => {
           {selecItem?.length && selecItem?.map((item: any, index: number) => <SelectItem key={index} value={item.value}>{item.title}</SelectItem>)}
         </BoxSelect>
       </FormControl>
-      <BoxBg><img src={CLAIM_IMAGE.bgClaim} /></BoxBg>
-      <ButtonClaim active={statusClaim}>Claim</ButtonClaim>
+      {dataSelected && dataClaim ? <DataClaimBox>
+        <Typography>Available {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.totalBox} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : CLAIM_IMAGE.box} /></span></Typography>
+        <Typography sx={{margin: '20px 0'}}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.claimed} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : CLAIM_IMAGE.box} /></span></Typography>
+      </DataClaimBox> : <BoxBg><img src={CLAIM_IMAGE.bgClaim} /></BoxBg>}
+      <ReCAPTCHA
+        ref={recaptchaRef}
+        sitekey={RECAPTCHA_SITE_KEY}
+        onChange={onReCAPTCHAChange}
+      />
+      <ButtonClaim active={checkStatusButton()} disabled={checkStatusButton() ? false : true} onClick={handleClaimButton}>Claim</ButtonClaim>
+      {/* <PopupMessage title="Transaction succeeded!" status={true} titleButton="Back to claim" popupType="success" handleToggleStatus={() => null} /> */}
+      {/* <PopupMessage title="Fail" status={true} titleButton="Back to claim" popupType="error" handleToggleStatus={() => null} /> */}
     </Wrap>
   )
 }
@@ -98,6 +153,7 @@ type tabItemProps = ButtonProps & {
   active: boolean
 }
 const TabItem = styled(Button)((props: tabItemProps) => ({
+  textTransform: 'capitalize',
   background: props.active ? 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)' : '#F8F9FB',
   borderRadius: 8,
   padding: '4px 0',
@@ -138,7 +194,9 @@ const BoxBg = styled(Box)({
   margin: '24px 0'
 })
 const ButtonClaim = styled(Button)((props: tabItemProps) => ({
+  textTransform: 'capitalize',
   padding: '16px',
+  marginTop: '16px',
   borderRadius: 8,
   boxShadow: 'none !important',
   '&:hover, &': {
@@ -146,3 +204,22 @@ const ButtonClaim = styled(Button)((props: tabItemProps) => ({
     color: props.active ? '#ffffff' : '#A7ACB8',
   }
 }))
+const DataClaimBox = styled(Box)({
+  margin: '16px 0 24px',
+  '& p': {
+    color: '#5A6178',
+    ...TEXT_STYLE(14, 500),
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  '& span': {
+    ...TEXT_STYLE(16, 600),
+    color: '#31373E',
+    display: 'flex',
+    alignItems : 'center'
+  },
+  '& img': {
+    marginLeft: '8px'
+  }
+})

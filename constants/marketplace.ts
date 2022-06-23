@@ -45,7 +45,8 @@ export const MARKETPLACE_ICON = {
   METAMASK: 'assets/icons/metamask.svg',
   BNBCOINYELLOW: 'assets/icons/bnbCoinYellow.svg',
   BNBCOINGRAY: 'assets/icons/bnbCoinGray.svg',
-  TICK: 'assets/icons/tick-circle.svg',
+  TICK: 'assets/icons/tick-green.svg',
+  CLOSE_ICON: 'assets/icons/close-red.svg',
   STAR: 'assets/icons/star2.svg',
 }
 

@@ -2,6 +2,7 @@ import { Box, Stack, styled } from "@mui/material"
 import Dialog from "@mui/material/Dialog"
 import DialogTitle from "@mui/material/DialogTitle"
 import { MARKETPLACE_ICON } from "../../constants/marketplace"
+import { TEXT_STYLE } from "../../styles/common/textStyles"
 import { MarketplaceButton } from "../buttons/MarketplaceButton"
 
 interface IProps {
@@ -34,18 +35,22 @@ const Wrap = styled(Stack)({
   padding: '0 16px 16px',
   width: 'calc(100vw - 32px)',
   '@media (min-width: 650px)': {
-    width: '544px',
+    width: '352px',
     padding: '0 24px 24px',
   }
 })
 const TitlePopup = styled(DialogTitle)({
-  fontSize: '22px !important',
+  fontSize: '16px !important',
   fontWeight: '500',
   color: '#31373E',
-  marginBottom: '17px',
+  // marginBottom: '17px',
+  marginBottom: 10,
   textAlign: 'center',
   '@media (min-width: 768px)': {
-    fontSize: '24px !important'
+    fontSize: '16px !important'
+  },
+  '& p': {
+    ...TEXT_STYLE(16, 600)
   }
 })
 const closeIcon = {

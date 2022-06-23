@@ -2,6 +2,8 @@ import { ethers, utils } from "ethers"
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react"
 import detectEthereumProvider from '@metamask/detect-provider';
 import { UserService } from "../services/user.service";
+import { beFitterBox, claimBox, noxyContract, nverContract } from "../libs/contracts";
+import MerkleClaim from "../abi/merkle-claim.json"
 
 interface Map {
 	[key: string]: any;
@@ -48,6 +50,8 @@ interface wallerContextType {
   setWalletAccount: (account: any) => void
   metaMaskIsInstalled: boolean,
   chainIdIsSupported: boolean,
+  BnbBalance: string,
+  claimBoxContract: any
 } 
 
 interface IProps {
@@ -64,6 +68,8 @@ const WalletContext = createContext<wallerContextType>({
   setWalletAccount: () => {},
   metaMaskIsInstalled: false,
   chainIdIsSupported: false,
+  BnbBalance: '',
+  claimBoxContract: null
 })
 
 export const useWalletContext = () => useContext(WalletContext);
@@ -87,6 +93,8 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
   const [walletAccount, setWalletAccount] = useState<any>();
   const [metaMaskIsInstalled, setMetaMaskIsInstalled] = useState<boolean>(false); 
   const [chainIdIsSupported, setChainIdIsSupported] = useState<boolean>(false);
+  const [claimBoxContract, setClaimBoxContract] = useState<any>();
+  const [BnbBalance, setBnbBalance] = useState<string>('');
 
   const handleDisconnectWallet = () => {
     UserService.removeCurrentUser();
@@ -99,6 +107,23 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
     } else {
       handleDisconnectWallet();
       window.location.reload();
+    }
+  }
+
+  const updateBalance = async () => {
+    if (walletAccount && ethersSigner) {
+      const _claim = new ethers.Contract(claimBox.address, claimBox.abi, ethersSigner);
+      _claim && setClaimBoxContract(_claim)
+
+      //GET BNB balance
+      const balance = await ethersProvider.getBalance(walletAccount);
+      const balanceInEth = ethers.utils.formatEther(balance);
+      balanceInEth && setBnbBalance(balanceInEth)
+
+      try {
+      } catch (error) {
+        console.error('claim', error);
+      }
     }
   }
 
@@ -155,6 +180,10 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
     walletAccount === null && handleDisconnectWallet()
   }, [walletAccount])
 
+  useEffect(() => {
+    updateBalance()
+  }, [walletAccount, ethersSigner])
+
   const value = {
     activePopup,
     setToggleActivePopup: setActivePopup,
@@ -164,7 +193,9 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
     walletAccount,
     setWalletAccount,
     metaMaskIsInstalled,
-    chainIdIsSupported
+    chainIdIsSupported,
+    BnbBalance: BnbBalance,
+    claimBoxContract: claimBoxContract
   }
   return <WalletContext.Provider value={value}>{children}</WalletContext.Provider>
 }

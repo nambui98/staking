@@ -27,7 +27,7 @@ import { convertWalletAddress } from '../../libs/utils/utils';
 const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 	const { asPath } = useRouter();
 	const isMobile = useMediaQuery('(max-width: 767px)');
-	const { setToggleActivePopup, walletAccount, setWalletAccount } = useWalletContext();
+	const { setToggleActivePopup, walletAccount, setWalletAccount, BnbBalance } = useWalletContext();
 	const [userInfo, setUserInfo] = useState({ walletAddress: walletAccount });
 	const [activePopoverAddress, setActiveProverAddress] = React.useState<HTMLButtonElement | null>(null);
 	const open = Boolean(activePopoverAddress);
@@ -92,7 +92,7 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 						{walletAccount ?
 							<WalletAccount>
 								<WalletAccountChain>BSC Mainnet</WalletAccountChain>
-								<WalletAccountAddress>10 <img src={HEADER_ICON_BNB} />									
+								<WalletAccountAddress>{BnbBalance?.length ? parseFloat(BnbBalance).toFixed(4) : '0.00'} <img src={HEADER_ICON_BNB} />									
 									<ButtonAddress onClick={handleClick}>{convertWalletAddress(walletAccount, 6, 3)}</ButtonAddress>
 									<ActiveProver
 										open={open}
