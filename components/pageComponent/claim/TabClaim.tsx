@@ -1,5 +1,6 @@
 import { Box, Button, ButtonProps, FormControl, InputLabel, MenuItem, Select, Stack, styled, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
+import { CLAIM_IMAGE } from "../../../constants/claim";
 import { useWalletContext } from "../../../contexts/WalletContext"
 import { convertWalletAddress } from "../../../libs/utils/utils";
 import { TEXT_STYLE } from "../../../styles/common/textStyles"
@@ -9,6 +10,7 @@ export const TabClaim = () => {
   const [currentTab, setCUrrentTab] = useState<'box' | 'token'>('box');
   const [selecItem, setSelectItem] = useState<{title: string, value: string}[]>([]);
   const [dataSelected, setDataSelected] = useState<string>('');
+  const [statusClaim, setStatusClaim] = useState<boolean>(false);
 
   useEffect(() => {
     if(currentTab === 'token') {
@@ -48,9 +50,11 @@ export const TabClaim = () => {
           label="Select round"
           onChange={e => setDataSelected(e.target.value as string)}
         >
-          {selecItem?.length && selecItem?.map((item: any, index: number) => <MenuItem key={index} value={item.value}>{item.title}</MenuItem>)}
+          {selecItem?.length && selecItem?.map((item: any, index: number) => <SelectItem key={index} value={item.value}>{item.title}</SelectItem>)}
         </BoxSelect>
       </FormControl>
+      <BoxBg><img src={CLAIM_IMAGE.bgClaim} /></BoxBg>
+      <ButtonClaim active={statusClaim}>Claim</ButtonClaim>
     </Wrap>
   )
 }
@@ -125,3 +129,20 @@ const BoxSelect = styled(Select)({
     border: 0
   }
 })
+const SelectItem = styled(MenuItem)({
+  ...TEXT_STYLE(14, 500),
+  color: '#31373E',
+  padding: '12px 16px'
+})
+const BoxBg = styled(Box)({
+  margin: '24px 0'
+})
+const ButtonClaim = styled(Button)((props: tabItemProps) => ({
+  padding: '16px',
+  borderRadius: 8,
+  boxShadow: 'none !important',
+  '&:hover, &': {
+    background: props.active ? 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)' : '#E9EAEF',
+    color: props.active ? '#ffffff' : '#A7ACB8',
+  }
+}))
