@@ -6,8 +6,8 @@ export const IMAGE_COUNTDOWN = {
     time: '2022-06-20T10:00',
     leadboard: {
       title: 'Leadboard',
-      link: '/',
-      active: false,
+      link: '/leaderboard',
+      active: true,
       image: 'assets/icons/ranking.svg',
       imageGray: 'assets/icons/rankingGray.svg',
     },
@@ -70,7 +70,7 @@ export const TAB_BODY = {
         subtitle: '(need 10 ticket to draw)',
         data: [
           '200 $FIU + 1 genesis shoe NFT',
-          'For 10 random participants who accumulate packs of 10 tickets during the event'
+          'For 20 random participants who accumulate packs of 10 tickets during the event'
         ]
       }
     ],
@@ -83,8 +83,9 @@ export const TAB_BODY = {
       data: [
         'Any accumulated 10 tickets of any users will be qualified to join the Grand Prizes draw automatically.',
         'The total distance users have traveled will be automatically synced to the app after each 15 mins.',
-        'If users join more than 01 categories, only one with the highest result will be taken into account.',
-        'Winners of the challenge will need to download the beFITTER Application (Mainnet version when available) and successfully register, then the rewards will be sent into their spending wallet and users must create an account on the Mainnet application after the reward time.'
+        "When mainnet launches, winners will be able to claim their rewards on beFITTER's website by submitting the exact wallet address registered in Open Beta Testnet.",
+        "To put rewards into use, winners need to log in to beFITTER's mainnet version of the app with the same account information registered in Open Beta Testnet (All account information from Alpha and Beta Testnet will be migrated to Mainnet).",
+        "The Mainnet version is expected to launch in July 2022."
       ]
     },
     bodyGetReward: 'Rewards will be delivered directly to participants’ Spending wallet after the Mainnet launch.'

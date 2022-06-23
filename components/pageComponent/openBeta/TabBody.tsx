@@ -2,6 +2,7 @@ import styled from "@emotion/styled"
 import { Box, Container, Link, Stack, Tab, Tabs, Typography } from "@mui/material"
 import { useState } from "react";
 import { TAB_BODY } from "../../../constants/openBeta";
+import { TEXT_STYLE } from "../../../styles/common/textStyles";
 
 function TabPanel(props: any) {
   const { children, value, index, ...other } = props;
@@ -74,9 +75,17 @@ export const TabBody = () => {
           <KeyNote>
             <KeyNoteTitle>{TAB_BODY.reward.keyNote.title}</KeyNoteTitle>
             <Stack>
-              {TAB_BODY.reward.keyNote.data?.map((item, index) => <KeyNoteItem key={index}><Typography>•</Typography> {item}</KeyNoteItem>)}
+              {TAB_BODY.reward.keyNote.data?.map((item, index) =>
+              <KeyNoteItem key={index} sx={index === 2 || index === 3 ? {marginBottom: '4px !important'} : {}}>
+                {index < 3 && <Typography>•</Typography>} 
+                {item}
+              </KeyNoteItem>)}
             </Stack>
           </KeyNote>
+          <Box>
+            <Typography sx={{color: '#5A6178', marginBottom: '10px', ...TEXT_STYLE.text_16_500}}>If you have any related concerns, kindly contact beFITTER for support!</Typography>
+            <Typography sx={{color: '#5A6178', ...TEXT_STYLE.text_16_500}}>Email: <span style={{color: '#FF8A50 '}}>team@befitter.io</span></Typography>
+          </Box>
           {/* <TitleImage><img src={TAB_BODY.reward.titleImage2} /></TitleImage>
           <BodyGetReward>{TAB_BODY.reward.bodyGetReward}</BodyGetReward> */}
         </TabBodyItem>

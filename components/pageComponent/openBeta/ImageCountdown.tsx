@@ -14,7 +14,7 @@ export const ImageCountdown = () => {
             <Body>
               <BoxCountdown>
                 <CountdownClock endDate={IMAGE_COUNTDOWN.countDown.time} sxTitle={40} sxSubTitle={16} />
-                <Link href='#'><CountdownButton active={IMAGE_COUNTDOWN.countDown.leadboard.active}><img src={IMAGE_COUNTDOWN.countDown.leadboard.imageGray} /> {IMAGE_COUNTDOWN.countDown.leadboard.title}</CountdownButton></Link>
+                <Link href='/leaderbroad'><CountdownButton active={IMAGE_COUNTDOWN.countDown.leadboard.active}><img src={IMAGE_COUNTDOWN.countDown.leadboard.image} /> {IMAGE_COUNTDOWN.countDown.leadboard.title}</CountdownButton></Link>
                 {IMAGE_COUNTDOWN.countDown.Questions?.map((item, index) => (
                   <QuestionsItem key={index}><img src={item.imageIcon} /><Link href={item.link}>{item.title}</Link></QuestionsItem>
                 ))}
