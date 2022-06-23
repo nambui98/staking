@@ -77,7 +77,7 @@ export const TabBody = () => {
             <Stack>
               {TAB_BODY.reward.keyNote.data?.map((item, index) =>
               <KeyNoteItem key={index} sx={index === 2 || index === 3 ? {marginBottom: '4px !important'} : {}}>
-                {index < 3 && <Typography>•</Typography>} 
+                <Typography sx={{opacity: index < 3 ? 1 : 0}}>•</Typography>
                 {item}
               </KeyNoteItem>)}
             </Stack>
