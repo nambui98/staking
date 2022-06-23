@@ -1,9 +1,8 @@
 
 import { ClaimService } from '../services/claim.service';
 
-export const handleClaimBox = async (walletAddress: string, claimBoxContract: any, captchaToken: string) => {
-  const AddressAmount: any = await ClaimService.getAmount(walletAddress, captchaToken)
-  const claim = AddressAmount?.status ? await claimBoxContract.claim(walletAddress, AddressAmount.amount, AddressAmount.proof) : null;
+export const handleClaimBox = async (walletAddress: string, claimBoxContract: any, AddressAmount: any) => {
+  const claim = await claimBoxContract.claim(walletAddress, AddressAmount.amount, AddressAmount.proof);
   return claim
 }
 

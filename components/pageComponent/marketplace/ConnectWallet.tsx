@@ -36,7 +36,9 @@ export const ConnectWallet: React.FC<IProps> = ({status, handleToggleStatus}) =>
     
   }
   return (
-    <Popup title="Connect wallet" status={activePopup} handleToggle={() => setToggleActivePopup(false)} >
+    <Popup title="Connect wallet" status={activePopup} handleToggle={() => setToggleActivePopup(false)} sx={{'@media (min-width: 650px)': {
+      width: '544px'
+    }}} >
       <Stack sx={wrap}>
         <Item>
           <Typography sx={titleConnect}>Recommended wallet</Typography>
@@ -46,7 +48,8 @@ export const ConnectWallet: React.FC<IProps> = ({status, handleToggleStatus}) =>
         </Item>
         <Item>
           <Typography sx={titleConnect}>Recommended wallet</Typography>
-          <Box sx={itemConnect}><Box sx={flex}><img src={MARKETPLACE_ICON.METAMASK} /><ItemTitle>MetaMask</ItemTitle></Box> <ButtonConnect>Connect</ButtonConnect></Box>
+          <Box sx={itemConnect}><Box sx={flex}><img src={MARKETPLACE_ICON.METAMASK} /><ItemTitle>MetaMask</ItemTitle></Box> 
+          <ButtonConnect onClick={handleConnectWallet}>Connect</ButtonConnect></Box>
         </Item>
         <LinkConnect href="#">How to connect wallet?</LinkConnect>
       </Stack>

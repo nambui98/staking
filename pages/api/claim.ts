@@ -4,12 +4,16 @@ import MerkleClaim from "../../abi/merkle-claim.json";
 const { serverRuntimeConfig } = getConfig();
 
 export default async function handler(req: any, res: any) {
+	const responseFail = {
+		amount: null,
+		proof: null,
+		status: 0,
+		message: 'fail'
+	}
 	if (req.method === 'POST') {
 		const { walletAddress, captchaToken } = req.body;
 		if (!walletAddress || !captchaToken) {
-			return res.status(422).json({
-				message: 'Unproccesable request, please provide the required fields',
-			});
+			return res.json(responseFail);
 		}
 		try {
 			const response = await fetch(
@@ -22,6 +26,7 @@ export default async function handler(req: any, res: any) {
 				}
 			);
 			const captchaValidation = await response.json();
+			console.log(captchaValidation.success);
 			if (captchaValidation.success) {
 				const findData = (MerkleClaim as any).merkleData.claimData[walletAddress];
 				if(findData){
@@ -41,12 +46,10 @@ export default async function handler(req: any, res: any) {
 				}
 			}
 
-			return res.status(422).json({
-				message: 'Unproccesable request, Invalid captcha code',
-			});
+			return res.json(res.json(responseFail));
 		} catch (error) {
 			console.log(error);
-			return res.status(422).json({ message: 'Something went wrong' });
+			return res.json(res.json(responseFail));
 		}
 	}
 	// Return 404 if someone pings the API with a method other than

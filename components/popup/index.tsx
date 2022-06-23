@@ -15,12 +15,13 @@ interface IProps {
   priceButton?: number
   handleClickButton?: () => any
   customStyleButton?: any
+  sx?: any
 }
 
-export const Popup: React.FC<IProps> = ({status, handleToggle, title, children, titleButton, priceButton, handleClickButton, customStyleButton, titleCustomStyle}) => {
+export const Popup: React.FC<IProps> = ({status, handleToggle, title, children, titleButton, priceButton, handleClickButton, customStyleButton, titleCustomStyle, sx}) => {
   return (
     <Dialog sx={borderRadius} onClose={handleToggle} open={status}>
-      <Wrap>
+      <Wrap sx={sx}>
         <Box onClick={handleToggle} sx={closeIcon}><img src={MARKETPLACE_ICON.CLOSE} /></Box>
         {title && <TitlePopup sx={titleCustomStyle}>{title}</TitlePopup>}
         {children}

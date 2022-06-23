@@ -1,4 +1,4 @@
-import { Box, Button, ButtonProps, FormControl, InputLabel, MenuItem, Select, Stack, styled, Typography } from "@mui/material"
+import { Backdrop, Box, Button, ButtonProps, CircularProgress, FormControl, InputLabel, MenuItem, Select, Stack, styled, Typography } from "@mui/material"
 import { ethers } from "ethers";
 import { useEffect, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -6,28 +6,33 @@ import { CLAIM_IMAGE } from "../../../constants/claim";
 import { useWalletContext } from "../../../contexts/WalletContext"
 import { getClaimedBox, handleClaimBox } from "../../../libs/claim";
 import { convertWalletAddress } from "../../../libs/utils/utils";
+import { ClaimService } from "../../../services/claim.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
+import { ConnectBox } from "./ConnectBox";
 import { PopupMessage } from "./PopupMessage";
 
 const RECAPTCHA_SITE_KEY = "6LfVxzAgAAAAAEFPNTeG6d8xqKifrYhwVZ4VAKtd"
 
 export const TabClaim = () => {
-  const { walletAccount, claimBoxContract, ethersProvider } = useWalletContext();
+  const { walletAccount, claimBoxContract, setWalletAccount } = useWalletContext();
   const [currentTab, setCUrrentTab] = useState<'box' | 'token'>('box');
-  const [selecItem, setSelectItem] = useState<{title: string, value: string}[]>([]);
+  const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [dataSelected, setDataSelected] = useState<string>('');
   const [captchaToken, setCaptchaToken] = useState('');
-  const [dataClaim, setDataClaim] = useState<{totalBox: number, claimed: number}>({
+  const [dataClaim, setDataClaim] = useState<{ totalBox: number, claimed: number }>({
     totalBox: 15, claimed: 5
   })
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [popupError, setPopupError] = useState(false);
+  const [popupSuccess, setPopupSuccess] = useState(false);
+  const [statusLoading, setStatusLoading] = useState<boolean>(false);
 
   const onReCAPTCHAChange = async (captchaCode: any) => {
-		if(!captchaCode) {
-			return;
-		}
-		setCaptchaToken(captchaCode);
-	}
+    if (!captchaCode) {
+      return;
+    }
+    setCaptchaToken(captchaCode);
+  }
 
   const handleChangeTab = (tab: 'box' | 'token') => {
     setDataSelected('')
@@ -35,41 +40,47 @@ export const TabClaim = () => {
   }
 
   const checkStatusButton = () => {
-    if(dataClaim.totalBox > dataClaim.claimed && captchaToken.length && dataSelected.length){
+    if (dataClaim.totalBox > dataClaim.claimed && captchaToken.length && dataSelected.length) {
       return true
     }
     return false;
   }
 
   const handleClaimButton = async () => {
-    const resultClaim: any = await handleClaimBox(walletAccount, claimBoxContract, captchaToken);
-    const status = await ethersProvider.getTransactionReceipt(resultClaim.hash);
-    const status2 = await ethersProvider.getTransactionReceipt(resultClaim.hash);
-
-    console.log(status, status2)
+    setStatusLoading(true)
+    const res: any = await ClaimService.getAmount(walletAccount, captchaToken);
+    if (res?.data?.status) {
+      const resultClaim: any = await handleClaimBox(walletAccount, claimBoxContract, res.data);
+      // const status = await ethersProvider.getTransactionReceipt(resultClaim.hash);
+      console.log(resultClaim)
+      setPopupSuccess(true)
+    } else {
+      setPopupError(true)
+    }
+    setStatusLoading(false)
   }
 
   useEffect(() => {
     const getClaimedBoxNumber = async () => {
       const dataBox = await getClaimedBox(walletAccount, claimBoxContract);
-      dataBox && setDataClaim({...dataClaim, claimed: parseInt(ethers.utils.formatEther(dataBox))})
+      dataBox && setDataClaim({ ...dataClaim, claimed: parseInt(ethers.utils.formatEther(dataBox)) })
     }
     getClaimedBoxNumber();
   }, [])
 
   useEffect(() => {
-    if(currentTab === 'token') {
+    if (currentTab === 'token') {
       setSelectItem([
-        {title: 'Seed', value: 'Seed'},
-        {title: 'Private', value: 'Private'},
-        {title: 'Airdrop', value: 'Airdrop'},
+        { title: 'Seed', value: 'Seed' },
+        { title: 'Private', value: 'Private' },
+        { title: 'Airdrop', value: 'Airdrop' },
       ])
     } else {
       setSelectItem([
-        {title: 'Alpha Test Reward', value: 'Alpha Test Reward'},
-        {title: 'Beta Test Reward', value: 'Beta Test Reward'},
-        {title: 'GameFi', value: 'GameFi'},
-        {title: 'Enjinstarter', value: 'Enjinstarter'}
+        { title: 'Alpha Test Reward', value: 'Alpha Test Reward' },
+        { title: 'Beta Test Reward', value: 'Beta Test Reward' },
+        { title: 'GameFi', value: 'GameFi' },
+        { title: 'Enjinstarter', value: 'Enjinstarter' }
       ])
     }
   }, [currentTab])
@@ -77,39 +88,48 @@ export const TabClaim = () => {
   return (
     <Wrap>
       <Title>beFitter Claim Portal</Title>
-      {walletAccount && <Account>
-        <Address>{convertWalletAddress(walletAccount, 8, 6)}</Address>
-        <Disconnect>Disconnect</Disconnect>
-      </Account>}
-      <Typography sx={{ ...TEXT_STYLE(14, 500), marginBottom: '12px', color: '#5A6178' }}>I want to claim</Typography>
-      <BoxTab>
-        <Box>
-          <TabItem onClick={() => handleChangeTab('box')} active={currentTab === 'box' ? true : false}>Box</TabItem>
-          <TabItem sx={{ marginRight: '4px' }} onClick={() => handleChangeTab('token')} active={currentTab === 'token' ? true : false}>Token</TabItem>
-        </Box>
-      </BoxTab>
-      <LabelSelect>Select your Vesting Round</LabelSelect>
-      <FormControl>
-        <BoxSelect
-          value={dataSelected}
-          label="Select round"
-          onChange={e => setDataSelected(e.target.value as string)}
-        >
-          {selecItem?.length && selecItem?.map((item: any, index: number) => <SelectItem key={index} value={item.value}>{item.title}</SelectItem>)}
-        </BoxSelect>
-      </FormControl>
-      {dataSelected && dataClaim ? <DataClaimBox>
-        <Typography>Available {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.totalBox} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : CLAIM_IMAGE.box} /></span></Typography>
-        <Typography sx={{margin: '20px 0'}}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.claimed} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : CLAIM_IMAGE.box} /></span></Typography>
-      </DataClaimBox> : <BoxBg><img src={CLAIM_IMAGE.bgClaim} /></BoxBg>}
-      <ReCAPTCHA
-        ref={recaptchaRef}
-        sitekey={RECAPTCHA_SITE_KEY}
-        onChange={onReCAPTCHAChange}
-      />
-      <ButtonClaim active={checkStatusButton()} disabled={checkStatusButton() ? false : true} onClick={handleClaimButton}>Claim</ButtonClaim>
-      {/* <PopupMessage title="Transaction succeeded!" status={true} titleButton="Back to claim" popupType="success" handleToggleStatus={() => null} /> */}
-      {/* <PopupMessage title="Fail" status={true} titleButton="Back to claim" popupType="error" handleToggleStatus={() => null} /> */}
+      {!walletAccount ? <ConnectBox/> : <Stack>
+        {walletAccount && <Account>
+          <Address>{convertWalletAddress(walletAccount, 8, 6)}</Address>
+          <Disconnect onClick={() => setWalletAccount(null)}>Disconnect</Disconnect>
+        </Account>}
+        <Typography sx={{ ...TEXT_STYLE(14, 500), marginBottom: '12px', color: '#5A6178' }}>I want to claim</Typography>
+        <BoxTab>
+          <Box>
+            <TabItem sx={{ marginRight: '4px' }} onClick={() => handleChangeTab('box')} active={currentTab === 'box' ? true : false}>Box</TabItem>
+            <TabItem active={currentTab === 'token' ? true : false}>Token</TabItem>
+          </Box>
+        </BoxTab>
+        <LabelSelect>Select your Vesting Round</LabelSelect>
+        <FormControl>
+          <BoxSelect
+            value={dataSelected}
+            label="Select round"
+            onChange={e => setDataSelected(e.target.value as string)}
+          >
+            {selecItem?.length && selecItem?.map((item: any, index: number) => <SelectItem key={index} value={item.value}>{item.title}</SelectItem>)}
+          </BoxSelect>
+        </FormControl>
+        {dataSelected && dataClaim ? <DataClaimBox>
+          <Typography>Available {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.totalBox} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : CLAIM_IMAGE.box} /></span></Typography>
+          <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.claimed} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : CLAIM_IMAGE.box} /></span></Typography>
+        </DataClaimBox> : <BoxBg><img src={CLAIM_IMAGE.bgClaim} /></BoxBg>}
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          sitekey={RECAPTCHA_SITE_KEY}
+          onChange={onReCAPTCHAChange}
+        />
+        <ButtonClaim active={checkStatusButton()} disabled={checkStatusButton() ? false : true} onClick={handleClaimButton}>Claim</ButtonClaim>
+      </Stack>}
+      <PopupMessage title="Successful claim item!" status={popupSuccess} titleButton="Back to claim" popupType="success" handleToggleStatus={() => setPopupSuccess(false)} handleClickButton={() => setPopupSuccess(false)} />
+      <PopupMessage title="Error!" status={popupError} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError(false)}
+        handleClickButton={() => setPopupError(false)} titleCustomColor={{ '& p': { color: '#FF6F61' } }} message="Something went wrong. Please try again!" />
+      <Backdrop
+        sx={{ color: '#FF6D24', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={statusLoading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Wrap>
   )
 }
@@ -217,7 +237,7 @@ const DataClaimBox = styled(Box)({
     ...TEXT_STYLE(16, 600),
     color: '#31373E',
     display: 'flex',
-    alignItems : 'center'
+    alignItems: 'center'
   },
   '& img': {
     marginLeft: '8px'

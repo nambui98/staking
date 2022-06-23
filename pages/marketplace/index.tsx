@@ -9,16 +9,15 @@ import { ConnectWallet } from "../../components/pageComponent/marketplace/Connec
 import {Filter} from "../../components/pageComponent/marketplace/Filter";
 import ListProduct from "../../components/pageComponent/marketplace/ListProduct";
 import { PaymentSuccess } from "../../components/pageComponent/marketplace/PaymentSuccess";
-import { PopupMessage } from "../../components/pageComponent/marketplace/PopupMessage";
 import { ProductDetail } from "../../components/pageComponent/marketplace/ProductDetail";
 
 const Marketplace: NextPage = () => {
   const [productDetailActive, setProductDetailActive] = useState<boolean>(false);
   const [currentProductDetail, setCurrentProductDetail] = useState<any>();
   const [popupConnectWallet, setPopupConnectWallet] = useState<boolean>(true);
-  const [popupCheckout, setpopupCheckout] = useState<boolean>(false);
-  const [popupApproveToken, setpopupApproveToken] = useState<boolean>(false)
-  const [popupPaymentSuccess, setPopupPaymentSuccess] = useState<boolean>(false)
+  const [popupCheckout, setpopupCheckout] = useState<boolean>(true);
+  const [popupApproveToken, setpopupApproveToken] = useState<boolean>(true)
+  const [popupPaymentSuccess, setPopupPaymentSuccess] = useState<boolean>(true)
 
   return (
     <MainLayout sxProps={{backgroundColor: "#FFFFFF"}}>

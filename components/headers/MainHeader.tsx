@@ -84,14 +84,14 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 						</Box>
 						<BoxMenuItem>
 							{MAIN_PAGE.map((item, index) => (
-								<Link href={item.link}>
+								<Link key={index} href={item.link}>
 									<MenuItem key={index}><MainMenuButton active={asPath === item.link ? true : false} title={item.title} iconLink={item.icon} /></MenuItem>
 								</Link>
 							))}
 						</BoxMenuItem>
 						{walletAccount ?
 							<WalletAccount>
-								<WalletAccountChain>BSC Mainnet</WalletAccountChain>
+								<WalletAccountChain>BSC Testnet</WalletAccountChain>
 								<WalletAccountAddress>{BnbBalance?.length ? parseFloat(BnbBalance).toFixed(4) : '0.00'} <img src={HEADER_ICON_BNB} />									
 									<ButtonAddress onClick={handleClick}>{convertWalletAddress(walletAccount, 6, 3)}</ButtonAddress>
 									<ActiveProver
