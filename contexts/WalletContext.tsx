@@ -113,7 +113,8 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
   const updateBalance = async () => {
     if (walletAccount && ethersSigner) {
       const _claim = new ethers.Contract(claimBox.address, claimBox.abi, ethersSigner);
-      _claim && setClaimBoxContract(_claim)
+      console.log(123)
+     setClaimBoxContract(_claim)
 
       //GET BNB balance
       const balance = await ethersProvider.getBalance(walletAccount);
@@ -195,7 +196,7 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
     metaMaskIsInstalled,
     chainIdIsSupported,
     BnbBalance: BnbBalance,
-    claimBoxContract: claimBoxContract
+    claimBoxContract
   }
   return <WalletContext.Provider value={value}>{children}</WalletContext.Provider>
 }

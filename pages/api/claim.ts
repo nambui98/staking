@@ -11,8 +11,8 @@ export default async function handler(req: any, res: any) {
 		message: 'fail'
 	}
 	if (req.method === 'POST') {
-		const { walletAddress, captchaToken } = req.body;
-		if (!walletAddress || !captchaToken) {
+		const { walletAddress, captchaToken, requireCaptcha } = req.body;
+		if (!walletAddress) {
 			return res.json(responseFail);
 		}
 		try {
@@ -26,10 +26,37 @@ export default async function handler(req: any, res: any) {
 				}
 			);
 			const captchaValidation = await response.json();
-			console.log(captchaValidation.success);
-			if (captchaValidation.success) {
+			
+			if (requireCaptcha) {
+				if (captchaValidation.success) {
+					const findData = (MerkleClaim as any).merkleData.claimData[walletAddress];
+					if (findData) {
+						return res.json({
+							amount: findData.amount,
+							proof: findData.proof,
+							status: 1,
+							message: 'success'
+						});
+					} else {
+						return res.json({
+							amount: null,
+							proof: null,
+							status: 0,
+							message: 'fail',
+						})
+					}
+				} else {
+					return res.json({
+						amount: null,
+						proof: null,
+						status: 0,
+						message: 'fail',
+						captchaValidation: false
+					})
+				}
+			} else {
 				const findData = (MerkleClaim as any).merkleData.claimData[walletAddress];
-				if(findData){
+				if (findData) {
 					return res.json({
 						amount: findData.amount,
 						proof: findData.proof,
