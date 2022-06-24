@@ -51,6 +51,7 @@ interface wallerContextType {
   metaMaskIsInstalled: boolean,
   chainIdIsSupported: boolean,
   BnbBalance: string,
+  updateBnbBalance: () => void
   claimBoxContract: any
 } 
 
@@ -69,6 +70,7 @@ const WalletContext = createContext<wallerContextType>({
   metaMaskIsInstalled: false,
   chainIdIsSupported: false,
   BnbBalance: '',
+  updateBnbBalance: () => null,
   claimBoxContract: null
 })
 
@@ -113,7 +115,6 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
   const updateBalance = async () => {
     if (walletAccount && ethersSigner) {
       const _claim = new ethers.Contract(claimBox.address, claimBox.abi, ethersSigner);
-      console.log(123)
      setClaimBoxContract(_claim)
 
       //GET BNB balance
@@ -196,6 +197,7 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
     metaMaskIsInstalled,
     chainIdIsSupported,
     BnbBalance: BnbBalance,
+    updateBnbBalance: updateBalance,
     claimBoxContract
   }
   return <WalletContext.Provider value={value}>{children}</WalletContext.Provider>

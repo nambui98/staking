@@ -1,4 +1,4 @@
-import { Box, Button, Link, Stack, styled, Typography } from "@mui/material";
+import { Box, Button, Link, Stack, styled, Typography, useMediaQuery } from "@mui/material";
 import { Popup } from "../../popup";
 import { MARKETPLACE_ICON } from "../../../constants/marketplace";
 import { ethers } from "ethers";
@@ -11,10 +11,11 @@ interface IProps {
 }
 
 export const ConnectWallet: React.FC<IProps> = ({status, handleToggleStatus}) => {
-  const {provider, setWalletAccount, setToggleActivePopup, walletAccount, metaMaskIsInstalled, activePopup, chainIdIsSupported } = useWalletContext();
+  const isMobile = useMediaQuery('(max-width: 991px)');
+  const {provider, setWalletAccount, setToggleActivePopup, walletAccount, metaMaskIsInstalled, activePopup, chainIdIsSupported, ethersProvider } = useWalletContext();
 
   const handleConnectWallet = async () => {
-    if (!metaMaskIsInstalled) {
+    if (!metaMaskIsInstalled && !isMobile) {
       let a = document.createElement('a');
       a.target = '_blank';
       a.href = 'https://metamask.io/download';
@@ -23,9 +24,9 @@ export const ConnectWallet: React.FC<IProps> = ({status, handleToggleStatus}) =>
       const providerEthers = await new ethers.providers.Web3Provider(provider);
       const address = await providerEthers.send("eth_requestAccounts", []);
       const signer = providerEthers.getSigner();
-      const signature = await signer.signMessage("Hello World");
+      const signature = await signer.signMessage("Please sign this transaction");
       if(address && signature){
-        setWalletAccount(address[0]);
+        setWalletAccount(ethers.utils.getAddress(address[0]));
         UserService.setCurrentUser(address[0]);
         setToggleActivePopup(false);
       }
