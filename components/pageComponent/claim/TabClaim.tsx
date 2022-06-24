@@ -69,6 +69,9 @@ export const TabClaim = () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
           if(statusClaim?.status){
             setPopupSuccess(true);
+            setTimeout(() => {
+              window.location.reload()
+            }, 3000);
             setStatusLoading(false);
             getClaimedBoxNumber();
             setRoundSelected('');
