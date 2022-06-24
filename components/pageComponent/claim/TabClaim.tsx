@@ -12,7 +12,7 @@ import { TEXT_STYLE } from "../../../styles/common/textStyles";
 import { ConnectBox } from "./ConnectBox";
 import { PopupMessage } from "./PopupMessage";
 
-const RECAPTCHA_SITE_KEY = "6LeE55cgAAAAANuGwIKdhnwjkVzSemORpryMhlML"
+const RECAPTCHA_SITE_KEY = "6Lc275cgAAAAAAHHwNMoAh448YXBi-jz3AeS-4A9"
 
 export const TabClaim = () => {
   const { walletAccount, claimBoxContract, setWalletAccount, ethersSigner } = useWalletContext();
