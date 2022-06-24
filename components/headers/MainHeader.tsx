@@ -48,7 +48,7 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 
 
 	return (
-		<Box component={'header'} sx={{ marginBottom: '62px' }}>
+		<Box component={'header'} sx={{ marginBottom: '125px', '@media (min-width: 1100px)': {marginBottom: '62px'} }}>
 			<AppBar
 				color="transparent"
 				square
@@ -57,7 +57,7 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 					background: '#fff',
 				}}
 			>
-				<Toolbar sx={{ height: 62 }}>
+				<ToolbarBox>
 					<Container
 						disableGutters
 						sx={{
@@ -65,11 +65,13 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 							display: 'flex',
 							justifyContent: 'space-between',
 							maxWidth: { xl: 1120 },
+							flexWrap: 'wrap',
+							alignItems: 'center'
 						}}
 					>
-						<Box sx={{ display: 'flex' }}>
+						<BoxLogo>
 							<Link href={PAGE.HOME.link}>
-								<Box
+								<Logo
 									component={'a'}
 									sx={{
 										display: 'flex',
@@ -78,10 +80,10 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 									}}
 								>
 									<img src={LOGO} alt="Logo" width={'auto'} height={40} />
-								</Box>
+								</Logo>
 							</Link>
 							<BoxSecurichain>{<img src={SECURICHAIN_LOGO} />}</BoxSecurichain>
-						</Box>
+						</BoxLogo>
 						<BoxMenuItem>
 							{MAIN_PAGE.map((item, index) => (
 								<Link key={index} href={item.link}>
@@ -109,9 +111,8 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 								</WalletAccountAddress>
 							</WalletAccount> : <ConnectButton variant="contained" onClick={() => setToggleActivePopup(true)}>Connect wallet</ConnectButton>
 						}
-						{isMobile && <MenuButton />}
 					</Container>
-				</Toolbar>
+				</ToolbarBox>
 			</AppBar>
 		</Box>
 	);
@@ -119,9 +120,41 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 
 export default MainHeader;
 
+const Logo = styled(Box)({
+	'& img': {
+		'@media (max-width: 767px)': {
+			width: 150
+		}
+	}
+})
+const BoxLogo = styled(Box)({
+	flexDirection: 'column',
+	justifyContent: 'flex-end',
+	'@media (min-width: 1100px)': {
+		display: 'flex',
+		flexDirection: 'row',
+	}
+})
 const BoxMenuItem = styled(Stack)({
 	flexDirection: 'row',
-	alignItems: 'center'
+	alignItems: 'center',
+	'@media (max-width: 1100px)': {
+		width: '100%',
+		order: 3, 
+		justifyContent: 'center',
+		marginTop: 10,
+		overflow: 'auto'
+	},
+	'@media (max-width: 500px)': {
+		justifyContent: 'flex-start'
+	}
+})
+const ToolbarBox = styled(Toolbar)({
+	padding: '10px 16px',
+	'@media (min-width: 1100px)': {
+		height: 62,
+		padding: '0 16px'
+	}
 })
 const MenuItem = styled(Box)({
 	marginRight: 8
@@ -147,16 +180,27 @@ const ConnectButton = styled(Button)({
 	boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.25)',
 	background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
 	borderRadius: '12px',
-	padding: '13px 24px',
+	padding: '4px 24px',
 	fontFamily: 'Electrofied',
 	fontStyle: 'italic',
 	textShadow: '0px 2px 1px #C64B0D',
-	fontSize: '16px',
-	fontWeight: '600',
-	color: '#ffffff'
+	...TEXT_STYLE(14, 600),
+	color: '#ffffff',
+	width: 121,
+	lineHeight: '16px',
+	'@media (min-width: 1100px)': {
+		padding: '13px 24px',
+		...TEXT_STYLE(16, 600),
+		lineHeight: '1.75',
+		width: 'auto'
+	}
 })
 const WalletAccount = styled(Stack)({
-
+	'@media (max-width: 1100px)': {
+		background: '#E9EAEF',
+		borderRadius: 8,
+		padding: '4px 8px'
+	}
 })
 const WalletAccountChain = styled(Typography)({
 	...TEXT_STYLE(12, 600),
@@ -171,7 +215,10 @@ const WalletAccountAddress = styled(Typography)({
 	alignItems: 'center',
 	display: 'flex',
 	'& img': {
-		margin: '0 12px 0 4px'
+		margin: '0 12px 0 4px',
+		'@media (max-width: 767px)': {
+			width: 16
+		}
 	}
 })
 const ButtonAddress = styled(Button)({
@@ -186,7 +233,14 @@ const ButtonAddress = styled(Button)({
 
 const BoxSecurichain = styled(Box)({
 	margin: 'auto auto auto 24px',
-	'@media (max-width: 465px)': {
-		display: 'none',
+	'@media (max-width: 1100px)': {
+		margin: 0,
+		display: 'flex',
+		justifyContent: 'flex-end',
+		'& img': {
+			width: 98,
+			marginRight: -15,
+			marginTop: -4
+		}
 	}
 })
