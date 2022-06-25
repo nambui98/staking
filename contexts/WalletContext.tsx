@@ -129,7 +129,12 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
     }
   }
 
-  const handleChainChanged = (chainId: any) => {
+  const handleChainChanged = async (chainId: any) => {
+    if (supportedChainIds.indexOf(chainId) >= 0) {
+      setChainIdIsSupported(true);
+    } else {
+      setChainIdIsSupported(false);
+    }
     window.location.reload();
   }
 

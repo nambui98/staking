@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { RECAPTCHA_SITE_KEY } from "../../../const";
 import { CLAIM_IMAGE } from "../../../constants/claim";
-import { useWalletContext } from "../../../contexts/WalletContext"
+import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { getClaimedBox, handleClaimBox } from "../../../libs/claim";
 import { claimBox } from "../../../libs/contracts";
 import { convertWalletAddress } from "../../../libs/utils/utils";
@@ -16,7 +16,7 @@ import { PopupMessage } from "./PopupMessage";
 // const RECAPTCHA_SITE_KEY = "6Lc275cgAAAAAAHHwNMoAh448YXBi-jz3AeS-4A9"
 
 export const TabClaim = () => {
-  const { walletAccount, claimBoxContract, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance } = useWalletContext();
+  const { walletAccount, claimBoxContract, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
   const [currentTab, setCUrrentTab] = useState<'box' | 'token'>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [roundSelected, setRoundSelected] = useState<string>('');
@@ -36,7 +36,7 @@ export const TabClaim = () => {
     setCaptchaToken(captchaCode);
   }
 
-  const handleChangeTab = (tab: 'box' | 'token') => {
+  const handleChangeTab = async (tab: 'box' | 'token') => {
     setRoundSelected('')
     setCUrrentTab(tab)
   }
@@ -49,6 +49,9 @@ export const TabClaim = () => {
   }
 
   const getClaimedBoxNumber = async () => {
+    if(!chainIdIsSupported) {
+      await changeNetwork(provider)
+    }
     const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, false);
     if (res?.data?.status) {
       const _claim = await new ethers.Contract(claimBox.address, claimBox.abi, ethersSigner)
@@ -125,8 +128,8 @@ export const TabClaim = () => {
         <Typography sx={{ ...TEXT_STYLE(14, 500), marginBottom: '12px', color: '#5A6178' }}>I want to claim</Typography>
         <BoxTab>
           <Box>
-            <TabItem sx={{ marginRight: '4px' }} onClick={() => handleChangeTab('box')} active={currentTab === 'box' ? true : false}>Box</TabItem>
-            <TabItem active={currentTab === 'token' ? true : false}>Token</TabItem>
+            <TabItem sx={{ marginRight: '4px' }} active={currentTab === 'box' ? true : false}>Box</TabItem>
+            {/* <TabItem active={currentTab === 'token' ? true : false}>Token</TabItem> */}
           </Box>
         </BoxTab>
         <Stack>
@@ -137,9 +140,9 @@ export const TabClaim = () => {
               labelId="test-select-label"
               value={roundSelected}
               label="Select round"
-              onChange={e => setRoundSelected(e.target.value as string)}
+              onChange={e => e.target.value === '3' && setRoundSelected(e.target.value as string)}
             >
-              {selecItem?.length && selecItem?.map((item: any, index: number) => <SelectItem key={index} value={item.value}>{item.title}</SelectItem>)}
+              {selecItem?.length && selecItem?.map((item: any, index: number) => <SelectItem sx={item.value === '3' ? activeItem : {}} key={index} value={item.value}>{item.title}</SelectItem>)}
             </BoxSelect>
           </FormControl>
           {roundSelected && dataClaim ? <DataClaimBox>
@@ -254,8 +257,12 @@ const BoxSelect = styled(Select)({
 const SelectItem = styled(MenuItem)({
   ...TEXT_STYLE(14, 500),
   color: '#31373E',
-  padding: '12px 16px'
+  padding: '12px 16px',
+  opacity: '0.4'
 })
+const activeItem = {
+  opacity: '1'
+}
 const BoxBg = styled(Box)({
   margin: '24px 0'
 })
