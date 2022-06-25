@@ -1,6 +1,9 @@
 import fetch from 'node-fetch';
 import getConfig from "next/config";
-import MerkleClaim from "../../abi/merkle-claim.json";
+import AlphaData from "../../abi/merkle-claim.json";
+import BetaData from "../../abi/merkle-claim.json";
+import GameFiData from "../../abi/merkle-claim.json";
+import EnjinstarterData from "../../abi/merkle-claim.json";
 const { serverRuntimeConfig } = getConfig();
 
 export default async function handler(req: any, res: any) {
@@ -11,8 +14,8 @@ export default async function handler(req: any, res: any) {
 		message: 'fail'
 	}
 	if (req.method === 'POST') {
-		const { walletAddress, captchaToken, requireCaptcha } = req.body;
-		if (!walletAddress) {
+		const { walletAddress, captchaToken, round, requireCaptcha } = req.body;
+		if (!walletAddress || !round) {
 			return res.json(responseFail);
 		}
 		try {
@@ -26,10 +29,20 @@ export default async function handler(req: any, res: any) {
 				}
 			);
 			const captchaValidation = await response.json();
-			
-			if (requireCaptcha) {
-				if (captchaValidation.success) {
-					const findData = (MerkleClaim as any).merkleData.claimData[walletAddress];
+			const checkRound = (round: any) => {
+				const findData = (round as any).merkleData.claimData[walletAddress];
+				if (requireCaptcha) {
+					if (captchaValidation.success) {					
+						if (findData) {
+							return res.json({
+								amount: findData.amount,
+								proof: findData.proof,
+								status: 1,
+								message: 'success'
+							});
+						} else res.json(responseFail)
+					} else res.json({...responseFail, captchaValidation: false})
+				} else {
 					if (findData) {
 						return res.json({
 							amount: findData.amount,
@@ -37,40 +50,21 @@ export default async function handler(req: any, res: any) {
 							status: 1,
 							message: 'success'
 						});
-					} else {
-						return res.json({
-							amount: null,
-							proof: null,
-							status: 0,
-							message: 'fail',
-						})
-					}
-				} else {
-					return res.json({
-						amount: null,
-						proof: null,
-						status: 0,
-						message: 'fail',
-						captchaValidation: false
-					})
+					} else res.json(responseFail)
 				}
-			} else {
-				const findData = (MerkleClaim as any).merkleData.claimData[walletAddress];
-				if (findData) {
-					return res.json({
-						amount: findData.amount,
-						proof: findData.proof,
-						status: 1,
-						message: 'success'
-					});
-				} else {
-					return res.json({
-						amount: null,
-						proof: null,
-						status: 0,
-						message: 'fail'
-					})
-				}
+			}
+
+			switch (round) {
+				case '1':
+					checkRound(AlphaData)
+				case '2':
+					checkRound(BetaData)
+				case '3':
+					checkRound(GameFiData)
+				case '4':
+					checkRound(EnjinstarterData)		
+				default:
+					break;
 			}
 
 			return res.json(res.json(responseFail));

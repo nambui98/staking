@@ -49,19 +49,19 @@ export const TabClaim = () => {
   }
 
   const getClaimedBoxNumber = async () => {
-    const res: any = await ClaimService.getAmount(walletAccount, captchaToken, false);
+    const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, false);
     if (res?.data?.status) {
       const _claim = await new ethers.Contract(claimBox.address, claimBox.abi, ethersSigner)
       const dataClaimed = await getClaimedBox(walletAccount, _claim);
       setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount }) 
     } else {
-      setDataClaim({...dataClaim, totalBox: 0})
+      setDataClaim({claimed: 0, totalBox: 0})
     }
   }
 
   const handleClaimButton = async () => {
     setStatusLoading(true)
-    const res: any = await ClaimService.getAmount(walletAccount, captchaToken, true);
+    const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, true);
     if (res?.data?.status) {
       try {
         const resultClaim: any = await handleClaimBox(walletAccount, claimBoxContract, res.data);       
@@ -106,10 +106,10 @@ export const TabClaim = () => {
       ])
     } else {
       setSelectItem([
-        { title: 'Alpha Test Reward', value: 'Alpha Test Reward' },
-        { title: 'Beta Test Reward', value: 'Beta Test Reward' },
-        { title: 'GameFi', value: 'GameFi' },
-        { title: 'Enjinstarter', value: 'Enjinstarter' }
+        { title: 'Alpha Test Reward', value: '1' },
+        { title: 'Beta Test Reward', value: '2' },
+        { title: 'GameFi', value: '3' },
+        { title: 'Enjinstarter', value: '4' }
       ])
     }
   }, [currentTab])
@@ -129,7 +129,7 @@ export const TabClaim = () => {
             <TabItem active={currentTab === 'token' ? true : false}>Token</TabItem>
           </Box>
         </BoxTab>
-        {dataClaim.totalBox ? <Stack>
+        <Stack>
           <LabelSelect>Select your Vesting Round</LabelSelect>
           <FormControl>
             {!roundSelected && <InputLabel sx={label}>Select round</InputLabel>}
@@ -151,7 +151,7 @@ export const TabClaim = () => {
             sitekey={RECAPTCHA_SITE_KEY}
             onChange={onReCAPTCHAChange}
           />
-        </Stack> : <MessageCanotClaim>your account cannot claim</MessageCanotClaim>}
+        </Stack>
         <ButtonClaim active={checkStatusButton()} disabled={checkStatusButton() ? false : true} onClick={handleClaimButton}>Claim</ButtonClaim>
       </Stack>}
       <PopupMessage title="Successful claim item!" status={popupSuccess} titleButton="Back to claim" popupType="success" handleToggleStatus={() => setPopupSuccess(false)} handleClickButton={() => window.location.reload()} />
