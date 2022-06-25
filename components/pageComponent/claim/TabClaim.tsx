@@ -69,9 +69,6 @@ export const TabClaim = () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
           if(statusClaim?.status){
             setPopupSuccess(true);
-            setTimeout(() => {
-              window.location.reload()
-            }, 3000);
             setStatusLoading(false);
             getClaimedBoxNumber();
             setRoundSelected('');
@@ -157,7 +154,7 @@ export const TabClaim = () => {
         </Stack> : <MessageCanotClaim>your account cannot claim</MessageCanotClaim>}
         <ButtonClaim active={checkStatusButton()} disabled={checkStatusButton() ? false : true} onClick={handleClaimButton}>Claim</ButtonClaim>
       </Stack>}
-      <PopupMessage title="Successful claim item!" status={popupSuccess} titleButton="Back to claim" popupType="success" handleToggleStatus={() => setPopupSuccess(false)} handleClickButton={() => setPopupSuccess(false)} />
+      <PopupMessage title="Successful claim item!" status={popupSuccess} titleButton="Back to claim" popupType="success" handleToggleStatus={() => setPopupSuccess(false)} handleClickButton={() => window.location.reload()} />
       <PopupMessage title="Error!" status={popupError} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError(false)}
         handleClickButton={() => setPopupError(false)} titleCustomColor={{ '& p': { color: '#FF6F61' } }} message="Something went wrong. Please try again!" />
       <Backdrop

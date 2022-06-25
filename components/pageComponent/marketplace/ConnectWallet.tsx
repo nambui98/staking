@@ -15,7 +15,7 @@ export const ConnectWallet: React.FC<IProps> = ({status, handleToggleStatus}) =>
   const {provider, setWalletAccount, setToggleActivePopup, walletAccount, metaMaskIsInstalled, activePopup, chainIdIsSupported, ethersProvider } = useWalletContext();
 
   const handleConnectWallet = async () => {
-    if (!metaMaskIsInstalled && !isMobile) {
+    if (!metaMaskIsInstalled) {
       let a = document.createElement('a');
       a.target = '_blank';
       a.href = 'https://metamask.io/download';
