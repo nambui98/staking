@@ -22,8 +22,8 @@ const addresses: Map = {
     nextAuction: '0xAB1fcf6b123084d90DCDf3C01cd13590F382D7f0',
     nextMarket: '0x55fB465d1CE088fD483b890794a76F2CfF3a9146',
     nextPack: '0x03dbB95547399d91659f6aF4F5E4B6f8f4aAC2A4',
-    beFitterBox: '0xAe3877309d9185259102565a698a74FF36eFA982',
-    claimBox: '0x4Dee7C3cD673C38d3bAf224BAAeb13975F3A2a37'
+    beFitterBox: '0x545d2339c40fb53F326037311C7d99bDB7668401',
+    claimBox: '0xBF4db77cbD1497BAcb7e5A8785E3a97713e0DD69'
   },
   ['localhost']: {
     nextDeployer: '0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1',

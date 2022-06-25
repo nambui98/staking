@@ -29,20 +29,9 @@ export default async function handler(req: any, res: any) {
 				}
 			);
 			const captchaValidation = await response.json();
-			const checkRound = (round: any) => {
-				const findData = (round as any).merkleData.claimData[walletAddress];
-				if (requireCaptcha) {
-					if (captchaValidation.success) {					
-						if (findData) {
-							return res.json({
-								amount: findData.amount,
-								proof: findData.proof,
-								status: 1,
-								message: 'success'
-							});
-						} else res.json(responseFail)
-					} else res.json({...responseFail, captchaValidation: false})
-				} else {
+			const findData = await (round === '1' ? AlphaData : round === '2' ? BetaData : round === '3' ? GameFiData : EnjinstarterData as any).merkleData.claimData[walletAddress];
+			if (requireCaptcha) {
+				if (captchaValidation.success) {
 					if (findData) {
 						return res.json({
 							amount: findData.amount,
@@ -51,29 +40,25 @@ export default async function handler(req: any, res: any) {
 							message: 'success'
 						});
 					} else res.json(responseFail)
-				}
+				} else res.json({ ...responseFail, captchaValidation: false })
+			} else {
+				if (findData) {
+					return res.json({
+						amount: findData.amount,
+						proof: findData.proof,
+						status: 1,
+						message: 'success'
+					});
+				} else res.json(responseFail)
 			}
 
-			switch (round) {
-				case '1':
-					checkRound(AlphaData)
-				case '2':
-					checkRound(BetaData)
-				case '3':
-					checkRound(GameFiData)
-				case '4':
-					checkRound(EnjinstarterData)		
-				default:
-					break;
-			}
-
-			return res.json(res.json(responseFail));
-		} catch (error) {
-			console.log(error);
-			return res.json(res.json(responseFail));
-		}
+	return res.json(responseFail);
+} catch (error) {
+	console.log(error);
+	return res.json(responseFail);
+}
 	}
-	// Return 404 if someone pings the API with a method other than
-	// POST
-	return res.status(404).send('Not found');
+// Return 404 if someone pings the API with a method other than
+// POST
+return res.status(404).send('Not found');
 }
