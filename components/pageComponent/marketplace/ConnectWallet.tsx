@@ -49,7 +49,7 @@ export const ConnectWallet: React.FC<IProps> = ({status, handleToggleStatus}) =>
           </Box>
         </Item>
         <Item>
-          <TitleConnect>Recommended wallet</TitleConnect>
+          <TitleConnect>LIMITED SUPPORT WALLET</TitleConnect>
           <Typography sx={{...TEXT_STYLE(16, 500), color: '#A7ACB8', marginTop: '16px'}}>Coming soon</Typography>
         </Item>
         <LinkConnect href="https://metamask.io/faqs/" target={'_blank'}>How to connect wallet?</LinkConnect>
