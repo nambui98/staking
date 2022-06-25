@@ -109,9 +109,9 @@ export const TabClaim = () => {
       ])
     } else {
       setSelectItem([
+        { title: 'GameFi', value: '3' },
         { title: 'Alpha Test Reward', value: '1' },
         { title: 'Beta Test Reward', value: '2' },
-        { title: 'GameFi', value: '3' },
         { title: 'Enjinstarter', value: '4' }
       ])
     }
@@ -129,11 +129,11 @@ export const TabClaim = () => {
         <BoxTab>
           <Box>
             <TabItem sx={{ marginRight: '4px' }} active={currentTab === 'box' ? true : false}>Box</TabItem>
-            {/* <TabItem active={currentTab === 'token' ? true : false}>Token</TabItem> */}
+            <TabItem sx={{opacity: '0.4'}} active={currentTab === 'token' ? true : false}>Token</TabItem>
           </Box>
         </BoxTab>
         <Stack>
-          <LabelSelect>Select your Vesting Round</LabelSelect>
+          <LabelSelect>Select vesting round</LabelSelect>
           <FormControl>
             {!roundSelected && <InputLabel sx={label}>Select round</InputLabel>}
             <BoxSelect
