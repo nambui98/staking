@@ -10,6 +10,7 @@ import {Filter} from "../../components/pageComponent/marketplace/Filter";
 import ListProduct from "../../components/pageComponent/marketplace/ListProduct";
 import { PaymentSuccess } from "../../components/pageComponent/marketplace/PaymentSuccess";
 import { ProductDetail } from "../../components/pageComponent/marketplace/ProductDetail";
+import { ProductPrice } from "../../components/pageComponent/marketplace/ProductPrice";
 
 const Marketplace: NextPage = () => {
   const [productDetailActive, setProductDetailActive] = useState<boolean>(false);
@@ -21,19 +22,19 @@ const Marketplace: NextPage = () => {
 
   return (
     <MainLayout sxProps={{backgroundColor: "#FFFFFF"}}>
-      <Banner />
       <Wrap>
         <Container disableGutters sx={container}>
-          <Body>
-            <Filter/>
-            <ListProduct handleSetProductDetail={setCurrentProductDetail} handleToggleDrawer={setProductDetailActive} />
-            <ProductDetail dataProduct={{}} drawerStatus={productDetailActive} handleToggleDrawer={setProductDetailActive} />
-          </Body>
+          <Inner>
+            <BoxLeft>
+              <ProductPrice/>
+            </BoxLeft>
+            <BoxRight></BoxRight>
+          </Inner>
         </Container>
       </Wrap>
-      <Checkout status={popupCheckout} handleToggleStatus={setpopupCheckout} />
+      {/* <Checkout status={popupCheckout} handleToggleStatus={setpopupCheckout} />
       <ApproveToken status={popupApproveToken} handleToggleStatus={setpopupApproveToken} />
-      <PaymentSuccess status={popupPaymentSuccess} handleToggleStatus={setPopupPaymentSuccess} />
+      <PaymentSuccess status={popupPaymentSuccess} handleToggleStatus={setPopupPaymentSuccess} /> */}
     </MainLayout>
   )
 }
@@ -47,13 +48,20 @@ const Wrap = styled(Box)({
   }
 })
 const container = {
-  maxWidth: { xl: 1920 - 240 },
+  maxWidth: { xl: 1120 },
 } 
 
-const Body = styled(Stack)({
-  justifyContent: 'space-between',
-  color: '#31373E',
+const Inner = styled(Stack)({
   '@media (min-width: 768px)': {
-    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flexDirection: 'row'
   }
+})
+const BoxLeft = styled(Stack)({
+  '@media (min-width: 768px)': {
+    width: 'calc(50% - 37)'
+  }
+})
+const BoxRight = styled(Stack)({
+
 })

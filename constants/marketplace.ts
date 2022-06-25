@@ -53,3 +53,7 @@ export const MARKETPLACE_ICON = {
 export const BACKGROUND = {
   SUCCESS: 'assets/backgrounds/union.png'
 }
+
+export const MARKETPLACE_IMAGE = {
+  shoe: 'assets/shoe.png'
+}

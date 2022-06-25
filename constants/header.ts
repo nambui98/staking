@@ -20,7 +20,7 @@ export const PAGE = {
 export const MAIN_PAGE = [
   {title: 'Dashboard', link: '#', icon: 'assets/icons/Dashboard.svg'},
   {title: 'Inventory', link: '#', icon: 'assets/icons/box.svg'},
-  {title: 'Shop', link: '#', icon: 'assets/icons/shop.svg'},
+  {title: 'Shop', link: '/marketplace', icon: 'assets/icons/shop.svg'},
   {title: 'Claim', link: '/claim', icon: 'assets/icons/3d-cube-scan.svg'},
 ]
 export const SECURICHAIN_LOGO = 'assets/securichain.png';
