@@ -4,7 +4,7 @@ import { TabClaim } from "../../components/pageComponent/claim/TabClaim";
 
 const Claim = () => {
   return (
-    <MainLayout>
+    <MainLayout titlePage='beFITTER - Claim Portal'>
       <Wrap>
         <TabClaim/>
       </Wrap>

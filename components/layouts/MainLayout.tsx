@@ -8,12 +8,12 @@ import { ConnectWallet } from '../pageComponent/marketplace/ConnectWallet';
 import { useWalletContext } from '../../contexts/WalletContext';
 
 
-const MainLayout: React.FC<any> = ({ sxProps, children }) => {
+const MainLayout: React.FC<any> = ({ sxProps, children, titlePage }) => {
 	const {setToggleActivePopup, activePopup} = useWalletContext();
 	return (
 		<>
 			<Head>
-				<title>Befitter</title>
+				<title>{titlePage ? titlePage : 'beFITTER'}</title>
 				<meta name="viewport" content="initial-scale=1, width=device-width" />
 				<meta name="description" content={META_DESC} />
 				<meta property="og:title" content={META_TITLE} />

@@ -119,7 +119,7 @@ export const TabClaim = () => {
 
   return (
     <Wrap>
-      <Title>beFitter Claim Portal</Title>
+      <Title>beFITTER - Claim Portal</Title>
       {!walletAccount ? <ConnectBox /> : <Stack>
         {walletAccount && <Account>
           <Address>{convertWalletAddress(walletAccount, 8, 6)}</Address>
@@ -157,7 +157,7 @@ export const TabClaim = () => {
         </Stack>
         <ButtonClaim active={checkStatusButton()} disabled={checkStatusButton() ? false : true} onClick={handleClaimButton}>Claim</ButtonClaim>
       </Stack>}
-      <PopupMessage title="Successful claim item!" status={popupSuccess} titleButton="Back to claim" popupType="success" handleToggleStatus={() => window.location.reload()} handleClickButton={() => window.location.reload()} />
+      <PopupMessage title="You have successfully claimed your item!" status={popupSuccess} titleButton="Back to claim" popupType="success" handleToggleStatus={() => window.location.reload()} handleClickButton={() => window.location.reload()} />
       <PopupMessage title="Error!" status={popupError} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError(false)}
         handleClickButton={() => setPopupError(false)} titleCustomColor={{ '& p': { color: '#FF6F61' } }} message="Something went wrong. Please try again!" />
       <Backdrop
