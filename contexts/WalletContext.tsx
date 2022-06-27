@@ -2,8 +2,7 @@ import { ethers, utils } from "ethers"
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react"
 import detectEthereumProvider from '@metamask/detect-provider';
 import { UserService } from "../services/user.service";
-import { beFitterBox, claimBox, noxyContract, nverContract } from "../libs/contracts";
-import MerkleClaim from "../abi/merkle-claim.json"
+import { claimBox } from "../libs/contracts";
 
 interface Map {
 	[key: string]: any;

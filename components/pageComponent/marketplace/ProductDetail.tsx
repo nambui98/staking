@@ -1,201 +1,176 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
-import { alertTitleClasses, Stack, styled, SvgIcon, Typography } from '@mui/material';
+import { alertTitleClasses, Stack, styled, SvgIcon, Tab, Tabs, Typography, useMediaQuery } from '@mui/material';
 import { useState } from 'react';
-import { MARKETPLACE_ICON } from '../../../constants/marketplace';
+import { MARKETPLACE_ICON, MARKETPLACE_IMAGE, PROPERTIES, STATISTICAL } from '../../../constants/marketplace';
 import { MarketplaceButton } from '../../buttons/MarketplaceButton';
+import { TEXT_STYLE } from '../../../styles/common/textStyles';
 
-interface IProps {
-  drawerStatus: boolean;
-  handleToggleDrawer: (status: boolean) => void;
-  dataProduct: any;
-}
 
-const data = {
-  link3d: 'https://cdn.befitter.io/Daily/',
-  title: '#Daily12420',
-  type: 'Daily',
-  tag: 'A'
-}
+export const ProductDetail = () => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
+  const [currentTab, setCurrentTab] = useState('1');
 
-export const ProductDetail: React.FC<IProps> = ({ drawerStatus, handleToggleDrawer }) => {
-
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setCurrentTab(newValue);
+  };
   return (
-    <Drawer
-      anchor={'right'}
-      open={drawerStatus}
-      onClose={() => handleToggleDrawer(false)}
-    >
-      <BoxDetail>
-        <Box sx={closeIcon} onClick={() => handleToggleDrawer(false)}><img src={MARKETPLACE_ICON.CLOSE} /></Box>
-        <Shoe3d>
-          <iframe src={data.link3d} />
-        </Shoe3d>
-        <Boxtitle>
-          <Typography sx={title}>{data.title}</Typography>
-          <BoxType>
-            <Type>{data.type}</Type>
-            <Tag>{data.tag}</Tag>
-          </BoxType>
-        </Boxtitle>
-
-        <Stack sx={parameters}>
-          <Box sx={parametersItem}><img src={MARKETPLACE_ICON.LEVEL1_5} /> <Typography><span>Level</span>2</Typography></Box>
-          <Box sx={parametersItem}><img src={MARKETPLACE_ICON.SHIELDGREEN} /> <Typography><span>Condition</span>89%</Typography></Box>
-          <Box sx={parametersItem}><img src={MARKETPLACE_ICON.SHOEMINT3} /> <Typography><span>Shoe Mint</span>3/7</Typography></Box>
-        </Stack>
-        <Stats>
-          <Typography sx={statsTitle}>Item stats</Typography>
-          <Stack>
-            <Box sx={statsItem}><Box sx={flex}><img src={MARKETPLACE_ICON.ENERGY} /> <Typography sx={statsItemTitle}>Energy</Typography></Box> <Typography sx={statsItemText}>3</Typography></Box>
-            <Box sx={statsItem}><Box sx={flex}><img src={MARKETPLACE_ICON.DURABILITY} /> <Typography sx={statsItemTitle}>Durability</Typography><Box sx={process}></Box></Box> <Typography sx={statsItemText}>30</Typography></Box>
-            <Box sx={statsItem}><Box sx={flex}><img src={MARKETPLACE_ICON.SUPPORT} /> <Typography sx={statsItemTitle}>Support</Typography><Box sx={process}></Box></Box> <Typography sx={statsItemText}>3</Typography></Box>
-            <Box sx={statsItem}><Box sx={flex}><img src={MARKETPLACE_ICON.LUCK} /> <Typography sx={statsItemTitle}>Luck</Typography><Box sx={process}></Box></Box> <Typography sx={statsItemText}>15</Typography></Box>
-            <Box sx={statsItem}><Box sx={flex}><img src={MARKETPLACE_ICON.RANGE} /> <Typography sx={statsItemTitle}>Range</Typography><Box sx={process}></Box></Box> <Typography sx={statsItemText}>3</Typography></Box>
-          </Stack>
-        </Stats>
-        <MarketplaceButton title="Proceed to payment" price={4620} handleOnClick={() => null} customStyle={{ margin: 'auto 16px 16px' }} />
-      </BoxDetail>
-    </Drawer>
+    <Wrap>
+      {!isMobile && <Statistical>
+        {STATISTICAL.items?.map((item, index) => (
+          <StatisticalItem key={index} sx={{marginRight: index === 0 ? '16px' : 0}}><img src={item.icon} /><Box><Typography>{item.title}</Typography><Typography>4000</Typography></Box></StatisticalItem>
+        ))}
+      </Statistical>}
+      <PropertiesBox>        
+        {PROPERTIES.items?.map((item, index) => (
+          <PropertiesItem isMobile={isMobile}><img src={item.icon} /><Box><Typography sx={{ ...TEXT_STYLE(14, 600) }}>
+            </Typography>{item.title}<Typography>{item.chance}</Typography></Box>
+            <Box></Box>
+            <TitleBg sx={{color: index === 0 ? '#FF6F61' : index === 1 ? '#FFC83A' : '#A7ACB8'}}>{item.titleBg}</TitleBg>
+          </PropertiesItem>
+        ))}
+      </PropertiesBox>
+      <BoxTabs
+        value={currentTab}
+        onChange={handleChange}
+        textColor="secondary"
+        indicatorColor="secondary"
+        aria-label="secondary tabs example"
+      >
+        <TabItem value="1" label="Rule introduction" />
+        <TabItem value="2" label="Box information" />
+      </BoxTabs>
+      <TabBody>
+        <Typography>Special Offer: With each Mystery Shoe Box purchased in this pool, you will get $12 guaranteed allocation for the beFITTER IDO later.</Typography>
+        <Typography>1. Everyone can purchase in this pool.</Typography>
+        <Typography>2. One Mystery Box contains one NFT Shoe.</Typography>
+        <Typography>3. Purchase limitation: 5 boxes per person.</Typography>
+      </TabBody>
+    </Wrap>
   )
 }
 
-const BoxDetail = styled(Box)({
-  minWidth: '100vw',
-  position: 'relative',
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  '@media (min-width: 580px)': {
-    minWidth: '476px'
-  }
+const Wrap = styled(Stack)({
+
 })
-const Shoe3d = styled(Box)({
-  position: 'relative',
-  '& iframe': {
-    height: '336px',
-    width: '100%',
-    border: 0
-  }
-})
-const closeIcon = {
+const bg = {
   position: 'absolute',
-  top: '18px',
-  right: '18px',
-  color: '#5A6178',
-  cursor: 'pointer',
-  zIndex: '2'
+  width: '100%',
+  height: '100%',
+  top: 0,
+  left: 0,
+  opacity: 0.3
 }
-const BoxType = styled(Box)({
+const StatisticalItem = styled(Box)({
+  padding: '8px 12px',
+  // width: 139,
   display: 'flex',
-  flexDirection: 'row',
   alignItems: 'center',
-})
-const Type = styled(Typography)({
-  padding: '4px 12px',
-  backgroundColor: '#55C8FC',
-  borderRadius: '16px',
-  fontWeight: '600',
-  color: '#ffffff',
-  marginRight: '8px'
-})
-const Tag = styled(Typography)({
-  padding: '4px 12px',
-  background: 'linear-gradient(268.2deg, #EC0CB7 0%, #C740D1 100%)',
-  borderRadius: '12px',
-  fontWeight: '600',
-  color: '#ffffff',
-  textDecoration: 'underline',
-  fontStyle: 'italic',
-})
-const Boxtitle = styled(Box)({
-  display: 'flex',
-  justifyContent: 'space-between',
-  margin: '16px',
-})
-const title = {
-  color: '#31373E',
-  fontSize: '20px',
-  fontWeight: '700',
-  '@media (min-width: 768px)': {
-    fontSize: '24px',
-  }
-}
-const parameters = {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  backgroundColor: '#ffe2d34d',
-  padding: '8px 16px',
-  marginBottom: '16px',
-}
-const parametersItem = {
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-  '& span': {
-    color: '#5A6178',
-    fontSize: '12px',
-    fontWeight: '500',
-    marginBottom: '3px',
+  backgroundImage: `url(${MARKETPLACE_IMAGE.borderv3})`,
+  backgroundPosition: '100%',
+  backgroundSize: 'contain',
+  backgroundRepeat: 'no-repeat',
+  '& img': {
+    marginRight: 16
   },
+  '& > div': {
+    '& p:first-of-type': {
+      ...TEXT_STYLE(12, 600),
+      color: '#898E9E',
+      marginBottom: 7
+    },
+    '& p:last-of-type': {
+      ...TEXT_STYLE(16, 600),
+    }
+  }
+})
+const Statistical = styled(Stack)({
+  marginBottom: 40,
+  flexDirection: 'row',
+})
+const TabBody = styled(Box)({
+  marginBottom: 20,
   '& p': {
-    display: 'flex',
-    flexDirection: 'column',
-    marginLeft: '8px',
-    fontSize: '16px',
-    color: '#31373E',
-    fontWeight: '700'
-  }
-}
-const Stats = styled(Stack)({
-  margin: '0 16px 40px',
-  padding: '16px',
-  borderRadius: '12px',
-  border: '1px solid #E9EAEF',
-  '@media (min-width: 768px)': {
-    margin: '0 16px 8px',
+    ...TEXT_STYLE(14, 500),
+    color: '#5A6178',
+    marginBottom: 20
   }
 })
-const statsTitle = {
-  fontSize: '16px',
-  fontWeight: '600',
-  marginBottom: '28px',
-  '@media (min-width: 768px)': {
-    marginBottom: '32px'
+const TabItem = styled(Tab)({
+  color: '#A7ACB8',
+  paddingBottom: 15,
+  ...TEXT_STYLE(16, 600),
+  '&.Mui-selected': {
+    color: '#FF6D24'
+  },
+})
+const BoxTabs = styled(Tabs)({
+  marginBottom: 16,
+  borderBottom: '1px solid #E9EAEF',
+  '& .MuiTabs-indicator': {
+    backgroundColor: '#FF6D24'
   }
+})
+type PropertiesProps = BoxProps & {
+  isMobile: boolean
 }
-const statsItem = {
-  display: 'flex',
+const PropertiesItem = styled(Box)((props: PropertiesProps) => ({
+  padding: '8px 5px 16px ',
+  textAlign: 'center',
+  width: 'calc(33.333% - 8px)',
+  position: 'relative',
+  '@media (min-width: 768px)': {
+    padding: 8,
+    marginBottom: 24,
+    width: '100%',
+    maxWidth: 352,
+    textAlign: 'left',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  '&:first-of-type > div:last-of-type': {
+    background: props.isMobile ? 'linear-gradient(180deg, rgba(255, 111, 97, 0) 0%, #FF6F61 73.44%, rgba(255, 111, 97, 0) 100%)' : 'linear-gradient(90deg, rgba(255, 111, 97, 0) 0%, #FF6F61 53.12%, rgba(255, 111, 97, 0) 100%)',
+    ...bg
+  },
+  '&:nth-of-type(2) > div:last-of-type': {
+    background: props.isMobile ? 'linear-gradient(180deg, rgba(255, 200, 58, 0) 0%, #FFC83A 71.87%, rgba(255, 200, 58, 0) 100%)' : 'linear-gradient(90deg, rgba(255, 200, 58, 0) 0%, #FFC83A 53.12%, rgba(255, 200, 58, 0) 100%)',
+    ...bg
+  },
+  '&:last-of-type > div:last-of-type': {
+    background: props.isMobile ? 'linear-gradient(180deg, rgba(233, 234, 239, 0) 0%, #A7ACB8 70.83%, rgba(233, 234, 239, 0) 100%)' : 'linear-gradient(90deg, rgba(233, 234, 239, 0) 0%, #A7ACB8 53.12%, rgba(233, 234, 239, 0) 100%)',
+    ...bg
+  },
+  '& img': {
+    marginBottom: props.isMobile ? 8 : 0,
+    marginRight: props.isMobile ? 0 : 16
+  },
+  '& p:last-of-type': {
+    background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
+    '-webkit-background-clip': 'text',
+    '-webkit-text-fill-color': 'transparent',
+    marginTop: 7,
+    ...TEXT_STYLE(12, 700)
+  }
+}))
+const PropertiesBox = styled(Stack)({
   flexDirection: 'row',
   justifyContent: 'space-between',
-  alignItems: 'center',
-  marginBottom: '24px'
-}
-const statsItemText = {
-  fontSize: '16px',
-  color: '#5A6178',
-  fontWeight: '500'
-}
-const statsItemTitle = {
-  marginLeft: '8px',
-  minWidth: '95px',
+  marginBottom: 24,
   '@media (min-width: 768px)': {
-    minWidth: '101px',
-  },
-  ...statsItemText
-}
-const process = {
-  background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
-  height: '4px',
-  width: '145px',
-  borderRadius: '2px',
-  '@media (min-width: 768px)': {
-    width: '185px'
+    marginBottom: 46,
+    flexDirection: 'column',
   }
-}
-const flex = {
-  display: 'flex',
-  alignItems: 'center',
-}
+})
+const TitleBg = styled(Typography)({
+  ...TEXT_STYLE(24, 600),
+  fontSize: '24px !important',
+  transform: 'rotate(-20deg)',
+  marginLeft: 'auto',
+  opacity: 0.2,
+  background: 'initial !important',
+  '-webkit-text-fill-color': 'initial !important',
+})
+
+

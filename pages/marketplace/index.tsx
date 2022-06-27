@@ -13,12 +13,6 @@ import { ProductDetail } from "../../components/pageComponent/marketplace/Produc
 import { ProductPrice } from "../../components/pageComponent/marketplace/ProductPrice";
 
 const Marketplace: NextPage = () => {
-  const [productDetailActive, setProductDetailActive] = useState<boolean>(false);
-  const [currentProductDetail, setCurrentProductDetail] = useState<any>();
-  const [popupConnectWallet, setPopupConnectWallet] = useState<boolean>(true);
-  const [popupCheckout, setpopupCheckout] = useState<boolean>(true);
-  const [popupApproveToken, setpopupApproveToken] = useState<boolean>(true)
-  const [popupPaymentSuccess, setPopupPaymentSuccess] = useState<boolean>(true)
 
   return (
     <MainLayout sxProps={{backgroundColor: "#FFFFFF"}}>
@@ -28,7 +22,9 @@ const Marketplace: NextPage = () => {
             <BoxLeft>
               <ProductPrice/>
             </BoxLeft>
-            <BoxRight></BoxRight>
+            <BoxRight>
+              <ProductDetail/>
+            </BoxRight>
           </Inner>
         </Container>
       </Wrap>
@@ -42,24 +38,39 @@ const Marketplace: NextPage = () => {
 export default Marketplace;
 
 const Wrap = styled(Box)({
-  margin: '0 16px',
+  width: '100%',
+  color: '#31373E',
+  marginTop: 6,
   '@media (min-width: 768px)': {
-    margin: '0 24px'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 18
   }
 })
 const container = {
   maxWidth: { xl: 1120 },
+  padding: '0 16px',
+  '@media (min-width: 768px)': {
+    padding: '0 24px'
+  }
 } 
 
 const Inner = styled(Stack)({
+  width: '100%',
+  color: '#31373E',
+  marginTop: 6,
   '@media (min-width: 768px)': {
+    flexDirection: 'row',
     justifyContent: 'space-between',
-    flexDirection: 'row'
+    marginTop: 18
   }
 })
 const BoxLeft = styled(Stack)({
   '@media (min-width: 768px)': {
-    width: 'calc(50% - 37)'
+    marginRight: 35
+  },
+  '@media (min-width: 1280px)': {
+    marginRight: 75
   }
 })
 const BoxRight = styled(Stack)({

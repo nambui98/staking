@@ -48,6 +48,15 @@ export const MARKETPLACE_ICON = {
   TICK: 'assets/icons/tick-green.svg',
   CLOSE_ICON: 'assets/icons/close-red.svg',
   STAR: 'assets/icons/star2.svg',
+  busdIcon: 'assets/icons/busd.svg',
+  heeIcon: 'assets/icons/hee.svg',
+  fiuIcon: 'assets/icons/fiu.svg',
+  arrowRightIcon: 'assets/icons/arrow-right-small.svg',
+  shoeIcon: 'assets/icons/standard.svg',
+  shoeYellowIcon: 'assets/icons/rare-yellow.svg',
+  shoeRedIcon: 'assets/icons/iconic-red.svg',
+  userTickIcon: 'assets/icons/user-tick.svg',
+  boxTickIcon: 'assets/icons/box-tick.svg',
 }
 
 export const BACKGROUND = {
@@ -55,5 +64,21 @@ export const BACKGROUND = {
 }
 
 export const MARKETPLACE_IMAGE = {
-  shoe: 'assets/shoe.png'
+  shoe: 'assets/shoe.png',
+  borderv3: 'assets/borderv3.png',
+}
+
+export const STATISTICAL = {
+  items: [
+    {title: 'REGISTERED USERS', icon: 'assets/icons/user-tick.svg'},
+    {title: 'ORDERED BOXES', icon: 'assets/icons/box-tick.svg'}
+  ]
+}
+
+export const PROPERTIES = {
+  items: [
+    {title: 'Iconic Shoe', titleBg: 'ICONIC', chance: '10% chance', icon: 'assets/icons/iconic-red.svg'},
+    {title: 'Rare Shoe', titleBg: 'RARE', chance: '50% chance', icon: 'assets/icons/rare-yellow.svg'},
+    {title: 'Standard Shoe', titleBg: 'Common', chance: '40% chance', icon: 'assets/icons/standard.svg'}
+  ]
 }
