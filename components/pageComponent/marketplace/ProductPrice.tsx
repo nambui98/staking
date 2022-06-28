@@ -3,15 +3,15 @@ import { ethers } from "ethers"
 import { useEffect, useState } from "react"
 import { MARKETPLACE_ICON, MARKETPLACE_IMAGE } from "../../../constants/marketplace"
 import { useWalletContext } from "../../../contexts/WalletContext"
-import { bftBusdToken, bftShop } from "../../../libs/contracts"
-import { getBoxPrice, PurchaseBox } from "../../../libs/marketplace"
+import { getAllowance, getBoxPrice, PurchaseBox } from "../../../libs/marketplace"
 import { TEXT_STYLE } from "../../../styles/common/textStyles"
+import { Checkout } from "./Checkout"
 
 export const ProductPrice = () => {
-  const {ethersSigner, claimBoxContract, walletAccount} = useWalletContext();
-  const [boxPrice, setBoxPrice] = useState<string>();
-  const [shopContract, setShopContract] = useState<any>();
-
+  const {ethersSigner, claimBoxContract, walletAccount, busdBalance} = useWalletContext();
+  const [boxPrice, setBoxPrice] = useState<number>(0);
+  const [currentBoxType, setCurrentBoxType] = useState<string>('gold');
+  const [currentAllowance, setAllowance] = useState<number>(0);
   const handlePurchaseBox = async () => {
     // const shopContract = await new ethers.Contract(beFitterShop.address, beFitterShop.abi, ethersSigner);
     // const busdContract = await new ethers.Contract(beFitterBusd.address, beFitterBusd.abi, ethersSigner);
@@ -25,16 +25,16 @@ export const ProductPrice = () => {
     console.log(ethers.utils.parseEther('0.03'));
   }
 
-  useEffect(() => {
-    // const getPrice = async () => {
-    //   const shopContract = await new ethers.Contract(beFitterShop.address, beFitterShop.abi, ethersSigner);
-    //   setShopContract(shopContract)
-    //   const res = await getBoxPrice(shopContract, 'gold', beFitterBusd.address);
-    //   res && setBoxPrice(ethers.utils.formatUnits(res))
-    // }
-    // getPrice()
-  }, [])
+  const getPriceCurrentBox = async () => {
+    const price = await getBoxPrice(currentBoxType, ethersSigner)
+    const allowance = await getAllowance(walletAccount, ethersSigner);
+    allowance && setAllowance(allowance)
+    price && setBoxPrice(price)
+  }
 
+  useEffect(() => {
+    ethersSigner && getPriceCurrentBox()
+  }, [currentBoxType, ethersSigner])
   return (
     <Wrap>
       <ProductImage><img src={MARKETPLACE_IMAGE.shoe} /></ProductImage>
@@ -48,6 +48,7 @@ export const ProductPrice = () => {
         <Busd><img src={MARKETPLACE_ICON.busdIcon} /> {boxPrice} BUSD</Busd>
         <ButtonBuyNow onClick={handlePurchaseBox}><Box>Buy now <img src={MARKETPLACE_ICON.arrowRightIcon} /></Box></ButtonBuyNow>
       </Price>
+      <Checkout status={true} handleToggleStatus={() => null} sx={customWidthPopup} data={{price: boxPrice, allowance: parseFloat(busdBalance) > currentAllowance}} />
     </Wrap>
   )
 }
@@ -143,3 +144,8 @@ const BoxPriceItem = styled(Box)({
     margin: '0 40px'
   }
 })
+const customWidthPopup = {
+  '@media (min-width: 650px)': {
+    width: '544px !important'
+  }
+}

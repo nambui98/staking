@@ -28,8 +28,7 @@ const Marketplace: NextPage = () => {
           </Inner>
         </Container>
       </Wrap>
-      {/* <Checkout status={popupCheckout} handleToggleStatus={setpopupCheckout} />
-      <ApproveToken status={popupApproveToken} handleToggleStatus={setpopupApproveToken} />
+      {/* <ApproveToken status={popupApproveToken} handleToggleStatus={setpopupApproveToken} />
       <PaymentSuccess status={popupPaymentSuccess} handleToggleStatus={setPopupPaymentSuccess} /> */}
     </MainLayout>
   )
@@ -76,3 +75,8 @@ const BoxLeft = styled(Stack)({
 const BoxRight = styled(Stack)({
 
 })
+const customWidthPopup = {
+  '@media (min-width: 650px)': {
+    width: '544px !important'
+  }
+}

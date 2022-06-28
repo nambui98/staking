@@ -6,29 +6,30 @@ import { MARKETPLACE_ICON } from "../../../constants/marketplace"
 interface IProps {
   status: boolean
   handleToggleStatus: (status: boolean) => void
+  sx?: any,
+  data: {
+    price: number,
+    allowance: boolean
+  }
 }
 
-export const Checkout: React.FC<IProps> = ({ status, handleToggleStatus }) => {
+export const Checkout: React.FC<IProps> = ({ status, handleToggleStatus, data, sx }) => {
   return (
-    <Popup title="Checkout" status={status} handleToggle={() => handleToggleStatus(false)} titleButton="BUY NOW" priceButton={400} handleClickButton={() => null} >
+    <Popup sx={sx} title="Checkout" status={status} handleToggle={() => handleToggleStatus(false)} 
+      titleButton={!data.allowance ? "BUY NOW" : 'INCREASE'} priceButton={400} handleClickButton={() => null} >
       <Stack sx={wrap}>
         <Stack sx={info}>
-          <Box sx={boxImage}>
+          <BoxImage>
             <img src={'assets/shoes/shoesItem.png'} />
             <Typography sx={type}>Daily</Typography>
-          </Box>
+          </BoxImage>
           <Stack sx={boxItem}>
             <Stack sx={infoItem}>
               <Typography sx={infoTitleItem}>You will pay</Typography>
-              <Typography sx={infoPriceItem}><img src={MARKETPLACE_ICON.BNBCOINYELLOW} />400</Typography>
-              <Typography sx={convertDollar}>0.00$</Typography>
+              <Typography sx={infoPriceItem}><img src={MARKETPLACE_ICON.busdIcon} />{data.price}</Typography>
+              <Typography sx={convertDollar}>{data.price}$</Typography>
             </Stack>
-            <Stack sx={infoItem}>
-              <Typography sx={infoTitleItem}>Estimated gas free</Typography>
-              <Typography sx={infoPriceItem}><img src={MARKETPLACE_ICON.BNBCOINYELLOW} />0.01</Typography>
-              <Typography sx={convertDollar}>0.00$</Typography>
-            </Stack>
-            <ErrorMessage>You need to approve more token to complete this transaction</ErrorMessage>
+            {!data.allowance && <ErrorMessage>You need to approve more token to complete this transaction</ErrorMessage>}
           </Stack>
         </Stack>
       </Stack>
@@ -44,7 +45,7 @@ const info = {
   flexDirection: 'row',
   justifyContent: 'space-between',
 }
-const boxImage = {
+const BoxImage = styled(Box)({
   width: '130px',
   height: '130px',
   backgroundColor: '#F8F9FB',
@@ -58,7 +59,7 @@ const boxImage = {
     width: '190px',
     height: '190px',
   }
-}
+})
 const type = {
   position: 'absolute',
   left: 0,
@@ -71,7 +72,10 @@ const type = {
   padding: '4px 12px'
 }
 const boxItem = {
-  width: 'calc(100% - 130px - 16px)'
+  width: 'calc(100% - 130px - 16px)',
+  '@media (min-width: 768px)': {
+    width: 'calc(100% - 190px - 16px)',
+  }
 }
 const infoItem = {
   flexWrap: 'wrap',
