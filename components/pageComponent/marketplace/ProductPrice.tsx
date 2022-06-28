@@ -3,7 +3,7 @@ import { ethers } from "ethers"
 import { useEffect, useState } from "react"
 import { MARKETPLACE_ICON, MARKETPLACE_IMAGE } from "../../../constants/marketplace"
 import { useWalletContext } from "../../../contexts/WalletContext"
-import { beFitterBusd, beFitterShop } from "../../../libs/contracts"
+import { bftBusdToken, bftShop } from "../../../libs/contracts"
 import { getBoxPrice, PurchaseBox } from "../../../libs/marketplace"
 import { TEXT_STYLE } from "../../../styles/common/textStyles"
 
@@ -13,8 +13,8 @@ export const ProductPrice = () => {
   const [shopContract, setShopContract] = useState<any>();
 
   const handlePurchaseBox = async () => {
-    const shopContract = await new ethers.Contract(beFitterShop.address, beFitterShop.abi, ethersSigner);
-    const busdContract = await new ethers.Contract(beFitterBusd.address, beFitterBusd.abi, ethersSigner);
+    // const shopContract = await new ethers.Contract(beFitterShop.address, beFitterShop.abi, ethersSigner);
+    // const busdContract = await new ethers.Contract(beFitterBusd.address, beFitterBusd.abi, ethersSigner);
 
 
     // const approve = await busdContract.approve(beFitterShop.address, '0x0aa87bee538000')
@@ -26,12 +26,12 @@ export const ProductPrice = () => {
   }
 
   useEffect(() => {
-    const getPrice = async () => {
-      const shopContract = await new ethers.Contract(beFitterShop.address, beFitterShop.abi, ethersSigner);
-      setShopContract(shopContract)
-      const res = await getBoxPrice(shopContract, 'gold', beFitterBusd.address);
-      res && setBoxPrice(ethers.utils.formatUnits(res))
-    }
+    // const getPrice = async () => {
+    //   const shopContract = await new ethers.Contract(beFitterShop.address, beFitterShop.abi, ethersSigner);
+    //   setShopContract(shopContract)
+    //   const res = await getBoxPrice(shopContract, 'gold', beFitterBusd.address);
+    //   res && setBoxPrice(ethers.utils.formatUnits(res))
+    // }
     // getPrice()
   }, [])
 

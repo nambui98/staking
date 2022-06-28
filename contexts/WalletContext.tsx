@@ -2,7 +2,11 @@ import { ethers, utils } from "ethers"
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react"
 import detectEthereumProvider from '@metamask/detect-provider';
 import { UserService } from "../services/user.service";
+<<<<<<< HEAD
 import { claimBox } from "../libs/contracts";
+=======
+import { bftBox, bftClaimBox, bftFiuToken, bftHeetoken, bftShoeItem } from "../libs/contracts";
+>>>>>>> preSale
 
 interface Map {
 	[key: string]: any;
@@ -49,7 +53,11 @@ interface wallerContextType {
   setWalletAccount: (account: any) => void
   metaMaskIsInstalled: boolean,
   chainIdIsSupported: boolean,
-  BnbBalance: string,
+  bnbBalance: string,
+  heeBalance: string,
+  fiuBalance: string,
+  shoeBalance: string,
+  boxBalance: string,
   updateBnbBalance: () => void
   claimBoxContract: any
 } 
@@ -68,7 +76,11 @@ const WalletContext = createContext<wallerContextType>({
   setWalletAccount: () => {},
   metaMaskIsInstalled: false,
   chainIdIsSupported: false,
-  BnbBalance: '',
+  bnbBalance: '',
+  heeBalance: '',
+  fiuBalance: '',
+  shoeBalance: '',
+  boxBalance: '',
   updateBnbBalance: () => null,
   claimBoxContract: null
 })
@@ -95,7 +107,11 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
   const [metaMaskIsInstalled, setMetaMaskIsInstalled] = useState<boolean>(false); 
   const [chainIdIsSupported, setChainIdIsSupported] = useState<boolean>(false);
   const [claimBoxContract, setClaimBoxContract] = useState<any>();
-  const [BnbBalance, setBnbBalance] = useState<string>('');
+  const [bnbBalance, setBnbBalance] = useState<string>('');
+  const [heeBalance, setHeebalance] = useState<string>('');
+  const [fiuBalance, setFiuBalance] = useState<string>('');
+  const [shoeBalance, setShoeBalance] = useState<string>('');
+  const [boxBalance, setBoxBalance] = useState<string>('');
 
   const handleDisconnectWallet = () => {
     UserService.removeCurrentUser();
@@ -113,14 +129,26 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
 
   const updateBalance = async () => {
     if (walletAccount && ethersSigner) {
-      const _claim = new ethers.Contract(claimBox.address, claimBox.abi, ethersSigner);
+      const _claim = new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner);
+      const _heeContract = new ethers.Contract(bftHeetoken.address, bftHeetoken.abi, ethersSigner);
+      const _fiuContract = new ethers.Contract(bftFiuToken.address, bftFiuToken.abi, ethersSigner);
+      const _shoeContract = new ethers.Contract(bftShoeItem.address, bftShoeItem.abi, ethersSigner);
+      const _boxContract = new ethers.Contract(bftBox.address, bftBox.abi, ethersSigner);
      setClaimBoxContract(_claim)
 
-      //GET BNB balance
+      //GET balance
       const balance = await ethersProvider.getBalance(walletAccount);
-      const balanceInEth = ethers.utils.formatEther(balance);
-      balanceInEth && setBnbBalance(balanceInEth)
-
+      const [hee, fiu, shoe, box] = await Promise.all([
+        _heeContract.balanceOf(walletAccount),
+        _fiuContract.balanceOf(walletAccount),
+        _shoeContract.balanceOf(walletAccount),
+        _boxContract.balanceOf(walletAccount)
+      ])
+      setBnbBalance(ethers.utils.formatEther(balance))
+      setHeebalance(ethers.utils.formatEther(hee))
+      setFiuBalance(ethers.utils.formatEther(fiu))
+      setShoeBalance(ethers.utils.formatUnits(shoe, 'wei'))
+      setBoxBalance(ethers.utils.formatUnits(box, 'wei'))
       try {
       } catch (error) {
         console.error('claim', error);
@@ -128,7 +156,12 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
     }
   }
 
-  const handleChainChanged = (chainId: any) => {
+  const handleChainChanged = async (chainId: any) => {
+    if (supportedChainIds.indexOf(chainId) >= 0) {
+      setChainIdIsSupported(true);
+    } else {
+      setChainIdIsSupported(false);
+    }
     window.location.reload();
   }
 
@@ -195,7 +228,11 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
     setWalletAccount,
     metaMaskIsInstalled,
     chainIdIsSupported,
-    BnbBalance: BnbBalance,
+    bnbBalance: bnbBalance,
+    heeBalance: heeBalance,
+    fiuBalance: fiuBalance,
+    shoeBalance: shoeBalance,
+    boxBalance: boxBalance,
     updateBnbBalance: updateBalance,
     claimBoxContract
   }

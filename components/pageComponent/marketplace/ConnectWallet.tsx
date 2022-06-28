@@ -4,6 +4,7 @@ import { MARKETPLACE_ICON } from "../../../constants/marketplace";
 import { ethers } from "ethers";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext";
 import { UserService } from "../../../services/user.service";
+import { TEXT_STYLE } from "../../../styles/common/textStyles";
 
 interface IProps {
   status: boolean;
@@ -33,36 +34,25 @@ export const ConnectWallet: React.FC<IProps> = ({status, handleToggleStatus}) =>
       if(!chainIdIsSupported) {
         await changeNetwork(provider)
       }
-      // if(isMobile){
-      //   await provider.request({
-      //     method: "wallet_requestPermissions",
-      //     params: [
-      //       {
-      //         eth_accounts: {}
-      //       }
-      //     ]
-      //   });
-      // }
     }
     
   }
   return (
-    <Popup title="Connect wallet" status={activePopup} handleToggle={() => setToggleActivePopup(false)} sx={{'@media (min-width: 650px)': {
+    <Popup title={<TitlePopup>Connect wallet</TitlePopup>} status={activePopup} handleToggle={() => setToggleActivePopup(false)} sx={{'@media (min-width: 650px)': {
       width: '544px'
     }}} >
       <Stack sx={wrap}>
         <Item>
-          <Typography sx={titleConnect}>Recommended wallet</Typography>
+          <TitleConnect>Recommended wallet</TitleConnect>
           <Box sx={itemConnect}><Box sx={flex}><img src={MARKETPLACE_ICON.METAMASK} /><ItemTitle>MetaMask</ItemTitle></Box> 
             <ButtonConnect onClick={handleConnectWallet}>Connect</ButtonConnect>
           </Box>
         </Item>
         <Item>
-          <Typography sx={titleConnect}>Recommended wallet</Typography>
-          <Box sx={itemConnect}><Box sx={flex}><img src={MARKETPLACE_ICON.METAMASK} /><ItemTitle>MetaMask</ItemTitle></Box> 
-          <ButtonConnect onClick={handleConnectWallet}>Connect</ButtonConnect></Box>
+          <TitleConnect>LIMITED SUPPORT WALLET</TitleConnect>
+          <Typography sx={{...TEXT_STYLE(16, 500), color: '#A7ACB8', marginTop: '16px'}}>Coming soon</Typography>
         </Item>
-        <LinkConnect href="#">How to connect wallet?</LinkConnect>
+        <LinkConnect href="https://metamask.io/faqs/" target={'_blank'}>How to connect wallet?</LinkConnect>
       </Stack>
     </Popup>
   )
@@ -74,12 +64,11 @@ const wrap = {
 const Item = styled(Stack)({
   marginBottom: '32px'
 })
-const titleConnect = {
-  fontSize: '14px',
+const TitleConnect = styled(Typography)({
+  ...TEXT_STYLE(14, 500),
   color: '#5A6178',
-  fontWeight: '500',
   textTransform: 'uppercase',
-}
+})
 const itemConnect = {
   display: 'flex',
   justifyContent: 'space-between',
@@ -115,4 +104,9 @@ const LinkConnect = styled(Link)({
   color: '#5A6178',
   textDecoration: 'underline',
   textAlign: 'center',
+})
+const TitlePopup = styled(Typography)({
+  fontWeight: '500 !important',
+  fontSize: '24px !important',
+  color: '#31373E'
 })
