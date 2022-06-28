@@ -27,7 +27,7 @@ import { convertWalletAddress } from '../../libs/utils/utils';
 const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 	const { asPath } = useRouter();
 	const isMobile = useMediaQuery('(max-width: 767px)');
-	const { setToggleActivePopup, walletAccount, setWalletAccount, BnbBalance } = useWalletContext();
+	const { setToggleActivePopup, walletAccount, setWalletAccount, bnbBalance } = useWalletContext();
 	const [userInfo, setUserInfo] = useState({ walletAddress: walletAccount });
 	const [activePopoverAddress, setActiveProverAddress] = React.useState<HTMLButtonElement | null>(null);
 	const open = Boolean(activePopoverAddress);
@@ -94,7 +94,7 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 						{walletAccount ?
 							<WalletAccount>
 								<WalletAccountChain>BSC Testnet</WalletAccountChain>
-								<WalletAccountAddress>{BnbBalance?.length ? parseFloat(BnbBalance).toFixed(4) : '0.00'} <img src={HEADER_ICON_BNB} />									
+								<WalletAccountAddress>{bnbBalance?.length ? parseFloat(bnbBalance).toFixed(4) : '0.00'} <img src={HEADER_ICON_BNB} />									
 									<ButtonAddress onClick={handleClick}>{convertWalletAddress(walletAccount, 6, 3)}</ButtonAddress>
 									<ActiveProver
 										open={open}
@@ -105,7 +105,7 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 											horizontal: 'left',
 										}}
 									>
-										<ProverItem sx={{marginBottom: '20px'}}><img style={{marginRight: 10}} src={HEADER_ICON.user} /> Link account</ProverItem>
+										<ProverItem sx={{marginBottom: '20px'}}><img style={{marginRight: 10}} src={HEADER_ICON.user} /><Link href={'/account'}>Account</Link></ProverItem>
 										<ProverItem onClick={() => setWalletAccount(null)} sx={{color: '#FF6F61'}}><img style={{marginRight: 10}} src={HEADER_ICON.logout} /> Disconnect wallet</ProverItem>
 									</ActiveProver>
 								</WalletAccountAddress>
@@ -174,7 +174,11 @@ const ProverItem = styled(Typography)({
 	display: 'flex',
 	alignItems: 'center',
 	color: '#5A6178',
-	...TEXT_STYLE(14, 500)
+	...TEXT_STYLE(14, 500),
+	'& a': {
+		textDecoration: 'none',
+		color: '#5A6178'
+	}
 })
 const ConnectButton = styled(Button)({
 	boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.25)',

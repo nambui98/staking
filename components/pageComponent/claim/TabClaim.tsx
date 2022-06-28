@@ -6,7 +6,7 @@ import { RECAPTCHA_SITE_KEY } from "../../../const";
 import { CLAIM_IMAGE } from "../../../constants/claim";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { getClaimedBox, handleClaimBox } from "../../../libs/claim";
-import { claimBox } from "../../../libs/contracts";
+import { bftClaimBox } from "../../../libs/contracts";
 import { convertWalletAddress } from "../../../libs/utils/utils";
 import { ClaimService } from "../../../services/claim.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
@@ -54,7 +54,7 @@ export const TabClaim = () => {
     }
     const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, false);
     if (res?.data?.status) {
-      const _claim = await new ethers.Contract(claimBox.address, claimBox.abi, ethersSigner)
+      const _claim = await new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner)
       const dataClaimed = await getClaimedBox(walletAccount, _claim);
       setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount }) 
     } else {
@@ -186,10 +186,6 @@ const label = {
   ...TEXT_STYLE(14, 500),
   color: '#A7ACB8'
 }
-const MessageCanotClaim = styled(Typography)({
-  color: '#FB2F2F',
-  ...TEXT_STYLE(12, 500)
-})
 const Title = styled(Typography)({
   ...TEXT_STYLE(16, 600),
   color: '#31373E',
