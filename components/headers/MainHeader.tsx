@@ -105,7 +105,7 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 											horizontal: 'left',
 										}}
 									>
-										<ProverItem sx={{marginBottom: '20px'}}><img style={{marginRight: 10}} src={HEADER_ICON.user} /><Link href={'/account'}>Account</Link></ProverItem>
+										{/* <ProverItem sx={{marginBottom: '20px'}}><img style={{marginRight: 10}} src={HEADER_ICON.user} /><Link href={PAGE.WALLET.link}>{PAGE.WALLET.title}</Link></ProverItem> */}
 										<ProverItem onClick={() => setWalletAccount(null)} sx={{color: '#FF6F61'}}><img style={{marginRight: 10}} src={HEADER_ICON.logout} /> Disconnect wallet</ProverItem>
 									</ActiveProver>
 								</WalletAccountAddress>

@@ -5,12 +5,12 @@ import { Popup } from "../../popup"
 
 interface IProps {
   title: string
-  message?: string
+  message?: any
   status: boolean
   handleToggleStatus: () => any
-  handleClickButton: () => any
+  handleClickButton?: () => any
   titleCustomColor?: any
-  titleButton: string
+  titleButton?: string
   popupType: 'success' | 'error'
 }
 

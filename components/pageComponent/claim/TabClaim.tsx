@@ -1,21 +1,25 @@
 import { Backdrop, Box, Button, ButtonProps, CircularProgress, FormControl, InputLabel, MenuItem, Select, Stack, styled, Typography } from "@mui/material"
 import { ethers } from "ethers";
+import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { RECAPTCHA_SITE_KEY } from "../../../const";
 import { CLAIM_IMAGE } from "../../../constants/claim";
+import { PAGE } from "../../../constants/header";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { getClaimedBox, handleClaimBox } from "../../../libs/claim";
 import { bftClaimBox } from "../../../libs/contracts";
 import { convertWalletAddress } from "../../../libs/utils/utils";
 import { ClaimService } from "../../../services/claim.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
+import { MarketplaceButton } from "../../buttons/MarketplaceButton";
 import { ConnectBox } from "./ConnectBox";
 import { PopupMessage } from "./PopupMessage";
 
 // const RECAPTCHA_SITE_KEY = "6Lc275cgAAAAAAHHwNMoAh448YXBi-jz3AeS-4A9"
 
 export const TabClaim = () => {
+  const router = useRouter();
   const { walletAccount, claimBoxContract, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
   const [currentTab, setCUrrentTab] = useState<'box' | 'token'>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
@@ -157,7 +161,12 @@ export const TabClaim = () => {
         </Stack>
         <ButtonClaim active={checkStatusButton()} disabled={checkStatusButton() ? false : true} onClick={handleClaimButton}>Claim</ButtonClaim>
       </Stack>}
-      <PopupMessage title="You have successfully claimed your item!" status={popupSuccess} titleButton="Back to claim" popupType="success" handleToggleStatus={() => window.location.reload()} handleClickButton={() => window.location.reload()} />
+      <PopupMessage title="You have successfully claimed your item!" message={
+        <BodyPopupSuccess>
+          <MarketplaceButton customStyle={{width: '100%'}} title={'View in wallet'} handleOnClick={() => router.push(PAGE.ASSETS.link)} />
+          <Typography sx={{cursor: 'pointer'}} onClick={() => window.location.reload()}>Claim more items</Typography>
+      </BodyPopupSuccess>
+      } status={popupSuccess} popupType="success" handleToggleStatus={() => window.location.reload()} />
       <PopupMessage title="Error!" status={popupError} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError(false)}
         handleClickButton={() => setPopupError(false)} titleCustomColor={{ '& p': { color: '#FF6F61' } }} message="Something went wrong. Please try again!" />
       <Backdrop
@@ -179,6 +188,18 @@ const Wrap = styled(Stack)({
   backgroundColor: '#ffffff',
   justifyContent: 'center',
   textAlign: 'center'
+})
+const BodyPopupSuccess = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  '& img': {
+    width: '100%'
+  },
+  '& p': {
+    marginTop: 32,
+    ...TEXT_STYLE(16, 500, '#FF6D24')
+  }
 })
 const label = {
   overflow: 'visible',

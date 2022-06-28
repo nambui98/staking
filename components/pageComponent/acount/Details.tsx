@@ -4,14 +4,14 @@ import { useWalletContext } from "../../../contexts/WalletContext"
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
 
 export const Details = () => {
-  const {walletAccount, bnbBalance, fiuBalance, heeBalance, shoeBalance, boxBalance} = useWalletContext();
+  const {walletAccount, bnbBalance, fiuBalance, heeBalance, shoeBalance, boxBalance, setWalletAccount} = useWalletContext();
   return (
     <Wrap>
       <Inner>
         <Top>
           <Address>{walletAccount?.slice(0, 6) + '...' + walletAccount?.slice(-3)}</Address>
           <BnbBalance>{bnbBalance?.length ? parseFloat(bnbBalance).toFixed(4) : '0.00'} <img src={ICON.bnbSmall} /></BnbBalance>
-          <Disconnect>Disconnect</Disconnect>
+          <Disconnect onClick={() => setWalletAccount(null)}>Disconnect</Disconnect>
         </Top>
         <Body>
           <Item><img src={ICON.hee} /><TitleItem>HEE</TitleItem> <Value>{heeBalance} <Typography>$0.00</Typography></Value></Item>

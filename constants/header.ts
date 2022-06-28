@@ -15,11 +15,12 @@ export const PAGE = {
   PRE_SALES: {title: 'Pre-Sale Shop', link: '/marketplace'},
   DOCUMENT: {title: 'Documentation', link: '/'},
   LITEPAPER: {title: 'litePaper', link: '/litePaper'},
+  ASSETS: {title: 'Assets', link: '/assets'}
 }
 
 export const MAIN_PAGE = [
   {title: 'Dashboard', link: '#', icon: 'assets/icons/Dashboard.svg'},
-  {title: 'Inventory', link: '#', icon: 'assets/icons/box.svg'},
+  {title: 'Assets', link: '/assets', icon: 'assets/icons/box.svg'},
   {title: 'Shop', link: '#', icon: 'assets/icons/shop.svg'},
   {title: 'Claim', link: '/claim', icon: 'assets/icons/3d-cube-scan.svg'},
 ]
