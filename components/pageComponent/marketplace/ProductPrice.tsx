@@ -3,38 +3,50 @@ import { ethers } from "ethers"
 import { useEffect, useState } from "react"
 import { MARKETPLACE_ICON, MARKETPLACE_IMAGE } from "../../../constants/marketplace"
 import { useWalletContext } from "../../../contexts/WalletContext"
-import { getAllowance, getBoxPrice, PurchaseBox } from "../../../libs/marketplace"
+import { getAllowance, getBoxPrice, purchaseBox, approvePurchase } from "../../../libs/marketplace"
 import { TEXT_STYLE } from "../../../styles/common/textStyles"
+import { ApproveToken } from "./ApproveToken"
 import { Checkout } from "./Checkout"
+import { PaymentSuccess } from "./PaymentSuccess"
 
 export const ProductPrice = () => {
   const {ethersSigner, claimBoxContract, walletAccount, busdBalance} = useWalletContext();
-  const [boxPrice, setBoxPrice] = useState<number>(0);
-  const [currentBoxType, setCurrentBoxType] = useState<string>('gold');
-  const [currentAllowance, setAllowance] = useState<number>(0);
+  const [boxDetail, setBoxDetail] = useState<{price: number, type: string}>({price: 0, type: 'gold'})
+  const [checkoutPopup, setCheckoutPopup] = useState<{
+    status: boolean, currentAllowance: number, allowanceStatus: boolean, onClickButton: () => any
+  }>({
+    status: false,
+    currentAllowance: 0,
+    allowanceStatus: false,
+    onClickButton: () => null
+  })
+
   const handlePurchaseBox = async () => {
-    // const shopContract = await new ethers.Contract(beFitterShop.address, beFitterShop.abi, ethersSigner);
-    // const busdContract = await new ethers.Contract(beFitterBusd.address, beFitterBusd.abi, ethersSigner);
-
-
-    // const approve = await busdContract.approve(beFitterShop.address, '0x0aa87bee538000')
-    // const price = await getBoxPrice(shopContract, 'gold', beFitterBusd.address);
-    // const allowance = await busdContract.allowance(walletAccount, beFitterShop.address);
-    // console.log(ethers.utils.formatUnits(price), ethers.utils.formatUnits(allowance, 'wei'), approve)
-    // const res = await PurchaseBox(shopContract, 'gold', beFitterBusd.address);
-    console.log(ethers.utils.parseEther('0.03'));
+    const res = await purchaseBox(boxDetail.type, ethersSigner);
   }
 
+  const handleApprovePurchase = async () => {
+    const res = await approvePurchase(boxDetail.price.toString(), ethersSigner);
+  }
+
+  const handleTogglePopup = () => setCheckoutPopup({...checkoutPopup, status: !checkoutPopup.status})
+
   const getPriceCurrentBox = async () => {
-    const price = await getBoxPrice(currentBoxType, ethersSigner)
+    const price = await getBoxPrice(boxDetail.type, ethersSigner)
     const allowance = await getAllowance(walletAccount, ethersSigner);
-    allowance && setAllowance(allowance)
-    price && setBoxPrice(price)
+    price && setBoxDetail({...boxDetail, price: price})
+    setCheckoutPopup({
+      ...checkoutPopup, 
+      currentAllowance: 
+      allowance, 
+      allowanceStatus: allowance > price,
+      onClickButton: allowance > price ? handlePurchaseBox : handleApprovePurchase
+    })
   }
 
   useEffect(() => {
     ethersSigner && getPriceCurrentBox()
-  }, [currentBoxType, ethersSigner])
+  }, [boxDetail.type, ethersSigner])
   return (
     <Wrap>
       <ProductImage><img src={MARKETPLACE_IMAGE.shoe} /></ProductImage>
@@ -45,10 +57,14 @@ export const ProductPrice = () => {
         <BoxPriceItem><Typography>CURRENCY</Typography><Typography sx={{display: 'flex', alignItems: 'center'}}><img style={{marginRight: '4px'}} src={MARKETPLACE_ICON.busdIcon} /> BUSD</Typography></BoxPriceItem>
       </BoxPrice>
       <Price>
-        <Busd><img src={MARKETPLACE_ICON.busdIcon} /> {boxPrice} BUSD</Busd>
-        <ButtonBuyNow onClick={handlePurchaseBox}><Box>Buy now <img src={MARKETPLACE_ICON.arrowRightIcon} /></Box></ButtonBuyNow>
+        <Busd><img src={MARKETPLACE_ICON.busdIcon} /> {boxDetail.price} BUSD</Busd>
+        <ButtonBuyNow onClick={handleTogglePopup}><Box>Buy now <img src={MARKETPLACE_ICON.arrowRightIcon} /></Box></ButtonBuyNow>
       </Price>
-      <Checkout status={true} handleToggleStatus={() => null} sx={customWidthPopup} data={{price: boxPrice, allowance: parseFloat(busdBalance) > currentAllowance}} />
+      <Checkout status={checkoutPopup.status} handleToggleStatus={handleTogglePopup} sx={customWidthPopup} 
+        data={{price: boxDetail.price, allowance: checkoutPopup.allowanceStatus}} handleCheckout={checkoutPopup.onClickButton}
+      />
+      <ApproveToken status={false} handleToggleStatus={() => null} sx={customWidthPopup} />
+      <PaymentSuccess status={true} handleToggleStatus={() => null} /> 
     </Wrap>
   )
 }

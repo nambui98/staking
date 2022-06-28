@@ -15,14 +15,14 @@ export const getAllowance = async (walletAddress: string, ethersSigner: any) => 
   return convertAllowance;
 }
 
-export const approvePurchase = async (price: string, walletAddress: string, ethersSigner: any) => {
+export const approvePurchase = async (price: string, ethersSigner: any) => {
   const busdContract = new ethers.Contract(bftBusdToken.address, bftBusdToken.abi, ethersSigner);
   const parsePrice = ethers.utils.parseUnits(price)
   const res = await busdContract.approve(bftShop.address, parsePrice);
   return res;
 }
-export const PurchaseBox = async (boxType: string, tokenAddress: string, ethersSigner: any) => {
+export const purchaseBox = async (boxType: string, ethersSigner: any) => {
   const shopContract = new ethers.Contract(bftShop.address, bftShop.abi, ethersSigner);
-  const res = await shopContract.purchaseBoxByToken(boxType, tokenAddress);
+  const res = await shopContract.purchaseBoxByToken(boxType, bftBusdToken.address);
   return res;
 }

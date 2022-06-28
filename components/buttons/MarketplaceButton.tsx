@@ -12,8 +12,9 @@ interface IProps {
 export const MarketplaceButton: React.FC<IProps> = ({price, title, handleOnClick, customStyle}) => {
   return (
     <ButtonMarketPlace variant="contained" onClick={handleOnClick} sx={customStyle} price={price} >
-      {price &&  <Box sx={flex}><img style={{marginRight: 8}} src={MARKETPLACE_ICON.busdIcon} /> {price}</Box>}
-      <Box sx={flex}>{title} {price && price > 0 && <img style={{marginLeft: 8, filter: 'invert(0%) sepia(0%) saturate(0%) hue-rotate(333deg) brightness(200%) contrast(100%)'}} src={MARKETPLACE_ICON.ARROWRIGHT} />}</Box>
+      {(price && price > 0) ? <Box sx={flex}><img style={iconWhite} src={MARKETPLACE_ICON.busdIcon} /> {price}</Box> : ''}
+      <Box sx={flex}>{title} {(price && price > 0) ? 
+      <img style={{marginLeft: 8}} src={MARKETPLACE_ICON.ARROWRIGHT} /> : ''}</Box>
     </ButtonMarketPlace>
   )
 }
@@ -42,4 +43,8 @@ const ButtonMarketPlace = styled(Button)((props: ButtonMarketPlace) => ({
 const flex = {
   display: 'flex',
   alignItems: 'center',
+}
+const iconWhite = {
+  marginRight: '8px',
+  filter: 'invert(0%) sepia(0%) saturate(0%) hue-rotate(333deg) brightness(200%) contrast(100%)'
 }

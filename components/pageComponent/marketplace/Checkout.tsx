@@ -6,6 +6,7 @@ import { MARKETPLACE_ICON } from "../../../constants/marketplace"
 interface IProps {
   status: boolean
   handleToggleStatus: (status: boolean) => void
+  handleCheckout: () => any
   sx?: any,
   data: {
     price: number,
@@ -13,10 +14,11 @@ interface IProps {
   }
 }
 
-export const Checkout: React.FC<IProps> = ({ status, handleToggleStatus, data, sx }) => {
+export const Checkout: React.FC<IProps> = ({ status, handleToggleStatus, handleCheckout, data, sx }) => {
   return (
     <Popup sx={sx} title="Checkout" status={status} handleToggle={() => handleToggleStatus(false)} 
-      titleButton={!data.allowance ? "BUY NOW" : 'INCREASE'} priceButton={400} handleClickButton={() => null} >
+      titleButton={data.allowance ? "BUY NOW" : 'INCREASE'} priceButton={data.allowance ? data.price : 0} handleClickButton={handleCheckout}
+      >
       <Stack sx={wrap}>
         <Stack sx={info}>
           <BoxImage>

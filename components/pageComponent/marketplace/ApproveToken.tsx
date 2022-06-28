@@ -7,12 +7,13 @@ import { CheckboxMarketplace } from "../../checkbox/CheckboxMarketplace";
 interface IProps {
   status: boolean
   handleToggleStatus: (status: boolean) => void
+  sx?: any
 }
 
-export const ApproveToken: React.FC<IProps> = ({ status, handleToggleStatus }) => {
+export const ApproveToken: React.FC<IProps> = ({ status, handleToggleStatus, sx }) => {
   return (
     <Popup title="Approve token" status={status} handleToggle={() => handleToggleStatus(false)} titleButton={'APPROVE'} handleClickButton={() => null}>
-      <Wrap>
+      <Wrap sx={sx}>
         <Stack>
           <InfoItem>
             <InfoTitleItem >Amount to buy</InfoTitleItem>
