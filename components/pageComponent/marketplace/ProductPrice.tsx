@@ -1,21 +1,28 @@
 import { Box, BoxProps, Button, Stack, styled, Tab, Tabs, Typography, useMediaQuery } from "@mui/material"
 import { ethers } from "ethers"
-import Image from "next/image"
 import { useEffect, useState } from "react"
 import { MARKETPLACE_ICON, MARKETPLACE_IMAGE } from "../../../constants/marketplace"
 import { useWalletContext } from "../../../contexts/WalletContext"
 import { beFitterBusd, beFitterShop } from "../../../libs/contracts"
-import { getBoxPrice, PurchaseBox } from "../../../libs/shop"
+import { getBoxPrice, PurchaseBox } from "../../../libs/marketplace"
 import { TEXT_STYLE } from "../../../styles/common/textStyles"
 
 export const ProductPrice = () => {
-  const {ethersSigner, claimBoxContract} = useWalletContext();
+  const {ethersSigner, claimBoxContract, walletAccount} = useWalletContext();
   const [boxPrice, setBoxPrice] = useState<string>();
   const [shopContract, setShopContract] = useState<any>();
 
   const handlePurchaseBox = async () => {
-    const res = await PurchaseBox(shopContract, 'diamond', beFitterBusd.address);
-    console.log(res, 1111);
+    const shopContract = await new ethers.Contract(beFitterShop.address, beFitterShop.abi, ethersSigner);
+    const busdContract = await new ethers.Contract(beFitterBusd.address, beFitterBusd.abi, ethersSigner);
+
+
+    // const approve = await busdContract.approve(beFitterShop.address, '0x0aa87bee538000')
+    // const price = await getBoxPrice(shopContract, 'gold', beFitterBusd.address);
+    // const allowance = await busdContract.allowance(walletAccount, beFitterShop.address);
+    // console.log(ethers.utils.formatUnits(price), ethers.utils.formatUnits(allowance, 'wei'), approve)
+    // const res = await PurchaseBox(shopContract, 'gold', beFitterBusd.address);
+    console.log(ethers.utils.parseEther('0.03'));
   }
 
   useEffect(() => {
@@ -25,7 +32,7 @@ export const ProductPrice = () => {
       const res = await getBoxPrice(shopContract, 'gold', beFitterBusd.address);
       res && setBoxPrice(ethers.utils.formatUnits(res))
     }
-    getPrice()
+    // getPrice()
   }, [])
 
   return (

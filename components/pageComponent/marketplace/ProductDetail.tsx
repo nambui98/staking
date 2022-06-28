@@ -25,7 +25,7 @@ export const ProductDetail = () => {
       </Statistical>}
       <PropertiesBox>        
         {PROPERTIES.items?.map((item, index) => (
-          <PropertiesItem isMobile={isMobile}><img src={item.icon} /><Box><Typography sx={{ ...TEXT_STYLE(14, 600) }}>
+          <PropertiesItem key={index} isMobile={isMobile}><img src={item.icon} /><Box><Typography sx={{ ...TEXT_STYLE(14, 600) }}>
             </Typography>{item.title}<Typography>{item.chance}</Typography></Box>
             <Box></Box>
             <TitleBg sx={{color: index === 0 ? '#FF6F61' : index === 1 ? '#FFC83A' : '#A7ACB8'}}>{item.titleBg}</TitleBg>
