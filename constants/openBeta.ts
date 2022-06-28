@@ -7,7 +7,7 @@ export const IMAGE_COUNTDOWN = {
     leadboard: {
       title: 'Leadboard',
       link: '/leaderboard',
-      active: true,
+      active: false,
       image: 'assets/icons/ranking.svg',
       imageGray: 'assets/icons/rankingGray.svg',
     },
@@ -22,7 +22,7 @@ export const TAB_BODY = {
     titleImage: 'assets/title1.png',
     list: [
       {title: 'Location', data: 'Global'},
-      {title: 'Duration', data: '3:00 UTC Jun 20, 2022 - 23:59 UTC Jun 30, 2022'},
+      {title: 'Duration', data: '3:00 UTC Jun 20, 2022 - 23:59 UTC July 4, 2022'},
       {title: 'Reward Announcement', data: 'July 07, 2022'},
       {title: 'Activities included', data: 'Walking, Running, Cycling'},
       {title: 'Total rewards', data: '10,000 $FIU and 370 shoe NFT boxes, each NFT could be worth up to 1,000 USD'},

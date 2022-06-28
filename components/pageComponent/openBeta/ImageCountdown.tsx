@@ -14,7 +14,7 @@ export const ImageCountdown = () => {
             <Body>
               <BoxCountdown>
                 <CountdownClock endDate={IMAGE_COUNTDOWN.countDown.time} sxTitle={40} sxSubTitle={16} />
-                <Link href='/leaderboard'><CountdownButton active={true}><img src={IMAGE_COUNTDOWN.countDown.leadboard.image} /> {IMAGE_COUNTDOWN.countDown.leadboard.title}</CountdownButton></Link>
+                <Link href={'#'}><CountdownButton disabled={!IMAGE_COUNTDOWN.countDown.leadboard.active} active={IMAGE_COUNTDOWN.countDown.leadboard.active}><img src={IMAGE_COUNTDOWN.countDown.leadboard.imageGray} /> {IMAGE_COUNTDOWN.countDown.leadboard.title}</CountdownButton></Link>
                 {IMAGE_COUNTDOWN.countDown.Questions?.map((item, index) => (
                   <QuestionsItem key={index}><img src={item.imageIcon} /><Link href={item.link}>{item.title}</Link></QuestionsItem>
                 ))}
@@ -84,7 +84,7 @@ const CountdownButton = styled(Button)((props: CountdownButton) => ({
   maxWidth: '176px',
   textTransform: 'initial',
   '& : hover, &': {
-    background: '#FFE2D3 !important',
+    background: props.active ? '#FFE2D3 !important' : '#E9EAEF !important',
     color: props.active ? '#FF8A50' : '#A7ACB8',
   },
   '& img': {
