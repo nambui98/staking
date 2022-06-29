@@ -10,7 +10,8 @@ interface IProps {
   sx?: any,
   data: {
     price: number,
-    allowance: boolean
+    allowance: boolean,
+    boxImage: string
   }
 }
 
@@ -22,8 +23,7 @@ export const Checkout: React.FC<IProps> = ({ status, handleToggleStatus, handleC
       <Stack sx={wrap}>
         <Stack sx={info}>
           <BoxImage>
-            <img src={'assets/shoes/shoesItem.png'} />
-            <Typography sx={type}>Daily</Typography>
+            <img src={data.boxImage} />
           </BoxImage>
           <Stack sx={boxItem}>
             <Stack sx={infoItem}>

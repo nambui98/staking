@@ -18,15 +18,13 @@ export const ProductDetail = () => {
   };
   return (
     <Wrap>
-      {!isMobile && <Statistical>
-        {STATISTICAL.items?.map((item, index) => (
-          <StatisticalItem key={index} sx={{marginRight: index === 0 ? '16px' : 0}}><img src={item.icon} /><Box><Typography>{item.title}</Typography><Typography>4000</Typography></Box></StatisticalItem>
-        ))}
-      </Statistical>}
       <PropertiesBox>        
         {PROPERTIES.items?.map((item, index) => (
-          <PropertiesItem key={index} isMobile={isMobile}><img src={item.icon} /><Box><Typography sx={{ ...TEXT_STYLE(14, 600) }}>
-            </Typography>{item.title}<Typography>{item.chance}</Typography></Box>
+          <PropertiesItem key={index} isMobile={isMobile}><img src={item.icon} />
+            <Box sx={{display: 'flex', alignItems: 'center'}}>
+              <Typography sx={{ ...TEXT_STYLE(16, 600) }}>{item.title}</Typography>
+              <Box>{item.chance} <Typography>chance</Typography></Box>
+            </Box>
             <Box></Box>
             <TitleBg sx={{color: index === 0 ? '#FF6F61' : index === 1 ? '#FFC83A' : '#A7ACB8'}}>{item.titleBg}</TitleBg>
           </PropertiesItem>
@@ -63,33 +61,6 @@ const bg = {
   left: 0,
   opacity: 0.3
 }
-const StatisticalItem = styled(Box)({
-  padding: '8px 12px',
-  // width: 139,
-  display: 'flex',
-  alignItems: 'center',
-  backgroundImage: `url(${MARKETPLACE_IMAGE.borderv3})`,
-  backgroundPosition: '100%',
-  backgroundSize: 'contain',
-  backgroundRepeat: 'no-repeat',
-  '& img': {
-    marginRight: 16
-  },
-  '& > div': {
-    '& p:first-of-type': {
-      ...TEXT_STYLE(12, 600),
-      color: '#898E9E',
-      marginBottom: 7
-    },
-    '& p:last-of-type': {
-      ...TEXT_STYLE(16, 600),
-    }
-  }
-})
-const Statistical = styled(Stack)({
-  marginBottom: 40,
-  flexDirection: 'row',
-})
 const TabBody = styled(Box)({
   marginBottom: 20,
   '& p': {
@@ -147,20 +118,33 @@ const PropertiesItem = styled(Box)((props: PropertiesProps) => ({
     marginRight: props.isMobile ? 0 : 16
   },
   '& p:last-of-type': {
+  
+    
+  },
+  '& > div div': {
+    position: 'absolute',
+    right: 81,
+    top: '50%',
+    transform: 'translateY(-50%)',
     background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
     '-webkit-background-clip': 'text',
     '-webkit-text-fill-color': 'transparent',
-    marginTop: 7,
-    ...TEXT_STYLE(12, 700)
+    ...TEXT_STYLE(20, 700),
+    textAlign: 'center',
+
+    '& p': {
+      ...TEXT_STYLE(12, 700)
+    }
   }
 }))
 const PropertiesBox = styled(Stack)({
   flexDirection: 'row',
   justifyContent: 'space-between',
-  marginBottom: 24,
+  marginTop: 24,
   '@media (min-width: 768px)': {
     marginBottom: 46,
     flexDirection: 'column',
+    margin: '124px 0 24px',
   }
 })
 const TitleBg = styled(Typography)({

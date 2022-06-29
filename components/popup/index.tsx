@@ -41,15 +41,12 @@ const Wrap = styled(Stack)({
   }
 })
 const TitlePopup = styled(DialogTitle)({
-  fontSize: '16px !important',
+  fontSize: '24px !important',
   fontWeight: '500',
   color: '#31373E',
   // marginBottom: '17px',
   marginBottom: 10,
   textAlign: 'center',
-  '@media (min-width: 768px)': {
-    fontSize: '16px !important'
-  },
   '& p': {
     ...TEXT_STYLE(16, 600)
   }

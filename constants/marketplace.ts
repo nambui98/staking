@@ -77,8 +77,22 @@ export const STATISTICAL = {
 
 export const PROPERTIES = {
   items: [
-    {title: 'Iconic Shoe', titleBg: 'ICONIC', chance: '10% chance', icon: 'assets/icons/iconic-red.svg'},
-    {title: 'Rare Shoe', titleBg: 'RARE', chance: '50% chance', icon: 'assets/icons/rare-yellow.svg'},
-    {title: 'Standard Shoe', titleBg: 'Common', chance: '40% chance', icon: 'assets/icons/standard.svg'}
+    {title: 'Iconic Shoe', titleBg: 'ICONIC', chance: '10%', icon: 'assets/icons/iconic-red.svg'},
+    {title: 'Rare Shoe', titleBg: 'RARE', chance: '50%', icon: 'assets/icons/rare-yellow.svg'},
+    {title: 'Standard Shoe', titleBg: 'Common', chance: '40%', icon: 'assets/icons/standard.svg'}
   ]
+}
+export const BOX_DETAIL = {
+  box_gold: {
+    video: 'videos/box-gold.mp4', 
+    image_small: 'assets/box-gold-small.png',
+    image_large: 'assets/box-gold-big.png',
+    type: 'gold'
+  },
+  box_diamond: {
+    video: 'videos/box-dinamod.mp4', 
+    image_small: 'assets/box-diamond-small.png',
+    image_large: 'assets/box-diamond-big.png',
+    type: 'diamond'
+  },
 }

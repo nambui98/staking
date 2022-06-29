@@ -39,11 +39,11 @@ export default Marketplace;
 const Wrap = styled(Box)({
   width: '100%',
   color: '#31373E',
-  marginTop: 6,
+  marginBottom: 30,
   '@media (min-width: 768px)': {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 18
+    marginBottom: 50
   }
 })
 const container = {

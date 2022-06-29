@@ -1,18 +1,23 @@
-import { Box, styled, Typography } from "@mui/material"
+import { Box, Stack, styled, Typography } from "@mui/material"
 import { BACKGROUND, MARKETPLACE_ICON } from "../../../constants/marketplace"
 import { Popup } from "../../popup"
 
 interface IProps {
   status: boolean
   handleToggleStatus: (status: boolean) => void
+  data: {
+    boxPrice: number,
+    boxImage: string
+  }
+  sx?: any
 }
 
-export const PaymentSuccess: React.FC<IProps> = ({status, handleToggleStatus}) => {
+export const PaymentSuccess: React.FC<IProps> = ({status, handleToggleStatus, data, sx}) => {
   return (
-    <Popup title="Success!!" status={status} handleToggle={() => handleToggleStatus(false)}>
+    <Popup title="Success!!" status={status} handleToggle={() => handleToggleStatus(false)} sx={sx}>
       <Message>Your items have successfully purchased!</Message>
-      <Message>Total price: <img src={MARKETPLACE_ICON.BNBCOINYELLOW} /><span>400</span></Message>
-      <ImageShoe><img src={'assets/shoes/imageSuccess.png'} /></ImageShoe>
+      <Message>Total price: <img src={MARKETPLACE_ICON.busdIcon} /><span>{data.boxPrice}</span></Message>
+      <ImageShoe><img src={data.boxImage} /></ImageShoe>
     </Popup>
   )
 }
@@ -32,13 +37,18 @@ const Message = styled(Typography)({
     fontWeight: '600'
   },
   '& img': {
-    margin: '0 4px 0 8px'
+    margin: '0 4px 0 8px',
   }
 })
 const ImageShoe = styled(Box)({
   backgroundImage: `url(${BACKGROUND.SUCCESS})`,
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
-  backgroundSize: 'contain',
-  textAlign: 'center'
+  backgroundSize: 'cover',
+  textAlign: 'center',
+  width: 260,
+  margin: 'auto',
+  '& img': {
+    maxWidth: 198
+  }
 })
