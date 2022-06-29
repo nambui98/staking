@@ -21,12 +21,12 @@ export const ProductDetail = () => {
       <PropertiesBox>        
         {PROPERTIES.items?.map((item, index) => (
           <PropertiesItem key={index} isMobile={isMobile}><img src={item.icon} />
-            <Box sx={{display: 'flex', alignItems: 'center'}}>
-              <Typography sx={{ ...TEXT_STYLE(16, 600) }}>{item.title}</Typography>
+            <Box sx={isMobile ? {} : {display: 'flex', alignItems: 'center'}}>
+              <Typography>{item.title}</Typography>
               <Box>{item.chance} <Typography>chance</Typography></Box>
             </Box>
             <Box></Box>
-            <TitleBg sx={{color: index === 0 ? '#FF6F61' : index === 1 ? '#FFC83A' : '#A7ACB8'}}>{item.titleBg}</TitleBg>
+            {!isMobile && <TitleBg sx={{color: index === 0 ? '#FF6F61' : index === 1 ? '#FFC83A' : '#A7ACB8'}}>{item.titleBg}</TitleBg>}
           </PropertiesItem>
         ))}
       </PropertiesBox>
@@ -92,6 +92,7 @@ const PropertiesItem = styled(Box)((props: PropertiesProps) => ({
   textAlign: 'center',
   width: 'calc(33.333% - 8px)',
   position: 'relative',
+  marginBottom: 10,
   '@media (min-width: 768px)': {
     padding: 8,
     marginBottom: 24,
@@ -117,23 +118,39 @@ const PropertiesItem = styled(Box)((props: PropertiesProps) => ({
     marginBottom: props.isMobile ? 8 : 0,
     marginRight: props.isMobile ? 0 : 16
   },
-  '& p:last-of-type': {
-  
-    
-  },
-  '& > div div': {
-    position: 'absolute',
+  '& > div div': {   
     right: 81,
     top: '50%',
-    transform: 'translateY(-50%)',
     background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
     '-webkit-background-clip': 'text',
     '-webkit-text-fill-color': 'transparent',
-    ...TEXT_STYLE(20, 700),
     textAlign: 'center',
-
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    ...TEXT_STYLE(12, 700),
+    marginTop: 7,
     '& p': {
-      ...TEXT_STYLE(12, 700)
+      ...TEXT_STYLE(12, 700),
+      marginLeft: 3
+    },
+
+    '@media (min-width: 768px)': {
+      position: 'absolute',
+      transform: 'translateY(-50%)',
+      display: 'block',
+      marginTop: 0,
+      ...TEXT_STYLE(20, 700),
+      '& p': {
+        ...TEXT_STYLE(12, 700),
+        marginTop: 0
+      }
+    }
+  },
+  '& > div p': {
+    ...TEXT_STYLE(14, 600),
+    '@media (min-width: 768px)': {
+      ...TEXT_STYLE(16, 600),
     }
   }
 }))

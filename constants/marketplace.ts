@@ -84,15 +84,17 @@ export const PROPERTIES = {
 }
 export const BOX_DETAIL = {
   box_gold: {
-    video: 'videos/box-gold.mp4', 
+    video: 'videos/box-gold.webm', 
     image_small: 'assets/box-gold-small.png',
     image_large: 'assets/box-gold-big.png',
-    type: 'gold'
+    type: 'gold',
+    title: 'Golden Mystery Shoe Box'
   },
   box_diamond: {
-    video: 'videos/box-dinamod.mp4', 
+    video: 'videos/box-diamond.webm', 
     image_small: 'assets/box-diamond-small.png',
     image_large: 'assets/box-diamond-big.png',
-    type: 'diamond'
+    type: 'diamond',
+    title: 'Diamond Mystery Shoe Box'
   },
 }

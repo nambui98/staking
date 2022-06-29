@@ -1,6 +1,6 @@
-import { Backdrop, Box, BoxProps, Button, CircularProgress, fabClasses, Stack, styled, Tab, Tabs, Typography, useMediaQuery } from "@mui/material"
+import { Backdrop, Box, BoxProps, Button, CircularProgress, fabClasses, Stack, styled, Tab, Tabs, Tooltip, Typography, useMediaQuery } from "@mui/material"
 import { ethers } from "ethers"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { BOX_DETAIL, MARKETPLACE_ICON, MARKETPLACE_IMAGE } from "../../../constants/marketplace"
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { getAllowance, getBoxPrice, purchaseBox, approvePurchase } from "../../../libs/marketplace"
@@ -11,9 +11,13 @@ import { Checkout } from "./Checkout"
 import { PaymentSuccess } from "./PaymentSuccess"
 
 export const ProductPrice = () => {
-  const { ethersSigner, provider, walletAccount, chainIdIsSupported, ethersProvider } = useWalletContext();
-  const [boxDetail, setBoxDetail] = useState<{ price: number, type: string, video: string, image_small: string, image_large: string}>({ 
-    price: 0, type: 'gold',  video: BOX_DETAIL.box_gold.video, image_small: BOX_DETAIL.box_gold.image_small, image_large: BOX_DETAIL.box_gold.image_large
+  const videoRef = useRef(null);
+  const { ethersSigner, provider, walletAccount, chainIdIsSupported, ethersProvider, setToggleActivePopup } = useWalletContext();
+  const [boxDetail, setBoxDetail] = useState<{ price: number, type: string, video: string, image_small: string, image_large: string, title: string}>({ 
+    price: 0, type: BOX_DETAIL.box_gold.type,  
+    video: BOX_DETAIL.box_gold.video, 
+    image_small: BOX_DETAIL.box_gold.image_small, image_large: BOX_DETAIL.box_gold.image_large,
+    title: BOX_DETAIL.box_gold.title
   })
   const [checkoutPopup, setCheckoutPopup] = useState<{
     status: boolean, currentAllowance: number, allowanceStatus: boolean, onClickButton: () => any
@@ -68,7 +72,9 @@ export const ProductPrice = () => {
     }
   }
 
-  const handleTogglePopup = () => setCheckoutPopup({ ...checkoutPopup, status: !checkoutPopup.status })
+  const handleTogglePopup = () => {
+    walletAccount ? setCheckoutPopup({ ...checkoutPopup, status: !checkoutPopup.status }) : setToggleActivePopup(true)
+  }
 
   const getPriceCurrentBox = async () => {
     if (!chainIdIsSupported) {
@@ -90,12 +96,14 @@ export const ProductPrice = () => {
   }
 
   const handleSwitchBoxType = (boxType:  string) => {
+    (videoRef.current as any)?.load()
     const handleSetBoxDetail = (boxData: any) => setBoxDetail({
       ...boxDetail,
       type: boxType,
       video: boxData.video,
       image_small: boxData.image_small,
       image_large: boxData.image_large,
+      title: boxData.title,
     })
     if(boxType === BOX_DETAIL.box_gold.type) {
       handleSetBoxDetail(BOX_DETAIL.box_gold)
@@ -111,6 +119,7 @@ export const ProductPrice = () => {
     <Wrap>
       <ProductVideo>
         <video
+          ref={videoRef}
           autoPlay={true}
           loop
           muted
@@ -126,7 +135,7 @@ export const ProductPrice = () => {
           />
         </video>
       </ProductVideo>
-      <Title>beFITTER Mystery Shoe Box</Title>
+      <Title>{boxDetail.title}</Title>
       <BoxPrice>
         <BoxPriceItem><Typography>TotalSale</Typography><Typography>400</Typography></BoxPriceItem>
         <BoxPriceItem><Typography>SUPPORTED</Typography><Typography>BUSD</Typography></BoxPriceItem>
@@ -136,13 +145,18 @@ export const ProductPrice = () => {
       <BoxType>
         <Typography>BOX TYPE</Typography>
         <ListBoxType>
+          <BoxTypeItem active={false}>
+            <Tooltip title="Coming soon" arrow placement="top">
+              <img src="assets/box-comming-soon.png" />
+            </Tooltip>
+          </BoxTypeItem>
           <BoxTypeItem onClick={() => handleSwitchBoxType(BOX_DETAIL.box_gold.type)} active={boxDetail.type === BOX_DETAIL.box_gold.type}><img src={BOX_DETAIL.box_gold.image_small} /></BoxTypeItem>
           <BoxTypeItem onClick={() => handleSwitchBoxType(BOX_DETAIL.box_diamond.type)} active={boxDetail.type === BOX_DETAIL.box_diamond.type}><img src={BOX_DETAIL.box_diamond.image_small} /></BoxTypeItem>
         </ListBoxType>
       </BoxType>
       <Price>
         <Busd><img src={MARKETPLACE_ICON.busdIcon} /> {boxDetail.price} BUSD</Busd>
-        <ButtonBuyNow onClick={handleTogglePopup}><Box>Buy now <img src={MARKETPLACE_ICON.arrowRightIcon} /></Box></ButtonBuyNow>
+        <ButtonBuyNow onClick={handleTogglePopup}><Box>Buy now <img className="animationArrow" src={MARKETPLACE_ICON.arrowRightIcon} /></Box></ButtonBuyNow>
       </Price>
       <Checkout status={checkoutPopup.status} handleToggleStatus={handleTogglePopup} sx={customWidthPopup}
         data={{ price: boxDetail.price, allowance: checkoutPopup.allowanceStatus, boxImage: boxDetail.image_large }} handleCheckout={checkoutPopup.onClickButton}
@@ -214,7 +228,6 @@ const ButtonBuyNow = styled(Button)({
     color: '#FF6D24',
     width: 240,
     '& img': {
-      transition: '0.3s',
       filter: 'invert(55%) sepia(46%) saturate(3957%) hue-rotate(344deg) brightness(101%) contrast(101%)'
     }
   },
@@ -222,7 +235,6 @@ const ButtonBuyNow = styled(Button)({
     display: 'flex',
     justifyContent: 'space-between',
     width: '100%',
-    transition: '0.3s',
     '@media (min-width: 768px)': {
       background: '#ffffff',
       borderRadius: 14,
@@ -238,7 +250,7 @@ const ButtonBuyNow = styled(Button)({
   }
 })
 const Busd = styled(Box)({
-  ...TEXT_STYLE(24, 600),
+  ...TEXT_STYLE(20, 600),
   marginRight: 10,
   display: 'flex',
   alignItems: 'center',
@@ -246,6 +258,7 @@ const Busd = styled(Box)({
     marginRight: 8
   },
   '@media (min-width: 768px)': {
+    ...TEXT_STYLE(24, 600),
     marginRight: 20,
     minWidth: 135
   }
@@ -257,16 +270,27 @@ const Price = styled(Stack)({
   marginBottom: 24
 })
 const ProductVideo = styled(Box)({
-  margin: '70px 0',
+  margin: '10px 0 16px',
   textAlign: 'center',
+  minHeight: 395,
+  overflow: 'hidden',
+  '@media (min-width: 768px)': {
+    margin: '70px 0 -20px',
+    minHeight: 480
+  },
   '& video': {
     width: '100%',
+    transform: 'scale(1.5)'
   }
 })
 const Title = styled(Typography)({
   color: '#31373E',
-  ...TEXT_STYLE(32, 600),
-  marginBottom: 24
+  ...TEXT_STYLE(20, 600),
+  marginBottom: 16,
+  '@media (min-width: 768px)': {
+    ...TEXT_STYLE(32, 600),
+    marginBottom: 24,
+  }
 })
 const BoxPrice = styled(Stack)({
   flexWrap: 'wrap',
@@ -280,17 +304,24 @@ const BoxPrice = styled(Stack)({
   }
 })
 const BoxPriceItem = styled(Box)({
-  marginBottom: 16,
+  marginBottom: 12,
   '& > p:first-of-type': {
     color: '#898E9E',
     ...TEXT_STYLE(14, 600),
-    marginBottom: 17,
+    marginBottom: 8,
   },
   '& > p:last-of-type': {
     ...TEXT_STYLE(16, 600),
   },
   '&:nth-child(2)': {
     margin: '0 40px'
+  },
+  '@media (min-width: 768px)': {
+    marginBottom: 16,
+    '& > p:first-of-type': {
+      color: '#898E9E',
+      marginBottom: 17,
+    },
   }
 })
 const customWidthPopup = {
