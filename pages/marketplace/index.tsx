@@ -2,28 +2,50 @@ import { Box, Container, Stack, styled, Typography } from "@mui/material";
 import type { NextPage } from "next";
 import { useState } from "react";
 import MainLayout from '../../components/layouts/MainLayout';
-import { ApproveToken } from "../../components/pageComponent/marketplace/ApproveToken";
-import { Banner } from "../../components/pageComponent/marketplace/Banner";
-import { Checkout } from "../../components/pageComponent/marketplace/Checkout";
-import { ConnectWallet } from "../../components/pageComponent/marketplace/ConnectWallet";
-import {Filter} from "../../components/pageComponent/marketplace/Filter";
-import ListProduct from "../../components/pageComponent/marketplace/ListProduct";
-import { PaymentSuccess } from "../../components/pageComponent/marketplace/PaymentSuccess";
 import { ProductDetail } from "../../components/pageComponent/marketplace/ProductDetail";
 import { ProductPrice } from "../../components/pageComponent/marketplace/ProductPrice";
+import { BOX_DETAIL } from "../../constants/marketplace";
+
+interface boxDetail {
+  price: number, 
+  type: string,
+  video: string, 
+  image_small: string, 
+  image_large: string, 
+  title: string,
+  properties: {
+    title: string, titleBg: string, chance: string, icon: string
+  }[],
+  information: {
+    introduction: string[],
+    info: string[]
+  }  
+}
+export interface MarketplaceProps {
+  boxDetail: boxDetail
+  setBoxDetail: (value: any) => void
+}
 
 const Marketplace: NextPage = () => {
-
+  const [boxDetail, setBoxDetail] = useState<boxDetail>({ 
+    price: 0, 
+    type: BOX_DETAIL.box_gold.type,  
+    video: BOX_DETAIL.box_gold.video, 
+    image_small: BOX_DETAIL.box_gold.image_small, image_large: BOX_DETAIL.box_gold.image_large,
+    title: BOX_DETAIL.box_gold.title,
+    properties: BOX_DETAIL.box_gold.properties,
+    information: BOX_DETAIL.box_gold.information
+  })
   return (
     <MainLayout sxProps={{backgroundColor: "#FFFFFF"}}>
       <Wrap>
         <Container disableGutters sx={container}>
           <Inner>
             <BoxLeft>
-              <ProductPrice/>
+              <ProductPrice boxDetail={boxDetail} setBoxDetail={setBoxDetail} />
             </BoxLeft>
             <BoxRight>
-              <ProductDetail/>
+              <ProductDetail boxDetail={boxDetail} setBoxDetail={setBoxDetail} />
             </BoxRight>
           </Inner>
         </Container>

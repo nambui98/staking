@@ -1,15 +1,12 @@
 import * as React from 'react';
 import Box, { BoxProps } from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import { alertTitleClasses, Stack, styled, SvgIcon, Tab, Tabs, Typography, useMediaQuery } from '@mui/material';
+import { Stack, styled, Tab, Tabs, Typography, useMediaQuery } from '@mui/material';
 import { useState } from 'react';
-import { MARKETPLACE_ICON, MARKETPLACE_IMAGE, PROPERTIES, STATISTICAL } from '../../../constants/marketplace';
-import { MarketplaceButton } from '../../buttons/MarketplaceButton';
 import { TEXT_STYLE } from '../../../styles/common/textStyles';
+import { MarketplaceProps } from '../../../pages/marketplace';
 
 
-export const ProductDetail = () => {
+export const ProductDetail: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetail}) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [currentTab, setCurrentTab] = useState('1');
 
@@ -19,7 +16,7 @@ export const ProductDetail = () => {
   return (
     <Wrap>
       <PropertiesBox>        
-        {PROPERTIES.items?.map((item, index) => (
+        {boxDetail.properties?.map((item, index) => (
           <PropertiesItem key={index} isMobile={isMobile}><img src={item.icon} />
             <Box sx={isMobile ? {} : {display: 'flex', alignItems: 'center'}}>
               <Typography>{item.title}</Typography>
@@ -41,10 +38,9 @@ export const ProductDetail = () => {
         <TabItem value="2" label="Box information" />
       </BoxTabs>
       <TabBody>
-        <Typography>Special Offer: With each Mystery Shoe Box purchased in this pool, you will get $12 guaranteed allocation for the beFITTER IDO later.</Typography>
-        <Typography>1. Everyone can purchase in this pool.</Typography>
-        <Typography>2. One Mystery Box contains one NFT Shoe.</Typography>
-        <Typography>3. Purchase limitation: 5 boxes per person.</Typography>
+        {boxDetail.information[currentTab === '1' ? 'introduction' : 'info']?.map((item: any, index: number) => (
+          <Typography key={index}>{item}</Typography>
+        ))}
       </TabBody>
     </Wrap>
   )

@@ -4,21 +4,22 @@ import { useEffect, useRef, useState } from "react"
 import { BOX_DETAIL, MARKETPLACE_ICON, MARKETPLACE_IMAGE } from "../../../constants/marketplace"
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { getAllowance, getBoxPrice, purchaseBox, approvePurchase } from "../../../libs/marketplace"
+import { MarketplaceProps } from "../../../pages/marketplace"
 import { TEXT_STYLE } from "../../../styles/common/textStyles"
 import { PopupMessage } from "../claim/PopupMessage"
 import { ApproveToken } from "./ApproveToken"
 import { Checkout } from "./Checkout"
 import { PaymentSuccess } from "./PaymentSuccess"
 
-export const ProductPrice = () => {
+export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetail}) => {
   const videoRef = useRef(null);
   const { ethersSigner, provider, walletAccount, chainIdIsSupported, ethersProvider, setToggleActivePopup } = useWalletContext();
-  const [boxDetail, setBoxDetail] = useState<{ price: number, type: string, video: string, image_small: string, image_large: string, title: string}>({ 
-    price: 0, type: BOX_DETAIL.box_gold.type,  
-    video: BOX_DETAIL.box_gold.video, 
-    image_small: BOX_DETAIL.box_gold.image_small, image_large: BOX_DETAIL.box_gold.image_large,
-    title: BOX_DETAIL.box_gold.title
-  })
+  // const [boxDetail, setBoxDetail] = useState<{ price: number, type: string, video: string, image_small: string, image_large: string, title: string}>({ 
+  //   price: 0, type: BOX_DETAIL.box_gold.type,  
+  //   video: BOX_DETAIL.box_gold.video, 
+  //   image_small: BOX_DETAIL.box_gold.image_small, image_large: BOX_DETAIL.box_gold.image_large,
+  //   title: BOX_DETAIL.box_gold.title
+  // })
   const [checkoutPopup, setCheckoutPopup] = useState<{
     status: boolean, currentAllowance: number, allowanceStatus: boolean, onClickButton: () => any
   }>({
