@@ -1,11 +1,15 @@
-import { Box, ClickAwayListener, Stack, styled, Tooltip, Typography } from "@mui/material"
-import { ReactNode, useState } from "react";
+import { Box, ClickAwayListener, Stack, styled, Tooltip, Typography, useMediaQuery } from "@mui/material"
+import { ethers } from "ethers";
+import { ReactNode, useEffect, useState } from "react";
 import { BOX_INFO, ICON } from "../../../constants/assetsWallet";
 import { useWalletContext } from "../../../contexts/WalletContext"
+import { getBoxType, getOwnedBox } from "../../../libs/claim";
+import { bftBox } from "../../../libs/contracts";
+import { convertWalletAddress } from "../../../libs/utils/utils";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
 
-const data = [
-  {
+const BOX_INFOMATION = {
+  silver: {
     type: 'silver',
     title: 'Silver Mystery Box',
     image: 'assets/box-silver-small.png',
@@ -15,7 +19,7 @@ const data = [
       iconic: '1%'
     }
   },
-  {
+  gold: {
     type: 'gold',
     title: 'Gold Mystery Box',
     image: 'assets/box-gold-small.png',
@@ -25,7 +29,7 @@ const data = [
       iconic: '10%'
     }
   },
-  {
+  diamond: {
     type: 'diamond',
     title: 'Diamond Mystery Box',
     image: 'assets/box-diamond-small.png',
@@ -35,31 +39,13 @@ const data = [
       iconic: '10%'
     }
   }
-]
+}
 
 export const MysteryBoxTab = () => {
-  const { boxBalance } = useWalletContext();
-  const [tooltip, setTooltip] = useState<{status: boolean, boxType: string, detail: any}>({
-    status: false,
-    boxType: '',
-    detail: {
-      standard: '',
-      rare: '',
-      iconic: ''
-    }
-  });
-
-  const handleShowTooltip = (data: any) => {
-    setTooltip({
-      status: true,
-      boxType: data.type,
-      detail: {
-        standard: data.detail.standard,
-        rare: data.detail.rare,
-        iconic: data.detail.iconic
-      }
-    })
-  }
+  const { boxBalance, walletAccount, ethersSigner } = useWalletContext();
+  const [tooltip, setTooltip] = useState<{ boxId: string }>({ boxId: '' });
+  const [listBoxType, setListBoxType] = useState<any[]>();
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const tooltipBody = (data: any) => {
     return <BodyTooltip>
@@ -69,21 +55,74 @@ export const MysteryBoxTab = () => {
     </BodyTooltip>
   }
 
+  const getListBox = async () => {
+    const boxContract = await new ethers.Contract(bftBox.address, bftBox.abi, ethersSigner);
+    const res = await getOwnedBox(walletAccount, ethersSigner);
+    const resListBoxType = await res?.map(async (item: any) => {
+      const boxType = await getBoxType(item, boxContract);
+      return {id: item, type: boxType};
+    })
+    Promise.all(resListBoxType).then(function (values) {
+      const newData = values?.reduce((init, item) => {
+        if (item.type === 'gold') {
+          init.push({
+            ...BOX_INFOMATION.gold,
+            boxId: item.id
+          })
+        } else if(item.type === 'silver'){
+          init.push({
+            ...BOX_INFOMATION.silver,
+            boxId: item.id
+          })
+        } else if(item.type === 'diamond'){
+          init.push({
+            ...BOX_INFOMATION.diamond,
+            boxId: item.id
+          })
+        }
+
+        return init
+      }, [])
+      setListBoxType(newData)
+    });
+  }
+
+
+  useEffect(() => {
+    getListBox()
+  }, [])
+
   return (
     <Wrap>
-      {data?.map((item, index) => (
+      {listBoxType?.length && listBoxType?.map((item, index) => (
         <Item key={index}>
           <img src={item.image} />
           <Title>
             <Typography>{item.title}</Typography>
-            <Typography>528jghd...fna3</Typography>
+            <Typography>{convertWalletAddress(item.boxId, 7, 4)}</Typography>
           </Title>
           <BoxTooltip>
-            <ClickAwayListener onClickAway={() => setTooltip({...tooltip, status: false})}>
+            {/* {!isMobile ? <ClickAwayListener onClickAway={() => setTooltip({boxId: ''})}>
               <Tooltip title={tooltipBody(item)} arrow placement="top">
-                <Star onClick={() => handleShowTooltip(item)}></Star>
+                <Star></Star>
               </Tooltip>
-            </ClickAwayListener>
+            </ClickAwayListener> : <ClickAwayListener onClickAway={() => setTooltip({boxId: ''})}>
+              <Tooltip title={tooltipBody(item)} arrow placement="top"
+                PopperProps={{
+                  disablePortal: true,
+                }}
+                onClose={() => setTooltip({boxId: ''})}
+                open={tooltip.boxId === `${index}` ? true : false}
+                disableFocusListener
+                disableHoverListener
+                disableTouchListener
+              >
+                <Star onClick={() => setTooltip({boxId: `${index}`})}></Star>
+              </Tooltip>
+            </ClickAwayListener>} */}
+            <Tooltip title={tooltipBody(item)} arrow placement="top">
+              <Star></Star>
+            </Tooltip>
           </BoxTooltip>
         </Item>
       ))}
@@ -142,7 +181,7 @@ const BoxTooltip = styled(Box)({
   '@media (min-width: 830px)': {
     marginLeft: 132
   }
-  
+
 })
 const BodyTooltip = styled(Box)({
 
