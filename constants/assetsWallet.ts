@@ -58,3 +58,35 @@ export const TAB_ITEM = [
   {title: TAB_NAME.pet, icon: ICON.pet, active: false},
 ]
 
+export const BOX_DETAILS = {
+  silver: {
+    type: 'silver',
+    title: 'Silver Mystery Box',
+    image: 'assets/box-silver-small.png',
+    detail: {
+      standard: '88%',
+      rare: '11%',
+      iconic: '1%'
+    }
+  },
+  gold: {
+    type: 'gold',
+    title: 'Gold Mystery Box',
+    image: 'assets/box-gold-small.png',
+    detail: {
+      standard: '50%',
+      rare: '40%',
+      iconic: '10%'
+    }
+  },
+  diamond: {
+    type: 'diamond',
+    title: 'Diamond Mystery Box',
+    image: 'assets/box-diamond-small.png',
+    detail: {
+      standard: '0%',
+      rare: '90%',
+      iconic: '10%'
+    }
+  }
+}

@@ -1,50 +1,18 @@
-import { Box, ClickAwayListener, Stack, styled, Tooltip, Typography, useMediaQuery } from "@mui/material"
+import { Backdrop, Box, CircularProgress, ClickAwayListener, Stack, styled, Tooltip, Typography, useMediaQuery } from "@mui/material"
 import { ethers } from "ethers";
 import { ReactNode, useEffect, useState } from "react";
-import { BOX_INFO, ICON } from "../../../constants/assetsWallet";
+import { BOX_DETAILS, BOX_INFO, ICON } from "../../../constants/assetsWallet";
 import { useWalletContext } from "../../../contexts/WalletContext"
 import { getBoxType, getOwnedBox } from "../../../libs/claim";
 import { bftBox } from "../../../libs/contracts";
 import { convertWalletAddress } from "../../../libs/utils/utils";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
 
-const BOX_INFOMATION = {
-  silver: {
-    type: 'silver',
-    title: 'Silver Mystery Box',
-    image: 'assets/box-silver-small.png',
-    detail: {
-      standard: '88%',
-      rare: '11%',
-      iconic: '1%'
-    }
-  },
-  gold: {
-    type: 'gold',
-    title: 'Gold Mystery Box',
-    image: 'assets/box-gold-small.png',
-    detail: {
-      standard: '50%',
-      rare: '40%',
-      iconic: '10%'
-    }
-  },
-  diamond: {
-    type: 'diamond',
-    title: 'Diamond Mystery Box',
-    image: 'assets/box-diamond-small.png',
-    detail: {
-      standard: '0%',
-      rare: '90%',
-      iconic: '10%'
-    }
-  }
-}
-
 export const MysteryBoxTab = () => {
   const { boxBalance, walletAccount, ethersSigner } = useWalletContext();
   const [tooltip, setTooltip] = useState<{ boxId: string }>({ boxId: '' });
   const [listBoxType, setListBoxType] = useState<any[]>();
+  const [statusLoading, setStatusLoading] = useState<boolean>(false)
   const isMobile = useMediaQuery('(max-width: 767px)');
 
   const tooltipBody = (data: any) => {
@@ -56,6 +24,7 @@ export const MysteryBoxTab = () => {
   }
 
   const getListBox = async () => {
+    setStatusLoading(true);
     const boxContract = await new ethers.Contract(bftBox.address, bftBox.abi, ethersSigner);
     const res = await getOwnedBox(walletAccount, ethersSigner);
     const resListBoxType = await res?.map(async (item: any) => {
@@ -66,24 +35,24 @@ export const MysteryBoxTab = () => {
       const newData = values?.reduce((init, item) => {
         if (item.type === 'gold') {
           init.push({
-            ...BOX_INFOMATION.gold,
+            ...BOX_DETAILS.gold,
             boxId: item.id
           })
         } else if(item.type === 'silver'){
           init.push({
-            ...BOX_INFOMATION.silver,
+            ...BOX_DETAILS.silver,
             boxId: item.id
           })
         } else if(item.type === 'diamond'){
           init.push({
-            ...BOX_INFOMATION.diamond,
+            ...BOX_DETAILS.diamond,
             boxId: item.id
           })
         }
-
         return init
       }, [])
       setListBoxType(newData)
+      setStatusLoading(false)
     });
   }
 
@@ -126,6 +95,12 @@ export const MysteryBoxTab = () => {
           </BoxTooltip>
         </Item>
       ))}
+      <Backdrop
+        sx={{ color: '#FF6D24', zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: 'transparent' }}
+        open={statusLoading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Wrap>
   )
 }
@@ -138,7 +113,21 @@ const Wrap = styled(Stack)({
   '@media (min-width: 768px)': {
     maxHeight: 465,
     minHeight: 222,
-    marginTop: 0
+    marginTop: 0,
+    '&::-webkit-scrollbar': {
+      width: 4,
+    },
+    '&::-webkit-scrollbar-track': {
+      background: '#E9EAEF',
+      borderRadius: 10
+    },
+    '&::-webkit-scrollbar-thumb': {
+      background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
+      borderRadius: 10
+    },
+    '&::-webkit-scrollbar-thumb:hover': {
+      background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)'
+    }
   }
 })
 const Item = styled(Box)({
@@ -149,6 +138,9 @@ const Item = styled(Box)({
   marginBottom: 8,
   '&:last-of-type': {
     marginBottom: 0
+  },
+  '&:hover': {
+    background: '#E9EAEF'
   }
 })
 const Title = styled(Box)({

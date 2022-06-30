@@ -7,8 +7,8 @@ export const ICON_MENU_DARK = 'assets/icons/menu-dark.svg';
 export const ICON_MENU_WHITE = 'assets/icons/menu-white.svg';
 export const MENU_ITEMS = [
 	// { title: 'LitePaper', href: 'https://cdn.befitter.io/lp' },
+	{ title: 'beFitter hub', href: '/claim' },
 	{ title: 'LitePaper', href: '/litePaper' },
-	{ title: 'Claim', href: '/claim' },
 	// { title: 'Pitch deck', href: '' },
 	{ title: 'Whitepaper', href: '' },
 ];

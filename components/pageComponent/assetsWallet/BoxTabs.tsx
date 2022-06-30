@@ -88,7 +88,8 @@ const TabBody = styled(Stack)({
     background: '#F8F9FB',
     borderRadius: 16,
     width: 'calc(100% - 256px - 32px)',
-    padding: 24
+    padding: 24,
+    paddingRight: 9
   }
 })
 const Top = styled(Box)({
