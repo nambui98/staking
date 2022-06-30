@@ -1,5 +1,5 @@
 import { Box, Stack, styled, Typography } from "@mui/material"
-import { ICON } from "../../../constants/account";
+import { ICON } from "../../../constants/assetsWallet";
 import { useWalletContext } from "../../../contexts/WalletContext"
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
 
