@@ -83,8 +83,8 @@ export const TabBody = () => {
             </Stack>
           </KeyNote>
           <Box>
-            <Typography sx={{color: '#5A6178', marginBottom: '10px', ...TEXT_STYLE.text_16_500}}>If you have any related concerns, kindly contact beFITTER for support!</Typography>
-            <Typography sx={{color: '#5A6178', ...TEXT_STYLE.text_16_500}}>Email: <span style={{color: '#FF8A50 '}}>team@befitter.io</span></Typography>
+            <Typography sx={{color: '#5A6178', marginBottom: '10px', ...TEXT_STYLE(16, 500)}}>If you have any related concerns, kindly contact beFITTER for support!</Typography>
+            <Typography sx={{color: '#5A6178', ...TEXT_STYLE(16, 500)}}>Email: <span style={{color: '#FF8A50 '}}>team@befitter.io</span></Typography>
           </Box>
           {/* <TitleImage><img src={TAB_BODY.reward.titleImage2} /></TitleImage>
           <BodyGetReward>{TAB_BODY.reward.bodyGetReward}</BodyGetReward> */}
