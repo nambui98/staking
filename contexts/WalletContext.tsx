@@ -59,8 +59,8 @@ const networks: Map = {
     blockExplorerUrls: ['']
   }
 };
-const networkKey = process.env.NEXT_PUBLIC_NETWORK || 'bscMainnet';
-const network = networks[networkKey] || networks['bscMainnet'];
+const networkKey = process.env.NEXT_PUBLIC_NETWORK || 'bscTestnet';
+const network = networks[networkKey] || networks['bscTestnet'];
 const supportedChainIds = [network.chainId];
 
 interface wallerContextType {
