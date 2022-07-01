@@ -35,17 +35,17 @@ export const MysteryBoxTab = () => {
         if (item.type === 'gold') {
           init.push({
             ...BOX_DETAILS.gold,
-            boxId: item.id
+            boxId: ethers.utils.formatUnits(item.id, 'wei')
           })
         } else if(item.type === 'silver'){
           init.push({
             ...BOX_DETAILS.silver,
-            boxId: item.id
+            boxId: ethers.utils.formatUnits(item.id, 'wei')
           })
         } else if(item.type === 'diamond'){
           init.push({
             ...BOX_DETAILS.diamond,
-            boxId: item.id
+            boxId: ethers.utils.formatUnits(item.id, 'wei')
           })
         }
         return init
@@ -67,7 +67,7 @@ export const MysteryBoxTab = () => {
           <img src={item.image} />
           <Title>
             <Typography>{item.title}</Typography>
-            <Typography>{convertWalletAddress(item.boxId, 7, 4)}</Typography>
+            <Typography>{item.boxId}</Typography>
           </Title>
           <BoxTooltip>
             <Tooltip title={tooltipBody(item)} arrow placement="top">
