@@ -14,6 +14,8 @@ const OpenIno: NextPage = () => {
             <BoxItemBody>
               {index === 2 ? 
                 <span>When your NFT item is shown on your wallet {'>'} transfer it from <b>Wallet</b> to your <b>Spending</b> in beFITTER app for unboxing process</span> : 
+                index === 1 ? 
+                <span>When you successfully buy a box {'->'} go to our website to <Link target='_blank' underline='always' href="assets/Claim-box-instruction.pdf">claim</Link> your beFITTER Mystery Shoe Box NFT(s)</span> : 
                 item.body
               }
             </BoxItemBody> 
