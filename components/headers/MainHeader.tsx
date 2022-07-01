@@ -94,7 +94,7 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 						</BoxMenuItem>
 						{walletAccount ?
 							<WalletAccount>
-								<WalletAccountChain>BSC Testnet</WalletAccountChain>
+								<WalletAccountChain>BSC Mainnet</WalletAccountChain>
 								<WalletAccountAddress>{bnbBalance?.length ? parseFloat(bnbBalance).toFixed(4) : '0.00'} <img src={HEADER_ICON_BNB} />									
 									<ButtonAddress onClick={handleClick}>{convertWalletAddress(walletAccount, 6, 3)}</ButtonAddress>
 									<ActiveProver
