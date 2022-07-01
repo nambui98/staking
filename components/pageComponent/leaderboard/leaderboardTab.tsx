@@ -113,27 +113,27 @@ const width40 = {
   height: 40
 }
 const AddressWallet = styled(Typography)({
-  ...TEXT_STYLE.text_10_500,
+  ...TEXT_STYLE(10, 500),
   color: '#A7ACB8'
 })
 const LoadMore = styled(Typography)({
   color: '#5A6178',
-  ...TEXT_STYLE.text_16_500,
+  ...TEXT_STYLE(16, 500),
   textAlign: 'center',
   textDecoration: 'underline',
   cursor: 'pointer',
 })
 const KmDetails = styled(Typography)({
   color: '#5A6178',
-  ...TEXT_STYLE.text_16_400,
+  ...TEXT_STYLE(16, 400),
   marginLeft: 'auto'
 })
 const Stt = styled(Typography)({
-  ...TEXT_STYLE.text_16_600,
+  ...TEXT_STYLE(16, 600),
   color: '#000000',
 })
 const Name = styled(Typography)({
-  ...TEXT_STYLE.text_14_600,
+  ...TEXT_STYLE(14, 600),
   marginBottom: 10
 })
 const Item = styled(Box)({
@@ -157,14 +157,14 @@ const ListDataTab = styled(Box)({
 
 })
 const KM = styled(Typography)({
-  ...TEXT_STYLE.text_14_400,
+  ...TEXT_STYLE(14, 400),
   color: '#5A6178',
   '@media (min-width: 768px)': {
-    ...TEXT_STYLE.text_16_400,
+    ...TEXT_STYLE(16, 400),
   }
 })
 const TitleRank = styled(Typography)({
-  ...TEXT_STYLE.text_16_600,
+  ...TEXT_STYLE(16, 600),
   color: '#31373E',
   marginBottom: 4
 })
@@ -216,7 +216,7 @@ const TabTitle = styled(Tab)({
     opacity: 0,
     transition: '.3s',
     color: '#FF6D24',
-    ...TEXT_STYLE.text_16_500
+    ...TEXT_STYLE(16, 500)
   },
   '& img': {
     filter: 'invert(0%) sepia(35%) saturate(204%) hue-rotate(185deg) brightness(89%) contrast(85%)',

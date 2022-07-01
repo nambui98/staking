@@ -285,6 +285,15 @@ body {
 		background-color: #5a6178;
 	}
 }
+// .MuiPaper-root{
+// 	border: 1px solid #E9EAEF;
+// 	border-radius: 16px;
+// 	box-shadow: none;
+
+// 	.MuiList-root {
+// 		padding: 5px
+// 	}
+// }
 // .swiper-wrapper {
 // 	&::before {
 // 		content: '';
@@ -315,3 +324,10 @@ body {
 // 		);
 // 	}
 // }
+
+.MuiTooltip-tooltip{
+	padding: 8px 9.5px;
+  border-radius: 16px;
+  background: rgba(49, 55, 62, 0.8);
+	min-width: 177px;
+}

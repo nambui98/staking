@@ -3,8 +3,8 @@ module.exports = {
   reactStrictMode: true,
   serverRuntimeConfig: {
     // Will only be available on the server side
-		RECAPTCHA_SITE_KEY: "6LfVxzAgAAAAAEFPNTeG6d8xqKifrYhwVZ4VAKtd",
-		RECAPTCHA_SECRET_KEY: "6LfVxzAgAAAAAEpbEejWuyAjWCp8mWpsiNvzB177",
+		RECAPTCHA_SITE_KEY: "6Lc275cgAAAAAAHHwNMoAh448YXBi-jz3AeS-4A9",
+		RECAPTCHA_SECRET_KEY: "6Lc275cgAAAAAH1J82HwTVgPVlm_RllqKN9Ycefp",
     OLD_EVENT_SPREADSHEET_ID: "1QokRb-eR4IZOxPoQQcZZlElvqNTBkC1-LMRWjEmQDf0",
 		EVENT_SPREADSHEET_ID: "1gn6dTzpq0eViCusTRwqHHvirF-fcCHNq7yVULDS3Nt4",
     HOME_SPREADSHEET_ID: "1P0PTiAHns91zNm_UOHknpaS9oi4ucfluMYmEvupbfT8",
