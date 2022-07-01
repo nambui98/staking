@@ -20,7 +20,7 @@ import { PopupMessage } from "./PopupMessage";
 
 export const TabClaim = () => {
   const router = useRouter();
-  const { walletAccount, claimBoxContract, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
+  const { walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
   const [currentTab, setCUrrentTab] = useState<'box' | 'token'>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [roundSelected, setRoundSelected] = useState<string>('');
@@ -70,6 +70,7 @@ export const TabClaim = () => {
     setStatusLoading(true)
     const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, true);
     if (res?.data?.status) {
+      const claimBoxContract = await new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner)
       try {
         const resultClaim: any = await handleClaimBox(walletAccount, claimBoxContract, res.data);       
         const checkStatus = setInterval( async () => {
