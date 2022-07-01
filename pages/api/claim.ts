@@ -39,8 +39,8 @@ export default async function handler(req: any, res: any) {
 							status: 1,
 							message: 'success'
 						});
-					} else res.json(responseFail)
-				} else res.json({ ...responseFail, captchaValidation: false })
+					} return res.json(responseFail)
+				} return res.json({ ...responseFail, captchaValidation: false })
 			} else {
 				if (findData) {
 					return res.json({
@@ -49,12 +49,10 @@ export default async function handler(req: any, res: any) {
 						status: 1,
 						message: 'success'
 					});
-				} else res.json(responseFail)
+				}
+				return res.json(responseFail)
 			}
-
-	return res.json(responseFail);
 } catch (error) {
-	console.log(error);
 	return res.json(responseFail);
 }
 	}
