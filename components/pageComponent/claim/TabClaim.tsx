@@ -40,11 +40,6 @@ export const TabClaim = () => {
     setCaptchaToken(captchaCode);
   }
 
-  const handleChangeTab = async (tab: 'box' | 'token') => {
-    setRoundSelected('')
-    setCUrrentTab(tab)
-  }
-
   const checkStatusButton = () => {
     if (dataClaim.totalBox > dataClaim.claimed && captchaToken.length && roundSelected.length) {
       return true
@@ -59,8 +54,9 @@ export const TabClaim = () => {
     try {
       const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, false);
       if (res?.data?.status) {
-        const _claim = await new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner)
-        const dataClaimed = await getClaimedBox(walletAccount, _claim);
+        const claimContractGamefi = await new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner);
+        const claimContractEnjinstarter = await new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner);
+        const dataClaimed = await getClaimedBox(walletAccount, roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter);
         setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount }) 
       } else {
         setDataClaim({claimed: 0, totalBox: 0})
@@ -74,9 +70,10 @@ export const TabClaim = () => {
     setStatusLoading(true)
     const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, true);
     if (res?.data?.status) {
-      const claimBoxContract = await new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner)
+      const claimContractGamefi = await new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner);
+      const claimContractEnjinstarter = await new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner);
       try {
-        const resultClaim: any = await handleClaimBox(walletAccount, claimBoxContract, res.data);       
+        const resultClaim: any = await handleClaimBox(walletAccount, roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data);       
         const checkStatus = setInterval( async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
           if(statusClaim?.status){
@@ -119,9 +116,9 @@ export const TabClaim = () => {
     } else {
       setSelectItem([
         { title: 'GameFi', value: '3' },
+        { title: 'Enjinstarter', value: '4' },
         { title: 'Alpha Test Reward', value: '1' },
         { title: 'Beta Test Reward', value: '2' },
-        { title: 'Enjinstarter', value: '4' }
       ])
     }
   }, [currentTab])
@@ -142,16 +139,16 @@ export const TabClaim = () => {
           </Box>
         </BoxTab>
         <Stack>
-          <LabelSelect>select your source</LabelSelect>
+          <LabelSelect>Select your source</LabelSelect>
           <FormControl>
             {!roundSelected && <InputLabel sx={label}>Select round</InputLabel>}
             <BoxSelect
               labelId="test-select-label"
               value={roundSelected}
               label="Select round"
-              onChange={e => e.target.value === '3' && setRoundSelected(e.target.value as string)}
+              onChange={e => (e.target.value === '3' || e.target.value === '4') && setRoundSelected(e.target.value as string)}
             >
-              {selecItem?.length && selecItem?.map((item: any, index: number) => <SelectItem sx={item.value === '3' ? activeItem : {}} key={index} value={item.value}>{item.title}</SelectItem>)}
+              {selecItem?.length && selecItem?.map((item: any, index: number) => <SelectItem sx={(item.value === '3' || item.value === '4') ? activeItem : {}} key={index} value={item.value}>{item.title}</SelectItem>)}
             </BoxSelect>
           </FormControl>
           {roundSelected && dataClaim ? <DataClaimBox>
