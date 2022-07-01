@@ -1,9 +1,9 @@
 import fetch from 'node-fetch';
 import getConfig from "next/config";
-import AlphaData from "../../abi/merkle-claim.json";
-import BetaData from "../../abi/merkle-claim.json";
-import GameFiData from "../../abi/merkle-claim.json";
-import EnjinstarterData from "../../abi/merkle-claim.json";
+import AlphaData from "../../abi/merkle-claim-gamefi.json";
+import BetaData from "../../abi/merkle-claim-gamefi.json";
+import GameFiData from "../../abi/merkle-claim-gamefi.json";
+import EnjinstarterData from "../../abi/merkle-claim-enjin.json";
 const { serverRuntimeConfig } = getConfig();
 
 export default async function handler(req: any, res: any) {

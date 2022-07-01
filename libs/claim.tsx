@@ -1,6 +1,6 @@
 
 import { ethers } from 'ethers';
-import { bftBox, bftClaimBox } from './contracts';
+import { bftBox } from './contracts';
 
 export const handleClaimBox = async (walletAddress: string, claimBoxContract: any, AddressAmount: any) => {
   const claim = await claimBoxContract.claim(walletAddress, AddressAmount.amount, AddressAmount.proof);

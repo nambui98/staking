@@ -8,7 +8,7 @@ import { CLAIM_IMAGE } from "../../../constants/claim";
 import { PAGE } from "../../../constants/header";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { getClaimedBox, handleClaimBox } from "../../../libs/claim";
-import { bftClaimBox } from "../../../libs/contracts";
+import { bftClaimGamefi, bftClaimEnjin } from "../../../libs/contracts";
 import { convertWalletAddress } from "../../../libs/utils/utils";
 import { ClaimService } from "../../../services/claim.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
@@ -54,8 +54,8 @@ export const TabClaim = () => {
     try {
       const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, false);
       if (res?.data?.status) {
-        const claimContractGamefi = await new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner);
-        const claimContractEnjinstarter = await new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner);
+        const claimContractGamefi = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
+        const claimContractEnjinstarter = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
         const dataClaimed = await getClaimedBox(walletAccount, roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter);
         setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount }) 
       } else {
@@ -70,8 +70,8 @@ export const TabClaim = () => {
     setStatusLoading(true)
     const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, true);
     if (res?.data?.status) {
-      const claimContractGamefi = await new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner);
-      const claimContractEnjinstarter = await new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner);
+      const claimContractGamefi = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
+      const claimContractEnjinstarter = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
       try {
         const resultClaim: any = await handleClaimBox(walletAccount, roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data);       
         const checkStatus = setInterval( async () => {
