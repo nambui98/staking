@@ -142,7 +142,7 @@ export const TabClaim = () => {
           </Box>
         </BoxTab>
         <Stack>
-          <LabelSelect>Select vesting round</LabelSelect>
+          <LabelSelect>select your source</LabelSelect>
           <FormControl>
             {!roundSelected && <InputLabel sx={label}>Select round</InputLabel>}
             <BoxSelect
@@ -169,7 +169,7 @@ export const TabClaim = () => {
       <PopupMessage title="You have successfully claimed your item!" message={
         <BodyPopupSuccess>
           <MarketplaceButton customStyle={{width: '100%'}} title={'View in wallet'} handleOnClick={() => router.push(PAGE.ASSETS.link)} />
-          <Typography sx={{cursor: 'pointer'}} onClick={() => window.location.reload()}>Claim more items</Typography>
+          {dataClaim.totalBox > dataClaim.claimed && <Typography sx={{cursor: 'pointer'}} onClick={() => window.location.reload()}>Claim more items</Typography>}
       </BodyPopupSuccess>
       } status={popupSuccess} popupType="success" handleToggleStatus={() => window.location.reload()} />
       <PopupMessage title="Error!" status={popupError} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError(false)}
