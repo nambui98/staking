@@ -10,7 +10,14 @@ const OpenIno: NextPage = () => {
       <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage>
       <ListBox>
         {BOX_LIST_ITEM?.map((item, index) => (
-          <BoxItem key={index}><img src={item.image} /><BoxItemBody>{index === 0 ? <span>Go to website <Link target={'_blank'} href='https://gamefi.org/'>Gamefi.org</Link> for buying our mystery boxes.</span> : item.body}</BoxItemBody> </BoxItem>
+          <BoxItem key={index}><img src={item.image} />
+            <BoxItemBody>
+              {index === 2 ? 
+                <span>When your NFT item is shown on your wallet {'>'} transfer it from <b>Wallet</b> to your <b>Spending</b> in beFITTER app for unboxing process</span> : 
+                item.body
+              }
+            </BoxItemBody> 
+          </BoxItem>
         ))}
       </ListBox>
     </Wrap>
@@ -70,6 +77,7 @@ const BoxItemBody = styled(Typography)({
     fontWeight: '500',
     color: '#31373E',
     textAlign: 'center',
+    lineHeight: '1.4'
   },
   '& a': {
     textDecoration: 'underline',
