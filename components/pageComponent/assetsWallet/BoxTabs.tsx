@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ICON, TAB_ITEM, TAB_NAME } from "../../../constants/assetsWallet";
 import { useWalletContext } from "../../../contexts/WalletContext"
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
+import { BoxEmpty } from "./BoxEmpty";
 import { MysteryBoxTab } from "./MysteryBoxTab";
 import { TokenTab } from "./TokenTab";
 
@@ -45,12 +46,7 @@ export const Boxtabs = () => {
         </TabBox>
       </TabLeft>
       <TabBody>
-        {currentTab.length ? renderBodyView() : 
-          <BoxShoeEmpty>
-            <img width={120} src={ICON.shoe} />
-            <Typography>Select assets to continue</Typography>
-          </BoxShoeEmpty>
-        }
+        {currentTab.length ? renderBodyView() : <BoxEmpty icon={ICON.shoe} emptyText={'Select assets to continue'} />}
       </TabBody>
     </Wrap>
   )

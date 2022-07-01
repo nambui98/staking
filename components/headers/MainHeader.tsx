@@ -11,7 +11,8 @@ import {
 	Typography,
 	Tooltip,
 	useMediaQuery,
-	Popover
+	Popover,
+	LinkProps
 } from '@mui/material';
 import MenuButton from '../buttons/MenuButton';
 import { HEADER_ICON, HEADER_ICON_BNB, LOGO, MAIN_PAGE, PAGE } from '../../constants/header';
@@ -86,8 +87,8 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 						</BoxLogo>
 						<BoxMenuItem>
 							{MAIN_PAGE.map((item, index) => (
-								<Link key={index} href={item.link}>
-									<MenuItem key={index}><MainMenuButton active={asPath === item.link ? true : false} title={item.title} iconLink={item.icon} /></MenuItem>
+								<Link key={index} href={item.active ? item.link : '#'}>
+									<MenuItem><MainMenuButton disabledBtn={!item.active} active={asPath === item.link ? true : false} title={item.title} iconLink={item.icon} /></MenuItem>
 								</Link>
 							))}
 						</BoxMenuItem>
@@ -157,7 +158,7 @@ const ToolbarBox = styled(Toolbar)({
 	}
 })
 const MenuItem = styled(Box)({
-	marginRight: 8
+	marginRight: 8,
 })
 
 const ActiveProver = styled(Popover)({

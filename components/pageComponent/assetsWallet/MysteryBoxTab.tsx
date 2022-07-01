@@ -1,19 +1,18 @@
-import { Backdrop, Box, CircularProgress, ClickAwayListener, Stack, styled, Tooltip, Typography, useMediaQuery } from "@mui/material"
+import { Backdrop, Box, CircularProgress, Stack, styled, Tooltip, Typography } from "@mui/material"
 import { ethers } from "ethers";
-import { ReactNode, useEffect, useState } from "react";
-import { BOX_DETAILS, BOX_INFO, ICON } from "../../../constants/assetsWallet";
+import { useEffect, useState } from "react";
+import { BOX_DETAILS, ICON } from "../../../constants/assetsWallet";
 import { useWalletContext } from "../../../contexts/WalletContext"
 import { getBoxType, getOwnedBox } from "../../../libs/claim";
 import { bftBox } from "../../../libs/contracts";
 import { convertWalletAddress } from "../../../libs/utils/utils";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
+import { BoxEmpty } from "./BoxEmpty";
 
 export const MysteryBoxTab = () => {
-  const { boxBalance, walletAccount, ethersSigner } = useWalletContext();
-  const [tooltip, setTooltip] = useState<{ boxId: string }>({ boxId: '' });
+  const { walletAccount, ethersSigner } = useWalletContext();
   const [listBoxType, setListBoxType] = useState<any[]>();
   const [statusLoading, setStatusLoading] = useState<boolean>(false)
-  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const tooltipBody = (data: any) => {
     return <BodyTooltip>
@@ -27,11 +26,11 @@ export const MysteryBoxTab = () => {
     setStatusLoading(true);
     const boxContract = await new ethers.Contract(bftBox.address, bftBox.abi, ethersSigner);
     const res = await getOwnedBox(walletAccount, ethersSigner);
-    const resListBoxType = await res?.map(async (item: any) => {
-      const boxType = await getBoxType(item, boxContract);
-      return {id: item, type: boxType};
+    const boxType = await res?.map(async (item: any) => {
+      const res = await getBoxType(item, boxContract);
+      return {id: item, type: res};
     })
-    Promise.all(resListBoxType).then(function (values) {
+    Promise.all(boxType).then((values) => {
       const newData = values?.reduce((init, item) => {
         if (item.type === 'gold') {
           init.push({
@@ -59,11 +58,11 @@ export const MysteryBoxTab = () => {
 
   useEffect(() => {
     getListBox()
-  }, [])
+  }, [walletAccount])
 
   return (
-    <Wrap>
-      {listBoxType?.length && listBoxType?.map((item, index) => (
+    <Wrap sx={listBoxType?.length ? {} : {maxHeight: 'initial !important'}}>
+      {listBoxType?.length ? listBoxType?.map((item, index) => (
         <Item key={index}>
           <img src={item.image} />
           <Title>
@@ -71,30 +70,12 @@ export const MysteryBoxTab = () => {
             <Typography>{convertWalletAddress(item.boxId, 7, 4)}</Typography>
           </Title>
           <BoxTooltip>
-            {/* {!isMobile ? <ClickAwayListener onClickAway={() => setTooltip({boxId: ''})}>
-              <Tooltip title={tooltipBody(item)} arrow placement="top">
-                <Star></Star>
-              </Tooltip>
-            </ClickAwayListener> : <ClickAwayListener onClickAway={() => setTooltip({boxId: ''})}>
-              <Tooltip title={tooltipBody(item)} arrow placement="top"
-                PopperProps={{
-                  disablePortal: true,
-                }}
-                onClose={() => setTooltip({boxId: ''})}
-                open={tooltip.boxId === `${index}` ? true : false}
-                disableFocusListener
-                disableHoverListener
-                disableTouchListener
-              >
-                <Star onClick={() => setTooltip({boxId: `${index}`})}></Star>
-              </Tooltip>
-            </ClickAwayListener>} */}
             <Tooltip title={tooltipBody(item)} arrow placement="top">
               <Star></Star>
             </Tooltip>
           </BoxTooltip>
         </Item>
-      ))}
+      )) : <BoxEmpty icon={ICON.box} emptyText={'no box'} />}
       <Backdrop
         sx={{ color: '#FF6D24', zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: 'transparent' }}
         open={statusLoading}

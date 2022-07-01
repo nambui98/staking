@@ -8,7 +8,7 @@ import { TEXT_STYLE } from "../../styles/common/textStyles"
 const Assets = () => {
   const { walletAccount } = useWalletContext();
   return (
-    <MainLayout sxProps={{ backgroundColor: "#FFFFFF" }}>
+    <MainLayout sxProps={{ backgroundColor: "#FFFFFF" }} titlePage='beFITTER - Assets'>
       <Wrap>
         <Container sx={{ maxWidth: { xl: 1168 } }}>
           {walletAccount?.length ? <Inner>
