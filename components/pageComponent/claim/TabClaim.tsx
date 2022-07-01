@@ -56,12 +56,16 @@ export const TabClaim = () => {
     if(!chainIdIsSupported) {
       await changeNetwork(provider)
     }
-    const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, false);
-    if (res?.data?.status) {
-      const _claim = await new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner)
-      const dataClaimed = await getClaimedBox(walletAccount, _claim);
-      setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount }) 
-    } else {
+    try {
+      const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, false);
+      if (res?.data?.status) {
+        const _claim = await new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner)
+        const dataClaimed = await getClaimedBox(walletAccount, _claim);
+        setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount }) 
+      } else {
+        setDataClaim({claimed: 0, totalBox: 0})
+      }
+    } catch (error) {
       setDataClaim({claimed: 0, totalBox: 0})
     }
   }
