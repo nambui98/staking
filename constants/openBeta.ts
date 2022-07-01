@@ -2,8 +2,8 @@ export const IMAGE_COUNTDOWN = {
   image: 'assets/bannerOpenBeta.png',
   imageMobile: 'assets/bannerOpenBetaMobile.png',
   countDown: {
-    title: 'Begins in',
-    time: '2022-06-20T10:00',
+    title: 'Begins end',
+    time: '2022-07-05T07:00',
     leadboard: {
       title: 'Leadboard',
       link: '/leaderboard',
