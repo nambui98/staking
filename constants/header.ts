@@ -22,6 +22,6 @@ export const MAIN_PAGE = [
   {title: 'Dashboard', link: '#', icon: 'assets/icons/Dashboard.svg', active: false},
   {title: 'Assets', link: '/assets', icon: 'assets/icons/box.svg', active: true},
   // {title: 'Shop', link: '#', icon: 'assets/icons/shop.svg', active: false},
-  {title: 'Claim', link: '/hub', icon: 'assets/icons/3d-cube-scan.svg', active: true},
+  {title: 'Claim', link: '/claim', icon: 'assets/icons/3d-cube-scan.svg', active: true},
 ]
 export const SECURICHAIN_LOGO = 'assets/securichain.png';
