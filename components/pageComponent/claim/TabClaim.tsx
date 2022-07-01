@@ -20,7 +20,7 @@ import { PopupMessage } from "./PopupMessage";
 
 export const TabClaim = () => {
   const router = useRouter();
-  const { walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
+  const {walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
   const [currentTab, setCUrrentTab] = useState<'box' | 'token'>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [roundSelected, setRoundSelected] = useState<string>('');
@@ -52,17 +52,18 @@ export const TabClaim = () => {
       await changeNetwork(provider)
     }
     try {
-      const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, false);
+      const res: any = await ClaimService.getAmount((walletAccount.toLowerCase()), captchaToken, roundSelected, false);
       if (res?.data?.status) {
         const claimContractGamefi = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
         const claimContractEnjinstarter = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
-        const dataClaimed = await getClaimedBox(walletAccount, roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter);
+        const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), roundSelected === "3" ? claimContractGamefi : claimContractEnjinstarter);
         setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount }) 
       } else {
         setDataClaim({claimed: 0, totalBox: 0})
       }
     } catch (error) {
       setDataClaim({claimed: 0, totalBox: 0})
+      console.log(error)
     }
   }
 

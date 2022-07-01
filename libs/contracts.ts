@@ -25,8 +25,8 @@ const addressKey = process.env.NEXT_PUBLIC_ADDRESS || 'deployment';
 const address = addresses[addressKey] || addresses['deployment'];
 
 export const bftBox = { address: address.bFBox, abi: bfBox.abi}
-export const bftClaimGamefi = { address: address.bFclaimBox, abi: bfClaimBoxGamefi.abi }
+export const bftClaimGamefi = { address: address.bFclaimBoxGamefi, abi: bfClaimBoxGamefi.abi }
 export const bftHeetoken = {address: address.bFheeToken, abi: bfHeeToken.abi}
 export const bftFiuToken = {address: address.bFfiuToken, abi: bfFiuToken.abi}
 export const bftShoeItem = {address: address.bFshoeItem, abi: (bfShoeItem as any).abi}
-export const bftClaimEnjin = { address: address.bFclaimEnjin, abi: (bfClaimEnjin as any).abi }
+export const bftClaimEnjin = { address: address.bFclaimEnjin, abi: (bfClaimBoxGamefi as any).abi }
