@@ -2,7 +2,7 @@ export const BANNER = {
 	IMAGE: 'assets/openBetaTestnet.png',
 	IMAGECUP: 'assets/alpha-challenge-cup.png',
 	DESC: 'Join our challenge, test your limit and earn a special reward',
-	COUNTDOWN: 'Begins end',
+	COUNTDOWN: 'Ends in',
 	BUTTON_LEADERBOARD: {
 		title: 'assets/buttonLeaderboard.png',
 		href: '/leaderboard'
