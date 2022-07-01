@@ -29,7 +29,7 @@ export default async function handler(req: any, res: any) {
 				}
 			);
 			const captchaValidation = await response.json();
-			const findData = await (round === '1' ? AlphaData : round === '2' ? BetaData : round === '3' ? GameFiData : EnjinstarterData as any).merkleData.claimData[walletAddress];
+			const findData = await (round === '1' ? AlphaData : round === '2' ? BetaData : round === '3' ? GameFiData : EnjinstarterData as any).merkleData.claimData[walletAddress.toLowerCase()];
 			if (requireCaptcha) {
 				if (captchaValidation.success) {
 					if (findData) {
