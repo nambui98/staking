@@ -16,9 +16,9 @@ export const MysteryBoxTab = () => {
 
   const tooltipBody = (data: any) => {
     return <BodyTooltip>
-      <TooltipItem><img src={ICON.shoeRed} /><Typography>Iconic Shoe</Typography> <Typography>{data.detail.standard}</Typography></TooltipItem>
+      <TooltipItem><img src={ICON.shoeRed} /><Typography>Iconic Shoe</Typography> <Typography>{data.detail.iconic}</Typography></TooltipItem>
       <TooltipItem><img src={ICON.shoeYellow} /><Typography>Rare Shoe</Typography> <Typography>{data.detail.rare}</Typography></TooltipItem>
-      <TooltipItem><img src={ICON.shoeGray} /><Typography>Standard Shoe</Typography> <Typography>{data.detail.iconic}</Typography></TooltipItem>
+      <TooltipItem><img src={ICON.shoeGray} /><Typography>Standard Shoe</Typography> <Typography>{data.detail.standard}</Typography></TooltipItem>
     </BodyTooltip>
   }
 
