@@ -8,7 +8,7 @@ import { CLAIM_IMAGE } from "../../../constants/claim";
 import { PAGE } from "../../../constants/header";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { getClaimedBox, handleClaimBox } from "../../../libs/claim";
-import { bftClaimBox } from "../../../libs/contracts";
+import { bftClaimGamefi, bftClaimEnjin } from "../../../libs/contracts";
 import { convertWalletAddress } from "../../../libs/utils/utils";
 import { ClaimService } from "../../../services/claim.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
@@ -20,7 +20,7 @@ import { PopupMessage } from "./PopupMessage";
 
 export const TabClaim = () => {
   const router = useRouter();
-  const { walletAccount, claimBoxContract, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
+  const {walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
   const [currentTab, setCUrrentTab] = useState<'box' | 'token'>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [roundSelected, setRoundSelected] = useState<string>('');
@@ -40,11 +40,6 @@ export const TabClaim = () => {
     setCaptchaToken(captchaCode);
   }
 
-  const handleChangeTab = async (tab: 'box' | 'token') => {
-    setRoundSelected('')
-    setCUrrentTab(tab)
-  }
-
   const checkStatusButton = () => {
     if (dataClaim.totalBox > dataClaim.claimed && captchaToken.length && roundSelected.length) {
       return true
@@ -56,13 +51,19 @@ export const TabClaim = () => {
     if(!chainIdIsSupported) {
       await changeNetwork(provider)
     }
-    const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, false);
-    if (res?.data?.status) {
-      const _claim = await new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner)
-      const dataClaimed = await getClaimedBox(walletAccount, _claim);
-      setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount }) 
-    } else {
+    try {
+      const res: any = await ClaimService.getAmount((walletAccount.toLowerCase()), captchaToken, roundSelected, false);
+      if (res?.data?.status) {
+        const claimContractGamefi = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
+        const claimContractEnjinstarter = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
+        const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), roundSelected === "3" ? claimContractGamefi : claimContractEnjinstarter);
+        setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount }) 
+      } else {
+        setDataClaim({claimed: 0, totalBox: 0})
+      }
+    } catch (error) {
       setDataClaim({claimed: 0, totalBox: 0})
+      console.log(error)
     }
   }
 
@@ -70,8 +71,10 @@ export const TabClaim = () => {
     setStatusLoading(true)
     const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, true);
     if (res?.data?.status) {
+      const claimContractGamefi = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
+      const claimContractEnjinstarter = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
       try {
-        const resultClaim: any = await handleClaimBox(walletAccount, claimBoxContract, res.data);       
+        const resultClaim: any = await handleClaimBox(walletAccount, roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data);       
         const checkStatus = setInterval( async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
           if(statusClaim?.status){
@@ -113,10 +116,10 @@ export const TabClaim = () => {
       ])
     } else {
       setSelectItem([
-        { title: 'GameFi', value: '3' },
+        { title: 'GameFi.org', value: '3' },
+        { title: 'Enjinstarter', value: '4' },
         { title: 'Alpha Test Reward', value: '1' },
         { title: 'Beta Test Reward', value: '2' },
-        { title: 'Enjinstarter', value: '4' }
       ])
     }
   }, [currentTab])
@@ -137,16 +140,16 @@ export const TabClaim = () => {
           </Box>
         </BoxTab>
         <Stack>
-          <LabelSelect>Select vesting round</LabelSelect>
+          <LabelSelect>Select your source</LabelSelect>
           <FormControl>
             {!roundSelected && <InputLabel sx={label}>Select round</InputLabel>}
             <BoxSelect
               labelId="test-select-label"
               value={roundSelected}
               label="Select round"
-              onChange={e => e.target.value === '3' && setRoundSelected(e.target.value as string)}
+              onChange={e => (e.target.value === '3' || e.target.value === '4') && setRoundSelected(e.target.value as string)}
             >
-              {selecItem?.length && selecItem?.map((item: any, index: number) => <SelectItem sx={item.value === '3' ? activeItem : {}} key={index} value={item.value}>{item.title}</SelectItem>)}
+              {selecItem?.length && selecItem?.map((item: any, index: number) => <SelectItem sx={(item.value === '3' || item.value === '4') ? activeItem : {}} key={index} value={item.value}>{item.title}</SelectItem>)}
             </BoxSelect>
           </FormControl>
           {roundSelected && dataClaim ? <DataClaimBox>
@@ -164,7 +167,7 @@ export const TabClaim = () => {
       <PopupMessage title="You have successfully claimed your item!" message={
         <BodyPopupSuccess>
           <MarketplaceButton customStyle={{width: '100%'}} title={'View in wallet'} handleOnClick={() => router.push(PAGE.ASSETS.link)} />
-          <Typography sx={{cursor: 'pointer'}} onClick={() => window.location.reload()}>Claim more items</Typography>
+          {dataClaim.totalBox > dataClaim.claimed && <Typography sx={{cursor: 'pointer'}} onClick={() => window.location.reload()}>Claim more items</Typography>}
       </BodyPopupSuccess>
       } status={popupSuccess} popupType="success" handleToggleStatus={() => window.location.reload()} />
       <PopupMessage title="Error!" status={popupError} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError(false)}

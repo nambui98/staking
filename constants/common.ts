@@ -1,4 +1,4 @@
-export const END_DATE_EVENT = '2022-06-20T10:00';
+export const END_DATE_EVENT = '2022-07-05T07:00';
 export const END_DATE_EVENT_EXTRA_HOURS = 0;
 
 export const SECTION_TITLE_BG = 'assets/backgrounds/section-title.png';
@@ -7,8 +7,8 @@ export const ICON_MENU_DARK = 'assets/icons/menu-dark.svg';
 export const ICON_MENU_WHITE = 'assets/icons/menu-white.svg';
 export const MENU_ITEMS = [
 	// { title: 'LitePaper', href: 'https://cdn.befitter.io/lp' },
+	{ title: 'beFITTER hub', href: 'https://hub.befitter.io/' },
 	{ title: 'LitePaper', href: '/litePaper' },
-	{ title: 'Claim', href: '/claim' },
 	// { title: 'Pitch deck', href: '' },
 	{ title: 'Whitepaper', href: '' },
 ];

@@ -2,15 +2,15 @@ export const BOX_IMAGE = 'assets/openImage.png';
 export const BOX_LIST_ITEM = [
   {
     image: 'assets/box3.png',
-    body: ''
+    body: 'Go to NFT markets for buying our mystery boxes.'
   },
   {
     image: 'assets/box2.png',
-    body: 'When you successfully buy a box, your NFT item will be automatically sent to your wallet.'
+    body: 'When you successfully buy a box -> go to our website to claim your beFITTER Mystery Shoe Box NFT(s)'
   },
   {
     image: 'assets/box1.png',
-    body: 'When your NFT item is shown your wallet > transfer it from wallet to your spending in beFITTER app for unboxing process'
+    body: ''
   },
   {
     image: 'assets/shoe.png',

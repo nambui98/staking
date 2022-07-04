@@ -3,7 +3,7 @@ import { useWalletContext } from "../../../contexts/WalletContext";
 import { TEXT_STYLE } from "../../../styles/common/textStyles"
 
 export const ConnectBox = () => {
-  const { walletAccount, claimBoxContract, setWalletAccount, setToggleActivePopup} = useWalletContext();
+  const { walletAccount, setWalletAccount, setToggleActivePopup} = useWalletContext();
   return (
     <Wrap>
       <Message>Please connect wallet to continue</Message>

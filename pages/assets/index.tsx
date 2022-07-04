@@ -1,25 +1,35 @@
-import { Box, Stack, styled, Typography } from "@mui/material"
+import { Box, Container, Stack, styled, Typography } from "@mui/material"
 import MainLayout from "../../components/layouts/MainLayout"
-import { Details } from "../../components/pageComponent/acount/Details"
+import { Boxtabs } from "../../components/pageComponent/assetsWallet/BoxTabs"
 import { ConnectBox } from "../../components/pageComponent/claim/ConnectBox"
 import { useWalletContext } from "../../contexts/WalletContext"
 import { TEXT_STYLE } from "../../styles/common/textStyles"
 
 const Assets = () => {
-  const {walletAccount} = useWalletContext();
+  const { walletAccount } = useWalletContext();
   return (
-    <MainLayout sxProps={{backgroundColor: "#FFFFFF"}}>
+    <MainLayout sxProps={{ backgroundColor: "#FFFFFF" }} titlePage='beFITTER - Assets'>
       <Wrap>
-        {walletAccount?.length ? <Details /> : <BoxConnect>
-          <TitleConnect>Assets</TitleConnect>
-          <ConnectBox/>
-        </BoxConnect>}
+        <Container sx={{ maxWidth: { xl: 1168 } }}>
+          {walletAccount?.length ? <Inner>
+            <Boxtabs/>
+          </Inner> : <BoxConnect>
+            <TitleConnect>Assets</TitleConnect>
+            <ConnectBox />
+          </BoxConnect>}
+        </Container>
       </Wrap>
     </MainLayout>
   )
 }
 
 const Wrap = styled(Stack)({
+  margin: '6px 0 40px',
+  '@media (min-width: 768px)': {
+    margin: '34px 0 50px'
+  }
+})
+const Inner = styled(Stack)({
 
 })
 const BoxConnect = styled(Box)({

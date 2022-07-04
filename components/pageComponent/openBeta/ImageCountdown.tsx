@@ -14,7 +14,7 @@ export const ImageCountdown = () => {
             <Body>
               <BoxCountdown>
                 <CountdownClock endDate={IMAGE_COUNTDOWN.countDown.time} sxTitle={40} sxSubTitle={16} />
-                <Link href='#'><CountdownButton active={IMAGE_COUNTDOWN.countDown.leadboard.active}><img src={IMAGE_COUNTDOWN.countDown.leadboard.imageGray} /> {IMAGE_COUNTDOWN.countDown.leadboard.title}</CountdownButton></Link>
+                <Link href={'#'}><CountdownButton disabled={!IMAGE_COUNTDOWN.countDown.leadboard.active} active={IMAGE_COUNTDOWN.countDown.leadboard.active}><img src={IMAGE_COUNTDOWN.countDown.leadboard.imageGray} /> {IMAGE_COUNTDOWN.countDown.leadboard.title}</CountdownButton></Link>
                 {IMAGE_COUNTDOWN.countDown.Questions?.map((item, index) => (
                   <QuestionsItem key={index}><img src={item.imageIcon} /><Link href={item.link}>{item.title}</Link></QuestionsItem>
                 ))}
@@ -77,14 +77,16 @@ type CountdownButton = ButtonProps & {
 const CountdownButton = styled(Button)((props: CountdownButton) => ({
   padding: '14px 24px',
   borderRadius: '12px',
-  background: props.active ? '#FFE2D3' : '#E9EAEF' + '!important',
   fontSize: '16px',
   fontWeight: '500',
-  color: props.active ? '#FF8A50' : '#A7ACB8',
   boxShadow: 'none',
   margin: '24px 0 0',
   maxWidth: '176px',
   textTransform: 'initial',
+  '& : hover, &': {
+    background: props.active ? '#FFE2D3 !important' : '#E9EAEF !important',
+    color: props.active ? '#FF8A50' : '#A7ACB8',
+  },
   '& img': {
     marginRight: 8,
   },

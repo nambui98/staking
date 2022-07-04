@@ -339,4 +339,10 @@ body {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+}		
+.MuiTooltip-tooltip{
+	padding: 8px 9.5px;
+  border-radius: 16px;
+  background: rgba(49, 55, 62, 0.8);
+	min-width: 177px;
 }

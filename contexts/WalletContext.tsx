@@ -2,7 +2,7 @@ import { ethers, utils } from "ethers"
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react"
 import detectEthereumProvider from '@metamask/detect-provider';
 import { UserService } from "../services/user.service";
-import { bftBox, bftBusdToken, bftClaimBox, bftFiuToken, bftHeetoken, bftShoeItem } from "../libs/contracts";
+import { bftBox, bftClaimGamefi, bftFiuToken, bftHeetoken, bftShoeItem, bftBusdToken } from "../libs/contracts";
 
 interface Map {
 	[key: string]: any;
@@ -27,6 +27,31 @@ const networks: Map = {
 		],
 		blockExplorerUrls: ["https://testnet.bscscan.com"],
 	},
+  ['bscMainnet']: {
+		chainId: `0x${Number(56).toString(16)}`,
+		chainName: 'BNB Chain',
+		nativeCurrency: {
+			name: "Binance Chain Native Token",
+			symbol: "BNB",
+			decimals: 18
+		},
+		rpcUrls: [
+      "https://bsc-dataseed.binance.org/",
+			"https://bsc-dataseed1.binance.org/",
+			"https://bsc-dataseed2.binance.org/",
+			"https://bsc-dataseed3.binance.org/",
+			"https://bsc-dataseed4.binance.org/",
+			"https://bsc-dataseed1.defibit.io/",
+			"https://bsc-dataseed2.defibit.io/",
+      "https://bsc-dataseed3.defibit.io/",
+      "https://bsc-dataseed4.defibit.io/",
+      "https://bsc-dataseed1.ninicoin.io/",
+      "https://bsc-dataseed2.ninicoin.io/",
+      "https://bsc-dataseed3.ninicoin.io/",
+      "https://bsc-dataseed4.ninicoin.io/"
+		],
+		blockExplorerUrls: ["https://bscscan.com/"],
+	},
   ['localhost8545']: {
     chainId: `0x${Number(1337).toString(16)}`,
 		chainName: 'Localhost 8545',
@@ -35,8 +60,8 @@ const networks: Map = {
     blockExplorerUrls: ['']
   }
 };
-const networkKey = process.env.NEXT_PUBLIC_NETWORK || 'bscTestnet';
-const network = networks[networkKey] || networks['bscTestnet'];
+const networkKey = process.env.NEXT_PUBLIC_NETWORK || 'bscMainnet';
+const network = networks['bscMainnet'];
 const supportedChainIds = [network.chainId];
 
 interface wallerContextType {
@@ -128,29 +153,29 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
 
   const updateBalance = async () => {
     if (walletAccount && ethersSigner) {
-      const _claim = new ethers.Contract(bftClaimBox.address, bftClaimBox.abi, ethersSigner);
-      const _heeContract = new ethers.Contract(bftHeetoken.address, bftHeetoken.abi, ethersSigner);
-      const _fiuContract = new ethers.Contract(bftFiuToken.address, bftFiuToken.abi, ethersSigner);
-      const _shoeContract = new ethers.Contract(bftShoeItem.address, bftShoeItem.abi, ethersSigner);
+      // const _claim = new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
+      // const _heeContract = new ethers.Contract(bftHeetoken.address, bftHeetoken.abi, ethersSigner);
+      // const _fiuContract = new ethers.Contract(bftFiuToken.address, bftFiuToken.abi, ethersSigner);
+      // const _shoeContract = new ethers.Contract(bftShoeItem.address, bftShoeItem.abi, ethersSigner);
       const _boxContract = new ethers.Contract(bftBox.address, bftBox.abi, ethersSigner);
-      const _busdContract = new ethers.Contract(bftBusdToken.address, bftBusdToken.abi, ethersSigner);
-     setClaimBoxContract(_claim)
+      // const _busdContract = new ethers.Contract(bftBusdToken.address, bftBusdToken.abi, ethersSigner);
+    //  setClaimBoxContract(_claim)
 
       //GET balance
       const balance = await ethersProvider.getBalance(walletAccount);
-      const [hee, fiu, shoe, box, busd] = await Promise.all([
-        _heeContract.balanceOf(walletAccount),
-        _fiuContract.balanceOf(walletAccount),
-        _shoeContract.balanceOf(walletAccount),
+      const [box] = await Promise.all([
+        // _heeContract.balanceOf(walletAccount),
+        // _fiuContract.balanceOf(walletAccount),
+        // _shoeContract.balanceOf(walletAccount),
         _boxContract.balanceOf(walletAccount),
-        _busdContract.balanceOf(walletAccount),
+        // _busdContract.balanceOf(WalletContext)
       ])
       setBnbBalance(ethers.utils.formatEther(balance))
-      setHeebalance(ethers.utils.formatEther(hee))
-      setFiuBalance(ethers.utils.formatEther(fiu))
-      setShoeBalance(ethers.utils.formatUnits(shoe, 'wei'))
+      // setHeebalance(ethers.utils.formatEther(hee))
+      // setFiuBalance(ethers.utils.formatEther(fiu))
+      // setShoeBalance(ethers.utils.formatUnits(shoe, 'wei'))
       setBoxBalance(ethers.utils.formatUnits(box, 'wei'))
-      setBusdBalance(ethers.utils.formatUnits(busd))
+      // setBusdBalance(ethers.utils.formatUnits(busd))
       try {
       } catch (error) {
         console.error('claim', error);
@@ -193,7 +218,6 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
       _ethereumProvider.on('accountsChanged', handleWalletAccountsChanged);
       _ethereumProvider.on('chainChanged', handleChainChanged);
     };
-
     const init = async () => {
       //detect whether the browser is connected to a provider
       let ethereumProvider = await detectEthereumProvider({ silent: true });

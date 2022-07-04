@@ -2,11 +2,11 @@ export const IMAGE_COUNTDOWN = {
   image: 'assets/bannerOpenBeta.png',
   imageMobile: 'assets/bannerOpenBetaMobile.png',
   countDown: {
-    title: 'Begins in',
-    time: '2022-06-20T10:00',
+    title: 'Ends in',
+    time: '2022-07-05T07:00',
     leadboard: {
       title: 'Leadboard',
-      link: '/',
+      link: '/leaderboard',
       active: false,
       image: 'assets/icons/ranking.svg',
       imageGray: 'assets/icons/rankingGray.svg',
@@ -22,7 +22,7 @@ export const TAB_BODY = {
     titleImage: 'assets/title1.png',
     list: [
       {title: 'Location', data: 'Global'},
-      {title: 'Duration', data: '3:00 UTC Jun 20, 2022 - 23:59 UTC Jun 30, 2022'},
+      {title: 'Duration', data: '3:00 UTC Jun 20, 2022 - 23:59 UTC July 4, 2022'},
       {title: 'Reward Announcement', data: 'July 07, 2022'},
       {title: 'Activities included', data: 'Walking, Running, Cycling'},
       {title: 'Total rewards', data: '10,000 $FIU and 370 shoe NFT boxes, each NFT could be worth up to 1,000 USD'},
@@ -70,7 +70,7 @@ export const TAB_BODY = {
         subtitle: '(need 10 ticket to draw)',
         data: [
           '200 $FIU + 1 genesis shoe NFT',
-          'For 10 random participants who accumulate packs of 10 tickets during the event'
+          'For 20 random participants who accumulate packs of 10 tickets during the event'
         ]
       }
     ],
@@ -83,8 +83,9 @@ export const TAB_BODY = {
       data: [
         'Any accumulated 10 tickets of any users will be qualified to join the Grand Prizes draw automatically.',
         'The total distance users have traveled will be automatically synced to the app after each 15 mins.',
-        'If users join more than 01 categories, only one with the highest result will be taken into account.',
-        'Winners of the challenge will need to download the beFITTER Application (Mainnet version when available) and successfully register, then the rewards will be sent into their spending wallet and users must create an account on the Mainnet application after the reward time.'
+        "When mainnet launches, winners will be able to claim their rewards on beFITTER's website by submitting the exact wallet address registered in Open Beta Testnet.",
+        "To put rewards into use, winners need to log in to beFITTER's mainnet version of the app with the same account information registered in Open Beta Testnet (All account information from Alpha and Beta Testnet will be migrated to Mainnet).",
+        "The Mainnet version is expected to launch in July 2022."
       ]
     },
     bodyGetReward: 'Rewards will be delivered directly to participants’ Spending wallet after the Mainnet launch.'

@@ -1,9 +1,9 @@
 import fetch from 'node-fetch';
 import getConfig from "next/config";
-import AlphaData from "../../abi/merkle-claim.json";
-import BetaData from "../../abi/merkle-claim.json";
-import GameFiData from "../../abi/merkle-claim.json";
-import EnjinstarterData from "../../abi/merkle-claim.json";
+import AlphaData from "../../abi/merkle-claim-gamefi.json";
+import BetaData from "../../abi/merkle-claim-gamefi.json";
+import GameFiData from "../../abi/merkle-claim-gamefi.json";
+import EnjinstarterData from "../../abi/merkle-claim-enjin.json";
 const { serverRuntimeConfig } = getConfig();
 
 export default async function handler(req: any, res: any) {
@@ -29,7 +29,7 @@ export default async function handler(req: any, res: any) {
 				}
 			);
 			const captchaValidation = await response.json();
-			const findData = await (round === '1' ? AlphaData : round === '2' ? BetaData : round === '3' ? GameFiData : EnjinstarterData as any).merkleData.claimData[walletAddress];
+			const findData = await (round === '1' ? AlphaData : round === '2' ? BetaData : round === '3' ? GameFiData : EnjinstarterData as any).merkleData.claimData[walletAddress.toLowerCase()];
 			if (requireCaptcha) {
 				if (captchaValidation.success) {
 					if (findData) {
@@ -39,8 +39,8 @@ export default async function handler(req: any, res: any) {
 							status: 1,
 							message: 'success'
 						});
-					} else res.json(responseFail)
-				} else res.json({ ...responseFail, captchaValidation: false })
+					} return res.json(responseFail)
+				} return res.json({ ...responseFail, captchaValidation: false })
 			} else {
 				if (findData) {
 					return res.json({
@@ -49,12 +49,10 @@ export default async function handler(req: any, res: any) {
 						status: 1,
 						message: 'success'
 					});
-				} else res.json(responseFail)
+				}
+				return res.json(responseFail)
 			}
-
-	return res.json(responseFail);
 } catch (error) {
-	console.log(error);
 	return res.json(responseFail);
 }
 	}

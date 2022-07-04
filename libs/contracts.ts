@@ -1,5 +1,6 @@
 import bfBox from '../abi/BeFitterBox.json';
-import bfClaimBox from '../abi/BeFitterClaim.json';
+import bfClaimBoxGamefi from '../abi/BeFitterClaim.json';
+import bfClaimEnjin from '../abi/merkle-claim-enjin.json';
 import bfHeeToken from '../abi/BFHeeToken.json';
 import bfFiuToken from '../abi/BFFiuToken.json';
 import bfShoeItem from '../abi/BFShoeItem.json';
@@ -11,8 +12,9 @@ interface Map {
 
 const addresses: Map = {
   ['deployment']: { // bscTestnet
-    bFBox: '0x545d2339c40fb53F326037311C7d99bDB7668401',
-    bFclaimBox: '0xBF4db77cbD1497BAcb7e5A8785E3a97713e0DD69',
+    bFBox: '0x62ae395292dC3B55654419F237438bcB4656E57d',
+    bFclaimBoxGamefi: '0x7f7f5971D45cA5EFAc225DA64299Fccb386a84B6',
+    bFclaimEnjin: '0x49509ac5266B51c686D4B75AF7fed9B4E21210Ee',
     bFheeToken: '0x05031f56DAD9EDa2Ff7e0d0b675787cC72Dc4675',
     bFfiuToken: '0x25FE4e58B463f0511f1dF848e3Afc3e97b8aB59f',
     bFshoeItem: '0x365B79e59080632E693D98e2A0A0e63625E51495',
@@ -27,9 +29,10 @@ const addressKey = process.env.NEXT_PUBLIC_ADDRESS || 'deployment';
 const address = addresses[addressKey] || addresses['deployment'];
 
 export const bftBox = { address: address.bFBox, abi: bfBox.abi}
-export const bftClaimBox = { address: address.bFclaimBox, abi: bfClaimBox.abi }
+export const bftClaimGamefi = { address: address.bFclaimBoxGamefi, abi: bfClaimBoxGamefi.abi }
 export const bftHeetoken = {address: address.bFheeToken, abi: bfHeeToken.abi}
 export const bftFiuToken = {address: address.bFfiuToken, abi: bfFiuToken.abi}
-export const bftShoeItem = {address: address.bFshoeItem, abi: bfShoeItem.abi}
+export const bftShoeItem = {address: address.bFshoeItem, abi: (bfShoeItem as any).abi}
+export const bftClaimEnjin = { address: address.bFclaimEnjin, abi: (bfClaimBoxGamefi as any).abi }
 export const bftBusdToken = {address: address.bFBusdToken, abi: bfBusdToken.abi}
 export const bftShop = {address: address.bFShop, abi: bfShop.abi}
