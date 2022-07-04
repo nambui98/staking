@@ -74,8 +74,8 @@ export const BOX_DETAILS = {
     title: 'Gold Mystery Box',
     image: 'assets/box-gold-small.png',
     detail: {
-      standard: '50%',
-      rare: '40%',
+      standard: '40%',
+      rare: '50%',
       iconic: '10%'
     }
   },
