@@ -1,5 +1,4 @@
-import { Backdrop, Box, BoxProps, Button, CircularProgress, fabClasses, Stack, styled, Tab, Tabs, Tooltip, Typography, useMediaQuery } from "@mui/material"
-import { ethers } from "ethers"
+import { Backdrop, Box, BoxProps, Button, CircularProgress, fabClasses, Stack, styled, Tab, Tabs, Tooltip, Typography, useMediaQuery, withStyles } from "@mui/material"
 import { useEffect, useRef, useState } from "react"
 import { BOX_DETAIL, MARKETPLACE_ICON, MARKETPLACE_IMAGE } from "../../../constants/marketplace"
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
@@ -14,12 +13,6 @@ import { PaymentSuccess } from "./PaymentSuccess"
 export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetail}) => {
   const videoRef = useRef(null);
   const { ethersSigner, provider, walletAccount, chainIdIsSupported, ethersProvider, setToggleActivePopup } = useWalletContext();
-  // const [boxDetail, setBoxDetail] = useState<{ price: number, type: string, video: string, image_small: string, image_large: string, title: string}>({ 
-  //   price: 0, type: BOX_DETAIL.box_gold.type,  
-  //   video: BOX_DETAIL.box_gold.video, 
-  //   image_small: BOX_DETAIL.box_gold.image_small, image_large: BOX_DETAIL.box_gold.image_large,
-  //   title: BOX_DETAIL.box_gold.title
-  // })
   const [checkoutPopup, setCheckoutPopup] = useState<{
     status: boolean, currentAllowance: number, allowanceStatus: boolean, onClickButton: () => any
   }>({
@@ -102,9 +95,11 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       ...boxDetail,
       type: boxType,
       video: boxData.video,
+      videoIphone: boxData.videoIphone,
       image_small: boxData.image_small,
       image_large: boxData.image_large,
       title: boxData.title,
+      properties: boxData.properties,
     })
     if(boxType === BOX_DETAIL.box_gold.type) {
       handleSetBoxDetail(BOX_DETAIL.box_gold)
@@ -134,6 +129,10 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
             src={boxDetail.video}
             type="video/webm"
           />
+          <source
+            src={boxDetail.videoIphone}
+            type="video/mov"
+          />
         </video>
       </ProductVideo>
       <Title>{boxDetail.title}</Title>
@@ -147,7 +146,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
         <Typography>BOX TYPE</Typography>
         <ListBoxType>
           <BoxTypeItem active={false}>
-            <Tooltip title="Coming soon" arrow placement="top">
+            <Tooltip classes={{popper: 'tooltip--marketplace'}} title="Coming soon" arrow placement="top">
               <img src="assets/box-comming-soon.png" />
             </Tooltip>
           </BoxTypeItem>

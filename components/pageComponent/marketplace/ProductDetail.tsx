@@ -17,7 +17,8 @@ export const ProductDetail: React.FC<MarketplaceProps> = ({boxDetail, setBoxDeta
     <Wrap>
       <PropertiesBox>        
         {boxDetail.properties?.map((item, index) => (
-          <PropertiesItem key={index} isMobile={isMobile}><img src={item.icon} />
+          <PropertiesItem key={index} isMobile={isMobile}>
+            <PropertiesImage><img src={item.icon} /></PropertiesImage>
             <Box sx={isMobile ? {} : {display: 'flex', alignItems: 'center'}}>
               <Typography>{item.title}</Typography>
               <Box>{item.chance} <Typography>chance</Typography></Box>
@@ -110,16 +111,12 @@ const PropertiesItem = styled(Box)((props: PropertiesProps) => ({
     background: props.isMobile ? 'linear-gradient(180deg, rgba(233, 234, 239, 0) 0%, #A7ACB8 70.83%, rgba(233, 234, 239, 0) 100%)' : 'linear-gradient(90deg, rgba(233, 234, 239, 0) 0%, #A7ACB8 53.12%, rgba(233, 234, 239, 0) 100%)',
     ...bg
   },
-  '& img': {
-    marginBottom: props.isMobile ? 8 : 0,
-    marginRight: props.isMobile ? 0 : 16
-  },
   '& > div div': {   
     right: 81,
     top: '50%',
     background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
-    '-webkit-background-clip': 'text',
-    '-webkit-text-fill-color': 'transparent',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
     textAlign: 'center',
     display: 'flex',
     alignItems: 'center',
@@ -128,9 +125,8 @@ const PropertiesItem = styled(Box)((props: PropertiesProps) => ({
     marginTop: 7,
     '& p': {
       ...TEXT_STYLE(12, 700),
-      marginLeft: 3
-    },
 
+    },
     '@media (min-width: 768px)': {
       position: 'absolute',
       transform: 'translateY(-50%)',
@@ -150,6 +146,18 @@ const PropertiesItem = styled(Box)((props: PropertiesProps) => ({
     }
   }
 }))
+const PropertiesImage = styled(Box)({
+  display: 'flex',
+  justifyContent : 'center',
+  alignItems: 'center',
+  marginBottom: 8,
+  '@media (min-width: 768px)': {
+    marginRight: 16,
+    width: 48,
+    height: 48,
+    marginBottom: 0
+  },
+})
 const PropertiesBox = styled(Stack)({
   flexDirection: 'row',
   justifyContent: 'space-between',
@@ -167,7 +175,7 @@ const TitleBg = styled(Typography)({
   marginLeft: 'auto',
   opacity: 0.2,
   background: 'initial !important',
-  '-webkit-text-fill-color': 'initial !important',
+  WebkitTextFillColor: 'initial !important',
 })
 
 

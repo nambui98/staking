@@ -19,32 +19,7 @@ export const FILTER = {
 }
 
 export const MARKETPLACE_ICON = {
-  LEVEL1_5: 'assets/icons/triangle.svg',
-  LEVEL6_14: 'assets/icons/triangle1.svg',
-  LEVEL15_20: 'assets/icons/triangle2.svg',
-  LEVELING: 'assets/icons/triangle3.svg',
-  SHIELDGREEN: 'assets/icons/shieldGreen.svg',
-  SHIELDGYELLOW: 'assets/icons/shieldYellow.svg',
-  SHIELDRED: 'assets/icons/Red.svg',
-  SHOEMINT: 'assets/icons/shoeMint.svg',
-  SHOEMINT1: 'assets/icons/shoeMint1.svg',
-  SHOEMINT2: 'assets/icons/shoeMint2.svg',
-  SHOEMINT3: 'assets/icons/shoeMint3.svg',
-  SHOEMINT4: 'assets/icons/shoeMint4.svg',
-  SHOEMINT5: 'assets/icons/shoeMint5.svg',
-  SHOEMINT6: 'assets/icons/shoeMint6.svg',
-  SHOEMINT7: 'assets/icons/shoeMint7.svg',
-  ENERGY: 'assets/icons/batteryFull.svg',
-  DURABILITY: 'assets/icons/shieldTick.svg',
-  SUPPORT: 'assets/icons/settingOrange.svg',
-  LUCK: 'assets/icons/magicStar.svg',
-  RANGE: 'assets/icons/routeSquare.svg',
-  ARROWRIGHT: 'assets/icons/arrowRightWhite.svg',
-  BNBCOIN: 'assets/icons/bnbCoin.svg',
-  CLOSE: 'assets/icons/close-circle.svg',
   METAMASK: 'assets/icons/metamask.svg',
-  BNBCOINYELLOW: 'assets/icons/bnbCoinYellow.svg',
-  BNBCOINGRAY: 'assets/icons/bnbCoinGray.svg',
   TICK: 'assets/icons/tick-green.svg',
   CLOSE_ICON: 'assets/icons/close-red.svg',
   STAR: 'assets/icons/star2.svg',
@@ -84,15 +59,16 @@ export const PROPERTIES = {
 }
 export const BOX_DETAIL = {
   box_gold: {
-    video: 'videos/box-gold.webm', 
+    video: 'videos/box-gold.webm',
+    videoIphone: 'videos/box-gold.mov', 
     image_small: 'assets/box-gold-small.png',
     image_large: 'assets/box-gold-big.png',
     type: 'gold',
     title: 'Golden Mystery Shoe Box',
     properties: [
       {title: 'Iconic Shoe', titleBg: 'ICONIC', chance: '10%', icon: 'assets/icons/iconic-red.svg'},
-      {title: 'Rare Shoe', titleBg: 'RARE', chance: '50%', icon: 'assets/icons/rare-yellow.svg'},
-      {title: 'Standard Shoe', titleBg: 'Common', chance: '40%', icon: 'assets/icons/standard.svg'}
+      {title: 'Rare Shoe', titleBg: 'RARE', chance: '40%', icon: 'assets/icons/rare-yellow.svg'},
+      {title: 'Standard Shoe', titleBg: 'Common', chance: '50%', icon: 'assets/icons/standard-gray.svg'}
     ],
     information: {
       introduction: [
@@ -111,14 +87,15 @@ export const BOX_DETAIL = {
   },
   box_diamond: {
     video: 'videos/box-diamond.webm', 
+    videoIphone: 'videos/box-diamond.mov',
     image_small: 'assets/box-diamond-small.png',
     image_large: 'assets/box-diamond-big.png',
     type: 'diamond',
     title: 'Diamond Mystery Shoe Box',
     properties: [
       {title: 'Iconic Shoe', titleBg: 'ICONIC', chance: '10%', icon: 'assets/icons/iconic-red.svg'},
-      {title: 'Rare Shoe', titleBg: 'RARE', chance: '50%', icon: 'assets/icons/rare-yellow.svg'},
-      {title: 'Standard Shoe', titleBg: 'Common', chance: '40%', icon: 'assets/icons/standard.svg'}
+      {title: 'Rare Shoe', titleBg: 'RARE', chance: '90%', icon: 'assets/icons/rare-yellow.svg'},
+      {title: 'Standard Shoe', titleBg: 'Common', chance: '0%', icon: 'assets/icons/standard-gray.svg'}
     ],
     information: {
       introduction: [

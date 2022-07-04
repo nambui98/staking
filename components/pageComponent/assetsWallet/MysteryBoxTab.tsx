@@ -70,7 +70,7 @@ export const MysteryBoxTab = () => {
             <Typography>{item.boxId}</Typography>
           </Title>
           <BoxTooltip>
-            <Tooltip title={tooltipBody(item)} arrow placement="top">
+            <Tooltip classes={{popper: 'tooltip--assets'}} title={tooltipBody(item)} arrow placement="top">
               <Star></Star>
             </Tooltip>
           </BoxTooltip>
