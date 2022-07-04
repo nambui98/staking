@@ -32,7 +32,7 @@ export const Boxtabs = () => {
       <TabLeft>
         <Top>
           <Address>{walletAccount?.slice(0, 6) + '...' + walletAccount?.slice(-3)}</Address>
-          <BnbBalance>{bnbBalance?.length ? parseFloat(bnbBalance).toFixed(4) : '0.00'} <img src={ICON.bnbSmall} /></BnbBalance>
+          <BnbBalance>{bnbBalance?.length && parseFloat(bnbBalance) > 0 ? parseFloat(bnbBalance).toFixed(4) : '0.00'} <img src={ICON.bnbSmall} /></BnbBalance>
         </Top>
         <TabBox>
           {TAB_ITEM?.map((item, index) => (

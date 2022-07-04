@@ -10,21 +10,21 @@ export const TokenTab = () => {
       <Item sx={ItemFiu}>
         <ItemLeft>
           <Title>Your balance</Title>
-          <Amount typeBnb={false}>{fiuBalance} <span>FIU</span></Amount>
+          <Amount typeBnb={false}>{fiuBalance} {fiuBalance?.length && parseFloat(fiuBalance) > 0 ? parseFloat(fiuBalance).toFixed(4) : '0.00'}<span>FIU</span></Amount>
         </ItemLeft>
         <ImageToken><img src={ICON.fiu} /></ImageToken>
       </Item>
       <Item sx={ItemHee}>
         <ItemLeft>
           <Title>Your balance</Title>
-          <Amount typeBnb={false}>{heeBalance} <span>HEE</span></Amount>
+          <Amount typeBnb={false}>{heeBalance} {heeBalance?.length && parseFloat(heeBalance) > 0 ? parseFloat(heeBalance).toFixed(4) : '0.00'}<span>HEE</span></Amount>
         </ItemLeft>
         <ImageToken><img src={ICON.hee} /></ImageToken>
       </Item>
       <Item sx={ItemBnb}>
         <ItemLeft>
           <Title sx={{color: '#31373E'}}>Your balance</Title>
-          <Amount typeBnb={true}>{parseFloat(bnbBalance).toFixed(4)} <span>BNB</span></Amount>
+          <Amount typeBnb={true}>{bnbBalance?.length && parseFloat(bnbBalance) > 0 ? parseFloat(bnbBalance).toFixed(4) : '0.00'} <span>BNB</span></Amount>
         </ItemLeft>
         <ImageToken><img src={ICON.bnbBig} /></ImageToken>
       </Item>
