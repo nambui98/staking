@@ -1,6 +1,5 @@
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { styled } from "@mui/system";
-import { FILTER } from "../../constants/marketplace";
 
 interface IProps {
   label: string
