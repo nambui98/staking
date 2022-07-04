@@ -116,7 +116,7 @@ export const TabClaim = () => {
       ])
     } else {
       setSelectItem([
-        { title: 'GameFi', value: '3' },
+        { title: 'GameFi.org', value: '3' },
         { title: 'Enjinstarter', value: '4' },
         { title: 'Alpha Test Reward', value: '1' },
         { title: 'Beta Test Reward', value: '2' },
