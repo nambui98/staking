@@ -95,6 +95,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       ...boxDetail,
       type: boxType,
       video: boxData.video,
+      maxBox: boxData.maxBox,
       videoIphone: boxData.videoIphone,
       image_small: boxData.image_small,
       image_large: boxData.image_large,
@@ -156,8 +157,12 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       </BoxType>
       <Price>
         <Busd><img src={MARKETPLACE_ICON.busdIcon} /> {boxDetail.price} BUSD</Busd>
-        <ButtonBuyNow onClick={handleTogglePopup}><Box>Buy now <img className="animationArrow" src={MARKETPLACE_ICON.arrowRightIcon} /></Box></ButtonBuyNow>
+        <Box>
+          <ButtonBuyNow onClick={handleTogglePopup}><Box>Buy now <img className="animationArrow" src={MARKETPLACE_ICON.arrowRightIcon} /></Box></ButtonBuyNow>
+          <MaxBox>Max {boxDetail.maxBox} boxes/wallet</MaxBox>
+        </Box>
       </Price>
+
       <Checkout status={checkoutPopup.status} handleToggleStatus={handleTogglePopup} sx={customWidthPopup}
         data={{ price: boxDetail.price, allowance: checkoutPopup.allowanceStatus, boxImage: boxDetail.image_large }} handleCheckout={checkoutPopup.onClickButton}
       />
@@ -184,6 +189,14 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
 const Wrap = styled(Stack)({
   '@media (min-width: 768px)': {
     minWidth: 448
+  }
+})
+const MaxBox = styled(Typography)({
+  ...TEXT_STYLE(14, 500, '#5A6178'),
+  marginTop: 10,
+  '@media (min-width: 768px)': {
+    marginTop: 16,
+    ...TEXT_STYLE(16, 500, '#5A6178'),
   }
 })
 const BoxType = styled(Box)({
@@ -275,7 +288,7 @@ const ProductVideo = styled(Box)({
   minHeight: 395,
   overflow: 'hidden',
   '@media (min-width: 768px)': {
-    margin: '70px 0 -20px',
+    margin: '50px 0 -20px',
     minHeight: 480
   },
   '& video': {

@@ -4,6 +4,7 @@ import { Stack, styled, Tab, Tabs, Typography, useMediaQuery } from '@mui/materi
 import { useState } from 'react';
 import { TEXT_STYLE } from '../../../styles/common/textStyles';
 import { MarketplaceProps } from '../../../pages/marketplace';
+import { TAB_PROPERTIES } from '../../../constants/marketplace';
 
 
 export const ProductDetail: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetail}) => {
@@ -13,9 +14,25 @@ export const ProductDetail: React.FC<MarketplaceProps> = ({boxDetail, setBoxDeta
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setCurrentTab(newValue);
   };
+
+  const checkLabelTab = () => {
+    switch (currentTab) {
+      case '1':
+        return 'introduction'  
+      case '2':
+        return 'info'
+      case '3': 
+        return 'timeline'
+      case '4':
+        return 'bonus'     
+      default:
+        return 'introduction';
+    }
+  }
   return (
     <Wrap>
-      <PropertiesBox>        
+      <PropertiesBox> 
+        {!isMobile && <PropertiesTitle>BOX SERIES</PropertiesTitle>}
         {boxDetail.properties?.map((item, index) => (
           <PropertiesItem key={index} isMobile={isMobile}>
             <PropertiesImage><img src={item.icon} /></PropertiesImage>
@@ -29,17 +46,17 @@ export const ProductDetail: React.FC<MarketplaceProps> = ({boxDetail, setBoxDeta
         ))}
       </PropertiesBox>
       <BoxTabs
+        scrollButtons="auto"
+        variant="scrollable"
         value={currentTab}
         onChange={handleChange}
         textColor="secondary"
         indicatorColor="secondary"
-        aria-label="secondary tabs example"
       >
-        <TabItem value="1" label="Rule introduction" />
-        <TabItem value="2" label="Box information" />
+        {TAB_PROPERTIES?.map((item, index) => <TabItem key={index} value={item.value} label={item.label} />)}
       </BoxTabs>
       <TabBody>
-        {boxDetail.information[currentTab === '1' ? 'introduction' : 'info']?.map((item: any, index: number) => (
+        {boxDetail.information[checkLabelTab()]?.map((item: any, index: number) => (
           <Typography key={index}>{item}</Typography>
         ))}
       </TabBody>
@@ -58,6 +75,13 @@ const bg = {
   left: 0,
   opacity: 0.3
 }
+const PropertiesTitle = styled(Typography)({
+  ...TEXT_STYLE(14, 600, '#5A6178'),
+  '@media (min-width: 768px)': {
+    marginBottom: 16,
+    ...TEXT_STYLE(16, 600, '#5A6178'),
+  }
+})
 const TabBody = styled(Box)({
   marginBottom: 20,
   '& p': {

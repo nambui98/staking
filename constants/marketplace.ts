@@ -1,23 +1,3 @@
-export const BANNER = {
-  imageDesktop: 'assets/backgrounds/bannerShop.png',
-  imageMobile: 'assets/backgrounds/bannerShopMobile.png',
-  titleTop: "BEFITTER'S STORE",
-  titleBot: 'COLLECTION 2022'
-}
-
-export const FILTER = {
-  CATEGORY: {
-    daily: {image: 'assets/shoes/shoesDaily.png', title: 'Daily'},
-    fitness: {image: 'assets/shoes/shoesFit.png', title: 'Fitness'},
-    racer: {image: 'assets/shoes/shoesRacer.png', title: 'Racer'},
-  },
-  RARITY: {
-    CLASSIC: 'Classic',
-    RARE: 'Rare',
-    ICONIC: 'Iconic',
-  }
-}
-
 export const MARKETPLACE_ICON = {
   METAMASK: 'assets/icons/metamask.svg',
   TICK: 'assets/icons/tick-green.svg',
@@ -57,6 +37,14 @@ export const PROPERTIES = {
     {title: 'Standard Shoe', titleBg: 'Common', chance: '40%', icon: 'assets/icons/standard.svg'}
   ]
 }
+
+export const TAB_PROPERTIES = [
+  {label: 'Rule introduction', value: '1'},
+  {label: 'Box information', value: '2'},
+  {label: 'TIMELINE', value: '3'},
+  {label: 'BONUS', value: '4'}
+]
+
 export const BOX_DETAIL = {
   box_gold: {
     video: 'videos/box-gold.webm',
@@ -65,6 +53,7 @@ export const BOX_DETAIL = {
     image_large: 'assets/box-gold-big.png',
     type: 'gold',
     title: 'Golden Mystery Shoe Box',
+    maxBox: '5',
     properties: [
       {title: 'Iconic Shoe', titleBg: 'ICONIC', chance: '10%', icon: 'assets/icons/iconic-red.svg'},
       {title: 'Rare Shoe', titleBg: 'RARE', chance: '40%', icon: 'assets/icons/rare-yellow.svg'},
@@ -82,6 +71,18 @@ export const BOX_DETAIL = {
         '1. Everyone can purchase in this pool.',
         '2. One Mystery Box contains one NFT Shoe.',
         '3. Purchase limitation: 5 boxes per person.'
+      ],
+      timeline: [
+        'Special Offer: With each Mystery Shoe Box purchased in this pool, you will get $12 guaranteed allocation for the beFITTER IDO later.',
+        '1. Everyone can purchase in this pool.',
+        '2. One Mystery Box contains one NFT Shoe.',
+        '3. Purchase limitation: 5 boxes per person.'
+      ],
+      bonus: [
+        'Special Offer: With each Mystery Shoe Box purchased in this pool, you will get $12 guaranteed allocation for the beFITTER IDO later.',
+        '1. Everyone can purchase in this pool.',
+        '2. One Mystery Box contains one NFT Shoe.',
+        '3. Purchase limitation: 5 boxes per person.'
       ]
     }
   },
@@ -92,6 +93,7 @@ export const BOX_DETAIL = {
     image_large: 'assets/box-diamond-big.png',
     type: 'diamond',
     title: 'Diamond Mystery Shoe Box',
+    maxBox: '2',
     properties: [
       {title: 'Iconic Shoe', titleBg: 'ICONIC', chance: '10%', icon: 'assets/icons/iconic-red.svg'},
       {title: 'Rare Shoe', titleBg: 'RARE', chance: '90%', icon: 'assets/icons/rare-yellow.svg'},
@@ -105,6 +107,18 @@ export const BOX_DETAIL = {
         '3. Purchase limitation: 5 boxes per person.'
       ],
       info: [
+        'Special Offer: With each Mystery Shoe Box purchased in this pool, you will get $12 guaranteed allocation for the beFITTER IDO later.',
+        '1. Everyone can purchase in this pool.',
+        '2. One Mystery Box contains one NFT Shoe.',
+        '3. Purchase limitation: 5 boxes per person.'
+      ],
+      timeline: [
+        'Special Offer: With each Mystery Shoe Box purchased in this pool, you will get $12 guaranteed allocation for the beFITTER IDO later.',
+        '1. Everyone can purchase in this pool.',
+        '2. One Mystery Box contains one NFT Shoe.',
+        '3. Purchase limitation: 5 boxes per person.'
+      ],
+      bonus: [
         'Special Offer: With each Mystery Shoe Box purchased in this pool, you will get $12 guaranteed allocation for the beFITTER IDO later.',
         '1. Everyone can purchase in this pool.',
         '2. One Mystery Box contains one NFT Shoe.',

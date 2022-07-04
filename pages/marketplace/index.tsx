@@ -9,6 +9,7 @@ import { BOX_DETAIL } from "../../constants/marketplace";
 interface boxDetail {
   price: number, 
   type: string,
+  maxBox: string,
   video: string, 
   videoIphone: string,
   image_small: string, 
@@ -19,7 +20,9 @@ interface boxDetail {
   }[],
   information: {
     introduction: string[],
-    info: string[]
+    info: string[],
+    timeline: string[],
+    bonus: string[]
   }  
 }
 export interface MarketplaceProps {
@@ -31,6 +34,7 @@ const Marketplace: NextPage = () => {
   const [boxDetail, setBoxDetail] = useState<boxDetail>({ 
     price: 0, 
     type: BOX_DETAIL.box_gold.type,  
+    maxBox: BOX_DETAIL.box_gold.maxBox,
     video: BOX_DETAIL.box_gold.video, 
     videoIphone: BOX_DETAIL.box_gold.videoIphone,
     image_small: BOX_DETAIL.box_gold.image_small, image_large: BOX_DETAIL.box_gold.image_large,
