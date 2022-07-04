@@ -1,4 +1,5 @@
 export const MARKETPLACE_ICON = {
+  CLOSE: 'assets/icons/close-circle.svg',
   ARROWRIGHT: 'assets/icons/arrowRightWhite.svg',
   METAMASK: 'assets/icons/metamask.svg',
   TICK: 'assets/icons/tick-green.svg',
