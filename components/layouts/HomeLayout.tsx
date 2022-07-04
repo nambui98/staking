@@ -5,7 +5,7 @@ import { META_TITLE, META_DESC } from '../../constants/head';
 import HomeHeader from '../headers/HomeHeader';
 import MainFooter from '../footers/MainFooter';
 
-const HomeLayout: React.FC<any> = ({ sxProps, children }) => {
+const HomeLayout: React.FC<any> = ({ sxProps, children, headerLandingPage }) => {
 	return (
 		<>
 			<Head>
@@ -37,7 +37,7 @@ const HomeLayout: React.FC<any> = ({ sxProps, children }) => {
 					flexDirection: 'column',
 				}}
 			>
-				<HomeHeader />
+				<HomeHeader headerLandingPage={headerLandingPage} />
 				<Box component="main" flexGrow={1} sx={{...sxProps}}>
 					{children}
 				</Box>

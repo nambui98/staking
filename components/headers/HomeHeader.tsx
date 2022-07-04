@@ -62,7 +62,7 @@ const LogoWithBackground: React.FC<any> = ({ isSm, isXs }) => {
 	);
 };
 
-const HomeHeader: React.FC<any> = ({ sxProps, children }) => {
+const HomeHeader: React.FC<any> = ({ sxProps, children, headerLandingPage }) => {
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 
@@ -100,16 +100,22 @@ const HomeHeader: React.FC<any> = ({ sxProps, children }) => {
 							px: { xl: 7 },
 						}}
 					>
-						{stickTrigger ? (
-							<>
+						{headerLandingPage && <>
 								<Logo />
 								<MenuButton />
-							</>
-						) : (
-							<>
-								<LogoWithBackground isSm={isSm} isXs={isXs} />
-								<MenuButton dark={false} />
-							</>
+							</>}
+						{!headerLandingPage && (
+							stickTrigger ? (
+								<>
+									<Logo />
+									<MenuButton />
+								</>
+							) : (
+								<>
+									<LogoWithBackground isSm={isSm} isXs={isXs} />
+									<MenuButton dark={false} />
+								</>
+							)
 						)}
 					</Container>
 				</Toolbar>

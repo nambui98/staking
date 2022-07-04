@@ -37,6 +37,7 @@ import {
 	CHARITY,
 	THE_TOKEN,
 } from '../constants/litePaper';
+import HomeLayout from '../components/layouts/HomeLayout';
 
 const Banner: React.FC<any> = ({ isXs }) => (
 	<Stack
@@ -1113,7 +1114,7 @@ const LitePaper: NextPage = () => {
 	const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 
 	return (
-		<MainLayout sxProps={{ background: '#fff' }}>
+		<HomeLayout sxProps={{ background: '#fff' }} headerLandingPage={true}>
 			<Banner isXs={isXs} />
 			<Token sxProps={{ my: 15 }} />
 			<Mission sxProps={{ my: 15 }} />
@@ -1126,7 +1127,7 @@ const LitePaper: NextPage = () => {
 			<Team sxProps={{ mb: 15 }} />
 			<App sxProps={{ mb: 15 }} />
 			<StayInTouch />
-		</MainLayout>
+		</HomeLayout>
 	);
 };
 
