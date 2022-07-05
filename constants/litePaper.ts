@@ -344,7 +344,7 @@ export const THE_TOKEN = {
 			],
 		},
 		STACK: {
-			X: [...Array(60)].map((el, idx) => idx+1),
+			X: ['Week 1','Week 2','Week 3','Week 4','Month 2','Month 3','Month 4','Month 5','Month 6','Month 7','Month 8','Month 9','Month 10','Month 11','Month 12','Month 13','Month 14','Month 15','Month 16','Month 17','Month 18','Month 19','Month 20','Month 21','Month 22','Month 23','Month 24','Month 25','Month 26','Month 27','Month 28','Month 29','Month 30','Month 31','Month 32','Month 33','Month 34','Month 35','Month 36','Month 37','Month 38','Month 39','Month 40','Month 41','Month 42','Month 43','Month 44','Month 45','Month 46','Month 47','Month 48', ''],
 			series: [
 				{
 					name: 'Public Sales',
