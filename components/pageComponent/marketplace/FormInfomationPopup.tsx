@@ -69,12 +69,9 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
       });
       setShowBackdrop(false);
       if (response.ok) {
-        // If the response is ok than show the success alert
         setStatusForm(true)
         MarketplaceService.setStatusPopupInfo(false)
       } else {
-        // Else throw an error with the message returned
-        // from the API
         const error = await response.json();
         throw new Error(error.message)
       }
@@ -127,7 +124,7 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
     }
   }
   return (
-    <Popup title="" status={status} handleToggle={() => handleToggleStatus(false)} sx={customPadding} titleButton={titleButton} handleClickButton={handleClickButton}>
+    <Popup title="" status={status} handleToggle={() => {handleToggleStatus(false); setStatusForm(false)}} sx={customPadding} titleButton={titleButton} handleClickButton={handleClickButton}>
       <Wrap>
         <ImageTop><img src={MARKETPLACE_IMAGE.boxShoeToken} /></ImageTop>
         <Title>{statusForm ? 'Your information is sent successfully! Don`t forget to join the Mainnet to receive your BONUS!' : 'Fill your information to receive BONUS gifts from beFITTER for the Mainnet.'}</Title>

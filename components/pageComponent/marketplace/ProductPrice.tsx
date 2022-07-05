@@ -29,6 +29,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
   const [statusLoading, setStatusLoading] = useState<boolean>(false);
   const [popupError, setPopupError] = useState<boolean>(false);
   const [popupFormInfo, setPopupFormInfo] = useState<boolean>(false);
+  const [messPopupErr, setMessPopupErr] = useState<string>('');
   const statusPopupInfo = MarketplaceService.getStatusPopupInfo()
   const handlePurchaseBox = async () => {
     setStatusLoading(true)
@@ -50,6 +51,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       setStatusLoading(false)
       setPopupError(true)
       setApprovePopup(false)
+      console.log(error)
     }
   }
 

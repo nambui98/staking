@@ -75,7 +75,7 @@ const Wrap = styled(Box)({
   }
 })
 const container = {
-  maxWidth: { xl: 1120 + 48 },
+  maxWidth: { xl: 1120 + 48 + 15 },
   padding: '0 16px',
   '@media (min-width: 768px)': {
     padding: '0 24px'
