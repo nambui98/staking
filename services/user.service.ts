@@ -14,3 +14,16 @@ export const UserService = {
     return localStorage.removeItem('user');
   }
 }
+
+export const MarketplaceService = {
+  getStatusPopupInfo: () => {
+    const ISSERVER = typeof window === "undefined";
+    if(!ISSERVER){
+      const status = localStorage.getItem('statusPopupInfo');
+      if(status) return status;
+    }
+  },
+  setStatusPopupInfo: (status: boolean) => {
+    return localStorage.setItem('statusPopupInfo', JSON.stringify(status));
+  }
+}

@@ -4,15 +4,17 @@ import { BOX_DETAIL, MARKETPLACE_ICON, MARKETPLACE_IMAGE } from "../../../consta
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { getAllowance, getBoxPrice, purchaseBox, approvePurchase } from "../../../libs/marketplace"
 import { MarketplaceProps } from "../../../pages/marketplace"
+import { MarketplaceService } from "../../../services/user.service"
 import { TEXT_STYLE } from "../../../styles/common/textStyles"
 import { PopupMessage } from "../claim/PopupMessage"
 import { ApproveToken } from "./ApproveToken"
 import { Checkout } from "./Checkout"
+import { FormInfomationPopup } from "./FormInfomationPopup"
 import { PaymentSuccess } from "./PaymentSuccess"
 
 export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetail}) => {
   const videoRef = useRef(null);
-  const { ethersSigner, provider, walletAccount, chainIdIsSupported, ethersProvider, setToggleActivePopup } = useWalletContext();
+  const { ethersSigner, provider, walletAccount, chainIdIsSupported, ethersProvider, setToggleActivePopup, updateBnbBalance } = useWalletContext();
   const [checkoutPopup, setCheckoutPopup] = useState<{
     status: boolean, currentAllowance: number, allowanceStatus: boolean, onClickButton: () => any
   }>({
@@ -26,7 +28,8 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
   const [approveToken, setApproveToken] = useState<string>('');
   const [statusLoading, setStatusLoading] = useState<boolean>(false);
   const [popupError, setPopupError] = useState<boolean>(false);
-
+  const [popupFormInfo, setPopupFormInfo] = useState<boolean>(false);
+  const statusPopupInfo = MarketplaceService.getStatusPopupInfo()
   const handlePurchaseBox = async () => {
     setStatusLoading(true)
     try {
@@ -38,7 +41,9 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
           clearInterval(checkStatus)
           setPaymentSuccessPopup(true)
           setApprovePopup(false)
+          updateBnbBalance()
           setCheckoutPopup({ ...checkoutPopup, status: false })
+          MarketplaceService.setStatusPopupInfo(true)
         }
       }, 1000);
     } catch (error) {
@@ -110,9 +115,21 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
     }
   }
 
+  const handleGetBonus = () => {
+    MarketplaceService.setStatusPopupInfo(true);
+    setPopupFormInfo(true)
+    setPaymentSuccessPopup(false)
+  }
+
   useEffect(() => {
     walletAccount?.length && getPriceCurrentBox()
   }, [boxDetail.type, ethersSigner, walletAccount, PaymentSuccessPopup, approvePopup])
+
+  useEffect(() => {
+    if(statusPopupInfo === 'true'){
+      setPopupFormInfo(true)
+    }
+  }, [])
   return (
     <Wrap>
       <ProductVideo>
@@ -172,10 +189,10 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       }} status={approvePopup} handleToggleStatus={() => setApprovePopup(!approvePopup)} sx={customWidthPopup} onChangeApproveToken={setApproveToken} handleClickButton={handleApprovePurchase} />
       <PaymentSuccess data={{
         boxPrice: boxDetail.price, boxImage: boxDetail.image_large
-      }} status={PaymentSuccessPopup} handleToggleStatus={() => setPaymentSuccessPopup(false)} titleButton={'Get bonus'} />
+      }} status={PaymentSuccessPopup} handleToggleStatus={() => setPaymentSuccessPopup(false)} titleButton={'Get bonus'} handleClickButton={handleGetBonus} />
       <PopupMessage title="Error!" status={popupError} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError(false)} sx={customWidthPopup}
         handleClickButton={() => setPopupError(false)} titleCustomColor={{ '& p': { color: '#FF6F61' } }} message="Something went wrong. Please try again!" />
-
+      <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
       <Backdrop
         sx={{ color: '#FF6D24', zIndex: 2000 }}
         className="backdrop-loading"

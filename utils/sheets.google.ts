@@ -13,24 +13,36 @@ const sheets = google.sheets({ version: 'v4', auth: jwt });
 const SHEET = {
 	EVENT: 'Event',
 	SUPPORT: 'Support',
+	MARKETPLACE: 'Data1',
+	MARKETPLACE_CLAIM: 'Data2'
 };
 
 interface eventBody {
+	name: string,
 	email: string;
-	wallet: string;
+	country: string;
+	twitter: string
+	discord: string
 	telegram: string;
-	device: string;
+	facebook: string;
+	sheetName: string
 }
 
 export async function appendEvent(body: eventBody) {
 	const data = {
 		// createdAt: new Date().toLocaleString("en-GB"),
 		createdAt: new Date().toLocaleString(),
-		...body,
+		name: body.name,
+		email: body.email,
+		country: body.country,
+		twitter: body.twitter,
+		discord: body.discord,
+		telegram: body.telegram,
+		facebook: body.facebook,
 	};
 	return sheets.spreadsheets.values.append({
-		spreadsheetId: serverRuntimeConfig.EVENT_SPREADSHEET_ID,
-		range: SHEET.EVENT,
+		spreadsheetId: serverRuntimeConfig.MARKETPLACE_INFORMATION_ID,
+		range: body.sheetName,
 		valueInputOption: 'USER_ENTERED',
 		requestBody: {
 			values: [[...Object.values(data)]],

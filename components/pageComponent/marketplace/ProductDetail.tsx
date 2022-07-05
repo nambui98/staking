@@ -103,6 +103,7 @@ const TabItem = styled(Tab)({
   color: '#A7ACB8',
   paddingBottom: 0,
   ...TEXT_STYLE(16, 600),
+  textTransform: 'uppercase',
   '&.Mui-selected': {
     color: '#FF6D24'
   },
@@ -202,7 +203,7 @@ const PropertiesBox = styled(Stack)({
   '@media (min-width: 768px)': {
     marginBottom: 46,
     flexDirection: 'column',
-    margin: '124px 0 24px',
+    margin: '85px 0 0px',
   }
 })
 const TitleBg = styled(Typography)({

@@ -61,5 +61,6 @@ const borderRadius = {
   '& .MuiDialog-paper': {
     borderRadius: '16px',
     margin: '0 !important',
+    overflow: 'visible',
   }
 }

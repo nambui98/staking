@@ -1,4 +1,5 @@
 import { Typography } from "@mui/material"
+import { constants } from "crypto"
 
 export const MARKETPLACE_ICON = {
   CLOSE: 'assets/icons/close-circle.svg',
@@ -26,6 +27,7 @@ export const BACKGROUND = {
 export const MARKETPLACE_IMAGE = {
   shoe: 'assets/shoe.png',
   borderv3: 'assets/borderv3.png',
+  boxShoeToken: 'assets/shoeBoxToken.png',
 }
 
 export const STATISTICAL = {
@@ -57,7 +59,7 @@ export const BOX_DETAIL = {
     image_small: 'assets/box-gold-small.png',
     image_large: 'assets/box-gold-big.png',
     type: 'gold',
-    title: 'Golden Mystery Shoe Box',
+    title: 'Gold Mystery Shoe Box',
     maxBox: '5',
     properties: [
       {title: 'Iconic Shoe', titleBg: 'ICONIC', chance: '10%', icon: 'assets/icons/iconic-red.svg'},
@@ -135,4 +137,9 @@ export const BOX_DETAIL = {
       ]
     }
   },
+}
+
+export const SHEET_NAME = {
+  data1: 'Data1',
+  data2: 'Data2'
 }

@@ -11,8 +11,8 @@ const { serverRuntimeConfig } = getConfig();
 
 export default async function handler(req: any, res: any) {
 	if (req.method === 'POST') {
-		const { email, wallet, telegram, device, captcha } = req.body;
-		if (!email || !wallet || !telegram || !device || !captcha) {
+		const {name, email, country, twitter, discord , telegram, facebook, captcha, sheetName } = req.body;
+		if (!name || !email || !country || !captcha) {
 			return res.status(422).json({
 				message: 'Unproccesable request, please provide the required fields',
 			});
@@ -42,7 +42,7 @@ export default async function handler(req: any, res: any) {
 			if (captchaValidation.success) {
 				// Replace this with the API that will save the data received
 				// to your backend
-				await appendEvent({ email, wallet, telegram, device })
+				await appendEvent({name, email, country, twitter, discord, telegram, facebook, sheetName})
 					// .then(() => res.json({ message: 'Success' }))
 					// .catch((err) => res.status(500).json({ message: err }));
 				// Return 200 if everything is successful
