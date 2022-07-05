@@ -101,6 +101,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       image_large: boxData.image_large,
       title: boxData.title,
       properties: boxData.properties,
+      information:  boxData.information
     })
     if(boxType === BOX_DETAIL.box_gold.type) {
       handleSetBoxDetail(BOX_DETAIL.box_gold)
@@ -171,7 +172,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       }} status={approvePopup} handleToggleStatus={() => setApprovePopup(!approvePopup)} sx={customWidthPopup} onChangeApproveToken={setApproveToken} handleClickButton={handleApprovePurchase} />
       <PaymentSuccess data={{
         boxPrice: boxDetail.price, boxImage: boxDetail.image_large
-      }} status={PaymentSuccessPopup} handleToggleStatus={() => setPaymentSuccessPopup(false)} sx={customWidthPopup} />
+      }} status={PaymentSuccessPopup} handleToggleStatus={() => setPaymentSuccessPopup(false)} titleButton={'Get bonus'} />
       <PopupMessage title="Error!" status={popupError} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError(false)} sx={customWidthPopup}
         handleClickButton={() => setPopupError(false)} titleCustomColor={{ '& p': { color: '#FF6F61' } }} message="Something went wrong. Please try again!" />
 
@@ -188,7 +189,10 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
 
 const Wrap = styled(Stack)({
   '@media (min-width: 768px)': {
-    minWidth: 448
+    minWidth: 420
+  },
+  '@media (min-width: 1200px)': {
+    minWidth: 470
   }
 })
 const MaxBox = styled(Typography)({
@@ -267,19 +271,21 @@ const Busd = styled(Box)({
   marginRight: 10,
   display: 'flex',
   alignItems: 'center',
+  marginTop: 17,
   '& img': {
     marginRight: 8
   },
   '@media (min-width: 768px)': {
     ...TEXT_STYLE(24, 600),
     marginRight: 20,
-    minWidth: 135
+    minWidth: 135,
+    marginTop: 15
   }
 })
 const Price = styled(Stack)({
   flexDirection: 'row',
   justifyContent: 'space-between',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   marginBottom: 24
 })
 const ProductVideo = styled(Box)({
@@ -288,7 +294,7 @@ const ProductVideo = styled(Box)({
   minHeight: 395,
   overflow: 'hidden',
   '@media (min-width: 768px)': {
-    margin: '50px 0 -20px',
+    margin: '0 0 -20px',
     minHeight: 480
   },
   '& video': {

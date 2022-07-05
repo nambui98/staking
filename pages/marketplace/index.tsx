@@ -19,10 +19,10 @@ interface boxDetail {
     title: string, titleBg: string, chance: string, icon: string
   }[],
   information: {
-    introduction: string[],
-    info: string[],
-    timeline: string[],
-    bonus: string[]
+    introduction: any[],
+    info: any[],
+    timeline: any[],
+    bonus: any[]
   }  
 }
 export interface MarketplaceProps {
@@ -75,7 +75,7 @@ const Wrap = styled(Box)({
   }
 })
 const container = {
-  maxWidth: { xl: 1120 },
+  maxWidth: { xl: 1120 + 48 },
   padding: '0 16px',
   '@media (min-width: 768px)': {
     padding: '0 24px'
@@ -85,23 +85,29 @@ const container = {
 const Inner = styled(Stack)({
   width: '100%',
   color: '#31373E',
-  marginTop: 6,
   '@media (min-width: 768px)': {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 18
   }
 })
 const BoxLeft = styled(Stack)({
   '@media (min-width: 768px)': {
     marginRight: 35
   },
+  '@media (min-width: 1200px)': {
+    width: 470
+  },
   '@media (min-width: 1280px)': {
-    marginRight: 75
+    marginRight: 44
   }
 })
 const BoxRight = styled(Stack)({
-
+  '@media (min-width: 768px)': {
+    width: 'calc(100% - 420px - 35px)'
+  },
+  '@media (min-width: 1200px)': {
+    width: '100%',
+  }
 })
 const customWidthPopup = {
   '@media (min-width: 650px)': {

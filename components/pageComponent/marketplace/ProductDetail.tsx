@@ -4,8 +4,7 @@ import { Stack, styled, Tab, Tabs, Typography, useMediaQuery } from '@mui/materi
 import { useState } from 'react';
 import { TEXT_STYLE } from '../../../styles/common/textStyles';
 import { MarketplaceProps } from '../../../pages/marketplace';
-import { TAB_PROPERTIES } from '../../../constants/marketplace';
-
+import { MARKETPLACE_ICON, TAB_PROPERTIES } from '../../../constants/marketplace';
 
 export const ProductDetail: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetail}) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
@@ -53,11 +52,11 @@ export const ProductDetail: React.FC<MarketplaceProps> = ({boxDetail, setBoxDeta
         textColor="secondary"
         indicatorColor="secondary"
       >
-        {TAB_PROPERTIES?.map((item, index) => <TabItem key={index} value={item.value} label={item.label} />)}
+        {TAB_PROPERTIES?.map((item, index) => <TabItem key={index} value={item.value} label={item.label} icon={index === 3 ? <img src={MARKETPLACE_ICON.infomation} /> : <></>} iconPosition="end" />)}
       </BoxTabs>
       <TabBody>
         {boxDetail.information[checkLabelTab()]?.map((item: any, index: number) => (
-          <Typography key={index}>{item}</Typography>
+          <TabBodyItem key={index}>{item}</TabBodyItem>
         ))}
       </TabBody>
     </Wrap>
@@ -84,19 +83,33 @@ const PropertiesTitle = styled(Typography)({
 })
 const TabBody = styled(Box)({
   marginBottom: 20,
+})
+const TabBodyItem = styled(Box)({
+  maxWidth: 448,
   '& p': {
     ...TEXT_STYLE(14, 500),
     color: '#5A6178',
-    marginBottom: 20
+    marginBottom: 13,
+    lineHeight: 1.6,
+    '& span': {
+      ...TEXT_STYLE(14, 600, '#FF8A50'),
+    },
+    '& b': {
+      ...TEXT_STYLE(14, 700, '#31373E')
+    }
   }
 })
 const TabItem = styled(Tab)({
   color: '#A7ACB8',
-  paddingBottom: 15,
+  paddingBottom: 0,
   ...TEXT_STYLE(16, 600),
   '&.Mui-selected': {
     color: '#FF6D24'
   },
+  '& img': {
+    marginLeft: 0,
+    marginTop: -15,
+  }
 })
 const BoxTabs = styled(Tabs)({
   marginBottom: 16,
