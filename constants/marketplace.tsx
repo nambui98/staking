@@ -106,7 +106,7 @@ export const BOX_DETAIL = {
     type: 'diamond',
     title: 'Diamond Mystery Shoe Box',
     maxBox: '2',
-    oldPrice: '449',
+    oldPrice: '499',
     price: 429,
     quantity: '30',
     properties: [

@@ -152,7 +152,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
             type='video/mp4; codecs="hvc1"'
           />
           <source
-            src={boxDetail.videoIphone}
+            src={boxDetail.video}
             type="video/webm"
           />
           <source
