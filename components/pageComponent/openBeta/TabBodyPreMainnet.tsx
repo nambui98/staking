@@ -284,7 +284,9 @@ const BoxTabs = styled(Tabs)({
 const TabItem = styled(Tab)({
   fontFamily: 'Electrofied',
   fontStyle: 'italic',
-  fontSize: '24px',
+  // fontSize: '24px',
+  fontSize: '1.2em',
+
   fontWeight: '400',
   textTransform: 'uppercase',
   padding: '0 13.5px',

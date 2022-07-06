@@ -24,16 +24,21 @@ export const ImageCountdown: React.FC<IProps> = ({countDown, imageTitle, hideLin
               <BoxCountdown>
                 <CountdownClock endDate={countDown ? countDown : IMAGE_COUNTDOWN.countDown.time} sxTitle={40} sxSubTitle={16} />
                 {/* <Link href={'#'}><CountdownButton disabled={!IMAGE_COUNTDOWN.countDown.leadboard.active} active={IMAGE_COUNTDOWN.countDown.leadboard.active}><img src={IMAGE_COUNTDOWN.countDown.leadboard.imageGray} /> {IMAGE_COUNTDOWN.countDown.leadboard.title}</CountdownButton></Link> */}
-                {IMAGE_COUNTDOWN.countDown.Questions?.map((item, index) => (
-                  !hideLinkPdf && <QuestionsItem key={index}><img src={item.imageIcon} /><Link href={item.link}>{item.title}</Link></QuestionsItem>
-                ))}
+                
               </BoxCountdown>
+              
               {/* <BoxQuestion>
                 {IMAGE_COUNTDOWN.countDown.Questions?.map((item, index) => (
                   <QuestionsItem key={index}><img src={item.imageIcon} /><Link href={item.link}>{item.title}</Link></QuestionsItem>
                 ))}
               </BoxQuestion> */}
             </Body>
+            <Stack direction={isMobile? "column":"row"} spacing={isMobile? 0:10} alignItems="center">
+            {IMAGE_COUNTDOWN.countDown.Questions?.map((item, index) => (
+                  <QuestionsItem key={index}><img src={item.imageIcon} /><Link href={item.link}>{item.title}</Link></QuestionsItem>
+                ))}
+                          </Stack>
+
           </Stack>
         </Inner>
       </Container>

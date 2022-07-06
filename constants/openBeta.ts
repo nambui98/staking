@@ -12,7 +12,8 @@ export const IMAGE_COUNTDOWN = {
       imageGray: 'assets/icons/rankingGray.svg',
     },
     Questions: [
-      {title: 'How to join challenge', link: '/howToJoinChain', imageIcon: 'assets/icons/message-question.svg'},
+      {title: 'How to join Pre-Mainnet if you have boxes', link: 'https://cdn.befitter.io/pre-mainnet/', imageIcon: 'assets/icons/message-question.svg'},
+      {title: 'How to join Pre-Mainnet if you don’t have boxes', link: 'https://cdn.befitter.io/pre-mainnet2/', imageIcon: 'assets/icons/message-question.svg'},
     ]
   }
 }
