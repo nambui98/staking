@@ -131,7 +131,7 @@ const BannerEvent: React.FC<any> = () => {
 		<Box
 			sx={{
 				position: 'absolute',
-				height: 425 - 160,
+				height: 265,
 				width: 624,
 				bottom: 0,
 				left: 80,
@@ -167,9 +167,9 @@ const BannerEvent: React.FC<any> = () => {
 						pr: 12,
 					}}
 				>
-					<Box>
+					<Box sx={{cursor: 'pointer'}}>
 						{/* <img src={BANNER.IMAGECUP} width={'25%'} height={'auto'} style={{zIndex: 2, position: 'relative'}} /> */}
-						<img src={BANNER.IMAGE} width={'100%'} height={'auto'} style={{marginTop: 5}} />
+						<Link href={'#'}><img src={'assets/title-pre-mainnet.png'} width={'100%'} height={'auto'} style={{marginTop: 5}} /></Link>						
 					</Box>
 					<Stack
 						direction="row"
@@ -190,14 +190,14 @@ const BannerEvent: React.FC<any> = () => {
 						<CountdownClock />
 					</Stack>
 				</Stack>
-				<Box
+				{/* <Box
 					sx={{
 						position: 'absolute',
 						top: 16,
 						right: 0,
 					}}
 				>
-					<Link href={BANNER.BUTTON.href}>
+					<Link href={'/shop'}>
 						<IconButton
 							sx={{
 								background: '#FFE2D3',
@@ -225,9 +225,9 @@ const BannerEvent: React.FC<any> = () => {
 							</Icon>
 						</IconButton>
 					</Link>
-				</Box>
+				</Box> */}
 			</Box>
-			<ButtonLeaderboard><Link href={BANNER.BUTTON_LEADERBOARD.href}><img src={BANNER.BUTTON_LEADERBOARD.title} /></Link></ButtonLeaderboard>
+			{/* <ButtonLeaderboard><Link href={BANNER.BUTTON_LEADERBOARD.href}><img src={BANNER.BUTTON_LEADERBOARD.title} /></Link></ButtonLeaderboard> */}
 		</Box>
 	);
 };
@@ -293,7 +293,7 @@ const MobileBannerEvent: React.FC<any> = () => {
 	})
 	const isMobile = useMediaQuery('(max-width:600px)');
 	return (
-		<Link href={BANNER.BUTTON.href}>
+		<Link href={'#'}>
 			<Box
 				component={'a'}
 				sx={{
@@ -323,12 +323,12 @@ const MobileBannerEvent: React.FC<any> = () => {
 					}}>
 						{/* <img src={BANNER.IMAGECUP} width={isMobile ? '90px' : '150px'} height={'auto'} style={{zIndex: 2, position: 'relative'}} /> */}
 						<img
-							src={BANNER.IMAGE}
+							src={'assets/title-pre-mainnet.png'}
 							width={isMobile ? 300 : 350}
 							height={'auto'}
 						/>
 					</Box>		
-					<ButtonLeaderboard><Link href={BANNER.BUTTON_LEADERBOARD.href}><img src={BANNER.BUTTON_LEADERBOARD.title} /></Link></ButtonLeaderboard>			
+					{/* <ButtonLeaderboard><Link href={BANNER.BUTTON_LEADERBOARD.href}><img src={BANNER.BUTTON_LEADERBOARD.title} /></Link></ButtonLeaderboard>			 */}
 					<Box
 						sx={{
 							position: 'absolute',
