@@ -109,6 +109,7 @@ export const ROADMAP = {
 			items: [`Idea & Concept`, `Form a team (Art, BA,\nEngineer, BD)`],
 			top: 514,
 			ml: -883,
+			active: true,
 		},
 		{
 			title: 'May - 2022',
@@ -120,6 +121,7 @@ export const ROADMAP = {
 			],
 			top: 225,
 			ml: -585,
+			active: true,
 		},
 		{
 			title: 'June - 2022',
@@ -131,6 +133,7 @@ export const ROADMAP = {
 			],
 			top: 668,
 			ml: -435,
+			active: true,
 		},
 		{
 			title: 'Q3 - 2022',
@@ -144,6 +147,7 @@ export const ROADMAP = {
 			],
 			top: 480,
 			ml: 18,
+			active: false,
 		},
 		{
 			title: 'Q4 - 2022',
@@ -155,6 +159,8 @@ export const ROADMAP = {
 			],
 			top: 156,
 			ml: 104,
+			active: false,
+
 		},
 		{
 			title: 'Q1 - 2023',
@@ -165,6 +171,8 @@ export const ROADMAP = {
 			],
 			top: 597,
 			ml: 580,
+			active: false,
+
 		},
 		{
 			title: 'Q2 - 2023',
@@ -176,6 +184,8 @@ export const ROADMAP = {
 			],
 			top: 128,
 			ml: 807,
+			active: false,
+
 		},
 	],
 };

@@ -16,7 +16,7 @@ import SectionTitle from '../../components/sections/SectionTitle';
 import MainFooter from '../../components/footers/MainFooter';
 // import { IconImage } from '../../styled';
 
-const Milestone: React.FC<any> = ({ sxProps, title, items }) => {
+const Milestone: React.FC<any> = ({ sxProps, title, items, active }) => {
 	return (
 		<Box>
 			<Box sx={{
@@ -25,11 +25,15 @@ const Milestone: React.FC<any> = ({ sxProps, title, items }) => {
 				width: 'max-content',
 			}}>
 				<Box sx={{
-					background: '#FFF',
+					background: active ? 'transparent' : '#FFF',
 					p: .5,
 					width: 'max-content',
 				}}>
-					<Typography fontSize={{ xs: 20, sm: 24, md: 18, lg: 24 }} fontWeight={700} color="#31373E">{title}</Typography>
+					<Typography fontSize={{ xs: 20, sm: 24, md: 18, lg: 24 }} fontWeight={700}
+						sx={{
+							color: active ? '#FFF' : '#31373E',
+						}}
+					>{title}</Typography>
 				</Box>
 			</Box>
 			<Box sx={{ pl: 2, mt: 1 }}>
@@ -71,6 +75,8 @@ const RoadmapDesktop: React.FC<any> = () => {
 				position: 'relative',
 				overflow: 'hidden',
 				height: 895,
+				marginTop: "100px !important"
+
 			}}
 		>
 			<Box display={'flex'} mb={10} alignItems="center" justifyContent="center">
@@ -114,7 +120,7 @@ const RoadmapDesktop: React.FC<any> = () => {
 					top: { md: el.top * 0.8, lg: el.top },
 					ml: { md: `${el.ml * 0.8}px`, lg: `${el.ml}px` },
 				}}>
-					<Milestone title={el.title} items={el.items} />
+					<Milestone title={el.title} items={el.items} active={el.active} />
 				</Box>
 			))}
 
@@ -125,14 +131,25 @@ const RoadmapDesktop: React.FC<any> = () => {
 const RoadmapMobile: React.FC<any> = () => {
 	return (
 		<Container sx={{ mb: 10 }}>
-			<SectionTitle
-				title={ROADMAP.TITLE}
-				subtitle={ROADMAP.SUBTITLE}
-			/>
-			<Grid container spacing={3} mt={5}>
+			<Box display={'flex'} mt={10} alignItems="center" justifyContent="center">
+
+				<Typography
+					fontSize={{ xs: 32, sm: 56 }}
+					textTransform="uppercase"
+					fontFamily='Electrofied'
+					fontStyle={'italic'}
+					fontWeight={800}
+					color="#FF6D24"
+					textAlign="center"
+				>
+					roadmap
+				</Typography>
+
+			</Box>
+			<Grid container spacing={3} mt={1}>
 				{ROADMAP.MILESTONES.map((el, idx) => (
 					<Grid item key={idx} xs={12} sm={6}>
-						<Milestone title={el.title} items={el.items} />
+						<Milestone title={el.title} items={el.items} active={el.active} />
 					</Grid>
 				))}
 			</Grid>
