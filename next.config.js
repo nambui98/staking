@@ -8,6 +8,7 @@ module.exports = {
 		OLD_EVENT_SPREADSHEET_ID: "1QokRb-eR4IZOxPoQQcZZlElvqNTBkC1-LMRWjEmQDf0",
 		EVENT_SPREADSHEET_ID: "1gn6dTzpq0eViCusTRwqHHvirF-fcCHNq7yVULDS3Nt4",
 		HOME_SPREADSHEET_ID: "1P0PTiAHns91zNm_UOHknpaS9oi4ucfluMYmEvupbfT8",
+		MARKETPLACE_INFORMATION_ID: '1kfzziyxZiCmhbCBJlEKppdvTQ9T5xbgVbbgHl3aP2fs',
 		DRIVE_ID: "1Wh-niW3MeVOl0Sd7c1KKR0aqC67an0FQ",
 		CLIENT_ID: "113562450568978192792",
 		CLIENT_EMAIL: "sheets-editor@versehub-homepage.iam.gserviceaccount.com",

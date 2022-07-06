@@ -1,13 +1,13 @@
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { styled } from "@mui/system";
-import { FILTER } from "../../constants/marketplace";
 
 interface IProps {
   label: string
   type?: 'blue' | 'green'
+  sx?: any
 }
 
-export const CheckboxMarketplace: React.FC<IProps> = ({label, type}) => {
+export const CheckboxMarketplace: React.FC<IProps> = ({label, type, sx}) => {
   const greenStyle = {
     backgroundColor: '#4FD19066',
     '&:before': {
@@ -15,7 +15,7 @@ export const CheckboxMarketplace: React.FC<IProps> = ({label, type}) => {
     }
   }
   return (
-    <FormGroup>
+    <FormGroup sx={sx}>
       <CheckboxMarket 
         control={<Checkbox icon={<BpIcon />} checkedIcon={<BpCheckedIcon sx={type === 'green' ? greenStyle : {}} />} sx={filterCheckbox} defaultChecked />} 
         label={label} 
