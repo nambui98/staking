@@ -22,7 +22,7 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 		}
 	]
 	return (
-		<Container sx={{ ...sxProps }}>
+		<Container sx={{ ...sxProps, }}>
 			{/* <SectionTitle
 				title={TEAM.TITLE}
 				subtitle={TEAM.SUBTITLE}

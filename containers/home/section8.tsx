@@ -71,6 +71,8 @@ const RoadmapDesktop: React.FC<any> = () => {
 				position: 'relative',
 				overflow: 'hidden',
 				height: 895,
+				marginTop: "100px !important"
+
 			}}
 		>
 			<Box display={'flex'} mb={10} alignItems="center" justifyContent="center">

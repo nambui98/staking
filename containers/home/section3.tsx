@@ -174,13 +174,17 @@ const Section3: NextPage = () => {
 		<div style={{
 			backgroundImage: `url(assets/bg_sec3.png)`,
 			height: '100%',
+			width: "100%",
 			backgroundPosition: 'center',
 			backgroundRepeat: 'no-repeat',
-			backgroundSize: 'cover'
+			backgroundSize: 'cover',
+			// padding: '29px auto 50px',
+
 		}}>
 
 			<Wrap sx={{
-				marginBottom: "0px !important"
+				marginBottom: "0px !important",
+				marginTop: "120px !important"
 			}}>
 				<Box sx={{
 					display: "flex",

@@ -13,7 +13,8 @@ const Section4: NextPage = () => {
 			height: '100%',
 			backgroundPosition: 'center',
 			backgroundRepeat: 'no-repeat',
-			backgroundSize: 'cover'
+			backgroundSize: 'cover',
+			marginTop: "100px !important"
 		}}>
 			<Box display={'flex'} mb={4} alignItems="center" flexDirection={"column"} sx={{
 
