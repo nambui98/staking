@@ -12,14 +12,14 @@ interface Map {
 
 const addresses: Map = {
   ['deployment']: { // bscTestnet
-    bFBox: '0x375bf3d08B76f22C9827D19c548BA97e5d2Cfcfd',
+    bFBox: '0x51019530C9313C93f0252F210F24604E1c1488ac',
     bFclaimBoxGamefi: '0x33c4d0220e11Ed8c763036b554E4cD77387e9E2C',
     bFclaimEnjin: '0x33c4d0220e11Ed8c763036b554E4cD77387e9E2C',
     bFheeToken: '0x05031f56DAD9EDa2Ff7e0d0b675787cC72Dc4675',
     bFfiuToken: '0x25FE4e58B463f0511f1dF848e3Afc3e97b8aB59f',
     bFshoeItem: '0x365B79e59080632E693D98e2A0A0e63625E51495',
     bFBusdToken: '0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee',
-    bFShop: '0x6D134E5C82a8df4D2481748d70b028dDAD1292F5'
+    bFShop: '0x2417D8195993DD295f21cb68e9079EC00f56dAb8'
   },
   ['localhost']: {
 
