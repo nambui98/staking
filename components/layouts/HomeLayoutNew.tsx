@@ -6,7 +6,7 @@ import HomeHeader from '../headers/HomeHeader';
 import MainFooter from '../footers/MainFooter';
 import HomeHeaderNew from '../headers/HomeHeaderNew';
 
-const HomeLayoutNew: React.FC<any> = ({ sxProps, children, headerLandingPage }) => {
+const HomeLayoutNew: React.FC<any> = ({ sxProps, children, headerLandingPage, currentPage }) => {
 
 	return (
 		<>
@@ -39,7 +39,7 @@ const HomeLayoutNew: React.FC<any> = ({ sxProps, children, headerLandingPage }) 
 					flexDirection: 'column',
 				}}
 			>
-				<HomeHeaderNew headerLandingPage={headerLandingPage} />
+				<HomeHeaderNew headerLandingPage={headerLandingPage} currentPage={currentPage} />
 				<Box component="main" flexGrow={1} sx={{ ...sxProps }}>
 					{children}
 				</Box>

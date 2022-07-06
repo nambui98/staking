@@ -15,6 +15,7 @@ import EarthMobile from "./icons/earth-mobile.svg";
 import ShoesMobile from "./icons/shoes-mobile.svg";
 import PawMobile from "./icons/paw-mobile.svg";
 import SmartwatchMobile from "./icons/smartwatch-mobile.svg";
+import { TEXT_STYLE } from "../../styles/common/textStyles";
 
 type itemType = {
 	title: string
@@ -134,11 +135,21 @@ const Section2: NextPage = () => {
 						data.map((item: itemType, index: number) => {
 							const Icon = isMobile ? item.iconMobile : item.icon;
 							return <BoxItemIcon mb={2} key={index} onClick={() => { setActiveIndex(index) }} sx={{ cursor: 'pointer' }}>
-								<Box display="flex" justifyItems="center" alignItems={"center"}>
-									<Icon  style={{ 
-										transition: '.4s all', fill: activeIndex == index ? "#FF6D24" : "#898E9E"								
+								<Box display="flex" justifyItems="center" alignItems={"center"} sx={{
+									'@media (max-width: 767px)': {
+										flexDirection: 'column',
+									}
+								}}>
+									<Icon style={{
+										transition: '.4s all', fill: activeIndex == index ? "#FF6D24" : "#898E9E"
 									}} />
-									<Typography sx={{ transition: '.4s all', color: activeIndex == index ? "#FF6D24" : "#31373E" }} fontWeight={500} fontSize={24}>{item.title}</Typography>
+									<Typography sx={{
+										transition: '.4s all', color: activeIndex == index ? "#FF6D24" : "#31373E",
+										'@media (max-width: 767px)': {
+											...TEXT_STYLE(14, 500),
+											marginTop: '5px'
+										}
+									}} fontWeight={500} fontSize={24}>{item.title}</Typography>
 								</Box>
 								{!isMobile && <Box sx={{
 									transition: '.4s all',
@@ -151,6 +162,14 @@ const Section2: NextPage = () => {
 						)
 					}
 				</BoxIcon>
+				{isMobile && <Box sx={{
+					transition: '.4s all',
+					...styleActiveContent(activeIndex),
+					marginBottom: '30px',
+					marginTop: '5px'
+				}}>
+					<Typography mt={0.5} fontSize={14} color="#5A6178" >{data[activeIndex].content}</Typography>
+				</Box>}
 				<BoxImage flex={1}>
 					<img width={"100%"} src={data[activeIndex].image} alt="" />
 				</BoxImage>

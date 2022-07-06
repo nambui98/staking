@@ -94,7 +94,7 @@ export const Section1: React.FC<IProps> = ({handleStatusPopup, statusPopup}) => 
       </Swiper>
       {isMobile992 ? <ButtonGetApp onClick={() => handleStatusPopup(true)}>GET THE APP</ButtonGetApp> : <BoxCountDown>
         <TitleCountDown>IDO IN</TitleCountDown>
-        <CountdownClockNew endDate={'2022-07-10T09:00:00.000Z'} />
+        <CountdownClockNew endDate={'2022-07-15T13:00:00.000Z'} />
       </BoxCountDown>}
     </Wrap>
   )
@@ -108,6 +108,7 @@ const Wrap = styled(Stack)({
 const ButtonGetApp = styled(Box)({
   position: 'absolute',
   bottom: 24,
+  width: 198,
   left: '50%',
   zIndex: 2,
   transform: 'translateX(-50%)',
@@ -129,7 +130,7 @@ const BoxCountDown = styled(Stack)({
   left: '50%',
   transform: 'translateX(-50%)',
   bottom: 0,
-  background: 'linear-gradient(90deg, rgba(255, 109, 36, 0) 0%, rgba(255, 109, 36, 0.7) 11.11%, rgba(255, 109, 36, 0) 95.65%)',
+  background: 'linear-gradient(90deg, rgba(255, 109, 36, 0) 0%, rgba(255, 109, 36, 0.52) 79.35%, rgba(255, 109, 36, 0) 95.65%)',
   padding: 16,
   flexDirection: 'row',
   alignItems: 'center',

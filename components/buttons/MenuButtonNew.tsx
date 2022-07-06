@@ -61,6 +61,7 @@ const MenuButton: React.FC<any> = ({ dark=true, customImage }) => {
 				onMouseOver={(e) => {
 					if (!isSm) handleOpen(e);
 				}}
+				sx={{paddingRight: '0 !important'}}
 			>
 				<Icon sx={{ width: { xs: 40, sm: 48 }, height: { xs: 40, sm: 48 } }}>
 					<IconImage sx={{width: customImage ? customImage : 'internal'}} src={ICON} />
@@ -97,7 +98,6 @@ const MenuButton: React.FC<any> = ({ dark=true, customImage }) => {
 										background: '#FFF',
 										width: '100%',
 										height: '100%',
-										opacity: 0.8,
 										backdropFilter: 'blur(24px)',
 										borderRadius: '12px',
 									}}

@@ -22,12 +22,13 @@ import { TEXT_STYLE } from '../../styles/common/textStyles';
 import { useRouter } from 'next/router';
 import { PopupApp } from '../../containers/home/PopupApp';
 import MenuButtonNew from '../buttons/MenuButtonNew';
+import { toast } from 'react-toastify';
 
 const MAIN_MENU = [
 	{ name: 'GET THE APP', link: '#' },
 	{ name: 'Staking', link: '#' },
-	{ name: 'HUB', link: '#' },
-	{ name: 'Litepaper', link: '#' }
+	{ name: 'HUB', link: 'https://hub.befitter.io/' },
+	{ name: 'Litepaper', link: '/litePaper' }
 ]
 
 const Logo: React.FC<any> = () => {
@@ -46,18 +47,29 @@ const Logo: React.FC<any> = () => {
 		</Link>
 	);
 };
-const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage }) => {
+const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, currentPage }) => {
 	const { asPath } = useRouter();
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 	const [statusPopup, setStatusPopup] = useState(false);
 	const isMobile992 = useMediaQuery('(max-width:992px)');
-
+	console.log(currentPage, 333)
 	const stickTrigger = useScrollTrigger({
 		disableHysteresis: true,
 		threshold: 200,
 	});
-
+	
+	const handleCommingSoon = () => {
+		toast('COMING SOON!', {
+			position: "top-center",
+			autoClose: 5000,
+			hideProgressBar: true,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		});
+	}
 	return (
 		<Box component={'header'}>
 			<AppBar
@@ -65,7 +77,8 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage }) 
 				square
 				elevation={0}
 				sx={{
-					background: stickTrigger ? '#fff' : 'transparent',
+					background: currentPage === '1' ? 'linear-gradient(180deg, rgba(185, 185, 185, 0.4) 0%, rgba(177, 177, 177, 0) 100%)' : '#fff',
+					borderBottom: currentPage === '1' ? '0' : '1px solid #E9EAEF',
 					transition: 'all ease 0.2s ',
 				}}
 			>
@@ -81,7 +94,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage }) 
 							justifyContent: 'space-between',
 							alignItems: 'center',
 							maxWidth: '1120px !important',
-							padding: '0 16px !important'
+							padding: '0 0 !important'
 						}}
 					>
 						<>
@@ -89,7 +102,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage }) 
 							{!isMobile992 && <MainMenu>
 								{MAIN_MENU?.map((item, index) => (
 									<Link key={index} href={item.link}>
-										<MenuItem onClick={() => setStatusPopup(true)}  active={index === 0 ? true : false}>{item.name}</MenuItem>
+										<MenuItem onClick={() => index === 0 ? setStatusPopup(true) : index === 1 ? handleCommingSoon() : null}  active={index === 0 ? true : false}>{item.name}</MenuItem>
 									</Link>
 								))}
 							</MainMenu>}

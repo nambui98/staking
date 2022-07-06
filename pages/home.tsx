@@ -387,6 +387,7 @@ const Home: NextPage = () => {
 	const [height, setHeight] = useState<number>();
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	const [statusPopup, setStatusPopup] = useState(false);
+	const [currentPage, setCurrentPage] = useState('1');
 
 	const windowHeightListener = () => {
 		setHeight(window.innerHeight);
@@ -403,6 +404,7 @@ const Home: NextPage = () => {
 		};
 	}, []);
 	const onLeave = (origin: any, destination: any, direction: any) => {
+		setCurrentPage(destination?.anchor)
 		console.log("onLeave", { origin, destination, direction });
 		// arguments are mapped in order of fullpage.js callback arguments do something
 		// with the event
@@ -457,7 +459,7 @@ const Home: NextPage = () => {
 		// </div>
 	]
 	return (
-		<HomeLayoutNew sxProps={{ background: '#fff' }} headerLandingPage={true}>
+		<HomeLayoutNew sxProps={{ background: '#fff' }} headerLandingPage={true} currentPage={currentPage}>
 			<ReactFullpage
 				// debug /* Debug logging */
 				// Required when using extensions
