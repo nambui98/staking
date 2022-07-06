@@ -46,6 +46,9 @@ import OpenIno from '../components/pageComponent/home/openIno';
 import HomeLayoutNew from '../components/layouts/HomeLayoutNew';
 import ReactFullpage from '@fullpage/react-fullpage';
 import MainFooter from '../components/footers/MainFooter';
+import Section2 from '../containers/home/section2';
+import Section3 from '../containers/home/section3';
+import Section4 from '../containers/home/section4';
 // import "./styles.css";
 const SEL = "custom-section";
 const SECTION_SEL = `.${SEL}`;
@@ -885,14 +888,16 @@ const Home: NextPage = () => {
 			{isSm && <MobileBannerEvent />}
 		</Box>,
 		<Box className={SEL}>
-			<AppSection sxProps={{ py: 8 }} />
+			<Section2 />
 		</Box>
 		,
 		<Box className={SEL}>
-			<OpenIno />
+			<Section3 />
 		</Box>
 		,
-
+		<Box className={SEL}>
+			<Section4 />
+		</Box>,
 		<Box className={SEL}>
 			<FoundedBy className={SEL} sxProps={{ mb: 15 }} />
 			<MainFooter />
