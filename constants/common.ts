@@ -52,7 +52,7 @@ export const SOCIAL = [
 ];
 
 export const FOUNDED = {
-	TITLE: 'INCUBATED', 
+	TITLE: 'INCUBATED',
 	SUBTITLE: 'BY',
 	BG: 'assets/backgrounds/home-founded.png',
 	ICETEA: 'assets/logo/icetea.png',
@@ -125,9 +125,9 @@ export const ROADMAP = {
 			title: 'June - 2022',
 			items: [
 				// `Launch Mainnet V1`, 
-				`Launch Testnet`, 
+				`Launch Testnet`,
 				`Coop w/All-in-one\ndiscovery Gaming Hub`,
-				`Launch Mainnet V1`, 
+				`Launch Mainnet V1`,
 			],
 			top: 668,
 			ml: -435,
@@ -135,7 +135,10 @@ export const ROADMAP = {
 		{
 			title: 'Q3 - 2022',
 			items: [
-				`Launch Mainnet V2 (Rent system)`,
+				`IDO & Token Listing`,
+				'Staking',
+				'Launch Mainnet V1',
+				'Release Renting system',
 				`In-app system optimization`,
 				`Co-branding Partnerships`,
 			],

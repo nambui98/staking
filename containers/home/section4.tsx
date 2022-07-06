@@ -1,44 +1,25 @@
 
-import { Box, Link, Stack, styled, Typography } from "@mui/material";
-import { datalabeling } from "googleapis/build/src/apis/datalabeling";
+import { Box, Stack, styled, Typography } from "@mui/material";
 import { NextPage } from "next";
-import { ComponentType, useState } from "react";
-import { BOX_IMAGE, BOX_LIST_ITEM } from "../../constants/openIno";
 // import { BOX_IMAGE, BOX_LIST_ITEM } from "../constants/openIno";
-import FitnessFi from "./icons/fitnessFi.svg";
-import Earth from "./icons/earth.svg";
-import Shoes from "./icons/shoes.svg";
-import Paw from "./icons/paw.svg";
-import Smartwatch from "./icons/smartwatch.svg";
-
-type itemType = {
-	title: string
-	content: string
-	image: string
-	icon: any
-}
+import { keyframes } from '@mui/system';
 const Section4: NextPage = () => {
 
 
 
 	return (
-		<Wrap>
-			{/* <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage> */}
-			<Box display={'flex'} mb={4} alignItems="center" flexDirection={"column"}>
+		<Wrap sx={{
+			backgroundImage: `url(assets/bg_sec4.png)`,
+			height: '100%',
+			backgroundPosition: 'center',
+			backgroundRepeat: 'no-repeat',
+			backgroundSize: 'cover'
+		}}>
+			<Box display={'flex'} mb={4} alignItems="center" flexDirection={"column"} sx={{
 
+			}}>
 				<Typography
-					fontSize={{ xs: 10, sm: 32 }}
-					textTransform="uppercase"
-					fontFamily='Electrofied'
-					fontStyle={'italic'}
-					fontWeight={800}
-					color="#31373E"
-					mb={0.5}
-				>
-					Make A healthy lifestyle
-				</Typography>
-				<Typography
-					fontSize={{ xs: 15, sm: 50 }}
+					fontSize={{ xs: 15, sm: 56 }}
 					textTransform="uppercase"
 					fontFamily='Electrofied'
 					fontStyle={'italic'}
@@ -46,35 +27,312 @@ const Section4: NextPage = () => {
 					color="#FF6D24"
 					mb={0.5}
 				>
-					irresistible
+					TOKENS
 				</Typography>
-				<Box display={'flex'}>
+				<Typography
+					fontSize={{ xs: 10, sm: 38 }}
+					textTransform="uppercase"
+					fontFamily='Electrofied'
+					fontStyle={'italic'}
+					fontWeight={800}
+					color="#31373E"
+					mb={0.5}
+				>
+					UTILITIES
+				</Typography>
+			</Box >
+			<Box display={'flex'} alignItems={'flex-start'} justifyContent="space-between" >
+				<Box flex={1} display={'flex'} flexDirection='column' alignItems={'flex-start'}>
 
+					<Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
+
+						<Typography
+							fontSize={{ xs: 15, sm: 56 }}
+							textTransform="uppercase"
+							fontFamily='Electrofied'
+							fontStyle={'italic'}
+							fontWeight={800}
+							color="#FF6D24"
+							// mb={5}
+							mr={2}
+						>
+							FIU
+						</Typography>
+						<img width="40px" src="assets/FIU.png" />
+					</Box>
 					<Typography
-						typography={'span'}
-						fontSize={{ xs: 10, sm: 16 }}
-						fontWeight={500}
-						color="#FF6D24"
-						mb={0.5}
-						textAlign="center"
+						fontSize={{ xs: 16, sm: 24 }}
+						textTransform="uppercase"
+						fontFamily='Electrofied'
+						fontStyle={'italic'}
+						fontWeight={800}
+						color="#31373E"
+						// mb={5}
+						mr={2}
+						width="250px"
 					>
-						beFITTER
+						SOCIAL TOKEN
 					</Typography>
-					<Typography typography={'span'}
-						fontSize={{ xs: 10, sm: 16 }}
+					<Typography
+						fontSize={{ xs: 16, sm: 16 }}
 						fontWeight={500}
 						color="#5A6178"
-						mb={0.5}
-						textAlign="center">’s ecosystem helps users improve mental & physical health,<br></br> gain achievements and still get monetary incentives.
+
+						mt={4}
+					>
+						Stake to earn interest and FitterPass
 					</Typography>
-				</Box>
-			</Box >
-			<Box display={'flex'} alignItems={'center'}>
-				<Box flex={1}>
+					<Typography
+						fontSize={{ xs: 16, sm: 16 }}
+						fontWeight={500}
+						color="#5A6178"
+
+						mt={2}
+					>
+						Level up shoe NFT at some levels & Mint
+					</Typography>
+					<Typography
+						fontSize={{ xs: 16, sm: 16 }}
+						fontWeight={500}
+						color="#5A6178"
+
+						mt={2}
+					>
+						Governance
+					</Typography>
+					<Typography
+						fontSize={{ xs: 16, sm: 16 }}
+						fontWeight={500}
+						color="#5A6178"
+
+						mt={2}
+					>
+						Pay rental commission fee
+					</Typography>
+					<Typography
+						fontSize={{ xs: 16, sm: 16 }}
+						fontWeight={500}
+						color="#5A6178"
+
+						mt={2}
+					>
+						Pay for some in-app purchases
+					</Typography>
+					<Box sx={{
+						mt: 2,
+						display: 'flex',
+						align: "center",
+						justifyContent: "flex-start",
+					}}
+					>
+
+						<Typography
+							fontSize={{ xs: 16, sm: 16 }}
+							fontWeight={500}
+							color="#5A6178"
+
+						>
+							Earn
+						</Typography>
+
+						<Typography
+							fontSize={{ xs: 16, sm: 16 }}
+							fontWeight={800}
+							color="#FF6D24"
+							ml={1}
+							mr={1}
+						>
+							FIU
+						</Typography>
+
+						<Typography
+							fontSize={{ xs: 16, sm: 16 }}
+							fontWeight={500}
+							color="#5A6178"
+
+						>
+							in With Pet Mode,
+						</Typography>
+					</Box>
+					<Typography
+						fontSize={{ xs: 16, sm: 16 }}
+						fontWeight={500}
+						color="#5A6178"
+
+					>
+						Challenges, Staking
+					</Typography>
 
 				</Box>
-				<Box flex={1}>
-					{/* <img width={"100%"} src={data[activeIndex].image} alt="" /> */}
+
+
+				<Box sx={{
+					width: "800px",
+					height: "100%",
+					position: "relative",
+				}}>
+					<Box sx={{
+						position: 'absolute',
+						top: "70%",
+						left: "00px",
+						width: "300px",
+						height: "303px",
+						transform: 'translateY(-50%)',
+						backgroundImage: `url(assets/bg_fiu1.png)`,
+						// height: '100%',
+						backgroundPosition: 'center',
+						backgroundRepeat: 'no-repeat',
+						backgroundSize: 'contain'
+
+					}}>
+						<BoxImageAnimation sx={{
+							position: 'absolute',
+							left: '50px'
+						}}>
+
+							<img width="226px" src="assets/fiu1.png" />
+						</BoxImageAnimation>
+					</Box>
+					<Box sx={{
+						position: 'absolute',
+						top: "50%",
+						right: "0",
+						width: "258px",
+						height: "292px",
+						transform: 'translateY(-50%)',
+						backgroundImage: `url(assets/bg_hee1.png)`,
+						// height: '100%',
+						backgroundPosition: 'center',
+						backgroundRepeat: 'no-repeat',
+						backgroundSize: 'contain'
+					}}>
+						<BoxImageAnimation sx={{
+							position: 'absolute',
+							right: '0'
+						}}>
+
+							<img width="226px" src="assets/hee1.png" />
+						</BoxImageAnimation>
+					</Box>
+				</Box>
+				<Box flex={1} display={'flex'} flexDirection='column' alignItems={'flex-end'}>
+
+					<Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
+
+						<img width="40px" src="assets/HEE.png" />
+						<h1 className="text_gadient_second">
+							HEE
+						</h1>
+						{/* <Typography
+							fontSize={{ xs: 15, sm: 56 }}
+							textTransform="uppercase"
+							fontFamily='Electrofied'
+							fontStyle={'italic'}
+							fontWeight={800}
+							color="#FF6D24"
+							// mb={5}
+							mr={2}
+						>
+							HEE
+						</Typography> */}
+					</Box>
+					<Typography
+						fontSize={{ xs: 16, sm: 24 }}
+						textTransform="uppercase"
+						fontFamily='Electrofied'
+						fontStyle={'italic'}
+						fontWeight={800}
+						color="#31373E"
+						// mb={5}
+						mr={2}
+						width="250px"
+						textAlign={"right"}
+					>
+						HEALTH TOKEN
+					</Typography>
+					<Typography
+						fontSize={{ xs: 16, sm: 16 }}
+						fontWeight={500}
+						color="#5A6178"
+						textAlign={"right"}
+						mt={4}
+					>
+						Level up shoe NFT
+					</Typography>
+					<Typography
+						fontSize={{ xs: 16, sm: 16 }}
+						fontWeight={500}
+						color="#5A6178"
+						textAlign={"right"}
+						mt={2}
+					>
+						Repair shoe NFT
+					</Typography>
+					<Typography
+						fontSize={{ xs: 16, sm: 16 }}
+						fontWeight={500}
+						color="#5A6178"
+						textAlign={"right"}
+						mt={2}
+					>
+						Transaction fee
+					</Typography>
+					<Typography
+						fontSize={{ xs: 16, sm: 16 }}
+						fontWeight={500}
+						color="#5A6178"
+						textAlign={"right"}
+						mt={2}
+					>
+						Mint
+					</Typography>
+
+					<Box sx={{
+						mt: 2,
+						display: 'flex',
+						align: "center",
+						justifyContent: "flex-start",
+					}}
+					>
+
+						<Typography
+							fontSize={{ xs: 16, sm: 16 }}
+							fontWeight={500}
+							color="#5A6178"
+							textAlign={"right"}
+						>
+							Earn
+						</Typography>
+
+						<Typography
+							fontSize={{ xs: 16, sm: 16 }}
+							fontWeight={800}
+							color="#1DB268"
+							ml={1}
+							mr={1}
+							textAlign={"right"}
+						>
+							HEE
+						</Typography>
+
+						<Typography
+							fontSize={{ xs: 16, sm: 16 }}
+							fontWeight={500}
+							color="#5A6178"
+							textAlign={"right"}
+						>
+							in With Pet Mode,
+						</Typography>
+					</Box>
+					<Typography
+						fontSize={{ xs: 16, sm: 16 }}
+						fontWeight={500}
+						color="#5A6178"
+						textAlign={"right"}
+					>
+						in all game modes
+					</Typography>
+
 				</Box>
 			</Box >
 		</Wrap >
@@ -91,7 +349,26 @@ const Wrap = styled(Stack)({
 		margin: '29px auto 80px',
 	}
 })
+const translate = keyframes`
+  /* from {
+    transform: translateY(-10px);
+  }
+  to {
+    transform: translateY(-50%);
+  } */
+	  0%   {transform: translateY( 20px);}
 
+  /* 25%  {transform: translateY(calc(-50% - 10px));} */
+  75%  {transform: translateY(0);}
+  100% {transform: translateY(20px)}
+`;
+const BoxImageAnimation = styled(Box)({
+	animation: `${translate}`,
+	animationDuration: '1.5s',
+	animationTimingFunction: 'ease-out',
+	// animationDelay: '1s',
+	animationIterationCount: 'infinite'
+})
 const BoxOpenImage = styled(Box)({
 	margin: '0 auto 56px',
 	'@media (min-width: 560px)': {

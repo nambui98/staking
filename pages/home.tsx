@@ -50,6 +50,10 @@ import Section2 from '../containers/home/section2';
 import Section3 from '../containers/home/section3';
 import Section4 from '../containers/home/section4';
 import { Section1 } from '../containers/home/Section1';
+import Section5 from '../containers/home/section5';
+import Section6 from '../containers/home/section6';
+import Section7 from '../containers/home/section7';
+import Section8 from '../containers/home/section8';
 // import "./styles.css";
 const SEL = "custom-section";
 const SECTION_SEL = `.${SEL}`;
@@ -420,6 +424,18 @@ const Home: NextPage = () => {
 		,
 		<Box className={SEL}>
 			<Section4 />
+		</Box>,
+		<Box className={SEL}>
+			<Section5 />
+		</Box>,
+		<Box className={SEL}>
+			<Section6 />
+		</Box>,
+		<Box className={SEL}>
+			<Section7 />
+		</Box>,
+		<Box className={SEL}>
+			<Section8 />
 		</Box>,
 		<Box className={SEL}>
 			<FoundedBy className={SEL} sxProps={{ mb: 15 }} />
