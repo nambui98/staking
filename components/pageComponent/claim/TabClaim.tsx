@@ -20,8 +20,7 @@ import { PopupMessage } from "./PopupMessage";
 
 export const TabClaim = () => {
   const router = useRouter();
-  const {setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
-  const walletAccount = '0xe604d72554f992cbc40cb80728554d6b1cec2723';
+  const {walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
   const [currentTab, setCUrrentTab] = useState<'box' | 'token'>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [roundSelected, setRoundSelected] = useState<string>('');
