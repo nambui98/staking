@@ -241,7 +241,7 @@ const Section3: NextPage = () => {
 							<Swiper
 								centeredSlides={true}
 								autoplay={{
-									delay: 2500,
+									delay: 2000,
 									disableOnInteraction: false,
 								}}
 								onSwiper={(s) => handleSwiper(s)}
@@ -259,7 +259,7 @@ const Section3: NextPage = () => {
 								{
 									Array.isArray(item.content) &&
 									item.content.map((e: contentType, index2: number) => {
-										return <SwiperSlide>
+										return <SwiperSlide key={index2 + "slide2"}>
 
 											<Box sx={{ cursor: 'pointer' }} onClick={() => {
 												setSlideActiveIndex(index2)
