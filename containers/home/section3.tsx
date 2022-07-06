@@ -245,7 +245,8 @@ const Section3: NextPage = () => {
 	}
 	const handleSlideChange = (s: any) => {
 		console.log(s.activeIndex)
-		setSlideActiveIndex(s.activeIndex);
+		var x= isTablet ? isMobile ? 2 : 3 : 5;
+		setSlideActiveIndex(s.activeIndex==(26+x)?x:s.activeIndex);
 	}
 	return (
 		<div style={{
