@@ -51,11 +51,7 @@ function TabPanel(props: TabPanelProps) {
 			aria-labelledby={`simple-tab-${index}`}
 			{...other}
 		>
-			{value === index && (
-				<Box sx={{ p: 3 }}>
-					<Typography>{children}</Typography>
-				</Box>
-			)}
+			{children}
 		</div>
 	);
 }
@@ -196,9 +192,21 @@ const Section3: NextPage = () => {
 					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 						<Tabs className={classes.tabs}
 							classes={{ indicator: classes.indicator }} value={activeIndex} onChange={handleChange} aria-label="basic tabs example">
-							<Tab sx={{ flex: '1', margin: "0 30px", textShadow: '0 0 2px #fff', fontStyle: 'italic', fontFamily: 'Electrofied', fontSize: '32px', color: '#000' }} label="PETS" {...a11yProps(0)} />
-							<Tab sx={{ flex: '1', margin: "0 30px", textShadow: '0 0 2px #fff', fontStyle: 'italic', fontFamily: 'Electrofied', fontSize: '32px', color: '#000' }} label="SHOES" {...a11yProps(1)} />
-							<Tab sx={{ flex: '1', margin: "0 30px", textShadow: '0 0 2px #fff', fontStyle: 'italic', fontFamily: 'Electrofied', fontSize: '32px', color: '#000' }} label="FITTER PASS" {...a11yProps(2)} />
+							<Tab sx={{
+								height: "60px",
+								transition: '.4s all',
+								flex: '1', margin: "0 30px", textShadow: '0 0 2px #fff', fontStyle: 'italic', fontFamily: 'Electrofied', fontSize: activeIndex == 0 ? '32px' : '25px', color: '#000'
+							}} label="PETS" {...a11yProps(0)} />
+							<Tab sx={{
+								height: "60px",
+								transition: '.4s all',
+								flex: '1', margin: "0 30px", textShadow: '0 0 2px #fff', fontStyle: 'italic', fontFamily: 'Electrofied', fontSize: activeIndex == 1 ? '32px' : '25px', color: '#000'
+							}} label="SHOES" {...a11yProps(1)} />
+							<Tab sx={{
+								height: "60px",
+								transition: '.4s all',
+								flex: '1', margin: "0 30px", textShadow: '0 0 2px #fff', fontStyle: 'italic', fontFamily: 'Electrofied', fontSize: activeIndex == 2 ? '32px' : '25px', color: '#000'
+							}} label="FITTER PASS" {...a11yProps(2)} />
 						</Tabs>
 					</Box>
 
@@ -211,7 +219,7 @@ const Section3: NextPage = () => {
 				data.map((item: itemType, index: number) => {
 					return <TabPanel key={index} value={activeIndex} index={index}>
 
-						<Box width={500} margin="auto">
+						<Box width={500} margin="auto" mt={5}>
 
 							<Typography typography={'span'}
 								fontSize={{ xs: 10, sm: 16 }}
@@ -223,11 +231,12 @@ const Section3: NextPage = () => {
 								}
 							</Typography>
 						</Box>
-						,
+
 						{item.typeContent == "image" ?
 							<Box display="flex" mt={5} alignItems={"center"} justifyContent="center">
 								<img height="500px" src={item.content.toString()} alt={item.title} />
 							</Box>
+
 							:
 							<Swiper
 								centeredSlides={true}

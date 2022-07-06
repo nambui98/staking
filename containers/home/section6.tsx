@@ -12,10 +12,9 @@ import {
 	Theme,
 	useMediaQuery,
 } from '@mui/material';
-import SectionTitle from './SectionTitle';
 import { TEAM } from '../../constants/common';
 
-const Team: React.FC<any> = ({ sxProps }) => {
+const Section6: React.FC<any> = ({ sxProps }) => {
 	return (
 		<Container sx={{ ...sxProps }}>
 			{/* <SectionTitle
@@ -101,4 +100,4 @@ const Team: React.FC<any> = ({ sxProps }) => {
 	);
 };
 
-export default Team;
+export default Section6;
