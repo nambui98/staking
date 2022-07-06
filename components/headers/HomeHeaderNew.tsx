@@ -25,8 +25,8 @@ import MenuButtonNew from '../buttons/MenuButtonNew';
 import { toast } from 'react-toastify';
 
 const MAIN_MENU = [
-	{ name: 'GET THE APP', link: '#' },
-	{ name: 'Staking', link: '#' },
+	// { name: 'GET THE APP', link: '#' },
+	// { name: 'Staking', link: '#' },
 	{ name: 'HUB', link: 'https://hub.befitter.io/' },
 	{ name: 'Litepaper', link: '/litePaper' }
 ]
@@ -62,7 +62,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 	const handleCommingSoon = () => {
 		toast('COMING SOON!', {
 			position: "top-center",
-			autoClose: 5000,
+			autoClose: 2000,
 			hideProgressBar: true,
 			closeOnClick: true,
 			pauseOnHover: true,
@@ -100,9 +100,11 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 						<>
 							<Logo />
 							{!isMobile992 && <MainMenu>
+								<MenuItem onClick={() => setStatusPopup(true)}  active={true}>GET THE APP</MenuItem>
+								<MenuItem onClick={() => handleCommingSoon()} active={false}>STAKING</MenuItem>
 								{MAIN_MENU?.map((item, index) => (
 									<Link key={index} href={item.link}>
-										<MenuItem onClick={() => index === 0 ? setStatusPopup(true) : index === 1 ? handleCommingSoon() : null}  active={index === 0 ? true : false}>{item.name}</MenuItem>
+										<MenuItem onClick={() => index === 0 ? handleCommingSoon() : null} active={false}>{item.name}</MenuItem>
 									</Link>
 								))}
 							</MainMenu>}
