@@ -21,6 +21,7 @@ import {
 import { TEXT_STYLE } from '../../styles/common/textStyles';
 import { useRouter } from 'next/router';
 import { PopupApp } from '../../containers/home/PopupApp';
+import MenuButtonNew from '../buttons/MenuButtonNew';
 
 const MAIN_MENU = [
 	{ name: 'GET THE APP', link: '#' },
@@ -50,6 +51,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage }) 
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 	const [statusPopup, setStatusPopup] = useState(false);
+	const isMobile992 = useMediaQuery('(max-width:992px)');
 
 	const stickTrigger = useScrollTrigger({
 		disableHysteresis: true,
@@ -73,28 +75,25 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage }) 
 						borderBottom: stickTrigger ? '1px solid #E9EAEF' : 'unset',
 					}}
 				>
-					<Container
-						disableGutters
+					<Container					
 						sx={{
-							py: 0,
-							pt: stickTrigger ? 'unset' : 3,
 							display: 'flex',
 							justifyContent: 'space-between',
-							maxWidth: '1120px',
 							alignItems: 'center',
-							px: { xl: 7 },
+							maxWidth: '1120px !important',
+							padding: '0 16px !important'
 						}}
 					>
 						<>
 							<Logo />
-							<MainMenu>
+							{!isMobile992 && <MainMenu>
 								{MAIN_MENU?.map((item, index) => (
 									<Link key={index} href={item.link}>
 										<MenuItem onClick={() => setStatusPopup(true)}  active={index === 0 ? true : false}>{item.name}</MenuItem>
 									</Link>
 								))}
-							</MainMenu>
-							<MenuButton customImage={'40px'} />
+							</MainMenu>}
+							<MenuButtonNew customImage={'40px'} />
 						</>
 					</Container>
 				</Toolbar>

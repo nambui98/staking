@@ -54,6 +54,7 @@ import Section5 from '../containers/home/section5';
 import Section6 from '../containers/home/section6';
 import Section7 from '../containers/home/section7';
 import Section8 from '../containers/home/section8';
+import { PopupApp } from '../containers/home/PopupApp';
 import Section9 from '../containers/home/section9';
 // import "./styles.css";
 const SEL = "custom-section";
@@ -385,6 +386,7 @@ const originalColors = [
 const Home: NextPage = () => {
 	const [height, setHeight] = useState<number>();
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+	const [statusPopup, setStatusPopup] = useState(false);
 
 	const windowHeightListener = () => {
 		setHeight(window.innerHeight);
@@ -413,7 +415,7 @@ const Home: NextPage = () => {
 				position: 'relative',
 			}}
 		>
-			<Section1 />
+			<Section1 statusPopup={statusPopup} handleStatusPopup={setStatusPopup} />
 		</Box>,
 		<Box className={SEL}>
 			<Section2 />
@@ -475,7 +477,7 @@ const Home: NextPage = () => {
 				)}
 			/>
 
-
+			<PopupApp statusPopup={statusPopup} handleToggleStatusPopup={setStatusPopup} />
 		</HomeLayoutNew>
 	);
 };

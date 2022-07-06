@@ -1,5 +1,5 @@
-import { Stack, styled, Typography, useMediaQuery } from "@mui/material"
-import { useEffect, useRef, useState } from "react";
+import { Box, Stack, styled, Typography, useMediaQuery } from "@mui/material"
+import React, { useEffect, useRef, useState } from "react";
 import {
   videoSlides,
   BANNER,
@@ -15,8 +15,14 @@ import CountdownClock from "../../components/sections/CountdownClock";
 import CountdownClockNew from "../../components/sections/countdownClockNew";
 import { PopupApp } from "./PopupApp";
 
-export const Section1 = () => {
+export interface IProps {
+  handleStatusPopup: (status: boolean) => void;
+  statusPopup: boolean
+}
+
+export const Section1: React.FC<IProps> = ({handleStatusPopup, statusPopup}) => {
   const isMobile = useMediaQuery('(max-width:700px)');
+  const isMobile992 = useMediaQuery('(max-width:992px)');
   const [indexActive, setIndexActive] = useState(0);
   const refSlide1 = useRef<any>(null);
   const refSlide2 = useRef<any>(null);
@@ -86,10 +92,10 @@ export const Section1 = () => {
           );
         })}
       </Swiper>
-      <BoxCountDown>
+      {isMobile992 ? <ButtonGetApp onClick={() => handleStatusPopup(true)}>GET THE APP</ButtonGetApp> : <BoxCountDown>
         <TitleCountDown>IDO IN</TitleCountDown>
         <CountdownClockNew endDate={'2022-07-10T09:00:00.000Z'} />
-      </BoxCountDown>
+      </BoxCountDown>}
     </Wrap>
   )
 }
@@ -98,6 +104,24 @@ const Wrap = styled(Stack)({
   width: '100vw',
   height: '100vh',
   position: 'relative',
+})
+const ButtonGetApp = styled(Box)({
+  position: 'absolute',
+  bottom: 24,
+  left: '50%',
+  zIndex: 2,
+  transform: 'translateX(-50%)',
+  padding: '12px 16px',
+	borderRadius: '12px',
+	...TEXT_STYLE(20, 600, '#31373E'),
+	background: '#FFFFFF',
+	boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)',
+	fontFamily: 'Electrofied',	
+	textTransform: 'uppercase',
+	fontStyle: 'italic',
+	color: '#FF8A50',
+	cursor: 'pointer',
+  marginRight: '0 !important'
 })
 const BoxCountDown = styled(Stack)({
   position: 'absolute',

@@ -33,9 +33,9 @@ export const PopupApp: React.FC<IProps> = ({statusPopup, handleToggleStatusPopup
         <DialogContent>
           <IconClose onClick={() => handleToggleStatusPopup(false)}><img src={'assets/icons/close-fill.svg'} /></IconClose>
           <Title>GET <span>beFITTER</span> APP</Title>
-          <Grid container spacing={2}>
+          <BoxButton container spacing={2}>
             {APP.BUTTON.map((el, idx) => (
-              <Grid key={idx} item xs={6} lg={4}>
+              <ButtonItem key={idx} item xs={6} lg={4}>
                 <AppStoreButtonNew
                   background={idx === 2}
                   disabled={!el.href}
@@ -44,9 +44,9 @@ export const PopupApp: React.FC<IProps> = ({statusPopup, handleToggleStatusPopup
                   icon={el.icon}
                   href={el.href}
                 />
-              </Grid>
+              </ButtonItem>
             ))}
-          </Grid>
+          </BoxButton>
         </DialogContent>
       </BoxPopup>
     </Wrap>
@@ -56,12 +56,30 @@ export const PopupApp: React.FC<IProps> = ({statusPopup, handleToggleStatusPopup
 const Wrap = styled(Stack)({
 
 })
+const BoxButton = styled(Grid)({
+  '@media (max-width: 767px)': {
+    flexDirection: 'column',
+    alignItems: 'center'
+  }
+})
+const ButtonItem = styled(Grid)({
+  '@media (max-width: 767px)': {
+    paddingLeft: '0 !important',
+    paddingTop: '0 !important',
+    width: 193,
+    marginBottom: 16,
+    maxWidth: 'initial',
+  }
+})
 const BoxPopup = styled(Dialog)({
   boxShadow: '0px 0px 12px rgba(0, 0, 0, 0.15)',
   borderRadius: 12,
   '& .MuiPaper-root': {
-    minWidth: 698,
+    minWidth: 'calc(100% - 32px)',
     borderRadius: 12,
+    '@media (min-width: 992px)': {
+      minWidth: 698,
+    }
   },
   '& .MuiDialogContent-root': {
     padding: 40
@@ -73,6 +91,9 @@ const Title = styled(Typography)({
   marginBottom: 24,
   '& span': {
     color: '#FF6D24'
+  },
+  '@media (max-width: 767px)': {
+    marginBottom: 40
   }
 })
 const IconClose = styled(Box)({
