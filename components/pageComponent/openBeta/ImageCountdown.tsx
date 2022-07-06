@@ -2,21 +2,28 @@ import { Box, Button, ButtonProps, Container, Link, Stack, styled, Typography, u
 import { IMAGE_COUNTDOWN } from "../../../constants/openBeta"
 import CountdownClock from "../../sections/CountdownClock"
 
-export const ImageCountdown = () => {
+interface IProps {
+  countDown?: string
+  imageTitle?: string
+  hideLinkPdf?: boolean
+  title?: string
+}
+
+export const ImageCountdown: React.FC<IProps> = ({countDown, imageTitle, hideLinkPdf, title}) => {
   const isMobile = useMediaQuery('(max-width: 579px)');
   return (
     <Wrap>
       <Container sx={{ maxWidth: { xl: 1200 } }}>
         <Inner>
-          <BoxImage><img src={isMobile ? IMAGE_COUNTDOWN.imageMobile : IMAGE_COUNTDOWN.image} /></BoxImage>
+          <BoxImage><img src={imageTitle ? imageTitle : (isMobile ? IMAGE_COUNTDOWN.imageMobile : IMAGE_COUNTDOWN.image)} /></BoxImage>
           <Stack>
-            <CountdownTitle>{IMAGE_COUNTDOWN.countDown.title}</CountdownTitle>
+            <CountdownTitle>{title ? title : IMAGE_COUNTDOWN.countDown.title}</CountdownTitle>
             <Body>
               <BoxCountdown>
-                <CountdownClock endDate={IMAGE_COUNTDOWN.countDown.time} sxTitle={40} sxSubTitle={16} />
+                <CountdownClock endDate={countDown ? countDown : IMAGE_COUNTDOWN.countDown.time} sxTitle={40} sxSubTitle={16} />
                 <Link href={'#'}><CountdownButton disabled={!IMAGE_COUNTDOWN.countDown.leadboard.active} active={IMAGE_COUNTDOWN.countDown.leadboard.active}><img src={IMAGE_COUNTDOWN.countDown.leadboard.imageGray} /> {IMAGE_COUNTDOWN.countDown.leadboard.title}</CountdownButton></Link>
                 {IMAGE_COUNTDOWN.countDown.Questions?.map((item, index) => (
-                  <QuestionsItem key={index}><img src={item.imageIcon} /><Link href={item.link}>{item.title}</Link></QuestionsItem>
+                  !hideLinkPdf && <QuestionsItem key={index}><img src={item.imageIcon} /><Link href={item.link}>{item.title}</Link></QuestionsItem>
                 ))}
               </BoxCountdown>
               {/* <BoxQuestion>
