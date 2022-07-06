@@ -8,6 +8,9 @@ import {
 	Theme,
 	useMediaQuery,
 	useScrollTrigger,
+	styled,
+	Stack,
+	BoxProps
 } from '@mui/material';
 import MenuButton from '../buttons/MenuButton';
 import {
@@ -15,6 +18,15 @@ import {
 	HOME_LOGO,
 	HOME_BG_LOGO,
 } from '../../constants/header';
+import { TEXT_STYLE } from '../../styles/common/textStyles';
+import { useRouter } from 'next/router';
+
+const MAIN_MENU = [
+	{ name: 'GET THE APP', link: '#' },
+	{ name: 'Staking', link: '#' },
+	{ name: 'HUB', link: '#' },
+	{ name: 'Litepaper', link: '#' }
+]
 
 const Logo: React.FC<any> = () => {
 	return (
@@ -32,37 +44,8 @@ const Logo: React.FC<any> = () => {
 		</Link>
 	);
 };
-
-const LogoWithBackground: React.FC<any> = ({ isSm, isXs }) => {
-	return (
-		<Link href={'/'}>
-			<Box
-				component={'a'}
-				sx={{
-					display: 'flex',
-					// alignItems: 'center',
-					cursor: 'pointer',
-					width: isXs ? 357 / 2.5 : isSm ? 357 / 2 : 357,
-					height: isXs ? 165 / 2.5 : isSm ? 165 / 2 : 165,
-					backgroundImage: `url(${HOME_BG_LOGO})`,
-					backgroundRepeat: 'no-repeat',
-					backgroundSize: 'contain',
-					pt: { xs: 1, md: 3 },
-					pl: { xs: 3, md: 6 },
-				}}
-			>
-				<img
-					src={HOME_LOGO}
-					alt="Logo"
-					width={'auto'}
-					height={isXs ? 24 : isSm ? 32 : 64}
-				/>
-			</Box>
-		</Link>
-	);
-};
-
 const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage }) => {
+	const { asPath } = useRouter();
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 
@@ -95,28 +78,22 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage }) 
 							pt: stickTrigger ? 'unset' : 3,
 							display: 'flex',
 							justifyContent: 'space-between',
-							alignItems: stickTrigger ? 'center' : 'flex-start',
-							maxWidth: { xl: 'unset' },
+							maxWidth: '1120px',
+							alignItems: 'center',
 							px: { xl: 7 },
 						}}
 					>
-						{headerLandingPage && <>
+						<>
 							<Logo />
+							<MainMenu>
+								{MAIN_MENU?.map((item, index) => (
+									<Link key={index} href={item.link}>
+										<MenuItem  active={asPath === item.link ? true : false}>{item.name}</MenuItem>
+									</Link>
+								))}
+							</MainMenu>
 							<MenuButton />
-						</>}
-						{!headerLandingPage && (
-							stickTrigger ? (
-								<>
-									<Logo />
-									<MenuButton />
-								</>
-							) : (
-								<>
-									<LogoWithBackground isSm={isSm} isXs={isXs} />
-									<MenuButton dark={false} />
-								</>
-							)
-						)}
+						</>
 					</Container>
 				</Toolbar>
 			</AppBar>
@@ -125,3 +102,19 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage }) 
 };
 
 export default HomeHeaderNew;
+
+const MainMenu = styled(Stack)({
+	flexDirection: 'row',
+	alignItems: 'center',
+})
+type menuItemProp = BoxProps & {
+	active: boolean
+}
+const MenuItem = styled(Box)((props: menuItemProp) => ({
+	padding: '12px 16px',
+	borderRadius: '12px',
+	marginRight: 16,
+	...TEXT_STYLE(20, 600, '#31373E'),
+	background: props.active ? '#FFFFFF' : 'transparent',
+	boxShadow: props.active ? '0px 2px 8px rgba(0, 0, 0, 0.15)' : 'none'
+}))
