@@ -158,24 +158,24 @@ export const WalletProvider: React.FC<IProps> = ({children}) => {
       // const _fiuContract = new ethers.Contract(bftFiuToken.address, bftFiuToken.abi, ethersSigner);
       // const _shoeContract = new ethers.Contract(bftShoeItem.address, bftShoeItem.abi, ethersSigner);
       // const _boxContract = new ethers.Contract(bftBox.address, bftBox.abi, ethersSigner);
-      // const _busdContract = new ethers.Contract(bftBusdToken.address, bftBusdToken.abi, ethersSigner);
+      const _busdContract = new ethers.Contract(bftBusdToken.address, bftBusdToken.abi, ethersSigner);
     //  setClaimBoxContract(_claim)
 
       //GET balance
       const balance = await ethersProvider.getBalance(walletAccount);
-      // const [busd] = await Promise.all([
-      //   // _heeContract.balanceOf(walletAccount),
-      //   // _fiuContract.balanceOf(walletAccount),
-      //   // _shoeContract.balanceOf(walletAccount),
-      //   // _boxContract.balanceOf(walletAccount),
-      //   _busdContract.balanceOf(walletAccount)
-      // ])
+      const [busd] = await Promise.all([
+        // _heeContract.balanceOf(walletAccount),
+        // _fiuContract.balanceOf(walletAccount),
+        // _shoeContract.balanceOf(walletAccount),
+        // _boxContract.balanceOf(walletAccount),
+        _busdContract.balanceOf(walletAccount)
+      ])
       setBnbBalance(ethers.utils.formatEther(balance))
       // setHeebalance(ethers.utils.formatEther(hee))
       // setFiuBalance(ethers.utils.formatEther(fiu))
       // setShoeBalance(ethers.utils.formatUnits(shoe, 'wei'))
       // setBoxBalance(ethers.utils.formatUnits(box, 'wei'))
-      // setBusdBalance(ethers.utils.formatUnits(busd))
+      setBusdBalance(ethers.utils.formatUnits(busd))
       try {
       } catch (error) {
         console.error('claim', error);
