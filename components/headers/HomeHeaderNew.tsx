@@ -88,7 +88,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage }) 
 							<MainMenu>
 								{MAIN_MENU?.map((item, index) => (
 									<Link key={index} href={item.link}>
-										<MenuItem  active={asPath === item.link ? true : false}>{item.name}</MenuItem>
+										<MenuItem  active={index === 0 ? true : false}>{item.name}</MenuItem>
 									</Link>
 								))}
 							</MainMenu>
@@ -116,5 +116,10 @@ const MenuItem = styled(Box)((props: menuItemProp) => ({
 	marginRight: 16,
 	...TEXT_STYLE(20, 600, '#31373E'),
 	background: props.active ? '#FFFFFF' : 'transparent',
-	boxShadow: props.active ? '0px 2px 8px rgba(0, 0, 0, 0.15)' : 'none'
+	boxShadow: props.active ? '0px 2px 8px rgba(0, 0, 0, 0.15)' : 'none',
+	fontFamily: props.active ? 'Electrofied': 'Be Vietnam Pro',
+	textTransform: 'uppercase',
+	fontStyle: props.active ? 'italic' : 'normal',
+	color: props.active ? '#FF8A50' : '#31373E',
+	cursor: 'pointer',
 }))
