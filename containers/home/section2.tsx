@@ -77,7 +77,7 @@ const Section2: NextPage = () => {
 			<Box display={'flex'} mb={4} alignItems="center" flexDirection={"column"}>
 
 				<Typography
-					fontSize={{ xs: 10, sm: 32 }}
+					fontSize={{ xs: 24, sm: 32 }}
 					textTransform="uppercase"
 					fontFamily='Electrofied'
 					fontStyle={'italic'}
@@ -88,7 +88,7 @@ const Section2: NextPage = () => {
 					Make A healthy lifestyle
 				</Typography>
 				<Typography
-					fontSize={{ xs: 15, sm: 50 }}
+					fontSize={{ xs: 24, sm: 50 }}
 					textTransform="uppercase"
 					fontFamily='Electrofied'
 					fontStyle={'italic'}
@@ -102,7 +102,7 @@ const Section2: NextPage = () => {
 
 					<Typography
 						typography={'span'}
-						fontSize={{ xs: 10, sm: 16 }}
+						fontSize={{ xs: 16, sm: 16 }}
 						fontWeight={500}
 						color="#FF6D24"
 						mb={0.5}
@@ -111,7 +111,7 @@ const Section2: NextPage = () => {
 						beFITTER
 					</Typography>
 					<Typography typography={'span'}
-						fontSize={{ xs: 10, sm: 16 }}
+						fontSize={{ xs: 16, sm: 16 }}
 						fontWeight={500}
 						color="#5A6178"
 						mb={0.5}
