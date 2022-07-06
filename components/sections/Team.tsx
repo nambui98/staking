@@ -18,11 +18,26 @@ import { TEAM } from '../../constants/common';
 const Team: React.FC<any> = ({ sxProps }) => {
 	return (
 		<Container sx={{ ...sxProps }}>
-			<SectionTitle
+			{/* <SectionTitle
 				title={TEAM.TITLE}
 				subtitle={TEAM.SUBTITLE}
 				sxProps={{ mb: 7 }}
-			/>
+			/> */}
+			<Box display={'flex'} mb={10} alignItems="center" justifyContent="center">
+
+				<Typography
+					fontSize={{ xs: 20, sm: 56 }}
+					textTransform="uppercase"
+					fontFamily='Electrofied'
+					fontStyle={'italic'}
+					fontWeight={800}
+					color="#FF6D24"
+					textAlign="center"
+				>
+					OUR TEAM
+				</Typography>
+
+			</Box>
 			<Grid container spacing={4} rowSpacing={6}>
 				{TEAM.ITEMS.map(({ name, role, desc, image }, idx) => (
 					<Grid key={idx} item xs={12} md={6}>

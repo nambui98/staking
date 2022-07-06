@@ -167,7 +167,7 @@ body {
 .swiper-slide {
 	text-align: center;
 	font-size: 18px;
-	background: #fff;
+	// background: #fff;
 
 	/* Center slide text vertically */
 	display: -webkit-box;
@@ -353,4 +353,32 @@ body {
 
 .MuiList-root{
 	max-height: 250px !important;
+}
+.fp-watermark{
+	display: none;
+}
+.text_gadient_primary{
+	font-size: 56px;
+	text-transform: uppercase;
+	font-family: 'Electrofied';
+	font-style: italic;
+	font-weight: 800;
+	  background: -webkit-linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+	
+	
+}
+.text_gadient_second{
+	
+	text-transform: uppercase;
+	font-family: 'Electrofied';
+	font-style: italic;
+	font-weight: 800;
+	  background: -webkit-linear-gradient(-90deg, #8AFFC5 6.58%, #1DB167 80.6%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+	background-clip: text;
+text-fill-color: transparent;
+	
 }

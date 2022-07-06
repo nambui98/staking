@@ -52,7 +52,7 @@ export const SOCIAL = [
 ];
 
 export const FOUNDED = {
-	TITLE: 'INCUBATED', 
+	TITLE: 'INCUBATED',
 	SUBTITLE: 'BY',
 	BG: 'assets/backgrounds/home-founded.png',
 	ICETEA: 'assets/logo/icetea.png',
@@ -109,6 +109,7 @@ export const ROADMAP = {
 			items: [`Idea & Concept`, `Form a team (Art, BA,\nEngineer, BD)`],
 			top: 514,
 			ml: -883,
+			active: true,
 		},
 		{
 			title: 'May - 2022',
@@ -120,27 +121,33 @@ export const ROADMAP = {
 			],
 			top: 225,
 			ml: -585,
+			active: true,
 		},
 		{
 			title: 'June - 2022',
 			items: [
 				// `Launch Mainnet V1`, 
-				`Launch Testnet`, 
+				`Launch Testnet`,
 				`Coop w/All-in-one\ndiscovery Gaming Hub`,
-				`Launch Mainnet V1`, 
+				`Launch Mainnet V1`,
 			],
 			top: 668,
 			ml: -435,
+			active: true,
 		},
 		{
 			title: 'Q3 - 2022',
 			items: [
-				`Launch Mainnet V2 (Rent system)`,
+				`IDO & Token Listing`,
+				'Staking',
+				'Launch Mainnet V1',
+				'Release Renting system',
 				`In-app system optimization`,
 				`Co-branding Partnerships`,
 			],
 			top: 480,
 			ml: 18,
+			active: false,
 		},
 		{
 			title: 'Q4 - 2022',
@@ -152,6 +159,8 @@ export const ROADMAP = {
 			],
 			top: 156,
 			ml: 104,
+			active: false,
+
 		},
 		{
 			title: 'Q1 - 2023',
@@ -162,6 +171,8 @@ export const ROADMAP = {
 			],
 			top: 597,
 			ml: 580,
+			active: false,
+
 		},
 		{
 			title: 'Q2 - 2023',
@@ -173,6 +184,8 @@ export const ROADMAP = {
 			],
 			top: 128,
 			ml: 807,
+			active: false,
+
 		},
 	],
 };
