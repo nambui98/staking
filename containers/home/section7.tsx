@@ -50,11 +50,16 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 						display: "flex",
 						justifyContent: "flex-start",
 						flexDirection: { xs: "row", sm: "column" }
+
 					}}>
 
-						<Box sx={{ width: { xs: "104px", sm: '100%' } }}>
+						<Box sx={{ width: { xs: "104px", sm: '100%' }, position: "relative" }}>
 
 							<img width={"100%"} src="assets/partners/icetealabs_director.png" />
+							<Box sx={{ display: { xs: "none", sm: 'block' }, position: "absolute", bottom: "-20px", right: "-20px" }}>
+
+								<img width={"48px"} src="assets/symbol.png" />
+							</Box>
 						</Box>
 						<Typography
 							fontSize={{ xs: 24, sm: 24 }}
@@ -96,11 +101,15 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 						justifyContent: "flex-start",
 						flexDirection: { xs: "row", sm: "column" }
 					}}>
-
-						<Box sx={{ width: { xs: "104px", sm: '100%' } }}>
+						<Box sx={{ width: { xs: "104px", sm: '100%' }, position: "relative" }}>
 
 							<img width={"100%"} src="assets/partners/dao_director.png" />
+							<Box sx={{ display: { xs: "none", sm: 'block' }, position: "absolute", bottom: "-20px", right: "-20px" }}>
+
+								<img width={"48px"} src="assets/symbol.png" />
+							</Box>
 						</Box>
+
 						<Typography
 							fontSize={{ xs: 24, sm: 24 }}
 							textTransform="uppercase"

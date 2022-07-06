@@ -2,7 +2,7 @@
 import { Box, Link, Stack, styled, Typography, useMediaQuery } from "@mui/material";
 import { datalabeling } from "googleapis/build/src/apis/datalabeling";
 import { NextPage } from "next";
-import { ComponentType, useState } from "react";
+import { ComponentType, useEffect, useState } from "react";
 import { BOX_IMAGE, BOX_LIST_ITEM } from "../../constants/openIno";
 // import { BOX_IMAGE, BOX_LIST_ITEM } from "../constants/openIno";
 import FitnessFi from "./icons/fitnessFi.svg";
@@ -82,7 +82,19 @@ const Section2: NextPage = () => {
 		}
 
 	}
-	console.log(data[activeIndex].image);
+	useEffect(() => {
+		const intervalId = setInterval(() => {
+			setActiveIndex(prevActiveIndex => {
+				if (prevActiveIndex < 4 && prevActiveIndex != null) {
+					return prevActiveIndex + 1;
+				} else {
+					return 0;
+				}
+			});
+		}, 5000);
+
+		return () => clearInterval(intervalId);
+	}, []);
 
 	return (
 		<Wrap>
@@ -155,7 +167,7 @@ const Section2: NextPage = () => {
 									transition: '.4s all',
 									...styleActiveContent(index)
 								}}>
-									<Typography mt={0.5} fontSize={16} color="#31373E">{item.content}</Typography>
+									<Typography mt={0.5} fontSize={16} color="#31373E" textAlign="left" >{item.content}</Typography>
 								</Box>}
 							</BoxItemIcon>
 						}

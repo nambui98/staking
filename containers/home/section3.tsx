@@ -138,6 +138,78 @@ const Section3: NextPage = () => {
 					active: 'assets/shoes_v2/L08.png',
 					inActive: 'assets/shoes_v2/D08.png'
 				},
+				{
+					active: 'assets/shoes_v2/L09.png',
+					inActive: 'assets/shoes_v2/D09.png'
+				},
+				{
+					active: 'assets/shoes_v2/L10.png',
+					inActive: 'assets/shoes_v2/D10.png'
+				},
+				{
+					active: 'assets/shoes_v2/L11.png',
+					inActive: 'assets/shoes_v2/D11.png'
+				},
+				{
+					active: 'assets/shoes_v2/L12.png',
+					inActive: 'assets/shoes_v2/D12.png'
+				},
+				{
+					active: 'assets/shoes_v2/L13.png',
+					inActive: 'assets/shoes_v2/D13.png'
+				},
+				{
+					active: 'assets/shoes_v2/L14.png',
+					inActive: 'assets/shoes_v2/D14.png'
+				},
+				{
+					active: 'assets/shoes_v2/L15.png',
+					inActive: 'assets/shoes_v2/D15.png'
+				},
+				{
+					active: 'assets/shoes_v2/L16.png',
+					inActive: 'assets/shoes_v2/D16.png'
+				},
+				{
+					active: 'assets/shoes_v2/L17.png',
+					inActive: 'assets/shoes_v2/D17.png'
+				},
+				{
+					active: 'assets/shoes_v2/L18.png',
+					inActive: 'assets/shoes_v2/D18.png'
+				},
+				{
+					active: 'assets/shoes_v2/L19.png',
+					inActive: 'assets/shoes_v2/D19.png'
+				},
+				{
+					active: 'assets/shoes_v2/L20.png',
+					inActive: 'assets/shoes_v2/D20.png'
+				},
+				{
+					active: 'assets/shoes_v2/L21.png',
+					inActive: 'assets/shoes_v2/D21.png'
+				},
+				{
+					active: 'assets/shoes_v2/L22.png',
+					inActive: 'assets/shoes_v2/D22.png'
+				},
+				{
+					active: 'assets/shoes_v2/L23.png',
+					inActive: 'assets/shoes_v2/D23.png'
+				},
+				{
+					active: 'assets/shoes_v2/L24.png',
+					inActive: 'assets/shoes_v2/D24.png'
+				},
+				{
+					active: 'assets/shoes_v2/L25.png',
+					inActive: 'assets/shoes_v2/D25.png'
+				},
+				{
+					active: 'assets/shoes_v2/L26.png',
+					inActive: 'assets/shoes_v2/D26.png'
+				},
 			],
 		},
 		{
@@ -303,7 +375,7 @@ const Section3: NextPage = () => {
 												setSlideActiveIndex(index2 + (isTablet ? isMobile ? 2 : 3 : 5))
 											}}>
 												<img style={{
-													transition: '.4s all',
+													transition: '.8s all',
 													transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "scale(1)" : "scale(0.5)"
 												}} src={slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? e.active : e.inActive} />
 											</Box>
