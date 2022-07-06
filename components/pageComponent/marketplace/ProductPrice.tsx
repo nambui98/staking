@@ -1,7 +1,9 @@
 import { Backdrop, Box, BoxProps, Button, CircularProgress, fabClasses, Stack, styled, Tab, Tabs, Tooltip, Typography, useMediaQuery, withStyles } from "@mui/material"
+import { ethers } from "ethers"
 import { useEffect, useRef, useState } from "react"
 import { BOX_DETAIL, MARKETPLACE_ICON, MARKETPLACE_IMAGE } from "../../../constants/marketplace"
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
+import { getAvailableBox } from "../../../libs/claim"
 import { getAllowance, getBoxPrice, purchaseBox, approvePurchase } from "../../../libs/marketplace"
 import { MarketplaceProps } from "../../../pages/shop"
 import { MarketplaceService } from "../../../services/user.service"
@@ -29,6 +31,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
   const [statusLoading, setStatusLoading] = useState<boolean>(false);
   const [popupError, setPopupError] = useState<{status: boolean, message: string}>({status: false, message: ''});
   const [popupFormInfo, setPopupFormInfo] = useState<boolean>(false);
+  const [availableBox, setAvailableBox] = useState<any>();
   const statusPopupInfo = MarketplaceService.getStatusPopupInfo()
   const handlePurchaseBox = async () => {
     setStatusLoading(true)
@@ -80,7 +83,8 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
     }
     const price = await getBoxPrice(boxDetail.type, ethersSigner);
     const allowance = await getAllowance(walletAccount, ethersSigner);
-    console.log(allowance)
+    const remaining = await getAvailableBox(boxDetail.type, ethersSigner)
+    setAvailableBox(ethers.utils.formatUnits(remaining, 'wei'))
     const setDataCheckoutPopup = {
       ...checkoutPopup,
       currentAllowance: allowance,
@@ -148,7 +152,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
             type='video/mp4; codecs="hvc1"'
           />
           <source
-            src={boxDetail.video}
+            src={boxDetail.videoIphone}
             type="video/webm"
           />
           <source
@@ -159,8 +163,8 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       </ProductVideo>
       <Title>{boxDetail.title}</Title>
       <BoxPrice>
-        <BoxPriceItem><Typography>TotalSale</Typography><Typography>{boxDetail.quantity}</Typography></BoxPriceItem>
-        <BoxPriceItem><Typography>SUPPORTED</Typography><Typography>BUSD</Typography></BoxPriceItem>
+        <BoxPriceItem><Typography>TOTAL SALE</Typography><Typography>{boxDetail.quantity}</Typography></BoxPriceItem>
+        <BoxPriceItem><Typography>REMAINING</Typography><Typography>{availableBox}</Typography></BoxPriceItem>
         <BoxPriceItem><Typography>CURRENCY</Typography><Typography sx={{ display: 'flex', alignItems: 'center' }}>
           <img style={{ marginRight: '4px' }} src={MARKETPLACE_ICON.busdIcon} /> BUSD</Typography></BoxPriceItem>
       </BoxPrice>
@@ -195,7 +199,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       }} status={approvePopup} handleToggleStatus={() => setApprovePopup(!approvePopup)} sx={customWidthPopup} onChangeApproveToken={setApproveToken} handleClickButton={handleApprovePurchase} />
       <PaymentSuccess data={{
         boxPrice: boxDetail.price, boxImage: boxDetail.image_large
-      }} status={PaymentSuccessPopup} handleToggleStatus={() => setPaymentSuccessPopup(false)} titleButton={'Get bonus'} handleClickButton={handleGetBonus} />
+      }} status={PaymentSuccessPopup} handleToggleStatus={() => setPaymentSuccessPopup(false)} handleClickButton={handleGetBonus} />
       <PopupMessage title="Error!" status={popupError.status} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError({status: false, message: ''})} sx={customWidthPopup}
         handleClickButton={() => setPopupError({status: false, message: ''})} titleCustomColor={{ '& p': { color: '#FF6F61' } }} message={popupError.message === 'execution reverted: Cannot buy more' ? 'You have reached the maximum number of slots for buying box.' : popupError.message} />
       {/* <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} /> */}
