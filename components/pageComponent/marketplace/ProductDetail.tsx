@@ -3,7 +3,7 @@ import Box, { BoxProps } from '@mui/material/Box';
 import { Stack, styled, Tab, Tabs, Typography, useMediaQuery } from '@mui/material';
 import { useState } from 'react';
 import { TEXT_STYLE } from '../../../styles/common/textStyles';
-import { MarketplaceProps } from '../../../pages/marketplace';
+import { MarketplaceProps } from '../../../pages/shop';
 import { MARKETPLACE_ICON, TAB_PROPERTIES } from '../../../constants/marketplace';
 
 export const ProductDetail: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetail}) => {
