@@ -271,23 +271,16 @@ const Mobile: React.FC<any> = () => {
 							HEE
 						</Typography>
 
+
 						<Typography
 							fontSize={{ xs: 12, sm: 16 }}
 							fontWeight={500}
 							color="#5A6178"
 							textAlign={"right"}
 						>
-							in With Pet Mode,
+							in all game modes
 						</Typography>
 					</Box>
-					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
-						fontWeight={500}
-						color="#5A6178"
-						textAlign={"right"}
-					>
-						in all game modes
-					</Typography>
 
 				</Box>
 			</Box>
@@ -608,17 +601,10 @@ const Section4: NextPage = () => {
 									color="#5A6178"
 									textAlign={"right"}
 								>
-									in With Pet Mode,
+									in all game modes.
 								</Typography>
 							</Box>
-							<Typography
-								fontSize={{ xs: 16, sm: 16 }}
-								fontWeight={500}
-								color="#5A6178"
-								textAlign={"right"}
-							>
-								in all game modes
-							</Typography>
+
 
 						</Box>
 					</Box >
