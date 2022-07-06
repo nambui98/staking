@@ -8,6 +8,7 @@ import { BOX_DETAIL } from "../../constants/marketplace";
 
 interface boxDetail {
   price: number, 
+  oldPrice: string,
   type: string,
   maxBox: string,
   quantity: string,
@@ -36,6 +37,7 @@ const Marketplace: NextPage = () => {
     price: 0, 
     type: BOX_DETAIL.box_gold.type,  
     maxBox: BOX_DETAIL.box_gold.maxBox,
+    oldPrice: BOX_DETAIL.box_gold.oldPrice,
     quantity: BOX_DETAIL.box_gold.quantity,
     video: BOX_DETAIL.box_gold.video, 
     videoIphone: BOX_DETAIL.box_gold.videoIphone,

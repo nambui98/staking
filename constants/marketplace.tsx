@@ -61,6 +61,8 @@ export const BOX_DETAIL = {
     type: 'gold',
     title: 'Gold Mystery Shoe Box',
     maxBox: '5',
+    oldPrice: '249',
+    price: '199',
     quantity: '1000',
     properties: [
       {title: 'Iconic Shoe', titleBg: 'ICONIC', chance: '10%', icon: 'assets/icons/iconic-red.svg'},
@@ -104,6 +106,8 @@ export const BOX_DETAIL = {
     type: 'diamond',
     title: 'Diamond Mystery Shoe Box',
     maxBox: '2',
+    oldPrice: '449',
+    price: '429',
     quantity: '30',
     properties: [
       {title: 'Iconic Shoe', titleBg: 'ICONIC', chance: '10%', icon: 'assets/icons/iconic-red.svg'},

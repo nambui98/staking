@@ -99,6 +99,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
     const handleSetBoxDetail = (boxData: any) => setBoxDetail({
       ...boxDetail,
       type: boxType,
+      oldPrice: boxData.oldPrice,
       video: boxData.video,
       maxBox: boxData.maxBox,
       quantity: boxData.quantity,
@@ -177,7 +178,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       <Price>
         <Box>
           <Busd><img src={MARKETPLACE_ICON.busdIcon} /> {boxDetail.price} BUSD</Busd>
-          <Busd sx={busdLine}><img src={MARKETPLACE_ICON.busdIcon} /> {boxDetail.price} BUSD</Busd>
+          <Busd sx={busdLine}><img src={MARKETPLACE_ICON.busdIcon} /> {boxDetail.oldPrice} BUSD</Busd>
         </Box>
         <Box>
           <ButtonBuyNow onClick={handleTogglePopup}><Box>Buy now <img className="animationArrow" src={MARKETPLACE_ICON.arrowRightIcon} /></Box></ButtonBuyNow>
