@@ -162,7 +162,7 @@ export const TabClaim = () => {
             onChange={onReCAPTCHAChange}
           />
         </Stack>
-        <ButtonClaim active={false} disabled={true} onClick={() => null}>Please try again after 6AM UTC</ButtonClaim>
+        <ButtonClaim active={checkStatusButton()} disabled={checkStatusButton() ? false : true} onClick={handleClaimButton}>Claim</ButtonClaim>
       </Stack>}
       <PopupMessage title="You have successfully claimed your item!" message={
         <BodyPopupSuccess>
