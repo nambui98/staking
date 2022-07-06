@@ -42,7 +42,7 @@ interface TabPanelProps {
 }
 
 function TabPanel(props: TabPanelProps) {
-	const {children, value, index, ...other} = props;
+	const { children, value, index, ...other } = props;
 
 	return (
 		<div
@@ -86,7 +86,7 @@ const useStyles: any = makeStyles({
 	// }
 });
 const Section3: NextPage = () => {
-	const [activeIndex, setActiveIndex] = useState<number>(0);
+	const [activeIndex, setActiveIndex] = useState<number>(1);
 	const [slideActiveIndex, setSlideActiveIndex] = useState<number>(3);
 	const [swiper, setSwiper] = useState(null);
 	const isTablet = useMediaQuery('(max-width:1000px)');
@@ -172,6 +172,7 @@ const Section3: NextPage = () => {
 		setSwiper(s);
 	}
 	const handleSlideChange = (s: any) => {
+		console.log(s.activeIndex)
 		setSlideActiveIndex(s.activeIndex);
 	}
 	return (
@@ -198,17 +199,17 @@ const Section3: NextPage = () => {
 					paddingTop: isTablet ? 3 : 0,
 				}}>
 					{isMobile ? (
-						<img height={"auto"} width={"auto"} src="assets/nfts_system_mobile.png"/>
+						<img height={"auto"} width={"auto"} src="assets/nfts_system_mobile.png" />
 					) : (
-						<img height={"90px !important"} src="assets/nfts_system.png"/>
+						<img height={"90px !important"} src="assets/nfts_system.png" />
 					)}
 
 				</Box>
-				<Box sx={{width: '100%'}}>
-					<Box sx={{borderBottom: 1, borderColor: 'divider'}}>
+				<Box sx={{ width: '100%' }}>
+					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 						<Tabs className={classes.tabs}
-									classes={{indicator: classes.indicator}} value={activeIndex} onChange={handleChange}
-									aria-label="basic tabs example">
+							classes={{ indicator: classes.indicator }} value={activeIndex} onChange={handleChange}
+							aria-label="basic tabs example">
 							<Tab sx={{
 								height: "60px",
 								transition: '.4s all',
@@ -254,56 +255,59 @@ const Section3: NextPage = () => {
 					return <TabPanel key={index} value={activeIndex} index={index}>
 
 						<Box width={isMobile ? '85%' : 500} margin="auto" mt={5}>
-							<Typography 
+							<Typography
 								// typography={'span'}
 								fontSize={{ xs: 14, sm: 16 }}
 								fontWeight={500}
 								color="#fff"
 								// mb={0.5}
 								textAlign="center">
-									{data[activeIndex].subtitle}
+								{data[activeIndex].subtitle}
 							</Typography>
 						</Box>
 
 						{item.typeContent == "image" ?
 							<Box display="flex" mt={5} alignItems={"center"} justifyContent="center" px={isTablet ? 4 : 0}>
 								<img src={item.content.toString()} alt={item.title}
-										 style={{height: isTablet ? "auto" : "500px", width: isTablet ? "90%" : "auto"}}/>
+									style={{ height: isTablet ? "auto" : "500px", width: isTablet ? "90%" : "auto" }} />
 							</Box>
 
 							:
 							<Swiper
 								centeredSlides={true}
+								loop={true}
+								grabCursor={true}
 								autoplay={{
 									delay: 2000,
 									disableOnInteraction: false,
 								}}
 								onSwiper={(s) => handleSwiper(s)}
 								onSlideChange={handleSlideChange}
-								slidesPerView={isTablet ? isMobile ? 2 : 3 : 4}
+								slideToClickedSlide={true}
+								slidesPerView={isTablet ? isMobile ? 2 : 3 : 5}
 								// initialSlide={slideActiveIndex}
-								spaceBetween={isTablet ? isMobile ? 0 : 15 : 30}
+								spaceBetween={isTablet ? isMobile ? 0 : 15 : 0}
 								pagination={false}
 								navigation={false}
 								// showsPagination={false}
 								modules={[Autoplay, Pagination, Navigation]}
 								className="mySwiper"
-								style={{height: isMobile ? "400px" : "500px"}}
+								style={{ height: isMobile ? "400px" : "500px" }}
 							>
 								{
 									Array.isArray(item.content) &&
 									item.content.map((e: contentType, index2: number) => {
 										return <SwiperSlide key={index2 + "slide2"}>
 
-												<Box sx={{cursor: 'pointer'}} onClick={() => {
-													setSlideActiveIndex(index2)
-												}}>
-													<img style={{
-														transition: '.4s all',
-														transform: slideActiveIndex == index2 ? "scale(1)" : "scale(0.8)"
-													}} src={slideActiveIndex == index2 ? e.active : e.inActive}/>
-												</Box>
-											</SwiperSlide>
+											<Box sx={{ cursor: 'pointer' }} onClick={() => {
+												setSlideActiveIndex(index2 + (isTablet ? isMobile ? 2 : 3 : 5))
+											}}>
+												<img style={{
+													transition: '.4s all',
+													transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "scale(1)" : "scale(0.5)"
+												}} src={slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? e.active : e.inActive} />
+											</Box>
+										</SwiperSlide>
 									})
 								}
 							</Swiper>
