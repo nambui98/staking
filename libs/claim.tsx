@@ -1,6 +1,6 @@
 
 import { ethers } from 'ethers';
-import { bftBox } from './contracts';
+import { bftBox, bftShop } from './contracts';
 
 export const handleClaimBox = async (walletAddress: string, claimBoxContract: any, AddressAmount: any) => {
   const claim = await claimBoxContract.claim(walletAddress, AddressAmount.amount, AddressAmount.proof);
@@ -21,4 +21,10 @@ export const getOwnedBox = async (walletAddress: string, ethersSigner: any) => {
 export const getBoxType = (boxId: any, boxContract: any) => {
   const boxType = boxContract.getBoxType(boxId);
   return boxType;
+}
+
+export const getAvailableBox = async (boxType: string, ethersSigner: any) => {
+  const shopContract = await new ethers.Contract(bftShop.address, bftShop.abi, ethersSigner)
+  const totalBox = await shopContract.getAvailableBox(boxType);
+  return totalBox;
 }

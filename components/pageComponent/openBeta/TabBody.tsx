@@ -124,8 +124,8 @@ const font18_600 = {
   fontWeight: 600
 }
 const colorGradient = {
-  '-webkit-background-clip': 'text !important',
-  '-webkit-text-fill-color': 'transparent',
+  WebkitBackgroundClip: 'text !important',
+  WebkitTextFillColor: 'transparent',
   background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)'
 }
 const BoxEarn = styled(Stack)({

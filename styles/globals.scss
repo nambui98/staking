@@ -325,11 +325,34 @@ body {
 // 	}
 // }
 
-.MuiTooltip-tooltip{
-	padding: 8px 9.5px;
-  border-radius: 16px;
-  background: rgba(49, 55, 62, 0.8);
-	min-width: 177px;
+@keyframes animationArrow {
+  0%   {transform: translateX(0)}
+  25%  {transform: translateX(10px)}
+  50%  {transform: translateX(0)}
+	75%  {transform: translateX(10px)}
+  100% {transform: translateX(0)}
+}
+
+.animationArrow {
+  animation-name: animationArrow;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}		
+.tooltip{
+	&--assets{
+		.MuiTooltip-tooltip{
+			padding: 8px 9.5px;
+			border-radius: 16px;
+			background: rgba(49, 55, 62, 0.8);
+			min-width: 177px;
+		}
+	}
+}
+
+.MuiList-root{
+	max-height: 250px !important;
 }
 .fp-watermark{
 	display: none;

@@ -2,7 +2,7 @@ export const BANNER = {
 	IMAGE: 'assets/openBetaTestnet.png',
 	IMAGECUP: 'assets/alpha-challenge-cup.png',
 	DESC: 'Join our challenge, test your limit and earn a special reward',
-	COUNTDOWN: 'Ends in',
+	COUNTDOWN: 'Begins in',
 	BUTTON_LEADERBOARD: {
 		title: 'assets/buttonLeaderboard.png',
 		href: '/leaderboard'
@@ -10,7 +10,7 @@ export const BANNER = {
 	BUTTON: {
 		title: 'REGISTER NOW',
 		icon: 'assets/icons/arrow-color.svg',
-		href: '/openBeta',
+		href: '/preMainnet',
 		mobileIcon: 'assets/icons/arrow-up.svg',
 	},
 	SOCIAL: {

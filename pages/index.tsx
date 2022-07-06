@@ -242,7 +242,7 @@ const BannerEvent: React.FC<any> = () => {
 					</Link>
 				</Box>
 			</Box>
-			<ButtonLeaderboard><Link href={BANNER.BUTTON_LEADERBOARD.href}><img src={BANNER.BUTTON_LEADERBOARD.title} /></Link></ButtonLeaderboard>
+			{/* <ButtonLeaderboard><Link href={BANNER.BUTTON_LEADERBOARD.href}><img src={BANNER.BUTTON_LEADERBOARD.title} /></Link></ButtonLeaderboard> */}
 		</Box>
 	);
 };
@@ -308,7 +308,7 @@ const MobileBannerEvent: React.FC<any> = () => {
 	})
 	const isMobile = useMediaQuery('(max-width:600px)');
 	return (
-		<Link href={BANNER.BUTTON.href}>
+		<Link href={'#'}>
 			<Box
 				component={'a'}
 				sx={{
@@ -338,7 +338,7 @@ const MobileBannerEvent: React.FC<any> = () => {
 					}}>
 						{/* <img src={BANNER.IMAGECUP} width={isMobile ? '90px' : '150px'} height={'auto'} style={{zIndex: 2, position: 'relative'}} /> */}
 						<img
-							src={BANNER.IMAGE}
+							src={'assets/pre-mainnet-2.png'}
 							width={isMobile ? 300 : 350}
 							height={'auto'}
 						/>
@@ -350,13 +350,13 @@ const MobileBannerEvent: React.FC<any> = () => {
 							top: -32,
 						}}
 					>
-						{/* <Link href={BANNER.BUTTON.href}> */}
+						<Link href={BANNER.BUTTON.href}>
 						<IconButton>
 							<Icon sx={{ width: 40, height: 40 }}>
 								<IconImage src={BANNER.BUTTON.mobileIcon} />
 							</Icon>
 						</IconButton>
-						{/* </Link> */}
+						</Link>
 					</Box>
 				</Stack>
 			</Box>
