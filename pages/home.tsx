@@ -54,6 +54,7 @@ import Section5 from '../containers/home/section5';
 import Section6 from '../containers/home/section6';
 import Section7 from '../containers/home/section7';
 import Section8 from '../containers/home/section8';
+import Section9 from '../containers/home/section9';
 // import "./styles.css";
 const SEL = "custom-section";
 const SECTION_SEL = `.${SEL}`;
@@ -439,9 +440,7 @@ const Home: NextPage = () => {
 
 		</Box>,
 		<Box className={SEL}>
-			<Box height={"100%"}></Box>
-			<StayInTouch />
-			<MainFooter />
+			<Section9 />
 
 
 		</Box>,
@@ -458,12 +457,13 @@ const Home: NextPage = () => {
 	return (
 		<HomeLayoutNew sxProps={{ background: '#fff' }} headerLandingPage={true}>
 			<ReactFullpage
-				debug /* Debug logging */
+				// debug /* Debug logging */
 				// Required when using extensions
 				pluginWrapper={pluginWrapper}
+
 				// fullpage options
-				licenseKey={"YOUR_KEY_HERE"} // Get one from https://alvarotrigo.com/fullPage/pricing/
-				navigation
+				// licenseKey={"YOUR_KEY_HERE"} // Get one from https://alvarotrigo.com/fullPage/pricing/
+				// navigation
 				anchors={["1", "2", "3", "4", "5", "6", "7", "8", "9"]}
 				sectionSelector={SECTION_SEL}
 				onLeave={onLeave}

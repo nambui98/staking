@@ -1,5 +1,5 @@
 
-import { Box, Stack, styled, Typography } from "@mui/material";
+import { Box, Stack, styled, Theme, Typography, useMediaQuery } from "@mui/material";
 import { NextPage } from "next";
 import { useState } from "react";
 // import { BOX_IMAGE, BOX_LIST_ITEM } from "../constants/openIno";
@@ -37,37 +37,50 @@ const Section5: NextPage = () => {
 			title: 'Gamefi'
 		},
 	];
+	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	return (
-		<Wrap>
+		<Wrap sx={{
+			// alignItems: { xs: "center", sm: 'normal' },
+			// display: 'flex',
+			// justifyContent: { xs: "center", sm: 'normal' },
+		}}>
 			{/* <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage> */}
 			<Box display={'flex'} mb={4} alignItems="center" flexDirection={"column"} >
-				<Box display={'flex'} mb={4} alignItems="flex-end">
+				<Box display={'flex'} mb={4}
+					sx={{
+						alignItems: "flex-end",
+						justifyContent: { xs: "center", sm: 'normal' },
+						flexWrap: { xs: "wrap", sm: 'nowrap' }
+					}}
+				>
 
 					<Typography
-						fontSize={{ xs: 20, sm: 40 }}
+						fontSize={{ xs: 32, sm: 40 }}
 						textTransform="uppercase"
 						fontFamily='Electrofied'
 						fontStyle={'italic'}
 						fontWeight={800}
 						color="#FF6D24"
+						width='100%'
+						textAlign={'center'}
 
 					>
 						BACKERs
 					</Typography>
 					<Typography
-						fontSize={{ xs: 15, sm: 30 }}
+						fontSize={{ xs: 25, sm: 30 }}
 						textTransform="uppercase"
 						fontFamily='Electrofied'
 						fontStyle={'italic'}
 						fontWeight={800}
 						color="#31373E"
-						mr={2}
-						ml={2}
+						mr={{ xs: 1, sm: 2 }}
+						ml={{ xs: 1, sm: 2 }}
 					>
 						&
 					</Typography>
 					<Typography
-						fontSize={{ xs: 20, sm: 40 }}
+						fontSize={{ xs: 32, sm: 40 }}
 						textTransform="uppercase"
 						fontFamily='Electrofied'
 						fontStyle={'italic'}
@@ -81,16 +94,20 @@ const Section5: NextPage = () => {
 
 				<Box display={'flex'} alignItems={'center'} sx={
 					{
-						backgroundImage: `url(assets/bg_sec5.png)`,
+
+						backgroundImage: { xs: 'none', sm: `url(assets/bg_sec5.png)` },
 						// height: '100%',
 						backgroundPosition: 'center',
 						backgroundRepeat: 'no-repeat',
 						backgroundSize: 'contain',
-						height: '128px',
+						height: { xs: '100%', sm: '128px' },
 						width: '100%',
 						pr: 4,
 						pl: 4,
+						flexDirection: { xs: 'column', sm: 'row' }
 					}
+
+
 				}>
 					{
 						data.map((item: itemType, index: number) => {
