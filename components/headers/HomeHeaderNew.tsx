@@ -92,7 +92,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage }) 
 									</Link>
 								))}
 							</MainMenu>
-							<MenuButton />
+							<MenuButton customImage={'40px'} />
 						</>
 					</Container>
 				</Toolbar>
@@ -106,6 +106,7 @@ export default HomeHeaderNew;
 const MainMenu = styled(Stack)({
 	flexDirection: 'row',
 	alignItems: 'center',
+	marginLeft: 'auto',
 })
 type menuItemProp = BoxProps & {
 	active: boolean
@@ -117,7 +118,7 @@ const MenuItem = styled(Box)((props: menuItemProp) => ({
 	...TEXT_STYLE(20, 600, '#31373E'),
 	background: props.active ? '#FFFFFF' : 'transparent',
 	boxShadow: props.active ? '0px 2px 8px rgba(0, 0, 0, 0.15)' : 'none',
-	fontFamily: props.active ? 'Electrofied': 'Be Vietnam Pro',
+	fontFamily: props.active ? 'Electrofied': 'BeVietnamPro',	
 	textTransform: 'uppercase',
 	fontStyle: props.active ? 'italic' : 'normal',
 	color: props.active ? '#FF8A50' : '#31373E',

@@ -1,4 +1,4 @@
-import { Stack, styled, useMediaQuery } from "@mui/material"
+import { Stack, styled, Typography, useMediaQuery } from "@mui/material"
 import { useEffect, useRef, useState } from "react";
 import {
   videoSlides,
@@ -10,6 +10,9 @@ import {
 } from '../../constants/home';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination } from 'swiper';
+import { TEXT_STYLE } from "../../styles/common/textStyles";
+import CountdownClock from "../../components/sections/CountdownClock";
+import CountdownClockNew from "../../components/sections/countdownClockNew";
 
 export const Section1 = () => {
   const isMobile = useMediaQuery('(max-width:700px)');
@@ -82,6 +85,10 @@ export const Section1 = () => {
           );
         })}
       </Swiper>
+      <BoxCountDown>
+        <TitleCountDown>IDO IN</TitleCountDown>
+        <CountdownClockNew endDate={'2022-07-10T09:00:00.000Z'} />
+      </BoxCountDown>
     </Wrap>
   )
 }
@@ -89,4 +96,28 @@ export const Section1 = () => {
 const Wrap = styled(Stack)({
   width: '100vw',
   height: '100vh',
+  position: 'relative',
+})
+const BoxCountDown = styled(Stack)({
+  position: 'absolute',
+  zIndex: 2,
+  left: '50%',
+  transform: 'translateX(-50%)',
+  bottom: 0,
+  background: 'linear-gradient(90deg, rgba(255, 109, 36, 0) 0%, rgba(255, 109, 36, 0.7) 11.11%, rgba(255, 109, 36, 0) 95.65%)',
+  padding: 16,
+  flexDirection: 'row',
+  alignItems: 'center',
+  width: '100%',
+  maxWidth: 1120,
+  justifyContent: 'center',
+})
+const TitleCountDown = styled(Typography)({
+  background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
+  '-webkit-background-clip': 'text',
+  '-webkit-text-fill-color': 'transparent',
+  ...TEXT_STYLE(40, 700),
+  fontFamily: 'Electrofied',
+  fontStyle: 'italic',
+  paddingRight: 14
 })

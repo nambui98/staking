@@ -15,7 +15,7 @@ import {
 import { ICON_MENU_DARK, ICON_MENU_WHITE, MENU_ITEMS } from '../../constants/common';
 import { IconImage } from '../styled';
 
-const MenuButton: React.FC<any> = ({ dark=true }) => {
+const MenuButton: React.FC<any> = ({ dark=true, customImage }) => {
 	const ICON = dark ? ICON_MENU_DARK : ICON_MENU_WHITE;
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 
@@ -63,7 +63,7 @@ const MenuButton: React.FC<any> = ({ dark=true }) => {
 				}}
 			>
 				<Icon sx={{ width: { xs: 32, sm: 48 }, height: { xs: 32, sm: 48 } }}>
-					<IconImage src={ICON} />
+					<IconImage sx={{width: customImage ? customImage : 'internal'}} src={ICON} />
 				</Icon>
 			</IconButton>
 			<ClickAwayListener onClickAway={handleClose}>
