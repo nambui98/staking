@@ -3,7 +3,7 @@ export const IMAGE_COUNTDOWN = {
   imageMobile: 'assets/bannerOpenBetaMobile.png',
   countDown: {
     title: 'Ends in',
-    time: '2022-07-05T07:00',
+    time: '2022-07-06T14:00:00.000Z',
     leadboard: {
       title: 'Leadboard',
       link: '/leaderboard',
@@ -108,14 +108,14 @@ export const BOX_DOWNLOAD = {
   titleImage: 'assets/title2.png',
   appleIcon: 'assets/icons/applelogo.svg',
   googleIcon: 'assets/icons/gplaylogo.svg',
-  linkIos: '#',
-  linkAndroid: '#'
+  linkIos: 'https://testflight.apple.com/join/7ZprWPng',
+  linkAndroid: 'https://play.google.com/store/apps/details?id=io.befitter.app'
 }
 export const TAB_BODY_PRE_MAINNET = {
   summary: {
     titleImage: 'assets/title1.png',
     list: [
-      {title: 'Challenge duration', data: 'From 07:00 UTC July 6 to 23:59 UTC July 12.'},
+      {title: 'Challenge duration', data: 'From 14:00 UTC July 6 to 23:59 UTC July 12.'},
       {title: 'Total reward', data: '2000 BUSD'},
       {title: 'The number of allowed participants', data: 'Unlimited'},
     ],

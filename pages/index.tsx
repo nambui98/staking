@@ -169,7 +169,7 @@ const BannerEvent: React.FC<any> = () => {
 				>
 					<Box>
 						{/* <img src={BANNER.IMAGECUP} width={'25%'} height={'auto'} style={{zIndex: 2, position: 'relative'}} /> */}
-						<img src={'assets/shoe-box-nft-sale.png'} width={'100%'} height={'auto'} style={{marginTop: 5}} />
+						<img src={'assets/pre-mainnet-2.png'} width={'100%'} height={'auto'} style={{marginTop: 5}} />
 					</Box>
 					<Stack
 						direction="row"
@@ -197,7 +197,7 @@ const BannerEvent: React.FC<any> = () => {
 						right: 0,
 					}}
 				>
-					<Link href={'#'}>
+					<Link href={BANNER.BUTTON.href}>
 						<IconButton
 							sx={{
 								background: '#FFE2D3',
@@ -323,7 +323,7 @@ const MobileBannerEvent: React.FC<any> = () => {
 					}}>
 						{/* <img src={BANNER.IMAGECUP} width={isMobile ? '90px' : '150px'} height={'auto'} style={{zIndex: 2, position: 'relative'}} /> */}
 						<img
-							src={'assets/shoe-box-nft-sale.png'}
+							src={'assets/pre-mainnet-2.png'}
 							width={isMobile ? 300 : 350}
 							height={'auto'}
 						/>
@@ -335,13 +335,13 @@ const MobileBannerEvent: React.FC<any> = () => {
 							top: -32,
 						}}
 					>
-						{/* <Link href={BANNER.BUTTON.href}> */}
+						<Link href={BANNER.BUTTON.href}>
 						<IconButton>
 							<Icon sx={{ width: 40, height: 40 }}>
 								<IconImage src={BANNER.BUTTON.mobileIcon} />
 							</Icon>
 						</IconButton>
-						{/* </Link> */}
+						</Link>
 					</Box>
 				</Stack>
 			</Box>
@@ -451,234 +451,234 @@ const AppSection: React.FC<any> = ({ sxProps }) => {
 	);
 };
 
-const ChallengeSection: React.FC<any> = ({ sxProps }) => {
-	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
-	const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+// const ChallengeSection: React.FC<any> = ({ sxProps }) => {
+// 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+// 	const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 
-	return (
-		<Stack
-			alignItems="center"
-			sx={{
-				position: 'relative',
-				pt: 8,
-				overflow: 'hidden',
-				backgroundImage: { xs: `url(${CHALLENGE.BG})`, md: 'none' },
-				backgroundRepeat: 'no-repeat',
-				backgroundSize: 'contain',
-				backgroundPosition: 'center',
-			}}
-		>
-			{!isSm && (
-				<Box
-					sx={{
-						position: 'relative',
-						width: '100%',
-						minWidth: 1920,
-					}}
-				>
-					<Box
-						sx={{
-							position: 'absolute',
-							top: 190,
-							left: '11%',
-						}}
-					>
-						<img src={CHALLENGE.BG_ITEM1} width={'auto'}></img>
-					</Box>
-					<Box
-						sx={{
-							position: 'absolute',
-							top: 0,
-							right: 0,
-						}}
-					>
-						<img src={CHALLENGE.BG_ITEM5} width={'auto'}></img>
-					</Box>
-					<Box
-						sx={{
-							position: 'absolute',
-							top: -62,
-							right: `${25}%`,
-						}}
-					>
-						<img src={CHALLENGE.BG_ITEM2} width={'auto'}></img>
-					</Box>
-					<Box
-						sx={{
-							position: 'absolute',
-							top: 40,
-							right: `${21.5}%`,
-						}}
-					>
-						<img src={CHALLENGE.BG_ITEM3} width={'auto'}></img>
-					</Box>
-				</Box>
-			)}
-			<Container sx={{ position: 'relative' }}>
-				<Stack alignItems={{ xs: 'center', md: 'start' }} spacing={1}>
-					<img
-						src={CHALLENGE.BG_TITLE}
-						alt=""
-						width={isXs ? '100%' : 'auto'}
-						height={'auto'}
-					/>
-					<img
-						src={CHALLENGE.BG_SUBTITLE}
-						alt=""
-						width={isXs ? '80%' : 'auto'}
-						height={'auto'}
-					/>
-					<Typography
-						fontSize={{ xs: 16, sm: 18 }}
-						fontWeight={500}
-						color="#5A6178"
-						lineHeight={1.5}
-						sx={{
-							pt: 3,
-							pb: { xs: 3, md: 7 },
-							maxWidth: 545,
-						}}
-					>
-						{CHALLENGE.DESC}
-					</Typography>
-					<Typography
-						fontSize={{ xs: 24, sm: 24 }}
-						fontWeight={700}
-						color="#31373E"
-						sx={{
-							textAlign: { xs: 'center', md: 'left' },
-						}}
-					>
-						{CHALLENGE.REGISTER.DESC}
-					</Typography>
-					<Stack
-						direction={{ xs: 'column-reverse', md: 'row' }}
-						alignItems={{ xs: 'center', md: 'start' }}
-						spacing={4.5}
-						sx={{ width: '100%', pt: 2, pb: 25 }}
-					>
-						<Link href={CHALLENGE.REGISTER.BUTTON.href}>
-							<Button
-								endIcon={
-									<Icon sx={{ width: 40, height: 40 }}>
-										<IconImage src={CHALLENGE.REGISTER.BUTTON.icon} />
-									</Icon>
-								}
-								sx={{
-									fontSize: 18,
-									fontWeight: 600,
-									color: '#FFF',
-									background:
-										'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
-									borderRadius: '16px',
-									boxShadow: 'none',
-									px: 3.5,
-									py: 2,
-									maxHeight: 72,
-								}}
-							>
-								{CHALLENGE.REGISTER.BUTTON.title}
-							</Button>
-						</Link>
-						<Box>
-							<Typography
-								fontStyle="italic"
-								fontSize={18}
-								color="#31373E"
-								fontWeight={500}
-								sx={{
-									textAlign: { xs: 'center', md: 'left' },
-								}}
-							>
-								{BANNER.COUNTDOWN}
-							</Typography>
-							<CountdownClock />
-						</Box>
-					</Stack>
-				</Stack>
-			</Container>
-		</Stack>
-	);
-};
+// 	return (
+// 		<Stack
+// 			alignItems="center"
+// 			sx={{
+// 				position: 'relative',
+// 				pt: 8,
+// 				overflow: 'hidden',
+// 				backgroundImage: { xs: `url(${CHALLENGE.BG})`, md: 'none' },
+// 				backgroundRepeat: 'no-repeat',
+// 				backgroundSize: 'contain',
+// 				backgroundPosition: 'center',
+// 			}}
+// 		>
+// 			{!isSm && (
+// 				<Box
+// 					sx={{
+// 						position: 'relative',
+// 						width: '100%',
+// 						minWidth: 1920,
+// 					}}
+// 				>
+// 					<Box
+// 						sx={{
+// 							position: 'absolute',
+// 							top: 190,
+// 							left: '11%',
+// 						}}
+// 					>
+// 						<img src={CHALLENGE.BG_ITEM1} width={'auto'}></img>
+// 					</Box>
+// 					<Box
+// 						sx={{
+// 							position: 'absolute',
+// 							top: 0,
+// 							right: 0,
+// 						}}
+// 					>
+// 						<img src={CHALLENGE.BG_ITEM5} width={'auto'}></img>
+// 					</Box>
+// 					<Box
+// 						sx={{
+// 							position: 'absolute',
+// 							top: -62,
+// 							right: `${25}%`,
+// 						}}
+// 					>
+// 						<img src={CHALLENGE.BG_ITEM2} width={'auto'}></img>
+// 					</Box>
+// 					<Box
+// 						sx={{
+// 							position: 'absolute',
+// 							top: 40,
+// 							right: `${21.5}%`,
+// 						}}
+// 					>
+// 						<img src={CHALLENGE.BG_ITEM3} width={'auto'}></img>
+// 					</Box>
+// 				</Box>
+// 			)}
+// 			<Container sx={{ position: 'relative' }}>
+// 				<Stack alignItems={{ xs: 'center', md: 'start' }} spacing={1}>
+// 					<img
+// 						src={CHALLENGE.BG_TITLE}
+// 						alt=""
+// 						width={isXs ? '100%' : 'auto'}
+// 						height={'auto'}
+// 					/>
+// 					<img
+// 						src={CHALLENGE.BG_SUBTITLE}
+// 						alt=""
+// 						width={isXs ? '80%' : 'auto'}
+// 						height={'auto'}
+// 					/>
+// 					<Typography
+// 						fontSize={{ xs: 16, sm: 18 }}
+// 						fontWeight={500}
+// 						color="#5A6178"
+// 						lineHeight={1.5}
+// 						sx={{
+// 							pt: 3,
+// 							pb: { xs: 3, md: 7 },
+// 							maxWidth: 545,
+// 						}}
+// 					>
+// 						{CHALLENGE.DESC}
+// 					</Typography>
+// 					<Typography
+// 						fontSize={{ xs: 24, sm: 24 }}
+// 						fontWeight={700}
+// 						color="#31373E"
+// 						sx={{
+// 							textAlign: { xs: 'center', md: 'left' },
+// 						}}
+// 					>
+// 						{CHALLENGE.REGISTER.DESC}
+// 					</Typography>
+// 					<Stack
+// 						direction={{ xs: 'column-reverse', md: 'row' }}
+// 						alignItems={{ xs: 'center', md: 'start' }}
+// 						spacing={4.5}
+// 						sx={{ width: '100%', pt: 2, pb: 25 }}
+// 					>
+// 						<Link href={CHALLENGE.REGISTER.BUTTON.href}>
+// 							<Button
+// 								endIcon={
+// 									<Icon sx={{ width: 40, height: 40 }}>
+// 										<IconImage src={CHALLENGE.REGISTER.BUTTON.icon} />
+// 									</Icon>
+// 								}
+// 								sx={{
+// 									fontSize: 18,
+// 									fontWeight: 600,
+// 									color: '#FFF',
+// 									background:
+// 										'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
+// 									borderRadius: '16px',
+// 									boxShadow: 'none',
+// 									px: 3.5,
+// 									py: 2,
+// 									maxHeight: 72,
+// 								}}
+// 							>
+// 								{CHALLENGE.REGISTER.BUTTON.title}
+// 							</Button>
+// 						</Link>
+// 						<Box>
+// 							<Typography
+// 								fontStyle="italic"
+// 								fontSize={18}
+// 								color="#31373E"
+// 								fontWeight={500}
+// 								sx={{
+// 									textAlign: { xs: 'center', md: 'left' },
+// 								}}
+// 							>
+// 								{BANNER.COUNTDOWN}
+// 							</Typography>
+// 							<CountdownClock />
+// 						</Box>
+// 					</Stack>
+// 				</Stack>
+// 			</Container>
+// 		</Stack>
+// 	);
+// };
 
-const NumberSection: React.FC<any> = ({ sxProps }) => {
-	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+// const NumberSection: React.FC<any> = ({ sxProps }) => {
+// 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 
-	return (
-		<Stack
-			alignItems="center"
-			sx={{
-				position: 'relative',
-				overflow: 'hidden',
-				...sxProps,
-			}}
-		>
-			{!isSm && (
-				<Box
-					sx={{
-						position: 'relative',
-						width: '100%',
-						minWidth: 1920,
-					}}
-				>
-					<Box
-						sx={{
-							position: 'absolute',
-							top: 557,
-							left: 0,
-						}}
-					>
-						<img src={NUMBER.BG_ITEM} width={'auto'}></img>
-					</Box>
-				</Box>
-			)}
-			<Container sx={{ position: 'relative' }}>
-				<SectionTitle title={NUMBER.TITLE} subtitle={NUMBER.SUBTITLE} />
-				<Grid container mt={7}>
-					<Grid item xs={12} md={5}>
-						<Stack
-							justifyContent="center"
-							alignItems="center"
-							sx={{ height: '100%' }}
-						>
-							<Box
-								sx={{
-									width: { xs: '75%', sm: '50%', md: '100%' },
-									height: 0,
-									pt: {
-										xs: `${(352 / 449) * 75}%`,
-										sm: `${(352 / 449) * 50}%`,
-										md: `${(352 / 449) * 100}%`,
-									},
-									backgroundImage: `url(${NUMBER.POSTER})`,
-									backgroundRepeat: 'no-repeat',
-									backgroundSize: 'cover',
-								}}
-							/>
-						</Stack>
-					</Grid>
-					<Grid item xs={12} md={7}>
-						<Stack
-							spacing={5}
-							pl={{ md: 12, lg: 24 }}
-							pt={{ xs: 4, md: 0 }}
-							alignItems={{ xs: 'center', md: 'start' }}
-						>
-							{NUMBER.ITEMS.map((el, idx) => (
-								<NumberBox
-									key={idx}
-									icon={el.icon}
-									count={el.count}
-									title={el.title}
-								/>
-							))}
-						</Stack>
-					</Grid>
-				</Grid>
-			</Container>
-		</Stack>
-	);
-};
+// 	return (
+// 		<Stack
+// 			alignItems="center"
+// 			sx={{
+// 				position: 'relative',
+// 				overflow: 'hidden',
+// 				...sxProps,
+// 			}}
+// 		>
+// 			{!isSm && (
+// 				<Box
+// 					sx={{
+// 						position: 'relative',
+// 						width: '100%',
+// 						minWidth: 1920,
+// 					}}
+// 				>
+// 					<Box
+// 						sx={{
+// 							position: 'absolute',
+// 							top: 557,
+// 							left: 0,
+// 						}}
+// 					>
+// 						<img src={NUMBER.BG_ITEM} width={'auto'}></img>
+// 					</Box>
+// 				</Box>
+// 			)}
+// 			<Container sx={{ position: 'relative' }}>
+// 				<SectionTitle title={NUMBER.TITLE} subtitle={NUMBER.SUBTITLE} />
+// 				<Grid container mt={7}>
+// 					<Grid item xs={12} md={5}>
+// 						<Stack
+// 							justifyContent="center"
+// 							alignItems="center"
+// 							sx={{ height: '100%' }}
+// 						>
+// 							<Box
+// 								sx={{
+// 									width: { xs: '75%', sm: '50%', md: '100%' },
+// 									height: 0,
+// 									pt: {
+// 										xs: `${(352 / 449) * 75}%`,
+// 										sm: `${(352 / 449) * 50}%`,
+// 										md: `${(352 / 449) * 100}%`,
+// 									},
+// 									backgroundImage: `url(${NUMBER.POSTER})`,
+// 									backgroundRepeat: 'no-repeat',
+// 									backgroundSize: 'cover',
+// 								}}
+// 							/>
+// 						</Stack>
+// 					</Grid>
+// 					<Grid item xs={12} md={7}>
+// 						<Stack
+// 							spacing={5}
+// 							pl={{ md: 12, lg: 24 }}
+// 							pt={{ xs: 4, md: 0 }}
+// 							alignItems={{ xs: 'center', md: 'start' }}
+// 						>
+// 							{NUMBER.ITEMS.map((el, idx) => (
+// 								<NumberBox
+// 									key={idx}
+// 									icon={el.icon}
+// 									count={el.count}
+// 									title={el.title}
+// 								/>
+// 							))}
+// 						</Stack>
+// 					</Grid>
+// 				</Grid>
+// 			</Container>
+// 		</Stack>
+// 	);
+// };
 
 const HowItWorks: React.FC<any> = ({ sxProps }) => {
 	// const [activeIndex, setActiveIndex] = React.useState<number>(0);

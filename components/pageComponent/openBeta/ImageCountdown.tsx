@@ -13,6 +13,8 @@ export const ImageCountdown: React.FC<IProps> = ({countDown, imageTitle, hideLin
   const isMobile = useMediaQuery('(max-width: 579px)');
   return (
     <Wrap>
+      			<Box sx={{ height:80, top: 80, left: 0, width: '100%' }}>
+      </Box>
       <Container sx={{ maxWidth: { xl: 1200 } }}>
         <Inner>
           <BoxImage><img src={imageTitle ? imageTitle : (isMobile ? IMAGE_COUNTDOWN.imageMobile : IMAGE_COUNTDOWN.image)} /></BoxImage>
@@ -21,7 +23,7 @@ export const ImageCountdown: React.FC<IProps> = ({countDown, imageTitle, hideLin
             <Body>
               <BoxCountdown>
                 <CountdownClock endDate={countDown ? countDown : IMAGE_COUNTDOWN.countDown.time} sxTitle={40} sxSubTitle={16} />
-                <Link href={'#'}><CountdownButton disabled={!IMAGE_COUNTDOWN.countDown.leadboard.active} active={IMAGE_COUNTDOWN.countDown.leadboard.active}><img src={IMAGE_COUNTDOWN.countDown.leadboard.imageGray} /> {IMAGE_COUNTDOWN.countDown.leadboard.title}</CountdownButton></Link>
+                {/* <Link href={'#'}><CountdownButton disabled={!IMAGE_COUNTDOWN.countDown.leadboard.active} active={IMAGE_COUNTDOWN.countDown.leadboard.active}><img src={IMAGE_COUNTDOWN.countDown.leadboard.imageGray} /> {IMAGE_COUNTDOWN.countDown.leadboard.title}</CountdownButton></Link> */}
                 {IMAGE_COUNTDOWN.countDown.Questions?.map((item, index) => (
                   !hideLinkPdf && <QuestionsItem key={index}><img src={item.imageIcon} /><Link href={item.link}>{item.title}</Link></QuestionsItem>
                 ))}
