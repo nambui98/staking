@@ -172,6 +172,7 @@ const Section3: NextPage = () => {
 		setSwiper(s);
 	}
 	const handleSlideChange = (s: any) => {
+		console.log(s.activeIndex)
 		setSlideActiveIndex(s.activeIndex);
 	}
 	return (
@@ -274,12 +275,15 @@ const Section3: NextPage = () => {
 							:
 							<Swiper
 								centeredSlides={true}
+								loop={true}
+								grabCursor={true}
 								autoplay={{
 									delay: 2000,
 									disableOnInteraction: false,
 								}}
 								onSwiper={(s) => handleSwiper(s)}
 								onSlideChange={handleSlideChange}
+								slideToClickedSlide={true}
 								slidesPerView={isTablet ? isMobile ? 2 : 3 : 4}
 								// initialSlide={slideActiveIndex}
 								spaceBetween={isTablet ? isMobile ? 0 : 15 : 30}
@@ -296,12 +300,12 @@ const Section3: NextPage = () => {
 										return <SwiperSlide key={index2 + "slide2"}>
 
 												<Box sx={{cursor: 'pointer'}} onClick={() => {
-													setSlideActiveIndex(index2)
+													setSlideActiveIndex(index2+(isTablet ? isMobile ? 2 : 3 : 4))
 												}}>
 													<img style={{
 														transition: '.4s all',
-														transform: slideActiveIndex == index2 ? "scale(1)" : "scale(0.8)"
-													}} src={slideActiveIndex == index2 ? e.active : e.inActive}/>
+														transform: slideActiveIndex == index2+(isTablet ? isMobile ? 2 : 3 : 4) ? "scale(1)" : "scale(0.8)"
+													}} src={slideActiveIndex == index2+(isTablet ? isMobile ? 2 : 3 : 4) ? e.active : e.inActive}/>
 												</Box>
 											</SwiperSlide>
 									})
