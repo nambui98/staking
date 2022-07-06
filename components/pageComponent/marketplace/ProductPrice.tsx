@@ -100,6 +100,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       ...boxDetail,
       type: boxType,
       oldPrice: boxData.oldPrice,
+      price: boxData.price,
       video: boxData.video,
       maxBox: boxData.maxBox,
       quantity: boxData.quantity,
@@ -197,7 +198,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       }} status={PaymentSuccessPopup} handleToggleStatus={() => setPaymentSuccessPopup(false)} titleButton={'Get bonus'} handleClickButton={handleGetBonus} />
       <PopupMessage title="Error!" status={popupError.status} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError({status: false, message: ''})} sx={customWidthPopup}
         handleClickButton={() => setPopupError({status: false, message: ''})} titleCustomColor={{ '& p': { color: '#FF6F61' } }} message={popupError.message === 'execution reverted: Cannot buy more' ? 'You have reached the maximum number of slots for buying box.' : popupError.message} />
-      <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
+      {/* <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} /> */}
       <Backdrop
         sx={{ color: '#FF6D24', zIndex: 2000 }}
         className="backdrop-loading"

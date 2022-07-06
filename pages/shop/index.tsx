@@ -34,7 +34,7 @@ export interface MarketplaceProps {
 
 const Marketplace: NextPage = () => {
   const [boxDetail, setBoxDetail] = useState<boxDetail>({ 
-    price: 0, 
+    price: BOX_DETAIL.box_gold.price, 
     type: BOX_DETAIL.box_gold.type,  
     maxBox: BOX_DETAIL.box_gold.maxBox,
     oldPrice: BOX_DETAIL.box_gold.oldPrice,
