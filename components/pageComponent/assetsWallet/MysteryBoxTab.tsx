@@ -16,9 +16,9 @@ export const MysteryBoxTab = () => {
 
   const tooltipBody = (data: any) => {
     return <BodyTooltip>
-      <TooltipItem><img src={ICON.shoeRed} /><Typography>Iconic Shoe</Typography> <Typography>{data.detail.iconic}</Typography></TooltipItem>
-      <TooltipItem><img src={ICON.shoeYellow} /><Typography>Rare Shoe</Typography> <Typography>{data.detail.rare}</Typography></TooltipItem>
-      <TooltipItem><img src={ICON.shoeGray} /><Typography>Standard Shoe</Typography> <Typography>{data.detail.standard}</Typography></TooltipItem>
+      <TooltipItem><Box><img src={ICON.shoeRed} /></Box><Typography>Iconic Shoe</Typography> <Typography>{data.detail.iconic}</Typography></TooltipItem>
+      <TooltipItem><Box><img src={ICON.shoeYellow} /></Box><Typography>Rare Shoe</Typography> <Typography>{data.detail.rare}</Typography></TooltipItem>
+      <TooltipItem><Box><img src={ICON.shoeGray} /></Box><Typography>Standard Shoe</Typography> <Typography>{data.detail.standard}</Typography></TooltipItem>
     </BodyTooltip>
   }
 
@@ -70,7 +70,7 @@ export const MysteryBoxTab = () => {
             <Typography>{item.boxId}</Typography>
           </Title>
           <BoxTooltip>
-            <Tooltip title={tooltipBody(item)} arrow placement="top">
+            <Tooltip classes={{popper: 'tooltip--assets'}} title={tooltipBody(item)} arrow placement="top">
               <Star></Star>
             </Tooltip>
           </BoxTooltip>
@@ -174,6 +174,14 @@ const TooltipItem = styled(Box)({
     marginLeft: 'auto',
   },
   '& img': {
-    marginRight: 8
+    width: 22.5
+  },
+  '& > div': {
+    marginRight: 8,
+    width: 24, 
+    height: 24,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 })

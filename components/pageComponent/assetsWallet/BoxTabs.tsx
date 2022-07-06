@@ -1,17 +1,18 @@
 import { Box, BoxProps, Stack, styled, Typography, useMediaQuery } from "@mui/material"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ICON, TAB_ITEM, TAB_NAME } from "../../../constants/assetsWallet";
 import { useWalletContext } from "../../../contexts/WalletContext"
+import { getOwnedBox } from "../../../libs/claim";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
 import { BoxEmpty } from "./BoxEmpty";
 import { MysteryBoxTab } from "./MysteryBoxTab";
 import { TokenTab } from "./TokenTab";
 
 export const Boxtabs = () => {
-  const { walletAccount, bnbBalance, fiuBalance, heeBalance, boxBalance } = useWalletContext();
+  const { walletAccount, bnbBalance, fiuBalance, heeBalance, ethersSigner, boxBalance } = useWalletContext();
   const isMobile = useMediaQuery('(max-width: 767px)');
+  const [totalBox, setTotalBox] = useState<number>();
   const [currentTab, setCurrentTab] = useState<string>('');
-
   const handleSwitchTab = (tab: string) => {
     setCurrentTab(tab);
   }
@@ -27,6 +28,15 @@ export const Boxtabs = () => {
     }
   }
 
+  const getTotalBox = async () => {
+    const res = await getOwnedBox(walletAccount, ethersSigner);
+    res?.length && setTotalBox(res.length)
+  }
+
+  useEffect(() => {
+    getTotalBox()
+  }, [])
+
   return (
     <Wrap>
       <TabLeft>
@@ -40,7 +50,7 @@ export const Boxtabs = () => {
               <img style={!item.active ? iconGray : {}} src={item.icon} />{!isMobile ? 
               <Typography sx={!item.active ? {color: '#A7ACB8 !important'} : {}}>{item.title}</Typography> : currentTab === item.title && <Typography>{item.title}</Typography>}
               {!item.active && !isMobile && <span>Coming soon</span>}
-              {!isMobile && item.active && index > 0 && <Typography>{boxBalance}</Typography>}
+              {!isMobile && item.active && index > 0 && <Typography>{totalBox}</Typography>}
             </TabItem>
           ))}
         </TabBox>

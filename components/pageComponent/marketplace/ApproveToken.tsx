@@ -1,34 +1,45 @@
-import { Box, ButtonProps, Checkbox, FormControlLabel, FormGroup, Stack, Typography, TypographyProps } from "@mui/material"
+import { Box, BoxProps, ButtonProps, Checkbox, FormControlLabel, FormGroup, Input, Stack, Typography, TypographyProps } from "@mui/material"
 import { Popup } from "../../popup"
 import { styled } from '@mui/system';
 import { MARKETPLACE_ICON } from "../../../constants/marketplace";
 import { CheckboxMarketplace } from "../../checkbox/CheckboxMarketplace";
+import { useState } from "react";
 
 interface IProps {
   status: boolean
   handleToggleStatus: (status: boolean) => void
+  data: {
+    boxPrice: number, currentAllowances: number
+  }
+  onChangeApproveToken: (amount: string) => void
+  handleClickButton: () => any
+  sx?: any
 }
 
-export const ApproveToken: React.FC<IProps> = ({ status, handleToggleStatus }) => {
+export const ApproveToken: React.FC<IProps> = ({ status, handleToggleStatus, data, onChangeApproveToken, handleClickButton, sx }) => {
+  let checkApproveToken = data.boxPrice;
   return (
-    <Popup title="Approve token" status={status} handleToggle={() => handleToggleStatus(false)} titleButton={'APPROVE'} handleClickButton={() => null}>
+    <Popup title="Approve token" status={status} handleToggle={() => handleToggleStatus(false)} titleButton={'APPROVE'} handleClickButton={handleClickButton} sx={sx}>
       <Wrap>
         <Stack>
           <InfoItem>
             <InfoTitleItem >Amount to buy</InfoTitleItem>
-            <InfoPriceItem ><img src={MARKETPLACE_ICON.BNBCOINYELLOW} />400</InfoPriceItem>
-            <ConvertDollar >0.00$</ConvertDollar>
+            <InfoPriceItem ><img src={MARKETPLACE_ICON.busdIcon} />{data.boxPrice}</InfoPriceItem>
+            <ConvertDollar >{data.boxPrice}$</ConvertDollar>
           </InfoItem>
           <InfoItem>
             <InfoTitleItem >Current allowances</InfoTitleItem>
-            <InfoPriceItem ><img src={MARKETPLACE_ICON.BNBCOINYELLOW} />0.01</InfoPriceItem>
-            <ConvertDollar >0.00$</ConvertDollar>
+            <InfoPriceItem ><img src={MARKETPLACE_ICON.busdIcon} />{data.currentAllowances}</InfoPriceItem>
+            <ConvertDollar >{data.currentAllowances}$</ConvertDollar>
           </InfoItem>
           <Increase>
             <InfoTitleItem>Increase</InfoTitleItem>
-            <IncreaseBnb gray={false}><img src={MARKETPLACE_ICON.BNBCOINYELLOW} />200</IncreaseBnb>
+            <IncreaseBnb><img src={MARKETPLACE_ICON.busdIcon} />            
+              <InputToken inputProps={{ min: checkApproveToken }} defaultValue={checkApproveToken} 
+              type='number' disableUnderline={true} onChange={(e: any) => onChangeApproveToken(parseFloat(e.target.value) < checkApproveToken ? `${checkApproveToken}` : e.target.value)} />
+            </IncreaseBnb>
           </Increase>
-          <CheckboxMarketplace type="green" label="WithDraw all" />
+          {/* <CheckboxMarketplace type="green" label="WithDraw all" sx={{marginBottom: '10px'}} /> */}
         </Stack>
       </Wrap>
     </Popup>
@@ -77,10 +88,10 @@ const Increase = styled(Stack)({
   alignItems: 'center',
   flexDirection: 'row'
 })
-type IncreaseBnbType = TypographyProps & {
-  gray: any
+type IncreaseBnbType = BoxProps & {
+  gray?: any
 };
-const IncreaseBnb = styled(Typography)((props: IncreaseBnbType) => ({
+const IncreaseBnb = styled(Box)((props: IncreaseBnbType) => ({
   padding: '16px',
   border: '1px solid #E9EAEF',
   background: props.gray ? '#E9EAEF' : '#F8F9FB',
@@ -91,3 +102,9 @@ const IncreaseBnb = styled(Typography)((props: IncreaseBnbType) => ({
   borderRadius: '12px',
   color: props.gray ? '#A7ACB8' : '#31373E'
 }))
+const InputToken = styled(Input)({
+  '& .MuiInput-input': {
+    width: 100,
+    textAlign: 'right',
+  }
+})

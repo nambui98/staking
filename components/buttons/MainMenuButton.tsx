@@ -10,28 +10,28 @@ interface IProps {
 
 export const MainMenuButton: React.FC<IProps> = ({title, iconLink, active, disabledBtn}) => {
   return (
-    <ButtonWrap disabled={disabledBtn} active={active} variant="contained" startIcon={<img src={iconLink} />}>
+    <ButtonWrap disabled={disabledBtn} active={active.toString()} variant="contained" startIcon={<img src={iconLink} />}>
       {title}
     </ButtonWrap>
   )
 }
 
 type buttonMarketPlace = ButtonProps & {
-  active: boolean, 
+  active: any, 
   disabled: boolean
 };
 const ButtonWrap = styled(Button)((props: buttonMarketPlace) => ({
   padding: '8px 12px',
-  background: props.active ? '#FFE2D3' : '#ffffff',
+  background: props.active === 'true' ? '#FFE2D3' : '#ffffff',
   borderRadius: 18,
-  color: props.active ? '#FF8A50' : '#5A6178',
+  color: props.active === 'true' ? '#FF8A50' : '#5A6178',
   ...TEXT_STYLE(14, 500),
   boxShadow: 'none !important',
   textTransform: 'capitalize',
   // opacity: props.disabled ? 0.3 : 1,
   '& img': {
     marginRight: 6,
-    filter: props.active ? 'invert(48%) sepia(75%) saturate(1542%) hue-rotate(343deg) brightness(99%) contrast(103%)' : 'none'
+    filter: props.active === 'true' ? 'invert(48%) sepia(75%) saturate(1542%) hue-rotate(343deg) brightness(99%) contrast(103%)' : 'none'
   },
   '&:hover': {
     background: '#FFE2D3',

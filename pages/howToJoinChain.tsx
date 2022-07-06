@@ -97,8 +97,8 @@ const JoinChain = () => {
 }
 
 const colorGradient = {
-  '-webkit-background-clip': 'text !important',
-  '-webkit-text-fill-color': 'transparent',
+  WebkitBackgroundClip: 'text !important',
+  WebkitTextFillColor: 'transparent',
   background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)'
 }
 const Wrap = styled(Stack)({
@@ -126,8 +126,8 @@ const TitleBottom = styled(Box)({
 })
 const TitleBottomItem = styled(Typography)({
   backgroundImage: 'radial-gradient(75% 75% at 21.87% 25%, #FFCC77 18.94%, #FF612F 89.59%)',
-  '-webkit-background-clip': 'text',
-  '-webkit-text-fill-color': 'transparent',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
   fontFamily: 'Electrofied',
   fontSize: 32,
   marginBottom: 20,
