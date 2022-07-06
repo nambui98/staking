@@ -3,7 +3,6 @@ import { TransitionProps } from "@mui/material/transitions";
 import { forwardRef, useState } from "react";
 import AppStoreButton from "../../components/buttons/AppStoreButton";
 import AppStoreButtonNew from "../../components/buttons/AppStoreButtonNew";
-import { APP } from "../../constants/home";
 import { TEXT_STYLE } from "../../styles/common/textStyles";
 
 const Transition = forwardRef(function Transition(
@@ -19,6 +18,37 @@ interface IProps {
   statusPopup: boolean;
   handleToggleStatusPopup: (status: boolean) => void;
 }
+
+export const APP = {
+	POSTER: 'assets/home-app.png',
+	SUBTITLE: 'Make healthy lifestyle',
+	TITLE: 'irresistible',
+	TITLE_BG: 'assets/backgrounds/home-app.png',
+	DESC: 'beFITTER is a web3 fitnessfi and socialfi app that aims to build a healthier ecosystem helping users balance their life, improve mental & physical health, gain achievements and still get monetary incentives.',
+	BUTTON: [
+		{
+			subtitle0: 'Coming soon',
+			subtitle: 'Download on',
+			title: 'App Store',
+			icon: 'assets/logo/apple.png',
+			href: 'https://testflight.apple.com/join/7ZprWPng',
+		},
+		{
+			subtitle0: 'Coming soon',
+			subtitle: 'Download on',
+			title: 'Google Play',
+			icon: 'assets/logo/gplay.png',
+			href: 'https://play.google.com/store/apps/details?id=io.befitter.app',
+		},
+		{
+			subtitle0: 'Coming soon',
+			subtitle: 'Download for',
+			title: 'Wearable',
+			icon: 'assets/logo/watch.svg',
+			href: '',
+		},
+	],
+};
 
 export const PopupApp: React.FC<IProps> = ({statusPopup, handleToggleStatusPopup}) => {
   return (

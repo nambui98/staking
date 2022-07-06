@@ -31,9 +31,8 @@ const AppStoreButtonNew: React.FC<any> = ({
 			px: 0.5,
 			py: { xs: 2.5, sm: 2.5 },
 			'&:hover': {
-				background: '#FFE2D3',
+				background: '#ffffff',
 				boxShadow: 'none',
-				border: '2px solid #E9EAEF',
 			},
 			'&.Mui-disabled': {
 				background: background ? '#E9EAEF' : '#ffffff',
