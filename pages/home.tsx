@@ -436,11 +436,19 @@ const Home: NextPage = () => {
 		</Box>,
 		<Box className={SEL}>
 			<Section8 />
+
 		</Box>,
 		<Box className={SEL}>
-			<FoundedBy className={SEL} sxProps={{ mb: 15 }} />
+			<Box height={"100%"}></Box>
+			<StayInTouch />
 			<MainFooter />
+
+
 		</Box>,
+		// <Box className={SEL}>
+		// 	<FoundedBy className={SEL} sxProps={{ mb: 15 }} />
+		// 	<MainFooter />
+		// </Box>,
 
 
 		// <div className={SEL}>
@@ -466,7 +474,6 @@ const Home: NextPage = () => {
 					</ReactFullpage.Wrapper>
 				)}
 			/>
-
 
 
 		</HomeLayoutNew>

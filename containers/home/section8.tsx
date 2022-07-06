@@ -13,6 +13,7 @@ import {
 import { ROADMAP } from '../../constants/common';
 import { IconImage } from '../../components/styled';
 import SectionTitle from '../../components/sections/SectionTitle';
+import MainFooter from '../../components/footers/MainFooter';
 // import { IconImage } from '../../styled';
 
 const Milestone: React.FC<any> = ({ sxProps, title, items }) => {
@@ -116,6 +117,7 @@ const RoadmapDesktop: React.FC<any> = () => {
 					<Milestone title={el.title} items={el.items} />
 				</Box>
 			))}
+
 		</Stack>
 	)
 }
