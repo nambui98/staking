@@ -18,6 +18,7 @@ const SHEET = {
 };
 
 interface eventBody {
+	walletAddress: string,
 	name: string,
 	email: string;
 	country: string;
@@ -32,6 +33,7 @@ export async function appendEvent(body: eventBody) {
 	const data = {
 		// createdAt: new Date().toLocaleString("en-GB"),
 		createdAt: new Date().toLocaleString(),
+		walletAddress: body.walletAddress,
 		name: body.name,
 		email: body.email,
 		country: body.country,

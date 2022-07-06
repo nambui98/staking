@@ -9,6 +9,7 @@ import { RECAPTCHA_SITE_KEY } from "../../../const";
 import { checkVerifyEmail } from "../../../libs/apis/marketplace";
 import CountryData from '../../../constants/countries/countries.json';
 import { MarketplaceService } from "../../../services/user.service";
+import { useWalletContext } from "../../../contexts/WalletContext";
 
 interface IProps {
   status: boolean
@@ -20,6 +21,7 @@ interface IProps {
 
 
 export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStatus, titleButton, handleClickButton, sx }) => {
+  const {walletAccount} = useWalletContext();
   const [textName, setTextName] = useState('');
   const [textEmail, setTextEmail] = useState('');
   const [textEmailCheck, setTextEmailCheck] = useState('');
@@ -40,6 +42,7 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
       const response = await fetch("/api/submit", {
         method: "POST",
         body: JSON.stringify({
+          walletAddress: walletAccount,
           name: textName,
           email: textEmail,
           country: textCountry,
@@ -48,7 +51,7 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
           telegram: textTelegram,
           facebook: textFacebook,
           captcha: captchaToken,
-          sheetName: SHEET_NAME.data2
+          sheetName: SHEET_NAME.data1
         }),
         headers: {
           "Content-Type": "application/json",

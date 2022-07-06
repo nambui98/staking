@@ -47,7 +47,7 @@ const Marketplace: NextPage = () => {
     information: BOX_DETAIL.box_gold.information
   })
   return (
-    <MainLayout sxProps={{backgroundColor: "#FFFFFF"}}>
+    <MainLayout sxProps={{backgroundColor: "#FFFFFF"}} titlePage='beFITTER - Shop'>
       <Wrap>
         <Container disableGutters sx={container}>
           <Inner>

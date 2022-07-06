@@ -12,7 +12,7 @@ export const HEADER_ICON = {
 
 export const PAGE = {
   HOME: {title: 'Home', link: '/'},
-  PRE_SALES: {title: 'Pre-Sale Shop', link: '/marketplace'},
+  PRE_SALES: {title: 'Pre-Sale Shop', link: '/shop'},
   DOCUMENT: {title: 'Documentation', link: '/'},
   LITEPAPER: {title: 'litePaper', link: '/litePaper'},
   ASSETS: {title: 'Assets', link: '/assets'}
@@ -21,7 +21,7 @@ export const PAGE = {
 export const MAIN_PAGE = [
   {title: 'Dashboard', link: '#', icon: 'assets/icons/Dashboard.svg', active: false},
   {title: 'Assets', link: '/assets', icon: 'assets/icons/box.svg', active: true},
-  {title: 'Shop', link: '/marketplace', icon: 'assets/icons/shop.svg', active: true},
+  {title: 'Shop', link: '/shop', icon: 'assets/icons/shop.svg', active: true},
   {title: 'Claim', link: '/claim', icon: 'assets/icons/3d-cube-scan.svg', active: true},
 ]
 export const SECURICHAIN_LOGO = 'assets/securichain.png';
