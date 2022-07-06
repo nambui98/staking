@@ -27,9 +27,8 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
   const [PaymentSuccessPopup, setPaymentSuccessPopup] = useState<boolean>(false)
   const [approveToken, setApproveToken] = useState<string>('');
   const [statusLoading, setStatusLoading] = useState<boolean>(false);
-  const [popupError, setPopupError] = useState<boolean>(false);
+  const [popupError, setPopupError] = useState<{status: boolean, message: string}>({status: false, message: ''});
   const [popupFormInfo, setPopupFormInfo] = useState<boolean>(false);
-  const [messPopupErr, setMessPopupErr] = useState<string>('');
   const statusPopupInfo = MarketplaceService.getStatusPopupInfo()
   const handlePurchaseBox = async () => {
     setStatusLoading(true)
@@ -47,14 +46,12 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
           MarketplaceService.setStatusPopupInfo(true)
         }
       }, 1000);
-    } catch (error) {
+    } catch (error: any) {
       setStatusLoading(false)
-      setPopupError(true)
+      setPopupError({status: true, message: error.reason || 'Something went wrong. Please try again!'})
       setApprovePopup(false)
-      console.log(error)
     }
   }
-
   const handleApprovePurchase = async () => {
     setStatusLoading(true)
     try {
@@ -66,10 +63,10 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
           clearInterval(checkStatus)
         }
       }, 1000);
-    } catch (error) {
+    } catch (error: any) {
       setStatusLoading(false);
       setApprovePopup(false)
-      setPopupError(true)
+      setPopupError({status: true, message: error.reason || 'Something went wrong. Please try again!'})
     }
   }
 
@@ -83,6 +80,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
     }
     const price = await getBoxPrice(boxDetail.type, ethersSigner);
     const allowance = await getAllowance(walletAccount, ethersSigner);
+    console.log(allowance)
     const setDataCheckoutPopup = {
       ...checkoutPopup,
       currentAllowance: allowance,
@@ -93,7 +91,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       ...setDataCheckoutPopup,
       onClickButton: allowance >= price ? handlePurchaseBox : () => { setApprovePopup(!approvePopup); setCheckoutPopup({ ...setDataCheckoutPopup, status: false }) }
     })
-    allowance < price && setApproveToken(`${price - allowance}`)
+    allowance < price && setApproveToken(`${price}`)
   }
 
   const handleSwitchBoxType = (boxType:  string) => {
@@ -103,6 +101,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       type: boxType,
       video: boxData.video,
       maxBox: boxData.maxBox,
+      quantity: boxData.quantity,
       videoIphone: boxData.videoIphone,
       image_small: boxData.image_small,
       image_large: boxData.image_large,
@@ -158,7 +157,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       </ProductVideo>
       <Title>{boxDetail.title}</Title>
       <BoxPrice>
-        <BoxPriceItem><Typography>TotalSale</Typography><Typography>400</Typography></BoxPriceItem>
+        <BoxPriceItem><Typography>TotalSale</Typography><Typography>{boxDetail.quantity}</Typography></BoxPriceItem>
         <BoxPriceItem><Typography>SUPPORTED</Typography><Typography>BUSD</Typography></BoxPriceItem>
         <BoxPriceItem><Typography>CURRENCY</Typography><Typography sx={{ display: 'flex', alignItems: 'center' }}>
           <img style={{ marginRight: '4px' }} src={MARKETPLACE_ICON.busdIcon} /> BUSD</Typography></BoxPriceItem>
@@ -176,7 +175,10 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
         </ListBoxType>
       </BoxType>
       <Price>
-        <Busd><img src={MARKETPLACE_ICON.busdIcon} /> {boxDetail.price} BUSD</Busd>
+        <Box>
+          <Busd><img src={MARKETPLACE_ICON.busdIcon} /> {boxDetail.price} BUSD</Busd>
+          <Busd sx={busdLine}><img src={MARKETPLACE_ICON.busdIcon} /> {boxDetail.price} BUSD</Busd>
+        </Box>
         <Box>
           <ButtonBuyNow onClick={handleTogglePopup}><Box>Buy now <img className="animationArrow" src={MARKETPLACE_ICON.arrowRightIcon} /></Box></ButtonBuyNow>
           <MaxBox>Max {boxDetail.maxBox} boxes/wallet</MaxBox>
@@ -192,8 +194,8 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       <PaymentSuccess data={{
         boxPrice: boxDetail.price, boxImage: boxDetail.image_large
       }} status={PaymentSuccessPopup} handleToggleStatus={() => setPaymentSuccessPopup(false)} titleButton={'Get bonus'} handleClickButton={handleGetBonus} />
-      <PopupMessage title="Error!" status={popupError} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError(false)} sx={customWidthPopup}
-        handleClickButton={() => setPopupError(false)} titleCustomColor={{ '& p': { color: '#FF6F61' } }} message="Something went wrong. Please try again!" />
+      <PopupMessage title="Error!" status={popupError.status} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError({status: false, message: ''})} sx={customWidthPopup}
+        handleClickButton={() => setPopupError({status: false, message: ''})} titleCustomColor={{ '& p': { color: '#FF6F61' } }} message={popupError.message === 'execution reverted: Cannot buy more' ? 'You have reached the maximum number of slots for buying box.' : popupError.message} />
       <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
       <Backdrop
         sx={{ color: '#FF6D24', zIndex: 2000 }}
@@ -290,7 +292,6 @@ const Busd = styled(Box)({
   marginRight: 10,
   display: 'flex',
   alignItems: 'center',
-  marginTop: 17,
   '& img': {
     marginRight: 8
   },
@@ -298,9 +299,15 @@ const Busd = styled(Box)({
     ...TEXT_STYLE(24, 600),
     marginRight: 20,
     minWidth: 135,
-    marginTop: 15
   }
 })
+const busdLine = {
+  fontSize: '16px !important',
+  fontWeight: '400 !important',
+  opacity: '0.8',
+  textDecoration: 'line-through',
+  marginTop: '2px'
+}
 const Price = styled(Stack)({
   flexDirection: 'row',
   justifyContent: 'space-between',

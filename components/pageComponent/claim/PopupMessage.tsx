@@ -34,7 +34,7 @@ const MessagePopup = styled(Typography)({
   marginBottom: '24px',
   ...TEXT_STYLE(14, 500),
   color: '#5A6178',
-  textAlign: 'center'
+  textAlign: 'center',
 })
 const TitleSuccess = styled(Typography)({
   display: 'flex',

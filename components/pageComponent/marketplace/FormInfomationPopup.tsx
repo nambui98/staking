@@ -18,19 +18,6 @@ interface IProps {
   sx?: any
 }
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
 
 export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStatus, titleButton, handleClickButton, sx }) => {
   const [textName, setTextName] = useState('');
@@ -149,7 +136,7 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
               />
               <VerifyText onClick={handleVerifyEmail} sx={{color: textEmailCheck ? '#55C8FC' : '#A7ACB8'}}>Verify</VerifyText>
             </Box>
-            {(textEmailError || textEmail) && <TextError sx={{color: textEmail ? '#118511' : '#FF6F61'}}>{textEmail ? 'Valid' : 'Invalid'} beFITTER`s email!</TextError>}
+            {(textEmailError || textEmail) && <TextError sx={{color: textEmail ? '#118511c7' : '#FF6F61'}}>{textEmail ? 'Valid' : 'Invalid'} beFITTER`s email!</TextError>}
           </FormItem>
           <FormItem>
             <Label>Country <span>*</span></Label>
@@ -159,7 +146,7 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
               onChange={(e) => setTextCountry(e.target.value as string)}
             >
               {CountryData?.data?.map((item, index) => (
-                <MenuItem key={index} value={item.name}>{item.name}</MenuItem>
+                <MenuItem key={index} value={item.name} sx={{...TEXT_STYLE(14, 500)}}>{item.name}</MenuItem>
               ))}
             </BoxSelect>
           </FormItem>
@@ -263,7 +250,8 @@ const Title = styled(Typography)({
   ...TEXT_STYLE(16, 500, '#31373E'),
   margin: '70px 0 20px',
   textAlign: 'center',
-  lineHeight: '1.4'
+  lineHeight: '1.4',
+  marginLeft: -14
 })
 const CustomInput = styled(InputBase)({
   '& .MuiInputBase-input': {

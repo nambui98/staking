@@ -61,6 +61,7 @@ export const BOX_DETAIL = {
     type: 'gold',
     title: 'Gold Mystery Shoe Box',
     maxBox: '5',
+    quantity: '1000',
     properties: [
       {title: 'Iconic Shoe', titleBg: 'ICONIC', chance: '10%', icon: 'assets/icons/iconic-red.svg'},
       {title: 'Rare Shoe', titleBg: 'RARE', chance: '50%', icon: 'assets/icons/rare-yellow.svg'},
@@ -79,7 +80,7 @@ export const BOX_DETAIL = {
         <Typography>2 boxes per wallet with Diamond Box</Typography>
       ],
       info: [
-        <Typography>The Mystery Shoe Boxes contain beFITTER’s Genesis NFTs for its in-app activities, including walking, running and cycling.</Typography>,
+        <Typography>The Mystery Shoe Boxes contain beFITTER's gold andGenesis NFTs for its in-app activities, including walking, running and cycling.</Typography>,
       ],
       timeline: [
         <Typography><span>1.</span> Buy Box on beFITTER Marketplace</Typography>,
@@ -103,6 +104,7 @@ export const BOX_DETAIL = {
     type: 'diamond',
     title: 'Diamond Mystery Shoe Box',
     maxBox: '2',
+    quantity: '30',
     properties: [
       {title: 'Iconic Shoe', titleBg: 'ICONIC', chance: '10%', icon: 'assets/icons/iconic-red.svg'},
       {title: 'Rare Shoe', titleBg: 'RARE', chance: '90%', icon: 'assets/icons/rare-yellow.svg'},
@@ -121,7 +123,7 @@ export const BOX_DETAIL = {
         <Typography>2 boxes per wallet with Diamond Box</Typography>
       ],
       info: [
-        <Typography>The Mystery Shoe Boxes contain beFITTER’s Genesis NFTs for its in-app activities, including walking, running and cycling.</Typography>,
+        <Typography>The Mystery Shoe Boxes contain beFITTER's Genesis NFTs for its in-app activities, including walking, running and cycling.</Typography>,
       ],
       timeline: [
         <Typography><span>1.</span> Buy Box on beFITTER Marketplace</Typography>,

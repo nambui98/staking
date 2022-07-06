@@ -17,7 +17,7 @@ interface IProps {
 }
 
 export const ApproveToken: React.FC<IProps> = ({ status, handleToggleStatus, data, onChangeApproveToken, handleClickButton, sx }) => {
-  let checkApproveToken = data.boxPrice - data.currentAllowances;
+  let checkApproveToken = data.boxPrice;
   return (
     <Popup title="Approve token" status={status} handleToggle={() => handleToggleStatus(false)} titleButton={'APPROVE'} handleClickButton={handleClickButton} sx={sx}>
       <Wrap>
