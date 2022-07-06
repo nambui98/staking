@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import {
 	Box,
@@ -20,6 +20,7 @@ import {
 } from '../../constants/header';
 import { TEXT_STYLE } from '../../styles/common/textStyles';
 import { useRouter } from 'next/router';
+import { PopupApp } from '../../containers/home/PopupApp';
 
 const MAIN_MENU = [
 	{ name: 'GET THE APP', link: '#' },
@@ -48,6 +49,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage }) 
 	const { asPath } = useRouter();
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+	const [statusPopup, setStatusPopup] = useState(false);
 
 	const stickTrigger = useScrollTrigger({
 		disableHysteresis: true,
@@ -88,7 +90,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage }) 
 							<MainMenu>
 								{MAIN_MENU?.map((item, index) => (
 									<Link key={index} href={item.link}>
-										<MenuItem  active={index === 0 ? true : false}>{item.name}</MenuItem>
+										<MenuItem onClick={() => setStatusPopup(true)}  active={index === 0 ? true : false}>{item.name}</MenuItem>
 									</Link>
 								))}
 							</MainMenu>
@@ -97,6 +99,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage }) 
 					</Container>
 				</Toolbar>
 			</AppBar>
+			<PopupApp statusPopup={statusPopup} handleToggleStatusPopup={setStatusPopup} />
 		</Box>
 	);
 };

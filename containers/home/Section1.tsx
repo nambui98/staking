@@ -13,6 +13,7 @@ import { Autoplay, EffectFade, Pagination } from 'swiper';
 import { TEXT_STYLE } from "../../styles/common/textStyles";
 import CountdownClock from "../../components/sections/CountdownClock";
 import CountdownClockNew from "../../components/sections/countdownClockNew";
+import { PopupApp } from "./PopupApp";
 
 export const Section1 = () => {
   const isMobile = useMediaQuery('(max-width:700px)');
