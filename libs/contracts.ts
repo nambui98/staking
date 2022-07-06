@@ -13,8 +13,8 @@ interface Map {
 const addresses: Map = {
   ['deployment']: { // bscTestnet
     bFBox: '0x62ae395292dC3B55654419F237438bcB4656E57d',
-    bFclaimBoxGamefi: '0x33c4d0220e11Ed8c763036b554E4cD77387e9E2C',
-    bFclaimEnjin: '0x33c4d0220e11Ed8c763036b554E4cD77387e9E2C',
+    bFclaimBoxGamefi: '0x7f7f5971D45cA5EFAc225DA64299Fccb386a84B6',
+    bFclaimEnjin: '0x49509ac5266B51c686D4B75AF7fed9B4E21210Ee',
     bFheeToken: '0x05031f56DAD9EDa2Ff7e0d0b675787cC72Dc4675',
     bFfiuToken: '0x25FE4e58B463f0511f1dF848e3Afc3e97b8aB59f',
     bFshoeItem: '0x365B79e59080632E693D98e2A0A0e63625E51495',
