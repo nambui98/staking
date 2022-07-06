@@ -1,5 +1,5 @@
 
-import { Box, Link, Stack, styled, Typography } from "@mui/material";
+import { Box, Link, Stack, styled, Typography, useMediaQuery } from "@mui/material";
 import { datalabeling } from "googleapis/build/src/apis/datalabeling";
 import { NextPage } from "next";
 import { ComponentType, useState } from "react";
@@ -10,49 +10,61 @@ import Earth from "./icons/earth.svg";
 import Shoes from "./icons/shoes.svg";
 import Paw from "./icons/paw.svg";
 import Smartwatch from "./icons/smartwatch.svg";
+import FitnessFiMobile from "./icons/fitnessFi-mobile.svg";
+import EarthMobile from "./icons/earth-mobile.svg";
+import ShoesMobile from "./icons/shoes-mobile.svg";
+import PawMobile from "./icons/paw-mobile.svg";
+import SmartwatchMobile from "./icons/smartwatch-mobile.svg";
 
 type itemType = {
 	title: string
 	content: string
 	image: string
-	icon: any
+	icon: any,
+	iconMobile: any
 }
 const Section2: NextPage = () => {
 	const [activeIndex, setActiveIndex] = useState<number>(0);
+	const isMobile = useMediaQuery('(max-width: 767px)');
 	const data: itemType[] = [
 		{
 			title: "FitnessFi",
 			content: 'Start earning for doing Activities such as walking, running, cycling, swimming (upcoming), sleeping (upcoming) or more in different game modes',
 			image: 'assets/sec2/fitnessfi.png',
-			icon: FitnessFi
+			icon: FitnessFi,
+			iconMobile: FitnessFiMobile
 		},
 		{
 			title: "SocialFi",
 			content: 'Checkin, draw amazing artworks on the map, generate content and inspire the world using beFITTER social media. Join challenges and clubs to unlock social tokens!',
 			image: 'assets/sec2/socialfi.png',
 			// icon: 'assets/icons/earth.svg'
-			icon: Earth
+			icon: Earth,
+			iconMobile: EarthMobile
 		},
 		{
 			title: "Lease",
 			content: 'Use the application daily with low to zero cost by renting an NFT. Utilize your inventory by using beFITTER advanced management tools!',
 			image: 'assets/sec2/lease.png',
 			// icon: 'assets/icons/shoes.svg'
-			icon: Shoes
+			icon: Shoes,
+			iconMobile: ShoesMobile
 		},
 		{
 			title: "Pet",
 			content: 'A totally exciting gamemode that users can own a pet! Take good care of your pets and they will fetch you bonus tokens when working out with you.',
 			image: 'assets/sec2/pet.png',
 			// icon: 'assets/icons/paw.svg'
-			icon: Paw
+			icon: Paw,
+			iconMobile: PawMobile
 		},
 		{
 			title: "Wearable",
 			content: 'The first web3 application to be available on wearable aka Smartwatch or fitness tracker, making your activities much more convenient and accurate.',
 			image: 'assets/sec2/wearable.png',
 			// icon: 'assets/icons/smartwatch.svg'
-			icon: Smartwatch
+			icon: Smartwatch,
+			iconMobile: SmartwatchMobile
 		},
 	]
 	const styleActiveContent = (index: number) => {
@@ -98,62 +110,87 @@ const Section2: NextPage = () => {
 				>
 					irresistible
 				</Typography>
-				<Box display={'flex'}>
-
-					<Typography
-						typography={'span'}
-						fontSize={{ xs: 16, sm: 16 }}
-						fontWeight={500}
-						color="#FF6D24"
-						mb={0.5}
-						textAlign="center"
-					>
-						beFITTER
-					</Typography>
+				<Box display={isMobile ? 'block' : 'flex'}>
 					<Typography typography={'span'}
 						fontSize={{ xs: 16, sm: 16 }}
 						fontWeight={500}
 						color="#5A6178"
 						mb={0.5}
-						textAlign="center">’s ecosystem helps users improve mental & physical health,<br></br> gain achievements and still get monetary incentives.
+						sx={{
+							'& span': {
+								color: '#FF8A50'
+							},
+							'@media (max-width: 767px)': {
+								marginTop: '7px'
+							}
+						}}
+						textAlign="center"><span>beFITTER</span>’s ecosystem helps users improve mental & physical health,<br></br> gain achievements and still get monetary incentives.
 					</Typography>
 				</Box>
 			</Box >
-			<Box display={'flex'} alignItems={'center'}>
-				<Box flex={1}>
+			<Inner display={'flex'} alignItems={'center'}>
+				<BoxIcon flex={1}>
 					{
 						data.map((item: itemType, index: number) => {
-							const Icon = item.icon;
-							return <Box mb={2} key={index} onClick={() => { setActiveIndex(index) }} sx={{ cursor: 'pointer' }}>
+							const Icon = isMobile ? item.iconMobile : item.icon;
+							return <BoxItemIcon mb={2} key={index} onClick={() => { setActiveIndex(index) }} sx={{ cursor: 'pointer' }}>
 								<Box display="flex" justifyItems="center" alignItems={"center"}>
-									<Icon style={{ transition: '.4s all', fill: activeIndex == index ? "#FF6D24" : "#898E9E" }} />
+									<Icon  style={{ 
+										transition: '.4s all', fill: activeIndex == index ? "#FF6D24" : "#898E9E"								
+									}} />
 									<Typography sx={{ transition: '.4s all', color: activeIndex == index ? "#FF6D24" : "#31373E" }} fontWeight={500} fontSize={24}>{item.title}</Typography>
 								</Box>
-								<Box sx={{
+								{!isMobile && <Box sx={{
 									transition: '.4s all',
 									...styleActiveContent(index)
 								}}>
 									<Typography mt={0.5} fontSize={16} color="#31373E">{item.content}</Typography>
-								</Box>
-							</Box>
+								</Box>}
+							</BoxItemIcon>
 						}
 						)
 					}
-				</Box>
-				<Box flex={1}>
+				</BoxIcon>
+				<BoxImage flex={1}>
 					<img width={"100%"} src={data[activeIndex].image} alt="" />
-				</Box>
-			</Box >
+				</BoxImage>
+			</Inner >
 		</Wrap >
 	)
 }
 
 export default Section2;
 
+const BoxImage = styled(Box)({
+	'@media (max-width: 767px)': {
+		marginTop: 16
+	}
+})
+const BoxItemIcon = styled(Box)({
+	'@media (max-width: 767px)': {
+		marginRight: 24
+	}
+})
+const Inner = styled(Box)({
+	'@media (max-width: 767px)': {
+		flexDirection: 'column'
+	}
+})
+const BoxIcon = styled(Box)({
+	'@media (max-width: 767px)': {
+		display: 'flex',
+		width: 'calc(100vw - 32px)',
+		overflow: 'auto',
+	}
+})
 const Wrap = styled(Stack)({
 	padding: '0 16px',
 	maxWidth: '1120px',
 	margin: '29px auto 50px',
+	textAlign: 'center',
+	'@media (min-width: 448px)': {
+		margin: '29px auto 50px',
+	},
 	'@media (min-width: 560px)': {
 		margin: '29px auto 80px',
 	}
