@@ -130,7 +130,7 @@ export const ROADMAP = {
 				// `Bug Bounty`,
 				`NFTs Airdrop Campaign`,
 			],
-			top: 225,
+			top: 285,
 			ml: -585,
 			active: true,
 		},

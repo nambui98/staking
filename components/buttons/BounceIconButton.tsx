@@ -14,8 +14,8 @@ const BounceIconButton: React.FC<any> = ({
 	icon,
 	iconActive,
 	href = '#',
-	width = 40,
-	height = 40,
+	width = 45,
+	height = 45,
 }) => (
 	<Stack
 		component="a"
