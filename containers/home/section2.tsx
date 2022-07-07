@@ -176,9 +176,11 @@ const Section2: NextPage = () => {
 									<Typography sx={{
 										transition: '.4s all', color: activeIndex == index ? "#FF6D24" : "#31373E",
 										fontSize: activeIndex == index ? '24px' : '18px',
+										marginLeft: 1,
 										'@media (max-width: 767px)': {
 											...TEXT_STYLE(14, 500),
-											marginTop: '5px'
+											marginTop: '5px',
+
 										}
 									}} fontWeight={500}>{item.title}</Typography>
 								</Box>

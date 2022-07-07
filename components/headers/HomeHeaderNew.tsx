@@ -73,7 +73,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 				elevation={0}
 				sx={{
 					background: currentPage === '1' ? 'linear-gradient(180deg, rgba(185, 185, 185, 0.4) 0%, rgba(177, 177, 177, 0) 100%)' : '#fff',
-					borderBottom: currentPage === '1' ? '0' : '1px solid #E9EAEF',
+					// borderBottom: currentPage === '1' ? '0' : '1px solid #E9EAEF',
 					transition: 'all ease 0.2s ',
 					padding: currentPage === '1' ? '14px 0' : '0'
 				}}
