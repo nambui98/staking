@@ -6,6 +6,11 @@ export const SECTION_TITLE_BG = 'assets/backgrounds/section-title.png';
 export const ICON_MENU_DARK = 'assets/icons/menu-dark.svg';
 export const ICON_MENU_WHITE = 'assets/icons/menu-white.svg';
 export const MENU_ITEMS = [
+	{ title: 'beFITTER hub', href: 'https://hub.befitter.io/claim' },
+	{ title: 'LitePaper', href: '/litePaper' },
+	{ title: 'Whitepaper', href: '' },
+];
+export const MENU_ITEMS_HOME = [
 	{ title: 'WHITEPAPER', href: '#' },
 	{ title: 'ABOUT', href: '#' },
 	{ title: 'CONTACT', href: '#' },
@@ -14,9 +19,9 @@ export const MENU_ITEMS_MOBILE = [
 	{ title: 'Staking', href: '#' },
 	{ title: 'HUB', href: 'https://hub.befitter.io/' },
 	{ title: 'LITEPAPER', href: '/litePaper' },
-	{ title: 'WHITEPAPER', href: '#' },
-	{ title: 'ABOUT', href: '#' },
-	{ title: 'CONTACT', href: '#' },
+	{ title: 'WHITEPAPER', href: '' },
+	// { title: 'ABOUT', href: '#' },
+	// { title: 'CONTACT', href: '#' },
 ];
 
 export const SOCIAL = [

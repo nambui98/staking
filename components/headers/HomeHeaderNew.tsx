@@ -75,6 +75,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 					background: currentPage === '1' ? 'linear-gradient(180deg, rgba(185, 185, 185, 0.4) 0%, rgba(177, 177, 177, 0) 100%)' : '#fff',
 					borderBottom: currentPage === '1' ? '0' : '1px solid #E9EAEF',
 					transition: 'all ease 0.2s ',
+					padding: currentPage === '1' ? '14px 0' : '0'
 				}}
 			>
 				<Toolbar
@@ -103,7 +104,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 									</Link>
 								))}
 							</MainMenu>}
-							<MenuButtonNew customImage={'40px'} />
+							{isMobile992 && <MenuButtonNew customImage={'40px'} />}
 						</>
 					</Container>
 				</Toolbar>
@@ -137,6 +138,9 @@ const MenuItem = styled(Box)((props: menuItemProp) => ({
 	textTransform: 'uppercase',
 	color: '#31373E',
 	cursor: 'pointer',
+	'&:last-of-type': {
+		marginRight: 0
+	},
 	'&:hover': {
 		color: '#FF6D24',
 		animation: props.hover ? 'shake .15s linear' : 'internal',
@@ -153,7 +157,7 @@ const ButtonApp = styled(Button)({
 	boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)',
 	fontFamily: 'Electrofied',
 	fontStyle: 'italic',
-	padding: '12px 16px',
+	padding: '5.5px 16px',
 	borderRadius: '12px',
 	marginRight: 16,
 	...TEXT_STYLE(20, 600, '#FF8A50'),
