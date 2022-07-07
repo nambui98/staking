@@ -110,6 +110,7 @@ const MediaButton: React.FC<any> = () => (
 			</Icon>
 		}
 		sx={{
+			marginTop: { xs: '14px !important', sm: '0' },
 			textTransform: 'none',
 			'&:hover': {
 				textDecoration: 'underline',
@@ -127,6 +128,7 @@ const SupportButton: React.FC<any> = ({ onClick }) => (
 		onClick={onClick}
 		sx={{
 			width: { xs: '100%', md: 'unset' },
+			marginTop: { xs: '14px !important', sm: '0' },
 			maxWidth: 343,
 			borderRadius: '16px',
 			textTransform: 'none',
@@ -494,8 +496,8 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 							direction="row"
 							justifyContent={{ xs: 'center', md: 'start' }}
 							ml={{ xs: 0, md: 3 }}
-							mt={4}
-							mb={{ xs: 4, md: 0 }}
+							mt={{ xs: 2, md: 4 }}
+							mb={{ xs: 3, md: 0 }}
 							spacing={1}
 						>
 							<Icon>
@@ -515,10 +517,12 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 						spacing={4}
 						alignItems={{ xs: 'center', md: 'flex-start' }}
 					>
-						<Box sx={{ pt: 1.5 }}>
+						<Box >
 							<Typography
 								fontSize={14}
 								color="#898E9E"
+								fontWeight={500}
+								textTransform={'uppercase'}
 								sx={{
 									textAlign: { xs: 'center', md: 'left' },
 								}}
@@ -528,7 +532,7 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 							<Stack
 								direction={{ xs: 'row', md: 'column' }}
 								spacing={{ xs: 3, md: 0.5 }}
-								mt={{ xs: 3, md: 1 }}
+								mt={{ xs: 2, md: 1 }}
 							>
 								{MENU_ITEMS.map((el, idx) => (
 									<Button
@@ -561,15 +565,15 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 						<MediaButton />
 						<SupportButton onClick={handleShowForm} />
 					</Stack>
-				</Stack>
+				</Stack >
 				<Box
 					sx={{ width: '100%', height: 1.5, background: '#4E5472', my: 2 }}
 				></Box>
 				<Typography fontSize={14} color="#898E9E" mb={3}>
 					Copyright @2022 beFITTER
 				</Typography>
-			</Container>
-		</Box>
+			</Container >
+		</Box >
 	);
 };
 

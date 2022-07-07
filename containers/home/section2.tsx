@@ -130,6 +130,7 @@ const Section2: NextPage = () => {
 						fontSize={{ xs: 16, sm: 16 }}
 						fontWeight={500}
 						color="#5A6178"
+						lineHeight="22px"
 						// mb={0.5}
 						sx={{
 							'& span': {
@@ -169,7 +170,7 @@ const Section2: NextPage = () => {
 									transition: '.4s all',
 									...styleActiveContent(index)
 								}}>
-									<Typography mt={0.5} fontSize={16} color="#31373E" textAlign="left" >{item.content}</Typography>
+									<Typography mt={0.5} fontSize={16} color="#31373E" textAlign="left" lineHeight="20px">{item.content}</Typography>
 								</Box>}
 							</BoxItemIcon>
 						}

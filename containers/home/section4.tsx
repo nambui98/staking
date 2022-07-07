@@ -66,7 +66,7 @@ const Mobile: React.FC<any> = () => {
 						fontSize={{ xs: 12, sm: 16 }}
 						fontWeight={500}
 						color="#5A6178"
-
+						lineHeight="22px"
 						mt={1}
 					>
 						Stake to earn interest and FitterPass
@@ -75,7 +75,7 @@ const Mobile: React.FC<any> = () => {
 						fontSize={{ xs: 12, sm: 16 }}
 						fontWeight={500}
 						color="#5A6178"
-
+						lineHeight="22px"
 						mt={1}
 					>
 						Level up shoe NFT at some levels & Mint
@@ -84,7 +84,7 @@ const Mobile: React.FC<any> = () => {
 						fontSize={{ xs: 12, sm: 16 }}
 						fontWeight={500}
 						color="#5A6178"
-
+						lineHeight="22px"
 						mt={1}
 					>
 						Governance
@@ -93,7 +93,7 @@ const Mobile: React.FC<any> = () => {
 						fontSize={{ xs: 12, sm: 16 }}
 						fontWeight={500}
 						color="#5A6178"
-
+						lineHeight="22px"
 						mt={1}
 					>
 						Pay rental commission fee
@@ -102,7 +102,7 @@ const Mobile: React.FC<any> = () => {
 						fontSize={{ xs: 12, sm: 16 }}
 						fontWeight={500}
 						color="#5A6178"
-
+						lineHeight="22px"
 						mt={1}
 					>
 						Pay for some in-app purchases
@@ -119,7 +119,7 @@ const Mobile: React.FC<any> = () => {
 							fontSize={{ xs: 12, sm: 16 }}
 							fontWeight={500}
 							color="#5A6178"
-
+							lineHeight="22px"
 						>
 							Earn
 						</Typography>
@@ -130,6 +130,7 @@ const Mobile: React.FC<any> = () => {
 							color="#FF6D24"
 							ml={1}
 							mr={1}
+							lineHeight="22px"
 						>
 							FIU
 						</Typography>
@@ -138,7 +139,7 @@ const Mobile: React.FC<any> = () => {
 							fontSize={{ xs: 12, sm: 16 }}
 							fontWeight={500}
 							color="#5A6178"
-
+							lineHeight="22px"
 						>
 							in With Pet Mode,
 						</Typography>
@@ -147,7 +148,7 @@ const Mobile: React.FC<any> = () => {
 						fontSize={{ xs: 12, sm: 16 }}
 						fontWeight={500}
 						color="#5A6178"
-
+						lineHeight="22px"
 					>
 						Challenges, Staking
 					</Typography>
@@ -212,6 +213,7 @@ const Mobile: React.FC<any> = () => {
 						color="#5A6178"
 						textAlign={"right"}
 						mt={1}
+						lineHeight="22px"
 					>
 						Level up shoe NFT
 					</Typography>
@@ -221,6 +223,7 @@ const Mobile: React.FC<any> = () => {
 						color="#5A6178"
 						textAlign={"right"}
 						mt={1}
+						lineHeight="22px"
 					>
 						Repair shoe NFT
 					</Typography>
@@ -230,6 +233,7 @@ const Mobile: React.FC<any> = () => {
 						color="#5A6178"
 						textAlign={"right"}
 						mt={1}
+						lineHeight="22px"
 					>
 						Transaction fee
 					</Typography>
@@ -239,6 +243,7 @@ const Mobile: React.FC<any> = () => {
 						color="#5A6178"
 						textAlign={"right"}
 						mt={1}
+						lineHeight="22px"
 					>
 						Mint
 					</Typography>
@@ -256,6 +261,7 @@ const Mobile: React.FC<any> = () => {
 							fontWeight={500}
 							color="#5A6178"
 							textAlign={"right"}
+							lineHeight="22px"
 						>
 							Earn
 						</Typography>
@@ -267,6 +273,7 @@ const Mobile: React.FC<any> = () => {
 							ml={1}
 							mr={1}
 							textAlign={"right"}
+							lineHeight="22px"
 						>
 							HEE
 						</Typography>
@@ -277,6 +284,7 @@ const Mobile: React.FC<any> = () => {
 							fontWeight={500}
 							color="#5A6178"
 							textAlign={"right"}
+							lineHeight="22px"
 						>
 							in all game modes
 						</Typography>
@@ -293,7 +301,7 @@ const Section4: NextPage = () => {
 
 	return (
 		<Wrap>
-			<Box display={'flex'} mb={4} alignItems="center" flexDirection={"column"} sx={{
+			<Box display={'flex'} mb={4} mt={10} alignItems="center" flexDirection={"column"} sx={{
 
 			}}>
 				<Typography
@@ -357,7 +365,7 @@ const Section4: NextPage = () => {
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
 								color="#5A6178"
-
+								lineHeight="22px"
 								mt={4}
 							>
 								Stake to earn interest and FitterPass
@@ -366,7 +374,7 @@ const Section4: NextPage = () => {
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
 								color="#5A6178"
-
+								lineHeight="22px"
 								mt={1}
 							>
 								Level up shoe NFT at some levels & Mint
@@ -375,7 +383,7 @@ const Section4: NextPage = () => {
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
 								color="#5A6178"
-
+								lineHeight="22px"
 								mt={1}
 							>
 								Governance
@@ -384,7 +392,7 @@ const Section4: NextPage = () => {
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
 								color="#5A6178"
-
+								lineHeight="22px"
 								mt={2}
 							>
 								Pay rental commission fee
@@ -393,7 +401,7 @@ const Section4: NextPage = () => {
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
 								color="#5A6178"
-
+								lineHeight="22px"
 								mt={2}
 							>
 								Pay for some in-app purchases
@@ -410,7 +418,7 @@ const Section4: NextPage = () => {
 									fontSize={{ xs: 16, sm: 16 }}
 									fontWeight={500}
 									color="#5A6178"
-
+									lineHeight="22px"
 								>
 									Earn
 								</Typography>
@@ -421,6 +429,7 @@ const Section4: NextPage = () => {
 									color="#FF6D24"
 									ml={1}
 									mr={1}
+									lineHeight="22px"
 								>
 									FIU
 								</Typography>
@@ -429,7 +438,7 @@ const Section4: NextPage = () => {
 									fontSize={{ xs: 16, sm: 16 }}
 									fontWeight={500}
 									color="#5A6178"
-
+									lineHeight="22px"
 								>
 									in With Pet Mode,
 								</Typography>
@@ -438,7 +447,7 @@ const Section4: NextPage = () => {
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
 								color="#5A6178"
-
+								lineHeight="22px"
 							>
 								Challenges, Staking
 							</Typography>
@@ -524,6 +533,7 @@ const Section4: NextPage = () => {
 								fontWeight={800}
 								color="#31373E"
 								// mb={5}
+								// lineHeight="22px"
 								mr={2}
 								width="250px"
 								textAlign={"right"}
@@ -536,6 +546,7 @@ const Section4: NextPage = () => {
 								color="#5A6178"
 								textAlign={"right"}
 								mt={4}
+								lineHeight="22px"
 							>
 								Level up shoe NFT
 							</Typography>
@@ -545,6 +556,7 @@ const Section4: NextPage = () => {
 								color="#5A6178"
 								textAlign={"right"}
 								mt={2}
+								lineHeight="22px"
 							>
 								Repair shoe NFT
 							</Typography>
@@ -554,6 +566,7 @@ const Section4: NextPage = () => {
 								color="#5A6178"
 								textAlign={"right"}
 								mt={2}
+								lineHeight="22px"
 							>
 								Transaction fee
 							</Typography>
@@ -563,6 +576,7 @@ const Section4: NextPage = () => {
 								color="#5A6178"
 								textAlign={"right"}
 								mt={2}
+								lineHeight="22px"
 							>
 								Mint
 							</Typography>
@@ -580,6 +594,7 @@ const Section4: NextPage = () => {
 									fontWeight={500}
 									color="#5A6178"
 									textAlign={"right"}
+									lineHeight="22px"
 								>
 									Earn
 								</Typography>
@@ -591,6 +606,7 @@ const Section4: NextPage = () => {
 									ml={1}
 									mr={1}
 									textAlign={"right"}
+									lineHeight="22px"
 								>
 									HEE
 								</Typography>
@@ -600,6 +616,7 @@ const Section4: NextPage = () => {
 									fontWeight={500}
 									color="#5A6178"
 									textAlign={"right"}
+									lineHeight="22px"
 								>
 									in all game modes.
 								</Typography>
@@ -618,18 +635,19 @@ export default Section4;
 const Wrap = styled(Stack)({
 	padding: '0 16px',
 	maxWidth: '1120px',
-	margin: '29px auto 50px',
+	margin: '29px auto 0px',
 	backgroundImage: `url(assets/bg_sec4.png)`,
-	height: '100%',
+	// height: '100%',
 	backgroundPosition: 'center',
 	backgroundRepeat: 'no-repeat',
 	backgroundSize: 'cover',
-	marginTop: "100px !important",
+	marginTop: "0px !important",
+	marginBottom: "0px !important",
 	'@media (max-width: 1100px)': {
-		margin: '29px auto 80px',
+		margin: '29px auto 0px',
 	},
 	'@media (min-width: 560px)': {
-		margin: '29px auto 80px',
+		margin: '29px auto 0px',
 	}
 
 })
