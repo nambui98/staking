@@ -303,7 +303,7 @@ const ButtonBuyNow = styled(Button)({
 })
 const Busd = styled(Box)({
   ...TEXT_STYLE(20, 600),
-  marginRight: 10,
+  marginRight: 30,
   display: 'flex',
   alignItems: 'center',
   marginTop: 19,
@@ -312,7 +312,7 @@ const Busd = styled(Box)({
   },
   '@media (min-width: 768px)': {
     ...TEXT_STYLE(24, 600),
-    marginRight: 20,
+    marginRight: 49,
     minWidth: 135,
     marginTop: 17
   }
@@ -326,7 +326,7 @@ const busdLine = {
 }
 const Price = styled(Stack)({
   flexDirection: 'row',
-  justifyContent: 'space-between',
+  // justifyContent: 'space-between',
   alignItems: 'flex-start',
   marginBottom: 24
 })
