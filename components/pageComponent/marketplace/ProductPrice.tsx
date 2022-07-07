@@ -183,10 +183,14 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       <Price>
         <Box>
           <Busd><img src={MARKETPLACE_ICON.busdIcon} /> {boxDetail.price} BUSD</Busd>
-          <Busd sx={busdLine}><img src={MARKETPLACE_ICON.busdIcon} /> {boxDetail.oldPrice} BUSD</Busd>
+          {/* <Busd sx={busdLine}><img src={MARKETPLACE_ICON.busdIcon} /> {boxDetail.oldPrice} BUSD</Busd> */}
         </Box>
         <Box>
-          <ButtonBuyNow onClick={handleTogglePopup}><Box>Buy now <img className="animationArrow" src={MARKETPLACE_ICON.arrowRightIcon} /></Box></ButtonBuyNow>
+          <ButtonBuyNow>
+            <Box>SOLD OUT!!!
+              {/* <img className="animationArrow" src={MARKETPLACE_ICON.arrowRightIcon} /> */}
+            </Box>
+          </ButtonBuyNow>
           <MaxBox>Max {boxDetail.maxBox} boxes/wallet</MaxBox>
         </Box>
       </Price>
@@ -256,7 +260,8 @@ const BoxTypeItem = styled(Box)((props: boxTypeProps) => ({
   background: props.active ? '#FFE2D3' : ''
 }))
 const ButtonBuyNow = styled(Button)({
-  background: 'radial-gradient(75% 75% at 21.87% 25%, #FFCC77 18.94%, #FF612F 89.59%)',
+  // background: 'radial-gradient(75% 75% at 21.87% 25%, #FFCC77 18.94%, #FF612F 89.59%)',
+  background: '#FF6F61 !important',
   padding: '10.5px 16px 10.5px 24px',
   fontFamily: 'Electrofied',
   ...TEXT_STYLE(20, 600),
@@ -269,8 +274,10 @@ const ButtonBuyNow = styled(Button)({
   '@media (min-width: 768px)': {
     padding: 3,
     ...TEXT_STYLE(24, 600),
-    color: '#FF6D24',
-    width: 240,
+    // color: '#FF6D24',
+    color: '#FF6F61',
+    // width: 240,
+    width: 215,
     '& img': {
       filter: 'invert(55%) sepia(46%) saturate(3957%) hue-rotate(344deg) brightness(101%) contrast(101%)'
     }
@@ -284,8 +291,9 @@ const ButtonBuyNow = styled(Button)({
       borderRadius: 14,
       padding: '5px 15px 5px 22px',
       '&:hover': {
-        background: 'radial-gradient(75% 75% at 21.87% 25%, #FFCC77 18.94%, #FF612F 89.59%)',
-        color: '#ffffff',
+        // background: 'radial-gradient(75% 75% at 21.87% 25%, #FFCC77 18.94%, #FF612F 89.59%)',
+        // background: '#ffffff',
+        // color: '#ffffff',
         '& img': {
           filter: 'unset'
         }
@@ -298,6 +306,7 @@ const Busd = styled(Box)({
   marginRight: 10,
   display: 'flex',
   alignItems: 'center',
+  marginTop: 19,
   '& img': {
     marginRight: 8
   },
@@ -305,6 +314,7 @@ const Busd = styled(Box)({
     ...TEXT_STYLE(24, 600),
     marginRight: 20,
     minWidth: 135,
+    marginTop: 17
   }
 })
 const busdLine = {
