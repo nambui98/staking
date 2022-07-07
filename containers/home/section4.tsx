@@ -509,7 +509,7 @@ const Section4: NextPage = () => {
 							<Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
 
 								<img width="40px" src="assets/HEE.png" />
-								<Typography fontSize="56px" className="text_gadient_second">
+								<Typography fontSize="56px" fontFamily='Electrofied' className="text_gadient_second">
 									HEE
 								</Typography>
 								{/* <Typography
