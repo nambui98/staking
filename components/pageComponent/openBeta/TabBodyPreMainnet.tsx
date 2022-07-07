@@ -70,7 +70,7 @@ export const TabBody = () => {
             </Stack>
           </KeyNote>
           <Typography sx={{ ...TEXT_STYLE(24, 600, '#31373E'), '& span': { color: '#FF6D24' } }} >
-            The total prize of the Pre-mainnet: <span>2000 BUSD</span>, have a chance to get a <span>10$ ticket</span> to buy IDO, chance to buy shoes on SHOP, have a chance to mind your shoes.
+            The total prize of the Pre-mainnet: <span>2000 BUSD</span>, chance to buy shoes on SHOP, have a chance to mind your shoes.
           </Typography>
           {/* <TitleImage><img src={TAB_BODY_PRE_MAINNET.reward.titleImage2} /></TitleImage>
           <BodyGetReward>{TAB_BODY_PRE_MAINNET.reward.bodyGetReward}</BodyGetReward> */}
