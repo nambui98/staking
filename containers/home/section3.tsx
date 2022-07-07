@@ -385,7 +385,7 @@ const Section3: NextPage = () => {
 														position: 'absolute',
 														inset: '0',
 														opacity: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "1" : "0",
-														transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "scale(1)" : "scale(0.5)"
+														transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? (isMobile ? "scale(1)" : "scale(1.3)") : (isMobile ? "scale(0.5)" : "scale(0.8)")
 														// width: "200px",
 														// height: "200px",
 														// transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "scale(1)" : "scale(1)"
@@ -396,7 +396,7 @@ const Section3: NextPage = () => {
 														position: 'absolute',
 														inset: '0',
 														opacity: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "0" : "1",
-														transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "scale(1)" : "scale(0.5)"
+														transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? (isMobile ? "scale(1)" : "scale(1.3)") : (isMobile ? "scale(0.5)" : "scale(0.8)")
 														// width: "200px",
 														// height: "200px",
 
