@@ -74,8 +74,8 @@ const RoadmapDesktop: React.FC<any> = () => {
 			sx={{
 				position: 'relative',
 				overflow: 'hidden',
-				height: 895,
-				marginTop: "100px !important"
+				height: "100%",
+				marginTop: "88px !important"
 
 			}}
 		>
