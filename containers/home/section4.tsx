@@ -301,7 +301,7 @@ const Section4: NextPage = () => {
 
 	return (
 		<Wrap>
-			<Box display={'flex'} mb={4} mt={10} alignItems="center" flexDirection={"column"} sx={{
+			<Box display={'flex'} mb={4} mt={{ xs: 10, sm: 0 }} alignItems="center" flexDirection={"column"} sx={{
 
 			}}>
 				<Typography
