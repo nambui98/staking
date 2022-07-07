@@ -32,7 +32,7 @@ function TabPanel(props: TabPanelProps) {
 	return (
 		<Box
 			sx={{
-				height: { xs: '50%', sm: '40%' },
+				height: { xs: '50%', sm: '50%' },
 				transition: 'all ease .6s',
 				opacity: value !== index ? '0' : '1',
 				position: 'absolute',
