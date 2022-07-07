@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Typography } from '@mui/material';
+import { Stack, Typography, useMediaQuery } from '@mui/material';
 import { END_DATE_EVENT, END_DATE_EVENT_EXTRA_HOURS } from '../../constants/common';
 
 interface IProps {
@@ -19,6 +19,7 @@ const CountdownClockNew: React.FC<IProps> = ({ endDate, sxTitle, sxSubTitle }) =
 	const [hrText, setHrText] = React.useState('00');
 	const [minText, setMinText] = React.useState('00');
 	const [secText, setSecText] = React.useState('00');
+	const isMobile = useMediaQuery('(max-width: 767px)')
 
 	React.useEffect(() => {
 		const counter = setInterval(() => {
@@ -59,7 +60,7 @@ const CountdownClockNew: React.FC<IProps> = ({ endDate, sxTitle, sxSubTitle }) =
 				>
 					<Typography
 						variant="subtitle1"
-						fontSize={40}
+						fontSize={isMobile ? 24 : 40}
 						fontStyle="italic"
 						color="#31373E"
             sx={flex}
@@ -68,7 +69,7 @@ const CountdownClockNew: React.FC<IProps> = ({ endDate, sxTitle, sxSubTitle }) =
 						{count}
 					</Typography>
 					<Typography
-						fontSize={16}
+						fontSize={isMobile ? 8 : 16}
 						fontStyle="italic"
 						color="#31373E"
 						fontWeight="bold"

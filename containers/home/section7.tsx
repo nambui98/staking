@@ -15,12 +15,6 @@ import {
 import { TEAM } from '../../constants/common';
 
 const Section7: React.FC<any> = ({ sxProps }) => {
-	const data = [
-		{
-			name: 'thi truong',
-
-		}
-	]
 	return (
 		<Container sx={{ ...sxProps, }}>
 			{/* <SectionTitle
@@ -28,7 +22,7 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 				subtitle={TEAM.SUBTITLE}
 				sxProps={{ mb: 7 }}
 			/> */}
-			<Box display={'flex'} mb={10} alignItems="center" justifyContent="center">
+			<Box display={'flex'} mt={{ xs: '88px', sm: '0px' }} mb={{ xs: 3, sm: 10 }} alignItems="center" justifyContent="center">
 
 				<Typography
 					fontSize={{ xs: 20, sm: 56 }}
@@ -80,7 +74,7 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 						fontSize: { xs: "13px", sm: '16px' },
 						mt: { xs: 1, sm: '0px' }
 					}}>
-						This is the founder of <span style={{ color: '#55C8FC' }} >
+						Thi is the founder of <span style={{ color: '#55C8FC' }} >
 							Icetea Labs
 						</span> , the company behind Red Kite Launchpad and GameFi.org gaming hub. He is also the incubator, advisor or investor of a couple of blockchain projects such as Faraland, NFTrade, The Unfettered…
 					</Typography>

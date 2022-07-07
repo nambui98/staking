@@ -25,10 +25,13 @@ const BounceIconButton: React.FC<any> = ({
 		sx={{
 			borderRadius: '12px',
 			py: 0.5,
+			'& span': {
+				transition: '.5s all cubic-bezier(0.7, -0.4, 0.4, 1.4)',
+
+			},
 			'&:hover': {
 				'& span': {
 					background: `url(${iconActive}) no-repeat center`,
-					transition: '.3s all cubic-bezier(0.7, -0.4, 0.4, 1.4)',
 					transform: `translateY(-8px)`,
 				},
 				'& div': {
