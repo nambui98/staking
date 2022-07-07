@@ -13,14 +13,14 @@ import {
 	useMediaQuery,
 	styled,
 } from '@mui/material';
-import { ICON_MENU_DARK, ICON_MENU_WHITE, MENU_ITEMS, MENU_ITEMS_MOBILE } from '../../constants/common';
+import { ICON_MENU_DARK, ICON_MENU_WHITE, MENU_ITEMS_HOME, MENU_ITEMS_MOBILE } from '../../constants/common';
 import { IconImage } from '../styled';
 import { toast } from 'react-toastify';
 
 const MenuButton: React.FC<any> = ({ dark = true, customImage }) => {
 	const ICON = dark ? ICON_MENU_DARK : ICON_MENU_WHITE;
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
-	const isMobile = useMediaQuery('(max-width: 767px');
+	const isMobile = useMediaQuery('(max-width: 767px)');
 
 	const anchorRef = React.useRef<HTMLButtonElement>(null);
 	const [open, setOpen] = React.useState<boolean>(false);
@@ -124,7 +124,7 @@ const MenuButton: React.FC<any> = ({ dark = true, customImage }) => {
 										justifyContent="center"
 										sx={{ height: '100%' }}
 									>
-										{(isMobile ? MENU_ITEMS_MOBILE : MENU_ITEMS).map(({ title, href }) => (
+										{(isMobile ? MENU_ITEMS_MOBILE : MENU_ITEMS_HOME).map(({ title, href }) => (
 											href !== '#' ? <Link href={href} key={title} target={'_blank'}>
 												<ButtonLink
 													disabled={!href}
