@@ -32,7 +32,7 @@ function TabPanel(props: TabPanelProps) {
 	return (
 		<Box
 			sx={{
-				height: { xs: '50%', sm: '50%' },
+				height: { xs: '50%', sm: '65%' },
 				transition: 'all ease .6s',
 				opacity: value !== index ? '0' : '1',
 				position: 'absolute',
@@ -339,7 +339,7 @@ const Section3: NextPage = () => {
 									}}
 									onSwiper={(s) => handleSwiper(s)}
 									onSlideChange={handleSlideChange}
-									slideToClickedSlide={true}
+									slideToClickedSlide={false}
 									slidesPerView={isTablet ? isMobile ? 2 : 3 : 5}
 									spaceBetween={isTablet ? isMobile ? 0 : 15 : 100}
 									pagination={false}
@@ -354,10 +354,11 @@ const Section3: NextPage = () => {
 											return <SwiperSlide key={index2 + "slide2"} style={{ display: "flex", alignItems: "center" }}>
 
 												<Box sx={{
-													cursor: 'pointer', position: 'relative', height: "100%",
+													// cursor: 'pointer', 
+													position: 'relative', height: "100%",
 													width: "100%",
 												}} onClick={() => {
-													setSlideActiveIndex(index2 + (isTablet ? isMobile ? 2 : 3 : 5))
+													// setSlideActiveIndex(index2 + (isTablet ? isMobile ? 2 : 3 : 5))
 												}}>
 													<Box sx={{
 														transition: '.8s all',
