@@ -10,7 +10,8 @@ import {
 	useScrollTrigger,
 	styled,
 	Stack,
-	BoxProps
+	BoxProps,
+	Button
 } from '@mui/material';
 import MenuButton from '../buttons/MenuButton';
 import {
@@ -25,8 +26,6 @@ import MenuButtonNew from '../buttons/MenuButtonNew';
 import { toast } from 'react-toastify';
 
 const MAIN_MENU = [
-	// { name: 'GET THE APP', link: '#' },
-	// { name: 'Staking', link: '#' },
 	{ name: 'HUB', link: 'https://hub.befitter.io/' },
 	{ name: 'Litepaper', link: '/litePaper' }
 ]
@@ -48,17 +47,13 @@ const Logo: React.FC<any> = () => {
 	);
 };
 const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, currentPage }) => {
-	const { asPath } = useRouter();
-	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
-	const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 	const [statusPopup, setStatusPopup] = useState(false);
 	const isMobile992 = useMediaQuery('(max-width:992px)');
-	console.log(currentPage, 333)
 	const stickTrigger = useScrollTrigger({
 		disableHysteresis: true,
 		threshold: 200,
 	});
-	
+
 	const handleCommingSoon = () => {
 		toast('COMING SOON!', {
 			position: "top-center",
@@ -88,7 +83,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 						borderBottom: stickTrigger ? '1px solid #E9EAEF' : 'unset',
 					}}
 				>
-					<Container					
+					<Container
 						sx={{
 							display: 'flex',
 							justifyContent: 'space-between',
@@ -100,11 +95,11 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 						<>
 							<Logo />
 							{!isMobile992 && <MainMenu>
-								<MenuItem onClick={() => setStatusPopup(true)}  active={true}>GET THE APP</MenuItem>
-								<MenuItem onClick={() => handleCommingSoon()} active={false}>STAKING</MenuItem>
+								<ButtonApp onClick={() => setStatusPopup(true)}><span>GET THE APP</span></ButtonApp>
+								<MenuItem onClick={() => handleCommingSoon()} hover={true}>STAKING</MenuItem>
 								{MAIN_MENU?.map((item, index) => (
 									<Link key={index} href={item.link}>
-										<MenuItem onClick={() => index === 0 ? handleCommingSoon() : null} active={false}>{item.name}</MenuItem>
+										<MenuItem onClick={() => index === 0 ? handleCommingSoon() : null} hover={true}>{item.name}</MenuItem>
 									</Link>
 								))}
 							</MainMenu>}
@@ -120,24 +115,59 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 
 export default HomeHeaderNew;
 
+const LinkItem = styled(Link)({
+	'&:hover': {
+
+	}
+})
 const MainMenu = styled(Stack)({
 	flexDirection: 'row',
 	alignItems: 'center',
 	marginLeft: 'auto',
 })
 type menuItemProp = BoxProps & {
-	active: boolean
+	hover: boolean
 }
 const MenuItem = styled(Box)((props: menuItemProp) => ({
 	padding: '12px 16px',
 	borderRadius: '12px',
 	marginRight: 16,
 	...TEXT_STYLE(20, 600, '#31373E'),
-	background: props.active ? '#FFFFFF' : 'transparent',
-	boxShadow: props.active ? '0px 2px 8px rgba(0, 0, 0, 0.15)' : 'none',
-	fontFamily: props.active ? 'Electrofied': 'BeVietnamPro',	
+	fontFamily: 'BeVietnamPro',
 	textTransform: 'uppercase',
-	fontStyle: props.active ? 'italic' : 'normal',
-	color: props.active ? '#FF8A50' : '#31373E',
+	color: '#31373E',
 	cursor: 'pointer',
+	'&:hover': {
+		color: '#FF6D24',
+		animation: props.hover ? 'shake .15s linear' : 'internal',
+	},
+	'@keyframes shake': {
+		'0%,100%': { transform: `translateY(0)` },
+		'30%': { transform: 'translateY(-10px)' },
+		'60%': { transform: 'translateY(10px)' },
+		'90%': { transform: 'translateY(-10px)' },
+	},
 }))
+const ButtonApp = styled(Button)({
+	background: '#FFFFFF',
+	boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)',
+	fontFamily: 'Electrofied',
+	fontStyle: 'italic',
+	padding: '12px 16px',
+	borderRadius: '12px',
+	marginRight: 16,
+	...TEXT_STYLE(20, 600, '#FF8A50'),
+	'&:hover': {
+		background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
+		color: '#ffffff',
+		'& span': {
+			animation: 'shake .15s linear',
+		}
+	},
+	'@keyframes shake': {
+		'0%,100%': { transform: `translateY(0)` },
+		'30%': { transform: 'translateY(-10px)' },
+		'60%': { transform: 'translateY(10px)' },
+		'90%': { transform: 'translateY(-10px)' },
+	},
+})

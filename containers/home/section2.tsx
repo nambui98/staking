@@ -137,7 +137,7 @@ const Section2: NextPage = () => {
 								marginTop: '7px'
 							}
 						}}
-						textAlign="center"><span>beFITTER</span>’s ecosystem helps users improve mental & physical health,<br></br> gain achievements and still get monetary incentives.
+						textAlign="center"><span>beFITTER’s</span> ecosystem helps users improve mental & physical health,<br></br> gain achievements and still get monetary incentives.
 					</Typography>
 				</Box>
 			</Box >

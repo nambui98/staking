@@ -6,11 +6,17 @@ export const SECTION_TITLE_BG = 'assets/backgrounds/section-title.png';
 export const ICON_MENU_DARK = 'assets/icons/menu-dark.svg';
 export const ICON_MENU_WHITE = 'assets/icons/menu-white.svg';
 export const MENU_ITEMS = [
-	// { title: 'LitePaper', href: 'https://cdn.befitter.io/lp' },
-	{ title: 'beFITTER hub', href: 'https://hub.befitter.io/' },
-	{ title: 'LitePaper', href: '/litePaper' },
-	// { title: 'Pitch deck', href: '' },
-	{ title: 'Whitepaper', href: '' },
+	{ title: 'WHITEPAPER', href: '#' },
+	{ title: 'ABOUT', href: '#' },
+	{ title: 'CONTACT', href: '#' },
+];
+export const MENU_ITEMS_MOBILE = [
+	{ title: 'Staking', href: '#' },
+	{ title: 'HUB', href: 'https://hub.befitter.io/' },
+	{ title: 'LITEPAPER', href: '/litePaper' },
+	{ title: 'WHITEPAPER', href: '#' },
+	{ title: 'ABOUT', href: '#' },
+	{ title: 'CONTACT', href: '#' },
 ];
 
 export const SOCIAL = [

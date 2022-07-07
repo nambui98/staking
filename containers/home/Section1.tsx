@@ -92,10 +92,11 @@ export const Section1: React.FC<IProps> = ({handleStatusPopup, statusPopup}) => 
           );
         })}
       </Swiper>
-      {isMobile992 ? <ButtonGetApp onClick={() => handleStatusPopup(true)}>GET THE APP</ButtonGetApp> : <BoxCountDown>
-        <TitleCountDown>IDO IN</TitleCountDown>
+      {isMobile992 && <ButtonGetApp onClick={() => handleStatusPopup(true)}>GET THE APP</ButtonGetApp>}
+      <BoxCountDown>
+        <TitleCountDown><img src={'assets/text-ido.png'} /></TitleCountDown>
         <CountdownClockNew endDate={'2022-07-15T13:00:00.000Z'} />
-      </BoxCountDown>}
+      </BoxCountDown>
     </Wrap>
   )
 }
@@ -107,7 +108,7 @@ const Wrap = styled(Stack)({
 })
 const ButtonGetApp = styled(Box)({
   position: 'absolute',
-  bottom: 24,
+  bottom: 80,
   width: 198,
   left: '50%',
   zIndex: 2,
@@ -131,19 +132,28 @@ const BoxCountDown = styled(Stack)({
   transform: 'translateX(-50%)',
   bottom: 0,
   background: 'linear-gradient(90deg, rgba(255, 109, 36, 0) 0%, rgba(255, 109, 36, 0.52) 79.35%, rgba(255, 109, 36, 0) 95.65%)',
-  padding: 16,
+  padding: 8,
   flexDirection: 'row',
   alignItems: 'center',
   width: '100%',
   maxWidth: 1120,
   justifyContent: 'center',
+  '@media (max-width: 767px)': {
+    flexDirection: 'column',
+    padding: '5.5px 8px',
+    justifyContent: 'center',
+    background: 'linear-gradient(90deg, rgba(255, 109, 36, 0) 0%, rgba(255, 109, 36, 0.7) 65.76%, rgba(255, 109, 36, 0) 95.65%)'
+  }
 })
-const TitleCountDown = styled(Typography)({
-  background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
-  '-webkit-background-clip': 'text',
-  '-webkit-text-fill-color': 'transparent',
+const TitleCountDown = styled(Box)({
   ...TEXT_STYLE(40, 700),
-  fontFamily: 'Electrofied',
-  fontStyle: 'italic',
-  paddingRight: 14
+  marginRight: 14,
+  lineHeight: 0,
+  '@media (max-width: 767px)': {
+    marginRight: 'auto',
+    marginLeft: 30,
+    '& img': {
+      width: 90,     
+    }
+  }
 })
