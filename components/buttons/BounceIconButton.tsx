@@ -24,7 +24,7 @@ const BounceIconButton: React.FC<any> = ({
 		target="_blank"
 		sx={{
 			borderRadius: '12px',
-			py: 0.5,
+			// py: 0.5,
 			'& span': {
 				transition: '.5s all cubic-bezier(0.7, -0.4, 0.4, 1.4)',
 
@@ -44,8 +44,8 @@ const BounceIconButton: React.FC<any> = ({
 			component={'span'}
 			sx={{
 				cursor: 'pointer',
-				width: width + 2,
-				height: height + 2,
+				width: width,
+				height: height,
 				background: `url(${icon}) no-repeat center`,
 			}}
 		></Box>

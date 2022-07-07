@@ -79,7 +79,7 @@ const RoadmapDesktop: React.FC<any> = () => {
 
 			}}
 		>
-			<Box display={'flex'} mb={10} alignItems="center" justifyContent="center">
+			<Box display={'flex'} mb={0} alignItems="center" justifyContent="center">
 
 				<Typography
 					fontSize={{ xs: 20, sm: 56 }}

@@ -50,9 +50,9 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 						<Box sx={{ width: { xs: "104px", sm: '100%' }, position: "relative" }}>
 
 							<img width={"100%"} src="assets/partners/icetealabs_director.png" />
-							<Box sx={{ display: { xs: "none", sm: 'block' }, position: "absolute", bottom: "-20px", right: "-20px" }}>
+							<Box sx={{ position: "absolute", bottom: "0px", right: "0px", transform: 'translate(50%, 50%)', width: { xs: '24px', sm: '48px' } }}>
 
-								<img width={"48px"} src="assets/symbol.png" />
+								<img width={"100%"} src="assets/symbol.png" />
 							</Box>
 						</Box>
 						<Typography
@@ -72,7 +72,9 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 						color: "#5A6178",
 						fontWeight: "500",
 						fontSize: { xs: "13px", sm: '16px' },
-						mt: { xs: 1, sm: '0px' }
+						mt: { xs: 1, sm: 1 },
+						lineHeight: '22px'
+
 					}}>
 						Thi is the founder of <span style={{ color: '#55C8FC' }} >
 							Icetea Labs
@@ -83,7 +85,8 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 						color: "#5A6178",
 						fontWeight: "500",
 						fontSize: { xs: "13px", sm: '16px' },
-						mb: { xs: 3, sm: '0px' }
+						mb: { xs: 3, sm: '0px' },
+						lineHeight: '22px'
 					}}>
 						Before founding Icetea Labs, Thi worked for Kyber Network and FPT Software.
 					</Typography>
@@ -98,9 +101,9 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 						<Box sx={{ width: { xs: "104px", sm: '100%' }, position: "relative" }}>
 
 							<img width={"100%"} src="assets/partners/dao_director.png" />
-							<Box sx={{ display: { xs: "none", sm: 'block' }, position: "absolute", bottom: "-20px", right: "-20px" }}>
+							<Box sx={{ position: "absolute", bottom: "0px", right: "0px", transform: 'translate(50%, 50%)', width: { xs: '24px', sm: '48px' } }}>
 
-								<img width={"48px"} src="assets/symbol.png" />
+								<img width={"100%"} src="assets/symbol.png" />
 							</Box>
 						</Box>
 
@@ -121,7 +124,8 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 						color: "#5A6178",
 						fontWeight: "500",
 						fontSize: { xs: "13px", sm: '16px' },
-						mt: { xs: 1, sm: '0px' }
+						mt: { xs: 1, sm: 1 },
+						lineHeight: '22px'
 					}}>
 						Hatu is the co-founder, chief marketing, and strategy in <span style={{ color: '#55C8FC' }} >
 							Dao Maker
@@ -132,7 +136,8 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 						color: "#5A6178",
 						fontWeight: "500",
 						fontSize: { xs: "13px", sm: '16px' },
-						mb: { xs: 3, sm: '0px' }
+						mb: { xs: 3, sm: '0px' },
+						lineHeight: '22px'
 					}}>
 						Before co-founding Dao Maker, he had years of experience in analytical roles, marketing, management, and entrepreneurial ventures.
 					</Typography>

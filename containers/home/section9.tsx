@@ -30,7 +30,7 @@ const StayInTouch: React.FC<any> = ({ sxProps }) => {
 		<Stack
 			justifyContent="center"
 			alignItems="center"
-			spacing={{ xs: 1, md: 6 }}
+			spacing={{ xs: 2, md: 6 }}
 
 		// sx={{ background: '#F8F9FB', py: { xs: 5, md: 10 }, ...sxProps }}
 		>
@@ -57,7 +57,7 @@ const StayInTouch: React.FC<any> = ({ sxProps }) => {
 				</Stack>
 			)}
 			{isSm && (
-				<Grid container justifyContent="center" rowSpacing={3}>
+				<Grid container justifyContent="center" rowSpacing={1}>
 					{SOCIAL.map(({ icon, iconActive, href }, idx) => (
 						<Grid item xs={3} key={idx}>
 							<Stack alignItems="center">
@@ -65,6 +65,7 @@ const StayInTouch: React.FC<any> = ({ sxProps }) => {
 									href={href}
 									icon={icon}
 									iconActive={iconActive}
+
 								/>
 							</Stack>
 						</Grid>
@@ -85,11 +86,11 @@ const Section9: React.FC<any> = ({ sxProps }) => {
 			display: 'flex',
 			flexDirection: 'column',
 			mt: {
-				xs: '88px', sm: '0px'
+				xs: '0', sm: '0px'
 			}
 
 		}}>
-			<Box sx={{ position: 'relative', marginTop: 'auto', display: 'flex', justifyContent: 'center', marginBottom: '80px', columnGap: '20px' }}>
+			<Box sx={{ position: 'relative', marginTop: 'auto', display: 'flex', justifyContent: 'center', marginBottom: { xs: 1, sm: '80px' }, columnGap: '20px' }}>
 				<Box sx={{
 					height: '495px',
 					// width: '100%',
@@ -99,7 +100,7 @@ const Section9: React.FC<any> = ({ sxProps }) => {
 					<img height={"100%"} style={{ objectFit: 'contain' }} width="100%" src="assets/sec9.png" />
 				</Box>
 				<StayInTouch />
-			</Box>
+			</Box >
 			<MainFooter />
 		</Box >
 

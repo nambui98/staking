@@ -379,3 +379,49 @@ body {
 text-fill-color: transparent;
 	
 }
+
+
+
+
+// .swiper {
+//   width: 450px;
+//   height: 100%;
+//   position: relative;
+//   overflow: hidden;
+//   list-style: none;
+//   padding: 0;
+//   z-index: 1;
+// }
+
+// .swiper-wrapper {
+//   position: relative;
+//   width: 100%;
+//   height: 100%;
+//   margin: 0;
+//   padding: 0;
+//   z-index: 1;
+//   display: flex;
+//   transition-property: transform;
+//   box-sizing: content-box;
+//   list-style: none;
+// }
+
+// .swiper-container-pointer-events {
+//   touch-action: pan-y;
+// }
+
+// .swiper-slide {
+//   flex-shrink: 0;
+//   width: 100px;
+//   height: 200px;
+//   background-color: lightblue;
+//   position: relative;
+//   transition-property: transform;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .swiper-slide.swiper-slide-active {
+//   background-color: coral;
+// }
