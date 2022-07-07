@@ -26,6 +26,7 @@ type itemType = {
 }
 const Section2: NextPage = () => {
 	const [activeIndex, setActiveIndex] = useState<number>(0);
+	const [auto, setAuto] = useState<boolean>(true);
 	const isMobile = useMediaQuery('(max-width: 767px)');
 	const data: itemType[] = [
 		{
@@ -82,19 +83,23 @@ const Section2: NextPage = () => {
 		}
 
 	}
+	let intervalId: any;
 	useEffect(() => {
-		const intervalId = setInterval(() => {
-			setActiveIndex(prevActiveIndex => {
-				if (prevActiveIndex < 4 && prevActiveIndex != null) {
-					return prevActiveIndex + 1;
-				} else {
-					return 0;
-				}
-			});
-		}, 5000);
+		if (auto) {
+
+			intervalId = setInterval(() => {
+				setActiveIndex(prevActiveIndex => {
+					if (prevActiveIndex < 4 && prevActiveIndex != null) {
+						return prevActiveIndex + 1;
+					} else {
+						return 0;
+					}
+				});
+			}, 5000);
+		}
 
 		return () => clearInterval(intervalId);
-	}, []);
+	}, [auto]);
 
 	return (
 		// <Box height={"100%"}>
@@ -149,28 +154,39 @@ const Section2: NextPage = () => {
 					{
 						data.map((item: itemType, index: number) => {
 							const Icon = isMobile ? item.iconMobile : item.icon;
-							return <BoxItemIcon mb={{ xs: 2, md: 2 }} key={index} onClick={() => { setActiveIndex(index) }} sx={{ cursor: 'pointer' }}>
+							return <BoxItemIcon mb={{ xs: 2, md: 2 }} key={index} sx={{ cursor: 'pointer' }} onClick={() => {
+								setAuto(false)
+								setTimeout(() => {
+									setAuto(true)
+								}, 5000);
+								setActiveIndex(index)
+							}} >
 								<Box display="flex" justifyItems="center" alignItems={"center"} sx={{
 									'@media (max-width: 767px)': {
 										flexDirection: 'column',
-									}
+									},
+									cursor: 'pointer'
 								}}>
 									<Icon style={{
-										transition: '.4s all', fill: activeIndex == index ? "#FF6D24" : "#898E9E"
+										transition: '.7s all',
+										// opacity: activeIndex == index ? 1 : 0,
+										fill: activeIndex == index ? "#FF6D24" : "#898E9E",
+
 									}} />
 									<Typography sx={{
 										transition: '.4s all', color: activeIndex == index ? "#FF6D24" : "#31373E",
+										fontSize: activeIndex == index ? '24px' : '18px',
 										'@media (max-width: 767px)': {
 											...TEXT_STYLE(14, 500),
 											marginTop: '5px'
 										}
-									}} fontWeight={500} fontSize={24}>{item.title}</Typography>
+									}} fontWeight={500}>{item.title}</Typography>
 								</Box>
 								{!isMobile && <Box sx={{
 									transition: '.4s all',
 									...styleActiveContent(index)
 								}}>
-									<Typography mt={0.5} fontSize={16} color="#31373E" textAlign="left" lineHeight="20px">{item.content}</Typography>
+									<Typography mt={0.5} fontSize={16} color="#31373E" sx={{ zIndex: 0, pointerEvents: 'none' }} textAlign="left" lineHeight="20px">{item.content}</Typography>
 								</Box>}
 							</BoxItemIcon>
 						}
@@ -185,9 +201,25 @@ const Section2: NextPage = () => {
 				}}>
 					<Typography mt={0.5} fontSize={14} color="#5A6178" >{data[activeIndex].content}</Typography>
 				</Box>}
-				<BoxImage flex={1}>
-					<img width={"100%"} src={data[activeIndex].image} alt="" />
-				</BoxImage>
+
+				<Box flex={1} sx={{ position: 'relative', height: '100%', width: '100%' }}>
+					{
+						data.map((item: itemType, index: number) => {
+							return <BoxImage sx={{
+								position: 'absolute',
+								top: '50%',
+								transform: {
+									xs: 'translateY(0)', sm: 'translateY(-50%)'
+								},
+								transition: 'all .6s',
+								opacity: index == activeIndex ? '1' : 0
+							}}>
+								<img width={"100%"} src={item.image} alt="" />
+							</BoxImage>
+						})
+					}
+
+				</Box>
 			</Inner >
 		</Wrap >
 		// </Box>
@@ -222,6 +254,7 @@ const Wrap = styled(Stack)({
 	padding: '0 16px',
 	maxWidth: '1120px',
 	margin: '65px auto 0px auto',
+	// overflow: 'hidden',
 	// paddingTop: '65px',
 	textAlign: 'center',
 	'@media (min-width: 448px)': {
@@ -232,51 +265,3 @@ const Wrap = styled(Stack)({
 	}
 })
 
-const BoxOpenImage = styled(Box)({
-	margin: '0 auto 56px',
-	'@media (min-width: 560px)': {
-		margin: '0 auto 86px',
-	},
-	'& img': {
-		width: '100%',
-	}
-})
-const ListBox = styled(Stack)({
-	justifyContent: 'space-between',
-	flexDirection: 'row',
-	flexWrap: 'wrap',
-})
-const BoxItem = styled(Box)({
-	textAlign: 'center',
-	width: '100%',
-	marginBottom: '30px',
-	'@media (min-width: 560px)': {
-		width: 'calc(50% - 30px)',
-	},
-	'@media (min-width: 992px)': {
-		width: 'calc(25% - 16px)',
-		marginBottom: '0'
-	},
-	'& img': {
-		width: '68%',
-		'@media (min-width: 560px)': {
-			width: '60%',
-			marginBottom: '23px',
-		},
-		'@media (min-width: 992px)': {
-			width: '100%',
-		},
-	}
-})
-const BoxItemBody = styled(Typography)({
-	'&, & a': {
-		fontSize: '16px',
-		fontWeight: '500',
-		color: '#31373E',
-		textAlign: 'center',
-		lineHeight: '1.4'
-	},
-	'& a': {
-		textDecoration: 'underline',
-	}
-})
