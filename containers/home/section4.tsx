@@ -16,7 +16,7 @@ const Mobile: React.FC<any> = () => {
 					backgroundImage: `url(assets/bg_fiu1.png)`,
 					backgroundPosition: 'center',
 					backgroundRepeat: 'no-repeat',
-					backgroundSize: 'contain',
+					backgroundSize: 'cover',
 					position: 'relative'
 				}}>
 					<BoxImageAnimation sx={{
@@ -28,7 +28,7 @@ const Mobile: React.FC<any> = () => {
 					</BoxImageAnimation>
 
 				</Box>
-				<Box display={'flex'} flexDirection='column' alignItems={'flex-start'} ml={4}>
+				<Box width={"200px"} flex={1} display={'flex'} flexDirection='column' alignItems={'flex-start'} ml={4}>
 
 					<Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
 
@@ -175,7 +175,7 @@ const Mobile: React.FC<any> = () => {
 					</BoxImageAnimation>
 
 				</Box>
-				<Box display={'flex'} flexDirection='column' alignItems={'flex-start'} ml={4}>
+				<Box width={"200px"} flex={1} display={'flex'} flexDirection='column' alignItems={'flex-start'} ml={4}>
 
 					<Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
 
@@ -300,7 +300,7 @@ const Section4: NextPage = () => {
 
 
 	return (
-		<Wrap>
+		<Wrap sx={{ marginTop: { xs: '0px !important', sm: '100px !important' }, }}>
 			<Box display={'flex'} mb={4} mt={{ xs: 10, sm: 0 }} alignItems="center" flexDirection={"column"} sx={{
 
 			}}>
@@ -633,16 +633,17 @@ const Section4: NextPage = () => {
 export default Section4;
 
 const Wrap = styled(Stack)({
-	padding: '0 16px',
+	padding: '0px 16px',
 	maxWidth: '1120px',
-	margin: '29px auto 0px',
+	margin: '0px auto 0px',
 	backgroundImage: `url(assets/bg_sec4.png)`,
-	// height: '100%',
+	height: '100%',
 	backgroundPosition: 'center',
 	backgroundRepeat: 'no-repeat',
 	backgroundSize: 'cover',
-	marginTop: "0px !important",
+
 	marginBottom: "0px !important",
+	marginTop: "0px !important",
 	'@media (max-width: 1100px)': {
 		margin: '29px auto 0px',
 	},
