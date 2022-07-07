@@ -30,7 +30,6 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
   const [approveToken, setApproveToken] = useState<string>('');
   const [statusLoading, setStatusLoading] = useState<boolean>(false);
   const [popupError, setPopupError] = useState<{status: boolean, message: string}>({status: false, message: ''});
-  const [popupFormInfo, setPopupFormInfo] = useState<boolean>(false);
   const [availableBox, setAvailableBox] = useState<any>();
   const statusPopupInfo = MarketplaceService.getStatusPopupInfo()
   const handlePurchaseBox = async () => {
@@ -124,19 +123,12 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
 
   const handleGetBonus = () => {
     MarketplaceService.setStatusPopupInfo(true);
-    setPopupFormInfo(true)
     setPaymentSuccessPopup(false)
   }
 
   useEffect(() => {
     walletAccount?.length && getPriceCurrentBox()
   }, [boxDetail.type, ethersSigner, walletAccount, PaymentSuccessPopup, approvePopup])
-
-  useEffect(() => {
-    if(statusPopupInfo === 'true'){
-      setPopupFormInfo(true)
-    }
-  }, [])
   return (
     <Wrap>
       <ProductVideo>
@@ -206,7 +198,6 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       }} status={PaymentSuccessPopup} handleToggleStatus={() => setPaymentSuccessPopup(false)} handleClickButton={handleGetBonus} />
       <PopupMessage title="Error!" status={popupError.status} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError({status: false, message: ''})} sx={customWidthPopup}
         handleClickButton={() => setPopupError({status: false, message: ''})} titleCustomColor={{ '& p': { color: '#FF6F61' } }} message={popupError.message === 'execution reverted: Cannot buy more' ? 'You have reached the maximum number of slots for buying box.' : popupError.message} />
-      {/* <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} /> */}
       <Backdrop
         sx={{ color: '#FF6D24', zIndex: 2000 }}
         className="backdrop-loading"
