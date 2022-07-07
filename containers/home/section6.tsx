@@ -16,13 +16,13 @@ import { TEAM } from '../../constants/common';
 
 const Section6: React.FC<any> = ({ sxProps }) => {
 	return (
-		<Container sx={{ ...sxProps }}>
+		<Container sx={{ ...sxProps, mb: { xs: '88px', sm: '0px' } }}>
 			{/* <SectionTitle
 				title={TEAM.TITLE}
 				subtitle={TEAM.SUBTITLE}
 				sxProps={{ mb: 7 }}
 			/> */}
-			<Box display={'flex'} mb={10} alignItems="center" justifyContent="center">
+			<Box display={'flex'} mt={{ xs: '88px', sm: '0px' }} mb={{ xs: 5, sm: 10 }} alignItems="center" justifyContent="center">
 
 				<Typography
 					fontSize={{ xs: 20, sm: 56 }}
@@ -96,7 +96,7 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 					</Grid>
 				))}
 			</Grid>
-		</Container>
+		</Container >
 	);
 };
 

@@ -45,7 +45,8 @@ function TabPanel(props: TabPanelProps) {
 	const { children, value, index, ...other } = props;
 
 	return (
-		<div
+		<Box
+			sx={{ height: { xs: '50%', sm: '30%' } }}
 			role="tabpanel"
 			hidden={value !== index}
 			id={`simple-tabpanel-${index}`}
@@ -53,7 +54,7 @@ function TabPanel(props: TabPanelProps) {
 			{...other}
 		>
 			{children}
-		</div>
+		</Box>
 	);
 }
 
@@ -221,22 +222,7 @@ const Section3: NextPage = () => {
 		},
 
 	]
-	const styleActiveContent = (index: number) => {
-		if (index == activeIndex) {
-			return {
-				height: "100%",
-				opacity: 1
-			}
-		} else {
-			return {
-				height: 0,
-				opacity: 0
-			}
-		}
 
-	}
-
-	console.log(data[activeIndex].image);
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setActiveIndex(newValue);
 	};
@@ -248,7 +234,7 @@ const Section3: NextPage = () => {
 		setSlideActiveIndex(s.activeIndex);
 	}
 	return (
-		<div style={{
+		<Box sx={{
 			backgroundImage: `url(assets/bg_sec3.png)`,
 			height: '100%',
 			width: "100%",
@@ -261,7 +247,7 @@ const Section3: NextPage = () => {
 
 			<Wrap sx={{
 				marginBottom: "0px !important",
-				marginTop: "120px !important"
+				marginTop: { xs: '0px', sm: 10 }
 			}}>
 				<Box sx={{
 					display: "flex",
@@ -364,19 +350,19 @@ const Section3: NextPage = () => {
 								// showsPagination={false}
 								modules={[Autoplay, Pagination, Navigation]}
 								className="mySwiper"
-								style={{ height: isMobile ? "400px" : "500px" }}
+								style={{ marginTop: isMobile ? "0px" : "120px", width: '100%' }}
 							>
 								{
 									Array.isArray(item.content) &&
 									item.content.map((e: contentType, index2: number) => {
-										return <SwiperSlide key={index2 + "slide2"}>
+										return <SwiperSlide key={index2 + "slide2"} style={{ display: "flex", alignItems: "center" }}>
 
 											<Box sx={{ cursor: 'pointer' }} onClick={() => {
 												setSlideActiveIndex(index2 + (isTablet ? isMobile ? 2 : 3 : 5))
 											}}>
 												<img style={{
 													transition: '.8s all',
-													transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "scale(1)" : "scale(0.5)"
+													transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "scale(1.5)" : "scale(1)"
 												}} src={slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? e.active : e.inActive} />
 											</Box>
 										</SwiperSlide>
@@ -387,7 +373,7 @@ const Section3: NextPage = () => {
 					</TabPanel>
 				})
 			}
-		</div>
+		</Box>
 	)
 }
 
@@ -431,10 +417,11 @@ const TabsBox = styled(Tabs)({
 const Wrap = styled(Stack)({
 	padding: '0 16px',
 	maxWidth: '1120px',
-	margin: '29px auto 50px',
-	'@media (min-width: 560px)': {
-		margin: '29px auto 80px',
-	}
+	margin: '0px auto 50px',
+	paddingTop: "65px"
+	// '@media (min-width: 560px)': {
+	// 	margin: '29px auto 80px',
+	// }
 })
 
 const BoxOpenImage = styled(Box)({

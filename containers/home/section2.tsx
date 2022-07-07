@@ -97,9 +97,11 @@ const Section2: NextPage = () => {
 	}, []);
 
 	return (
+		// <Box height={"100%"}>
+
 		<Wrap>
 			{/* <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage> */}
-			<Box display={'flex'} mb={4} alignItems="center" flexDirection={"column"}>
+			<Box display={'flex'} mb={{ xs: 2, md: 4 }} alignItems="center" flexDirection={"column"}>
 
 				<Typography
 					fontSize={{ xs: 24, sm: 32 }}
@@ -128,7 +130,7 @@ const Section2: NextPage = () => {
 						fontSize={{ xs: 16, sm: 16 }}
 						fontWeight={500}
 						color="#5A6178"
-						mb={0.5}
+						// mb={0.5}
 						sx={{
 							'& span': {
 								color: '#FF8A50'
@@ -146,7 +148,7 @@ const Section2: NextPage = () => {
 					{
 						data.map((item: itemType, index: number) => {
 							const Icon = isMobile ? item.iconMobile : item.icon;
-							return <BoxItemIcon mb={2} key={index} onClick={() => { setActiveIndex(index) }} sx={{ cursor: 'pointer' }}>
+							return <BoxItemIcon mb={{ xs: 2, md: 2 }} key={index} onClick={() => { setActiveIndex(index) }} sx={{ cursor: 'pointer' }}>
 								<Box display="flex" justifyItems="center" alignItems={"center"} sx={{
 									'@media (max-width: 767px)': {
 										flexDirection: 'column',
@@ -177,7 +179,7 @@ const Section2: NextPage = () => {
 				{isMobile && <Box sx={{
 					transition: '.4s all',
 					...styleActiveContent(activeIndex),
-					marginBottom: '30px',
+					marginBottom: '20px',
 					marginTop: '5px'
 				}}>
 					<Typography mt={0.5} fontSize={14} color="#5A6178" >{data[activeIndex].content}</Typography>
@@ -187,15 +189,16 @@ const Section2: NextPage = () => {
 				</BoxImage>
 			</Inner >
 		</Wrap >
+		// </Box>
 	)
 }
 
 export default Section2;
 
 const BoxImage = styled(Box)({
-	'@media (max-width: 767px)': {
-		marginTop: 16
-	}
+	// '@media (max-width: 767px)': {
+	// 	marginTop: 16
+	// }
 })
 const BoxItemIcon = styled(Box)({
 	'@media (max-width: 767px)': {
@@ -217,13 +220,14 @@ const BoxIcon = styled(Box)({
 const Wrap = styled(Stack)({
 	padding: '0 16px',
 	maxWidth: '1120px',
-	margin: '29px auto 50px',
+	margin: '65px auto 0px auto',
+	// paddingTop: '65px',
 	textAlign: 'center',
 	'@media (min-width: 448px)': {
-		margin: '29px auto 50px',
+		// margin: '64px auto 50px',
 	},
 	'@media (min-width: 560px)': {
-		margin: '29px auto 80px',
+		// margin: '29px auto 80px',
 	}
 })
 
