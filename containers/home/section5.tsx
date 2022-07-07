@@ -40,6 +40,7 @@ const Section5: NextPage = () => {
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	return (
 		<Wrap sx={{
+			marginTop: { xs: '88px', sm: '0px' }
 			// alignItems: { xs: "center", sm: 'normal' },
 			// display: 'flex',
 			// justifyContent: { xs: "center", sm: 'normal' },
@@ -123,8 +124,7 @@ const Section5: NextPage = () => {
 
 
 							}}>
-								<BoxImage p={4}>
-
+								<BoxImage p={{ xs: 2, sm: 4 }}>
 									{
 										activeIndex == index ?
 											<img height={'48px'} src={item.active} />
@@ -148,9 +148,10 @@ const Wrap = styled(Stack)({
 	padding: '0 16px',
 	maxWidth: '1120px',
 	margin: '29px auto 50px',
-	'@media (min-width: 560px)': {
-		margin: '29px auto 80px',
-	}
+
+	// '@media (min-width: 560px)': {
+	// 	margin: '29px auto 80px',
+	// }
 })
 
 const BoxImage = styled(Box)({

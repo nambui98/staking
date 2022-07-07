@@ -32,20 +32,20 @@ const StayInTouch: React.FC<any> = ({ sxProps }) => {
 			alignItems="center"
 			spacing={{ xs: 1, md: 6 }}
 
-			sx={{ background: '#F8F9FB', py: { xs: 5, md: 10 }, ...sxProps }}
+		// sx={{ background: '#F8F9FB', py: { xs: 5, md: 10 }, ...sxProps }}
 		>
 			<Typography
-				fontSize={{ xs: 24, sm: 32 }}
-				fontStyle="italic"
-				fontWeight="900"
+				fontSize={{ xs: 24, sm: 24 }}
+				// fontStyle="italic"
+				fontWeight="600"
 				color="#5A6178"
 				align="center"
 				px={2}
 			>
-				STAY IN TOUCH WITH <span style={{ color: '#FF6D24' }}>beFITTER</span>
+				Stay in touch with  <span className='text_gadient_primary'>beFITTER</span>
 			</Typography>
 			{!isSm && (
-				<Stack direction="row" spacing={10} alignItems="center">
+				<Stack direction="row" spacing={7} alignItems="center">
 					{SOCIAL.map(({ icon, iconActive, href }, idx) => (
 						<BounceIconButton
 							key={idx}
@@ -84,16 +84,24 @@ const Section9: React.FC<any> = ({ sxProps }) => {
 			height: '100%',
 			display: 'flex',
 			flexDirection: 'column',
-		}}>
-			<Box mt={"100px"} sx={{ position: 'relative', marginBottom: 'auto' }}>
+			mt: {
+				xs: '88px', sm: '0px'
+			}
 
-				<StayInTouch />
-				<Box sx={{ position: 'absolute', right: "50%", transform: 'translateX(50%)' }}>
-					<img height={'495px'} src="assets/sec9.png" />
+		}}>
+			<Box sx={{ position: 'relative', marginTop: 'auto', display: 'flex', justifyContent: 'center', marginBottom: '80px', columnGap: '20px' }}>
+				<Box sx={{
+					height: '495px',
+					// width: '100%',
+					display: { xs: 'none', md: 'block' }
+				}}>
+
+					<img height={"100%"} style={{ objectFit: 'contain' }} width="100%" src="assets/sec9.png" />
 				</Box>
+				<StayInTouch />
 			</Box>
 			<MainFooter />
-		</Box>
+		</Box >
 
 	)
 }

@@ -21,38 +21,38 @@ export const MENU_ITEMS_MOBILE = [
 
 export const SOCIAL = [
 	{
-		icon: 'assets/icons/fb-dark.svg',
-		iconActive: 'assets/icons/fb-color.svg',
+		icon: 'assets/social/facebook/normal.svg',
+		iconActive: 'assets/social/facebook/hover.svg',
 		href: 'https://www.facebook.com/beFITTER.io',
 	},
 	{
-		icon: 'assets/icons/ig-dark.svg',
-		iconActive: 'assets/icons/ig-color.svg',
+		icon: 'assets/social/insta/normal.svg',
+		iconActive: 'assets/social/insta/hover.svg',
 		href: 'https://www.instagram.com/befitter.io',
 	},
 	{
-		icon: 'assets/icons/tw-dark.svg',
-		iconActive: 'assets/icons/tw-color.svg',
+		icon: 'assets/social/twit/normal.svg',
+		iconActive: 'assets/social/twit/hover.svg',
 		href: 'https://twitter.com/beFITTER_io',
 	},
 	{
-		icon: 'assets/icons/yt-dark.svg',
-		iconActive: 'assets/icons/yt-color.svg',
+		icon: 'assets/social/youtube/normal.svg',
+		iconActive: 'assets/social/youtube/hover.svg',
 		href: 'https://www.youtube.com/channel/UCWHlMEIroTPlHS6fukq5pyw',
 	},
 	{
-		icon: 'assets/icons/dc-dark.svg',
-		iconActive: 'assets/icons/dc-color.svg',
+		icon: 'assets/social/discord/normal.svg',
+		iconActive: 'assets/social/discord/hover.svg',
 		href: 'https://discord.gg/hSfajgQkzh',
 	},
 	{
-		icon: 'assets/icons/tl-dark.svg',
-		iconActive: 'assets/icons/tl-color.svg',
+		icon: 'assets/social/tele/normal.svg',
+		iconActive: 'assets/social/tele/hover.svg',
 		href: 'https://t.me/befitter_chat',
 	},
 	{
-		icon: 'assets/icons/md-dark.svg',
-		iconActive: 'assets/icons/md-color.svg',
+		icon: 'assets/social/medium/normal.svg',
+		iconActive: 'assets/social/medium/hover.svg',
 		href: 'https://medium.com/@beFITTER',
 	},
 ];
