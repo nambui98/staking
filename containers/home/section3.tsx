@@ -31,9 +31,16 @@ function TabPanel(props: TabPanelProps) {
 
 	return (
 		<Box
-			sx={{ height: { xs: '50%', sm: '40%' } }}
+			sx={{
+				height: { xs: '50%', sm: '40%' },
+				transition: 'all ease .6s',
+				opacity: value !== index ? '0' : '1',
+				position: 'absolute',
+				inset: '0'
+			}}
+
 			role="tabpanel"
-			hidden={value !== index}
+			// hidden={false}
 			id={`simple-tabpanel-${index}`}
 			aria-labelledby={`simple-tab-${index}`}
 			{...other}
@@ -50,34 +57,12 @@ function a11yProps(index: number) {
 	};
 }
 
-const useStyles: any = makeStyles({
-	indicator: {
-		background: "radial-gradient(50% 50% at 50% 50%, #FF6D24 0%, rgba(255, 109, 36, 0) 100%);",
-		// '&, &:before': {
-		// 	position: "absolute",
-		// 	bottom: 0,
-		// 	// top: "0px",
-		// 	background: "radial-gradient(50% 50% at 50% 50%, #FF6D24 0%, rgba(255, 109, 36, 0) 100%);",
-		// },
-		// '&:after': {
-		// 	content: "aaa",
-		// 	top: "0px",
-		// 	background: "radial-gradient(50% 50% at 50% 50%, #FF6D24 0%, rgba(255, 109, 36, 0) 100%);",
-		// },
-	},
-	// tabs: {
-	// 	"& button[aria-selected='true']": {
-	// 		border: "3px solid red"
-	// 	}
-	// }
-});
 const Section3: NextPage = () => {
 	const [activeIndex, setActiveIndex] = useState<number>(1);
 	const [slideActiveIndex, setSlideActiveIndex] = useState<number>(3);
 	const [swiper, setSwiper] = useState(null);
 	const isTablet = useMediaQuery('(max-width:1000px)');
 	const isMobile = useMediaQuery('(max-width:599px)');
-	const classes = useStyles();
 	const data: itemType[] = [
 		{
 			title: "PETS",
@@ -234,6 +219,7 @@ const Section3: NextPage = () => {
 			backgroundPosition: 'center',
 			backgroundRepeat: 'no-repeat',
 			backgroundSize: 'cover',
+			overflow: 'hidden',
 			// padding: '29px auto 50px',
 
 		}}>
@@ -258,8 +244,20 @@ const Section3: NextPage = () => {
 				</Box>
 				<Box sx={{ width: '100%' }}>
 					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-						<Tabs className={classes.tabs}
-							classes={{ indicator: classes.indicator }} value={activeIndex} onChange={handleChange}
+						<Tabs TabIndicatorProps={{
+							sx: {
+								background: "radial-gradient(50% 50% at 50% 50%, #FF6D24 0%, rgba(255, 109, 36, 0) 100%);",
+								'&:before': {
+									content: '""',
+									height: '100%',
+									width: '100%',
+									position: 'absolute',
+									background: "radial-gradient(50% 50% at 50% 50%, #FF6D24 0%, rgba(255, 109, 36, 0) 100%);",
+									top: '-55px'
+								}
+							}
+						}}
+							value={activeIndex} onChange={handleChange}
 							aria-label="basic tabs example">
 							<Tab sx={{
 								height: "60px",
@@ -299,118 +297,106 @@ const Section3: NextPage = () => {
 
 				</Box>
 			</Wrap>
+			<Box sx={{ position: 'relative', height: "60%" }}>
 
+				{
+					data.map((item: itemType, index: number) => {
+						return <TabPanel key={index} value={activeIndex} index={index} >
 
-			{
-				data.map((item: itemType, index: number) => {
-					return <TabPanel key={index} value={activeIndex} index={index}>
-
-						<Box width={isMobile ? '85%' : 500} margin="auto" mt={5}>
-							<Typography
-								// typography={'span'}
-								fontSize={{ xs: 14, sm: 16 }}
-								fontWeight={500}
-								color="#fff"
-								lineHeight="22px"
-								// mb={0.5}
-								textAlign="center">
-								{data[activeIndex].subtitle}
-							</Typography>
-						</Box>
-
-						{item.typeContent == "image" ?
-							<Box display="flex" mt={5} alignItems={"center"} justifyContent="center" px={isTablet ? 4 : 0}>
-								<img src={item.content.toString()} alt={item.title}
-									style={{ height: isTablet ? "auto" : "500px", width: isTablet ? "90%" : "auto" }} />
+							<Box width={isMobile ? '85%' : 500} margin="auto" mt={5} >
+								<Typography
+									// typography={'span'}
+									fontSize={{ xs: 14, sm: 16 }}
+									fontWeight={500}
+									color="#fff"
+									lineHeight="22px"
+									sx={{
+										transition: 'all .8s',
+										opacity: activeIndex !== index ? '0' : '1',
+									}}
+									// mb={0.5}
+									textAlign="center">
+									{item.subtitle}
+								</Typography>
 							</Box>
 
-							:
 
-							// <FilterCarousel value={filter} onChange={setFilter} />
-							<Swiper
-								centeredSlides={true}
-								loop={true}
-								grabCursor={true}
-								// autoplay={{
-								// 	delay: 2000,
-								// 	disableOnInteraction: false,
-								// }}
-								// slidesPerView={3}
-								// slidesPerView="auto"								
+							{item.typeContent == "image" ?
+								<Box display="flex" mt={5} alignItems={"center"} justifyContent="center" px={isTablet ? 4 : 0}>
+									<img src={item.content.toString()} alt={item.title}
+										style={{ height: isTablet ? "auto" : "500px", width: isTablet ? "90%" : "auto" }} />
+								</Box>
+								:
+								// <Box sx={{ height: { xs: '50%', sm: '40%' }, width: '100%' }}>
 
-								onSwiper={(s) => handleSwiper(s)}
-								onSlideChange={handleSlideChange}
-								slideToClickedSlide={true}
-								slidesPerView={isTablet ? isMobile ? 2 : 3 : 5}
-								// initialSlide={slideActiveIndex}
-								spaceBetween={isTablet ? isMobile ? 0 : 15 : 100}
-								pagination={false}
-								navigation={false}
-								// showsPagination={false}
-								modules={[Autoplay, Pagination, Navigation]}
-								className="mySwiper"
-								style={{ marginTop: isMobile ? "0px" : "120px", width: '100%' }}
-							>
-								{
-									Array.isArray(item.content) &&
-									item.content.map((e: contentType, index2: number) => {
-										return <SwiperSlide key={index2 + "slide2"} style={{ display: "flex", alignItems: "center" }}>
+								<Swiper
+									centeredSlides={true}
+									loop={true}
+									grabCursor={true}
+									autoplay={{
+										delay: 2000,
+										disableOnInteraction: false,
+									}}
+									onSwiper={(s) => handleSwiper(s)}
+									onSlideChange={handleSlideChange}
+									slideToClickedSlide={true}
+									slidesPerView={isTablet ? isMobile ? 2 : 3 : 5}
+									spaceBetween={isTablet ? isMobile ? 0 : 15 : 100}
+									pagination={false}
+									navigation={false}
+									modules={[Autoplay, Pagination, Navigation]}
+									className="mySwiper"
+									style={{ marginTop: isMobile ? "0px" : "120px", width: '100%' }}
+								>
+									{
+										Array.isArray(item.content) &&
+										item.content.map((e: contentType, index2: number) => {
+											return <SwiperSlide key={index2 + "slide2"} style={{ display: "flex", alignItems: "center" }}>
 
-											<Box sx={{
-												cursor: 'pointer', position: 'relative', height: "100%",
-												width: "100%",
-											}} onClick={() => {
-												setSlideActiveIndex(index2 + (isTablet ? isMobile ? 2 : 3 : 5))
-											}}>
-												{/* <img style={{
-													transition: '.8s all',
-													position: 'absolute',
-													opacity: '0'
-													// transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "scale(1)" : "scale(1)"
-												}} src={slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? e.inActive : e.inActive} /> */}
 												<Box sx={{
-													transition: '.8s all',
-													// position: 'absolute',
-													position: 'relative',
-													height: "100%",
+													cursor: 'pointer', position: 'relative', height: "100%",
 													width: "100%",
-													inset: 0,
-													// opacity:
-													// 	slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? 1 : .7
+												}} onClick={() => {
+													setSlideActiveIndex(index2 + (isTablet ? isMobile ? 2 : 3 : 5))
 												}}>
+													<Box sx={{
+														transition: '.8s all',
+														position: 'relative',
+														height: "100%",
+														width: "100%",
+														inset: 0,
+													}}>
 
-													<img style={{
-														transition: '.7s all',
-														objectFit: 'contain',
-														position: 'absolute',
-														inset: '0',
-														opacity: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "1" : "0",
-														transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? (isMobile ? "scale(1)" : "scale(1.3)") : (isMobile ? "scale(0.5)" : "scale(0.8)")
-														// width: "200px",
-														// height: "200px",
-														// transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "scale(1)" : "scale(1)"
-													}} src={e.active} />
-													<img style={{
-														transition: '.7s all',
-														objectFit: 'contain',
-														position: 'absolute',
-														inset: '0',
-														opacity: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "0" : "1",
-														transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? (isMobile ? "scale(1)" : "scale(1.3)") : (isMobile ? "scale(0.5)" : "scale(0.8)")
-														// width: "200px",
-														// height: "200px",
-
-													}} src={e.inActive} />
+														<img style={{
+															transition: '.7s all',
+															objectFit: 'contain',
+															position: 'absolute',
+															inset: '0',
+															opacity: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "1" : "0",
+															transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? (isMobile ? "scale(1)" : "scale(1.3)") : (isMobile ? "scale(0.5)" : "scale(0.8)")
+														}} src={e.active} />
+														<img style={{
+															transition: '.7s all',
+															objectFit: 'contain',
+															position: 'absolute',
+															inset: '0',
+															opacity: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "0" : "1",
+															transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? (isMobile ? "scale(1)" : "scale(1.3)") : (isMobile ? "scale(0.5)" : "scale(0.8)")
+														}} src={e.inActive} />
+													</Box>
 												</Box>
-											</Box>
-										</SwiperSlide>
-									})
-								}
-							</Swiper>
-						}
-					</TabPanel>
-				})
-			}
+											</SwiperSlide>
+										})
+									}
+								</Swiper>
+								// </Box>
+							}
+
+						</TabPanel>
+					})
+				}
+			</Box>
+
 		</Box>
 	)
 }
