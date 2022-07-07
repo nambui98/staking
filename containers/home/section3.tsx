@@ -331,10 +331,10 @@ const Section3: NextPage = () => {
 								centeredSlides={true}
 								loop={true}
 								grabCursor={true}
-								// autoplay={{
-								// 	delay: 2000,
-								// 	disableOnInteraction: false,
-								// }}
+								autoplay={{
+									delay: 2000,
+									disableOnInteraction: false,
+								}}
 								// slidesPerView={3}
 								// slidesPerView="auto"								
 
