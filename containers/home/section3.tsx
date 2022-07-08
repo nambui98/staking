@@ -208,7 +208,8 @@ const Section3: NextPage = () => {
 
 	return (
 		<Box sx={{
-			backgroundImage: `url(assets/bg_sec3.png)`,
+			// backgroundImage: `url(assets/bg_sec3.png)`,
+			backgroundColor: '#000',
 			height: '100%',
 			width: "100%",
 			backgroundPosition: 'center',
