@@ -49,10 +49,12 @@ const Logo: React.FC<any> = () => {
 const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, currentPage }) => {
 	const [statusPopup, setStatusPopup] = useState(false);
 	const isMobile992 = useMediaQuery('(max-width:992px)');
+	const isMobile = useMediaQuery('(max-width:599px)');
 	const stickTrigger = useScrollTrigger({
 		disableHysteresis: true,
 		threshold: 200,
 	});
+	console.log(stickTrigger);
 
 	const handleCommingSoon = () => {
 		toast('COMING SOON!', {
@@ -65,6 +67,8 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 			progress: undefined,
 		});
 	}
+	console.log(currentPage);
+
 	return (
 		<Box component={'header'}>
 			<AppBar
@@ -72,7 +76,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 				square
 				elevation={0}
 				sx={{
-					background: currentPage === '1' ? 'linear-gradient(180deg, rgba(185, 185, 185, 0.4) 0%, rgba(177, 177, 177, 0) 100%)' : '#fff',
+					background: (currentPage === '1' && !stickTrigger) || (!stickTrigger && isMobile) ? 'linear-gradient(180deg, rgba(185, 185, 185, 0.4) 0%, rgba(177, 177, 177, 0) 100%)' : '#fff',
 					// borderBottom: currentPage === '1' ? '0' : '1px solid #E9EAEF',
 					transition: 'all ease 0.2s ',
 					padding: currentPage === '1' ? '14px 0' : '0'
@@ -81,7 +85,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 				<Toolbar
 					sx={{
 						height: stickTrigger ? 80 : 'unset',
-						borderBottom: stickTrigger ? '1px solid #E9EAEF' : 'unset',
+						// borderBottom: stickTrigger ? '1px solid #E9EAEF' : 'unset',
 					}}
 				>
 					<Container

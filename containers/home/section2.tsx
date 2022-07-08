@@ -104,7 +104,11 @@ const Section2: NextPage = () => {
 	return (
 		// <Box height={"100%"}>
 
-		<Wrap>
+		<Wrap sx={{
+			marginTop: {
+				xs: '88px !important', sm: '0px !important'
+			}
+		}}>
 			{/* <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage> */}
 			<Box display={'flex'} mb={{ xs: 2, md: 4 }} alignItems="center" flexDirection={"column"}>
 
@@ -255,7 +259,7 @@ const BoxIcon = styled(Box)({
 const Wrap = styled(Stack)({
 	padding: '0 16px',
 	maxWidth: '1120px',
-	margin: '65px auto 0px auto',
+	margin: '0px auto 0px auto',
 	// overflow: 'hidden',
 	// paddingTop: '65px',
 	textAlign: 'center',
