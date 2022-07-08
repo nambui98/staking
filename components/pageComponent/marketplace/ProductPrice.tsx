@@ -5,7 +5,7 @@ import { BOX_DETAIL, MARKETPLACE_ICON, MARKETPLACE_IMAGE } from "../../../consta
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { getAvailableBox } from "../../../libs/claim"
 import { getAllowance, getBoxPrice, purchaseBox, approvePurchase } from "../../../libs/marketplace"
-import { MarketplaceProps } from "../../../pages/shop"
+import { MarketplaceProps } from "../../../pages/shopDisable"
 import { MarketplaceService } from "../../../services/user.service"
 import { TEXT_STYLE } from "../../../styles/common/textStyles"
 import { PopupMessage } from "../claim/PopupMessage"
