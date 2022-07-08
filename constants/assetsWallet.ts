@@ -11,7 +11,12 @@ export const ICON = {
   starYellow: 'assets/icons/droprate-yellow.svg',
   shoeRed: 'assets/icons/iconic-red.svg',
   shoeYellow: 'assets/icons/rare-yellow.svg',
-  shoeGray: 'assets/icons/standard-gray.svg'
+  shoeGray: 'assets/icons/standard-gray.svg',
+  gift: 'assets/icons/gift.svg',
+}
+
+export const IMAGE = {
+  boxShoeToken: 'assets/shoeBoxToken.png'
 }
 
 export const BOX_INFO = {

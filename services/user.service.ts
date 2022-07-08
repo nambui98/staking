@@ -16,14 +16,14 @@ export const UserService = {
 }
 
 export const MarketplaceService = {
-  getStatusPopupInfo: () => {
+  getStatusPopupGetBonus: () => {
     const ISSERVER = typeof window === "undefined";
     if(!ISSERVER){
       const status = localStorage.getItem('statusPopupInfo');
       if(status) return status;
     }
   },
-  setStatusPopupInfo: (status: boolean) => {
+  setStatusPopupGetBonus: (status: boolean) => {
     return localStorage.setItem('statusPopupInfo', JSON.stringify(status));
   }
 }
