@@ -85,6 +85,7 @@ const Section9: React.FC<any> = ({ sxProps }) => {
 			height: '100%',
 			display: 'flex',
 			flexDirection: 'column',
+			position: 'relative',
 			mt: {
 				xs: '0', sm: '0px'
 			}

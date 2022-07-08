@@ -100,11 +100,20 @@ const Home: NextPage = () => {
 		>
 			<Section1 statusPopup={statusPopup} handleStatusPopup={setStatusPopup} />
 		</Box>,
-		<Box className={SEL} key={"2"}>
+		<Box sx={{
+			height: { xs: height, sm: '100%' },
+			display: { sx: 'block', sm: 'flex' }, alignItems: 'center'
+
+			// position: 'relative',
+		}} className={SEL} key={"2"} >
 			<Section2 />
-		</Box>
+		</Box >
 		,
-		<Box className={SEL} key={"3"}>
+		<Box sx={{
+
+			height: { xs: height, sm: '100%' },
+			position: 'relative',
+		}} className={SEL} key={"3"}>
 			<Section3 />
 		</Box>
 		,
@@ -124,34 +133,38 @@ const Home: NextPage = () => {
 			<Section8 />
 
 		</Box>,
-		<Box className={SEL} key={"9"}>
+		<Box sx={{
+
+			height: { xs: height, sm: '100%' },
+			position: 'relative',
+		}} className={SEL} key={"9"}>
 			<Section9 />
 		</Box>,
 	]
 	const isMobile = useMediaQuery('(max-width:599px)');
 	return (
 		<HomeLayoutNew sxProps={{ background: '#fff' }} headerLandingPage={true} currentPage={currentPage}>
-			{/* {
-				isMobile ? SECTIONS : */}
-			<ReactFullpage
-				// debug /* Debug logging */
-				// Required when using extensions
-				pluginWrapper={pluginWrapper}
+			{
+				isMobile ? SECTIONS :
+					<ReactFullpage
+						// debug /* Debug logging */
+						// Required when using extensions
+						pluginWrapper={pluginWrapper}
 
-				// fullpage options
-				// licenseKey={"YOUR_KEY_HERE"} // Get one from https://alvarotrigo.com/fullPage/pricing/
-				// navigation
-				anchors={["1", "2", "3", "4", "5", "6", "7", "8", "9"]}
-				sectionSelector={SECTION_SEL}
-				onLeave={onLeave}
-				// sectionsColor={[...originalColors]}
-				render={(comp) => (
-					<ReactFullpage.Wrapper>
-						{SECTIONS}
-					</ReactFullpage.Wrapper>
-				)}
-			/>
-			{/* } */}
+						// fullpage options
+						// licenseKey={"YOUR_KEY_HERE"} // Get one from https://alvarotrigo.com/fullPage/pricing/
+						// navigation
+						anchors={["1", "2", "3", "4", "5", "6", "7", "8", "9"]}
+						sectionSelector={SECTION_SEL}
+						onLeave={onLeave}
+						// sectionsColor={[...originalColors]}
+						render={(comp) => (
+							<ReactFullpage.Wrapper>
+								{SECTIONS}
+							</ReactFullpage.Wrapper>
+						)}
+					/>
+			}
 
 			<PopupApp statusPopup={statusPopup} handleToggleStatusPopup={setStatusPopup} />
 		</HomeLayoutNew>
