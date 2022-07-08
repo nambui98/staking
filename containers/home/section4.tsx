@@ -300,7 +300,7 @@ const Section4: NextPage = () => {
 
 
 	return (
-		<Wrap sx={{ marginTop: { xs: '0px !important', sm: '100px !important' }, }}>
+		<Wrap sx={{ marginTop: { xs: '0px !important', sm: '0px !important' }, display: 'flex', justifyContent: 'center' }}>
 			<Box display={'flex'} mb={4} mt={{ xs: 10, sm: 0 }} alignItems="center" flexDirection={"column"} sx={{
 
 			}}>

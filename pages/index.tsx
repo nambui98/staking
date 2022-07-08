@@ -128,9 +128,11 @@ const Home: NextPage = () => {
 			<Section9 />
 		</Box>,
 	]
-
+	const isMobile = useMediaQuery('(max-width:599px)');
 	return (
 		<HomeLayoutNew sxProps={{ background: '#fff' }} headerLandingPage={true} currentPage={currentPage}>
+			{/* {
+				isMobile ? SECTIONS : */}
 			<ReactFullpage
 				// debug /* Debug logging */
 				// Required when using extensions
@@ -149,6 +151,7 @@ const Home: NextPage = () => {
 					</ReactFullpage.Wrapper>
 				)}
 			/>
+			{/* } */}
 
 			<PopupApp statusPopup={statusPopup} handleToggleStatusPopup={setStatusPopup} />
 		</HomeLayoutNew>
