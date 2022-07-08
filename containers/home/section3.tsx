@@ -32,7 +32,7 @@ function TabPanel(props: TabPanelProps) {
 	return (
 		<Box
 			sx={{
-				height: { xs: '50%', sm: '65%' },
+				height: "100%",
 				transition: 'all ease .6s',
 				opacity: value !== index ? '0' : '1',
 				position: 'absolute',
@@ -62,6 +62,7 @@ const Section3: NextPage = () => {
 	const [slideActiveIndex, setSlideActiveIndex] = useState<number>(3);
 	const [swiper, setSwiper] = useState(null);
 	const isTablet = useMediaQuery('(max-width:1000px)');
+	const isNestHub = useMediaQuery('(max-height:800px)');
 	const isMobile = useMediaQuery('(max-width:599px)');
 	const data: itemType[] = [
 		{
@@ -203,14 +204,7 @@ const Section3: NextPage = () => {
 		console.log(s.activeIndex)
 		setSlideActiveIndex(s.activeIndex);
 	}
-	const settings = {
-		className: "center",
-		centerMode: true,
-		infinite: true,
-		centerPadding: "60px",
-		slidesToShow: 3,
-		speed: 500
-	};
+
 	return (
 		<Box sx={{
 			backgroundImage: `url(assets/bg_sec3.png)`,
@@ -346,7 +340,7 @@ const Section3: NextPage = () => {
 									navigation={false}
 									modules={[Autoplay, Pagination, Navigation]}
 									className="mySwiper"
-									style={{ marginTop: isMobile ? "0px" : "120px", width: '100%' }}
+									style={{ marginTop: isTablet || isNestHub || isMobile ? "0px" : "0px", width: '100%' }}
 								>
 									{
 										Array.isArray(item.content) &&
