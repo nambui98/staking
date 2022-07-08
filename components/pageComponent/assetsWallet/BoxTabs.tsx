@@ -68,16 +68,16 @@ export const Boxtabs = () => {
             ))}
           </TabBox>
         </BoxBodyLeft>
-        {totalBox > 0 && !isMobile && !statusFormGetBonus && <BoxBonus>
+        {/* {totalBox > 0 && !isMobile && !statusFormGetBonus && <BoxBonus>
           <img src={IMAGE.boxShoeToken} />
           <ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus>
-        </BoxBonus>}
+        </BoxBonus>} */}
       </TabLeft>
       <TabBody>
         {currentTab.length ? renderBodyView() : <BoxEmpty icon={ICON.shoe} emptyText={'Select assets to continue'} />}
       </TabBody>
       <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
-      {totalBox > 0 && isMobile && !statusFormGetBonus && <BoxBonus><ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus></BoxBonus>}
+      {/* {totalBox > 0 && isMobile && !statusFormGetBonus && <BoxBonus><ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus></BoxBonus>} */}
     </Wrap>
   )
 }
