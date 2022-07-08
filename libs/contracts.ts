@@ -12,7 +12,7 @@ interface Map {
 
 const addresses: Map = {
   ['deployment']: { // bscTestnet
-    bFBox: '0xc383606B2bfF784a7a90CA76A3cE6d86eAC15167',
+    bFBox: '0x51019530C9313C93f0252F210F24604E1c1488ac',
     bFclaimBoxGamefi: '0x33c4d0220e11Ed8c763036b554E4cD77387e9E2C',
     bFclaimEnjin: '0x33c4d0220e11Ed8c763036b554E4cD77387e9E2C',
     bFheeToken: '0x05031f56DAD9EDa2Ff7e0d0b675787cC72Dc4675',
