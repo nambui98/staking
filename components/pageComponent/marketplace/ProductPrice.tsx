@@ -31,7 +31,6 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
   const [statusLoading, setStatusLoading] = useState<boolean>(false);
   const [popupError, setPopupError] = useState<{status: boolean, message: string}>({status: false, message: ''});
   const [availableBox, setAvailableBox] = useState<any>();
-  const statusPopupInfo = MarketplaceService.getStatusPopupInfo()
   const handlePurchaseBox = async () => {
     setStatusLoading(true)
     try {
@@ -45,7 +44,6 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
           setApprovePopup(false)
           updateBnbBalance()
           setCheckoutPopup({ ...checkoutPopup, status: false })
-          MarketplaceService.setStatusPopupInfo(true)
         }
       }, 1000);
     } catch (error: any) {
@@ -122,7 +120,6 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
   }
 
   const handleGetBonus = () => {
-    MarketplaceService.setStatusPopupInfo(true);
     setPaymentSuccessPopup(false)
   }
 

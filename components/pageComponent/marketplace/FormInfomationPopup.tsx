@@ -60,7 +60,7 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
       setShowBackdrop(false);
       if (response.ok) {
         setStatusForm(true)
-        MarketplaceService.setStatusPopupInfo(false)
+        MarketplaceService.setStatusPopupGetBonus(true)
       } else {
         const error = await response.json();
         throw new Error(error.message)
@@ -248,6 +248,7 @@ const VerifyText = styled(Typography)({
   top: '50%',
   transform: 'translateY(-50%)',
   cursor: 'pointer',
+  textDecoration: 'underline',
 })
 const Title = styled(Typography)({
   ...TEXT_STYLE(16, 500, '#31373E'),

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ICON, IMAGE, TAB_ITEM, TAB_NAME } from "../../../constants/assetsWallet";
 import { useWalletContext } from "../../../contexts/WalletContext"
 import { getOwnedBox } from "../../../libs/claim";
+import { MarketplaceService } from "../../../services/user.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
 import { FormInfomationPopup } from "../marketplace/FormInfomationPopup";
 import { BoxEmpty } from "./BoxEmpty";
@@ -18,6 +19,7 @@ export const Boxtabs = () => {
   const handleSwitchTab = (tab: string) => {
     setCurrentTab(tab);
   }
+  const statusFormGetBonus = MarketplaceService.getStatusPopupGetBonus();
 
   const renderBodyView = () => {
     switch (currentTab) {
@@ -31,13 +33,21 @@ export const Boxtabs = () => {
   }
 
   const getTotalBox = async () => {
-    const res = await getOwnedBox(walletAccount, ethersSigner);
-    res?.length && setTotalBox(res.length)
+    try {
+      const res = await getOwnedBox(walletAccount, ethersSigner);
+      if (res?.length) {
+        setTotalBox(res.length)
+      } else {
+        setTotalBox(0)
+      }
+    } catch (error) {
+      setTotalBox(0)
+    }
   }
 
   useEffect(() => {
     getTotalBox()
-  }, [])
+  }, [walletAccount])
 
   return (
     <Wrap>
@@ -58,15 +68,16 @@ export const Boxtabs = () => {
             ))}
           </TabBox>
         </BoxBodyLeft>
-        {totalBox > 0 && <BoxBonus>
+        {totalBox > 0 && !isMobile && !statusFormGetBonus && <BoxBonus>
           <img src={IMAGE.boxShoeToken} />
-          <ButtonBonus startIcon={<img src={ICON.gift} />}>GET YOUR BONUS</ButtonBonus>
+          <ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus>
         </BoxBonus>}
       </TabLeft>
       <TabBody>
         {currentTab.length ? renderBodyView() : <BoxEmpty icon={ICON.shoe} emptyText={'Select assets to continue'} />}
       </TabBody>
       <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
+      {totalBox > 0 && isMobile && !statusFormGetBonus && <BoxBonus><ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus></BoxBonus>}
     </Wrap>
   )
 }
@@ -78,6 +89,7 @@ const iconGray = {
 const BoxBonus = styled(Box)({
   textAlign: 'center',
   marginTop: 24,
+  width: '100%',
   '& img': {
     width: '100%',
   },
