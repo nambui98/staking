@@ -64,6 +64,7 @@ const Section3: NextPage = () => {
 	const isTablet = useMediaQuery('(max-width:1000px)');
 	const isNestHub = useMediaQuery('(max-height:800px)');
 	const isMobile = useMediaQuery('(max-width:599px)');
+	const isBigDesktop = useMediaQuery('(min-width:3000px)');
 	const data: itemType[] = [
 		{
 			title: "PETS",
@@ -258,7 +259,11 @@ const Section3: NextPage = () => {
 								transition: '.4s all',
 								flex: '1',
 								margin: isMobile ? "0 5px" : "0 30px",
-								textShadow: '0 0 2px #fff',
+								WebkitTextStroke: '0.5px #fff',
+								// WebkitTextFillColor: '#000',
+								// textShadow: '0 0 2px #fff',
+								// 						-webkit-text-stroke: 1px black;
+								// -webkit-text-fill-color: white;
 								fontStyle: 'italic',
 								fontFamily: 'Electrofied',
 								fontSize: isMobile ? (activeIndex == 0 ? '20px' : '16px') : activeIndex == 0 ? '32px' : '25px',
@@ -269,7 +274,8 @@ const Section3: NextPage = () => {
 								transition: '.4s all',
 								flex: '1',
 								margin: isMobile ? "0 5px" : "0 30px",
-								textShadow: '0 0 2px #fff',
+								WebkitTextStroke: '0.5px #fff',
+								// textShadow: '0 0 2px #fff',
 								fontStyle: 'italic',
 								fontFamily: 'Electrofied',
 								fontSize: isMobile ? (activeIndex == 1 ? '20px' : '16px') : activeIndex == 1 ? '32px' : '25px',
@@ -280,7 +286,8 @@ const Section3: NextPage = () => {
 								transition: '.4s all',
 								flex: '1',
 								margin: isMobile ? "0 5px" : "0 30px",
-								textShadow: '0 0 2px #fff',
+								WebkitTextStroke: '0.5px #fff',
+								// textShadow: '0 0 2px #fff',
 								fontStyle: 'italic',
 								fontFamily: 'Electrofied',
 								fontSize: isMobile ? (activeIndex == 2 ? '20px' : '16px') : activeIndex == 2 ? '32px' : '25px',
@@ -356,10 +363,11 @@ const Section3: NextPage = () => {
 												}}>
 													<Box sx={{
 														transition: '.8s all',
-														position: 'relative',
-														height: "100%",
-														width: "100%",
+														position: 'absolute',
+														// height: "100%",
+														// width: "100%",
 														inset: 0,
+														bottom: "20px"
 													}}>
 
 														<img style={{
@@ -368,7 +376,7 @@ const Section3: NextPage = () => {
 															position: 'absolute',
 															inset: '0',
 															opacity: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "1" : "0",
-															transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? (isMobile ? "scale(1)" : "scale(1.3)") : (isMobile ? "scale(0.5)" : "scale(0.8)")
+															transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? (isMobile || isBigDesktop ? "scale(1)" : "scale(1.3)") : (isMobile || isBigDesktop ? "scale(0.5)" : "scale(0.8)")
 														}} src={e.active} />
 														<img style={{
 															transition: '.7s all',
@@ -376,7 +384,7 @@ const Section3: NextPage = () => {
 															position: 'absolute',
 															inset: '0',
 															opacity: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "0" : "1",
-															transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? (isMobile ? "scale(1)" : "scale(1.3)") : (isMobile ? "scale(0.5)" : "scale(0.8)")
+															transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? (isMobile || isBigDesktop ? "scale(1)" : "scale(1.3)") : (isMobile || isBigDesktop ? "scale(0.5)" : "scale(0.8)")
 														}} src={e.inActive} />
 													</Box>
 												</Box>
