@@ -8,10 +8,10 @@ export const ICON_MENU_WHITE = 'assets/icons/menu-white.svg';
 export const MENU_ITEMS = [
 	{ title: 'beFITTER hub', href: 'https://hub.befitter.io/claim' },
 	{ title: 'LitePaper', href: '/litePaper' },
-	{ title: 'Whitepaper', href: '' },
+	{ title: 'Whitepaper', href: 'https://whitepaper.befitter.io/' },
 ];
 export const MENU_ITEMS_HOME = [
-	{ title: 'WHITEPAPER', href: '#' },
+	{ title: 'WHITEPAPER', href: 'https://whitepaper.befitter.io/' },
 	{ title: 'ABOUT', href: '#' },
 	{ title: 'CONTACT', href: '#' },
 ];
@@ -19,7 +19,7 @@ export const MENU_ITEMS_MOBILE = [
 	{ title: 'Staking', href: '#' },
 	{ title: 'HUB', href: 'https://hub.befitter.io/' },
 	{ title: 'LITEPAPER', href: '/litePaper' },
-	{ title: 'WHITEPAPER', href: '' },
+	{ title: 'WHITEPAPER', href: 'https://whitepaper.befitter.io/' },
 	// { title: 'ABOUT', href: '#' },
 	// { title: 'CONTACT', href: '#' },
 ];

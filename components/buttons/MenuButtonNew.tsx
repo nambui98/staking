@@ -84,7 +84,7 @@ const MenuButton: React.FC<any> = ({ dark = true, customImage }) => {
 			</IconButton>
 			<ClickAwayListener onClickAway={handleClose}>
 				<Fade in={open}>
-					<Box sx={{ position: 'fixed', top: 80, left: 0, width: '100%' }}>
+					<Box sx={{ position: 'fixed', top: 90, left: 0, width: '100%' }}>
 						<Container
 							disableGutters
 							sx={{
@@ -125,7 +125,7 @@ const MenuButton: React.FC<any> = ({ dark = true, customImage }) => {
 										sx={{ height: '100%' }}
 									>
 										{(isMobile ? MENU_ITEMS_MOBILE : MENU_ITEMS_HOME).map(({ title, href }) => (
-											href !== '#' ? <Link href={href} key={title} target={'_blank'}>
+											href !== '#' ? <Link href={href} key={title} target="_blank">
 												<ButtonLink
 													disabled={!href}
 													variant="text"

@@ -54,7 +54,6 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 		disableHysteresis: true,
 		threshold: 200,
 	});
-	console.log(stickTrigger);
 
 	const handleCommingSoon = () => {
 		toast('COMING SOON!', {
@@ -67,7 +66,6 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 			progress: undefined,
 		});
 	}
-	console.log(currentPage);
 
 	return (
 		<Box component={'header'}>
@@ -108,7 +106,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 									</Link>
 								))}
 							</MainMenu>}
-							{isMobile992 && <MenuButtonNew customImage={'40px'} />}
+							<MenuButtonNew customImage={'40px'} />
 						</>
 					</Container>
 				</Toolbar>
