@@ -1,0 +1,3248 @@
+{
+  "data": [
+    {
+      "Wallet": "0x909cefd055b2f2c8160a41a3031b24083afd2cfd",
+      "Allocation": "30"
+    },
+    {
+      "Wallet": "0x7fda14e0bc939017ed0857f01994bb2c724f87bd",
+      "Allocation": "108"
+    },
+    {
+      "Wallet": "0xcfef5bf5e5778fe33ed52d3c2bb5c29c324f0fd9",
+      "Allocation": "120"
+    },
+    {
+      "Wallet": "0x85d8179bacb371c3f343365fec64b1233d914b69",
+      "Allocation": "120"
+    },
+    {
+      "Wallet": "0xef0b201e7523f827d4e42d406d24418e8f99e2e8",
+      "Allocation": "42"
+    },
+    {
+      "Wallet": "0x894e82c5c4400143a198e632dc3ea838557ea405",
+      "Allocation": "54"
+    },
+    {
+      "Wallet": "0x98b267c74728e49fd14bdeedd7e08f6c610be38a",
+      "Allocation": "66"
+    },
+    {
+      "Wallet": "0x25a4cffbad9b6064fed39a63dd2aaba0fd3e5fa5",
+      "Allocation": "156"
+    },
+    {
+      "Wallet": "0x88aa9ec31d8d90824efe5d0a10542de96c81bbda",
+      "Allocation": "90"
+    },
+    {
+      "Wallet": "0x9594e3c28e04f0d876b8f12351c63a93371ed910",
+      "Allocation": "90"
+    },
+    {
+      "Wallet": "0xeeda7f71df5a589a9b8c5794aa3d28d66a4ee672",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x8ad9dbc38ea6d4022dc6e93e2ba003ed364759c7",
+      "Allocation": "66"
+    },
+    {
+      "Wallet": "0x0441b05ce9d600b2558b84e30be69b46de704b9a",
+      "Allocation": "78"
+    },
+    {
+      "Wallet": "0x97fbee6a9a5f74df4214d306a95cba229816ff18",
+      "Allocation": "96"
+    },
+    {
+      "Wallet": "0x3d51cbfeaea061278d2b20b5da046869f29a20da",
+      "Allocation": "66"
+    },
+    {
+      "Wallet": "0xc33425fbce6a18d7119ce7907e81b151d658b136",
+      "Allocation": "42"
+    },
+    {
+      "Wallet": "0x81e63427b2336bca62555e655a66655e0dad4c67",
+      "Allocation": "72"
+    },
+    {
+      "Wallet": "0x1eef8ca2d7b4ed6ce8f24665ad5b06126ddfb08f",
+      "Allocation": "30"
+    },
+    {
+      "Wallet": "0xd96fcc51a852767af7a599a5bdf2daf0f162627b",
+      "Allocation": "78"
+    },
+    {
+      "Wallet": "0x371c743cfb0f7277bdb31571f521be7ce05c1890",
+      "Allocation": "42"
+    },
+    {
+      "Wallet": "0xa21901993ac74f3d7db6eea3e1b5fdc94879da7e",
+      "Allocation": "90"
+    },
+    {
+      "Wallet": "0xba1601c98934666189a47a98021f70a8ac36746d",
+      "Allocation": "42"
+    },
+    {
+      "Wallet": "0x84ad615992351486e2aa06ea04b5e16467b21152",
+      "Allocation": "30"
+    },
+    {
+      "Wallet": "0x350e6558c19d5d51911cbfa8d4e3aa0ff50fecfc",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xeb1c1a9f4c1083b22ac4bbe1601b78fd29ad0850",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0ef696b2da7e7c6a3113681ce57344b66bbcf559",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x47f4a740428e6c09f40531a79ce7fc5aa70f8298",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x6494c1e42d16c6c523bae6162261e6380211cf46",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x466011e467ab55f4ccb22ebdbf97135abab3d149",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x960b47939bd5d4397d2ae09bfa6e12935e8fc66b",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x00ffee0b7e2fc54fda9dd592e14b3aaecac5ce44",
+      "Allocation": "96"
+    },
+    {
+      "Wallet": "0x1d76c15202f40c7113e26765d2456230a91389f8",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x17629eb34059cd9921e77d666ef0eb8dbb0d3f7b",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x33ee6627ca0bea3258d5839420ee151345998e88",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x000872be5ec7dc8197ef6618ef507d9a449cac1a",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x828f8294daf20deb3b59d14f74de4150a876b632",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x8b09120ca4485b94b2fa94c74df31930c049ca63",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xdd183b4d1a9e1c511e9bb132fbbc23d23db2d0d5",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x56ff93114c7ab8489ccd4f33f4d0f7a4ff917263",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0xa894971d6a347077062c77bbd366af224255e2cc",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x1da158559f54d81b13dda7b9602cb5e09468ac09",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x183adb424d0f88e4ab65745a0fe846242bf928ba",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x9cfa1e7d42b76152da24fd226e9c0257d3dad993",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x1c72efb9bf062bbed604fc9a34a2623704b6dadd",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xff1882511a5673194b252c35f2530562f74f47e4",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xd88ceb0a6da0295f902888bb047b334ca2cc4d98",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x83c9440dc34da00c47a0d4dc2b598d7bdb1b53f7",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x077309a5422c0537ff541695bc8293d620790b89",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x8bc8b4e4921101bcc56ec084b906069b73de7276",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x8390fb38f6f647a4da128b3142485a583a2712d7",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xae3754df0459fa3c5a65a90155d71e09c9a604fd",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x64396c9e243b5ef60dc617b98e0f455f67104513",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x72906ae744b6e5c95d7cb0040add57613189e368",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x5f7570481d1c29589270f8db49a3ec25b0da22b6",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xd60bb1dad4ed8df7e34ca61d3a9c37768da070ba",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xa965b780c4d8195bcc58b46109a4b244da86ace3",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x361ff2ac2eb2d8e7cd36a0f6daf1f944441c2d57",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x5f29f1f5da11bad9707c6a4e8557d4c2369ae9f4",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x029f400799a69b74e4f53a91e45899ca12dc72df",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x506e2fdce0f16905908982cda526ea5e6384d05e",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xb41d0073e2c8811d5cbe5a51e5159583b17bdb12",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xc60188ebfcbfc4f0771ad9c2ebc02ed5c58f1aed",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xf22dbc5439c3a01733c03d316981f0391f2c13c3",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0073d2e233fe044ac44ae8a49406e2ab6eb9ea7c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x3506e5f79754e8aad83152b8e6189b6c5508aad4",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xed1e925a7c3fae940a721fd121a91fe3121a8361",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x30330cf6b58ba9fc3fc70ffa948f2da4c67b94d4",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x4e76c377f4231e072ee18b6e62b452b5802b2354",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd6085929281bb484763ca58cb06690e4f457d171",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x0e1caae6b90091b54165c266eb9d7f9601d2cc61",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xf009d057f8210c380c68d383aa7ffee8f9e6df74",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x933d16eec58781a1dbc649468ce4ec34f84eb244",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x638546303db57137817c8728bdd5194ed178f1ee",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x6ff94e693d9109160b96e833082ae3fe9a3d4665",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x7f310c961b2c695a418de85ee5b18da2d96493eb",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x48309e804e797eb2a1e302e2a949ef5a53fe7fee",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x411d41fa6be15967020a016876891b254d7f8769",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x634084deb492ae343dcdf6f778f81a4374ec4ca8",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xedd74a346d75508298cd280c8e6686fd7c8b8d47",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xd3edec5115049a0c70c0b15ed7bae4504f642701",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x92e787b966599916deeb4a9c767e65d83ac88f2f",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xc1d35daaf8c740f0f582a111c27125730771b74c",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x298523faa843ca40e83b7934170ca874a4fa1b04",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x653a092d095ba05ef6a077bd5ab5dac0c0a2ad3c",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x38e599d3fd554862fe32b8423f5034017e51bd30",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xf2719d5f7ec66c38abd64bc5efda6876590b3b30",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x65fbc4237823e905be037905a581ef4ac1f9b944",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x05054c258af0d56cab3c98b3923e93966fe797a3",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x0d240837404ea1a62da1273459bfb07ce16ac429",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x70c556fe87545de4fb841dcb67c732162a1aa928",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x538d87cdaec077f532fd01e91cb661ae06ee38ff",
+      "Allocation": "96"
+    },
+    {
+      "Wallet": "0xa94e12ab3209280b4bcc948ab3bdb78fb5f3333f",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xf17e60e848d4d6b96aae6a1ff25baaed5c95b9f7",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0xa922f54e02bcbe8ac9f769654634f617ad9f464f",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xdc8788aaec1c15a420b05a50c9c7b2a6d6ab3b8b",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x72627aa41b4eaa80d329eeeae65dc410a173edc5",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xcb76d5ee12e448eb5f4731c243fc8198e2524e04",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x58e78d096109e5ab7406877b0e5255a653a225a6",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x5a8e3243a74d097741157064b85314a6bc846f0e",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x733605ec2119bc3bfa62745efdb768bdc153e7ad",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xf34bbee56024c82598becc6f2c8cfc7db62f2fcc",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x57b6771cdd64e00584e476b99821d8613fc43030",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xcad702c4b8a9191ab6b43d8074871ef767f451b4",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd5d7f72941d5b918d4e50ca776c2c23ac7cd87be",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xb7f04e25aa0ddd4caedba5f9ef09d4abf0d4dbe7",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xec8edfae340278b79a9a7ba58c8f97b36f3739ef",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xac1fe42461b9bb76ff9e49c52221b154ea01cdc8",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x7c3ff0173b676a0aeae13463a592803ab09a05b5",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x53daf9dcaeb86a6bda07f22e1af2a7c0a9f2b8c6",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xb5c326d27d6bcec567170f1d6e9ec9d55baf32fd",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x6eaf52ac0046d8233976cb79bb46e7d90e7d94ad",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x43beaaf55b402a7b59b8d2696ec040fd09f6c001",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x1ba49b08d59e5f4865a24fe2da2d1f37a416378a",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0a7285d8f3088c3234de71fe7b6158094f60012c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x04cd9cc35601bb748cbc98b549545f44068cddeb",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x75697d4802423fdab397abb3f5de74cb311b3a6d",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x51b68a29429f03f8364a2ae0a4b1a62819405094",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xbd294729aeab8ac7d6c123fcfcd1f4cb09eccdbb",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xe2cd5bbd5185318638139d17bd594f7cecd8a106",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x1506bf1b4979b3cc94c979878e6661a31af004b3",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x078ca0b8b10891887c4c8f1bc064f766565a9787",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x514645a6f4a4d39468414ec7bc884860556f1ac7",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x045aa32568a4b86bdcc0752227acd383a43422ce",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xea79905a9704016ccbecb8f72e49ee7a3b5e051e",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x1d88f5a58624688627fccd370dc8eac3a700c138",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x0603a430fdbe17a40eb923d94ba62afa2c9e8823",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x9efbcde2d37efa672ff251cdc3da1f1a4c6c809c",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xe608449cb4ae30a367a288f23fcaa821fcf7ce18",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x2f216c2f292a34bf285bb0a9ddb366b6c2baf7f2",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x3d6e4a3857edb49d0704e1940cacf5b8512d121b",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x05b015c5f00755eb2589e1971d8b13c060c53938",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xc117d6ed92bb2a974fa25178b02d7c3b7868415d",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xcbce7cf88811137034fa9eab807c4a983c3a2d60",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x07e86eee49ebb02fc61cd88e5cef798dc0e4e1c6",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xed812d4f03d2956c39b78f953374a6fea754e0c5",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x25c8be0b211a3bf79f115500df69d1b3176980c1",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xcab41915af424c256e32fcf8b7c0f59ec1cc0463",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xf7e7bdf26071d05ed5447153e483ed74cdb12202",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xf1f957595dc117128bf7d3ac5f71042a889b826a",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x9249582c4c321bd49efd2f279029ef90c8a8d8c0",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x9d0442c647d42c09f18a46ac0f4337889a16f749",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x3ec968c4d0154328d99b491953c8b2193401a06a",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x36aacf25130c06dd548cc8e8d76f106eb2a743f5",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd632d7582bea61e861de0afca569ce5945c70239",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x9bd48e08e3444b30113812acd52458b35c33803a",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x259fbd962ae389ebd7671fca408d0f4ef441f026",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x2031cc88e566e08e7cbd0b8363d36a4141731503",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x3050c7ad5c28aa9bb357421fdcd7cb35809a448d",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xea91e017718fddbd897e4b0fc8b5412f996f63f4",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x19ba4782efadd1bf349e87a233515f24db496868",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x2c71808c0f8a41c34c69472b3ec32458b026ee01",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x17eea820a2dfff14ef53185a196727474552bc00",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xcf3d47b808dc7651f1b3c1b615a19a0d0ab73567",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x25382a5f407a31c1996bbf96fbb92a690497288c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0330b57a23433db7be4b663a9c2d896cabf0970d",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x3c8be9410b7f78d62bf3250668aac3787ceaa109",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0544868b896316a53b01090a7c4505353b008c15",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x7dd3705b1abc05cf736f6fdce4bcac1069058a63",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xc06114c795f85ebdf5bb9f66d2ae197c2897571b",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x58f833e5e6dd6e0c922138f4035598a8bce2ad1d",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x601acc458036bdca8716884451bdbc044facc941",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xdfc4d34c1b934a3688a9ccadbe831ca5d86ceedb",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xcb529bacf06e5d6dd158e608d2005cfc1b9fa904",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xb5efa26c8e597f6355ddaf79f4b2558173705fe5",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x95d05d613ec0f1b1afa6743e3fb3473a76ee17db",
+      "Allocation": "96"
+    },
+    {
+      "Wallet": "0x294c2a8bd233fad3d9c29e9362a42f8881f4461b",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xff92318eec032755d443ae6c877ab09fd27fc2f5",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xeafe6edd5192780fdc5d3010c6d72c3834dd7b1c",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x6d4bf16d1efc8e5b07a447f6889b1338176d0dd0",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xbfa2487ef2b12192c687f8ae47409532efc0d2f7",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xcf7e5d2bbe28d27baf5e26e53135bb01e2fd5515",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xd61d38e4cdd33e6d6b13a70a527062724a577927",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x10c5f89cb714d908e4cc3db31c4d551d6ee15061",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x94bc15f7a7f9716b50638ee8dea820cd7d77958c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x44fc7c5dbcf1c40b4546571453157fd52bf08195",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x46becdc63d50abc2cefd6a546b98bf7538bbe2e0",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xa84279c8a671109909c168a2cc9880f861ade446",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xa72e75f5d2e8a67c9e8d5825c31ea8aa011946e2",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x7e4d7b3bc3698cc625a6c6dff5c5a572b300a631",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xcc33d826a33b47eeec6cea8ad5f4b8f69d4511da",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x2017afdb9f8635e89fb1c136967e1e79949f5703",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xcb4306433cf5cc94badc01dd38f0e6d777a0345e",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x8ad29ae0d3cf87ee8d8f5cb2173fa7e08c00cd0a",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x105650cec28f5c344ec1b5ea9d569a7599f1c25e",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x6a9065271055e710116209c8032d2e18e42535a7",
+      "Allocation": "96"
+    },
+    {
+      "Wallet": "0x518c4050fd1631dbe24debcf27f7bf038c49a076",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x5f5676b24d7b6faf586292977c29fb0b7f74ac4f",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x54fdae0393dd9e71f0279f33881cb7e87f8758ae",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x6d07fa7b60cce5b70cd01842310462783b00b770",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xe8f25fbd6aa4dc03d7fd125ecd32194b547fa225",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x79fd8752f0eea7782cad1871fc09dc13e0eea58e",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x9a94353cda0bfe039ded20223b627498382f5e07",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xe05444b24c2520b312d2f7f853609df7bd9bd5ce",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x3743eb7554d75ae5ed1ab0ae0707057a36fce9a0",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xd653400c0d2b673b86338efa57a44936ac36a3d9",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x8a0c3189e1653e23433473c451273aee234902e6",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x9bd71f9b7309142266d44846fed1a1bec01e4c03",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x98d9e623f6bcb4a254d9628231c7817da050144c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xa9b396ad7530ad06669520824769542aedaa450f",
+      "Allocation": "84"
+    },
+    {
+      "Wallet": "0x8aa60881dde54833fd2e2186ee7a9661440c16a1",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x3df16c66f12d7488e8638dae25b8cc69865891aa",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0d2745320046e0e9db8fcd8152768c3310009585",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x2b13a9a626ac6f12f9b7047c4a6cb0f504194a01",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x6eaa340b1040db919c7de40fd194710b234a53ed",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x3d0d8ce236bd45a8636e47ae9507758562391779",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x7d39b21710c610d59ad15f71e22d910d80283b28",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0a5abc4eef196994abb9cd34fa8fe9229ce53e4f",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xebb8f70d40d62864eab334c66bb5b88ce558054f",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x73064f6c1c5dad8d917782aec16ab564feb3c011",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x7247dcf278360e7a1470a979ee085f38f0d3e05e",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x2b76d89318b1c674bd1fe49491b2674326089cea",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xc2acf30bcbbf739db2dbeed69d973d33e33aa237",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xbdfcedafc40fe21dfabb3c4794406e4eb591c0c0",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xc441fcd2e080a01f451b63e9b6ba4b524c5e1d58",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xf888321e980dcf01dea475029afcbf8af51fbde3",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x63aea877b5d5fa234a1532f1b26a4f6d9051866e",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x6688595960852ceeda8d669b7a29dbaa43bd4ce2",
+      "Allocation": "72"
+    },
+    {
+      "Wallet": "0x05bd7bc42fc24310018afe5917b2fd25d92c0ba9",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xed200ebb364c8ae12a44aa002e488a78746b1490",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x5736811693de100f34e7c021de2f3f1665652314",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xf3e36e557a325af44acc5834759055819e22aece",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0xffe827d8c75f8071a8c60a1e1ad3d97fd678587e",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x94367468ca35ae05b5c90bf69a7a035ca17ea642",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xe6caf9b1fe066129947feb3d464057506a5a815a",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x50339a5c57dc3ec07912def41fd0de43e09d995e",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x7fc55ecf955f1c0072b3b6cacab654532f10f017",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x75f958029c4ff5c1795a4b78e573f47a2174aae7",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xf6595947cb79a2f6b158fe6e50f4ba14b2a331ed",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x7e8d2190dde46f666ec7e578611b5728dbeafc1a",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0eb19da3b5a7a73ee4ecf3f8709c748a17395ff3",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x741132fca8b9fc6f3971dc436ce16a61e73135ab",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x84069003863695df178adeae15527be8fa5286ad",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xe7497c632aa78aa2d3a3fc3bb01957a3a6c5c913",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x9906a2c7516afff1b2999bb0badb43cae7c2c012",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x02de0a6808cc62927d14b325ca407b83de9d5ce1",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x0755c865e5e46b58f3ff790b662e7998405f0c46",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xc33bac3c568039d5196f0b0faf9b98d9ea26a97f",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x0fe6b003c38e1ef8c139c0f95f283b79fbf9bd97",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xf77506dac023a7483b8ec308b387abb161ac4fa0",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xcec771b3ab9204c4eb0b731111658e7c8ba539cf",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x00411c1d15fd3dd6e2de50651b1fba9dd8ff7115",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x0ff0f94a43ec6f2796194d6d8e4fb03b3c66d73f",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xa1ca3d520c24b9477bc1a77a9657a6db29146846",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x1ae84834bde4f367117e0acb611885c2db00d61c",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x36b62523b315f9e1ead0968dfe4b9685cf94f262",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x98e77d1b7fbc368cca46060cd2079cc850cd0f06",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x8659013c2f5d62cc12a1be652f8f937d5cd40641",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xb9639d4f9f572eb415c85bddd1a99b8f7ddf5b5a",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x3fe09442d06279d117babee9063204904e1e2dfe",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x4815366bb6f74796173c8bea057b5919810138a6",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x63c1a2983e2fee77c97eb013f5ae031de6eff0d7",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xce2da6e847bd0d7f31be0ad17ff54bc6b7d2cf02",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x45760286e18c3d6a365ef31b518fe51a8993272e",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x04448554d0257ee180a5f500d861b3f3192343f0",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xebaa7f83b1ab7733a50856caacea5fdb307ba656",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xb2f974d3346f3f9f00b147c2fab6d62c6c43ce01",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xe0243b2ed37f74aa4ad2bd3a18e48ea6326807bd",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0f0c8c1deaf18bde17da471cd05df01d3e3008ff",
+      "Allocation": "84"
+    },
+    {
+      "Wallet": "0x2a5b12c7880f277579ab86388203f7e17f7ff2d0",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xc5f5cc4905fea1651e839910fbebb88b6ae40e36",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x6f7768859f8704b898f4acbdc5d71061b854b2c1",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x39fa6e3ce722ceebcba9b020efc14d006f9b532e",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x224742054fb9c01101dce91f4100b766b486efdc",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x5290302fafc3f7931351d417bf480b1e73c70cd1",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x666f8b01214c39bb05bdf4bd3a03c008224800c0",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xdafc143308f80fdecd85e0aeb2c51ec0e1c63793",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x4519c4fdda24240034dcc2ab8efee7f143f128e7",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd335c8eba8c214ba199cb2b27e4ab5c96e43cc11",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xa280a717b2a7553699680fa1240fd1be0790261f",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x238727eeb11d0cb459facde1d3db52e4f0ec2300",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x6cb9c2c61908658e3c9875c864b5e2cab2f21a4c",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x4c024f63a9b39a5282193f075bfc9c67b8a00c34",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xbff85a4fc48f10876e01a2e8721bff0124d125dd",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x905ef06810b5d168d0c8d351593ed5d1880dbc28",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x287e2a0e76d380a63a09b8f20e3644992e4823c7",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xb4639ba01a2217986f81bc2852008931852d0dd0",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x426f4d2d81f1bd1ca1d288e3bdac0020662daa7f",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xdc8aba01485334d726cf69f8601338fa11f39e49",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x785c072c977513e1090edc5c17d945022491c1ac",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x9407a95adf5e9481c3321126afb72241b89de296",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x8461c0f3f458fe8055ab1797e31cff0449e2cdf7",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x177cae807ffc5505ecbf5bfc126d41e4e071b87c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x19081de04875e477afd3b44c2929d82986b1610c",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x6b052bb4f5e54dee68cf96530d67c9b54283ace8",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xa1daf9d485898ce10ceddd1e3c0659bd6696e1b6",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd2f72d82bdf80a662d8ee66fd488c64f824f6628",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xad155c939d8d745dd488567b18369c13cdd841f4",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x83c5deba87fe67b8054de6355487a8d804e2c9dc",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x533f99958d4552d8b9c9cd87756dd3a8b29f4bd7",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x236176b4f9d3e3013e6959c58f7fe3de534e1772",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x522854311f30f812cbd7f7cae27d8b6a5f25b67e",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x38dd6668bbbe70200438d09d71c0886a0f4023d6",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x6f87362c97e781c2d21cde78bb4920a46fdc4289",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x39691c14e718c1bcaa0ebc63339185916159e0f2",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x9ccec61b874921d525032269c4e03f06950cac59",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xb124317f166a97dc8fd63520ac961ac8259b658c",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xf67901412e22735add5a25ea718b3fdbe2f4367c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xe3ceee16e70177dcbfe3a3f5f09e22fa3433c24e",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x76dc7a48d82f1e322d56f1e2f019aafb9d38ba9b",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x3b796de193c3a1d19c3ed29dd5d2a184df58f53f",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x3c000a1567fa16fac04aa377de4197a5638cba1f",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x28886a5092c106af706d6df9a6da0282bb79f5bc",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xb81c59406fcb2235943481dd26f7bd4d209432f8",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x81a6e4d322f690935df339abc5c92e3eb20bc49e",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x2b4e82e584ec7f3307bee4ac7f86986554ec6ebe",
+      "Allocation": "84"
+    },
+    {
+      "Wallet": "0x7f3707b6bafbe1c7b6ce0b20db0d31bd4290a0f7",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x6645d1d2fb6acdb8dead7e4f42eaef85d8897e85",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xa72eeaa05f39a601895ab6690a73b96a89d8826d",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x20aacb4577d69c32d2413d37e5f045c8ab958d4a",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x0ac4dd0d43a587b5f44afd3c4e47ce49a5713292",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x6b043ab19226a3bec56c36d0b1c24c23eafd7ce0",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0389653a69d187db44837586384d9fd2f068dbbe",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd49591f0e9e8fc90856ea791b5f5cdf5edc78883",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x31b48d410003ab480bd66398f6e0712c55e11587",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xd6578014899175f1177f65889ffe1123f3952a6c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xa385d9367df02d05f72a5ee0877c5ba6b7bf2ba6",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x840695a5fc6bb891552907a492685ff8a74af86f",
+      "Allocation": "96"
+    },
+    {
+      "Wallet": "0x2220dcd6617f428ccc90567a3416fffe149c69b5",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0d8807e947a7392e4d73fbcde7624723f82177d3",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x667cbbed2e1295ec25381e2b056547eb90fc8f96",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x1fa97d69e4d3e4c015ee97ca589dc6379350d48b",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd78910c72ad46747dfef5d11bf837637c1074a2a",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xda6c75643c0cd92b7212f80e291999db64959827",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x4dc1aeceaecbaf4103741c86a5676b4554bdad43",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x62314223560235abe4fc08b67a1481afae9e2d13",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x7569ff833ff6c5fdbb58934862a08281828673ea",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xf3381ee675e4b0ee5a74ecea36b3dde77bc23c47",
+      "Allocation": "120"
+    },
+    {
+      "Wallet": "0xcc539ab5ec181caab7d585e4d74220f93f6a33c1",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x436902d3e7b45a1d90791049d369283b49a032aa",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xd18992db12494f18f0fd2e4a05c1596aced9131e",
+      "Allocation": "120"
+    },
+    {
+      "Wallet": "0x548bbfa2d618e17ac4a90248c69191d330775c97",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0025c3c11bb53bb4b3e8e18bf33d8635c97aa52b",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x4272ecc9ede53952029214b52c0a0e19cc450c73",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x465050115c77566c87344b740a40095444bc0205",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xe8ac3ee3cbc40bb5f4fc1104d829b3c13a7ae13b",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x54b0488ff116b77b499253f12c2fa5af1a1a1ede",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0xb6656062101ebabdecc76d742fcdc7ff8629de71",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x90c53d5cc0f6756def2542830a6c16bbb995aff3",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xbc1fc761213b346b1053ab0f67276f8557f0eafb",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x4dea8f14ee5534311a275985b6b9e3b112d86b1a",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x57078a98d1503974466009d6f95689e29368b74c",
+      "Allocation": "144"
+    },
+    {
+      "Wallet": "0x1ef7612f883491808fda0af5dba97d07c6e0b71a",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x370d08fcfda5d28082a0b3a4358d5dadd21d86a4",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x598a62133ec46b767071b18d88b44620eb591ab8",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x1873e568e55fa4885f48968fe9277f62660482cf",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x231b405c333db6d81adeaadf4c6ff3940ea5db21",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x701f88f3abcb3b1fbfcc7e28f59f279c7f69c416",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xbfbc1a9d959f3140ef3ba0073f1044a02be7b637",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xa0dd451e56b15aac30475477c6d636f49e813358",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x52e5cab0ede7303c3de191ed04e2d22766df31d0",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x7e1d89efe0d75b659fece9159801fd9df37c0ac0",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xb0ac72f731e60408769a0d733a28063a0685436a",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xa1d5e9cb4f6a09fcf8b938435b0de63270c67537",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x757836ae97b58833f8e96a1240e6cbabe1955707",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd9390b46a1749dee5325a490490491db9a826d1f",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xac683692902a158ba1a43003e134e45f02bdbe39",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x69c941c7e2947139b7cd5e142da433892eecb9c6",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x3ee40569ed7790f8798d8ab3cfce7150de7af8b8",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xaf8008b48134ded589a1ce1c2a7301060585ccce",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xa814b3043c92462a84cbd0c7ee191b4b97c2d6a7",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xe6cc5e3ebb07b5156ba3af510b8c6ca19804d88e",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x1b6ce6b6e2f5b5205851a993a7d294b1896a4619",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x0e1713bc7fe17fe9a6b1925846d7f82cda558b4b",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x69d7bec89472c439b3544b5e04f50479b23febbf",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x7a7784ec619bb91d463f127ad720dc9047bb0acd",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x8d4201d61be3c0958c13eaa1bc39474f3dd90123",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x07488ea86e834e643d17515c114c8aa25893c8cd",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x013e45ad7e2f70445bf6bfcfe1a7a18c71f6758c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x7c3c36c496a173e933709c7d882cd1e84b7baaf0",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xeddb00d08022f282a0179cb4c35697f50ef3b138",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x50de3e34f0bed163f732c0170dfb82f542f0a110",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xa9358cf1c8935b0de44e5ca158ce963cf8842252",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x92fb101e33224d74bdfcef5bfd17e7cdf184a58f",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0bd007403183cca51051fa858cad4429df53ccca",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x90bca5826eb99495d2bf5ace26445d40e6f6d204",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x844dc38bfa4882eec8c5b85dceb08fc66a7a4fbe",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x3c4c7180bdf63f2d98be0592d0501283c315d839",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xd2cc9027480f9630e291e91074b95343f886e043",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x9042f2ac3aac98aca7d5a0654a6761227854e6cf",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x29d5d8055da44b68582bfa108498d6b2f6ca4f05",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x75bd317bfbf742dec4fac0e1e6c55f1b19202a24",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x2f697170f55e4736e3a02b0eb5ad5e3d6766734c",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x0bdb188095ffc53d6ae2592196fb2215735a6755",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xfcb09bf2635e216b18fda08dadf1f011aa2a287c",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xabd263d64781a01fe3d9b17f12fc95f6fccb2943",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x289cf66ac13e6a285c06682dc1f93e8904719f1c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x36c53c6b2a53a67df989d6bf98cc5fe05847c34c",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x9bb0c1adfc5b14ba25a906acdb7c438ba2103d9e",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xe108ed7f9c2539f3d180dbb002f95c5d46c182f8",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x9d09ec3cbb97bc6571168a155cad17043ff1093d",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xec84ca73029969a43509ff850de593e5540cd050",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x26f87a9b970653aaa55972f0a9b3db4fad6ab9e3",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x260e749a47742b48f5359c82b8d6bc9b50887d25",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xcd98c52d690d9f9827921c1a26392c9b0d8c9aed",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x53c21d88b9c0f427837b2367411b166e68bd5663",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x3646ce1ed80c28d843dc56084c5b2801b0f1cc51",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xf69e594ddccedde159dc6922e9786dd2f762c600",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x4a4b9a1553dadb071fe6a53bfe909ec08cb6ce35",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x2169c7ec10350e7f38603db8237f5fe4602b62e1",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xe1ecf8ef96a4a01e1cb713321564530dc3165a8c",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x4dcf970ef4d8f22661526db927197ee7b8741ded",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x1e55d37997697d233be6756aca2840c074e152e8",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x873766a927f92c3594eda5182a87d5519b8062f3",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xcdb70ab6c33d281fa744a687fe969783cbb03464",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd2553b673fffd25cfcbb345c48c74cc17af1f374",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x9b9e485040686a48f6f41848086fad301aaf08ff",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xbd244ec0f8fc7ba73e22dbe8bd89390e561e112d",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xcb4d5e7026c3f86348c80d918ba9e511295399f1",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xdbb9b22678db779942d88b0c35489e33ab685483",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x8d005cc8c0ff30ac7e2343351107de2591e3c59a",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x79dc282b6bbe75f3382ae8761a3b553fd5b91f22",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x1d3799c98f6abd59883a887ec1d164d5e29a5d43",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0af5d467bd5fbf995a2ea381385c7ddf6b99236c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x8cefbdcec0cf2b3a349a56a924acfd587d0a8e1f",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xa41d8f83e1466dd8966edb79ce2b6ba94226804c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x1cab647aed688da43b1d38aa2027f35e5b61cde3",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd9917c83a81e00da4de9a3d32f66f5acced76140",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x7bc158c283525b269823a97556fe29813d51932b",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xf1e988611a3a959cf67d5a9ae53eeb7e57be5651",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x4cd11faa9b92a042e59c9bdbe2012ac5b2648885",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xf4796c3a78080dad8b3f1fcb39f097fe46b7bc0f",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xcfdd6cb5aea4c6da545efe9201bc8c3ae959aa79",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xc47145a82f21c5bb731e0dd419a668a5014a7037",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x77e9248f63fc7e9eca2b88a2d5f030ff06ce04fd",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xbee3ac646cbc46fafa04e1ad1c7ca123b70e2c57",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xc765d74d8cb7dabf4944e5039cb142244b5fe4cc",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd8d4edab781f5607bc08701c45d36a9dbbc5326d",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x1ef624456d62aeb5ece0f5c9108748d65d9e21de",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x49f4c5e9c0a01c3c938c1fb038e59fc36dc77cba",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd0a846eed558d61e65a3543acc6b9b46619cd2ce",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xc70b27d65e44db8c599a87533c45b2a067485652",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x2d8cb74ccb3cbed6e88b935a63e0dc57042ae480",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x73ad157342afc3adc416fe2c90bb275946cb3c5a",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x68be24632f483c97fd3bf3297de7218a8840691c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x407b15c1eb785ccb45ad0ce74458a7ef1530c9d0",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x58682d8e862e74316871b70ffaf2d03963206c1d",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x70d3a2a768e214547da852ef323df8a62807ca25",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x8f522535f239cd794f7d23df0a4d54b1c133a8dc",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0e95d836e68fba6db134871935afa44ac9e32799",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x31143c52d4a9fede65fc0209309dc26d15a36f26",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xf000bdcce0a72c661ddcce7691f7de4c92b1f1d6",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x7c7e606dc5e446438f7938858136a665671f753a",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xdc9c13829e8d3d8613f7ca786dd0145f6ac58eb7",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x6118a5b215fa1b31ab7dcfe66a3679eb6bb7fbde",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x5ff2b3354eb7e44dd5026622b6eb3f716dc16a92",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x770ea929208c8b1d9fcb4258687587c543f706a5",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xa0ab8b16dadcc767a202a26651eead5b04bd5eb2",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x972af7ee6c96b8b841bff490d88b266c82064347",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x6f5b81468c57fb7df033dc1cb7360bbe218f86cd",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x83a88a81fb8ddb3108272ef182f19199168de296",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x91596516ef0bee1024ec73482e5d050411e65ada",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xc60a420d931ea58a113206a06cb1aced509e7033",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x8f02df367d80dc5e7eb2febd334ab473b35cc269",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x1b4c98a34c38d9ad0a895a70727650cb58b6ea57",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x3704ef69d0956d8cd4bcf558f3c7e6cebb9323ef",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x04197c405a7f63ae083dd74fd4124efad25d702b",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xd489aca8d6dd8f004c07f239831303aca0aacd24",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x8fbd07de10bca6433d695312e8c41fc0537393e0",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xe4187d34ac13a4f0fa74d6c6ad5ce9a167d38a92",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xcc5445fc13ef16d705d01b88a61b1f4d01c38c8a",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x43634d29b94268bad0eb63d54e1c92362048d2dc",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x9c332eaf1e1834d948447bb72ce3acb63def78a0",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x2195be053c2429402813855afcbd6370fb969b26",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x49dcf4c437952224bc279ce6a5b26db620346c85",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xd57bf4bba27997bee7cc8d1d5d052c592e6e01db",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xf69f1d0d46ba787755566ba2495d41748965c88a",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x431b5ddb0ace97ebc3d936403ea25831bad832b6",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x1bee777c26446c46958da640c40eb8f9db369e96",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xc6d84b7333ccf2db3362f5acd944da2dcc304d06",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x65df157a0d9db0976ccce1698051416fdfdf8a31",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xdb7cf0a197530620f68d010ada866c533ab992b5",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x2d2cf2205d16b334f76ca813c632e48c12b0a241",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x8594cfad8648dc92dd2015d6402a8064407c1d54",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x131d680ffb83c1be55d6b1e2f1f21031d872f094",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x597e3646f8ea18e16bbc354e3444d14fced4f421",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x590da95c1c8e4b4a867504530c2c5f32abd5731d",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x8342f513760717da7056f4f445b6a2dacf31b857",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x366f4b08dd7bd8240fc3d57c37fd351f7507e236",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x4a678ace0a7abfe7219d2c0ee7585be362316b82",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x858d4e9faa4c75d30acc6115819f9f77f03d9603",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x27d534e59bb79c5d10f57775f5cd1792c98640cf",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x182d03d2be598ce6191ed3026ef0b09cc8aa1496",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x1cdb9385898bc7f8b90e891af7d2ef45f7e0bece",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x8004453582cfa0f516613f8f25ef99eb6e6c2841",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xe41f508fef5f9730ee94d633d7e33f5ea0f29ff3",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x58df46d6f3156fa9fc9b6e69a26607dfe2d4e3d8",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x7fa5cefe48fd79c6d3c44841d998c7a0872a66c6",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xa21498b25118dd6e6d88b94c1886d32129f0023d",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x1c3b526debaf722f20f5c08fe983ca77cf7435d4",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x164b8755b39cae145f9989c39e1da150187848b0",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x92a6e3d9e5d553f3b9c55476813bb8d9c1ec005f",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xdb6f0ebff7d9724e4b4db8f829ddb04067da314f",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xd6b682b465084e3348ffa79886e0120e52ae3a23",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x0ec24d66d8c13702b0515b5acdcd9b1e69a2a6aa",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x946d47ceb29058d1e11578fc0cb41d924c03584d",
+      "Allocation": "96"
+    },
+    {
+      "Wallet": "0x51036a953a03663707b1f9e59ce8c00471472225",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xd0b74bae747a7756644b1f453577449055693a6c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0f4e989f7580af183f4150aca7cf3c7b4a68e1cd",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xfb8ad467543af7ed64a6e61b411ad629a7f7d127",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x497cddf021c36beaef7cc09e8b7c06a14dd5c289",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x7090e61e52a0210288a2866209f450d9e13338cf",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xe14065222b3c41ac7e42f484281bdc9404a7689d",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x8b344ff82dad2772c9bb0f46a6ae5717ff946a5a",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xf7f1ae6e7634237c02a2d32b7de3f653177578a2",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x7225c9b9add64736fd38a83c9504b8044819561b",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x10a4374f439fd3f312ed397cb454d7db9d973d95",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xf663532633d1ab40999a7ab9ac4be4a93b88cfcf",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x49446ec48967497bfac4b11b8f8c8e20b63b3f6d",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xd0bb3b27d26155bffd2a77684e1f28f8d725dc98",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x91a771094cbfde591fc9efe33995c4c8a1dd87c6",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xc3cac0b0fa58c6d0619f38445ae65a426d40f321",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x710af7dddd304b10e85a91f5523e7bbc745c8c34",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x72d56f59587c63377267806522941d0d32f5fd68",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xa1581ab558c689dd5059fc8addf87f574553c1f1",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x2364797fda4928016e631adf65e532a941c86afd",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x479ce2a71bd00bb170ba57e23b87961326f37dfb",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x77fcc17608eb06ffa8c6fc4e80ddae8c034270a4",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x219e5f35a97415c7a2c9e69033026e821a21869d",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x58ff62ce8f12508e03ce4b8b6a03f94adba855f0",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x765d9c485bebb431872ea51d000a20623c1e5b94",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xed39a2d3a17c0377160b8aeba665e227e5ee511e",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x4e042cc374a08a32851971ae9e35cdb911617be7",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x6f57aec9cec64a9e0e0318808a221fe473891a45",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x33461daac6548f606411310d2916a1f0b0c91878",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xed46fe5823dbdf7be088f4f023840f4636941879",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x5ef22d551ca109f5cc7996502709065b39cdd23b",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x5c1679eb432be2d59548a8ca188e104159d1db8e",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x4e1076f4bfa971b6eed1d03bed962e0b927016f7",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xd26b8c70efe3a7f95ada2718d87445d73e6f82e7",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x90671437ade8237dd73933058d949d16cd24773c",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x81661cad2fa84e03a1fc51260018f383bb5ca79b",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd2e9bc873bbaa026c4fa1a96613d0fe67eb03fc0",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x6953b35c50c7489691ac3d9032e4192326597d43",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x1f8dd194700bd78188f0977294edbaad929d5e1d",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x5f6e79afe64e512979a4fac043f95f00fb264a0b",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x3c2573b002cf51e64ab6d051814648eb3a305363",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x3942789f9e88ae0ff158bd6720c7159f2cacac92",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xb1ac9db0d6a1ec291f427ad03fc3b632e1e93a56",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xca3dfad2f5b498c1777b3b37336678cd29e0918b",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xc2325d815e92d9c9d816b79aece8bd1113d72e4c",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xbc84aadbe6156633f317344d9d8576bfce419d7d",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xf0390a6cada1a6fb95c4693463f11c492bcb4d71",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xa6bc78476c0e9a9760c4948438d7e09a6b91c8c0",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x49fd12c68923db898e9ac9e0aefb53db4678ece8",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x65f4c15bc9baf27a4829b958441184ae15083597",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xdbac6aab5d01ad73447507a513d0acfd6fe8206a",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x58b8341002aaa4d82d8e9c6d57d7565a5f1d9dd6",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x521ad4eba65a598566368a7dd4841c30fcfef52f",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xf15ace93ba23dd41a49c410b73549fe6ca4bf865",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xef8df0f0bbfd930661876905341cca69b1ee6a62",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x2bffee3d6c86c3cad8452016f973f7189eea973d",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x70d787ae6942f1499d59274171328c6ba771e8a6",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x2f038ad6e6c936300c043217d13ed267c873d4b1",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x026fe0c1062d6657c27974a4dacb86cc42040d60",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xfdfd9a06ad604b52e87a2ff3f2f01297419848cd",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x062164d0c571002b9b34a9a71ddaeeb0b6f93132",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x98ef9429588702f62d43407d826066113d8b6ee1",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x47c9e69941752ac2820c23ce36a36d67d7dbe1ce",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x51fe8ae7b3f24049fee42028839716de2b362386",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x3044e94ec9cbf6d27a3f6c6bb4503f18e5765a24",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xdcafe3fc758af777e3c588bae14911a82a0e748b",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x90b13d2437f81d7218ab725d4ef0b87994d21bb4",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x6bf900f06e7af762d4c935ba9b67778da611c58e",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x54ca5b9593428ecd892ec1463a5fb5446fba4e7f",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x1a68eca989f04f8ce3c150932154f5a44838f83a",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x01d00f9ef56284c766374de05add7c5674503160",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x6dfa7cedca21099c019e3b4eac7fef9581ce885b",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x74c132131f764d549ea9f7d16a6fc0e17ca29606",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x3c494547d0d5ab343fcc094ff21a1ac306b19a9e",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x2b0666f128374ce8f30d7560bdaf2bc14e079da8",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x7764f54aa8f58c3c441bc1c8ed181051921afa90",
+      "Allocation": "84"
+    },
+    {
+      "Wallet": "0x8cb9d407c3c6c80088d1cebda8c541f71cf29d25",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x02f844ded29220a88682c4839603870ed375cae8",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xfcbea4609a5001ee922f833d6859fdc247cc1e5c",
+      "Allocation": "108"
+    },
+    {
+      "Wallet": "0xac024b7fdf80c2a949619a2543f4ec8f1b48c7e0",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x32d568569e050d4e7dfcd524f5af6f2688e85c8e",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x914f684065187db32102a6a2b817394202a63fbc",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x295b7a593561e8f35005a96a0e9fe81a7be5e19b",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x0430948bff738a2dabca294a4e0fc55dec34feb8",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xcb86f2f531f02d54afde4935b5f528e5466c4a9a",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x9e3e8c904da41b96377e579d495f548b05bc5fe6",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x7c7ec2ef96e05582a0bc999ba1613b2c235efc20",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xefb425409d8af361f08daa40c156de0bafa03fed",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x281c1e4ae92fd35d16206e88b1991a0e7a33eb29",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x666dbc60c0011dfec5c1af959f63d6e50e60536b",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x31aaf6c83b315decf54d11dfe61f911783011d5f",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xc53e662db87524a11bdd9ca749c31a7e9757f125",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x5fdb23be409e4f8e6b29944a59bce56c89032c40",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xdfe493f255875f4565a690358d47c1d83c8c7e4b",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xde8d09d967134cdb9d9f6712769b9fc704330f65",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x204089c88aef6e44abb0aade1e3469dea7d0c766",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x427bbc3f3bb99eae243d250bb17c790be297b936",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd593be7d470ba396c180229308edab4e60b98479",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x29a0e1dae16de1bb5fb0413bb1f4763615e96190",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x9b10d2ff54e68038fed58b11b9822f3446b1943a",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x491abb862472f42d2937d3d74792fa98fddce0bc",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x3968853bf63aa61c5d127832f803c9117a94fec9",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x99ea5c0340368161ceb32728eb9d33e72f1f225d",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x70432f0ff8dcf49e1c8a5a5e739c584ec8f5a573",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xeeaffd12092e58b99faea89dffb80da4f7415056",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x03124d9ef10783240b839791b1aa25239197fa1c",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x598094a9478209c2d3356a4302b875c4d7be26a7",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x4810e5ea996f3f8bd3b0022e120c7fc50f7faea1",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xc29323bcde92d47ed7e03eec1bd4573c513b1239",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xc3d9760faad4b894f715e7007ea53add8029db22",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x4c5d06d24c8988d366341a51d63196b5b268f8ec",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xb7b1ccca086bbde2848be1ba1390e290986d18ad",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x9ca6fcc5c8b86bc76dd5268d138deb267673a137",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xa2ec0075ca606dd4bf030a9f619ab8a479cd35ca",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x64d3ba16aed7555359037810433b66e4439618b3",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x97d7424cd1c1c78e8ecaa9fc4cdcfbcd1174055c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xc547d6263b119de88bc60d5912507076bf7c6cd6",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xa95e4f2931340ff536c29daacad34a6066adc639",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x9a464619281286bc434cac77d2e0d9e51210b9d5",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x9157bff4a5770f1adbcc32ab9f2eee1d36a156a4",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xce136ae6a2762ac23984ec0a4e4629e1c3637958",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd6551589cc9781acce33b2bc33e539c298a9ffaf",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x630b5bbfc23410724e9941980c15a239a25c8a54",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x7558dbf6ba1bc947b876e2da64b9b413d059345e",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xf7ffb3adfcd12b3424ee04d619f5395f20bc84a7",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xb00979ab681d28c44a2845732d89a8a547001968",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x82476ea913709b88d61a11b92fbb40843ffedef9",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x23711a5c8dbd3fc04792d42a54c00a8a70407cf8",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0f54fbff69e21f493b5b717f9025fa3eb4d89d8d",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xaa4c69dfe3c705bf8e5f1d9966bfe47221db8c9d",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x080182970f8cf8ebfd7db1d359fb81d32680208b",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0e4bd2435590c6549e0874a28b0a2aee5d6c21e0",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x7c0d738d564ecff483e3dc242ef67b1004f67ca4",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x71ae3132d550a9a0a92deeb24161fae68fbfbe8a",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xbeb72b567a4fe8f7419ce7a42fc0cfad315f2d22",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x56538f3c69d915a2fa9799f14b234d803fd66d86",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x6eb6f686542cf0d0bb57ff22a0d8ab9e4e8f1aba",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x4802f8217b462ff3d98bf0e193033503c949498b",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x590aafedf5bb78b2870e8e7c08ddcca9624d68ca",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x32b1fc547ac8392b08adb4d78460a7ad0be09cfe",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x451a587514adf10c81b7715510efbd885312b3f8",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x98fde2158adb0eee13d3f350cc6a39586f115732",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xbb82885d55871d11534630cad01d7564cb9150e1",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xdbd09a7fdd3591b2c22b89eca5feff04d668228f",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x0bcc93882488f270c90b7042c83b6e5646966811",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x8b8472f21a70d9f58d0a1a3dc77174f966e5edc2",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xb5a926bb0aa1163935f95ef1ec2ea7e8e4cf0f9f",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xb35e9200b016dbb42103b928878cf7c8f7e4d41c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x46f3094fd4e7b75e6c45fa0c50682e1f11f4d9da",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xa44df9a43c54feaa10b6ae79b1ddfabdd5896f09",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x7fdf5c20b65db2927b6d7d2e56a14c9123fbc1a1",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x458F8783a6f45E3D8E8f467e5Ac9ef92102229e6",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x88c9674043bd87bbb89dcd415508e0d267b6bd8a",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x8009641888a2a71a3f69b5dacdae3f0069008c13",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x5db29fe8e34df7dc8b3f75c322859a03f43af83f",
+      "Allocation": "84"
+    },
+    {
+      "Wallet": "0x001cd06366ac4aa869f398f532499a00aa68e182",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xe604d72554f992cbc40cb80728554d6b1cec2723",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x685430e01ebe6abd6163590e6ef4901236b5910b",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x19e0bbde26b90bce84b69e383b8ab659e6a55965",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xf9e66d7408d827141fd928bec760a852daac7ee2",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd5cb308f8d60ba16fa4815ab0731877a188f2690",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x5b1578681d43931030fffe066a072133842dde43",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x2f78740dd2d260b3fff102cfa10d451b48b9c746",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x3a70b4d96f281e48aad2a93190806b2209deeeb1",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x33ed7ea88f882dbddc89156ade46cf70ad832ffc",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x28f8a2f2ea0b0d65d4725a612cdb09fcf60c2cf2",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x50c77e7f4a83de5fb9e3b1ec6e157520bfce9b61",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x5483a940f64de7f0891ca7d8a56f88d667e35a5f",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x7f8a9d71c36f89574120103ca4b9483d40897827",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x97804d60f9d695544fcfd1797605f5d1c90f445f",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x28cd5e66ca99623ca4f7a2d66d3e8788a4287f63",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x73e608d3657c486331949fcc0643110e93bb460b",
+      "Allocation": "84"
+    },
+    {
+      "Wallet": "0xc8c0673063600d816a8e51ab51a6bcae4cb9475d",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x2be70302579b674fe3d4e61701ba64fcebd74eac",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x747bf2a818b4e642e64b76e378a5a0247ddc59ba",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x79b8faa70c4add96943095d834f6523a24e33ad6",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xa069f2204cab4862c861925ad40b113d158a5e2f",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x141039ae81d48259417e62ea83d77623c98824b0",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xa6267846e8b276569d40889210345cb60331924e",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x154a2fe536ba3ce61d503b8cba210ebd29f33135",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x83acd3ba8ef0aadbeca0409b2486440c35892db4",
+      "Allocation": "84"
+    },
+    {
+      "Wallet": "0x99d4065fc6d4986a67ce473997935eb48aa435f9",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x5ee013b4d0c2f1acd2d2eb3c76a9d7469bf2be39",
+      "Allocation": "84"
+    },
+    {
+      "Wallet": "0xc7f7a122bd8f3aff266c79c1fd58fc50adf075db",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x3f816594e130e244f1f8539c95856aab12c4f41e",
+      "Allocation": "84"
+    },
+    {
+      "Wallet": "0xfe67d1249e2555a051069ce6cd46021b7fd63f82",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xf7fdab8686e01035b0442244519a3d647aa4c8cc",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x3c7898c61ddd993e107be9b904479880a85ed4ec",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xab34de91585fdbc7eb4a8dedb7d8ff55202fa71f",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x869950832da76fd02fb12028ddd64bbfdb26f760",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x718ccc968b5aa9f4bcfc8228525bd40cc5cb8721",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x6c19dd514ceb0cc6a19237a35feffbe718305a5a",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x6158942881076a13e1856cc6a76c6a83c6f0e7d6",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x22b15b424bc1a6087d07c67be6224ff83c830787",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x1f59d0e3fb58497167ba8081bd7d67f0cf17d673",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x3f182a2531ab2be325e3106e3e4ed73c66abe342",
+      "Allocation": "84"
+    },
+    {
+      "Wallet": "0x68d17b7b18e06fa89e7e24b8aa60171bc3a66316",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x20a0b3b3773a7f3091e5a177ee00b15afd32f312",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x18ca401f6b3f12d62d137835c107dc4af4e5ab99",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xc00bada3f45186d815a8654765d3b80b1328d45a",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xe3c101bc3b156681c8354d2ced3b8710a608823f",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x1b16e9bde48fba049ffc15ca4e2d0f04b27301ae",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x5eb0856b08e47b6299f917e7f594b96b297af805",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x5280537847c00723a2e710349390bff199661cd3",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xa3eda3b12782f22d7ab45bf48c432898a9bd55a3",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x92d7aac06d1f44e3153b1c89f6c3d918d906691c",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x81ff2128cada2889ec2a1ae7c6ef032098b30dab",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xffb8c9ec9951b1d22ae0676a8965de43412ceb7d",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x91709c57bdcb8c55993c39855e85eeda6e728a71",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xa437edb5987318649c05386801135a0c0bfcb701",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x3904e8a65d53a0368bb830eb394a834289922d93",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xf365fcdf3e4b8d55d7b2b7dbf8a525ed2e48dcba",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x4f36394a5d937f8e13689d9f965c6acc05000456",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xe1edcbdda59644bb641062016a88be9b54a4be76",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x8e1583291474dbc50ca4038b143df0b6861c376d",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xb6a042f7779bf04880d1525a5cd60d50698c4392",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x6bdb62bb6c72b10d107410cd743061efebcb4f36",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xd7f944b6c5e45d0544100338b9eea37bc57ce1a3",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x32ecb32b0ec68f058ebc21243540644a8f4984cf",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x30d4d1a4f9affb674062fed332f30e7dea638813",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x86b152ea19289a03686bb09abcf8afe2042ea1e5",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0xfeedfe9c2acb949ef80b0fa714e282d66bd2f955",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x20682c90782777f76fe07a31e65467fd936b7cd1",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x24bb4de554cc1a3fde5f10f1fcdaf4a66ecab35e",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xb842618497c17c8d008d7259eb144bf377dba2f3",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x83691dfecfb766efdecc2d1998b55eed7c4eb7fd",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x81213a21350f5d955a4aadf723fa79c0c2112a5a",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xd03df82375cdc85b18276a5e5b23fd523eb8e7f6",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x62e219d5a8965e1ada920b578d743ce3507fe7f4",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x4172c10d094f16e3ccea0cece6c378b0360e679f",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x564b97df9e25d570312a8ddeb32f7027a52fc558",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x637d2469283cdc30e71ebc542d818949917a8e50",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x97fd87cc32ed4ccee07b17e1159e9aca85b223ab",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x5b73163920f9090079f1b7bce7e01e149586961b",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x29e433a7da5ed6cdb2678bb0b4bda234ea2703fa",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x688540222769a99ad6603ae830d30a20808c5948",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x1d6b74d149c2ed9a43125891308fea3a223694d8",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x5cb37081e1507597bb4f992568f6d7dce5cca8cf",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x5bd21d173ec7c00e6a123cee48729369ef417109",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x1e1fb94b27def2121827fd38a613140db6fb5748",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x508178498fac6d140d4e20671161a746e76df369",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xad1840d72191a1172786214cba4da6d4a3bbfa1b",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x72ceaf0b1cf0dfcd4503ae53520c6241a8297daa",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x2463cc40480903c003d53e97133609745edecd0a",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x59ed088f50d0ab3c84bcb85b593e15a2b889f3f0",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x63515a14726762ae3195cb9e09f42f682bd19d65",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xdca20d5fc8bcf13c4a2f3e37dea13fbf1fff8fba",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x782d4cc681d969797ead50427ffcee9d7de349ab",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xc0c530810f60186a00f56f5f34e340e3ec023e2e",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xcf5241bc700be82538b3ac32fd2d5f2003aacfb5",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x276ee3892dc02e2105a02a716d7ce1c75ecca5d2",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xaec5bc1d9c6c82de2147c8b08802dbd1de3f250f",
+      "Allocation": "48"
+    },
+    {
+      "Wallet": "0x57a36e40a540fb1744cc30d47d2c7e5888110c5d",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x1f5e0a887eaa48f14ea8714d23c42b21fcdb2f19",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x3c4133e0d96b84c97ea42c0a30adbef5f8d9eaa4",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xf5bbb5ca95a0e54049451fda6f63193b443f038e",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x748fb6d809f87d4aec14c1144096c9a6e9c2572d",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xe14e368844a0983e30247eb97c23d3099ab3dfee",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x147048b2c1b058633ceac371ee06b3c7c60a56bd",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x6091fb57e4ddb86feacd6b9959b1d30dcb350a0f",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xd7af376c3138b717a301beed1fcf0b48fa0b2a75",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xeadc374e6f8a5fcad0ca698d2ade1a669ab1b6d9",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x9bd34a27ed836cc25c13e88e552ec7e59d522090",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x73a9d257f43b0c2a0def2dd41020dcc4a3e6af70",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0x84bb83db78c22b0b90fe2c3672598b3e660ce960",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x1accb2615f06e9289395cba71aaa50ba1adcd861",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xe5458463c13d667c71a5093eaca37620aea1abf6",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x1c45e1057b4de6f779495a10f5548ca46f78d1c0",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xaf648f50781cc709f5188aca0333ed24de0fcec3",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xadb3a666accef23b14a74fe4202ecdaac062441f",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xcc0f195bc892892609a06ee4e8cfa6f0f2fbbffd",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x614ec547640247d9fd1c252974227ed4d929ba40",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x1f3a7d53479cee2debb48c3c2ab288ffdd83d772",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x070cee478a6dd83a1aec8abe02fa98de3e797591",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x9a2ad80e2f2e74f9d834b60a90684a9606229e2b",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xb9bc5a3252d1e0ed4602655b89e29855753f7f13",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x0176e09f8f4e675ed78107a89f5acddee626b968",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x888d956a6d195fe15e895fdeeaa04b500f600d5b",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x4de5e6455800d214de10f68daff45cc03b5feb44",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xfe366175311170a4e8816eb6f00d196efbecf37f",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xe4b60504e53974cc4e008d82da7868ebb257b48c",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x42d969cb51d2c08df63f24ceaa975b3affc4c932",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x00fbab65d200e11164c67c6df8f68af2472dc34e",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xa1e6bbe54c708300bf69bfcf077892d16bcadaf6",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x10164da16d62699c58c594fa02d187d5219b2b95",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x1d76327f2fbab0a7a2944a5e7d7284a4fb7edcf2",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x73d862e761e58a2b9a7da94681f151e3c55adb5c",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x73e22e4dfc6fde94298949ba88f7514eb0e487c6",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x53314910f91d0fd597c0db4fd8737de7ba963ed5",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x9d023bf0b60524936832f7a9832bfe6ea2633708",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x3128ad3be0685a5bc6b920b70f14495c69393d68",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x40f251f1ef10ffde941d1fada446f44efaac8fcd",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0xcebc5f0e3325c560fc6896ce6baf0fed4e7c02b6",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x20ff6dbde4aba9ad6272b4972d09bfce99f40544",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xc1a30bdb27480ff0a8bf1372ea346e144cb02a04",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xacfcd33d3e5ffe39ab50aa59e02c021827ae7745",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x971740ed368934875f1890898d5ffc10ea99fa43",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0xea19def7284b6d691af6b4209d30fccbcfe94e39",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x175d694d043b41d47b739e3d2721097e45465a73",
+      "Allocation": "36"
+    },
+    {
+      "Wallet": "0xd2e88e561e519368647038fe2672050ecec6b7d1",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x0d86b7dd0836dfc864f7b8acac619cc2e8c7d63c",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x89884c138cfe059e0cf5d76a351eb647e64a9f34",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x57c191389cb4cf776830564e35d2ce3c5b744531",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x23b6068efee73b678ccd92b8dc49dd15a7520354",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x646a81a6dbf0665ff6a4f4ce1311755d6a9cdb5f",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x2fcfcd26705acad289c8b2018ea68b51d9588c7d",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x9ef00cf25db5b82d55637f9f1b1bbdbad705aa74",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x52555bbc9bd09f1f85aaf89d35d75ad1f44caa9f",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x9182d92645ee3459c2d34f582f04aa8fbd40f41b",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x11d72a233c8455027eaf925dee24c29b78257590",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x475021e2cbfe925beafb63084646eaa8ffe195e7",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x63ebc6ac180510e1c1d3509727235a753b1747e4",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0x82cbefe607172eecc646763762c5e9dec0e71c32",
+      "Allocation": "24"
+    },
+    {
+      "Wallet": "0xebe2df6a4d8857b70c89c936b419e327503c8c31",
+      "Allocation": "60"
+    },
+    {
+      "Wallet": "0x6637287636de430f2edb9c0d9a754b08c2733ea2",
+      "Allocation": "12"
+    },
+    {
+      "Wallet": "0x699d6e4c56d539c3fd8b4f922c07412dc4e76783",
+      "Allocation": "24"
+    }
+  ]
+}
