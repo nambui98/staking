@@ -163,7 +163,7 @@ export const ROADMAP = {
 		{
 			title: 'Q4 - 2022',
 			items: [
-				`Mainnet V3 (Challenge)`,
+				`Mainnet V2 (Challenge)`,
 				`Wearable (Sleep)`,
 				`In-app system optimization`,
 				`Advertising`,
