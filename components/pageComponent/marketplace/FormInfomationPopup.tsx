@@ -67,6 +67,7 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
       setShowBackdrop(false);
       if (response.ok) {
         setStatusForm(true)
+        setErrorName(false)
         MarketplaceService.setStatusPopupGetBonus(true)
       } else {
         const error = await response.json();
@@ -125,7 +126,9 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
       <Wrap>
         <ImageTop><img src={MARKETPLACE_IMAGE.boxShoeToken} /></ImageTop>
         <Title>{statusForm ? 'Your information is sent successfully! Don`t forget to join the Mainnet to receive your BONUS!' : 'Fill your information to receive BONUS gifts from beFITTER for the Mainnet.'}</Title>
+        {errorName && <TextError sx={{color: '#FF6F61', marginBottom: '20px', textAlign: 'center', marginLeft: '-14px'}}>Please try again</TextError>}
         {!statusForm && <BoxForm variant="standard">
+        
           <FormItem>
             <Label>Name <span>*</span></Label>
             <CustomInput
@@ -261,7 +264,7 @@ const VerifyText = styled(Typography)({
 })
 const Title = styled(Typography)({
   ...TEXT_STYLE(16, 500, '#31373E'),
-  margin: '70px 0 20px',
+  margin: '70px 0 0',
   textAlign: 'center',
   lineHeight: '1.4',
   marginLeft: -14
