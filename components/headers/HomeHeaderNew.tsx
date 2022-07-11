@@ -27,7 +27,7 @@ import { toast } from 'react-toastify';
 
 const MAIN_MENU = [
 	{ name: 'HUB', link: 'https://hub.befitter.io/' },
-	{ name: 'Litepaper', link: '/litePaper' }
+	{ name: 'whitepaper', link: 'https://whitepaper.befitter.io/' }
 ]
 
 const Logo: React.FC<any> = () => {
@@ -106,7 +106,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 									</Link>
 								))}
 							</MainMenu>}
-							<MenuButtonNew customImage={'40px'} />
+							{isMobile992 && <MenuButtonNew customImage={'40px'} />}
 						</>
 					</Container>
 				</Toolbar>
