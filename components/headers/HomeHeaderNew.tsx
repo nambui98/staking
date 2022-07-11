@@ -27,7 +27,7 @@ import { toast } from 'react-toastify';
 
 const MAIN_MENU = [
 	{ name: 'HUB', link: 'https://hub.befitter.io/' },
-	{ name: 'Litepaper', link: '/litePaper' }
+	{ name: 'whitepaper', link: 'https://whitepaper.befitter.io/' }
 ]
 
 const Logo: React.FC<any> = () => {
@@ -54,7 +54,6 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 		disableHysteresis: true,
 		threshold: 200,
 	});
-	console.log(stickTrigger);
 
 	const handleCommingSoon = () => {
 		toast('COMING SOON!', {
@@ -67,7 +66,6 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 			progress: undefined,
 		});
 	}
-	console.log(currentPage);
 
 	return (
 		<Box component={'header'}>
