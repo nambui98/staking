@@ -107,7 +107,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 									</Link>
 								))}
 							</MainMenu>}
-							{isMobile992 && <MenuButtonNew customImage={'40px'} />}
+							{isMobile992 && <MenuButtonNew customImage={'40px'} dark={customWhite && !stickTrigger ? false : true} />}
 						</>
 					</Container>
 				</Toolbar>
