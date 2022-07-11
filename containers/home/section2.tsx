@@ -219,7 +219,7 @@ const Section2: NextPage = () => {
 								},
 								transition: 'all .6s',
 								opacity: index == activeIndex ? '1' : 0
-							}}>
+							}} key={index}>
 								<img width={"100%"} src={item.image} alt="" />
 							</BoxImage>
 						})
