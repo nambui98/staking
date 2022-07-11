@@ -148,6 +148,7 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
                 required
                 value={textEmailCheck}
                 onChange={(e) => setTextEmailCheck(e.target.value)}
+                sx={{'& input': {paddingRight: '55px !important'}}}
               />
               <VerifyText onClick={() => textEmailCheck && handleVerifyEmail()} sx={{color: textEmailCheck ? '#55C8FC' : '#A7ACB8'}}>Verify</VerifyText>
             </Box>
