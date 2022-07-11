@@ -35,8 +35,15 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
   const [showBackdrop, setShowBackdrop] = useState(false);
   const recaptchaRef = React.useRef<ReCAPTCHA>(null);
   const [statusForm, setStatusForm] = useState(false);
+  const [errorName, setErrorName] = useState(false);
 
   const handleSubmit = async () => {
+    const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+    if(format.test(textName)){
+      return setErrorName(true)
+    }
+
     try {
       setShowBackdrop(true);
       const response = await fetch("/api/submit", {
@@ -123,10 +130,12 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
             <Label>Name <span>*</span></Label>
             <CustomInput
               fullWidth
+              inputProps={{maxLength: '60'}}
               required
               value={textName}
               onChange={(e) => setTextName(e.target.value)}
             />
+            {errorName && <TextError sx={{color: '#FF6F61'}}>You should not contain any special characters</TextError>}
           </FormItem>
           <FormItem>
             <Label>beFITTER{`’`}s account <span>*</span></Label>
@@ -154,7 +163,7 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
             </BoxSelect>
           </FormItem>
           <FormItem>
-            <Label>Twitter ID</Label>
+            <Label>Twitter username</Label>
             <CustomInput
               fullWidth
               required
@@ -172,7 +181,7 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
             />
           </FormItem>
           <FormItem>
-            <Label>Telegram ID</Label>
+            <Label>Telegram username</Label>
             <CustomInput
               fullWidth
               required
@@ -181,7 +190,7 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
             />
           </FormItem>
           <FormItem>
-            <Label>Facebook ID</Label>
+            <Label>Facebook link</Label>
             <CustomInput
               fullWidth
               required
@@ -196,6 +205,7 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
               onChange={onReCAPTCHAChange}
             />
           </Box>
+          {errorName && <TextError sx={{color: '#FF6F61'}}>You should not contain any special characters</TextError>}
           <ButtonSend active={handleCheckStatusSend()} disabled={handleCheckStatusSend() ? false : true} onClick={handleSubmit}>Send</ButtonSend>
         </BoxForm>}
       </Wrap>
