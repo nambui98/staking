@@ -1,4 +1,4 @@
-import { Box, BoxProps, Button, Stack, styled, Typography, useMediaQuery } from "@mui/material"
+import { Box, BoxProps, Button, InputBase, Stack, styled, Typography, useMediaQuery } from "@mui/material"
 import { useEffect, useState } from "react";
 import { ICON, IMAGE, TAB_ITEM, TAB_NAME } from "../../../constants/assetsWallet";
 import { useWalletContext } from "../../../contexts/WalletContext"
@@ -16,6 +16,7 @@ export const Boxtabs = () => {
   const [totalBox, setTotalBox] = useState<number>(0);
   const [currentTab, setCurrentTab] = useState<string>('');
   const [popupFormInfo, setPopupFormInfo] = useState<boolean>(false);
+  const [textEmail, setTextEmail] = useState<string>('');
   const handleSwitchTab = (tab: string) => {
     setCurrentTab(tab);
   }
@@ -74,7 +75,21 @@ export const Boxtabs = () => {
         </BoxBonus>} */}
       </TabLeft>
       <TabBody>
-        {currentTab.length ? renderBodyView() : <BoxEmpty icon={ICON.shoe} emptyText={'Select assets to continue'} />}
+        <BodyContent>
+          {currentTab.length ? renderBodyView() : <BoxEmpty icon={ICON.shoe} emptyText={'Select assets to continue'} />}
+        </BodyContent>
+        <SendSpending>
+            <Label>beFITTER email</Label>
+            <Box sx={{display: 'flex', alignItems: 'center'}}>
+              <CustomInput
+                fullWidth
+                required
+                value={textEmail}
+                onChange={(e: any) => setTextEmail(e.target.value)}
+              />
+              <ButtonSendSpending>Send to Spending</ButtonSendSpending>
+            </Box>
+          </SendSpending>
       </TabBody>
       <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
       {/* {totalBox > 0 && isMobile && !statusFormGetBonus && <BoxBonus><ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus></BoxBonus>} */}
@@ -86,6 +101,36 @@ export const Boxtabs = () => {
 const iconGray = {
   filter: 'invert(85%) sepia(61%) saturate(10%) hue-rotate(196deg) brightness(100%) contrast(115%)'
 }
+const ButtonSendSpending = styled(Button)({
+  padding: 8,
+  borderRadius: 12,
+  background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
+  color: '#ffffff',
+  ...TEXT_STYLE(16, 600),
+  width: 188,
+  marginLeft: 'auto',
+  textTransform: 'unset'
+})
+const SendSpending = styled(Box)({
+  marginTop: 16,
+  padding: 16,
+  background: '#F8F9FB',
+  borderRadius: 16,
+})
+const Label = styled(Typography)({
+  ...TEXT_STYLE(14, 500, '#5A6178'),
+  marginBottom: 8,
+})
+const CustomInput = styled(InputBase)({
+  width: 305,
+  marginRight: 20,
+  '& .MuiInputBase-input': {
+    ...TEXT_STYLE(14, 500, '#31373E'),
+    padding: '10px 16px',
+    borderRadius: 8,
+    background: '#E9EAEF',   
+  },
+});
 const BoxBonus = styled(Box)({
   textAlign: 'center',
   marginTop: 24,
@@ -133,9 +178,13 @@ const TabLeft = styled(Stack)({
 const TabBody = styled(Stack)({
   width: '100%',
   '@media (min-width: 768px)': {
+    width: 'calc(100% - 256px - 32px)',
+  }
+})
+const BodyContent = styled(Box)({
+  '@media (min-width: 768px)': {
     background: '#F8F9FB',
     borderRadius: 16,
-    width: 'calc(100% - 256px - 32px)',
     padding: 24,
     paddingRight: 9
   }
