@@ -205,7 +205,6 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
               onChange={onReCAPTCHAChange}
             />
           </Box>
-          {errorName && <TextError sx={{color: '#FF6F61'}}>You should not contain any special characters</TextError>}
           <ButtonSend active={handleCheckStatusSend()} disabled={handleCheckStatusSend() ? false : true} onClick={handleSubmit}>Send</ButtonSend>
         </BoxForm>}
       </Wrap>
