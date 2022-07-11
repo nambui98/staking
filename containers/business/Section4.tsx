@@ -42,7 +42,7 @@ export const Section4 = () => {
 					<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "64px" }, marginTop: { xs: "16px", md: "0px" } }}>  <Typography sx={{ lineHeight: { xs: "22px", sm: "64px" } }}>  25% Challenge rewards pool </Typography></Details>
 					<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "64px" }, marginTop: { xs: "16px", md: "0px" } }}>  <Typography sx={{ lineHeight: { xs: "22px", sm: "64px" } }}>  1% of NFT Renting Rewards </Typography></Details>
 				</Box>
-				<Box sx={{ alignSelf: { xs: 'flex-end', sm: "auto" }, mt: "24px" }}>
+				<Box sx={{ alignSelf: { xs: 'flex-end', sm: "auto" }, mt: "24px", '& p': {textAlign: 'right'}}}>
 					<Title>
 						<Typography sx={{ background: 'linear-gradient(180deg, #8AFFC5 6.58%, #1DB167 80.6%)', textTransform: 'uppercase', fontWeight: "900", fontSize: { xm: "24px !important", sm: '48px !important' } }}>$HEE Token</Typography>
 					</Title>
@@ -95,12 +95,12 @@ const Title = styled(Box)({
 	}
 })
 const SubTitle = styled(Typography)({
-	...TEXT_STYLE(20, 600),
+	...TEXT_STYLE(20, 600, '#ffffff'),
 	lineHeight: '72px',
 	// marginBottom: 24,
+	marginTop: 20,
 	'@media (min-width: 768px)': {
-		...TEXT_STYLE(48, 600),
-
+		...TEXT_STYLE(48, 600, '#ffffff')
 		// marginBottom: 80
 	}
 })

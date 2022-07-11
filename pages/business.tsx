@@ -9,7 +9,7 @@ import { Token } from "../containers/business/Token";
 
 const Business = () => {
 	return (
-		<HomeLayoutNew sxProps={{ background: '#111021' }} headerLandingPage={true}>
+		<HomeLayoutNew sxProps={{ background: '#111021' }} headerLandingPage={true} customWhite={true} >
 			<Banner />
 			<Container sx={{ maxWidth: { xl: 1680 + 48 } }}>
 				<Intro />

@@ -122,10 +122,10 @@ const Title = styled(Box)({
   }
 })
 const SubTitle = styled(Typography)({
-  ...TEXT_STYLE(20, 600),
+  ...TEXT_STYLE(20, 600, '#ffffff'),
   marginBottom: 24,
   '@media (min-width: 768px)': {
-    ...TEXT_STYLE(48, 600),
+    ...TEXT_STYLE(48, 600, '#ffffff'),
     marginBottom: 80
   }
 })

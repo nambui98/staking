@@ -21,8 +21,12 @@ export const BUSINESS_TOKEN = {
   fiu: <Typography><span>$FIU </span>(Social token) rewards activities involving social interaction such as challenges and SocialFi; in the future, it will become a governance token when DAO is established.</Typography>,
   body: [
     <Typography>The two tokens are also used in In-app activities. </Typography>,
-    <Typography>• Users need <span style={{color: '#1DB268'}}>$HEE</span> to repair NFTs, mint NFTs and level up NFTs at most levels.</Typography>,
-    <Typography>• Users need <span style={{color: '#FF6D24'}}>$FIU</span> to mint NFTs, level up NFTs at some levels and join challenges.</Typography>,
+    <Typography sx={{
+      paddingLeft: '10px'
+    }}>• Users need <span style={{color: '#1DB268'}}>$HEE</span> to repair NFTs, mint NFTs and level up NFTs at most levels.</Typography>,
+    <Typography sx={{
+      paddingLeft: '10px'
+    }}>• Users need <span style={{color: '#FF6D24'}}>$FIU</span> to mint NFTs, level up NFTs at some levels and join challenges.</Typography>,
     <Typography>The utilities of $FIU and $HEE will evolve alongside app features.</Typography>,
   ]
 }
