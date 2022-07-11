@@ -9,7 +9,7 @@ export const Intro = () => {
 }
 
 const Wrap = styled(Box)({
-  padding: 24,
+  padding: '24px 0',
   '@media (min-width: 768px)': {
     padding: '80px 0 120px'
   }

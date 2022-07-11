@@ -29,15 +29,25 @@ export const BUSINESS_TOKEN = {
 
 export const BUSINESS_MODEL = {
   title: 'Business Model',
-  subTitle: 'The beFITTER features six revenue streams, which can be found as follows:',
+  intro: 'The beFITTER features six revenue streams, which can be found as follows:',
   body1: [
-    <Typography><span>NFT Items Sale</span>: The reserved Genesis Shoe NFT and other limited collections would be sold in special events for users who stake $FIU or hold the first Genesis Shoe NFT. </Typography>,
+    <Typography sx={{
+      marginBottom: '80px',
+      '@media (max-width: 767px)': {
+        marginBottom: '24px',
+      }
+    }}><span>NFT Items Sale</span>: The reserved Genesis Shoe NFT and other limited collections would be sold in special events for users who stake $FIU or hold the first Genesis Shoe NFT. </Typography>,
     <Typography><span>NFT Level-up, Repair and Mint</span>: A revenue stream comes from in-app activities, including NFT leveling up, repairing and minting NFT to create a new one.</Typography>
   ],
   body2: <Typography><span>Challenge</span>: Users spend $FIU to join 1vs1 challenges or buy tickets to participate in a tournament,  where they have a chance to receive a higher reward than in solo activities. The organizer, which is beFITTER in the early stage, would take …% of the winning pool.</Typography>,
   body3: [
     <Typography><span>Transaction Fee</span>: A …% fee on all NFT trades on the in-app NFT marketplac, …% fee when transferring $FIU, … when transferring $HEE,… when transferring $BNB, when transferring NFT between spending and wallet.</Typography>,
-    <Typography><span>Rental Commission Fee</span>: There are 2 forms in the rental system: fixed rent and profit sharing. We will charge a …% fee from the shoe rental profit of the lessor.</Typography>,
+    <Typography sx={{
+      margin: '80px 0',
+      '@media (max-width: 767px)': {
+        margin: '24px 0',
+      }
+    }}><span>Rental Commission Fee</span>: There are 2 forms in the rental system: fixed rent and profit sharing. We will charge a …% fee from the shoe rental profit of the lessor.</Typography>,
     <Typography><span>Advertising & Brand Collaboration Fee</span>: displaying ads within the app and collaborating with brands to launch new shoe collections. This fee is up to negotiation with partners.</Typography>
   ],
   introFire: 'A  portion of the revenue in tokens are permanently destroyed via token burning. This immediately reduces the total supply of tokens.',
