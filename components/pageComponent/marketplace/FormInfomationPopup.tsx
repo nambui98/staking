@@ -38,7 +38,7 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
   const [errorName, setErrorName] = useState(false);
 
   const handleSubmit = async () => {
-    const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    const format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
     if(format.test(textName)){
       return setErrorName(true)
