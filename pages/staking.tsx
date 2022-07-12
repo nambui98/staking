@@ -1,5 +1,6 @@
 import { Stack, styled } from "@mui/material"
 import MainLayout from "../components/layouts/MainLayout"
+import { RoadMap } from "../containers/staking/RoadMap"
 import { TabPools } from "../containers/staking/TabPools"
 
 const Staking = () => {
@@ -7,6 +8,7 @@ const Staking = () => {
     <MainLayout titlePage='beFITTER - Staking pools' sxProps={{ background: '#fff' }}>
       <Wrap>
         <TabPools/>
+        <RoadMap/>
       </Wrap>
     </MainLayout>
   )
