@@ -388,7 +388,7 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 		<Box
 			component={'footer'}
 			sx={{
-				background: '#272B3F',
+				// background: '#272B3F',
 				position: 'relative',
 				height: { xs: 'unset', md: 263 },
 			}}

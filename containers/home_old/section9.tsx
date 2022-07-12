@@ -38,7 +38,7 @@ const StayInTouch: React.FC<any> = ({ sxProps }) => {
 				fontSize={{ xs: 24, sm: 24 }}
 				// fontStyle="italic"
 				fontWeight="600"
-				color="#fff"
+				color="#5A6178"
 				align="center"
 				px={2}
 			>
@@ -81,7 +81,7 @@ const Section9: React.FC<any> = ({ sxProps }) => {
 	return (
 		<Box sx={{
 
-			// background: '#F8F9FB',
+			background: '#F8F9FB',
 			height: '100%',
 			display: 'flex',
 			flexDirection: 'column',
@@ -91,15 +91,15 @@ const Section9: React.FC<any> = ({ sxProps }) => {
 			}
 
 		}}>
-			<Box sx={{ position: 'relative', marginTop: 'auto', display: 'flex', justifyContent: 'center', marginBottom: { xs: 1, sm: '80px' }, mt: { xs: 1, sm: "50px" }, columnGap: '20px' }}>
-				{/* <Box sx={{
+			<Box sx={{ position: 'relative', marginTop: 'auto', display: 'flex', justifyContent: 'center', marginBottom: { xs: 1, sm: '80px' }, columnGap: '20px' }}>
+				<Box sx={{
 					height: '495px',
 					// width: '100%',
 					display: { xs: 'none', md: 'block' }
 				}}>
 
 					<img height={"100%"} style={{ objectFit: 'contain' }} width="100%" src="assets/sec9.png" />
-				</Box> */}
+				</Box>
 				<StayInTouch />
 			</Box >
 			<MainFooter />

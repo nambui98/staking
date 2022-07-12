@@ -16,13 +16,13 @@ import { TEAM } from '../../constants/common';
 
 const Section7: React.FC<any> = ({ sxProps }) => {
 	return (
-		<Container sx={{ ...sxProps, mt: 16, paddingBottom: "22px" }}>
+		<Container sx={{ ...sxProps, }}>
 			{/* <SectionTitle
 				title={TEAM.TITLE}
 				subtitle={TEAM.SUBTITLE}
 				sxProps={{ mb: 7 }}
 			/> */}
-			<Box display={'flex'} mt={{ xs: '88px', sm: '0px' }} mb={{ xs: 3, sm: 5 }} alignItems="center" justifyContent="center">
+			<Box display={'flex'} mt={{ xs: '88px', sm: '0px' }} mb={{ xs: 3, sm: 10 }} alignItems="center" justifyContent="center">
 
 				<Typography
 					fontSize={{ xs: 20, sm: 56 }}
@@ -43,13 +43,11 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 					<Box sx={{
 						display: "flex",
 						justifyContent: "flex-start",
-						flexDirection: { xs: "row", sm: "column" },
-						position: "relative",
+						flexDirection: { xs: "row", sm: "column" }
+
 					}}>
-						<Box position="absolute" sx={{ inset: 0 }}>
-							<img width={"100%"} src="assets/dark/sec7_2.png" />
-						</Box>
-						<Box sx={{ width: { xs: "104px", sm: '100%' }, padding: "3px", position: "relative" }}>
+
+						<Box sx={{ width: { xs: "104px", sm: '100%' }, position: "relative" }}>
 
 							<img width={"100%"} src="assets/partners/icetealabs_director.png" />
 							<Box sx={{ position: "absolute", bottom: "0px", right: "0px", transform: 'translate(50%, 50%)', width: { xs: '24px', sm: '48px' } }}>
@@ -63,9 +61,8 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 							fontWeight={700}
 							color="#31373E"
 							textAlign="left"
-							zIndex={2}
-							ml={{ xs: 2, sm: "16px" }}
-							mt={{ xs: "0px", sm: 2 }}
+							ml={{ xs: 2, sm: "0px" }}
+							mt={{ xs: "0px", sm: 3 }}
 						// sx={{ width: { xs: "104px", sm: '100%' } }}
 						>
 							THI TRUONG
@@ -75,8 +72,7 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 						color: "#5A6178",
 						fontWeight: "500",
 						fontSize: { xs: "13px", sm: '16px' },
-						mt: { xs: 1, sm: 5 },
-						mr: "-100px",
+						mt: { xs: 1, sm: 1 },
 						lineHeight: '22px'
 
 					}}>
@@ -100,13 +96,9 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 					<Box sx={{
 						display: "flex",
 						justifyContent: "flex-start",
-						flexDirection: { xs: "row", sm: "column" },
-						position: "relative",
+						flexDirection: { xs: "row", sm: "column" }
 					}}>
-						<Box position="absolute" sx={{ inset: 0 }}>
-							<img width={"100%"} src="assets/dark/sec7_2.png" />
-						</Box>
-						<Box sx={{ width: { xs: "104px", sm: '100%' }, position: "relative", padding: "3px", }}>
+						<Box sx={{ width: { xs: "104px", sm: '100%' }, position: "relative" }}>
 
 							<img width={"100%"} src="assets/partners/dao_director.png" />
 							<Box sx={{ position: "absolute", bottom: "0px", right: "0px", transform: 'translate(50%, 50%)', width: { xs: '24px', sm: '48px' } }}>
@@ -121,9 +113,8 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 							fontWeight={700}
 							color="#31373E"
 							textAlign="left"
-							ml={{ xs: 2, sm: "16px" }}
-							mt={{ xs: "0px", sm: 2 }}
-							zIndex={2}
+							ml={{ xs: 2, sm: "0px" }}
+							mt={{ xs: "0px", sm: 3 }}
 						// sx={{ width: { xs: "104px", sm: '100%' } }}
 						>
 							HATU SHEIKH
@@ -133,9 +124,8 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 						color: "#5A6178",
 						fontWeight: "500",
 						fontSize: { xs: "13px", sm: '16px' },
-						mt: { xs: 1, sm: 5 },
-						lineHeight: '22px',
-						mr: "-100px",
+						mt: { xs: 1, sm: 1 },
+						lineHeight: '22px'
 					}}>
 						Hatu is the co-founder, chief marketing, and strategy in <span style={{ color: '#55C8FC' }} >
 							Dao Maker

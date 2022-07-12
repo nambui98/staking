@@ -209,7 +209,7 @@ const Section3: NextPage = () => {
 	return (
 		<Box sx={{
 			// backgroundImage: `url(assets/bg_sec3.png)`,
-			// backgroundColor: '#000',
+			backgroundColor: '#000',
 			height: '100%',
 			width: "100%",
 			backgroundPosition: 'center',
@@ -299,41 +299,13 @@ const Section3: NextPage = () => {
 
 				</Box>
 			</Wrap>
-			<Box sx={{
-				position: 'relative', height: "60%",
-
-
-			}}>
-				{
-					activeIndex == 1 && [
-						<Box sx={{
-
-							position: 'absolute',
-							top: "calc(50% + 70px)",
-							left: "50%",
-							transform: 'translate(-50%, -50%)'
-						}}>
-							<img width={"100%"} src="assets/dark/neon-orange.png" alt="" />
-
-						</Box>,
-						<Box sx={{
-
-							position: 'absolute',
-							top: "calc(50% + 70px)",
-							left: "50%",
-							transform: 'translate(-50%, -50%)'
-						}}>
-
-							<img width={"100%"} src="assets/dark/neon-orange1.png" alt="" />
-						</Box>
-					]
-				}
+			<Box sx={{ position: 'relative', height: "60%" }}>
 
 				{
 					data.map((item: itemType, index: number) => {
 						return <TabPanel key={index} value={activeIndex} index={index} >
 
-							<Box width={isMobile ? '85%' : 500} margin="auto" mt={5}  >
+							<Box width={isMobile ? '85%' : 500} margin="auto" mt={5} >
 								<Typography
 									// typography={'span'}
 									fontSize={{ xs: 14, sm: 16 }}
@@ -387,11 +359,9 @@ const Section3: NextPage = () => {
 													// cursor: 'pointer', 
 													position: 'relative', height: "100%",
 													width: "100%",
-
 												}} onClick={() => {
 													// setSlideActiveIndex(index2 + (isTablet ? isMobile ? 2 : 3 : 5))
 												}}>
-
 													<Box sx={{
 														transition: '.8s all',
 														position: 'absolute',
@@ -406,7 +376,6 @@ const Section3: NextPage = () => {
 															objectFit: 'contain',
 															position: 'absolute',
 															inset: '0',
-
 															opacity: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "1" : "0",
 															transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? (isMobile || isBigDesktop ? "scale(1)" : "scale(1.3)") : (isMobile || isBigDesktop ? "scale(0.5)" : "scale(0.8)")
 														}} src={e.active} />

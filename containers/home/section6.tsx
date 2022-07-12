@@ -40,57 +40,70 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 			<Grid container spacing={4} rowSpacing={6}>
 				{TEAM.ITEMS.map(({ name, role, desc, image }, idx) => (
 					<Grid key={idx} item xs={12} md={6}>
-						<Grid container spacing={2}>
+						<Grid container spacing={2} flexDirection={idx % 2 === 1 ? "row" : "row-reverse"}>
 							<Grid item xs={6} sm={4} sx={{ mx: 'auto' }}>
 								<Box
 									sx={{
 										width: '100%',
-										height: 0,
-										pt: `${(160 / 174) * 100}%`,
-										backgroundImage: `url(${image})`,
+										height: "100%",
+										// pt: `${(160 / 174) * 100}%`,
+										backgroundImage: `url(assets/dark/neon-orange-5.png)`,
 										backgroundRepeat: 'no-repeat',
 										backgroundSize: 'cover',
+										backgroundPosition: "center",
+										padding: "25px"
 									}}
-								/>
+								>
+									<img width="100%" height="100%" style={{ objectFit: "contain" }} src={image} />
+								</Box>
 							</Grid>
-							<Grid item xs={12} sm={8}>
-								<Typography
-									fontSize={24}
-									fontWeight={700}
-									color="#31373E"
-									sx={{
-										textAlign: { xs: 'center', sm: 'left' },
-									}}
-								>
-									{name}
-								</Typography>
-								<Typography
-									variant="subtitle1"
-									fontSize={14}
-									fontStyle="italic"
-									sx={{
-										mt: 1,
-										mb: 3,
-										textAlign: { xs: 'center', sm: 'left' },
-										textTransform: 'uppercase',
-										background:
-											'linear-gradient(270deg, #FF5C35 3.42%, #FF612F 98.2%)',
-										WebkitBackgroundClip: 'text',
-										WebkitTextFillColor: 'transparent',
-										backgroundClip: 'text',
-										textFillColor: 'transparent',
-									}}
-								>
-									{role}
-								</Typography>
-								<Typography
+							<Grid item xs={12} sm={8} sx={idx % 2 !== 1 ? {
+								display: 'flex',
+								justifyContent: 'end',
+								alignItems: 'center'
+
+							} : { display: 'flex', alignItems: 'center', }}>
+								<Box width={"fit-content"}>
+
+									<Typography
+										fontSize={24}
+										fontWeight={700}
+										color="#fff"
+										textAlign="right"
+										sx={{
+											textAlign: { xs: 'center', sm: idx % 2 === 1 ? 'left' : 'right' },
+										}}
+									>
+										{name}
+									</Typography>
+									<Typography
+										variant="subtitle1"
+										fontSize={14}
+										fontStyle="italic"
+										sx={{
+											mt: 1,
+											mb: 3,
+											textAlign: { xs: 'center', sm: 'left' },
+											textTransform: 'uppercase',
+											background:
+												'linear-gradient(270deg, #FF5C35 3.42%, #FF612F 98.2%)',
+											WebkitBackgroundClip: 'text',
+											WebkitTextFillColor: 'transparent',
+											backgroundClip: 'text',
+											textFillColor: 'transparent',
+										}}
+									>
+										{role}
+									</Typography>
+								</Box>
+								{/* <Typography
 									fontSize={14}
 									fontWeight={500}
 									lineHeight={1.5}
 									color="#5A6178"
 								>
 									{desc}
-								</Typography>
+								</Typography> */}
 							</Grid>
 						</Grid>
 					</Grid>

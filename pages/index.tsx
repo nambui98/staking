@@ -42,7 +42,7 @@ import Team from '../components/sections/Team';
 import Roadmap from '../components/sections/Roadmap';
 import StayInTouch from '../components/sections/StayInTouch';
 import OpenIno from '../components/pageComponent/home/openIno';
-import HomeLayoutNew from '../components/layouts/HomeLayoutNew';
+import HomeLayoutNew from '../components/layouts/HomeLayoutNew_old';
 import ReactFullpage from '@fullpage/react-fullpage';
 import MainFooter from '../components/footers/MainFooter';
 import Section2 from '../containers/home/section2';
@@ -56,15 +56,6 @@ import Section8 from '../containers/home/section8';
 import { PopupApp } from '../containers/home/PopupApp';
 import Section9 from '../containers/home/section9';
 import { Box } from '@mui/system';
-// import "./styles.css";
-const SEL = "custom-section";
-const SECTION_SEL = `.${SEL}`;
-// NOTE: if using fullpage extensions/plugins put them here and pass it as props.
-const pluginWrapper = () => {
-	/*
-	 * require('./fullpage.fadingEffect.min'); // Optional. Required when using the "fadingEffect" extension.
-	 */
-};
 
 const Home: NextPage = () => {
 	const [height, setHeight] = useState<number>();
@@ -86,50 +77,65 @@ const Home: NextPage = () => {
 			window.removeEventListener('resize', windowHeightListener);
 		};
 	}, []);
-	const onLeave = (origin: any, destination: any, direction: any) => {
-		setCurrentPage(destination.anchor)
-	}
+	console.log(height);
 	const SECTIONS = [
 		<Box
 			key={"1"}
-			className={SEL}
+
 			sx={{
 				height: height,
 				position: 'relative',
+				overflow: 'hidden',
 			}}
 		>
 			<Section1 statusPopup={statusPopup} handleStatusPopup={setStatusPopup} />
 		</Box>,
 		<Box sx={{
-			height: { xs: height, sm: '100%' },
+			// height: { xs: height, sm: '100%' },
 			display: { sx: 'block', sm: 'flex' }, alignItems: 'center'
 
 			// position: 'relative',
-		}} className={SEL} key={"2"} >
+		}} key={"2"} >
 			<Section2 />
 		</Box >
 		,
 		<Box sx={{
 
-			height: { xs: height, sm: '100%' },
+			height: height,
 			position: 'relative',
-		}} className={SEL} key={"3"}>
+		}} key={"3"}>
 			<Section3 />
 		</Box>
 		,
-		<Box className={SEL} key={"4"}>
+		<Box key={"4"} sx={{
+
+			height: height,
+			position: 'relative',
+		}}>
 			<Section4 />
 		</Box>,
-		<Box className={SEL} key={"5"}>
+		<Box key={"5"} sx={{
+
+			height: height,
+			position: 'relative',
+			display: "flex",
+			alignItems: "center",
+
+		}}>
 			<Section5 />
 		</Box>,
-		<Box className={SEL} key={"6"}>
+		<Box key={"6"}>
 			<Section6 />
 		</Box>,
-		<Box className={SEL} key={"7"}>
+		<Box key={"7"} sx={{ backgroundImage: `url(assets/dark/sec7.png)`, backgroundRepeat: "no-repeat", backgroundPosition: "bottom", }}>
 			<Section7 />
 		</Box>,
-		<Box className={SEL} key={"8"}>
+		<Box key={"8"} sx={{
+			height: height
+			// display: { sx: 'block', sm: 'flex' }, alignItems: 'center'
+
+			// position: 'relative',
+		}}>
 			<Section8 />
 
 		</Box>,
@@ -137,34 +143,15 @@ const Home: NextPage = () => {
 
 			height: { xs: height, sm: '100%' },
 			position: 'relative',
-		}} className={SEL} key={"9"}>
+		}} key={"9"}>
 			<Section9 />
 		</Box>,
 	]
 	const isMobile = useMediaQuery('(max-width:599px)');
 	return (
-		<HomeLayoutNew sxProps={{ background: '#fff' }} headerLandingPage={true} currentPage={currentPage}>
-			{
-				isMobile ? SECTIONS :
-					<ReactFullpage
-						// debug /* Debug logging */
-						// Required when using extensions
-						pluginWrapper={pluginWrapper}
+		<HomeLayoutNew sxProps={{ background: '#1C1E29' }} headerLandingPage={true} currentPage={currentPage}>
+			{SECTIONS}
 
-						// fullpage options
-						// licenseKey={"YOUR_KEY_HERE"} // Get one from https://alvarotrigo.com/fullPage/pricing/
-						// navigation
-						anchors={["1", "2", "3", "4", "5", "6", "7", "8", "9"]}
-						sectionSelector={SECTION_SEL}
-						onLeave={onLeave}
-						// sectionsColor={[...originalColors]}
-						render={(comp) => (
-							<ReactFullpage.Wrapper>
-								{SECTIONS}
-							</ReactFullpage.Wrapper>
-						)}
-					/>
-			}
 
 			<PopupApp statusPopup={statusPopup} handleToggleStatusPopup={setStatusPopup} />
 		</HomeLayoutNew>

@@ -129,7 +129,7 @@ const MenuButton: React.FC<any> = ({ dark = true, customImage }) => {
 												<ButtonLink
 													disabled={!href}
 													variant="text"
-													href={href}													
+													href={href}
 												>
 													<span className="text-in-button">{title}</span>
 												</ButtonLink>

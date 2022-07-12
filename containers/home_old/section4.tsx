@@ -65,7 +65,7 @@ const Mobile: React.FC<any> = () => {
 					<Typography
 						fontSize={{ xs: 12, sm: 16 }}
 						fontWeight={500}
-						color="#fff"
+						color="#5A6178"
 						lineHeight="22px"
 						mt={1}
 					>
@@ -74,7 +74,7 @@ const Mobile: React.FC<any> = () => {
 					<Typography
 						fontSize={{ xs: 12, sm: 16 }}
 						fontWeight={500}
-						color="#fff"
+						color="#5A6178"
 						lineHeight="22px"
 						mt={1}
 					>
@@ -83,7 +83,7 @@ const Mobile: React.FC<any> = () => {
 					<Typography
 						fontSize={{ xs: 12, sm: 16 }}
 						fontWeight={500}
-						color="#fff"
+						color="#5A6178"
 						lineHeight="22px"
 						mt={1}
 					>
@@ -92,7 +92,7 @@ const Mobile: React.FC<any> = () => {
 					<Typography
 						fontSize={{ xs: 12, sm: 16 }}
 						fontWeight={500}
-						color="#fff"
+						color="#5A6178"
 						lineHeight="22px"
 						mt={1}
 					>
@@ -101,7 +101,7 @@ const Mobile: React.FC<any> = () => {
 					<Typography
 						fontSize={{ xs: 12, sm: 16 }}
 						fontWeight={500}
-						color="#fff"
+						color="#5A6178"
 						lineHeight="22px"
 						mt={1}
 					>
@@ -118,7 +118,7 @@ const Mobile: React.FC<any> = () => {
 						<Typography
 							fontSize={{ xs: 12, sm: 16 }}
 							fontWeight={500}
-							color="#fff"
+							color="#5A6178"
 							lineHeight="22px"
 						>
 							Earn
@@ -138,7 +138,7 @@ const Mobile: React.FC<any> = () => {
 						<Typography
 							fontSize={{ xs: 12, sm: 16 }}
 							fontWeight={500}
-							color="#fff"
+							color="#5A6178"
 							lineHeight="22px"
 						>
 							in With Pet Mode,
@@ -147,7 +147,7 @@ const Mobile: React.FC<any> = () => {
 					<Typography
 						fontSize={{ xs: 12, sm: 16 }}
 						fontWeight={500}
-						color="#fff"
+						color="#5A6178"
 						lineHeight="22px"
 					>
 						Challenges, Staking
@@ -210,7 +210,7 @@ const Mobile: React.FC<any> = () => {
 					<Typography
 						fontSize={{ xs: 12, sm: 16 }}
 						fontWeight={500}
-						color="#fff"
+						color="#5A6178"
 						textAlign={"right"}
 						mt={1}
 						lineHeight="22px"
@@ -220,7 +220,7 @@ const Mobile: React.FC<any> = () => {
 					<Typography
 						fontSize={{ xs: 12, sm: 16 }}
 						fontWeight={500}
-						color="#fff"
+						color="#5A6178"
 						textAlign={"right"}
 						mt={1}
 						lineHeight="22px"
@@ -230,7 +230,7 @@ const Mobile: React.FC<any> = () => {
 					<Typography
 						fontSize={{ xs: 12, sm: 16 }}
 						fontWeight={500}
-						color="#fff"
+						color="#5A6178"
 						textAlign={"right"}
 						mt={1}
 						lineHeight="22px"
@@ -240,7 +240,7 @@ const Mobile: React.FC<any> = () => {
 					<Typography
 						fontSize={{ xs: 12, sm: 16 }}
 						fontWeight={500}
-						color="#fff"
+						color="#5A6178"
 						textAlign={"right"}
 						mt={1}
 						lineHeight="22px"
@@ -259,7 +259,7 @@ const Mobile: React.FC<any> = () => {
 						<Typography
 							fontSize={{ xs: 12, sm: 16 }}
 							fontWeight={500}
-							color="#fff"
+							color="#5A6178"
 							textAlign={"right"}
 							lineHeight="22px"
 						>
@@ -282,7 +282,7 @@ const Mobile: React.FC<any> = () => {
 						<Typography
 							fontSize={{ xs: 12, sm: 16 }}
 							fontWeight={500}
-							color="#fff"
+							color="#5A6178"
 							textAlign={"right"}
 							lineHeight="22px"
 						>
@@ -301,14 +301,6 @@ const Section4: NextPage = () => {
 
 	return (
 		<Wrap sx={{ marginTop: { xs: '0px !important', sm: '0px !important' }, display: 'flex', justifyContent: 'center' }}>
-			<Box sx={{ position: 'absolute', left: 0, top: "30%" }}>
-
-				<img width="auto" src="assets/dark/neon-orange-4.png" />
-			</Box>
-			<Box sx={{ position: 'absolute', right: 0, top: "30%" }}>
-
-				<img width="auto" src="assets/dark/neon-green-4.png" />
-			</Box>
 			<Box display={'flex'} mb={4} mt={{ xs: 10, sm: 0 }} alignItems="center" flexDirection={"column"} sx={{
 
 			}}>
@@ -324,12 +316,12 @@ const Section4: NextPage = () => {
 					TOKENS
 				</Typography>
 				<Typography
-					fontSize={{ xs: 25, sm: 30 }}
+					fontSize={{ xs: 25, sm: 38 }}
 					textTransform="uppercase"
 					fontFamily='Electrofied'
 					fontStyle={'italic'}
 					fontWeight={800}
-					color="#fff"
+					color="#31373E"
 					mb={0.5}
 				>
 					UTILITIES
@@ -362,7 +354,7 @@ const Section4: NextPage = () => {
 								fontFamily='Electrofied'
 								fontStyle={'italic'}
 								fontWeight={800}
-								color="#fff"
+								color="#31373E"
 								// mb={5}
 								mr={2}
 								width="250px"
@@ -372,7 +364,7 @@ const Section4: NextPage = () => {
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#fff"
+								color="#5A6178"
 								lineHeight="22px"
 								mt={4}
 							>
@@ -381,7 +373,7 @@ const Section4: NextPage = () => {
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#fff"
+								color="#5A6178"
 								lineHeight="22px"
 								mt={1}
 							>
@@ -390,7 +382,7 @@ const Section4: NextPage = () => {
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#fff"
+								color="#5A6178"
 								lineHeight="22px"
 								mt={1}
 							>
@@ -399,7 +391,7 @@ const Section4: NextPage = () => {
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#fff"
+								color="#5A6178"
 								lineHeight="22px"
 								mt={2}
 							>
@@ -408,7 +400,7 @@ const Section4: NextPage = () => {
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#fff"
+								color="#5A6178"
 								lineHeight="22px"
 								mt={2}
 							>
@@ -425,7 +417,7 @@ const Section4: NextPage = () => {
 								<Typography
 									fontSize={{ xs: 16, sm: 16 }}
 									fontWeight={500}
-									color="#fff"
+									color="#5A6178"
 									lineHeight="22px"
 								>
 									Earn
@@ -445,7 +437,7 @@ const Section4: NextPage = () => {
 								<Typography
 									fontSize={{ xs: 16, sm: 16 }}
 									fontWeight={500}
-									color="#fff"
+									color="#5A6178"
 									lineHeight="22px"
 								>
 									in With Pet Mode,
@@ -454,7 +446,7 @@ const Section4: NextPage = () => {
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#fff"
+								color="#5A6178"
 								lineHeight="22px"
 							>
 								Challenges, Staking
@@ -471,11 +463,11 @@ const Section4: NextPage = () => {
 							<Box sx={{
 								position: 'absolute',
 								top: "70%",
-								left: "0px",
-								width: "286px",
-								height: "351px",
+								left: "00px",
+								width: "300px",
+								height: "303px",
 								transform: 'translateY(-50%)',
-								backgroundImage: `url(assets/dark/neon-orange-3.png)`,
+								backgroundImage: `url(assets/bg_fiu1.png)`,
 								// height: '100%',
 								backgroundPosition: 'center',
 								backgroundRepeat: 'no-repeat',
@@ -484,25 +476,24 @@ const Section4: NextPage = () => {
 							}}>
 								<BoxImageAnimation sx={{
 									position: 'absolute',
-									left: '50px',
-									top: "40px"
+									left: '50px'
 								}}>
-									<img width="226px" src="assets/fiu1.png" />
 
+									<img width="226px" src="assets/fiu1.png" />
 								</BoxImageAnimation>
 							</Box>
 							<Box sx={{
 								position: 'absolute',
 								top: "50%",
 								right: "0",
-								width: "246px",
+								width: "258px",
 								height: "292px",
 								transform: 'translateY(-50%)',
-								backgroundImage: `url(assets/dark/neon-green.png)`,
+								backgroundImage: `url(assets/bg_hee1.png)`,
 								// height: '100%',
 								backgroundPosition: 'center',
 								backgroundRepeat: 'no-repeat',
-								backgroundSize: 'cover'
+								backgroundSize: 'contain'
 							}}>
 								<BoxImageAnimation sx={{
 									position: 'absolute',
@@ -540,7 +531,7 @@ const Section4: NextPage = () => {
 								fontFamily='Electrofied'
 								fontStyle={'italic'}
 								fontWeight={800}
-								color="#fff"
+								color="#31373E"
 								// mb={5}
 								// lineHeight="22px"
 								mr={2}
@@ -552,7 +543,7 @@ const Section4: NextPage = () => {
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#fff"
+								color="#5A6178"
 								textAlign={"right"}
 								mt={4}
 								lineHeight="22px"
@@ -562,7 +553,7 @@ const Section4: NextPage = () => {
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#fff"
+								color="#5A6178"
 								textAlign={"right"}
 								mt={2}
 								lineHeight="22px"
@@ -572,7 +563,7 @@ const Section4: NextPage = () => {
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#fff"
+								color="#5A6178"
 								textAlign={"right"}
 								mt={2}
 								lineHeight="22px"
@@ -582,7 +573,7 @@ const Section4: NextPage = () => {
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#fff"
+								color="#5A6178"
 								textAlign={"right"}
 								mt={2}
 								lineHeight="22px"
@@ -601,7 +592,7 @@ const Section4: NextPage = () => {
 								<Typography
 									fontSize={{ xs: 16, sm: 16 }}
 									fontWeight={500}
-									color="#fff"
+									color="#5A6178"
 									textAlign={"right"}
 									lineHeight="22px"
 								>
@@ -623,7 +614,7 @@ const Section4: NextPage = () => {
 								<Typography
 									fontSize={{ xs: 16, sm: 16 }}
 									fontWeight={500}
-									color="#fff"
+									color="#5A6178"
 									textAlign={"right"}
 									lineHeight="22px"
 								>
@@ -645,7 +636,7 @@ const Wrap = styled(Stack)({
 	padding: '0px 16px',
 	maxWidth: '1120px',
 	margin: '0px auto 0px',
-	// backgroundImage: `url(assets/bg_sec4.png)`,
+	backgroundImage: `url(assets/bg_sec4.png)`,
 	height: '100%',
 	backgroundPosition: 'center',
 	backgroundRepeat: 'no-repeat',
