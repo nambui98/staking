@@ -50,9 +50,10 @@ export const Section4 = () => {
 						<Typography sx={{ background: 'linear-gradient(180deg, #8AFFC5 6.58%, #1DB167 80.6%)', textTransform: 'uppercase', fontWeight: "900", fontSize: { xm: "24px !important", sm: '48px !important' } }}>$HEE Token</Typography>
 					</Title>
 					<TitleText sx={{ textTransform: 'uppercase', fontSize: { xm: "24px !important", sm: '32px !important' } }}></TitleText>
-					<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "64px" }, marginTop: { xs: "16px", md: "0px" } }}>  <Typography sx={{ lineHeight: { xs: "22px", sm: "64px" } }}>  25% Minting fee in $HEE </Typography></Details>
-					<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "64px" }, marginTop: { xs: "16px", md: "0px" } }}>  <Typography sx={{ lineHeight: { xs: "22px", sm: "64px" } }}>  25% Leveling up fee in $HEE </Typography></Details>
-					<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "64px" }, marginTop: { xs: "16px", md: "0px" } }}>  <Typography sx={{ lineHeight: { xs: "22px", sm: "64px" } }}>  25% Repairing fee </Typography></Details>
+					<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "64px" }, marginTop: { xs: "16px", md: "0px" } }}>  <Typography sx={{ lineHeight: { xs: "22px", sm: "64px" } }}>  95% Minting fee in $HEE </Typography></Details>
+					<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "64px" }, marginTop: { xs: "16px", md: "0px" } }}>  <Typography sx={{ lineHeight: { xs: "22px", sm: "64px" } }}>  95% Leveling up fee in $HEE </Typography></Details>
+					<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "64px" }, marginTop: { xs: "16px", md: "0px" } }}>  <Typography sx={{ lineHeight: { xs: "22px", sm: "64px" } }}>  95% Repairing fee </Typography></Details>
+					<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "64px" }, marginTop: { xs: "16px", md: "0px" } }}>  <Typography sx={{ lineHeight: { xs: "22px", sm: "64px" } }}>  1% of NFT Renting Rewards </Typography></Details>
 				</Box>
 			</Box>
 		</Wrap >

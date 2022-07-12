@@ -13,7 +13,7 @@ export const BUSINESS_IMAGE = {
 }
 
 export const INTRO = {
-  content: <Typography><span>beFITTER</span> provides the first health ecosystem with tight gameplay mechanics and SocialFi enhancement at its core. The whole ecosystem is powered by a token economy that enables in-app activities and pays for transactions fees.</Typography>,
+  content: <Typography><span>beFITTER</span> beFITTER provides the first health ecosystem with tight gameplay mechanics and SocialFi enhancement at its core. The whole ecosystem is powered by a token economy that enables in-app activities and pays for transactions fees.</Typography>,
 }
 
 export const BUSINESS_TOKEN = {
@@ -42,17 +42,17 @@ export const BUSINESS_MODEL = {
         marginBottom: '24px',
       }
     }}><span>NFT Items Sale</span>: The reserved Genesis Shoe NFT and other limited collections would be sold in special events for users who stake $FIU or hold the first Genesis Shoe NFT. </Typography>,
-    <Typography><span>NFT Level-up, Repair and Mint</span>: A revenue stream comes from in-app activities, including NFT leveling up, repairing and minting NFT to create a new one.</Typography>
+    <Typography><span>NFT Level-up, Repair and Mint</span>: A 5% tax on in-app activities, including NFT leveling up, repairing and minting NFT to create a new one. </Typography>
   ],
-  body2: <Typography><span>Challenge</span>: Users spend $FIU to join 1vs1 challenges or buy tickets to participate in a tournament,  where they have a chance to receive a higher reward than in solo activities. The organizer, which is beFITTER in the early stage, would take …% of the winning pool.</Typography>,
+  body2: <Typography><span>Challenge</span>: Users spend $FIU to join 1vs1 challenges or buy tickets to participate in a tournament,  where they have a chance to receive a higher reward than in solo activities. The organizer, which is beFITTER in the early stage, would take 5% of the winning pool.</Typography>,
   body3: [
-    <Typography><span>Transaction Fee</span>: A …% fee on all NFT trades on the in-app NFT marketplac, …% fee when transferring $FIU, … when transferring $HEE,… when transferring $BNB, when transferring NFT between spending and wallet.</Typography>,
+    <Typography><span>Transaction Fee</span>: A 2% fee on all NFT trades on the in-app NFT marketplac, 0.5% fee but not less than a fixed number when withdrawing a token from spending to wallet. Fee is paid by the token which is withdrawn (HEE,FIU,BNB). When withdrawing NFT, the fee is a fixed number of HEE. These fixed numbers ensure our system has enough gas fee to process the transaction.</Typography>,
     <Typography sx={{
       margin: '80px 0',
       '@media (max-width: 767px)': {
         margin: '24px 0',
       }
-    }}><span>Rental Commission Fee</span>: There are 2 forms in the rental system: fixed rent and profit sharing. We will charge a …% fee from the shoe rental profit of the lessor.</Typography>,
+    }}><span>Rental Commission Fee</span>: There are 2 forms in the rental system: fixed rent and profit sharing. We will charge a 5% fee from the shoe rental profit of the lessor.</Typography>,
     <Typography><span>Advertising & Brand Collaboration Fee</span>: displaying ads within the app and collaborating with brands to launch new shoe collections. This fee is up to negotiation with partners.</Typography>
   ],
   introFire: 'A  portion of the revenue in tokens are permanently destroyed via token burning. This immediately reduces the total supply of tokens.',

@@ -13,13 +13,15 @@ export const Section5 = () => {
 				</Title>
 				{/* <img src={BUSINESS_IMAGE.tokenDouble} /> */}
 			</Box>
-			<SubTitle>50% of beFITTER revenue, excluding the tokens in burning mechanism, would be circulated directly back to the ecosystem funds or used to buy back tokens. The tokens is used for profit sharing, dividing into different usages:</SubTitle>
+			<SubTitle>50% of beFITTER revenue, excluding the $HEE tokens in burning mechanism, would be circulated directly back to the ecosystem funds or used to buy back tokens. The tokens is used for profit sharing, dividing into different usages:</SubTitle>
 
 			<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "72px" }, marginTop: { xs: "32px", md: "80px" } }}>  <Typography> <span style={{ color: '#FF6D24' }}>NFT Airdrop and Rewards pool</span> - replenish FitnessFi and SocialFi prize pool and NFT airdrop, enabling the incentive program to continue.</Typography></Details>
 
 			<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "72px" }, marginTop: { xs: "32px", md: "80px" } }}>  <Typography> <span style={{ color: '#FF6D24' }}>Staking Fund </span> – $FIU holders that stake tokens in beFITTER hub or provide liquidity to DEX liquidity pools earn a staking yield. Check out the beFITTER staking Pool Roadmap here.</Typography></Details>
-			<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "72px" }, marginTop: { xs: "32px", md: "80px" } }}>  <Typography> <span style={{ color: '#FF6D24' }}>Locking Liquidity</span> - contribution to the DEX liquidity pool, which is locked in 01 year, to increase the tradable liquidity and promote a healthy secondary market.</Typography></Details>
+			<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "72px" }, marginTop: { xs: "32px", md: "80px" } }}>  <Typography> <span style={{ color: '#FF6D24' }}>Locking Liquidity</span> - contribution to the DEX liquidity pool, which is locked in 01 year,  to increase the tradable liquidity and promote a healthy secondary market. </Typography></Details>
 			<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "72px" }, marginTop: { xs: "32px", md: "80px" } }}>  <Typography> <span style={{ color: '#FF6D24' }}>Token Burning Events</span> – Burning events occur on a regular basis, initially set at once per quarter but subject to community vote.</Typography></Details>
+			<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "72px" }, marginTop: { xs: "32px", md: "80px" } }}>  <Typography>*Note: The number is subject to change with notice based on the economic situation.</Typography></Details>
+
 
 		</Wrap>
 	)
