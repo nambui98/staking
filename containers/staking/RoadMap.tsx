@@ -1,4 +1,4 @@
-import { Box, BoxProps, Container, Stack, styled, Typography } from "@mui/material"
+import { Box, BoxProps, Container, Stack, styled, Typography, useMediaQuery } from "@mui/material"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { ROAD_MAP, STAKING_ICON, STAKING_IMAGE } from "../../constants/staking"
 import { TEXT_STYLE } from "../../styles/common/textStyles"
@@ -11,7 +11,8 @@ import { useRef } from "react";
 export const RoadMap = () => {
   const navigationPrevRef = useRef(null)
   const navigationNextRef = useRef(null)
-
+  const isMobile991 = useMediaQuery('(max-width: 991px)');
+  const isMobile767 = useMediaQuery('(max-width: 767px)')
 
   return (
     <Wrap>
@@ -21,7 +22,8 @@ export const RoadMap = () => {
           <NavigationItem ref={navigationPrevRef} className="swiper-button-prev"><img src={STAKING_ICON.arrowLeftGray} /></NavigationItem>
           <NavigationItem ref={navigationNextRef} className="swiper-button-next"><img src={STAKING_ICON.arrowLeftGray} /></NavigationItem>
           <Swiper
-            slidesPerView={4}
+            slidesPerView={isMobile767 ? 2 : isMobile991 ? 3 : 4}
+            spaceBetween={32}
             slidesPerGroup={1}
             navigation={{
               prevEl: navigationPrevRef.current,
@@ -38,7 +40,10 @@ export const RoadMap = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    alignItems: 'flex-start'
+                    alignItems: 'center',
+                    '@media (min-width: 768px)': {
+                      alignItems: 'flex-start'
+                    }
                   }}>
                     <Name>{item.title}</Name>
                     <Status active={item.status}>{item.status ? 'LIVE' : 'UPCOMING'}</Status>
@@ -57,6 +62,10 @@ export const RoadMap = () => {
 const Wrap = styled(Stack)({
   '& img': {
     width: '100%',
+  },
+  marginBottom: 60,
+  '@media (min-width: 768px)': {
+    marginBottom: 150
   }
 })
 const Inner = styled(Box)({
@@ -74,14 +83,32 @@ const Item = styled(Box)((props: itemProps) =>({
   borderRadius: 12,
   backgroundColor: props.active ? '#FFE2D3' : '#F8F9FB',
   display: 'flex',
-  minHeight: 108
+  minHeight: 170,
+  flexDirection: 'column',
+  alignItems: 'center',
+  '@media (min-width: 768px)': {
+    flexDirection: 'row',
+    alignItems: 'unset',
+    minHeight: 108,
+  }
 }))
 const Image = styled(Box)({
   maxWidth: 80,
-  marginRight: 16
+  marginBottom: 10,
+  '& img': {
+    height: 'auto !important'
+  },
+  '@media (min-width: 768px)': {
+    marginRight: 16,
+    marginBottom: 0
+  }
 })
 const Name = styled(Typography)({
-  ...TEXT_STYLE(14, 500, '#31373E')
+  ...TEXT_STYLE(14, 500, '#31373E'),
+  marginBottom: 10,
+  '@media (min-width: 768px)': {
+    marginBottom: 0
+  }
 })
 const Status = styled(Typography)((props: itemProps) => ({
   padding: '4px 8px',
