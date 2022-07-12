@@ -82,7 +82,7 @@ const itemImage2 = {
   width: '100%',
   '@media (min-width: 768px)': {
     '& img': {
-      maxWidth: '400px'
+
     }
   }
 }

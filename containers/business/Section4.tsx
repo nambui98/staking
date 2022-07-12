@@ -24,7 +24,10 @@ export const Section4 = () => {
 
 						</Title> */}
 
-						<img src="assets/fire_text_v2.png" />
+						<img style={{
+							maxWidth: '1379px',
+							margin: 'auto'
+						}} src="assets/fire_text_v2.png" />
 						{/* <Title>
 							<Typography sx={{ background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)', textTransform: 'uppercase', fontFamily: 'Electrofied !important' }}>mechanism</Typography>
 						</Title> */}

@@ -10,14 +10,18 @@ export const Token = () => {
         <Title>
           <Typography sx={{ 
             background: 'linear-gradient(180deg, #8AFFC5 6.58%, #1DB167 80.6%)',
+            fontStyle: 'italic',
             '@media (max-width: 767px)': {
               textAlign: 'left',
               marginBottom: '10px',
               background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)'
+            },
+            '@media (min-width: 1440px)': {
+              width: '715px'
             }
          }}>{isMobile ? 'SOCIAL TOKEN' : 'Health Token'}</Typography>
           {!isMobile && <Typography>&</Typography>}
-          {!isMobile && <Typography sx={{ background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)' }}>SOCIAL TOKEN</Typography>}
+          {!isMobile && <Typography sx={{ background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)', fontStyle: 'italic' }}>SOCIAL TOKEN</Typography>}
           {isMobile && <Box sx={{
             display: 'flex',
             alignItems: 'center',
@@ -27,7 +31,12 @@ export const Token = () => {
               ...TEXT_STYLE(16, 600, '#ffffff'),
               marginRight: '8px'
             }}>&</Box>
-            <Typography sx={{ background: 'linear-gradient(180deg, #8AFFC5 6.58%, #1DB167 80.6%)', fontSize: '24px !important' }}>Health Token</Typography>
+            <Typography sx={{ 
+              background: 'linear-gradient(180deg, #8AFFC5 6.58%, #1DB167 80.6%)', 
+              fontSize: '24px !important', 
+              fontStyle: 'italic',
+              
+             }}>Health Token</Typography>
           </Box>}
         </Title>
         <ImageTop><img src={BUSINESS_IMAGE.tokenDouble} /></ImageTop>
