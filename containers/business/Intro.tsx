@@ -17,11 +17,13 @@ const Wrap = styled(Box)({
 const Content = styled(Box)({
   '& p': {
     ...TEXT_STYLE(20, 600, '#ffffff'),
+    lineHeight: '30px',
     '& span': {
       color: '#FF6D24'
     },
     '@media (min-width: 768px)': {
       ...TEXT_STYLE(48, 600, '#ffffff'),
+      lineHeight: '72px',
     }
   }
 })

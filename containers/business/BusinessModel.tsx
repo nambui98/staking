@@ -14,7 +14,7 @@ export const BusinessModel = () => {
       <BoxItem>
         <Box sx={{
           display: 'flex',
-          alignItems: 'center'
+          alignItems: 'flex-start',
         }}>
           <Box>
             {BUSINESS_MODEL.body1?.map((item, index) => (
@@ -117,6 +117,12 @@ const BoxTop = styled(Box)({
 const BoxItem = styled(Box)({
   flexWrap: 'wrap',
   display: 'flex',
+  '& p': {
+    lineHeight: '22px',
+    '@media (min-width: 768px)': {
+      lineHeight: '64px'
+    }
+  }
 })
 const Item = styled(Box)({
   display: 'flex',

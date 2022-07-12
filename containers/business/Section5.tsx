@@ -9,7 +9,7 @@ export const Section5 = () => {
 				<Title>
 					{/* <Typography sx={{ background: 'linear-gradient(180deg, #8AFFC5 6.58%, #1DB167 80.6%)' }}>Health Token</Typography>
 					<Typography>&</Typography> */}
-					<Typography sx={{ background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)', textTransform: 'uppercase' }}>Profit Sharing</Typography>
+					<Typography sx={{ background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)', textTransform: 'uppercase', fontStyle: 'italic' }}>Profit Sharing</Typography>
 				</Title>
 				{/* <img src={BUSINESS_IMAGE.tokenDouble} /> */}
 			</Box>
@@ -72,10 +72,11 @@ const Title = styled(Box)({
 })
 const SubTitle = styled(Typography)({
 	...TEXT_STYLE(20, 600, '#ffffff'),
-	// marginBottom: 24,
+	lineHeight: '30px',
 	marginTop: 20,
 	'@media (min-width: 768px)': {
 		...TEXT_STYLE(48, 600, '#ffffff'),
+		lineHeight: '72px'
 		// marginBottom: 80
 	}
 })
