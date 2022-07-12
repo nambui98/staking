@@ -22,7 +22,8 @@ export const BUSINESS_TOKEN = {
   body: [
     <Typography>The two tokens are also used in In-app activities. </Typography>,
     <Typography sx={{
-      paddingLeft: '10px'
+      paddingLeft: '10px',
+      marginBottom: '10px !important',
     }}>• Users need <span style={{color: '#1DB268'}}>$HEE</span> to repair NFTs, mint NFTs and level up NFTs at most levels.</Typography>,
     <Typography sx={{
       paddingLeft: '10px'

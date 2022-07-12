@@ -47,6 +47,10 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 						display: 'flex',
 						alignItems: 'center',
 						cursor: 'pointer',
+						'& img': {
+							maxWidth: '150px',
+							height: 'auto'
+						}
 					}}
 				>
 					<img src={customWhite && !stickTrigger ? 'assets/logo/logo-text-white.png' : LOGO} alt="Logo" width={'auto'} height={40} />
@@ -66,7 +70,6 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 			progress: undefined,
 		});
 	}
-	console.log(currentPage);
 
 	return (
 		<Box component={'header'}>

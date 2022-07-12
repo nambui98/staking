@@ -59,8 +59,8 @@ const Title = styled(Box)({
 		}
 	},
 	'& p:first-of-type, & p:last-of-type': {
-		'-webkit-background-clip': 'text',
-		'-webkit-text-fill-color': 'transparent',
+		'WebkitBackgroundClip': 'text',
+		'WebkitTextFillColor': 'transparent',
 		fontFamily: 'Electrofied',
 	},
 	'& p:nth-child(2)': {

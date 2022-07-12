@@ -9,25 +9,25 @@ export const Section4 = () => {
 			{
 				isMobile ?
 					<Box sx={{ ...flex, alignItems: 'center', flexWrap: "wrap", columnGap: "16px" }}>
-						<Title >
+						{/* <Title >
 							<Typography sx={{ background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)', textTransform: 'uppercase', fontFamily: 'Electrofied !important' }}>Burning</Typography>
 
-						</Title>
+						</Title> */}
 
-						<Title>
+						{/* <Title>
 							<Typography sx={{ background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)', textTransform: 'uppercase', fontFamily: 'Electrofied !important' }}>  mechanism</Typography>
-						</Title>
-						<img height={"280px"} src="assets/backgrounds/fire_sec4.png" />
+						</Title> */}
+						<img src="assets/fire_text_v2.png" />
 					</Box> : <Box sx={{ ...flex, alignItems: 'center' }}>
-						<Title>
+						{/* <Title>
 							<Typography sx={{ background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)', textTransform: 'uppercase', fontFamily: 'Electrofied !important' }}>Burning</Typography>
 
-						</Title>
+						</Title> */}
 
-						<img height={"560px"} src="assets/backgrounds/fire_sec4.png" />
-						<Title>
+						<img src="assets/fire_text_v2.png" />
+						{/* <Title>
 							<Typography sx={{ background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)', textTransform: 'uppercase', fontFamily: 'Electrofied !important' }}>mechanism</Typography>
-						</Title>
+						</Title> */}
 					</Box>
 			}
 			<SubTitle sx={{ fontSize: { xs: "20px", sm: '48px' }, lineHeight: { xs: "30px", sm: '72px' } }}>A portion of the revenue in tokens are permanently destroyed via token burning. This immediately reduces the total supply of tokens.</SubTitle>
@@ -62,10 +62,11 @@ const flex = {
 
 const Wrap = styled(Box)({
 	paddingBottom: 40,
-
-
 	'@media (min-width: 768px)': {
 		paddingBottom: 120
+	},
+	'& img': {
+		width: '100%',
 	}
 })
 const TitleText = styled(Typography)({
@@ -83,8 +84,8 @@ const Title = styled(Box)({
 		}
 	},
 	'& p:first-of-type, & p:last-of-type': {
-		'-webkit-background-clip': 'text',
-		'-webkit-text-fill-color': 'transparent',
+		'WebkitBackgroundClip': 'text',
+		'WebkitTextFillColor': 'transparent',
 		// fontFamily: 'Electrofied',
 	},
 	'& p:nth-child(2)': {

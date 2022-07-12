@@ -43,7 +43,7 @@ export const Token = () => {
         <Details sx={{'& span': {color: '#FF6D24'}}}>{BUSINESS_TOKEN.fiu} <BorderOrange></BorderOrange></Details>
       </Box>
       <Body>{BUSINESS_TOKEN.body?.map((item, index) => (
-        <Typography key={index}>{item}</Typography>
+        <Box key={index}>{item}</Box>
       ))}</Body>
     </Wrap>
   )
@@ -105,13 +105,14 @@ const Title = styled(Box)({
   },
   '& p': {
     ...TEXT_STYLE(24, 700),
+    textTransform: 'uppercase',
     '@media (min-width: 768px)': {
       ...TEXT_STYLE(80, 700),
     }
   },
   '& p:first-of-type, & p:last-of-type': {
-    '-webkit-background-clip': 'text',
-    '-webkit-text-fill-color': 'transparent',
+    'WebkitBackgroundClip': 'text',
+    'WebkitTextFillColor': 'transparent',
     fontFamily: 'Electrofied',
   },
   '& p:nth-child(2)': {

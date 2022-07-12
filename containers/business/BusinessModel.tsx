@@ -94,9 +94,9 @@ const Title = styled(Typography)({
   }
 })
 const Subtitle = styled(Typography)({
-  ...TEXT_STYLE(16, 700),
+  ...TEXT_STYLE(16, 700, '#ffffff'),
   '@media (min-width: 768px)': {
-    ...TEXT_STYLE(48, 700),
+    ...TEXT_STYLE(48, 700, '#ffffff'),
   }
 })
 const Intro = styled(Typography)({
