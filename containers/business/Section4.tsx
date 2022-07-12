@@ -9,15 +9,15 @@ export const Section4 = () => {
 			{
 				isMobile ?
 					<Box sx={{ ...flex, alignItems: 'center', flexWrap: "wrap", columnGap: "16px" }}>
-						{/* <Title >
+						<Title >
 							<Typography sx={{ background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)', textTransform: 'uppercase', fontFamily: 'Electrofied !important' }}>Burning</Typography>
 
-						</Title> */}
+						</Title>
 
-						{/* <Title>
+						<Title sx={{marginRight: 'auto'}}>
 							<Typography sx={{ background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)', textTransform: 'uppercase', fontFamily: 'Electrofied !important' }}>  mechanism</Typography>
-						</Title> */}
-						<img src="assets/fire_text_v2.png" />
+						</Title>
+						<img style={{maxWidth: '225px', margin: 'auto'}} src="assets/fire_text.png" />
 					</Box> : <Box sx={{ ...flex, alignItems: 'center' }}>
 						{/* <Title>
 							<Typography sx={{ background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)', textTransform: 'uppercase', fontFamily: 'Electrofied !important' }}>Burning</Typography>

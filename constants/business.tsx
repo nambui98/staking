@@ -13,7 +13,7 @@ export const BUSINESS_IMAGE = {
 }
 
 export const INTRO = {
-  content: <Typography><span>beFITTER</span> beFITTER provides the first health ecosystem with tight gameplay mechanics and SocialFi enhancement at its core. The whole ecosystem is powered by a token economy that enables in-app activities and pays for transactions fees.</Typography>,
+  content: <Typography><span>beFITTER</span> provides the first health ecosystem with tight gameplay mechanics and SocialFi enhancement at its core. The whole ecosystem is powered by a token economy that enables in-app activities and pays for transactions fees.</Typography>,
 }
 
 export const BUSINESS_TOKEN = {
