@@ -30,23 +30,7 @@ const MAIN_MENU = [
 	{ name: 'whitepaper', link: 'https://whitepaper.befitter.io/' }
 ]
 
-const Logo: React.FC<any> = () => {
-	return (
-		<Link href={'/'}>
-			<Box
-				component={'a'}
-				sx={{
-					display: 'flex',
-					alignItems: 'center',
-					cursor: 'pointer',
-				}}
-			>
-				<img src={LOGO} alt="Logo" width={'auto'} height={40} />
-			</Box>
-		</Link>
-	);
-};
-const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, currentPage }) => {
+const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, currentPage, customWhite }) => {
 	const [statusPopup, setStatusPopup] = useState(false);
 	const isMobile992 = useMediaQuery('(max-width:992px)');
 	const isMobile = useMediaQuery('(max-width:599px)');
@@ -54,6 +38,26 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 		disableHysteresis: true,
 		threshold: 200,
 	});
+	const Logo: React.FC<any> = () => {
+		return (
+			<Link href={'/'}>
+				<Box
+					component={'a'}
+					sx={{
+						display: 'flex',
+						alignItems: 'center',
+						cursor: 'pointer',
+						'& img': {
+							maxWidth: '150px',
+							height: 'auto'
+						}
+					}}
+				>
+					<img src={customWhite && !stickTrigger ? 'assets/logo/logo-text-white.png' : LOGO} alt="Logo" width={'auto'} height={40} />
+				</Box>
+			</Link>
+		);
+	};
 
 	const handleCommingSoon = () => {
 		toast('COMING SOON!', {
@@ -74,7 +78,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 				square
 				elevation={0}
 				sx={{
-					background: (currentPage === '1' && !stickTrigger) || (!stickTrigger && isMobile) ? 'linear-gradient(180deg, rgba(185, 185, 185, 0.4) 0%, rgba(177, 177, 177, 0) 100%)' : '#fff',
+					background: (customWhite && !stickTrigger) ? 'linear-gradient(180deg, rgba(0, 0, 0, 0.57) 0%, rgba(0, 0, 0, 0) 100%)' : ((currentPage === '1' && !stickTrigger) || (!stickTrigger && isMobile) ? 'linear-gradient(180deg, rgba(185, 185, 185, 0.4) 0%, rgba(177, 177, 177, 0) 100%)' : '#fff'),
 					// borderBottom: currentPage === '1' ? '0' : '1px solid #E9EAEF',
 					transition: 'all ease 0.2s ',
 					padding: currentPage === '1' ? '14px 0' : '0'
@@ -99,14 +103,14 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 							<Logo />
 							{!isMobile992 && <MainMenu>
 								<ButtonApp onClick={() => setStatusPopup(true)}><span>GET THE APP</span></ButtonApp>
-								<MenuItem onClick={() => handleCommingSoon()} hover={true}>STAKING</MenuItem>
+								<MenuItem onClick={() => handleCommingSoon()} hover={true} sx={{color: customWhite && !stickTrigger ? '#ffffff' : '#31373E' + '!important'}}>STAKING</MenuItem>
 								{MAIN_MENU?.map((item, index) => (
 									<Link key={index} href={item.link}>
-										<MenuItem onClick={() => index === 0 ? handleCommingSoon() : null} hover={true}>{item.name}</MenuItem>
+										<MenuItem sx={{color: customWhite && !stickTrigger ? '#ffffff' : '#31373E' + '!important'}} onClick={() => index === 0 ? handleCommingSoon() : null} hover={true}>{item.name}</MenuItem>
 									</Link>
 								))}
 							</MainMenu>}
-							{isMobile992 && <MenuButtonNew customImage={'40px'} />}
+							{isMobile992 && <MenuButtonNew customImage={'40px'} dark={customWhite && !stickTrigger ? false : true} />}
 						</>
 					</Container>
 				</Toolbar>
