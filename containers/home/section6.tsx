@@ -16,16 +16,16 @@ import { TEAM } from '../../constants/common';
 
 const Section6: React.FC<any> = ({ sxProps }) => {
 	return (
-		<Container sx={{ ...sxProps, mb: { xs: '88px', sm: '0px' } }}>
+		<Container sx={{ ...sxProps, mb: { xs: '80px', sm: '0px' } }}>
 			{/* <SectionTitle
 				title={TEAM.TITLE}
 				subtitle={TEAM.SUBTITLE}
 				sxProps={{ mb: 7 }}
 			/> */}
-			<Box display={'flex'} mt={{ xs: '88px', sm: '0px' }} mb={{ xs: 5, sm: 10 }} alignItems="center" justifyContent="center">
+			<Box display={'flex'} mt={{ xs: '80px', sm: '0px' }} mb={{ xs: 5, sm: 10 }} alignItems="center" justifyContent="center">
 
 				<Typography
-					fontSize={{ xs: 20, sm: 56 }}
+					fontSize={{ xs: 32, sm: 56 }}
 					textTransform="uppercase"
 					fontFamily='Electrofied'
 					fontStyle={'italic'}
@@ -37,11 +37,36 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 				</Typography>
 
 			</Box>
-			<Grid container spacing={4} rowSpacing={6}>
+			<Grid container spacing={4} rowSpacing={6} sx={{
+				'@media (max-width: 767px)': {
+					marginLeft: '0 !important',
+					width: '100% !important'
+				}
+			}}>
 				{TEAM.ITEMS.map(({ name, role, desc, image }, idx) => (
-					<Grid key={idx} item xs={12} md={6}>
-						<Grid container spacing={2} flexDirection={idx % 2 === 1 ? "row" : "row-reverse"}>
-							<Grid item xs={6} sm={4} sx={{ mx: 'auto' }}>
+					<Grid key={idx} item xs={12} md={6} sx={{
+						'@media (max-width: 767px)': {
+							paddingLeft: '0 !important',
+							paddingRight: '0 !important',
+							paddingTop: '40px !important'
+						}
+					}}>
+						<Grid container spacing={2} flexDirection={idx % 2 === 1 ? "row" : "row-reverse"} sx={{
+							'@media (max-width: 767px)': {
+								flexDirection: 'row !important',
+								width: '100% !important',
+								marginLeft: '0 !important',
+							}
+						}}>
+							<Grid item xs={6} sm={4} sx={{
+								mx: 'auto', '@media (max-width: 767px)': {
+									paddingLeft: '0 !important',
+									paddingTop: '0px !important',
+									flexBasis: 'unset !important',
+									marginLeft: 'unset !important',
+									marginRight: 'unset !important',
+								}
+							}}>
 								<Box
 									sx={{
 										width: '100%',
@@ -60,10 +85,25 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 							<Grid item xs={12} sm={8} sx={idx % 2 !== 1 ? {
 								display: 'flex',
 								justifyContent: 'end',
-								alignItems: 'center'
+								alignItems: 'center',
+								'@media (max-width: 767px)': {
+									paddingLeft: '0 !important',
+									paddingTop: '0 !important',
+									flexBasis: 'unset !important',
+									width: 'unset !important',
+									maxWidth: '180px !important',
+								}
 
-							} : { display: 'flex', alignItems: 'center', }}>
-								<Box width={"fit-content"}>
+							} : {
+								display: 'flex', alignItems: 'center', '@media (max-width: 767px)': {
+									paddingLeft: '0 !important',
+									paddingTop: '0 !important',
+									flexBasis: 'unset !important',
+									width: 'unset !important',
+									maxWidth: '143px !important',
+								}
+							}}>
+								<Box width={"fit-content"} >
 
 									<Typography
 										fontSize={24}
@@ -72,6 +112,9 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 										textAlign="right"
 										sx={{
 											textAlign: { xs: 'center', sm: idx % 2 === 1 ? 'left' : 'right' },
+											'@media (max-width: 767px)': {
+												textAlign: 'left',
+											}
 										}}
 									>
 										{name}
@@ -91,6 +134,10 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 											WebkitTextFillColor: 'transparent',
 											backgroundClip: 'text',
 											textFillColor: 'transparent',
+											'@media (max-width: 767px)':  {
+												marginBottom: '0 !important',
+												textAlign: 'left',
+											}
 										}}
 									>
 										{role}

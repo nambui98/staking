@@ -131,9 +131,9 @@ const Home: NextPage = () => {
 		<Box key={"6"}>
 			<Section6 />
 		</Box>,
-		<Box key={"7"} sx={{ backgroundImage: `url(assets/dark/sec7.png)`, backgroundRepeat: "no-repeat", backgroundPosition: "bottom", }}>
-			<Section7 />
-		</Box>,
+		// <Box key={"7"} sx={{ backgroundImage: `url(assets/dark/sec7.png)`, backgroundRepeat: "no-repeat", backgroundPosition: "bottom", }}>
+		// 	<Section7 />
+		// </Box>,
 		// <Box key={"8"} sx={{
 		// 	height: height
 		// 	display: { sx: 'block', sm: 'flex' }, alignItems: 'center'
