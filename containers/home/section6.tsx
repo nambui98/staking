@@ -22,7 +22,12 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 	// 	AOS.refresh();
 	// }, []);
 	return (
-		<Container sx={{ ...sxProps, mb: { xs: '88px', sm: '0px' }, position: 'relative' }}>
+		<Container sx={{
+			...sxProps, mb: { xs: '88px', sm: '0px' }, position: 'relative',
+			'@media (min-width: 768px)': {
+				marginBottom: '120px'
+			}
+		}}>
 			{/* <SectionTitle
 				title={TEAM.TITLE}
 				subtitle={TEAM.SUBTITLE}
@@ -36,7 +41,7 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 				<img width={"100%"} src={`assets/sec6/bg.png`} style={{ objectFit: "cover" }} alt="" />
 			</Box>
 
-			<Box display={'flex'} mt={{ xs: '80px', sm: '0px' }} mb={{ xs: 5, sm: 10 }} alignItems="center" justifyContent="center">
+			<Box display={'flex'} mt={{ xs: '80px', sm: '0px' }} mb={{ xs: 5, sm: 10 }} alignItems="center" justifyContent="center"  >
 
 				<Typography
 					fontSize={{ xs: 32, sm: 56 }}
@@ -148,7 +153,7 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 											WebkitTextFillColor: 'transparent',
 											backgroundClip: 'text',
 											textFillColor: 'transparent',
-											'@media (max-width: 767px)':  {
+											'@media (max-width: 767px)': {
 												marginBottom: '0 !important',
 												textAlign: 'left',
 											}
