@@ -45,8 +45,14 @@ const Section5: NextPage = () => {
 			// display: 'flex',
 			// justifyContent: { xs: "center", sm: 'normal' },
 		}}>
-			{/* <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage> */}
-			<Box display={'flex'} mb={4} alignItems="center" flexDirection={"column"} >
+			<Box data-aos-offset="1400"
+
+				data-aos-duration="1000" data-aos="fade-right" sx={{ position: 'absolute', top: '-120px', left: "120px", width: '100%' }}>
+				<img width={"100%"} src={`assets/sec5/bg_2.png`} style={{ objectFit: "cover" }} alt="" />
+			</Box>
+
+
+			<Box display={'flex'} zIndex={1} mb={4} alignItems="center" flexDirection={"column"} >
 				<Box display={'flex'} mb={4}
 					sx={{
 						alignItems: "flex-end",

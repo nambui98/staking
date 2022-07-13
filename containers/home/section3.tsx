@@ -261,6 +261,7 @@ const Section3: NextPage = () => {
 								flex: '1',
 								margin: isMobile ? "0 5px" : "0 30px",
 								WebkitTextStroke: '0.5px #fff',
+								zIndex: 1,
 								// WebkitTextFillColor: '#000',
 								// textShadow: '0 0 2px #fff',
 								// 						-webkit-text-stroke: 1px black;
@@ -277,6 +278,7 @@ const Section3: NextPage = () => {
 								margin: isMobile ? "0 5px" : "0 30px",
 								WebkitTextStroke: '0.5px #fff',
 								// textShadow: '0 0 2px #fff',
+								zIndex: 1,
 								fontStyle: 'italic',
 								fontFamily: 'Electrofied',
 								fontSize: isMobile ? (activeIndex == 1 ? '20px' : '16px') : activeIndex == 1 ? '32px' : '25px',
@@ -290,6 +292,7 @@ const Section3: NextPage = () => {
 								WebkitTextStroke: '0.5px #fff',
 								// textShadow: '0 0 2px #fff',
 								fontStyle: 'italic',
+								zIndex: 1,
 								fontFamily: 'Electrofied',
 								fontSize: isMobile ? (activeIndex == 2 ? '20px' : '16px') : activeIndex == 2 ? '32px' : '25px',
 								color: '#000'
@@ -350,6 +353,7 @@ const Section3: NextPage = () => {
 								</Typography>
 							</Box>
 							<Box data-aos-offset="1000"
+
 								data-aos-duration="1000" data-aos="fade-right" sx={{ position: "absolute", zIndex: 0, bottom: "0", transform: "translate(-50%, -50%)", left: "0px" }}>
 								<img width={"100%"} src={`assets/sec3/bg_left.png`} style={{ objectFit: "cover" }} alt="" />
 							</Box>

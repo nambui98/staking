@@ -79,7 +79,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 	const isMobile992 = useMediaQuery('(max-width:992px)');
 	const isMobile = useMediaQuery('(max-width:599px)');
 	const isMobile1500 = useMediaQuery('(max-width: 1500px)');
-	
+
 	const isMobile1140 = useMediaQuery('(max-width: 1140px)');
 
 	const handleCommingSoon = () => {

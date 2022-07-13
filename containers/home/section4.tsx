@@ -300,6 +300,18 @@ const Section4: NextPage = () => {
 	const isMobile959 = useMediaQuery('(max-width: 959px)')
 
 	return (
+		<Wrap sx={{ marginTop: { xs: '0px !important', sm: '0px !important' }, display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+			<Box data-aos-offset="600"
+
+				data-aos-duration="1000" data-aos="fade-right" sx={{ position: 'absolute', left: 0, top: "30%", transform: "translate(50%, 50%)" }}>
+				<img width={"100%"} src={`assets/sec4/bg_left.png`} style={{ objectFit: "cover" }} alt="" />
+			</Box>
+			<Box data-aos-offset="600"
+
+				data-aos-duration="1000" data-aos="fade-left" sx={{ position: 'absolute', right: 0, top: "30%" }}>
+				<img width={"100%"} src={`assets/sec4/bg_right.png`} style={{ objectFit: "cover" }} alt="" />
+			</Box>
+			{/* <Box sx={{ position: 'absolute', left: 0, top: "30%" }}>
 		<Wrap sx={{ marginTop: { xs: '0px !important', sm: '0px !important' }, display: 'flex', justifyContent: 'center' }}>
 			{!isMobile959 && <Box sx={{ position: 'absolute', left: 0, top: "30%" }}>
 
@@ -308,7 +320,7 @@ const Section4: NextPage = () => {
 		{!isMobile959 &&	<Box sx={{ position: 'absolute', right: 0, top: "30%" }}>
 
 				<img width="auto" src="assets/dark/neon-green-4.png" />
-			</Box>}
+			</Box> */}
 			<Box display={'flex'} mb={4} mt={{ xs: 10, sm: 0 }} alignItems="center" flexDirection={"column"} sx={{
 
 			}}>
