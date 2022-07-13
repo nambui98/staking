@@ -15,27 +15,27 @@ export const ROAD_MAP = {
   items: [
     {
       image: STAKING_IMAGE.ftpass,
-      title: 'FIU - FITTER Pass',
+      title: 'FITTER Pass Drops',
       status: true
     },
     {
       image: STAKING_IMAGE.smartPhone,
-      title: 'FIU - Shared Pool',
+      title: 'Shared Pool - Yield Farming',
       status: true
     },
     {
       image: STAKING_IMAGE.box,
-      title: '',
+      title: 'Fixed rate - Yield Farming',
       status: ''
     },
     {
       image: STAKING_IMAGE.box,
-      title: '',
+      title: 'LP Farming',
       status: ''
     },
     {
       image: STAKING_IMAGE.box,
-      title: '',
+      title: 'Profit Sharing',
       status: ''
     }
   ]

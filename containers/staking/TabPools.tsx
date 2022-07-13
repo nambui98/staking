@@ -17,7 +17,7 @@ export const TabPools = () => {
 
   const rows = [
     { name: 'FIU - FITTER Pass', data: createData('-', '-', '-', '-', '-', '-', '-') },
-    { name: 'FIU - Shared Pool', data: createData('-', '-', '-', '-', '-', '-', '-') }
+    { name: 'FIU - Shared Pool', data: createData('-', '-', '-', '-', '-', '-', '-') },
   ];
 
   const handleShowPopupPass = () => {
