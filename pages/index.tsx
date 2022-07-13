@@ -56,7 +56,8 @@ import Section8 from '../containers/home/section8';
 import { PopupApp } from '../containers/home/PopupApp';
 import Section9 from '../containers/home/section9';
 import { Box } from '@mui/system';
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 const Home: NextPage = () => {
 	const [height, setHeight] = useState<number>();
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
@@ -66,6 +67,11 @@ const Home: NextPage = () => {
 	const windowHeightListener = () => {
 		setHeight(window.innerHeight);
 	};
+
+	useEffect(() => {
+		AOS.init();
+		AOS.refresh();
+	}, []);
 
 	useEffect(() => {
 		windowHeightListener();

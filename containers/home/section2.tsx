@@ -260,14 +260,23 @@ const Section2: NextPage = () => {
 				marginTop: '-16%',
 				position: "relative",
 			}}>
-				<img width={"100%"} src={`assets/sec2/${activeIndex}.png`} style={{ objectFit: "cover" }} alt="" />
+				<img width={"100%"} src={`assets/sec2/${activeIndex}.png`} style={{ objectFit: "cover", zIndex: 1 }} alt="" />
+				<Box data-aos="fade-right" sx={{ position: "absolute", zIndex: 0, top: "30%", transform: "translate(-50%, -50%)", right: "100px" }}>
+					<img width={"100%"} src={`assets/sec2/bieucam1.png`} style={{ objectFit: "cover" }} alt="" />
+				</Box>
+				<Box data-aos="fade-left" sx={{ position: "absolute", zIndex: 0, bottom: "0px", transform: "translate(-50%, -50%)", left: "-100px" }}>
+					<img width={"100%"} src={`assets/sec2/bieucam2.png`} style={{ objectFit: "cover" }} alt="" />
+				</Box>
+				<Box data-aos="fade-right" sx={{ position: "absolute", zIndex: 0, bottom: "-100px", transform: "translate(-50%, -50%)", right: "0px" }}>
+					<img width={"100%"} src={`assets/sec2/bieucam3.png`} style={{ objectFit: "cover" }} alt="" />
+				</Box>
 				{
 
 					data.map((item: itemType, index: number) => {
 						const Icon = isMobile ? item.iconMobile : item.icon;
 						return <BoxItemWrapper
 							key={index}
-							sx={{ top: item.top.toString(), left: item.left.toString() }}
+							sx={{ top: item.top.toString(), left: item.left.toString(), zIndex: 1 }}
 							// sx={{ cursor: 'pointer', position: 'absolute', inset: 0, top: item.top, left: item.left }} 
 							onClick={() => {
 								setAuto(false)
@@ -276,130 +285,25 @@ const Section2: NextPage = () => {
 								}, 5000);
 								setActiveIndex(index)
 							}} >
-							<BoxItem >
-								<Icon style={{
-									transition: '.7s all',
-									fill: activeIndex == index ? "#FF6D24" : "#E9EAEF",
-								}} />
-								<Typography sx={{
-									transition: '.4s all', color: activeIndex == index ? "#FF6D24" : "#E9EAEF",
-									fontSize: activeIndex == index ? '24px' : '18px',
-									marginLeft: 1,
-									'@media (max-width: 767px)': {
-										...TEXT_STYLE(14, 500),
-										marginTop: '5px',
 
-									}
-								}} fontWeight={500}>{item.title}</Typography>
-							</BoxItem>
+							<Icon style={{
+								transition: '.7s all',
+								fill: activeIndex == index ? "#FF6D24" : "#E9EAEF",
+							}} />
+							<Typography sx={{
+								transition: '.4s all', color: activeIndex == index ? "#FF6D24" : "#E9EAEF",
+								fontSize: activeIndex == index ? '24px' : '18px',
+								// marginLeft: 1,
+								'@media (max-width: 767px)': {
+									...TEXT_STYLE(14, 500),
+									marginTop: '5px',
+
+								}
+							}} fontWeight={500}>{item.title}</Typography>
+
 						</BoxItemWrapper>
 					})
 				}
-				{/* <Box sx={{ position: 'absolute', inset: 0, top: "calc(50% - 60px)", left: "-20px" }}>
-					<BoxItem >
-						<FitnessFi style={{
-							transition: '.7s all',
-							// opacity: activeIndex == index ? 1 : 0,
-							fill: "#FF6D24",
-
-						}} />
-						<Typography sx={{
-							transition: '.4s all', color: "#FF6D24",
-							fontSize: '24px',
-							marginLeft: 1,
-							'@media (max-width: 767px)': {
-								...TEXT_STYLE(14, 500),
-								marginTop: '5px',
-
-							}
-						}} fontWeight={500}>FitnessFi</Typography>
-					</BoxItem>
-
-				</Box>
-				<Box sx={{ position: 'absolute', inset: 0, top: "72%", left: "60px" }}>
-					<BoxItem >
-						<FitnessFi style={{
-							transition: '.7s all',
-							// opacity: activeIndex == index ? 1 : 0,
-							fill: "#FF6D24",
-
-						}} />
-						<Typography sx={{
-							transition: '.4s all', color: "#FF6D24",
-							fontSize: '24px',
-							marginLeft: 1,
-							'@media (max-width: 767px)': {
-								...TEXT_STYLE(14, 500),
-								marginTop: '5px',
-
-							}
-						}} fontWeight={500}>FitnessFi</Typography>
-					</BoxItem>
-
-				</Box>
-				<Box sx={{ position: 'absolute', inset: 0, top: "91%", left: "28%" }}>
-					<BoxItem >
-						<FitnessFi style={{
-							transition: '.7s all',
-							// opacity: activeIndex == index ? 1 : 0,
-							fill: "#FF6D24",
-
-						}} />
-						<Typography sx={{
-							transition: '.4s all', color: "#FF6D24",
-							fontSize: '24px',
-							marginLeft: 1,
-							'@media (max-width: 767px)': {
-								...TEXT_STYLE(14, 500),
-								marginTop: '5px',
-
-							}
-						}} fontWeight={500}>FitnessFi</Typography>
-					</BoxItem>
-
-				</Box>
-				<Box sx={{ position: 'absolute', inset: 0, top: "87%", left: "69%" }}>
-					<BoxItem >
-						<FitnessFi style={{
-							transition: '.7s all',
-							// opacity: activeIndex == index ? 1 : 0,
-							fill: "#FF6D24",
-
-						}} />
-						<Typography sx={{
-							transition: '.4s all', color: "#FF6D24",
-							fontSize: '24px',
-							marginLeft: 1,
-							'@media (max-width: 767px)': {
-								...TEXT_STYLE(14, 500),
-								marginTop: '5px',
-
-							}
-						}} fontWeight={500}>FitnessFi</Typography>
-					</BoxItem>
-
-				</Box>
-				<Box sx={{ position: 'absolute', inset: 0, top: "68%", left: "87%" }}>
-					<BoxItem >
-						<FitnessFi style={{
-							transition: '.7s all',
-							// opacity: activeIndex == index ? 1 : 0,
-							fill: "#FF6D24",
-
-						}} />
-						<Typography sx={{
-							transition: '.4s all', color: "#FF6D24",
-							fontSize: '24px',
-							marginLeft: 1,
-							'@media (max-width: 767px)': {
-								...TEXT_STYLE(14, 500),
-								marginTop: '5px',
-
-							}
-						}} fontWeight={500}>FitnessFi</Typography>
-					</BoxItem>
-
-				</Box> */}
 				{
 					data.map((item: itemType, index: number) => {
 						return <Box sx={{
@@ -418,7 +322,7 @@ const Section2: NextPage = () => {
 								marginBottom: '20px',
 								marginTop: '24px'
 							}}>
-								<Typography mt={0.5} fontSize={14} color="#fff" >{item.content}</Typography>
+								<Typography mt={0.5} fontSize={14} color="#fff" lineHeight={"24px"}>{item.content}</Typography>
 							</Box>
 						</Box>
 					})
@@ -431,10 +335,12 @@ const Section2: NextPage = () => {
 export default Section2;
 
 const BoxItemWrapper = styled(Box)({
-	cursor: 'pointer', position: 'absolute', inset: 0,
+	cursor: 'pointer', position: 'absolute',
 })
 const BoxItem = styled(Box)({
-	position: "absolute",
+	// position: "absolute",
+	// width: "200px",
+	// height: "200px"
 	// top: "-60px",
 	// left: "40px",
 	// transform: "translateX(50%)",

@@ -24,6 +24,7 @@ export interface IProps {
 export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) => {
 	const isMobile = useMediaQuery('(max-width:700px)');
 	const isMobile992 = useMediaQuery('(max-width:992px)');
+	const isBigDesktop = useMediaQuery('(min-width:3200px)');
 	const [indexActive, setIndexActive] = useState(0);
 	const refSlide1 = useRef<any>(null);
 	const refSlide2 = useRef<any>(null);
@@ -44,7 +45,7 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 		refSlide3.current?.load();
 		refSlide4.current?.load();
 		refSlide5.current?.load();
-	}, [isMobile]);
+	}, [isMobile, isBigDesktop]);
 	return (
 		<Wrap>
 			<Swiper
@@ -85,14 +86,19 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 								className="absolute"
 							>
 								<source
-									src={isMobile && slide.mobileSrc ? slide.mobileSrc : slide.src}
+									src={isMobile ? slide.mobileSrc : isBigDesktop ? slide.bigDecktopSrc : slide.src}
 									type='video/mp4; codecs="hvc1"'
 								/>
 								<source
-									src={isMobile && slide.mobileSrc ? slide.mobileSrc : slide.src}
+									src={isMobile ? slide.mobileSrc : isBigDesktop ? slide.bigDecktopSrc : slide.src}
 									type="video/webm"
 								/>
+
 							</video>
+							{/* <Box sx={{ height: "122px", position: 'absolute', }}>
+
+								<img src={'assets/logo/02.png'} alt="Logo" width={'auto'} />
+							</Box> */}
 						</SwiperSlide>
 					);
 				})}
