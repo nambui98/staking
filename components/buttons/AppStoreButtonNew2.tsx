@@ -33,17 +33,17 @@ const AppStoreButtonNew2: React.FC<any> = ({
 			px: 2,
 			py: { xs: 2.5, sm: 2.5 },
 			'&:hover': {
-				background: '#ffffff',
+				background: '#b4b4b44b',
 				boxShadow: 'none',
 			},
 			'&.Mui-disabled': {
-				background: background ? '#E9EAEF' : '#ffffff',
+				// background: background ? '#E9EAEF' : '#ffffff',
 			},
 			paddingTop: '12px !important',
 			paddingBottom: '12px !important',
 		}}
 	>
-		<Grid container justifyContent={'center'}>
+		<Grid container justifyContent={'center'} alignItems={'center'}>
 			<Grid item xs={'auto'}>
 				<Stack
 					justifyContent="center"
@@ -67,7 +67,7 @@ const AppStoreButtonNew2: React.FC<any> = ({
 					<Typography
 						fontSize={{ xs: 14, sm: 14 }}
 						fontWeight={600}
-						color="#fff"
+						color={disabled ? "#898E9E" : "#fff"}
 					>
 						{title}
 					</Typography>
