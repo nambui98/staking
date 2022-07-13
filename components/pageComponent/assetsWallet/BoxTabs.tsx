@@ -9,6 +9,7 @@ import { FormInfomationPopup } from "../marketplace/FormInfomationPopup";
 import { BoxEmpty } from "./BoxEmpty";
 import { MysteryBoxTab } from "./MysteryBoxTab";
 import { TokenTab } from "./TokenTab";
+import addressBuyBox from '../../../abi/addressBuyBox.json';
 
 export const Boxtabs = () => {
   const { walletAccount, bnbBalance, fiuBalance, heeBalance, ethersSigner, boxBalance } = useWalletContext();
@@ -17,6 +18,9 @@ export const Boxtabs = () => {
   const [currentTab, setCurrentTab] = useState<string>('');
   const [popupFormInfo, setPopupFormInfo] = useState<boolean>(false);
   const [textEmail, setTextEmail] = useState<string>('');
+  const [statusBuyBox, setStatusBuyBox] = useState<boolean>(false);
+
+
   const handleSwitchTab = (tab: string) => {
     setCurrentTab(tab);
   }
@@ -46,8 +50,20 @@ export const Boxtabs = () => {
     }
   }
 
+  const checkAddressBuyBox = async () => {
+    const filterAddress = await (addressBuyBox as any)?.data?.filter((item: any, index: number) => {
+      return item?.Wallet.toLowerCase() === walletAccount?.toLowerCase()
+    })
+    if(filterAddress.length){
+      return setStatusBuyBox(true)
+    } else {
+      return setStatusBuyBox(false)
+    }
+  }
+
   useEffect(() => {
-    getTotalBox()
+    getTotalBox();
+    checkAddressBuyBox()
   }, [walletAccount])
 
   return (
@@ -69,10 +85,10 @@ export const Boxtabs = () => {
             ))}
           </TabBox>
         </BoxBodyLeft>
-        {/* {totalBox > 0 && !isMobile && !statusFormGetBonus && <BoxBonus>
+        {statusBuyBox && !isMobile && !statusFormGetBonus && <BoxBonus>
           <img src={IMAGE.boxShoeToken} />
           <ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus>
-        </BoxBonus>} */}
+        </BoxBonus>}
       </TabLeft>
       <TabBody>
         <BodyContent>
@@ -92,7 +108,7 @@ export const Boxtabs = () => {
           </SendSpending>
       </TabBody>
       <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
-      {/* {totalBox > 0 && isMobile && !statusFormGetBonus && <BoxBonus><ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus></BoxBonus>} */}
+      {statusBuyBox && isMobile && !statusFormGetBonus && <BoxBonus><ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus></BoxBonus>}
     </Wrap>
   )
 }

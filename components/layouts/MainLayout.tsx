@@ -21,7 +21,7 @@ const MainLayout: React.FC<any> = ({ sxProps, children, titlePage }) => {
 				<meta property="og:url" content="https://www.befitter.io/" />
 				<meta
 					property="og:image"
-					content="https://befitter.io/images/item.png"
+					content="https://befitter.io/images/image_meta.png"
 				/>
 				<meta property="og:description" content={META_DESC} />
 				<meta name="twitter:card" content="summary_large_image" />
@@ -29,7 +29,7 @@ const MainLayout: React.FC<any> = ({ sxProps, children, titlePage }) => {
 				<meta property="twitter:description" content={META_DESC} />
 				<meta
 					property="twitter:image"
-					content="https://befitter.io/images/item.png"
+					content="https://befitter.io/images/image_meta.png"
 				/>
 			</Head>
 			<Box
