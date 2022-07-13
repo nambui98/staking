@@ -27,7 +27,7 @@ import { toast } from 'react-toastify';
 
 const MAIN_MENU = [
 	{ name: 'HUB', link: 'https://hub.befitter.io/claim' },
-	{ name: 'BUSINESS PAGE', link: '/business' },
+	{ name: 'Business Paper', link: '/business' },
 	{ name: 'whitepaper', link: 'https://whitepaper.befitter.io/' }
 ]
 
@@ -104,10 +104,12 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 							<Logo />
 							{!isMobile992 && <MainMenu>
 								<ButtonApp onClick={() => setStatusPopup(true)}><span>GET THE APP</span></ButtonApp>
-								<MenuItem onClick={() => handleCommingSoon()} hover={true} sx={{color: customWhite && !stickTrigger ? '#ffffff' : '#31373E' + '!important'}}>STAKING</MenuItem>
+								<Link href={'/staking'}>
+									<MenuItem hover={true} sx={{ color: customWhite && !stickTrigger ? '#ffffff' : '#31373E' + '!important' }}>STAKING</MenuItem>
+								</Link>
 								{MAIN_MENU?.map((item, index) => (
 									<Link key={index} href={item.link}>
-										<MenuItem sx={{color: customWhite && !stickTrigger ? '#ffffff' : '#31373E' + '!important'}} hover={true}>{item.name}</MenuItem>
+										<MenuItem sx={{ color: customWhite && !stickTrigger ? '#ffffff' : '#31373E' + '!important' }} hover={true}>{item.name}</MenuItem>
 									</Link>
 								))}
 							</MainMenu>}
