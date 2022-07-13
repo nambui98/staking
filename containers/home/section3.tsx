@@ -209,7 +209,7 @@ const Section3: NextPage = () => {
 	return (
 		<Box sx={{
 			// backgroundImage: `url(assets/bg_sec3.png)`,
-			// backgroundColor: '#000',
+			backgroundColor: '#151515',
 			height: '100%',
 			width: "100%",
 			backgroundPosition: 'center',
@@ -217,7 +217,7 @@ const Section3: NextPage = () => {
 			backgroundSize: 'cover',
 			overflow: 'hidden',
 			// padding: '29px auto 50px',
-
+			marginTop: { xs: '0px', sm: 20 }
 		}}>
 
 			<Wrap sx={{
@@ -349,7 +349,14 @@ const Section3: NextPage = () => {
 									{item.subtitle}
 								</Typography>
 							</Box>
-
+							<Box data-aos-offset="1000"
+								data-aos-duration="1000" data-aos="fade-right" sx={{ position: "absolute", zIndex: 0, bottom: "0", transform: "translate(-50%, -50%)", left: "0px" }}>
+								<img width={"100%"} src={`assets/sec3/bg_left.png`} style={{ objectFit: "cover" }} alt="" />
+							</Box>
+							<Box data-aos-offset="1000"
+								data-aos-duration="1000" data-aos="fade-left" sx={{ position: "absolute", zIndex: 0, bottom: "0", transform: "translate(-50%, -50%)", right: "0px" }}>
+								<img width={"100%"} src={`assets/sec3/bg_right.png`} style={{ objectFit: "cover" }} alt="" />
+							</Box>
 
 							{item.typeContent == "image" ?
 								<Box display="flex" mt={5} alignItems={"center"} justifyContent="center" px={isTablet ? 4 : 0}>
