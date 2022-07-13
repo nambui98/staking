@@ -35,7 +35,7 @@ export const RoadMap = () => {
             {ROAD_MAP.items?.map((item, index) => (
               <SwiperSlide key={index}>
                 <Item active={item.status.toString()}>
-                  <Image><img src={item.status ? item.image : STAKING_IMAGE.boxGray} /></Image>
+                  <Image sx={{opacity: item.status ? '0.2' : '1'}}><img src={item.status ? item.image : STAKING_IMAGE.boxGray} /></Image>
                   <Box sx={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -46,7 +46,7 @@ export const RoadMap = () => {
                     }
                   }}>
                     <Name>{item.title}</Name>
-                    <Status active={item.status.toString()}>{item.status ? 'LIVE' : 'UPCOMING'}</Status>
+                    <Status active={item.status.toString()}>{'UPCOMING'}</Status>
                   </Box>
                 </Item>
               </SwiperSlide>
@@ -81,7 +81,7 @@ type itemProps = BoxProps & {
 const Item = styled(Box)((props: itemProps) =>({
   padding: 16,
   borderRadius: 12,
-  backgroundColor: props.active ? '#FFE2D3' : '#F8F9FB',
+  backgroundColor: '#F8F9FB',
   display: 'flex',
   minHeight: 170,
   flexDirection: 'column',
@@ -104,7 +104,7 @@ const Image = styled(Box)({
   }
 })
 const Name = styled(Typography)({
-  ...TEXT_STYLE(14, 500, '#31373E'),
+  ...TEXT_STYLE(14, 500, '#5A6178'),
   marginBottom: 10,
   '@media (min-width: 768px)': {
     marginBottom: 0
@@ -113,7 +113,7 @@ const Name = styled(Typography)({
 const Status = styled(Typography)((props: itemProps) => ({
   padding: '4px 8px',
   ...TEXT_STYLE(14, 500, '#ffffff'),
-  backgroundColor: props.active ? '#FF6F61' : '#A7ACB8',
+  backgroundColor: '#A7ACB8',
   textTransform: 'uppercase',
   marginTop: 'auto',
   display: 'inline-block'

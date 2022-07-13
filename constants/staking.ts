@@ -26,17 +26,17 @@ export const ROAD_MAP = {
     {
       image: STAKING_IMAGE.box,
       title: '',
-      status: false
+      status: ''
     },
     {
       image: STAKING_IMAGE.box,
       title: '',
-      status: false
+      status: ''
     },
     {
       image: STAKING_IMAGE.box,
       title: '',
-      status: false
+      status: ''
     }
   ]
 }

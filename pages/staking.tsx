@@ -8,7 +8,7 @@ const Staking = () => {
     <MainLayout titlePage='beFITTER - Staking pools' sxProps={{ background: '#fff' }}>
       <Wrap>
         <TabPools/>
-        {/* <RoadMap/> */}
+        <RoadMap/>
       </Wrap>
     </MainLayout>
   )

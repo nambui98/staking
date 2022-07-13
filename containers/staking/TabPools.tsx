@@ -80,7 +80,7 @@ export const TabPools = () => {
                     key={index}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 }, position: 'relative' }}
                   >
-                    {/* <TitleItem key={index}><img src={STAKING_ICON.fiu} /> {item.name} <span onClick={index === 0 ? handleShowPopupPass : handleShowPopupShared}>How it works?</span></TitleItem>
+                    <TitleItem key={index}><img src={STAKING_ICON.fiu} /> {item.name} <span onClick={index === 0 ? handleShowPopupPass : handleShowPopupShared}>How it works?</span></TitleItem>
                     <ComingSoon sx={{
                       top: index === 0 ? '0 !important' : 4
                     }}>coming soon</ComingSoon>
@@ -90,7 +90,7 @@ export const TabPools = () => {
                     <Item align="left">Token remaining <Box>{item.data.tokenRemaining}</Box></Item>
                     <Item align="left">Lock-up time <Box>{item.data.lockUpTime}</Box></Item>
                     <Item align="left">Withdrawal delay time <Box>{item.data.delayTime}</Box></Item>
-                    <Item align="left">Total staked <Box>{item.data.total}</Box></Item> */}
+                    <Item align="left">Total staked <Box>{item.data.total}</Box></Item>
                   </BoxTr>
                 ))}
               </TableBody>
