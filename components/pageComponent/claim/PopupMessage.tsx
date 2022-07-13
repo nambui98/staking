@@ -11,13 +11,13 @@ interface IProps {
   handleClickButton?: () => any
   titleCustomColor?: any
   titleButton?: string
-  popupType: 'success' | 'error'
+  popupType?: 'success' | 'error'
   sx?: any
 }
 
 export const PopupMessage: React.FC<IProps> = ({title, message, status, handleToggleStatus, titleCustomColor, titleButton, popupType, handleClickButton, sx}) => {
   const checkIcon = <TitleSuccess>
-      <img src={popupType === 'success' ? MARKETPLACE_ICON.TICK : MARKETPLACE_ICON.CLOSE_ICON} />
+      {popupType && <img src={popupType === 'success' ? MARKETPLACE_ICON.TICK : MARKETPLACE_ICON.CLOSE_ICON} />}
       {title}
     </TitleSuccess>
   
@@ -30,7 +30,7 @@ export const PopupMessage: React.FC<IProps> = ({title, message, status, handleTo
   )
 }
 
-const MessagePopup = styled(Typography)({
+const MessagePopup = styled(Box)({
   marginBottom: '24px',
   ...TEXT_STYLE(14, 500),
   color: '#5A6178',

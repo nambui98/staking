@@ -23,5 +23,6 @@ export const MAIN_PAGE = [
   {title: 'Assets', link: '/assets', icon: 'assets/icons/box.svg', active: true},
   // {title: 'Shop', link: '/shop', icon: 'assets/icons/shop.svg', active: true},
   {title: 'Claim', link: '/claim', icon: 'assets/icons/3d-cube-scan.svg', active: true},
+  {title: 'Staking', link: '/staking', icon: 'assets/icons/staking.svg', active: true},
 ]
 export const SECURICHAIN_LOGO = 'assets/securichain.png';
