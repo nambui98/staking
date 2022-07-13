@@ -54,7 +54,7 @@ export const Boxtabs = () => {
     const filterAddress = await (addressBuyBox as any)?.data?.filter((item: any, index: number) => {
       return item?.Wallet.toLowerCase() === walletAccount?.toLowerCase()
     })
-    if(filterAddress.length){
+    if (filterAddress.length) {
       return setStatusBuyBox(true)
     } else {
       return setStatusBuyBox(false)
@@ -95,17 +95,30 @@ export const Boxtabs = () => {
           {currentTab.length ? renderBodyView() : <BoxEmpty icon={ICON.shoe} emptyText={'Select assets to continue'} />}
         </BodyContent>
         <SendSpending>
-            <Label>beFITTER email</Label>
-            <Box sx={{display: 'flex', alignItems: 'center'}}>
+          <BoxInput>
+            <InputBottom>
+              <Label>beFITTER email</Label>
               <CustomInput
                 fullWidth
                 required
                 value={textEmail}
+                placeholder={'Email'}
                 onChange={(e: any) => setTextEmail(e.target.value)}
               />
-              <ButtonSendSpending>Send to Spending</ButtonSendSpending>
-            </Box>
-          </SendSpending>
+            </InputBottom>
+            <InputBottom>
+              <Label>Amount to send</Label>
+              <CustomInput
+                fullWidth
+                required
+                value={textEmail}
+                placeholder={'Amount'}
+                onChange={(e: any) => setTextEmail(e.target.value)}
+              />
+            </InputBottom>
+            <ButtonSendSpending>Send to Spending</ButtonSendSpending>
+          </BoxInput>
+        </SendSpending>
       </TabBody>
       <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
       {statusBuyBox && isMobile && !statusFormGetBonus && <BoxBonus><ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus></BoxBonus>}
@@ -117,6 +130,19 @@ export const Boxtabs = () => {
 const iconGray = {
   filter: 'invert(85%) sepia(61%) saturate(10%) hue-rotate(196deg) brightness(100%) contrast(115%)'
 }
+const BoxInput = styled(Box)({
+  '@media (min-width: 992px)': { 
+    display: 'flex', 
+    alignItems: 'flex-end' 
+  }
+})
+const InputBottom = styled(Box)({
+  marginBottom: 16,
+  '@media (min-width: 992px)': {
+    marginRight: 20,
+    marginBottom: 0
+  }
+})
 const ButtonSendSpending = styled(Button)({
   padding: 8,
   borderRadius: 12,
@@ -125,7 +151,11 @@ const ButtonSendSpending = styled(Button)({
   ...TEXT_STYLE(16, 600),
   width: 188,
   marginLeft: 'auto',
-  textTransform: 'unset'
+  textTransform: 'unset',
+  width: '100%',
+  '@media (min-width: 992px)': {
+    width: 'auto'
+  }
 })
 const SendSpending = styled(Box)({
   marginTop: 16,
@@ -138,13 +168,15 @@ const Label = styled(Typography)({
   marginBottom: 8,
 })
 const CustomInput = styled(InputBase)({
-  width: 305,
   marginRight: 20,
+  '@media (min-width: 1280px)': {
+    width: 275,
+  },
   '& .MuiInputBase-input': {
     ...TEXT_STYLE(14, 500, '#31373E'),
     padding: '10px 16px',
     borderRadius: 8,
-    background: '#E9EAEF',   
+    background: '#E9EAEF',
   },
 });
 const BoxBonus = styled(Box)({
@@ -178,9 +210,9 @@ const Wrap = styled(Stack)({
   flexDirection: 'row',
   alignItems: 'flex-start',
   '@media (max-width: 767px)': {
-    padding: 16,
+    // padding: 16,
     borderRadius: 16,
-    background: '#F8F9FB',
+    // background: '#F8F9FB',
     flexDirection: 'column',
   }
 })
@@ -189,6 +221,11 @@ const TabLeft = styled(Stack)({
   '@media (min-width: 768px)': {
     marginRight: 32,
     width: 266,
+  },
+  '@media (max-width: 767px)': {
+    padding: '16px 16px 0',
+    borderRadius: '16px 16px 0 0',
+    background: '#F8F9FB'
   }
 })
 const TabBody = styled(Stack)({
@@ -203,6 +240,11 @@ const BodyContent = styled(Box)({
     borderRadius: 16,
     padding: 24,
     paddingRight: 9
+  },
+  '@media (max-width: 767px)': {
+    padding: '0 16px 16px',
+    borderRadius: '0 0 16px 16px',
+    background: '#F8F9FB'
   }
 })
 const Top = styled(Box)({
