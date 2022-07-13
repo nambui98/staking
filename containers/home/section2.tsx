@@ -174,7 +174,7 @@ const Section2: NextPage = () => {
 								mt={4}
 								sx={{
 									'@media (max-width: 767px)': {
-										marginTop: '40px',
+										marginTop: '75px',
 										lineHeight: '24px'
 									}
 								}}
@@ -203,7 +203,7 @@ const Section2: NextPage = () => {
 							}
 						}}>
 							<img src={'assets/dark/neon-orange-6.png'} alt="Logo" width={'auto'} />
-							<img style={{ position: 'absolute', inset: 0, transform: 'scale(1)', objectFit: 'cover' }} src={'assets/dark/bg_sec1.1.png'} alt="Logo" width={'auto'} />
+							<img style={{ position: 'absolute', inset: 0, transform: 'scale(1.1)', objectFit: 'cover' }} src={'assets/dark/bg_sec1.1.png'} alt="Logo" width={'auto'} />
 						</Box>
 					</BoxTitle>
 				</Wrap >
