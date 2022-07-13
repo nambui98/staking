@@ -26,13 +26,17 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 			<Box display={'flex'} mt={{ xs: '88px', sm: '0px' }} mb={{ xs: 3, sm: 5 }} alignItems="center" justifyContent="center">
 
 				<Typography
-					fontSize={{ xs: 20, sm: 56 }}
+					fontSize={{ xs: 32, sm: 56 }}
 					textTransform="uppercase"
 					fontFamily='Electrofied'
 					fontStyle={'italic'}
 					fontWeight={800}
 					color="#FF6D24"
 					textAlign="center"
+					sx={{
+						'@media (max-width: 767px)': {
+							
+						}}}
 				>
 					ADVISORS
 				</Typography>
@@ -42,9 +46,12 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 				isSm ?
 					<Box display={'flex'} sx={{ flexDirection: { xs: "column", sm: 'row' }, justifyContent: "space-between" }}>
 
-						<Box sx={{ flexDirection: { xs: "column", sm: 'row' }, position: "relative", width: { xs: "100%", sm: "320px" } }}>
+						<Box sx={{ flexDirection: { xs: "column", sm: 'row' }, position: "relative", width: { xs: "100%", sm: "320px" }, paddingBottom: '10px',
+						'@media (max-width: 767px)': {
+							marginBottom: '20px'
+						} }}>
 							<Box position="absolute" sx={{ inset: 0, zIndex: 0 }}>
-								<img width={"100%"} src={isSm ? "assets/dark/sec7_3.png" : "assets/dark/sec7_2.png"} />
+								<img width={"100%"} height={"100%"} src={isSm ? "assets/dark/sec7_3.png" : "assets/dark/sec7_2.png"} />
 							</Box>
 							<Box sx={{
 								display: "flex",
@@ -118,9 +125,13 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 							</Box>
 
 						</Box>
-						<Box sx={{ flexDirection: { xs: "column", sm: 'row' }, mt: 5, position: "relative", width: { xs: "100%", sm: "320px" } }}>
+						<Box sx={{ flexDirection: { xs: "column", sm: 'row' }, mt: 5, position: "relative", width: { xs: "100%", sm: "320px" }, paddingBottom: '10px',
+						'@media (max-width: 1440px)': {
+							marginTop: '0 !important'
+						}
+					 }}>
 							<Box position="absolute" sx={{ inset: 0, zIndex: 0 }}>
-								<img width={"100%"} src={isSm ? "assets/dark/sec7_3.png" : "assets/dark/sec7_2.png"} />
+								<img width={"100%"} height={"100%"} src={isSm ? "assets/dark/sec7_3.png" : "assets/dark/sec7_2.png"} />
 							</Box>
 							<Box sx={{
 								display: "flex",

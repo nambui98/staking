@@ -105,7 +105,7 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 									paddingTop: '0 !important',
 									flexBasis: 'unset !important',
 									width: 'unset !important',
-									maxWidth: '180px !important',
+									maxWidth: '143px !important',
 								}
 
 							} : {
