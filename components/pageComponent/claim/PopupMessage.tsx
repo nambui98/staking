@@ -30,7 +30,7 @@ export const PopupMessage: React.FC<IProps> = ({title, message, status, handleTo
   )
 }
 
-const MessagePopup = styled(Typography)({
+const MessagePopup = styled(Box)({
   marginBottom: '24px',
   ...TEXT_STYLE(14, 500),
   color: '#5A6178',
