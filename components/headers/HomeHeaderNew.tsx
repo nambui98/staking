@@ -27,6 +27,7 @@ import { toast } from 'react-toastify';
 
 const MAIN_MENU = [
 	{ name: 'HUB', link: 'https://hub.befitter.io/' },
+	{ name: 'BUSINESS PAGE', link: '/business' },
 	{ name: 'whitepaper', link: 'https://whitepaper.befitter.io/' }
 ]
 
