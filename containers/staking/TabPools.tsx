@@ -9,7 +9,7 @@ function createData(status: string, reward: string, earned: string, tokenRemaini
 }
 
 export const TabPools = () => {
-  const [tabCurrent, setTabCurrent] = useState<string>('1')
+  const [tabCurrent, setTabCurrent] = useState<number>(1)
   const [statusPopup, setStatusPopup] = useState<any>({
     status: false,
     content: <Box></Box>
@@ -58,9 +58,9 @@ export const TabPools = () => {
     <Wrap>
       <Container sx={{ maxWidth: 1120 }}>
         <Top>
-          <BoxTabs value={tabCurrent} onChange={(e, value) => setTabCurrent(value)}>
-            <TabItem className={tabCurrent === '1' ? "Mui-selected" : ''} label="All pools" />
-            <TabItem label="My pool" />
+          <BoxTabs value={tabCurrent}>
+            <TabItem className={tabCurrent === 0 ? "Mui-selected" : ''} label="All pools" onClick={() => setTabCurrent(0)} />
+            <TabItem className={tabCurrent === 1 ? "Mui-selected" : ''} label="My pool" onClick={() => setTabCurrent(1)} />
           </BoxTabs>
           <Search placeholder="Search pool..." InputProps={{
             endAdornment: (
@@ -80,7 +80,7 @@ export const TabPools = () => {
                     key={index}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 }, position: 'relative' }}
                   >
-                    <TitleItem key={index}><img src={STAKING_ICON.fiu} /> {item.name} <span onClick={index === 0 ? handleShowPopupPass : handleShowPopupShared}>How it works?</span></TitleItem>
+                    {/* <TitleItem key={index}><img src={STAKING_ICON.fiu} /> {item.name} <span onClick={index === 0 ? handleShowPopupPass : handleShowPopupShared}>How it works?</span></TitleItem>
                     <ComingSoon sx={{
                       top: index === 0 ? '0 !important' : 4
                     }}>coming soon</ComingSoon>
@@ -90,7 +90,7 @@ export const TabPools = () => {
                     <Item align="left">Token remaining <Box>{item.data.tokenRemaining}</Box></Item>
                     <Item align="left">Lock-up time <Box>{item.data.lockUpTime}</Box></Item>
                     <Item align="left">Withdrawal delay time <Box>{item.data.delayTime}</Box></Item>
-                    <Item align="left">Total staked <Box>{item.data.total}</Box></Item>
+                    <Item align="left">Total staked <Box>{item.data.total}</Box></Item> */}
                   </BoxTr>
                 ))}
               </TableBody>

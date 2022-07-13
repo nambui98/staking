@@ -34,7 +34,7 @@ export const RoadMap = () => {
 
             {ROAD_MAP.items?.map((item, index) => (
               <SwiperSlide key={index}>
-                <Item active={item.status}>
+                <Item active={item.status.toString()}>
                   <Image><img src={item.status ? item.image : STAKING_IMAGE.boxGray} /></Image>
                   <Box sx={{
                     display: 'flex',
@@ -46,7 +46,7 @@ export const RoadMap = () => {
                     }
                   }}>
                     <Name>{item.title}</Name>
-                    <Status active={item.status}>{item.status ? 'LIVE' : 'UPCOMING'}</Status>
+                    <Status active={item.status.toString()}>{item.status ? 'LIVE' : 'UPCOMING'}</Status>
                   </Box>
                 </Item>
               </SwiperSlide>
@@ -76,7 +76,7 @@ const Title = styled(Typography)({
   marginBottom: 16
 })
 type itemProps = BoxProps & {
-  active: boolean
+  active: string
 }
 const Item = styled(Box)((props: itemProps) =>({
   padding: 16,
