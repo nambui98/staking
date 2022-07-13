@@ -136,7 +136,7 @@ const Home: NextPage = () => {
 		</Box>,
 		<Box key={"6"} sx={{
 
-			height: height,
+			// height: height,
 			// position: 'relative',
 		}}>
 			{/* <Box data-aos-offset="600"

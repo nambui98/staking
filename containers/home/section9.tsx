@@ -61,8 +61,8 @@ const ButtonItem = styled(Grid)({
 	'@media (max-width: 767px)': {
 		paddingLeft: '0 !important',
 		paddingTop: '0 !important',
-		width: 193,
-		marginBottom: 16,
+		// width: 193,
+		// marginBottom: 16,
 		maxWidth: 'initial',
 	}
 })
@@ -169,23 +169,11 @@ const StayInTouch: React.FC<any> = ({ sxProps }) => {
 								/>
 							))}
 						</Stack>
-						<Stack direction="row" spacing={7} alignItems="center">
-							{APP.BUTTON.map((el, idx) => (
-								<ButtonItem key={idx} item xs={6} lg={4}>
-									<AppStoreButtonNew2
-										background={idx === 2}
-										disabled={!el.href}
-										subtitle={el.href ? el.subtitle : el.subtitle0}
-										title={el.title}
-										icon={el.icon}
-										href={el.href}
-									/>
-								</ButtonItem>
-							))}
-						</Stack>
+
 					</>
 				)
 			}
+
 			{
 				isSm && (
 
@@ -205,6 +193,34 @@ const StayInTouch: React.FC<any> = ({ sxProps }) => {
 					</Grid>
 				)
 			}
+			{/* <Grid container justifyContent="center" rowSpacing={1}>
+				{SOCIAL.map(({ icon, iconActive, href }, idx) => (
+					<Grid item xs={3} key={idx}>
+						<Stack alignItems="center">
+							<BounceIconButton
+								href={href}
+								icon={icon}
+								iconActive={iconActive}
+
+							/>
+						</Stack>
+					</Grid>
+				))}
+			</Grid> */}
+			<Stack direction="row" spacing={{ xs: 0, sm: 7 }} sx={{ gap: 3 }} alignItems="center" justifyContent="center" flexWrap={"wrap"}>
+				{APP.BUTTON.map((el, idx) => (
+					<ButtonItem key={idx} item >
+						<AppStoreButtonNew2
+							background={idx === 2}
+							disabled={!el.href}
+							subtitle={el.href ? el.subtitle : el.subtitle0}
+							title={el.title}
+							icon={el.icon}
+							href={el.href}
+						/>
+					</ButtonItem>
+				))}
+			</Stack>
 		</Stack >
 	);
 };
@@ -244,7 +260,7 @@ const Section9: React.FC<any> = ({ sxProps }) => {
 			>
 				<Container >
 					<Box
-						sx={{ width: '100%', height: 1.5, background: '#4E5472', my: 2 }}
+						sx={{ width: '100%', height: 1.5, background: '#4E5472', mb: 2, mt: { xs: 2, sm: 0 } }}
 					></Box>
 					<Box display='flex' alignItems={"center"} flexDirection={{ xs: 'column', sm: 'row' }} rowGap={{ xs: 2, sm: 0 }} mb={3}>
 
