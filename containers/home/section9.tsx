@@ -96,6 +96,13 @@ export const APP = {
 		},
 	],
 };
+const MAIN_FOOTER = [
+	{ title: 'STAKING', link: '/staking' },
+	{ title: 'HUB', link: 'https://hub.befitter.io/claim' },
+	{ title: 'BUSINESS PAGE', link: '/business' },
+	{ title: 'MANIFESTO', link: '' },
+	{ title: 'WHITEPAPER', link: 'https://whitepaper.befitter.io/' },
+]
 const StayInTouch: React.FC<any> = ({ sxProps }) => {
 	const isSm = useMediaQuery((theme: Theme) =>
 		theme.breakpoints.down('md')
@@ -122,38 +129,13 @@ const StayInTouch: React.FC<any> = ({ sxProps }) => {
 				Stay in touch with  <span className='text_gadient_primary'>beFITTER</span>
 			</Typography> */}
 			<Stack sx={{ display: 'flex', flexDirection: { xs: "column", sm: 'row' }, gap: { xs: 3, sm: 7 } }} alignItems="center">
-				<MenuItem onClick={() => { }}>
-					<div>STAKING</div>
-					<div>STAKING</div>
-				</MenuItem>
-				<MenuItem onClick={() => { }}>
-					<div>HUB</div>
-					<div>HUB</div>
-				</MenuItem>
-				<MenuItem onClick={() => { }}>
-					<div>BUSINESS PAGE</div>
-					<div>BUSINESS PAGE</div>
-				</MenuItem>
-				<MenuItem onClick={() => { }}>
-					<div>MANIFESTO</div>
-					<div>MANIFESTO</div>
-				</MenuItem>
-				<MenuItem onClick={() => { }}>
-					<div>WHITEPAPER</div>
-					<div>WHITEPAPER</div>
-				</MenuItem>
-				<MenuItem onClick={() => { }}>
-					<div>LITEPAPER</div>
-					<div>LITEPAPER</div>
-				</MenuItem>
-				<MenuItem onClick={() => { }}>
-					<div>ABOUT</div>
-					<div>ABOUT</div>
-				</MenuItem>
-				<MenuItem onClick={() => { }}>
-					<div>CONTACT</div>
-					<div>CONTACT</div>
-				</MenuItem>
+				{MAIN_FOOTER?.map((item: any, index) => (
+					<Link href={item.link}>
+						<MenuItem key={index} onClick={() => { }}>
+							<div>{item.title}</div>
+							<div>{item.title}</div>
+						</MenuItem></Link>
+				))}
 			</Stack>
 			{
 				!isSm && (

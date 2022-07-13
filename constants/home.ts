@@ -191,7 +191,7 @@ export const videoSlides = (refs: any) => {
 		// },
 		{
 			src: '/videos/IDO.mp4',
-			mobileSrc: '/videos/runMobile.mp4',
+			mobileSrc: '/videos/IDO.mp4',
 			bigDecktopSrc: '/videos/IDO2.mp4',
 		},
 		// {
