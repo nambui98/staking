@@ -107,7 +107,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 								<MenuItem onClick={() => handleCommingSoon()} hover={true} sx={{color: customWhite && !stickTrigger ? '#ffffff' : '#31373E' + '!important'}}>STAKING</MenuItem>
 								{MAIN_MENU?.map((item, index) => (
 									<Link key={index} href={item.link}>
-										<MenuItem sx={{color: customWhite && !stickTrigger ? '#ffffff' : '#31373E' + '!important'}} onClick={() => index === 0 ? handleCommingSoon() : null} hover={true}>{item.name}</MenuItem>
+										<MenuItem sx={{color: customWhite && !stickTrigger ? '#ffffff' : '#31373E' + '!important'}} hover={true}>{item.name}</MenuItem>
 									</Link>
 								))}
 							</MainMenu>}
