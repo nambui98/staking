@@ -146,7 +146,7 @@ const Home: NextPage = () => {
 			</Box> */}
 			<Section6 />
 		</Box>,
-		<Box key={"7"} sx={{ backgroundImage: { xs: "transparent", sm: `url(assets/dark/sec7.png)` }, backgroundRepeat: "no-repeat", backgroundPosition: "bottom", }}>
+		<Box key={"7"} sx={{ backgroundImage: { xs: "transparent", sm: `url(assets/dark/sec7.png)` }, backgroundRepeat: "no-repeat", backgroundPosition: "bottom", paddingTop: "1px"}}>
 			<Section7 />
 		</Box>,
 		<Box key={"8"} sx={{
