@@ -19,7 +19,7 @@ const HomeLayoutNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 				<meta property="og:url" content="https://www.befitter.io/" />
 				<meta
 					property="og:image"
-					content="images/item.png"
+					content="https://befitter.io/images/image_meta.png"
 				/>
 				<meta property="og:description" content={META_DESC} />
 				<meta name="twitter:card" content="summary_large_image" />
@@ -27,7 +27,7 @@ const HomeLayoutNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 				<meta property="twitter:description" content={META_DESC} />
 				<meta
 					property="twitter:image"
-					content="images/item.png"
+					content="https://befitter.io/images/image_meta.png"
 				/>
 			</Head>
 			<Box
