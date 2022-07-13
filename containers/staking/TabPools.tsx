@@ -78,7 +78,7 @@ export const TabPools = () => {
                 {rows.map((item, index) => (
                   <BoxTr
                     key={index}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 }, position: 'relative' }}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TitleItem key={index}><img src={STAKING_ICON.fiu} /> {item.name} <span onClick={index === 0 ? handleShowPopupPass : handleShowPopupShared}>How it works?</span></TitleItem>
                     <ComingSoon sx={{
@@ -191,6 +191,7 @@ const Body = styled(Box)({
 })
 const BoxTr = styled(TableRow)({
   background: '#FFFFFF',
+  position: 'sticky',
 })
 const Item = styled(TableCell)({
   paddingTop: 35,
