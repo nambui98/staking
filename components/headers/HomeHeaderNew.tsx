@@ -28,8 +28,8 @@ import { toast } from 'react-toastify';
 
 const MAIN_MENU = [
 	{ name: 'HUB', link: 'https://hub.befitter.io/' },
-	{ name: 'BUSINESS PAGE', link: '' },
-	{ name: 'manifesto', link: '' }
+	{ name: 'Business Paper', link: '/business' },
+	// { name: 'manifesto', link: '' }
 ]
 
 const Logo: React.FC<any> = () => {
@@ -41,6 +41,12 @@ const Logo: React.FC<any> = () => {
 					display: 'flex',
 					alignItems: 'center',
 					cursor: 'pointer',
+					'@media (max-width: 768px)': {
+						img: {
+							width: '150px',
+							height: 'auto'
+						}
+					}
 				}}
 			>
 				<img src={HOME_LOGO} alt="Logo" width={'auto'} height={40} />
@@ -55,7 +61,6 @@ const Logo: React.FC<any> = () => {
 const BoxSecurichain = styled(Box)({
 	margin: 'auto auto auto 24px',
 	'@media (max-width: 1100px)': {
-		margin: 0,
 		display: 'flex',
 		justifyContent: 'flex-end',
 		'& img': {
@@ -63,6 +68,9 @@ const BoxSecurichain = styled(Box)({
 			marginRight: -15,
 			marginTop: -4
 		}
+	},
+	'@media (max-width: 767px)': {
+		display: 'none',
 	}
 })
 
@@ -70,11 +78,9 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 	const [statusPopup, setStatusPopup] = useState(false);
 	const isMobile992 = useMediaQuery('(max-width:992px)');
 	const isMobile = useMediaQuery('(max-width:599px)');
-	// const stickTrigger = useScrollTrigger({
-	// 	disableHysteresis: true,
-	// 	threshold: 200,
-	// });
-	// console.log(stickTrigger);
+	const isMobile1500 = useMediaQuery('(max-width: 1500px)');
+
+	const isMobile1140 = useMediaQuery('(max-width: 1140px)');
 
 	const handleCommingSoon = () => {
 		toast('COMING SOON!', {
@@ -95,12 +101,14 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 				square
 				elevation={0}
 				sx={{
-					backgroundColor: ' rgba(28, 30, 41, 0.8)',
+					backgroundColor: ' rgba(28, 30, 41, 0.5)',
 					backdropFilter: 'blur(24px)',
 					// background: (currentPage === '1' && !stickTrigger) || (!stickTrigger && isMobile) ? 'linear-gradient(180deg, rgba(185, 185, 185, 0.4) 0%, rgba(177, 177, 177, 0) 100%)' : '#fff',
 					// borderBottom: currentPage === '1' ? '0' : '1px solid #E9EAEF',
 					transition: 'all ease 0.2s ',
-					padding: currentPage === '1' ? '14px 0' : '0'
+					'@media (min-width: 768px)': {
+						padding: '14px 0',
+					}
 				}}
 			>
 
@@ -109,15 +117,17 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 						display: 'flex',
 						justifyContent: 'space-between',
 						alignItems: 'center',
-						// maxWidth: '1120px !important',
-						padding: '0 120px !important'
+						padding: '0 16px !important',
+						'@media (min-width: 1500px)': {
+							padding: '0 120px !important'
+						}
 					}}
 				>
 					<>
 						<Logo />
 						{/* {!isMobile992 &&  */}
 						<MainMenu>
-							<ButtonApp onClick={() => setStatusPopup(true)} className="button">
+							{!isMobile1140 && <ButtonApp className="button" onClick={() => setStatusPopup(true)}>
 								<Box className="button-wrapper">
 									<Box className="text" sx={{
 										...TEXT_STYLE(20, 600, '#ffffff'), fontFamily: 'Electrofied',
@@ -129,28 +139,29 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 									}}>GET THE APP</Box>
 
 								</Box>
-							</ButtonApp>
+							</ButtonApp>}
 
-							<MenuItem onClick={() => handleCommingSoon()} hover={true}>
-								<div>STAKING</div>
-								<div>STAKING</div>
-							</MenuItem>
-							{MAIN_MENU?.map((item, index) => (
+							{!isMobile1140 && <Link href={'/staking'}>
+								<MenuItem hover={true}>
+									<div>STAKING</div>
+									<div>STAKING</div>
+								</MenuItem>
+							</Link>}
+							{!isMobile1140 && MAIN_MENU?.map((item, index) => (
 								<Link key={index} href={item.link}>
-									<MenuItem onClick={() => index === 0 ? handleCommingSoon() : null} hover={true}>
-
+									<MenuItem hover={true}>
 										<div>{item.name}</div>
 										<div>{item.name}</div>
-
 									</MenuItem>
 								</Link>
 							))}
-							<Button sx={{ backgroundColor: 'transparent', boxShadow: 'none', }} >
-								<img src="assets/icons/menu_dark.png" alt="" />
-							</Button>
+							{!isMobile1500 && <MenuItem onClick={() => handleCommingSoon()} hover={true}>
+								<div>manifesto</div>
+								<div>manifesto</div>
+							</MenuItem>}
+							<MenuButtonNew customImage={'40px'} />
 						</MainMenu>
 						{/* } */}
-						{isMobile992 && <MenuButtonNew customImage={'40px'} />}
 					</>
 				</Box>
 
@@ -192,7 +203,6 @@ const MenuItem = styled(Box)((props: menuItemProp) => ({
 			opacity: 0,
 			position: 'absolute',
 		}
-
 	},
 	'&:last-of-type': {
 		marginRight: 0
@@ -207,7 +217,6 @@ const MenuItem = styled(Box)((props: menuItemProp) => ({
 			opacity: 0,
 		}
 	},
-
 }))
 const ButtonApp = styled(Button)({
 	background: 'url(assets/backgrounds/bt-bg.png)',

@@ -24,7 +24,7 @@ type itemType = {
 	icon: any,
 	iconMobile: any
 }
-const Section2: NextPage = () => {
+const Section2Old: NextPage = () => {
 	const [activeIndex, setActiveIndex] = useState<number>(0);
 	const [auto, setAuto] = useState<boolean>(true);
 	const isMobile = useMediaQuery('(max-width: 767px)');
@@ -105,53 +105,11 @@ const Section2: NextPage = () => {
 		// <Box height={"100%"}>
 
 		<Wrap sx={{
-			marginTop: {
-				xs: '88px !important', sm: '0px !important'
-			}
+			marginTop: '-50px',
+			background: '#1C1E29'
 		}}>
 			{/* <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage> */}
 			<Box display={'flex'} mb={{ xs: 2, md: 4 }} alignItems="center" flexDirection={"column"}>
-
-				<Typography
-					fontSize={{ xs: 24, sm: 32 }}
-					textTransform="uppercase"
-					fontFamily='Electrofied'
-					fontStyle={'italic'}
-					fontWeight={800}
-					color="#31373E"
-					mb={0.5}
-				>
-					Make A healthy lifestyle
-				</Typography>
-				<Typography
-					fontSize={{ xs: 24, sm: 50 }}
-					textTransform="uppercase"
-					fontFamily='Electrofied'
-					fontStyle={'italic'}
-					fontWeight={800}
-					color="#FF6D24"
-					mb={0.5}
-				>
-					irresistible
-				</Typography>
-				<Box display={isMobile ? 'block' : 'flex'}>
-					<Typography typography={'span'}
-						fontSize={{ xs: 16, sm: 16 }}
-						fontWeight={500}
-						color="#5A6178"
-						lineHeight="22px"
-						// mb={0.5}
-						sx={{
-							'& span': {
-								color: '#FF8A50'
-							},
-							'@media (max-width: 767px)': {
-								marginTop: '7px'
-							}
-						}}
-						textAlign="center"><span>beFITTER’s</span> ecosystem helps users improve mental & physical health,<br></br> gain achievements and still get monetary incentives.
-					</Typography>
-				</Box>
 			</Box >
 			<Inner display={'flex'} alignItems={'center'}>
 				<BoxIcon flex={1}>
@@ -174,11 +132,11 @@ const Section2: NextPage = () => {
 									<Icon style={{
 										transition: '.7s all',
 										// opacity: activeIndex == index ? 1 : 0,
-										fill: activeIndex == index ? "#FF6D24" : "#898E9E",
+										fill: activeIndex == index ? "#FF6D24" : "#E9EAEF",
 
 									}} />
 									<Typography sx={{
-										transition: '.4s all', color: activeIndex == index ? "#FF6D24" : "#31373E",
+										transition: '.4s all', color: activeIndex == index ? "#FF6D24" : "#E9EAEF",
 										fontSize: activeIndex == index ? '24px' : '18px',
 										marginLeft: 1,
 										'@media (max-width: 767px)': {
@@ -192,7 +150,7 @@ const Section2: NextPage = () => {
 									transition: '.4s all',
 									...styleActiveContent(index)
 								}}>
-									<Typography mt={0.5} fontSize={16} color="#31373E" sx={{ zIndex: 0, pointerEvents: 'none' }} textAlign="left" lineHeight="20px">{item.content}</Typography>
+									<Typography mt={0.5} fontSize={16} color="#E9EAEF" sx={{ zIndex: 0, pointerEvents: 'none' }} textAlign="left" lineHeight="20px">{item.content}</Typography>
 								</Box>}
 							</BoxItemIcon>
 						}
@@ -205,20 +163,22 @@ const Section2: NextPage = () => {
 					marginBottom: '20px',
 					marginTop: '5px'
 				}}>
-					<Typography mt={0.5} fontSize={14} color="#5A6178" >{data[activeIndex].content}</Typography>
+					<Typography mt={0.5} fontSize={14} color="#FFFFFF" >{data[activeIndex].content}</Typography>
 				</Box>}
 
 				<Box flex={1} sx={{ position: 'relative', height: '100%', width: '100%' }}>
+					<BoxImage sx={{opacity: 0, marginBottom: '80px'}}>
+						<img width={"100%"} src={'assets/sec2/fitnessfi.png'} alt="" />
+					</BoxImage>
 					{
 						data.map((item: itemType, index: number) => {
 							return <BoxImage sx={{
 								position: 'absolute',
-								top: '50%',
-								transform: {
-									xs: 'translateY(0)', sm: 'translateY(-50%)'
-								},
+								top: 0,
+								// transform: 'translateY(0)',
 								transition: 'all .6s',
-								opacity: index == activeIndex ? '1' : 0
+								opacity: index == activeIndex ? '1' : 0,
+								background: '#1C1E29'
 							}}>
 								<img width={"100%"} src={item.image} alt="" />
 							</BoxImage>
@@ -232,7 +192,7 @@ const Section2: NextPage = () => {
 	)
 }
 
-export default Section2;
+export default Section2Old;
 
 const BoxImage = styled(Box)({
 	// '@media (max-width: 767px)': {

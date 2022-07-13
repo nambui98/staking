@@ -40,7 +40,7 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 			</Box>
 			{
 				isSm ?
-					<Box display={'flex'} justifyContent="space-evenly" sx={{ flexDirection: { xs: "column", sm: 'row' } }}>
+					<Box display={'flex'} sx={{ flexDirection: { xs: "column", sm: 'row' }, justifyContent: "space-between" }}>
 
 						<Box sx={{ flexDirection: { xs: "column", sm: 'row' }, position: "relative", width: { xs: "100%", sm: "320px" } }}>
 							<Box position="absolute" sx={{ inset: 0, zIndex: 0 }}>
@@ -118,7 +118,7 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 							</Box>
 
 						</Box>
-						<Box sx={{ flexDirection: { xs: "column", sm: 'row' }, mt: 8, position: "relative", width: { xs: "100%", sm: "320px" } }}>
+						<Box sx={{ flexDirection: { xs: "column", sm: 'row' }, mt: 5, position: "relative", width: { xs: "100%", sm: "320px" } }}>
 							<Box position="absolute" sx={{ inset: 0, zIndex: 0 }}>
 								<img width={"100%"} src={isSm ? "assets/dark/sec7_3.png" : "assets/dark/sec7_2.png"} />
 							</Box>

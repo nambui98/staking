@@ -121,7 +121,7 @@ const StayInTouch: React.FC<any> = ({ sxProps }) => {
 			>
 				Stay in touch with  <span className='text_gadient_primary'>beFITTER</span>
 			</Typography> */}
-			<Stack direction={{ xs: "column", sm: 'row' }} spacing={{ xs: 3, sm: 7 }} columnSpacing={8} alignItems="center">
+			<Stack sx={{ display: 'flex', flexDirection: { xs: "column", sm: 'row' }, gap: { xs: 3, sm: 7 } }} alignItems="center">
 				<MenuItem onClick={() => { }}>
 					<div>STAKING</div>
 					<div>STAKING</div>

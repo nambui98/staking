@@ -488,10 +488,10 @@ const Wrap = styled(Stack)({
 	padding: '0 16px',
 	maxWidth: '1120px',
 	margin: '0px auto 50px',
-	paddingTop: "65px"
-	// '@media (min-width: 560px)': {
-	// 	margin: '29px auto 80px',
-	// }
+	paddingTop: "65px",
+	'@media (max-width: 767px)': {
+		paddingTop: "24px",
+	}
 })
 
 const BoxOpenImage = styled(Box)({

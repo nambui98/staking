@@ -40,10 +40,10 @@ const Section5: NextPage = () => {
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	return (
 		<Wrap sx={{
-			// marginTop: { xs: '88px', sm: '0px' },
-			// height: "100%",
-			display: "flex",
-			// justifyContent: "center"
+			marginTop: { xs: '80px', sm: '0px' }
+			// alignItems: { xs: "center", sm: 'normal' },
+			// display: 'flex',
+			// justifyContent: { xs: "center", sm: 'normal' },
 		}}>
 			<Box data-aos-offset="1400"
 
@@ -80,7 +80,7 @@ const Section5: NextPage = () => {
 						fontFamily='Electrofied'
 						fontStyle={'italic'}
 						fontWeight={800}
-						color="#31373E"
+						color="#fff"
 						mr={{ xs: 1, sm: 2 }}
 						ml={{ xs: 1, sm: 2 }}
 					>
@@ -111,7 +111,7 @@ const Section5: NextPage = () => {
 						width: '100%',
 						pr: 4,
 						pl: 4,
-						flexDirection: { xs: 'column', sm: 'row' }
+						flexDirection: { xs: 'column', sm: 'row' },
 					}
 
 
@@ -130,7 +130,13 @@ const Section5: NextPage = () => {
 
 
 							}}>
-								<BoxImage p={{ xs: 2, sm: 4 }}>
+								<BoxImage p={{ xs: 2, sm: 4 }} sx={{
+									'& img': {
+										width: '100%',
+										height: 'auto',
+										maxWidth: '240px'
+									}
+								}}>
 									{
 										activeIndex == index ?
 											<img height={'48px'} src={item.active} />

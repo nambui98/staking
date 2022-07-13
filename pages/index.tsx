@@ -121,8 +121,8 @@ const Home: NextPage = () => {
 			<Section4 />
 		</Box>,
 		<Box key={"5"} sx={{
-			marginTop: "0px",
 			height: height,
+
 			position: 'relative',
 			display: "flex",
 			alignItems: "center",
@@ -136,7 +136,7 @@ const Home: NextPage = () => {
 		</Box>,
 		<Box key={"6"} sx={{
 
-			// height: height,
+			height: height,
 			// position: 'relative',
 		}}>
 			{/* <Box data-aos-offset="600"
@@ -150,10 +150,10 @@ const Home: NextPage = () => {
 			<Section7 />
 		</Box>,
 		<Box key={"8"} sx={{
-			height: { sx: 'auto', sm: height }
+			height: { xs: '100%', sm: height }
 			// display: { sx: 'block', sm: 'flex' }, alignItems: 'center'
 
-			// position: 'relative',
+			// 	position: 'relative',
 		}}>
 			<Section8 />
 
@@ -164,7 +164,7 @@ const Home: NextPage = () => {
 			position: 'relative',
 		}} key={"9"}>
 			<Section9 />
-		</Box>,
+		</Box>
 	]
 	const isMobile = useMediaQuery('(max-width:599px)');
 	return (

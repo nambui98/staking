@@ -23,7 +23,7 @@ export interface IProps {
 
 export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) => {
 	const isMobile = useMediaQuery('(max-width:700px)');
-	const isMobile992 = useMediaQuery('(max-width:992px)');
+	const isMobile1140 = useMediaQuery('(max-width:1140px)');
 	const isBigDesktop = useMediaQuery('(min-width:3200px)');
 	const [indexActive, setIndexActive] = useState(0);
 	const refSlide1 = useRef<any>(null);
@@ -103,7 +103,7 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 					);
 				})}
 			</Swiper>
-			{isMobile992 && <ButtonGetApp onClick={() => handleStatusPopup(true)}>GET THE APP</ButtonGetApp>}
+			{isMobile1140 && <ButtonGetApp onClick={() => handleStatusPopup(true)}>GET THE APP</ButtonGetApp>}
 			<BoxCountDown>
 				<TitleCountDown><img src={'assets/text-ido.png'} /></TitleCountDown>
 				<CountdownClockNew endDate={'2022-07-15T13:00:00.000Z'} />

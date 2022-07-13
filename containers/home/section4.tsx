@@ -55,7 +55,7 @@ const Mobile: React.FC<any> = () => {
 						fontFamily='Electrofied'
 						fontStyle={'italic'}
 						fontWeight={800}
-						color="#31373E"
+						color={"#fff"}
 						// mb={5}
 						mr={2}
 						width="250px"
@@ -63,7 +63,7 @@ const Mobile: React.FC<any> = () => {
 						SOCIAL TOKEN
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
 						color="#fff"
 						lineHeight="22px"
@@ -72,7 +72,7 @@ const Mobile: React.FC<any> = () => {
 						Stake to earn interest and FitterPass
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
 						color="#fff"
 						lineHeight="22px"
@@ -81,7 +81,7 @@ const Mobile: React.FC<any> = () => {
 						Level up shoe NFT at some levels & Mint
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
 						color="#fff"
 						lineHeight="22px"
@@ -90,7 +90,7 @@ const Mobile: React.FC<any> = () => {
 						Governance
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
 						color="#fff"
 						lineHeight="22px"
@@ -99,7 +99,7 @@ const Mobile: React.FC<any> = () => {
 						Pay rental commission fee
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
 						color="#fff"
 						lineHeight="22px"
@@ -116,7 +116,7 @@ const Mobile: React.FC<any> = () => {
 					>
 
 						<Typography
-							fontSize={{ xs: 12, sm: 16 }}
+							fontSize={{ xs: 14, sm: 16 }}
 							fontWeight={500}
 							color="#fff"
 							lineHeight="22px"
@@ -125,7 +125,7 @@ const Mobile: React.FC<any> = () => {
 						</Typography>
 
 						<Typography
-							fontSize={{ xs: 12, sm: 16 }}
+							fontSize={{ xs: 14, sm: 16 }}
 							fontWeight={800}
 							color="#FF6D24"
 							ml={1}
@@ -136,7 +136,7 @@ const Mobile: React.FC<any> = () => {
 						</Typography>
 
 						<Typography
-							fontSize={{ xs: 12, sm: 16 }}
+							fontSize={{ xs: 14, sm: 16 }}
 							fontWeight={500}
 							color="#fff"
 							lineHeight="22px"
@@ -145,7 +145,7 @@ const Mobile: React.FC<any> = () => {
 						</Typography>
 					</Box>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
 						color="#fff"
 						lineHeight="22px"
@@ -199,7 +199,7 @@ const Mobile: React.FC<any> = () => {
 						fontFamily='Electrofied'
 						fontStyle={'italic'}
 						fontWeight={800}
-						color="#31373E"
+						color={"#fff"}
 						// mb={5}
 						mr={2}
 						width="250px"
@@ -208,7 +208,7 @@ const Mobile: React.FC<any> = () => {
 						HEALTH TOKEN
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
 						color="#fff"
 						textAlign={"right"}
@@ -218,7 +218,7 @@ const Mobile: React.FC<any> = () => {
 						Level up shoe NFT
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
 						color="#fff"
 						textAlign={"right"}
@@ -228,7 +228,7 @@ const Mobile: React.FC<any> = () => {
 						Repair shoe NFT
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
 						color="#fff"
 						textAlign={"right"}
@@ -238,7 +238,7 @@ const Mobile: React.FC<any> = () => {
 						Transaction fee
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
 						color="#fff"
 						textAlign={"right"}
@@ -257,7 +257,7 @@ const Mobile: React.FC<any> = () => {
 					>
 
 						<Typography
-							fontSize={{ xs: 12, sm: 16 }}
+							fontSize={{ xs: 14, sm: 16 }}
 							fontWeight={500}
 							color="#fff"
 							textAlign={"right"}
@@ -267,7 +267,7 @@ const Mobile: React.FC<any> = () => {
 						</Typography>
 
 						<Typography
-							fontSize={{ xs: 12, sm: 16 }}
+							fontSize={{ xs: 14, sm: 16 }}
 							fontWeight={800}
 							color="#1DB268"
 							ml={1}
@@ -280,7 +280,7 @@ const Mobile: React.FC<any> = () => {
 
 
 						<Typography
-							fontSize={{ xs: 12, sm: 16 }}
+							fontSize={{ xs: 14, sm: 16 }}
 							fontWeight={500}
 							color="#fff"
 							textAlign={"right"}
@@ -297,7 +297,7 @@ const Mobile: React.FC<any> = () => {
 };
 const Section4: NextPage = () => {
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
-
+	const isMobile959 = useMediaQuery('(max-width: 959px)')
 
 	return (
 		<Wrap sx={{ marginTop: { xs: '0px !important', sm: '0px !important' }, display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
@@ -312,10 +312,12 @@ const Section4: NextPage = () => {
 				<img width={"100%"} src={`assets/sec4/bg_right.png`} style={{ objectFit: "cover" }} alt="" />
 			</Box>
 			{/* <Box sx={{ position: 'absolute', left: 0, top: "30%" }}>
+		<Wrap sx={{ marginTop: { xs: '0px !important', sm: '0px !important' }, display: 'flex', justifyContent: 'center' }}>
+			{!isMobile959 && <Box sx={{ position: 'absolute', left: 0, top: "30%" }}>
 
 				<img width="auto" src="assets/dark/neon-orange-4.png" />
-			</Box>
-			<Box sx={{ position: 'absolute', right: 0, top: "30%" }}>
+			</Box>}
+		{!isMobile959 &&	<Box sx={{ position: 'absolute', right: 0, top: "30%" }}>
 
 				<img width="auto" src="assets/dark/neon-green-4.png" />
 			</Box> */}
