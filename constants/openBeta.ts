@@ -172,9 +172,8 @@ export const TAB_BODY_PRE_MAINNET = {
     keyNote: {
       data: [
         'The Pre-Mainnet Quest event takes place from 6th July to 12th July with a total prize pool of 750 BUSD.',
-        'Chance to get IDO Allocation takes place from 6th July to 13th July. Participated users have a chance to get an extra $10 ticket guaranteed allocation.',
         'MemeFITTER event: This is a place to show off creativity exclusively for the FITTERs community from 5th July to 15th July. The total prize pool is up to 200 BUSD.',
-        'Incentivized Pre-mainnet Airdrop: takes place from 7th July to 15th July. The total prize pool is up to 1050 BUSD.'
+        "Transfer all assets from the Spending wallet to the user's wallet, including HEE, BNB, and NFT items on July 12."
       ]
     },
     tab3: [

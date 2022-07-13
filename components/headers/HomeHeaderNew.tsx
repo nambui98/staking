@@ -87,7 +87,6 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 			progress: undefined,
 		});
 	}
-	console.log(currentPage);
 
 	return (
 		<Box component={'header'}>

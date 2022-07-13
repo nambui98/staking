@@ -5,7 +5,7 @@ import { BOX_DETAIL, MARKETPLACE_ICON, MARKETPLACE_IMAGE } from "../../../consta
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { getAvailableBox } from "../../../libs/claim"
 import { getAllowance, getBoxPrice, purchaseBox, approvePurchase } from "../../../libs/marketplace"
-import { MarketplaceProps } from "../../../pages/shop"
+import { MarketplaceProps } from "../../../pages/shopDisable"
 import { MarketplaceService } from "../../../services/user.service"
 import { TEXT_STYLE } from "../../../styles/common/textStyles"
 import { PopupMessage } from "../claim/PopupMessage"
@@ -30,9 +30,7 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
   const [approveToken, setApproveToken] = useState<string>('');
   const [statusLoading, setStatusLoading] = useState<boolean>(false);
   const [popupError, setPopupError] = useState<{status: boolean, message: string}>({status: false, message: ''});
-  const [popupFormInfo, setPopupFormInfo] = useState<boolean>(false);
   const [availableBox, setAvailableBox] = useState<any>();
-  const statusPopupInfo = MarketplaceService.getStatusPopupInfo()
   const handlePurchaseBox = async () => {
     setStatusLoading(true)
     try {
@@ -46,7 +44,6 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
           setApprovePopup(false)
           updateBnbBalance()
           setCheckoutPopup({ ...checkoutPopup, status: false })
-          MarketplaceService.setStatusPopupInfo(true)
         }
       }, 1000);
     } catch (error: any) {
@@ -123,20 +120,12 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
   }
 
   const handleGetBonus = () => {
-    MarketplaceService.setStatusPopupInfo(true);
-    setPopupFormInfo(true)
     setPaymentSuccessPopup(false)
   }
 
   useEffect(() => {
     walletAccount?.length && getPriceCurrentBox()
   }, [boxDetail.type, ethersSigner, walletAccount, PaymentSuccessPopup, approvePopup])
-
-  useEffect(() => {
-    if(statusPopupInfo === 'true'){
-      setPopupFormInfo(true)
-    }
-  }, [])
   return (
     <Wrap>
       <ProductVideo>
@@ -183,10 +172,14 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       <Price>
         <Box>
           <Busd><img src={MARKETPLACE_ICON.busdIcon} /> {boxDetail.price} BUSD</Busd>
-          <Busd sx={busdLine}><img src={MARKETPLACE_ICON.busdIcon} /> {boxDetail.oldPrice} BUSD</Busd>
+          {/* <Busd sx={busdLine}><img src={MARKETPLACE_ICON.busdIcon} /> {boxDetail.oldPrice} BUSD</Busd> */}
         </Box>
         <Box>
-          <ButtonBuyNow onClick={handleTogglePopup}><Box>Buy now <img className="animationArrow" src={MARKETPLACE_ICON.arrowRightIcon} /></Box></ButtonBuyNow>
+          <ButtonBuyNow>
+            <Box>SOLD OUT!!!
+              {/* <img className="animationArrow" src={MARKETPLACE_ICON.arrowRightIcon} /> */}
+            </Box>
+          </ButtonBuyNow>
           <MaxBox>Max {boxDetail.maxBox} boxes/wallet</MaxBox>
         </Box>
       </Price>
@@ -202,7 +195,6 @@ export const ProductPrice: React.FC<MarketplaceProps> = ({boxDetail, setBoxDetai
       }} status={PaymentSuccessPopup} handleToggleStatus={() => setPaymentSuccessPopup(false)} handleClickButton={handleGetBonus} />
       <PopupMessage title="Error!" status={popupError.status} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError({status: false, message: ''})} sx={customWidthPopup}
         handleClickButton={() => setPopupError({status: false, message: ''})} titleCustomColor={{ '& p': { color: '#FF6F61' } }} message={popupError.message === 'execution reverted: Cannot buy more' ? 'You have reached the maximum number of slots for buying box.' : popupError.message} />
-      {/* <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} /> */}
       <Backdrop
         sx={{ color: '#FF6D24', zIndex: 2000 }}
         className="backdrop-loading"
@@ -256,7 +248,8 @@ const BoxTypeItem = styled(Box)((props: boxTypeProps) => ({
   background: props.active ? '#FFE2D3' : ''
 }))
 const ButtonBuyNow = styled(Button)({
-  background: 'radial-gradient(75% 75% at 21.87% 25%, #FFCC77 18.94%, #FF612F 89.59%)',
+  // background: 'radial-gradient(75% 75% at 21.87% 25%, #FFCC77 18.94%, #FF612F 89.59%)',
+  background: '#FF6F61 !important',
   padding: '10.5px 16px 10.5px 24px',
   fontFamily: 'Electrofied',
   ...TEXT_STYLE(20, 600),
@@ -269,8 +262,10 @@ const ButtonBuyNow = styled(Button)({
   '@media (min-width: 768px)': {
     padding: 3,
     ...TEXT_STYLE(24, 600),
-    color: '#FF6D24',
-    width: 240,
+    // color: '#FF6D24',
+    color: '#FF6F61',
+    // width: 240,
+    width: 215,
     '& img': {
       filter: 'invert(55%) sepia(46%) saturate(3957%) hue-rotate(344deg) brightness(101%) contrast(101%)'
     }
@@ -284,8 +279,9 @@ const ButtonBuyNow = styled(Button)({
       borderRadius: 14,
       padding: '5px 15px 5px 22px',
       '&:hover': {
-        background: 'radial-gradient(75% 75% at 21.87% 25%, #FFCC77 18.94%, #FF612F 89.59%)',
-        color: '#ffffff',
+        // background: 'radial-gradient(75% 75% at 21.87% 25%, #FFCC77 18.94%, #FF612F 89.59%)',
+        // background: '#ffffff',
+        // color: '#ffffff',
         '& img': {
           filter: 'unset'
         }
@@ -295,16 +291,18 @@ const ButtonBuyNow = styled(Button)({
 })
 const Busd = styled(Box)({
   ...TEXT_STYLE(20, 600),
-  marginRight: 10,
+  marginRight: 30,
   display: 'flex',
   alignItems: 'center',
+  marginTop: 19,
   '& img': {
     marginRight: 8
   },
   '@media (min-width: 768px)': {
     ...TEXT_STYLE(24, 600),
-    marginRight: 20,
+    marginRight: 49,
     minWidth: 135,
+    marginTop: 17
   }
 })
 const busdLine = {
@@ -316,7 +314,7 @@ const busdLine = {
 }
 const Price = styled(Stack)({
   flexDirection: 'row',
-  justifyContent: 'space-between',
+  // justifyContent: 'space-between',
   alignItems: 'flex-start',
   marginBottom: 24
 })

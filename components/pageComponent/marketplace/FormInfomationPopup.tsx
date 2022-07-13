@@ -35,8 +35,15 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
   const [showBackdrop, setShowBackdrop] = useState(false);
   const recaptchaRef = React.useRef<ReCAPTCHA>(null);
   const [statusForm, setStatusForm] = useState(false);
+  const [errorName, setErrorName] = useState(false);
 
   const handleSubmit = async () => {
+    const format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+    if(format.test(textName)){
+      return setErrorName(true)
+    }
+
     try {
       setShowBackdrop(true);
       const response = await fetch("/api/submit", {
@@ -60,7 +67,8 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
       setShowBackdrop(false);
       if (response.ok) {
         setStatusForm(true)
-        MarketplaceService.setStatusPopupInfo(false)
+        setErrorName(false)
+        MarketplaceService.setStatusPopupGetBonus(true)
       } else {
         const error = await response.json();
         throw new Error(error.message)
@@ -118,15 +126,19 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
       <Wrap>
         <ImageTop><img src={MARKETPLACE_IMAGE.boxShoeToken} /></ImageTop>
         <Title>{statusForm ? 'Your information is sent successfully! Don`t forget to join the Mainnet to receive your BONUS!' : 'Fill your information to receive BONUS gifts from beFITTER for the Mainnet.'}</Title>
+        {errorName && <TextError sx={{color: '#FF6F61', textAlign: 'center', marginLeft: '-14px'}}>Please try again</TextError>}
         {!statusForm && <BoxForm variant="standard">
+        
           <FormItem>
             <Label>Name <span>*</span></Label>
             <CustomInput
               fullWidth
+              inputProps={{maxLength: '60'}}
               required
               value={textName}
               onChange={(e) => setTextName(e.target.value)}
             />
+            {errorName && <TextError sx={{color: '#FF6F61'}}>You should not contain any special characters</TextError>}
           </FormItem>
           <FormItem>
             <Label>beFITTER{`’`}s account <span>*</span></Label>
@@ -136,8 +148,9 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
                 required
                 value={textEmailCheck}
                 onChange={(e) => setTextEmailCheck(e.target.value)}
+                sx={{'& input': {paddingRight: '55px !important'}}}
               />
-              <VerifyText onClick={handleVerifyEmail} sx={{color: textEmailCheck ? '#55C8FC' : '#A7ACB8'}}>Verify</VerifyText>
+              <VerifyText onClick={() => textEmailCheck && handleVerifyEmail()} sx={{color: textEmailCheck ? '#55C8FC' : '#A7ACB8'}}>Verify</VerifyText>
             </Box>
             {(textEmailError || textEmail) && <TextError sx={{color: textEmail ? '#118511c7' : '#FF6F61'}}>{textEmail ? 'Valid' : 'Invalid'} beFITTER`s email!</TextError>}
           </FormItem>
@@ -154,7 +167,7 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
             </BoxSelect>
           </FormItem>
           <FormItem>
-            <Label>Twitter ID</Label>
+            <Label>Twitter username</Label>
             <CustomInput
               fullWidth
               required
@@ -172,7 +185,7 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
             />
           </FormItem>
           <FormItem>
-            <Label>Telegram ID</Label>
+            <Label>Telegram username</Label>
             <CustomInput
               fullWidth
               required
@@ -181,7 +194,7 @@ export const FormInfomationPopup: React.FC<IProps> = ({ status, handleToggleStat
             />
           </FormItem>
           <FormItem>
-            <Label>Facebook ID</Label>
+            <Label>Facebook link</Label>
             <CustomInput
               fullWidth
               required
@@ -248,10 +261,11 @@ const VerifyText = styled(Typography)({
   top: '50%',
   transform: 'translateY(-50%)',
   cursor: 'pointer',
+  textDecoration: 'underline',
 })
 const Title = styled(Typography)({
   ...TEXT_STYLE(16, 500, '#31373E'),
-  margin: '70px 0 20px',
+  margin: '70px 0 0',
   textAlign: 'center',
   lineHeight: '1.4',
   marginLeft: -14
@@ -295,6 +309,7 @@ const BoxForm = styled(FormControl)({
   maxHeight: 500,
   overflow: 'auto',
   paddingRight: 10,
+  marginTop: 20,
   '&::-webkit-scrollbar': {
     width: 4,
   },
