@@ -261,15 +261,15 @@ const Section2: NextPage = () => {
 				position: "relative",
 			}}>
 				<img width={"100%"} src={`assets/sec2/${activeIndex}.png`} style={{ objectFit: "cover", zIndex: 1 }} alt="" />
-				<Box data-aos-offset="600"
+				<Box data-aos-offset="100"
 					data-aos-duration="600" data-aos="fade-right" sx={{ position: "absolute", zIndex: 0, top: "30%", transform: "translate(-50%, -50%)", right: "100px" }}>
 					<img width={"100%"} src={`assets/sec2/bieucam1.png`} style={{ objectFit: "cover" }} alt="" />
 				</Box>
-				<Box data-aos-offset="600"
+				<Box data-aos-offset="100"
 					data-aos-duration="600" data-aos="fade-left" sx={{ position: "absolute", zIndex: 0, bottom: "0px", transform: "translate(-50%, -50%)", left: "-100px" }}>
 					<img width={"100%"} src={`assets/sec2/bieucam2.png`} style={{ objectFit: "cover" }} alt="" />
 				</Box>
-				<Box data-aos-offset="600"
+				<Box data-aos-offset="100"
 					data-aos-duration="600" data-aos="fade-right" sx={{ position: "absolute", zIndex: 0, bottom: "-100px", transform: "translate(-50%, -50%)", right: "0px" }}>
 					<img width={"100%"} src={`assets/sec2/bieucam3.png`} style={{ objectFit: "cover" }} alt="" />
 				</Box>

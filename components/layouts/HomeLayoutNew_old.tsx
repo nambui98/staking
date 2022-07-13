@@ -40,7 +40,7 @@ const HomeLayoutNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 				}}
 			>
 				<HomeHeaderNew headerLandingPage={headerLandingPage} currentPage={currentPage} />
-				<Box component="main" flexGrow={1} sx={{ ...sxProps }}>
+				<Box component="main" flexGrow={1} sx={{ ...sxProps, overflow: 'hidden' }}>
 					{children}
 				</Box>
 

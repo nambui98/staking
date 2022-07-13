@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
 	Box,
 	Container,
@@ -12,16 +12,30 @@ import {
 	Theme,
 	useMediaQuery,
 } from '@mui/material';
+// import AOS from "aos";
+// import "aos/dist/aos.css";
 import { TEAM } from '../../constants/common';
 
 const Section6: React.FC<any> = ({ sxProps }) => {
+	// useEffect(() => {
+	// 	AOS.init();
+	// 	AOS.refresh();
+	// }, []);
 	return (
-		<Container sx={{ ...sxProps, mb: { xs: '88px', sm: '0px' } }}>
+		<Container sx={{ ...sxProps, mb: { xs: '88px', sm: '0px' }, position: 'relative' }}>
 			{/* <SectionTitle
 				title={TEAM.TITLE}
 				subtitle={TEAM.SUBTITLE}
 				sxProps={{ mb: 7 }}
 			/> */}
+
+
+			<Box data-aos-offset="1800"
+
+				data-aos-duration="1000" data-aos="zoom-in" sx={{ position: 'absolute', inset: 0, top: '0px' }}>
+				<img width={"100%"} src={`assets/sec6/bg.png`} style={{ objectFit: "cover" }} alt="" />
+			</Box>
+
 			<Box display={'flex'} mt={{ xs: '88px', sm: '0px' }} mb={{ xs: 5, sm: 10 }} alignItems="center" justifyContent="center">
 
 				<Typography

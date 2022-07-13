@@ -117,7 +117,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 						<Logo />
 						{/* {!isMobile992 &&  */}
 						<MainMenu>
-							<ButtonApp className="button">
+							<ButtonApp onClick={() => setStatusPopup(true)} className="button">
 								<Box className="button-wrapper">
 									<Box className="text" sx={{
 										...TEXT_STYLE(20, 600, '#ffffff'), fontFamily: 'Electrofied',
@@ -186,32 +186,17 @@ const MenuItem = styled(Box)((props: menuItemProp) => ({
 	cursor: 'pointer',
 	overflow: 'hidden',
 	transition: 'all .4s',
-	// transform: 'translateY(50%)',
-	// width: '180px',
-	// height: "fit-content",
-	// display: "flex",
-	// justifyContent: 'center',
-	// alignItems: 'center',
-	// flexDirection: 'column',
 	'& div': {
 		transition: 'all .3s',
 		'&:last-child': {
 			opacity: 0,
 			position: 'absolute',
 		}
-		// position: 'absolute',
-		// inset: 0,
-		// width: "100%",
-		// height: "100%"
+
 	},
 	'&:last-of-type': {
 		marginRight: 0
 	},
-	// '&:hover': {
-	// 	color: '#FF6D24',
-
-	// 	// animation: props.hover ? 'shake .15s linear' : 'internal',
-	// },
 	'&:hover div': {
 		transform: "translateY(-100%)",
 		color: '#FF6D24',
@@ -221,14 +206,8 @@ const MenuItem = styled(Box)((props: menuItemProp) => ({
 		'&:first-child': {
 			opacity: 0,
 		}
-		// animation: props.hover ? 'shake .15s linear' : 'internal',
 	},
-	// '@keyframes shake': {
-	// 	'0%,100%': { transform: `translateY(0)` },
-	// 	'30%': { transform: 'translateY(-10px)' },
-	// 	'60%': { transform: 'translateY(10px)' },
-	// 	'90%': { transform: 'translateY(-10px)' },
-	// },
+
 }))
 const ButtonApp = styled(Button)({
 	background: 'url(assets/backgrounds/bt-bg.png)',
