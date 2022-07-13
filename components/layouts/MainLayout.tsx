@@ -6,10 +6,13 @@ import MainHeader from '../headers/MainHeader';
 import MainFooter from '../footers/MainFooter';
 import { ConnectWallet } from '../pageComponent/marketplace/ConnectWallet';
 import { useWalletContext } from '../../contexts/WalletContext';
+import { PopupMessage } from '../pageComponent/claim/PopupMessage';
+import { useCommonContext } from '../../contexts/CommonContent';
 
 
 const MainLayout: React.FC<any> = ({ sxProps, children, titlePage }) => {
 	const {setToggleActivePopup, activePopup} = useWalletContext();
+	const {popupNoti, handleClickButtonPopupNoti} = useCommonContext();
 	return (
 		<>
 			<Head>
@@ -47,6 +50,16 @@ const MainLayout: React.FC<any> = ({ sxProps, children, titlePage }) => {
 				</Box>
 				<ConnectWallet status={activePopup} handleToggleStatus={setToggleActivePopup} />
 				<MainFooter />
+				<PopupMessage 
+					status={popupNoti.status} 
+					title={popupNoti.title} 
+					handleToggleStatus={popupNoti.handleToggleStatus} 
+					popupType={popupNoti.popupType}
+					message={popupNoti.message}
+					titleButton={popupNoti.titleButton}
+					titleCustomColor={popupNoti.titleCustomColor}
+					handleClickButton={popupNoti.handleClickButton}
+				/>
 			</Box>
 		</>
 	);

@@ -13,6 +13,7 @@ import '../styles/globals.scss';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { WalletProvider } from '../contexts/WalletContext';
+import { CommonProvider } from '../contexts/CommonContent';
 
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -32,11 +33,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 		<ThemeProvider theme={theme}>
 			<WalletProvider>
-				{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-				<CssBaseline />
-				<NextNProgress color="#FF6D24" />
-				<Component {...pageProps} />
-				<ToastContainer />
+				<CommonProvider>
+					{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+					<CssBaseline />
+					<NextNProgress color="#FF6D24" />
+					<Component {...pageProps} />
+					<ToastContainer />
+				</CommonProvider>
 			</WalletProvider>
 		</ThemeProvider >
 

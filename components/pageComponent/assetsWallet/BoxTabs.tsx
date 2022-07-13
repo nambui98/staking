@@ -10,9 +10,11 @@ import { BoxEmpty } from "./BoxEmpty";
 import { MysteryBoxTab } from "./MysteryBoxTab";
 import { TokenTab } from "./TokenTab";
 import addressBuyBox from '../../../abi/addressBuyBox.json';
+import { useCommonContext } from "../../../contexts/CommonContent";
 
 export const Boxtabs = () => {
   const { walletAccount, bnbBalance, fiuBalance, heeBalance, ethersSigner, boxBalance } = useWalletContext();
+  const {popupNoti} = useCommonContext();
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [totalBox, setTotalBox] = useState<number>(0);
   const [currentTab, setCurrentTab] = useState<string>('');
@@ -94,7 +96,7 @@ export const Boxtabs = () => {
         <BodyContent>
           {currentTab.length ? renderBodyView() : <BoxEmpty icon={ICON.shoe} emptyText={'Select assets to continue'} />}
         </BodyContent>
-        <SendSpending>
+        {currentTab.length ? <SendSpending>
           <BoxInput>
             <InputBottom>
               <Label>beFITTER email</Label>
@@ -106,7 +108,7 @@ export const Boxtabs = () => {
                 onChange={(e: any) => setTextEmail(e.target.value)}
               />
             </InputBottom>
-            <InputBottom>
+            {currentTab === TAB_NAME.token && <InputBottom>
               <Label>Amount to send</Label>
               <CustomInput
                 fullWidth
@@ -115,10 +117,10 @@ export const Boxtabs = () => {
                 placeholder={'Amount'}
                 onChange={(e: any) => setTextEmail(e.target.value)}
               />
-            </InputBottom>
-            <ButtonSendSpending>Send to Spending</ButtonSendSpending>
+            </InputBottom>}
+            <ButtonSendSpending onClick={() => popupNoti.handleToggleStatus({status: true})}>Send to Spending</ButtonSendSpending>
           </BoxInput>
-        </SendSpending>
+        </SendSpending> : null}
       </TabBody>
       <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
       {statusBuyBox && isMobile && !statusFormGetBonus && <BoxBonus><ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus></BoxBonus>}
@@ -149,12 +151,11 @@ const ButtonSendSpending = styled(Button)({
   background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
   color: '#ffffff',
   ...TEXT_STYLE(16, 600),
-  width: 188,
   marginLeft: 'auto',
   textTransform: 'unset',
   width: '100%',
   '@media (min-width: 992px)': {
-    width: 'auto'
+    width: 188,
   }
 })
 const SendSpending = styled(Box)({
@@ -168,7 +169,6 @@ const Label = styled(Typography)({
   marginBottom: 8,
 })
 const CustomInput = styled(InputBase)({
-  marginRight: 20,
   '@media (min-width: 1280px)': {
     width: 275,
   },
