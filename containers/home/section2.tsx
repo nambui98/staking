@@ -110,82 +110,105 @@ const Section2: NextPage = () => {
 	}, [auto]);
 
 	return (
-		<Box height={"100%"} width={"100%"}>
-			<Wrap>
-				{/* <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage> */}
-				<BoxTitle>
-					<Box display={'flex'} flexDirection={"column"} alignItems="flex-start" sx={{
-				
-					}}>
-						<Typography
-							fontSize={{ xs: 24, sm: 24 }}
-							textTransform="uppercase"
-							fontFamily='Electrofied'
-							fontStyle={'italic'}
-							fontWeight={800}
-							color="#fff"
-							mb={0.5}
-							textAlign="left"
-							sx={{
-								'@media (max-width: 767px)': {
-									fontSize: '19px',
-									marginBottom: '-5px'
-								}
-							}}
-						>
-							Make A healthy lifestyle
-						</Typography>
-						<Typography
-							fontSize={{ xs: 24, sm: 50 }}
-							textTransform="uppercase"
-							fontFamily='Electrofied'
-							fontStyle={'italic'}
-							fontWeight={800}
-							color="#FF6D24"
-							mb={0.5}
-							sx={{
-								'@media (max-width: 767px)': {
-									fontSize: '32px'
-								}
-							}}
-						>
-							irresistible
-						</Typography>
-						<Typography
-							fontSize={{ xs: 16, sm: 20 }}
-							fontWeight={500}
-							color="#fff"
-							lineHeight="40px"
-							textTransform={"uppercase"}
-							textAlign="left"
-							mt={4}
-							sx={{
-								'@media (max-width: 767px)': {
-									marginTop: '18px',
-									lineHeight: '24px'
-								}
-							}}
-						><span style={{ color: '#FF8A50' }}>beFITTER’s</span>  ecosystem helps users improve mental & physical health, gain achievements and still get monetary incentives.</Typography>
+		<Box height={"100%"} width={"100%"} mt={10}>
+			<Box position="relative" sx={{ background: "url(assets/dark/bg_sec2.png)", backgroundRepeat: "no-repeat", backgroundPosition: { xs: "0px 100px", sm: "0px 160px" }, mb: { xs: 5, sm: 0 } }}>
+				{/* <Box sx={{
 
-					</Box>
-					<Box sx={{
-						'@media (min-width: 768px)': {
-							'& img': {
-								minWidth: 384
+					position: 'absolute',
+					bottom: "100px",
+					// inset: 0
+					// top: "calc(50% + 70px)",
+					// left: "50%",
+					// transform: 'translate(-50%, -50%)'
+				}}>
+					<img width={"100%"} src="assets/dark/bg_sec2.png" alt="" />
+
+				</Box> */}
+				<Wrap sx={{ zIndex: 1 }}>
+					{/* <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage> */}
+					<BoxTitle>
+						<Box display={'flex'} flexDirection={"column"} alignItems="flex-start" sx={{
+
+						}}>
+							<Typography
+								fontSize={{ xs: 24, sm: 24 }}
+								textTransform="uppercase"
+								fontFamily='Electrofied'
+								fontStyle={'italic'}
+								fontWeight={800}
+								color="#fff"
+								mb={0.5}
+								textAlign="left"
+								sx={{
+									'@media (max-width: 767px)': {
+										fontSize: '19px',
+										marginBottom: '-5px'
+									}
+								}}
+							>
+								Make A healthy lifestyle
+							</Typography>
+							<Typography
+								fontSize={{ xs: 24, sm: 50 }}
+								textTransform="uppercase"
+								fontFamily='Electrofied'
+								fontStyle={'italic'}
+								fontWeight={800}
+								color="#FF6D24"
+								mb={0.5}
+								sx={{
+									'@media (max-width: 767px)': {
+										fontSize: '32px'
+									}
+								}}
+							>
+								irresistible
+							</Typography>
+							<Typography
+								fontSize={{ xs: 16, sm: 20 }}
+								fontWeight={500}
+								color="#5A6178"
+								lineHeight="40px"
+								textTransform={"uppercase"}
+								textAlign="left"
+								mt={4}
+								sx={{
+									'@media (max-width: 767px)': {
+										marginTop: '40px',
+										lineHeight: '24px'
+									}
+								}}
+							><span style={{ color: '#FF8A50' }}>beFITTER’s</span>  ecosystem helps users improve mental & physical health, gain achievements and still get monetary incentives.</Typography>
+
+						</Box>
+						<Box sx={{
+							backgroundColor: "#1C1E29",
+							borderRadius: "50%",
+							position: 'relative',
+							// padding: "20px",
+							'@media (min-width: 768px)': {
+								'& img': {
+									minWidth: 384,
+									height: 384,
+									objectFit: 'cover'
+								}
+							},
+							'@media (max-width: 767px)': {
+								marginTop: '60px',
+								'& img': {
+									width: 240,
+									height: 240,
+									objectFit: 'cover'
+								}
 							}
-						},
-						'@media (max-width: 767px)': {
-							marginTop: '-35px',
-							'& img': {
-								width: '100%'
-							}
-						}
-					}}>
-						<img src={'assets/neon-orange-s2.png'} alt="Logo" width={'auto'} />
-					</Box>
-				</BoxTitle>
-			</Wrap >
-			{isMobile ? <Section2Old/> : <Wrap sx={{
+						}}>
+							<img src={'assets/dark/neon-orange-6.png'} alt="Logo" width={'auto'} />
+							<img style={{ position: 'absolute', inset: 0, transform: 'scale(1)', objectFit: 'cover' }} src={'assets/dark/bg_sec1.1.png'} alt="Logo" width={'auto'} />
+						</Box>
+					</BoxTitle>
+				</Wrap >
+			</Box>
+			{isMobile ? <Section2Old /> : <Wrap sx={{
 				marginTop: '-16%',
 				position: "relative",
 			}}>
