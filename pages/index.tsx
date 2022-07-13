@@ -121,8 +121,6 @@ const Home: NextPage = () => {
 			<Section4 />
 		</Box>,
 		<Box key={"5"} sx={{
-
-			height: height,
 			position: 'relative',
 			display: "flex",
 			alignItems: "center",
@@ -136,22 +134,22 @@ const Home: NextPage = () => {
 		<Box key={"7"} sx={{ backgroundImage: `url(assets/dark/sec7.png)`, backgroundRepeat: "no-repeat", backgroundPosition: "bottom", }}>
 			<Section7 />
 		</Box>,
-		<Box key={"8"} sx={{
-			height: height
-			// display: { sx: 'block', sm: 'flex' }, alignItems: 'center'
+		// <Box key={"8"} sx={{
+		// 	height: height
+		// 	display: { sx: 'block', sm: 'flex' }, alignItems: 'center'
 
-			// position: 'relative',
-		}}>
-			<Section8 />
+		// 	position: 'relative',
+		// }}>
+		// 	<Section8 />
 
-		</Box>,
-		<Box sx={{
+		// </Box>,
+		// <Box sx={{
 
-			height: { xs: height, sm: '100%' },
-			position: 'relative',
-		}} key={"9"}>
-			<Section9 />
-		</Box>,
+		// 	height: { xs: height, sm: '100%' },
+		// 	position: 'relative',
+		// }} key={"9"}>
+		// 	<Section9 />
+		// </Box>,
 	]
 	const isMobile = useMediaQuery('(max-width:599px)');
 	return (

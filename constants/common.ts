@@ -11,14 +11,16 @@ export const MENU_ITEMS = [
 	{ title: 'Whitepaper', href: 'https://whitepaper.befitter.io/' },
 ];
 export const MENU_ITEMS_HOME = [
+	{ title: 'Staking', href: '/staking' },
+	{ title: 'HUB', href: 'https://hub.befitter.io/' },
 	{ title: 'WHITEPAPER', href: 'https://whitepaper.befitter.io/' },
-	{ title: 'ABOUT', href: '#' },
-	{ title: 'CONTACT', href: '#' },
+	// { title: 'ABOUT', href: '#' },
+	// { title: 'CONTACT', href: '#' },
 ];
 export const MENU_ITEMS_MOBILE = [
-	{ title: 'Staking', href: '#' },
+	{ title: 'Staking', href: '/staking' },
 	{ title: 'HUB', href: 'https://hub.befitter.io/' },
-	// { title: 'LITEPAPER', href: '/litePaper' },
+	{ title: 'BUSINESS PAPER', href: '/business' },
 	{ title: 'WHITEPAPER', href: 'https://whitepaper.befitter.io/' },
 	// { title: 'ABOUT', href: '#' },
 	// { title: 'CONTACT', href: '#' },

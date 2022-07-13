@@ -16,6 +16,7 @@ import ShoesMobile from "./icons/shoes-mobile.svg";
 import PawMobile from "./icons/paw-mobile.svg";
 import SmartwatchMobile from "./icons/smartwatch-mobile.svg";
 import { TEXT_STYLE } from "../../styles/common/textStyles";
+import Section2Old from "../home_old/section2";
 
 type itemType = {
 	title: string
@@ -110,18 +111,12 @@ const Section2: NextPage = () => {
 
 	return (
 		<Box height={"100%"} width={"100%"}>
-
-			<Wrap sx={{
-				marginTop: {
-					xs: '88px !important', sm: '0px !important'
-				}
-			}}>
+			<Wrap>
 				{/* <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage> */}
-				<Box display={'flex'}
-
-					// mb={{ xs: 2, md: 4 }} 
-					alignItems="center">
-					<Box display={'flex'} flexDirection={"column"} alignItems="flex-start">
+				<BoxTitle>
+					<Box display={'flex'} flexDirection={"column"} alignItems="flex-start" sx={{
+				
+					}}>
 						<Typography
 							fontSize={{ xs: 24, sm: 24 }}
 							textTransform="uppercase"
@@ -130,6 +125,13 @@ const Section2: NextPage = () => {
 							fontWeight={800}
 							color="#fff"
 							mb={0.5}
+							textAlign="left"
+							sx={{
+								'@media (max-width: 767px)': {
+									fontSize: '19px',
+									marginBottom: '-5px'
+								}
+							}}
 						>
 							Make A healthy lifestyle
 						</Typography>
@@ -141,6 +143,11 @@ const Section2: NextPage = () => {
 							fontWeight={800}
 							color="#FF6D24"
 							mb={0.5}
+							sx={{
+								'@media (max-width: 767px)': {
+									fontSize: '32px'
+								}
+							}}
 						>
 							irresistible
 						</Typography>
@@ -152,111 +159,33 @@ const Section2: NextPage = () => {
 							textTransform={"uppercase"}
 							textAlign="left"
 							mt={4}
-						// mb={0.5}
-						// sx={{
-						// 	'& span': {
-						// 		color: '#FF8A50'
-						// 	},
-						// 	'@media (max-width: 767px)': {
-						// 		marginTop: '7px'
-						// 	}
-						// }}
+							sx={{
+								'@media (max-width: 767px)': {
+									marginTop: '18px',
+									lineHeight: '24px'
+								}
+							}}
 						><span style={{ color: '#FF8A50' }}>beFITTER’s</span>  ecosystem helps users improve mental & physical health, gain achievements and still get monetary incentives.</Typography>
 
 					</Box>
 					<Box sx={{
-						position: 'relative',
-						backgroundImage: 'url(assets/dark/neon-orange.png)',
-						backgroundRepeat: 'no-repeat',
-						backgroundPosition: 'center',
-					}}>
-						<img src={'assets/sec2_dark.png'} alt="Logo" width={'auto'} />
-					</Box>
-				</Box >
-				{/* <Inner sx={{
-				width: "956px",
-				backgroundImage: 'url(assets/sec2/5.png)',
-				backgroundRepeat: 'no-repeat',
-				backgroundPosition: 'center',
-				backgroundSize: "contain",
-				height: "956px"
-			}}> */}
-
-				{/* <BoxIcon flex={1}>
-					{
-						data.map((item: itemType, index: number) => {
-							const Icon = isMobile ? item.iconMobile : item.icon;
-							return <BoxItemIcon mb={{ xs: 2, md: 2 }} key={index} sx={{ cursor: 'pointer' }} onClick={() => {
-								setAuto(false)
-								setTimeout(() => {
-									setAuto(true)
-								}, 5000);
-								setActiveIndex(index)
-							}} >
-								<Box display="flex" justifyItems="center" alignItems={"center"} sx={{
-									'@media (max-width: 767px)': {
-										flexDirection: 'column',
-									},
-									cursor: 'pointer'
-								}}>
-									<Icon style={{
-										transition: '.7s all',
-										// opacity: activeIndex == index ? 1 : 0,
-										fill: activeIndex == index ? "#FF6D24" : "#898E9E",
-
-									}} />
-									<Typography sx={{
-										transition: '.4s all', color: activeIndex == index ? "#FF6D24" : "#31373E",
-										fontSize: activeIndex == index ? '24px' : '18px',
-										marginLeft: 1,
-										'@media (max-width: 767px)': {
-											...TEXT_STYLE(14, 500),
-											marginTop: '5px',
-
-										}
-									}} fontWeight={500}>{item.title}</Typography>
-								</Box>
-								{!isMobile && <Box sx={{
-									transition: '.4s all',
-									...styleActiveContent(index)
-								}}>
-									<Typography mt={0.5} fontSize={16} color="#31373E" sx={{ zIndex: 0, pointerEvents: 'none' }} textAlign="left" lineHeight="20px">{item.content}</Typography>
-								</Box>}
-							</BoxItemIcon>
+						'@media (min-width: 768px)': {
+							'& img': {
+								minWidth: 384
+							}
+						},
+						'@media (max-width: 767px)': {
+							marginTop: '-35px',
+							'& img': {
+								width: '100%'
+							}
 						}
-						)
-					}
-				</BoxIcon> */}
-				{/* {isMobile && <Box sx={{
-					transition: '.4s all',
-					...styleActiveContent(activeIndex),
-					marginBottom: '20px',
-					marginTop: '5px'
-				}}>
-					<Typography mt={0.5} fontSize={14} color="#5A6178" >{data[activeIndex].content}</Typography>
-				</Box>}
-
-				<Box flex={1} sx={{ position: 'relative', height: '100%', width: '100%' }}>
-					{
-						data.map((item: itemType, index: number) => {
-							return <BoxImage sx={{
-								position: 'absolute',
-								top: '50%',
-								transform: {
-									xs: 'translateY(0)', sm: 'translateY(-50%)'
-								},
-								transition: 'all .6s',
-								opacity: index == activeIndex ? '1' : 0
-							}} key={index}>
-								<img width={"100%"} src={item.image} alt="" />
-							</BoxImage>
-						})
-					} */}
-
-				{/* </Box> */}
-				{/* </Inner > */}
+					}}>
+						<img src={'assets/neon-orange-s2.png'} alt="Logo" width={'auto'} />
+					</Box>
+				</BoxTitle>
 			</Wrap >
-			<Wrap sx={{
+			{isMobile ? <Section2Old/> : <Wrap sx={{
 				marginTop: '-16%',
 				position: "relative",
 			}}>
@@ -330,13 +259,21 @@ const Section2: NextPage = () => {
 						</Box>
 					})
 				}
-			</Wrap>
+			</Wrap>}
 		</Box>
 	)
 }
 
 export default Section2;
 
+const BoxTitle = styled(Box)({
+	display: 'flex',
+	alignItems: 'center',
+	'@media (max-width: 991px)': {
+		flexDirection: 'column',
+		marginTop: 23
+	}
+})
 const BoxItemWrapper = styled(Box)({
 	cursor: 'pointer', position: 'absolute',
 })
