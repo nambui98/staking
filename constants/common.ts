@@ -16,9 +16,9 @@ export const MENU_ITEMS_HOME = [
 	{ title: 'CONTACT', href: '#' },
 ];
 export const MENU_ITEMS_MOBILE = [
-	{ title: 'Staking', href: '#' },
+	{ title: 'Staking', href: '/staking' },
 	{ title: 'HUB', href: 'https://hub.befitter.io/claim' },
-	{ title: 'BUSINESS PAGE', href: '/business' },
+	{ title: 'Business Paper', href: '/business' },
 	{ title: 'WHITEPAPER', href: 'https://whitepaper.befitter.io/' },
 	// { title: 'ABOUT', href: '#' },
 	// { title: 'CONTACT', href: '#' },
