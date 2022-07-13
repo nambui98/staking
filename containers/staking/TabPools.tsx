@@ -9,7 +9,7 @@ function createData(status: string, reward: string, earned: string, tokenRemaini
 }
 
 export const TabPools = () => {
-  const [tabCurrent, setTabCurrent] = useState<number>(1)
+  const [tabCurrent, setTabCurrent] = useState<number>(0)
   const [statusPopup, setStatusPopup] = useState<any>({
     status: false,
     content: <Box></Box>
@@ -34,7 +34,7 @@ export const TabPools = () => {
         <Typography>The more token you stake, the more reward you will receive. </Typography>
         <Typography>5.Specially, in the first 72 hours from this campaign begin, you have chance to get double the reward.</Typography>
         <Typography>Ex: With 20.000 FIU staked per 24h, you earn 2 FITTER Pass.</Typography>
-        <Typography>5.Staking does have a short cooldown period of 14 days, meaning once you want to exit, you have to wait 14 days.</Typography>
+        <Typography>6.Staking does have a short cooldown period of 14 days, meaning once you want to exit, you have to wait 14 days.</Typography>
       </Box>
     })
   }
@@ -85,7 +85,7 @@ export const TabPools = () => {
                       top: index === 0 ? '0 !important' : 4
                     }}>coming soon</ComingSoon>
                     <Item sx={{ paddingLeft: '8px', borderRadiusTopleft: '12px' }} align="left">Status <Box>{item.data.status}</Box></Item>
-                    <Item align="left">Reward <Box>{item.data.reward}</Box></Item>
+                    <Item align="left">{index === 0 ? 'Reward' : 'APR'} <Box>{item.data.reward}</Box></Item>
                     <Item align="left">Earned <Box>{item.data.earned}</Box></Item>
                     <Item align="left">Token remaining <Box>{item.data.tokenRemaining}</Box></Item>
                     <Item align="left">Lock-up time <Box>{item.data.lockUpTime}</Box></Item>
@@ -117,14 +117,14 @@ const customWidthPopup = {
 }
 const BodyPopup = styled(Box)({
   '& p': {
-    marginBottom: 10,
+    lineHeight: '24px',
     textAlign: 'left',
   },
   '& b': {
     color: '#31373E'
   }
 })
-const ComingSoon = styled(Box)({
+const ComingSoon = styled(TableCell)({
   position: 'absolute',
   top: 4,
   right: 0,
@@ -194,7 +194,7 @@ const BoxTr = styled(TableRow)({
   position: 'sticky',
 })
 const Item = styled(TableCell)({
-  paddingTop: 35,
+  paddingTop: 40,
   paddingBottom: 16,
   borderBottom: '8px solid transparent',
   ...TEXT_STYLE(12, 500, '#898E9E'),
@@ -204,9 +204,11 @@ const Item = styled(TableCell)({
     ...TEXT_STYLE(14, 500, '#31373E')
   }
 })
-const TitleItem = styled(Box)({
+const TitleItem = styled(TableCell)({
   position: 'absolute',
   top: 0,
+  borderBottom: 0,
+  padding: 0,
   margin: '8px 0 0 8px',
   display: 'flex',
   alignItems: 'center',
