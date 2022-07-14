@@ -279,7 +279,8 @@ const Section2: NextPage = () => {
 							transform: 'translate(-50%, -40%)',
 							transition: 'all .6s',
 							opacity: index == activeIndex ? '1' : 0,
-							height: "404px"
+							height: "404px",
+							zIndex: 2
 						}} key={index}>
 							<img height={"100%"} src={item.image} alt="" />
 							<Box sx={{
@@ -287,8 +288,9 @@ const Section2: NextPage = () => {
 								...styleActiveContent(activeIndex),
 								marginBottom: '20px',
 								marginTop: '24px'
+
 							}}>
-								<Typography mt={0.5} fontSize={14} color="#fff" lineHeight={"24px"}>{item.content}</Typography>
+								<Typography mt={0.5} fontSize={14} color="#fff" textTransform={"uppercase"} lineHeight={"24px"}>{item.content}</Typography>
 							</Box>
 						</Box>
 					})
