@@ -48,7 +48,13 @@ const Section5: NextPage = () => {
 		}}>
 			<Box data-aos-offset="2400"
 
-				data-aos-duration="1500" data-aos="fade-right" sx={{ position: 'absolute', top: '-280px', left: "0px", width: '100%' }}>
+				data-aos-duration="1500" data-aos="fade-right" sx={{ position: 'absolute', top: '-280px', left: "0px", width: '100%', 
+					'@media (min-width: 768px)': {
+						'& img': {
+							transform: 'scale(1.4)'
+						}
+					}
+				}}>
 				<img width={"100%"} src={`assets/sec5/bg_2.png`} style={{ objectFit: "cover" }} alt="" />
 			</Box>
 
@@ -136,19 +142,6 @@ const Section5: NextPage = () => {
 									</div>
 									<div> <img height={'48px'} src={item.active} /></div>
 								</MenuItem>
-								{/* <BoxImage p={{ xs: 2, sm: 4 }} sx={{
-									'& img': {
-										width: '100%',
-										height: 'auto',
-										maxWidth: '240px'
-									}
-								}}>
-									{
-										activeIndex == index ?
-											<img height={'48px'} src={item.active} />
-											: <img height={'48px'} src={item.inActive} />
-									}
-								</BoxImage> */}
 							</a>
 						})
 					}
