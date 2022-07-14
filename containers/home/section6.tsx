@@ -23,7 +23,7 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 	// }, []);
 	return (
 		<Container sx={{
-			...sxProps, mb: { xs: '88px', sm: '0px' }, position: 'relative',
+			...sxProps, mb: { xs: '70px', sm: '0px' }, position: 'relative',
 			'@media (min-width: 768px)': {
 				marginBottom: '120px'
 			}
@@ -41,7 +41,7 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 				<img width={"100%"} src={`assets/sec6/bg.png`} style={{ objectFit: "cover" }} alt="" />
 			</Box>
 
-			<Box display={'flex'} mt={{ xs: '80px', sm: '0px' }} mb={{ xs: 5, sm: 10 }} alignItems="center" justifyContent="center"  >
+			<Box display={'flex'} mt={{ xs: '0px', sm: '0px' }} mb={{ xs: 5, sm: 10 }} alignItems="center" justifyContent="center"  >
 
 				<Typography
 					fontSize={{ xs: 32, sm: 56 }}
@@ -57,9 +57,10 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 
 			</Box>
 			<Grid container spacing={4} rowSpacing={6} sx={{
+				position: 'relative',
 				'@media (max-width: 767px)': {
 					marginLeft: '0 !important',
-					width: '100% !important'
+					width: '100% !important',
 				}
 			}}>
 				{TEAM.ITEMS.map(({ name, role, desc, image }, idx) => (
@@ -75,9 +76,24 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 								flexDirection: 'row !important',
 								width: '100% !important',
 								marginLeft: '0 !important',
+								position: 'relative',
 							},
-							'& .team-avatar:hover': {
-								display: 'none'
+							'&:hover': {
+								'& .team-body p:last-of-type': {
+									height: '100px',
+									opacity: 1,
+									'@media (max-width: 767px)': {
+										height: 'auto',
+									}
+								},
+								'@media (min-width: 768px)': {
+									'& .team-avatar': {
+										transform: 'rotate(170deg)'
+									},
+									'& .team-avatar img': {
+										transform: 'rotate(-170deg)'
+									}
+								}
 							}
 						}}>
 							<Grid item xs={6} sm={4} sx={{
@@ -97,11 +113,12 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 										backgroundRepeat: 'no-repeat',
 										backgroundSize: 'cover',
 										backgroundPosition: "center",
-										padding: "25px"
+										padding: "25px",
+										transition: '.4s all'
 									}}
 									className="team-avatar"
 								>
-									<img width="100%" height="100%" style={{ objectFit: "contain" }} src={image} />
+									<img width="100%" height="100%" style={{ objectFit: "contain", transition: '.4s all' }} src={image} />
 								</Box>
 							</Grid>
 							<Grid item xs={12} sm={8} sx={idx % 2 !== 1 ? {
@@ -128,8 +145,9 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 								<Box className="team-body" width={"fit-content"} sx={{
 									overflow: 'hidden',
 									'& p:last-of-type': {
+										transition: '.4s all',
 										height: 0
-									},
+									}
 								}}>
 									<Typography
 										fontSize={24}
@@ -159,7 +177,7 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 											WebkitTextFillColor: 'transparent',
 											backgroundClip: 'text',
 											textFillColor: 'transparent',
-											textAlign: idx === 0 ? 'right' : 'left',
+											textAlign: idx === 0 || idx === 2 ? 'right' : 'left',
 											'@media (max-width: 767px)': {
 												marginBottom: '0 !important',
 												textAlign: 'left',
@@ -173,6 +191,20 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 										fontWeight={500}
 										lineHeight={1.5}
 										color="#fff"
+										sx={{
+											'@media (min-width: 768px)': {
+												textAlign: idx === 0 || idx === 2 ? 'right' : 'left'
+											},
+											'@media (max-width: 767px)': {
+												position: 'absolute',
+												left: 0,
+												top: '50%',
+												transform: 'translateY(-50%)',
+												opacity: 0,
+												background: 'rgba(28, 30, 41, 0.9)',
+												padding: '8px'
+											}
+										}}
 									>
 										{desc}
 									</Typography>
