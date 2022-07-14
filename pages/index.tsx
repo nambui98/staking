@@ -64,6 +64,7 @@ const Home: NextPage = () => {
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	const [statusPopup, setStatusPopup] = useState(false);
 	const [currentPage, setCurrentPage] = useState('1');
+	const isMobile767 = useMediaQuery('(max-width: 767px)');
 
 	const windowHeightListener = () => {
 		setHeight(window.innerHeight);
@@ -156,25 +157,20 @@ const Home: NextPage = () => {
 		// sx={{ 
 		// 	backgroundImage: { xs: "transparent", sm: `url(assets/dark/sec7.png)` }, backgroundRepeat: "no-repeat", backgroundPosition: "bottom", paddingTop: "1px" }}
 		>
-			<ParallaxBanner
+			{isMobile767 ? <Section7 /> : <ParallaxBanner
 				style={{ height: "100%" }}
 				layers={[
 					{ image: 'assets/dark/sec7_5.png', style: { backgroundRepeat: "no-repeat", inset: "100px 0px", backgroundSize: "contain", backgroundPosition: "0px 0px" }, speed: 40, },
 					{ image: 'assets/dark/sec7_4.png', style: { backgroundRepeat: "no-repeat", inset: "550px 0px", backgroundPosition: "bottom", backgroundSize: "cover", height: "306px" } },
 					{
 						children: [
-
-
-
 						]
 					}
-					// { image: '/static/banner-foreground.png', speed: -10 },
 				]}
 				className="aspect-[2/1]"
 			>
 				<Section7 />
-			</ParallaxBanner>
-			{/* <Section7 /> */}
+			</ParallaxBanner>}
 		</Box>,
 		<Box key={"8"} >
 			<Section8 />

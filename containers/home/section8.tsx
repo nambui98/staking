@@ -134,7 +134,7 @@ const RoadmapDesktop: React.FC<any> = () => {
 const RoadmapMobile: React.FC<any> = () => {
 	return (
 		<Container sx={{ mb: 10 }}>
-			<Box display={'flex'} mt={10} alignItems="center" justifyContent="center">
+			<Box display={'flex'} mt={{sm: 10, xs: 0}} alignItems="center" justifyContent="center">
 
 				<Typography
 					fontSize={{ xs: 32, sm: 56 }}

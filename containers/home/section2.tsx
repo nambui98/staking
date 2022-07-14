@@ -181,8 +181,12 @@ const Section2: NextPage = () => {
 								zIndex={1}
 								sx={{
 									'@media (max-width: 767px)': {
-										marginTop: '75px',
-										lineHeight: '24px'
+										marginTop: '24px',
+										lineHeight: '24px',
+										padding: '16px 16px 0',
+										background: '#ffffff',
+										marginLeft: '-16px',
+										width: 'calc(100% + 32px)'
 									}
 								}}
 							><span style={{ color: '#FF8A50' }}>beFITTER’s</span>  ecosystem helps users improve mental & physical health, gain achievements and still get monetary incentives.</Typography>
