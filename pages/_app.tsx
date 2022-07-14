@@ -5,6 +5,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ToastContainer } from 'react-toastify';
 import { ThemeProvider } from '@mui/material';
 import NextNProgress from 'nextjs-progressbar';
+import AOS from "aos";
+import "aos/dist/aos.css";
 import theme from '../utils/theme';
 import { pageView } from "../utils/gtag";
 
@@ -38,6 +40,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 		router.events.on("routeChangeComplete", handleComplete);
 		router.events.on("routeChangeError", handleComplete);
 	}, [router]);
+	useEffect(() => {
+		AOS.init();
+		AOS.refresh();
+	}, []);
 	return (
 		<>
 

@@ -56,8 +56,7 @@ import Section8 from '../containers/home/section8';
 import { PopupApp } from '../containers/home/PopupApp';
 import Section9 from '../containers/home/section9';
 import { Box } from '@mui/system';
-import AOS from "aos";
-import "aos/dist/aos.css";
+
 import { ParallaxBanner } from 'react-scroll-parallax';
 const Home: NextPage = () => {
 	const [height, setHeight] = useState<number>();
@@ -70,10 +69,7 @@ const Home: NextPage = () => {
 		setHeight(window.innerHeight);
 	};
 
-	useEffect(() => {
-		AOS.init();
-		AOS.refresh();
-	}, []);
+
 
 	useEffect(() => {
 		windowHeightListener();
