@@ -111,19 +111,24 @@ const Section2: NextPage = () => {
 
 	return (
 		<Box height={"100%"} width={"100%"} mt={10}>
-			<Box position="relative" sx={{ background: "url(assets/dark/bg_sec2.png)", backgroundRepeat: "no-repeat", backgroundPosition: { xs: "0px 100px", sm: "0px 160px" }, mb: { xs: 5, sm: 0 } }}>
-				{/* <Box sx={{
+			<Box position="relative"
+
+			// sx={{ background: "url(assets/dark/bg_sec2.png)", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: { xs: "0px 100px", sm: "0px 160px" }, mb: { xs: 5, sm: 0 } }}
+			>
+				<Box sx={{
 
 					position: 'absolute',
-					bottom: "100px",
-					// inset: 0
+					// righ: 0,
+					height: { xs: "128px", sm: "168px" },
+					width: "100%",
+					bottom: { xs: "275px", md: "45px", sm: "340px" }
 					// top: "calc(50% + 70px)",
 					// left: "50%",
 					// transform: 'translate(-50%, -50%)'
 				}}>
-					<img width={"100%"} src="assets/dark/bg_sec2.png" alt="" />
+					<img width={"100%"} height="100%" style={{ objectFit: "cover" }} src="assets/dark/bg_sec2.png" alt="" />
 
-				</Box> */}
+				</Box>
 				<Wrap sx={{ zIndex: 1 }}>
 					{/* <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage> */}
 					<BoxTitle>
@@ -156,6 +161,7 @@ const Section2: NextPage = () => {
 								fontWeight={800}
 								color="#FF6D24"
 								mb={0.5}
+								zIndex={1}
 								sx={{
 									'@media (max-width: 767px)': {
 										fontSize: '32px'
@@ -168,10 +174,11 @@ const Section2: NextPage = () => {
 								fontSize={{ xs: 16, sm: 20 }}
 								fontWeight={500}
 								color="#5A6178"
-								lineHeight="40px"
+								lineHeight={{ xs: 24, sm: "40px" }}
 								textTransform={"uppercase"}
 								textAlign="left"
 								mt={4}
+								zIndex={1}
 								sx={{
 									'@media (max-width: 767px)': {
 										marginTop: '75px',
@@ -209,7 +216,7 @@ const Section2: NextPage = () => {
 				</Wrap >
 			</Box>
 			{isMobile ? <Section2Old /> : <Wrap sx={{
-				marginTop: '-16%',
+				marginTop: '-200px',
 				position: "relative",
 			}}>
 				<img width={"100%"} src={`assets/sec2/${activeIndex}.png`} style={{ objectFit: "cover", zIndex: 1 }} alt="" />
