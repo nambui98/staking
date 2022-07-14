@@ -115,7 +115,7 @@ const StayInTouch: React.FC<any> = ({ sxProps }) => {
 			<img src={'assets/logo/02.png'} alt="Logo" width={'226px'} style={{ marginBottom: "20px" }} />
 			<Stack sx={{ display: 'flex', flexDirection: { xs: "column", sm: 'row' }, gap: { xs: 3, sm: 7 } }} alignItems="center">
 				{MAIN_FOOTER?.map((item: any, index) => (
-					<Link href={item.link}>
+					<Link key={index} href={item.link}>
 						<MenuItem key={index} onClick={() => { }}>
 							<div>{item.title}</div>
 							<div>{item.title}</div>

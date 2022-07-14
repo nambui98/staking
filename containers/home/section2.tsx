@@ -280,7 +280,7 @@ const Section2: NextPage = () => {
 							transition: 'all .6s',
 							opacity: index == activeIndex ? '1' : 0,
 							height: "404px"
-						}}>
+						}} key={index}>
 							<img height={"100%"} src={item.image} alt="" />
 							<Box sx={{
 								transition: '.4s all',

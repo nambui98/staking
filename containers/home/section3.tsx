@@ -304,22 +304,10 @@ const Section3: NextPage = () => {
 			</Wrap>
 			<Box sx={{
 				position: 'relative', height: "60%",
-
-
 			}}>
 				{
 					activeIndex == 1 && [
-						// <Box sx={{
-
-						// 	position: 'absolute',
-						// 	top: "calc(50% + 70px)",
-						// 	left: "50%",
-						// 	transform: 'translate(-50%, -50%)'
-						// }}>
-						// 	<img width={"100%"} src="assets/dark/neon-orange.png" alt="" />
-
-						// </Box>,
-						<Box sx={{
+						<Box key={1} sx={{
 
 							position: 'absolute',
 							top: "calc(50% + 70px)",
