@@ -52,7 +52,7 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 		setHeightWindow(window.innerHeight)
 	}, [])
 	return (
-		<Wrap sx={{height: heightWindow ? heightWindow : 'auto'}}>
+		<Wrap sx={{ height: heightWindow ? heightWindow : 'auto' }}>
 			<Swiper
 				autoplay={{
 					delay: data[indexActive].unplayable ? 3000 : 6000,
@@ -98,20 +98,72 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 									src={isMobile ? slide.mobileSrc : isBigDesktop ? slide.bigDecktopSrc : slide.src}
 									type="video/webm"
 								/>
-
 							</video>
-							{/* <Box sx={{ height: "122px", position: 'absolute', }}>
-
-								<img src={'assets/logo/02.png'} alt="Logo" width={'auto'} />
-							</Box> */}
 						</SwiperSlide>
 					);
 				})}
 			</Swiper>
-			{isMobile1140 && <ButtonGetApp onClick={() => handleStatusPopup(true)}>GET THE APP</ButtonGetApp>}
 			<BoxCountDown>
-				<TitleCountDown><img src={'assets/text-ido.png'} /></TitleCountDown>
-				<CountdownClockNew endDate={'2022-07-15T13:00:00.000Z'} />
+				<Box sx={{
+					'@media (min-width: 1024px)': {
+						display: 'flex',
+					},
+					'@media (max-width: 1023px)': {
+						marginTop: '-25px',
+						marginRight: 'auto',
+						marginBottom: '17px',
+						paddingLeft: '8px',
+						paddingRight: '8px',
+					}
+				}}>
+					<TitleCountDown><img src={'assets/text-ido.png'} /></TitleCountDown>
+					<CountdownClockNew endDate={'2022-07-15T13:00:00.000Z'} />
+				</Box>
+				<Box sx={{
+					marginLeft: '60px',
+					'@media (min-width: 1050px)': {
+						marginLeft: '130px',
+					},
+					'& img': {
+						marginRight: '30px',
+						transition: '.3s all',
+						'&:hover': {
+							filter: 'drop-shadow(0px 0px 16px #FF6D24)'
+						}
+					},
+					'& img:last-of-type': {
+						marginRight: '0 !important',
+					},
+					'@media (max-width: 1023px)': {
+						display: 'flex',
+						marginLeft: '0',
+						alignItems: 'center',
+						'& img': {
+							maxWidth: '70px',
+							marginRight: '16px'
+						},
+						'& img:first-of-type': {
+							maxWidth: '90px'
+						}
+					}
+				}}>
+					<Typography sx={{
+						marginBottom: '8px',
+						...TEXT_STYLE(12, 500, '#ffffff'),
+						'@media (max-width: 1023px)': {
+							marginBottom: 0,
+							marginRight: '12px'
+						}
+					}}>More info on</Typography>
+					<Box sx={{
+						display: "flex",
+						alignItems: "center",
+					}}>
+						<img src={'assets/dark/da2.png'} />
+						<img src={'assets/dark/rk2.png'} />
+						<img src={'assets/dark/gf2.png'} />
+					</Box>
+				</Box>
 			</BoxCountDown>
 		</Wrap>
 	)
@@ -154,20 +206,19 @@ const BoxCountDown = styled(Stack)({
 	width: '100%',
 	maxWidth: 1120,
 	justifyContent: 'center',
-	'@media (max-width: 767px)': {
-		flexDirection: 'column',
+	'@media (max-width: 1023px)': {
 		padding: '5.5px 8px',
 		justifyContent: 'center',
-		background: 'linear-gradient(90deg, rgba(255, 109, 36, 0) 0%, rgba(255, 109, 36, 0.7) 65.76%, rgba(255, 109, 36, 0) 95.65%)'
+		background: 'linear-gradient(90deg, rgba(255, 109, 36, 0) 0%, rgba(255, 109, 36, 0.34) 65.76%, rgba(255, 109, 36, 0) 95.65%)',
+		flexDirection: 'column',
 	}
 })
 const TitleCountDown = styled(Box)({
 	...TEXT_STYLE(40, 700),
 	marginRight: 14,
 	lineHeight: 0,
-	'@media (max-width: 767px)': {
+	'@media (max-width: 1023px)': {
 		marginRight: 'auto',
-		marginLeft: 30,
 		'& img': {
 			width: 90,
 		}

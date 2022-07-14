@@ -216,7 +216,6 @@ const Section3: NextPage = () => {
 			backgroundRepeat: 'no-repeat',
 			backgroundSize: 'cover',
 			overflow: 'hidden',
-			// padding: '29px auto 50px',
 			marginTop: { xs: '0px', sm: 20 }
 		}}>
 
@@ -239,7 +238,7 @@ const Section3: NextPage = () => {
 
 				</Box>
 				<Box sx={{ width: '100%' }}>
-					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+					<Box>
 						<Tabs TabIndicatorProps={{
 							sx: {
 								background: "radial-gradient(50% 50% at 50% 50%, #FF6D24 0%, rgba(255, 109, 36, 0) 100%);",

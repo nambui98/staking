@@ -387,8 +387,16 @@ const Section4: NextPage = () => {
 								color="#fff"
 								lineHeight="22px"
 								mt={4}
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginRight: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Stake to earn interest and FitterPass
+							<img src={'assets/icons/dot-orange.svg'} />	Stake to earn interest and FitterPass
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
@@ -396,8 +404,16 @@ const Section4: NextPage = () => {
 								color="#fff"
 								lineHeight="22px"
 								mt={1}
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginRight: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Level up shoe NFT at some levels & Mint
+							<img src={'assets/icons/dot-orange.svg'} />	Level up shoe NFT at some levels & Mint
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
@@ -405,8 +421,16 @@ const Section4: NextPage = () => {
 								color="#fff"
 								lineHeight="22px"
 								mt={1}
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginRight: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Governance
+							<img src={'assets/icons/dot-orange.svg'} />	Governance
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
@@ -414,8 +438,16 @@ const Section4: NextPage = () => {
 								color="#fff"
 								lineHeight="22px"
 								mt={2}
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginRight: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Pay rental commission fee
+							<img src={'assets/icons/dot-orange.svg'} />	Pay rental commission fee
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
@@ -423,8 +455,16 @@ const Section4: NextPage = () => {
 								color="#fff"
 								lineHeight="22px"
 								mt={2}
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginRight: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Pay for some in-app purchases
+							<img src={'assets/icons/dot-orange.svg'} />	Pay for some in-app purchases
 							</Typography>
 							<Box sx={{
 								mt: 2,
@@ -432,45 +472,24 @@ const Section4: NextPage = () => {
 								align: "center",
 								justifyContent: "flex-start",
 							}}
-							>
-
+							>								 
 								<Typography
 									fontSize={{ xs: 16, sm: 16 }}
 									fontWeight={500}
 									color="#fff"
 									lineHeight="22px"
+									sx={{
+										display: 'flex',
+										alignItems: 'flex-start',
+										'& img': {
+											marginRight: '8px',
+											marginTop: '4px'
+										}
+									}}
 								>
-									Earn
-								</Typography>
-
-								<Typography
-									fontSize={{ xs: 16, sm: 16 }}
-									fontWeight={800}
-									color="#FF6D24"
-									ml={1}
-									mr={1}
-									lineHeight="22px"
-								>
-									FIU
-								</Typography>
-
-								<Typography
-									fontSize={{ xs: 16, sm: 16 }}
-									fontWeight={500}
-									color="#fff"
-									lineHeight="22px"
-								>
-									in With Pet Mode,
+								<img src={'assets/icons/dot-orange.svg'} /> Earn FIU	in With Pet Mode, Challenges, Staking
 								</Typography>
 							</Box>
-							<Typography
-								fontSize={{ xs: 16, sm: 16 }}
-								fontWeight={500}
-								color="#fff"
-								lineHeight="22px"
-							>
-								Challenges, Staking
-							</Typography>
 
 						</Box>
 
@@ -533,18 +552,6 @@ const Section4: NextPage = () => {
 								<Typography fontSize="56px" fontFamily='Electrofied' sx={{ paddingRight: "10px" }} className="text_gadient_second">
 									HEE
 								</Typography>
-								{/* <Typography
-							fontSize={{ xs: 15, sm: 56 }}
-							textTransform="uppercase"
-							fontFamily='Electrofied'
-							fontStyle={'italic'}
-							fontWeight={800}
-							color="#FF6D24"
-							// mb={5}
-							mr={2}
-						>
-							HEE
-						</Typography> */}
 							</Box>
 							<Typography
 								fontSize={{ xs: 16, sm: 24 }}
@@ -553,8 +560,6 @@ const Section4: NextPage = () => {
 								fontStyle={'italic'}
 								fontWeight={800}
 								color="#fff"
-								// mb={5}
-								// lineHeight="22px"
 								mr={2}
 								width="250px"
 								textAlign={"right"}
@@ -568,8 +573,16 @@ const Section4: NextPage = () => {
 								textAlign={"right"}
 								mt={4}
 								lineHeight="22px"
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginLeft: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Level up shoe NFT
+							Level up shoe NFT <img src={'assets/icons/dot-green.svg'} />
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
@@ -578,8 +591,16 @@ const Section4: NextPage = () => {
 								textAlign={"right"}
 								mt={2}
 								lineHeight="22px"
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginLeft: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Repair shoe NFT
+								Repair shoe NFT <img src={'assets/icons/dot-green.svg'} />
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
@@ -588,8 +609,16 @@ const Section4: NextPage = () => {
 								textAlign={"right"}
 								mt={2}
 								lineHeight="22px"
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginLeft: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Transaction fee
+								Transaction fee <img src={'assets/icons/dot-green.svg'} />
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
@@ -598,8 +627,16 @@ const Section4: NextPage = () => {
 								textAlign={"right"}
 								mt={2}
 								lineHeight="22px"
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginLeft: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Mint
+								Mint <img src={'assets/icons/dot-green.svg'} />
 							</Typography>
 
 							<Box sx={{
@@ -616,30 +653,16 @@ const Section4: NextPage = () => {
 									color="#fff"
 									textAlign={"right"}
 									lineHeight="22px"
+									sx={{
+										display: 'flex',
+										alignItems: 'flex-start',
+										'& img': {
+											marginLeft: '8px',
+											marginTop: '4px'
+										}
+									}}
 								>
-									Earn
-								</Typography>
-
-								<Typography
-									fontSize={{ xs: 16, sm: 16 }}
-									fontWeight={800}
-									color="#1DB268"
-									ml={1}
-									mr={1}
-									textAlign={"right"}
-									lineHeight="22px"
-								>
-									HEE
-								</Typography>
-
-								<Typography
-									fontSize={{ xs: 16, sm: 16 }}
-									fontWeight={500}
-									color="#fff"
-									textAlign={"right"}
-									lineHeight="22px"
-								>
-									in all game modes.
+									Earn HEE in all game modes. <img src={'assets/icons/dot-green.svg'} />
 								</Typography>
 							</Box>
 
