@@ -1,5 +1,5 @@
 import { Box, Stack, styled, Tabs, Typography, useMediaQuery } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+// import { makeStyles } from "@mui/styles";
 import { NextPage } from "next";
 import { useState } from "react";
 import Tab from '@mui/material/Tab';
@@ -342,11 +342,11 @@ const Section3: NextPage = () => {
 							</Box>
 							<Box data-aos-offset="1500"
 
-								data-aos-duration="1500" data-aos="fade-right" sx={{ position: "absolute", zIndex: 0, bottom: "0", transform: "translate(-50%, -50%)", left: "0px" }}>
+								data-aos-duration="1500" data-aos="fade-right" sx={{ position: "absolute", zIndex: 0, bottom: "0", left: "0px" }}>
 								<img width={"100%"} src={`assets/sec3/bg_left.png`} style={{ objectFit: "cover" }} alt="" />
 							</Box>
 							<Box data-aos-offset="1500"
-								data-aos-duration="1500" data-aos="fade-left" sx={{ position: "absolute", zIndex: 0, bottom: "0", transform: "translate(-50%, -50%)", right: "0px" }}>
+								data-aos-duration="1500" data-aos="fade-left" sx={{ position: "absolute", zIndex: 0, bottom: "0", right: "0px" }}>
 								<img width={"100%"} src={`assets/sec3/bg_right.png`} style={{ objectFit: "cover" }} alt="" />
 							</Box>
 
