@@ -92,7 +92,7 @@ export const Boxtabs = () => {
       <TabBody>
         {currentTab.length ? renderBodyView() : <BoxEmpty icon={ICON.shoe} emptyText={'Select assets to continue'} />}
       </TabBody>
-      <FormInfomationPopup status={true} handleToggleStatus={() => setPopupFormInfo(false)} />
+      <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
       {statusBuyBox && isMobile && !statusFormGetBonus && <BoxBonus><ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus></BoxBonus>}
     </Wrap>
   )
