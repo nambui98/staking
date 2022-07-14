@@ -149,18 +149,11 @@ const Home: NextPage = () => {
 		<Box key={"7"} sx={{ backgroundImage: { xs: "transparent", sm: `url(assets/dark/sec7.png)` }, backgroundRepeat: "no-repeat", backgroundPosition: "bottom", paddingTop: "1px"}}>
 			<Section7 />
 		</Box>,
-		<Box key={"8"} sx={{
-			height: { xs: '100%', sm: height }
-			// display: { sx: 'block', sm: 'flex' }, alignItems: 'center'
-
-			// 	position: 'relative',
-		}}>
+		<Box key={"8"} >
 			<Section8 />
-
 		</Box>,
 		<Box sx={{
 			backgroundColor: "#151515",
-			// height: { xs: height, sm: '100%' },
 			position: 'relative',
 		}} key={"9"}>
 			<Section9 />

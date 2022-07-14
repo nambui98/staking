@@ -75,6 +75,9 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 								flexDirection: 'row !important',
 								width: '100% !important',
 								marginLeft: '0 !important',
+							},
+							'& .team-avatar:hover': {
+								display: 'none'
 							}
 						}}>
 							<Grid item xs={6} sm={4} sx={{
@@ -90,13 +93,13 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 									sx={{
 										width: '100%',
 										height: "100%",
-										// pt: `${(160 / 174) * 100}%`,
 										backgroundImage: `url(assets/dark/neon-orange-5.png)`,
 										backgroundRepeat: 'no-repeat',
 										backgroundSize: 'cover',
 										backgroundPosition: "center",
 										padding: "25px"
 									}}
+									className="team-avatar"
 								>
 									<img width="100%" height="100%" style={{ objectFit: "contain" }} src={image} />
 								</Box>
@@ -122,8 +125,12 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 									maxWidth: '143px !important',
 								}
 							}}>
-								<Box width={"fit-content"} >
-
+								<Box className="team-body" width={"fit-content"} sx={{
+									overflow: 'hidden',
+									'& p:last-of-type': {
+										height: 0
+									},
+								}}>
 									<Typography
 										fontSize={24}
 										fontWeight={700}
@@ -144,8 +151,7 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 										fontStyle="italic"
 										sx={{
 											mt: 1,
-											mb: 3,
-											textAlign: { xs: 'center', sm: 'left' },
+											mb: '10px',
 											textTransform: 'uppercase',
 											background:
 												'linear-gradient(270deg, #FF5C35 3.42%, #FF612F 98.2%)',
@@ -153,6 +159,7 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 											WebkitTextFillColor: 'transparent',
 											backgroundClip: 'text',
 											textFillColor: 'transparent',
+											textAlign: idx === 0 ? 'right' : 'left',
 											'@media (max-width: 767px)': {
 												marginBottom: '0 !important',
 												textAlign: 'left',
@@ -161,15 +168,15 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 									>
 										{role}
 									</Typography>
+									<Typography
+										fontSize={14}
+										fontWeight={500}
+										lineHeight={1.5}
+										color="#fff"
+									>
+										{desc}
+									</Typography>
 								</Box>
-								{/* <Typography
-									fontSize={14}
-									fontWeight={500}
-									lineHeight={1.5}
-									color="#5A6178"
-								>
-									{desc}
-								</Typography> */}
 							</Grid>
 						</Grid>
 					</Grid>

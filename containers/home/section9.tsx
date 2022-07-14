@@ -26,9 +26,6 @@ import AppStoreButtonNew2 from '../../components/buttons/AppStoreButtonNew2';
 import { IconImage } from '../../components/styled';
 import { EMAIL, ICON } from '../../constants/footer';
 const MenuItem = styled(Box)({
-	// padding: '0px 12px',
-	// borderRadius: '12px',
-	// marginRight: 16,
 	...TEXT_STYLE(14, 500, '#FFF'),
 	fontFamily: 'BeVietnamPro',
 	textTransform: 'uppercase',
@@ -114,20 +111,8 @@ const StayInTouch: React.FC<any> = ({ sxProps }) => {
 			justifyContent="center"
 			alignItems="center"
 			spacing={{ xs: 2, md: 3 }}
-
-		// sx={{ background: '#F8F9FB', py: { xs: 5, md: 10 }, ...sxProps }}
 		>
 			<img src={'assets/logo/02.png'} alt="Logo" width={'226px'} style={{ marginBottom: "20px" }} />
-			{/* <Typography
-				fontSize={{ xs: 24, sm: 24 }}
-				// fontStyle="italic"
-				fontWeight="600"
-				color="#fff"
-				align="center"
-				px={2}
-			>
-				Stay in touch with  <span className='text_gadient_primary'>beFITTER</span>
-			</Typography> */}
 			<Stack sx={{ display: 'flex', flexDirection: { xs: "column", sm: 'row' }, gap: { xs: 3, sm: 7 } }} alignItems="center">
 				{MAIN_FOOTER?.map((item: any, index) => (
 					<Link href={item.link}>
@@ -175,23 +160,11 @@ const StayInTouch: React.FC<any> = ({ sxProps }) => {
 					</Grid>
 				)
 			}
-			{/* <Grid container justifyContent="center" rowSpacing={1}>
-				{SOCIAL.map(({ icon, iconActive, href }, idx) => (
-					<Grid item xs={3} key={idx}>
-						<Stack alignItems="center">
-							<BounceIconButton
-								href={href}
-								icon={icon}
-								iconActive={iconActive}
-
-							/>
-						</Stack>
-					</Grid>
-				))}
-			</Grid> */}
 			<Stack direction="row" spacing={{ xs: 0, sm: 7 }} sx={{ gap: 3 }} alignItems="center" justifyContent="center" flexWrap={"wrap"}>
 				{APP.BUTTON.map((el, idx) => (
-					<ButtonItem key={idx} item >
+					<ButtonItem key={idx} item sx={{
+						marginLeft: '0 !important'
+					}}>
 						<AppStoreButtonNew2
 							background={idx === 2}
 							disabled={!el.href}
@@ -223,17 +196,8 @@ const Section9: React.FC<any> = ({ sxProps }) => {
 
 		}}>
 			<Box sx={{ position: 'relative', marginTop: 'auto', display: 'flex', justifyContent: 'center', marginBottom: { xs: 1, sm: '40px' }, mt: { xs: "24px", sm: "40px" }, columnGap: '20px' }}>
-				{/* <Box sx={{
-					height: '495px',
-					// width: '100%',
-					display: { xs: 'none', md: 'block' }
-				}}>
-
-					<img height={"100%"} style={{ objectFit: 'contain' }} width="100%" src="assets/sec9.png" />
-				</Box> */}
 				<StayInTouch />
 			</Box >
-			{/* <MainFooter /> */}
 			<Box
 				component={'footer'}
 				sx={{

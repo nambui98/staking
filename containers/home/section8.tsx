@@ -79,7 +79,7 @@ const RoadmapDesktop: React.FC<any> = () => {
 				position: 'relative',
 				overflow: 'hidden',
 				height: "100%",
-				marginTop: "88px !important"
+				marginTop: "80px !important"
 
 			}}
 		>
@@ -99,7 +99,6 @@ const RoadmapDesktop: React.FC<any> = () => {
 
 			</Box>
 			<Box sx={{
-				position: 'absolute',
 				backgroundImage: `url(${ROADMAP.MAP})`,
 				backgroundRepeat: 'no-repeat',
 				backgroundSize: 'cover',

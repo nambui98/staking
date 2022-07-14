@@ -17,13 +17,15 @@ import { TEAM } from '../../constants/common';
 const Section7: React.FC<any> = ({ sxProps }) => {
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	return (
-		<Container sx={{ ...sxProps, mt: 16, paddingBottom: "22px" }}>
+		<Container sx={{ ...sxProps, paddingBottom: "22px", '@media (min-width: 768px)': {
+			marginTop: 16
+		} }}>
 			{/* <SectionTitle
 				title={TEAM.TITLE}
 				subtitle={TEAM.SUBTITLE}
 				sxProps={{ mb: 7 }}
 			/> */}
-			<Box display={'flex'} mt={{ xs: '88px', sm: '0px' }} mb={{ xs: 3, sm: 5 }} alignItems="center" justifyContent="center">
+			<Box display={'flex'} mb={{ xs: 3, sm: 5 }} alignItems="center" justifyContent="center">
 
 				<Typography
 					fontSize={{ xs: 32, sm: 56 }}
@@ -48,7 +50,8 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 
 						<Box sx={{ flexDirection: { xs: "column", sm: 'row' }, position: "relative", width: { xs: "100%", sm: "320px" }, paddingBottom: '10px',
 						'@media (max-width: 767px)': {
-							marginBottom: '20px'
+							marginBottom: '20px',
+							marginRight: '20px'
 						} }}>
 							<Box position="absolute" sx={{ inset: 0, zIndex: 0 }}>
 								<img width={"100%"} height={"100%"} src={isSm ? "assets/dark/sec7_3.png" : "assets/dark/sec7_2.png"} />
