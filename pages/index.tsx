@@ -76,13 +76,13 @@ const Home: NextPage = () => {
 
 	useEffect(() => {
 		windowHeightListener();
-		setTimeout(() => {
-			windowHeightListener();
-		}, 100);
-		window.addEventListener('resize', windowHeightListener);
-		return () => {
-			window.removeEventListener('resize', windowHeightListener);
-		};
+		// setTimeout(() => {
+		// 	windowHeightListener();
+		// }, 100);
+		// window.addEventListener('resize', windowHeightListener);
+		// return () => {
+		// 	window.removeEventListener('resize', windowHeightListener);
+		// };
 	}, []);
 	console.log(height);
 	const SECTIONS = [
@@ -120,11 +120,11 @@ const Home: NextPage = () => {
 		,
 		<Box key={"4"} sx={{
 
-			height: height,
+			height: { xs: "auto", sm: height },
 			position: 'relative',
 		}}>
 			<Section4 />
-		</Box>,
+		</Box >,
 		<Box key={"5"} sx={{
 			height: height,
 

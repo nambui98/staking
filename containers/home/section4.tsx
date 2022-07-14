@@ -300,7 +300,7 @@ const Section4: NextPage = () => {
 	const isMobile959 = useMediaQuery('(max-width: 959px)')
 
 	return (
-		<Wrap sx={{ marginTop: { xs: '0px !important', sm: '0px !important' }, display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+		<Wrap sx={{ marginTop: { xs: '0px !important', sm: '0px !important' }, paddingBottom: { xs: "80px", sm: "0px" }, display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
 			<Box data-aos-offset="600"
 
 				data-aos-duration="1000" data-aos="fade-right" sx={{ position: 'absolute', left: 0, top: "30%", transform: "translate(50%, 50%)" }}>
