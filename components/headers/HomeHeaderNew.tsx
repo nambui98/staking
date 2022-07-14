@@ -52,7 +52,7 @@ const Logo: React.FC<any> = () => {
 				<img src={HOME_LOGO} alt="Logo" width={'auto'} height={40} />
 
 
-				<BoxSecurichain>{<img src={SECURICHAIN_LOGO} />}</BoxSecurichain>
+				<Link target="_blank" href={'https://www.securichain.io/audits/2022/beFITTERTokenAudit_Public.pdf'}><BoxSecurichain>{<img src={SECURICHAIN_LOGO} />}</BoxSecurichain></Link>
 
 			</Box>
 		</Link>
