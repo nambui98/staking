@@ -109,6 +109,10 @@ const Home: NextPage = () => {
 
 			height: height,
 			position: 'relative',
+			'@media (min-width: 3000px)': {
+				// paddingTop: "24px",
+				height: "1200px"
+			}
 		}} key={"3"}>
 			<Section3 />
 		</Box>
@@ -146,7 +150,7 @@ const Home: NextPage = () => {
 			</Box> */}
 			<Section6 />
 		</Box>,
-		<Box key={"7"} sx={{ backgroundImage: { xs: "transparent", sm: `url(assets/dark/sec7.png)` }, backgroundRepeat: "no-repeat", backgroundPosition: "bottom", paddingTop: "1px"}}>
+		<Box key={"7"} sx={{ backgroundImage: { xs: "transparent", sm: `url(assets/dark/sec7.png)` }, backgroundRepeat: "no-repeat", backgroundPosition: "bottom", paddingTop: "1px" }}>
 			<Section7 />
 		</Box>,
 		<Box key={"8"} >

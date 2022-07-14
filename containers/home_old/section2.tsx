@@ -105,7 +105,7 @@ const Section2Old: NextPage = () => {
 		// <Box height={"100%"}>
 
 		<Wrap sx={{
-			marginTop: '-50px',
+			// marginTop: '-50px',
 			background: '#1C1E29'
 		}}>
 			{/* <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage> */}
@@ -167,7 +167,7 @@ const Section2Old: NextPage = () => {
 				</Box>}
 
 				<Box flex={1} sx={{ position: 'relative', height: '100%', width: '100%' }}>
-					<BoxImage sx={{opacity: 0, marginBottom: '80px'}}>
+					<BoxImage sx={{ opacity: 0, marginBottom: '80px' }}>
 						<img width={"100%"} src={'assets/sec2/fitnessfi.png'} alt="" />
 					</BoxImage>
 					{

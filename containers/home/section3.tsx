@@ -309,25 +309,26 @@ const Section3: NextPage = () => {
 			}}>
 				{
 					activeIndex == 1 && [
+						// <Box sx={{
+
+						// 	position: 'absolute',
+						// 	top: "calc(50% + 70px)",
+						// 	left: "50%",
+						// 	transform: 'translate(-50%, -50%)'
+						// }}>
+						// 	<img width={"100%"} src="assets/dark/neon-orange.png" alt="" />
+
+						// </Box>,
 						<Box sx={{
 
 							position: 'absolute',
 							top: "calc(50% + 70px)",
 							left: "50%",
-							transform: 'translate(-50%, -50%)'
-						}}>
-							<img width={"100%"} src="assets/dark/neon-orange.png" alt="" />
-
-						</Box>,
-						<Box sx={{
-
-							position: 'absolute',
-							top: "calc(50% + 70px)",
-							left: "50%",
-							transform: 'translate(-50%, -50%)'
+							transform: 'translate(-50%, -50%)',
+							width: { xs: "380px", md: "25%" }
 						}}>
 
-							<img width={"100%"} src="assets/dark/neon-orange1.png" alt="" />
+							<img width={"100%"} src="assets/dark/neon-orange-7.png" alt="" />
 						</Box>
 					]
 				}
@@ -336,7 +337,7 @@ const Section3: NextPage = () => {
 					data.map((item: itemType, index: number) => {
 						return <TabPanel key={index} value={activeIndex} index={index} >
 
-							<Box width={isMobile ? '85%' : 500} margin="auto" mt={5}  >
+							<Box width={isMobile ? '85%' : "500px"} margin="auto" mt={5}  >
 								<Typography
 									// typography={'span'}
 									fontSize={{ xs: 14, sm: 16 }}
@@ -352,12 +353,12 @@ const Section3: NextPage = () => {
 									{item.subtitle}
 								</Typography>
 							</Box>
-							<Box data-aos-offset="1000"
+							<Box data-aos-offset="600"
 
 								data-aos-duration="1000" data-aos="fade-right" sx={{ position: "absolute", zIndex: 0, bottom: "0", transform: "translate(-50%, -50%)", left: "0px" }}>
 								<img width={"100%"} src={`assets/sec3/bg_left.png`} style={{ objectFit: "cover" }} alt="" />
 							</Box>
-							<Box data-aos-offset="1000"
+							<Box data-aos-offset="600"
 								data-aos-duration="1000" data-aos="fade-left" sx={{ position: "absolute", zIndex: 0, bottom: "0", transform: "translate(-50%, -50%)", right: "0px" }}>
 								<img width={"100%"} src={`assets/sec3/bg_right.png`} style={{ objectFit: "cover" }} alt="" />
 							</Box>
