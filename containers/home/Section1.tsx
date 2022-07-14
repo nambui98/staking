@@ -131,7 +131,7 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 							filter: 'drop-shadow(0px 0px 16px #FF6D24)'
 						}
 					},
-					'& img:last-of-type': {
+					'& a:last-of-type img': {
 						marginRight: '0 !important',
 					},
 					'@media (max-width: 1023px)': {
@@ -158,10 +158,13 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 					<Box sx={{
 						display: "flex",
 						alignItems: "center",
+						'& a': {
+							display: "inline-block",
+						}
 					}}>
-						<img src={'assets/dark/da2.png'} />
-						<img src={'assets/dark/rk2.png'} />
-						<img src={'assets/dark/gf2.png'} />
+						<a href="https://daomaker.com/company/befitter" target={'_blank'}><img src={'assets/dark/da2.png'} /></a>
+						<a href="https://redkite.polkafoundry.com/#/buy-token/188" target={'_blank'}><img src={'assets/dark/rk2.png'} /></a>
+						<a href="https://gamefi.org/igo/befitter-igo" target={'_blank'}><img src={'assets/dark/gf2.png'} /></a>
 					</Box>
 				</Box>
 			</BoxCountDown>

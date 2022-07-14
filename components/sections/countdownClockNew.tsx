@@ -45,7 +45,11 @@ const CountdownClockNew: React.FC<IProps> = ({ endDate, sxTitle, sxSubTitle }) =
 	}, []);
 
 	return (
-		<Stack direction="row" alignItems="center" justifyContent="center">
+		<Stack direction="row" alignItems="center" justifyContent="center" sx={{
+			'@media (min-width: 768px)': {
+				minWidth: '450px'
+			}
+		}}>
 			{[
 				{ count: dayText, title: 'days' },
 				{ count: hrText, title: 'hours' },
