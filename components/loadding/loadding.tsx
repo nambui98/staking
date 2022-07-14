@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./Loading.module.css";
 
 const Loading: React.FC<any> = (props) => {
-	debugger
 	return (
 		<div
 			className={

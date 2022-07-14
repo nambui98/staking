@@ -131,7 +131,12 @@ const Section5: NextPage = () => {
 
 
 							}}>
-								<BoxImage p={{ xs: 2, sm: 4 }} sx={{
+								<MenuItem >
+									<div>	<img height={'48px'} src={item.inActive} />
+									</div>
+									<div> <img height={'48px'} src={item.active} /></div>
+								</MenuItem>
+								{/* <BoxImage p={{ xs: 2, sm: 4 }} sx={{
 									'& img': {
 										width: '100%',
 										height: 'auto',
@@ -143,7 +148,7 @@ const Section5: NextPage = () => {
 											<img height={'48px'} src={item.active} />
 											: <img height={'48px'} src={item.inActive} />
 									}
-								</BoxImage>
+								</BoxImage> */}
 							</a>
 						})
 					}
@@ -156,7 +161,38 @@ const Section5: NextPage = () => {
 }
 
 export default Section5;
-
+const MenuItem = styled(Box)((props) => ({
+	padding: '0px 16px',
+	borderRadius: '12px',
+	marginRight: 16,
+	// ...TEXT_STYLE(20, 600, '#FFF'),
+	fontFamily: 'BeVietnamPro',
+	textTransform: 'uppercase',
+	color: '#FFF',
+	cursor: 'pointer',
+	overflow: 'hidden',
+	transition: 'all .4s',
+	'& div': {
+		transition: 'all .2s',
+		'&:last-child': {
+			opacity: 0,
+			position: 'absolute',
+		}
+	},
+	'&:last-of-type': {
+		marginRight: 0
+	},
+	'&:hover div': {
+		transform: "translateY(-100%)",
+		color: '#FF6D24',
+		'&:last-child': {
+			opacity: 1,
+		},
+		'&:first-child': {
+			opacity: 0,
+		}
+	},
+}))
 const Wrap = styled(Stack)({
 	padding: '0 16px',
 	maxWidth: '1120px',
