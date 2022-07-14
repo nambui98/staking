@@ -290,7 +290,7 @@ const Section2: NextPage = () => {
 								marginTop: '24px'
 
 							}}>
-								<Typography mt={0.5} fontSize={14} color="#fff" lineHeight={"24px"}>{item.content}</Typography>
+								<Typography mt={0.5} fontSize={14} color="#fff" textTransform={"uppercase"} lineHeight={"24px"}>{item.content}</Typography>
 							</Box>
 						</Box>
 					})
