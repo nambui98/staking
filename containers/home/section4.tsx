@@ -301,14 +301,14 @@ const Section4: NextPage = () => {
 
 	return (
 		<Wrap sx={{ marginTop: { xs: '0px !important', sm: '0px !important' }, paddingBottom: { xs: "80px", sm: "0px" }, display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
-			<Box data-aos-offset="600"
+			<Box data-aos-offset="1400"
 
-				data-aos-duration="1000" data-aos="fade-right" sx={{ position: 'absolute', left: 0, top: "30%", transform: "translate(50%, 50%)" }}>
+				data-aos-duration="1500" data-aos="fade-right" sx={{ position: 'absolute', left: 0, top: "30%", transform: "translate(50%, 50%)" }}>
 				<img width={"100%"} src={`assets/sec4/bg_left.png`} style={{ objectFit: "cover" }} alt="" />
 			</Box>
-			<Box data-aos-offset="600"
+			<Box data-aos-offset="1400"
 
-				data-aos-duration="1000" data-aos="fade-left" sx={{ position: 'absolute', right: 0, top: "30%" }}>
+				data-aos-duration="1500" data-aos="fade-left" sx={{ position: 'absolute', right: 0, top: "30%" }}>
 				<img width={"100%"} src={`assets/sec4/bg_right.png`} style={{ objectFit: "cover" }} alt="" />
 			</Box>
 			{/* <Box sx={{ position: 'absolute', left: 0, top: "30%" }}>

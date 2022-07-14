@@ -13,7 +13,7 @@ import {
 	useMediaQuery,
 } from '@mui/material';
 import { TEAM } from '../../constants/common';
-import { ParallaxBanner } from 'react-scroll-parallax';
+// import { ParallaxBanner } from 'react-scroll-parallax';
 
 const Section7: React.FC<any> = ({ sxProps }) => {
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));

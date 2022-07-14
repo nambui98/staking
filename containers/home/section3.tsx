@@ -341,13 +341,13 @@ const Section3: NextPage = () => {
 									{item.subtitle}
 								</Typography>
 							</Box>
-							<Box data-aos-offset="600"
+							<Box data-aos-offset="1500"
 
-								data-aos-duration="1000" data-aos="fade-right" sx={{ position: "absolute", zIndex: 0, bottom: "0", transform: "translate(-50%, -50%)", left: "0px" }}>
+								data-aos-duration="1500" data-aos="fade-right" sx={{ position: "absolute", zIndex: 0, bottom: "0", transform: "translate(-50%, -50%)", left: "0px" }}>
 								<img width={"100%"} src={`assets/sec3/bg_left.png`} style={{ objectFit: "cover" }} alt="" />
 							</Box>
-							<Box data-aos-offset="600"
-								data-aos-duration="1000" data-aos="fade-left" sx={{ position: "absolute", zIndex: 0, bottom: "0", transform: "translate(-50%, -50%)", right: "0px" }}>
+							<Box data-aos-offset="1500"
+								data-aos-duration="1500" data-aos="fade-left" sx={{ position: "absolute", zIndex: 0, bottom: "0", transform: "translate(-50%, -50%)", right: "0px" }}>
 								<img width={"100%"} src={`assets/sec3/bg_right.png`} style={{ objectFit: "cover" }} alt="" />
 							</Box>
 

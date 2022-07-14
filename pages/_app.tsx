@@ -41,12 +41,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<>
 
-			<Loading loading={loading} />
 			<ThemeProvider theme={theme}>
 
 				<WalletProvider>
 					{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
 					<CssBaseline />
+					<Loading loading={loading} />
 					{/* <NextNProgress color="#FF6D24" /> */}
 					<Component {...pageProps} />
 					<ToastContainer />

@@ -187,7 +187,6 @@ const Home: NextPage = () => {
 		<HomeLayoutNew sxProps={{ background: '#1C1E29' }} headerLandingPage={true} currentPage={currentPage}>
 			{SECTIONS}
 
-
 			<PopupApp statusPopup={statusPopup} handleToggleStatusPopup={setStatusPopup} />
 		</HomeLayoutNew>
 	);

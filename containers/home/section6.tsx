@@ -35,9 +35,9 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 			/> */}
 
 
-			<Box data-aos-offset="1800"
+			<Box data-aos-offset="2800"
 
-				data-aos-duration="1000" data-aos="zoom-in" sx={{ position: 'absolute', inset: 0, top: '0px' }}>
+				data-aos-duration="1500" data-aos="zoom-in" sx={{ position: 'absolute', inset: 0, top: '0px' }}>
 				<img width={"100%"} src={`assets/sec6/bg.png`} style={{ objectFit: "cover" }} alt="" />
 			</Box>
 
@@ -145,7 +145,7 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 								<Box className="team-body" width={"fit-content"} sx={{
 									overflow: 'hidden',
 									'& p:last-of-type': {
-										transition: '.4s all',										
+										transition: '.4s all',
 										opacity: 0,
 										'@media (min-width: 768px)': {
 											height: 0,
