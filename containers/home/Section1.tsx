@@ -23,6 +23,7 @@ export interface IProps {
 
 export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) => {
 	const isMobile = useMediaQuery('(max-width:700px)');
+	const [heightWindow, setHeightWindow] = useState<any>();
 	const isMobile1140 = useMediaQuery('(max-width:1140px)');
 	const isBigDesktop = useMediaQuery('(min-width:3200px)');
 	const [indexActive, setIndexActive] = useState(0);
@@ -46,8 +47,12 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 		refSlide4.current?.load();
 		refSlide5.current?.load();
 	}, [isMobile, isBigDesktop]);
+
+	useEffect(() => {
+		setHeightWindow(window.innerHeight)
+	}, [])
 	return (
-		<Wrap>
+		<Wrap sx={{height: heightWindow ? heightWindow : 'auto'}}>
 			<Swiper
 				autoplay={{
 					delay: data[indexActive].unplayable ? 3000 : 6000,
@@ -114,7 +119,6 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 
 const Wrap = styled(Stack)({
 	width: '100vw',
-	height: '100vh',
 	position: 'relative',
 
 })

@@ -145,8 +145,11 @@ const Section6: React.FC<any> = ({ sxProps }) => {
 								<Box className="team-body" width={"fit-content"} sx={{
 									overflow: 'hidden',
 									'& p:last-of-type': {
-										transition: '.4s all',
-										height: 0
+										transition: '.4s all',										
+										opacity: 0,
+										'@media (min-width: 768px)': {
+											height: 0,
+										}
 									}
 								}}>
 									<Typography

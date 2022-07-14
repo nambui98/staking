@@ -212,7 +212,7 @@ const Inner = styled(Box)({
 })
 const CloseIcon = styled(Box)({
 	position: 'absolute',
-	top: 35,
+	top: 20,
 	right: 24,
 	'& img': {
 		width: 32,
