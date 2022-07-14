@@ -84,10 +84,10 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 					}}
 				>
 					<img src={isMobile ? 'assets/logo/logo.png' : HOME_LOGO} alt="Logo" width={'auto'} height={40} />
-	
-	
+
+
 					<Link target="_blank" href={'https://www.securichain.io/audits/2022/beFITTERTokenAudit_Public.pdf'}><BoxSecurichain>{<img src={SECURICHAIN_LOGO} />}</BoxSecurichain></Link>
-	
+
 				</Box>
 			</Link>
 		);
@@ -187,6 +187,7 @@ type menuItemProp = BoxProps & {
 }
 const MenuItem = styled(Box)((props: menuItemProp) => ({
 	padding: '0px 16px',
+	height: "20px",
 	borderRadius: '12px',
 	marginRight: 16,
 	...TEXT_STYLE(20, 600, '#FFF'),
@@ -200,7 +201,7 @@ const MenuItem = styled(Box)((props: menuItemProp) => ({
 		transition: 'all .3s',
 		'&:last-child': {
 			opacity: 0,
-			position: 'absolute',
+			position: 'relative',
 		}
 	},
 	'&:last-of-type': {

@@ -28,6 +28,8 @@ import { EMAIL, ICON } from '../../constants/footer';
 const MenuItem = styled(Box)({
 	...TEXT_STYLE(14, 500, '#FFF'),
 	fontFamily: 'BeVietnamPro',
+	height: "16px",
+	textAlign: "center",
 	textTransform: 'uppercase',
 	color: '#FFF',
 	cursor: 'pointer',
@@ -37,7 +39,7 @@ const MenuItem = styled(Box)({
 		transition: 'all .3s',
 		'&:last-child': {
 			opacity: 0,
-			position: 'absolute',
+			position: 'relative',
 		}
 
 	},

@@ -45,7 +45,8 @@ const Section5: NextPage = () => {
 		}}>
 			<Box data-aos-offset="2400"
 
-				data-aos-duration="1500" data-aos="fade-right" sx={{ position: 'absolute', top: '-280px', left: "0px", width: '100%', 
+				data-aos-duration="1500" data-aos="fade-right" sx={{
+					position: 'absolute', top: '-280px', left: "0px", width: '100%',
 					'@media (min-width: 768px)': {
 						'& img': {
 							transform: 'scale(1.4)'
@@ -73,7 +74,7 @@ const Section5: NextPage = () => {
 						justifyContent: { xs: "center", sm: 'normal' },
 						flexWrap: { xs: "wrap", sm: 'nowrap' },
 						'@media (max-width: 991px)': {
-							marginBottom: '40px' 
+							marginBottom: '40px'
 						}
 					}}
 				>
@@ -170,6 +171,7 @@ const Section5: NextPage = () => {
 export default Section5;
 const MenuItem = styled(Box)((props) => ({
 	padding: '0px 16px',
+	height: "50px",
 	borderRadius: '12px',
 	marginRight: 16,
 	// ...TEXT_STYLE(20, 600, '#FFF'),
@@ -183,7 +185,7 @@ const MenuItem = styled(Box)((props) => ({
 		transition: 'all .2s',
 		'&:last-child': {
 			opacity: 0,
-			position: 'absolute',
+			position: 'relative',
 		}
 	},
 	'&:last-of-type': {
