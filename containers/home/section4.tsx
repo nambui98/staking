@@ -303,7 +303,7 @@ const Section4: NextPage = () => {
 		<Wrap sx={{ marginTop: { xs: '0px !important', sm: '0px !important' }, paddingBottom: { xs: "80px", sm: "0px" }, display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
 			<Box data-aos-offset="1400"
 
-				data-aos-duration="1500" data-aos="fade-right" sx={{ position: 'absolute', left: 0, top: "30%", transform: "translate(50%, 50%)" }}>
+				data-aos-duration="1500" data-aos="fade-right" sx={{ position: 'absolute', left: 0, top: "30%", }}>
 				<img width={"100%"} src={`assets/sec4/bg_left.png`} style={{ objectFit: "cover" }} alt="" />
 			</Box>
 			<Box data-aos-offset="1400"
@@ -396,7 +396,7 @@ const Section4: NextPage = () => {
 									}
 								}}
 							>
-							<img src={'assets/icons/dot-orange.svg'} />	Stake to earn interest and FitterPass
+								<img src={'assets/icons/dot-orange.svg'} />	Stake to earn interest and FitterPass
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
@@ -413,7 +413,7 @@ const Section4: NextPage = () => {
 									}
 								}}
 							>
-							<img src={'assets/icons/dot-orange.svg'} />	Level up shoe NFT at some levels & Mint
+								<img src={'assets/icons/dot-orange.svg'} />	Level up shoe NFT at some levels & Mint
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
@@ -430,7 +430,7 @@ const Section4: NextPage = () => {
 									}
 								}}
 							>
-							<img src={'assets/icons/dot-orange.svg'} />	Governance
+								<img src={'assets/icons/dot-orange.svg'} />	Governance
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
@@ -447,7 +447,7 @@ const Section4: NextPage = () => {
 									}
 								}}
 							>
-							<img src={'assets/icons/dot-orange.svg'} />	Pay rental commission fee
+								<img src={'assets/icons/dot-orange.svg'} />	Pay rental commission fee
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
@@ -464,7 +464,7 @@ const Section4: NextPage = () => {
 									}
 								}}
 							>
-							<img src={'assets/icons/dot-orange.svg'} />	Pay for some in-app purchases
+								<img src={'assets/icons/dot-orange.svg'} />	Pay for some in-app purchases
 							</Typography>
 							<Box sx={{
 								mt: 2,
@@ -472,7 +472,7 @@ const Section4: NextPage = () => {
 								align: "center",
 								justifyContent: "flex-start",
 							}}
-							>								 
+							>
 								<Typography
 									fontSize={{ xs: 16, sm: 16 }}
 									fontWeight={500}
@@ -487,7 +487,7 @@ const Section4: NextPage = () => {
 										}
 									}}
 								>
-								<img src={'assets/icons/dot-orange.svg'} /> Earn FIU	in With Pet Mode, Challenges, Staking
+									<img src={'assets/icons/dot-orange.svg'} /> Earn FIU	in With Pet Mode, Challenges, Staking
 								</Typography>
 							</Box>
 
@@ -582,7 +582,7 @@ const Section4: NextPage = () => {
 									}
 								}}
 							>
-							Level up shoe NFT <img src={'assets/icons/dot-green.svg'} />
+								Level up shoe NFT <img src={'assets/icons/dot-green.svg'} />
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
