@@ -13,18 +13,19 @@ import {
 	useMediaQuery,
 } from '@mui/material';
 import { TEAM } from '../../constants/common';
+import { ParallaxBanner } from 'react-scroll-parallax';
 
 const Section7: React.FC<any> = ({ sxProps }) => {
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+
 	return (
-		<Container sx={{ ...sxProps, paddingBottom: "22px", '@media (min-width: 768px)': {
-			marginTop: 16
-		} }}>
-			{/* <SectionTitle
-				title={TEAM.TITLE}
-				subtitle={TEAM.SUBTITLE}
-				sxProps={{ mb: 7 }}
-			/> */}
+		<Container sx={{
+			...sxProps, paddingBottom: "22px", '@media (min-width: 768px)': {
+				marginTop: 16
+			},
+			zIndex: 2
+		}}>
+
 			<Box display={'flex'} mb={{ xs: 3, sm: 5 }} alignItems="center" justifyContent="center">
 
 				<Typography
@@ -37,8 +38,9 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 					textAlign="center"
 					sx={{
 						'@media (max-width: 767px)': {
-							
-						}}}
+
+						}
+					}}
 				>
 					ADVISORS
 				</Typography>
@@ -48,11 +50,13 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 				isSm ?
 					<Box display={'flex'} sx={{ flexDirection: { xs: "column", sm: 'row' }, justifyContent: "space-between" }}>
 
-						<Box sx={{ flexDirection: { xs: "column", sm: 'row' }, position: "relative", width: { xs: "100%", sm: "320px" }, paddingBottom: '10px',
-						'@media (max-width: 767px)': {
-							marginBottom: '20px',
-							marginRight: '20px'
-						} }}>
+						<Box sx={{
+							flexDirection: { xs: "column", sm: 'row' }, position: "relative", width: { xs: "100%", sm: "320px" }, paddingBottom: '10px',
+							'@media (max-width: 767px)': {
+								marginBottom: '20px',
+								marginRight: '20px'
+							}
+						}}>
 							<Box position="absolute" sx={{ inset: 0, zIndex: 0 }}>
 								<img width={"100%"} height={"100%"} src={isSm ? "assets/dark/sec7_3.png" : "assets/dark/sec7_2.png"} />
 							</Box>
@@ -128,11 +132,12 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 							</Box>
 
 						</Box>
-						<Box sx={{ flexDirection: { xs: "column", sm: 'row' }, mt: 5, position: "relative", width: { xs: "100%", sm: "320px" }, paddingBottom: '10px',
-						'@media (max-width: 1440px)': {
-							marginTop: '0 !important'
-						}
-					 }}>
+						<Box sx={{
+							flexDirection: { xs: "column", sm: 'row' }, mt: 5, position: "relative", width: { xs: "100%", sm: "320px" }, paddingBottom: '10px',
+							'@media (max-width: 1440px)': {
+								marginTop: '0 !important'
+							}
+						}}>
 							<Box position="absolute" sx={{ inset: 0, zIndex: 0 }}>
 								<img width={"100%"} height={"100%"} src={isSm ? "assets/dark/sec7_3.png" : "assets/dark/sec7_2.png"} />
 							</Box>
@@ -237,30 +242,32 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 								>
 									THI TRUONG
 								</Typography>
+								<Typography sx={{
+									color: "#5A6178",
+									fontWeight: "500",
+									fontSize: { xs: "13px", sm: '16px' },
+									mt: { xs: 1, sm: 5 },
+									mr: "-100px",
+									lineHeight: '22px',
+									zIndex: 2
+								}}>
+									Thi is the founder of <span style={{ color: '#55C8FC' }} >
+										Icetea Labs
+									</span> , the company behind Red Kite Launchpad and GameFi.org gaming hub. He is also the incubator, advisor or investor of a couple of blockchain projects such as Faraland, NFTrade, The Unfettered…
+								</Typography>
+								<Typography sx={{
+									color: "#5A6178",
+									fontWeight: "500",
+									fontSize: { xs: "13px", sm: '16px' },
+									mt: 2,
+									mb: { xs: 3, sm: '0px' },
+									lineHeight: '22px',
+									zIndex: 2
+								}}>
+									Before founding Icetea Labs, Thi worked for Kyber Network and FPT Software.
+								</Typography>
 							</Box>
-							<Typography sx={{
-								color: "#5A6178",
-								fontWeight: "500",
-								fontSize: { xs: "13px", sm: '16px' },
-								mt: { xs: 1, sm: 5 },
-								mr: "-100px",
-								lineHeight: '22px'
 
-							}}>
-								Thi is the founder of <span style={{ color: '#55C8FC' }} >
-									Icetea Labs
-								</span> , the company behind Red Kite Launchpad and GameFi.org gaming hub. He is also the incubator, advisor or investor of a couple of blockchain projects such as Faraland, NFTrade, The Unfettered…
-							</Typography>
-							<br />
-							<Typography sx={{
-								color: "#5A6178",
-								fontWeight: "500",
-								fontSize: { xs: "13px", sm: '16px' },
-								mb: { xs: 3, sm: '0px' },
-								lineHeight: '22px'
-							}}>
-								Before founding Icetea Labs, Thi worked for Kyber Network and FPT Software.
-							</Typography>
 
 						</Box>
 						<Box sx={{ flexDirection: { xs: "column", sm: 'row' }, width: { xs: "100%", sm: "320px" } }}>
@@ -296,30 +303,31 @@ const Section7: React.FC<any> = ({ sxProps }) => {
 								>
 									HATU SHEIKH
 								</Typography>
+								<Typography sx={{
+									color: "#5A6178",
+									fontWeight: "500",
+									fontSize: { xs: "13px", sm: '16px' },
+									mt: { xs: 1, sm: 5 },
+									lineHeight: '22px',
+									mr: "-100px",
+									zIndex: { xs: 1, sm: 0 }
+								}}>
+									Hatu is the co-founder, chief marketing, and strategy in <span style={{ color: '#55C8FC' }} >
+										Dao Maker
+									</span>. He defines himself as an analyst with the business intuition necessary to analyze opportunities for growth.
+								</Typography>
+
+								<Typography sx={{
+									color: "#5A6178",
+									fontWeight: "500",
+									fontSize: { xs: "13px", sm: '16px' },
+									mb: { xs: 3, sm: '0px' },
+									lineHeight: '22px',
+									mt: 2,
+								}}>
+									Before co-founding Dao Maker, he had years of experience in analytical roles, marketing, management, and entrepreneurial ventures.
+								</Typography>
 							</Box>
-							<Typography sx={{
-								color: "#5A6178",
-								fontWeight: "500",
-								fontSize: { xs: "13px", sm: '16px' },
-								mt: { xs: 1, sm: 5 },
-								lineHeight: '22px',
-								mr: "-100px",
-								zIndex: { xs: 1, sm: 0 }
-							}}>
-								Hatu is the co-founder, chief marketing, and strategy in <span style={{ color: '#55C8FC' }} >
-									Dao Maker
-								</span>. He defines himself as an analyst with the business intuition necessary to analyze opportunities for growth.
-							</Typography>
-							<br />
-							<Typography sx={{
-								color: "#5A6178",
-								fontWeight: "500",
-								fontSize: { xs: "13px", sm: '16px' },
-								mb: { xs: 3, sm: '0px' },
-								lineHeight: '22px'
-							}}>
-								Before co-founding Dao Maker, he had years of experience in analytical roles, marketing, management, and entrepreneurial ventures.
-							</Typography>
 
 						</Box>
 					</Box>

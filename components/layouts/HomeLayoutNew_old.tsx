@@ -5,6 +5,7 @@ import { META_TITLE, META_DESC } from '../../constants/head';
 import HomeHeader from '../headers/HomeHeader';
 import MainFooter from '../footers/MainFooter';
 import HomeHeaderNew from '../headers/HomeHeaderNew';
+import { ParallaxProvider } from 'react-scroll-parallax';
 
 const HomeLayoutNew: React.FC<any> = ({ sxProps, children, headerLandingPage, currentPage }) => {
 
@@ -39,10 +40,13 @@ const HomeLayoutNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 					flexDirection: 'column',
 				}}
 			>
-				<HomeHeaderNew headerLandingPage={headerLandingPage} currentPage={currentPage} />
-				<Box component="main" flexGrow={1} sx={{ ...sxProps, overflow: 'hidden' }}>
-					{children}
-				</Box>
+				<ParallaxProvider>
+					<HomeHeaderNew headerLandingPage={headerLandingPage} currentPage={currentPage} />
+					<Box component="main" flexGrow={1} sx={{ ...sxProps, overflow: 'hidden' }}>
+						{children}
+					</Box>
+				</ParallaxProvider>
+
 
 
 

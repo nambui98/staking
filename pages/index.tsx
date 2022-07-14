@@ -58,6 +58,7 @@ import Section9 from '../containers/home/section9';
 import { Box } from '@mui/system';
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { ParallaxBanner } from 'react-scroll-parallax';
 const Home: NextPage = () => {
 	const [height, setHeight] = useState<number>();
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
@@ -150,8 +151,30 @@ const Home: NextPage = () => {
 			</Box> */}
 			<Section6 />
 		</Box>,
-		<Box key={"7"} sx={{ backgroundImage: { xs: "transparent", sm: `url(assets/dark/sec7.png)` }, backgroundRepeat: "no-repeat", backgroundPosition: "bottom", paddingTop: "1px" }}>
-			<Section7 />
+		<Box key={"7"}
+			height="100vh"
+		// sx={{ 
+		// 	backgroundImage: { xs: "transparent", sm: `url(assets/dark/sec7.png)` }, backgroundRepeat: "no-repeat", backgroundPosition: "bottom", paddingTop: "1px" }}
+		>
+			<ParallaxBanner
+				style={{ height: "100%" }}
+				layers={[
+					{ image: 'assets/dark/sec7_5.png', style: { backgroundRepeat: "no-repeat", inset: "100px 0px", backgroundSize: "contain", backgroundPosition: "0px 0px" }, speed: 40, },
+					{ image: 'assets/dark/sec7_4.png', style: { backgroundRepeat: "no-repeat", inset: "550px 0px", backgroundPosition: "bottom", backgroundSize: "cover", height: "306px" } },
+					{
+						children: [
+
+
+
+						]
+					}
+					// { image: '/static/banner-foreground.png', speed: -10 },
+				]}
+				className="aspect-[2/1]"
+			>
+				<Section7 />
+			</ParallaxBanner>
+			{/* <Section7 /> */}
 		</Box>,
 		<Box key={"8"} >
 			<Section8 />
