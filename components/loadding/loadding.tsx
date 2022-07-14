@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Loading.module.css";
-
+import logo from 'assets/gif-loading.gif'
 const Loading: React.FC<any> = (props) => {
 	return (
 		<div
@@ -9,8 +9,27 @@ const Loading: React.FC<any> = (props) => {
 					styles.body_loading : styles.none}
 		>
 			<div>
-
-				<div className={styles.spinner}></div>
+				<video
+					autoPlay={true}
+					loop
+					muted
+					playsInline
+				>
+					<source
+						src={"assets/loading.webm"}
+						type='video/mp4; codecs="hvc1"'
+					/>
+					<source
+						src={"assets/loading.webm"}
+						type="video/webm"
+					/>
+					<source
+						src={"assets/loading.webm"}
+						type="video/mov"
+					/>
+				</video>
+				{/* <img src={'assets/loading.webm'} alt="loading..." /> */}
+				{/* <div className={styles.spinner}></div> */}
 			</div>
 		</div>
 		// <div
