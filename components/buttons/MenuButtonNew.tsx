@@ -128,7 +128,11 @@ const MenuButton: React.FC<any> = ({ dark = true, customImage }) => {
 										spacing={0}
 										alignItems="center"
 										justifyContent="center"
-										sx={{ height: isMobile1140 ? '100vh' : '100%' }}
+										sx={{ height: isMobile1140 ? '100vh' : '100%',
+										'@media (min-width: 768px)': {
+											alignItems: 'flex-end'
+										}
+									 }}
 									>
 										{(isMobile1140 ? MENU_ITEMS_MOBILE : MENU_ITEMS_HOME).map(({ title, href }) => (
 											href !== '#' ? <Link href={href} key={title} target="_blank">

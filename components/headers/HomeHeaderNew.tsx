@@ -31,33 +31,6 @@ const MAIN_MENU = [
 	{ name: 'Business Paper', link: '/business' },
 	// { name: 'manifesto', link: '' }
 ]
-
-const Logo: React.FC<any> = () => {
-	return (
-		<Link href={'/'}>
-			<Box
-				component={'a'}
-				sx={{
-					display: 'flex',
-					alignItems: 'center',
-					cursor: 'pointer',
-					'@media (max-width: 768px)': {
-						img: {
-							width: '150px',
-							height: 'auto'
-						}
-					}
-				}}
-			>
-				<img src={HOME_LOGO} alt="Logo" width={'auto'} height={40} />
-
-
-				<Link target="_blank" href={'https://www.securichain.io/audits/2022/beFITTERTokenAudit_Public.pdf'}><BoxSecurichain>{<img src={SECURICHAIN_LOGO} />}</BoxSecurichain></Link>
-
-			</Box>
-		</Link>
-	);
-};
 const BoxSecurichain = styled(Box)({
 	margin: 'auto auto auto 24px',
 	'@media (max-width: 1100px)': {
@@ -79,7 +52,6 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 	const isMobile992 = useMediaQuery('(max-width:992px)');
 	const isMobile = useMediaQuery('(max-width:599px)');
 	const isMobile1500 = useMediaQuery('(max-width: 1500px)');
-
 	const isMobile1140 = useMediaQuery('(max-width: 1140px)');
 
 	const handleCommingSoon = () => {
@@ -94,6 +66,33 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 		});
 	}
 
+	const Logo: React.FC<any> = () => {
+		return (
+			<Link href={'/'}>
+				<Box
+					component={'a'}
+					sx={{
+						display: 'flex',
+						alignItems: 'center',
+						cursor: 'pointer',
+						'@media (max-width: 599px)': {
+							img: {
+								width: '33.33px',
+								height: 'auto'
+							}
+						}
+					}}
+				>
+					<img src={isMobile ? 'assets/logo/logo.png' : HOME_LOGO} alt="Logo" width={'auto'} height={40} />
+	
+	
+					<Link target="_blank" href={'https://www.securichain.io/audits/2022/beFITTERTokenAudit_Public.pdf'}><BoxSecurichain>{<img src={SECURICHAIN_LOGO} />}</BoxSecurichain></Link>
+	
+				</Box>
+			</Link>
+		);
+	};
+
 	return (
 		<Box component={'header'}>
 			<AppBar
@@ -107,7 +106,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 					// borderBottom: currentPage === '1' ? '0' : '1px solid #E9EAEF',
 					transition: 'all ease 0.2s ',
 					'@media (min-width: 768px)': {
-						padding: '14px 0',
+						padding: '2px 0',
 					}
 				}}
 			>
@@ -127,7 +126,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 						<Logo />
 						{/* {!isMobile992 &&  */}
 						<MainMenu>
-							{!isMobile1140 && <ButtonApp className="button" onClick={() => setStatusPopup(true)}>
+							<ButtonApp className="button" onClick={() => setStatusPopup(true)}>
 								<Box className="button-wrapper">
 									<Box className="text" sx={{
 										...TEXT_STYLE(20, 600, '#ffffff'), fontFamily: 'Electrofied',
@@ -139,7 +138,7 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 									}}>GET THE APP</Box>
 
 								</Box>
-							</ButtonApp>}
+							</ButtonApp>
 
 							{!isMobile1140 && <Link href={'/staking'}>
 								<MenuItem hover={true}>
@@ -250,4 +249,13 @@ const ButtonApp = styled(Button)({
 		background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
 		boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)',
 	},
+	'@media (max-width: 767px)': {
+		height: '31px !important',
+		width: 140,
+		backgroundPosition: '100%',
+		backgroundSize: 'cover',
+		'& div': {
+			...TEXT_STYLE(14, 600, '#ffffff'),
+		}
+	}
 })
