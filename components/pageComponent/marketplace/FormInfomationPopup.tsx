@@ -310,6 +310,9 @@ const BoxForm = styled(FormControl)({
   overflow: 'auto',
   paddingRight: 10,
   marginTop: 20,
+  '@media (max-width: 400px)': {
+    maxHeight: 300,
+  },
   '&::-webkit-scrollbar': {
     width: 4,
   },
