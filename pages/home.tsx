@@ -43,7 +43,7 @@ import Team from '../components/sections/Team';
 import Roadmap from '../components/sections/Roadmap';
 import StayInTouch from '../components/sections/StayInTouch';
 import OpenIno from '../components/pageComponent/home/openIno';
-import HomeLayoutNew from '../components/layouts/HomeLayoutNew';
+import HomeLayoutNew from '../components/layouts/HomeLayoutNew_old';
 import ReactFullpage from '@fullpage/react-fullpage';
 import MainFooter from '../components/footers/MainFooter';
 import Section2 from '../containers/home/section2';

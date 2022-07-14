@@ -14,8 +14,8 @@ const BounceIconButton: React.FC<any> = ({
 	icon,
 	iconActive,
 	href = '#',
-	width = 45,
-	height = 45,
+	width = 32,
+	height = 32,
 }) => (
 	<Stack
 		component="a"
@@ -23,7 +23,7 @@ const BounceIconButton: React.FC<any> = ({
 		href={href}
 		target="_blank"
 		sx={{
-			borderRadius: '12px',
+			// borderRadius: '100%',
 			// py: 0.5,
 			'& span': {
 				transition: '.5s all cubic-bezier(0.7, -0.4, 0.4, 1.4)',
@@ -33,6 +33,7 @@ const BounceIconButton: React.FC<any> = ({
 				'& span': {
 					background: `url(${iconActive}) no-repeat center`,
 					transform: `translateY(-8px)`,
+					backgroundSize: "cover"
 				},
 				'& div': {
 					opacity: 0.8,
@@ -47,9 +48,10 @@ const BounceIconButton: React.FC<any> = ({
 				width: width,
 				height: height,
 				background: `url(${icon}) no-repeat center`,
+				backgroundSize: "cover"
 			}}
 		></Box>
-		<Box
+		{/* <Box
 			sx={{
 				mt: 0.5,
 				width: 32,
@@ -58,7 +60,7 @@ const BounceIconButton: React.FC<any> = ({
 				opacity: 0,
 				filter: 'blur(8px)',
 			}}
-		></Box>
+		></Box> */}
 	</Stack>
 );
 

@@ -42,7 +42,7 @@ import Team from '../components/sections/Team';
 import Roadmap from '../components/sections/Roadmap';
 import StayInTouch from '../components/sections/StayInTouch';
 import OpenIno from '../components/pageComponent/home/openIno';
-import HomeLayoutNew from '../components/layouts/HomeLayoutNew';
+import HomeLayoutNew from '../components/layouts/HomeLayoutNew_old';
 import ReactFullpage from '@fullpage/react-fullpage';
 import MainFooter from '../components/footers/MainFooter';
 import Section2 from '../containers/home/section2';
@@ -56,115 +56,137 @@ import Section8 from '../containers/home/section8';
 import { PopupApp } from '../containers/home/PopupApp';
 import Section9 from '../containers/home/section9';
 import { Box } from '@mui/system';
-// import "./styles.css";
-const SEL = "custom-section";
-const SECTION_SEL = `.${SEL}`;
-// NOTE: if using fullpage extensions/plugins put them here and pass it as props.
-const pluginWrapper = () => {
-	/*
-	 * require('./fullpage.fadingEffect.min'); // Optional. Required when using the "fadingEffect" extension.
-	 */
-};
-
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { ParallaxBanner } from 'react-scroll-parallax';
 const Home: NextPage = () => {
 	const [height, setHeight] = useState<number>();
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	const [statusPopup, setStatusPopup] = useState(false);
 	const [currentPage, setCurrentPage] = useState('1');
+	const isMobile767 = useMediaQuery('(max-width: 767px)');
+	const isMobile991 = useMediaQuery('(max-width: 991px)');
 
 	const windowHeightListener = () => {
 		setHeight(window.innerHeight);
 	};
 
 	useEffect(() => {
-		windowHeightListener();
-		setTimeout(() => {
-			windowHeightListener();
-		}, 100);
-		window.addEventListener('resize', windowHeightListener);
-		return () => {
-			window.removeEventListener('resize', windowHeightListener);
-		};
+		AOS.init();
+		AOS.refresh();
 	}, []);
-	const onLeave = (origin: any, destination: any, direction: any) => {
-		setCurrentPage(destination.anchor)
-	}
+
+	useEffect(() => {
+		windowHeightListener();
+		// setTimeout(() => {
+		// 	windowHeightListener();
+		// }, 100);
+		// window.addEventListener('resize', windowHeightListener);
+		// return () => {
+		// 	window.removeEventListener('resize', windowHeightListener);
+		// };
+	}, []);
+	console.log(height);
 	const SECTIONS = [
 		<Box
 			key={"1"}
-			className={SEL}
+
 			sx={{
 				height: height,
 				position: 'relative',
+				overflow: 'hidden',
 			}}
 		>
 			<Section1 statusPopup={statusPopup} handleStatusPopup={setStatusPopup} />
 		</Box>,
 		<Box sx={{
-			height: { xs: height, sm: '100%' },
+			// height: { xs: height, sm: '100%' },
 			display: { sx: 'block', sm: 'flex' }, alignItems: 'center'
 
 			// position: 'relative',
-		}} className={SEL} key={"2"} >
+		}} key={"2"} >
 			<Section2 />
 		</Box >
 		,
 		<Box sx={{
-
-			height: { xs: height, sm: '100%' },
+			height: height,
 			position: 'relative',
-		}} className={SEL} key={"3"}>
+			'@media (min-width: 3000px)': {
+				// paddingTop: "24px",
+				height: "1200px"
+			}
+		}} key={"3"}>
 			<Section3 />
 		</Box>
 		,
-		<Box className={SEL} key={"4"}>
+		<Box key={"4"} sx={{
+
+			height: { xs: "auto", sm: height },
+			position: 'relative',
+		}}>
 			<Section4 />
-		</Box>,
-		<Box className={SEL} key={"5"}>
+		</Box >,
+		<Box key={"5"} sx={{
+			height: isMobile991 ? 'auto' : height,
+
+			position: 'relative',
+			display: "flex",
+			alignItems: "center",
+			// backgroundImage: 'url(assets/sec5/bg.png)',
+			// backgroundPosition: 'top left',
+			// backgroundSize: 'contain',
+			// backgroundRepeat: 'no-repeat',
+		}}>
+
 			<Section5 />
 		</Box>,
-		<Box className={SEL} key={"6"}>
+		<Box key={"6"} sx={{
+
+			// height: height,
+			// position: 'relative',
+		}}>
+			{/* <Box data-aos-offset="600"
+
+				data-aos-duration="1000" data-aos="fade-left" sx={{ position: 'absolute', right: 0, top: "30%" }}>
+				<img width={"100%"} src={`assets/sec4/bg_right.png`} style={{ objectFit: "cover" }} alt="" />
+			</Box> */}
 			<Section6 />
 		</Box>,
-		<Box className={SEL} key={"7"}>
-			<Section7 />
+		<Box key={"7"}
+			height="100vh"
+		// sx={{ 
+		// 	backgroundImage: { xs: "transparent", sm: `url(assets/dark/sec7.png)` }, backgroundRepeat: "no-repeat", backgroundPosition: "bottom", paddingTop: "1px" }}
+		>
+			{isMobile767 ? <Section7 /> : <ParallaxBanner
+				style={{ height: "100%" }}
+				layers={[
+					{ image: 'assets/dark/sec7_5.png', style: { backgroundRepeat: "no-repeat", inset: "100px 0px", backgroundSize: "contain", backgroundPosition: "0px 0px" }, speed: 40, },
+					{ image: 'assets/dark/sec7_4.png', style: { backgroundRepeat: "no-repeat", inset: "550px 0px", backgroundPosition: "bottom", backgroundSize: "cover", height: "306px" } },
+					{
+						children: [
+						]
+					}
+				]}
+				className="aspect-[2/1]"
+			>
+				<Section7 />
+			</ParallaxBanner>}
 		</Box>,
-		<Box className={SEL} key={"8"}>
+		<Box key={"8"} >
 			<Section8 />
-
 		</Box>,
 		<Box sx={{
-
-			height: { xs: height, sm: '100%' },
+			backgroundColor: "#151515",
 			position: 'relative',
-		}} className={SEL} key={"9"}>
+		}} key={"9"}>
 			<Section9 />
-		</Box>,
+		</Box>
 	]
 	const isMobile = useMediaQuery('(max-width:599px)');
 	return (
-		<HomeLayoutNew sxProps={{ background: '#fff' }} headerLandingPage={true} currentPage={currentPage}>
-			{
-				isMobile ? SECTIONS :
-					<ReactFullpage
-						// debug /* Debug logging */
-						// Required when using extensions
-						pluginWrapper={pluginWrapper}
+		<HomeLayoutNew sxProps={{ background: '#1C1E29' }} headerLandingPage={true} currentPage={currentPage}>
+			{SECTIONS}
 
-						// fullpage options
-						// licenseKey={"YOUR_KEY_HERE"} // Get one from https://alvarotrigo.com/fullPage/pricing/
-						// navigation
-						anchors={["1", "2", "3", "4", "5", "6", "7", "8", "9"]}
-						sectionSelector={SECTION_SEL}
-						onLeave={onLeave}
-						// sectionsColor={[...originalColors]}
-						render={(comp) => (
-							<ReactFullpage.Wrapper>
-								{SECTIONS}
-							</ReactFullpage.Wrapper>
-						)}
-					/>
-			}
 
 			<PopupApp statusPopup={statusPopup} handleToggleStatusPopup={setStatusPopup} />
 		</HomeLayoutNew>

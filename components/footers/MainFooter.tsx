@@ -166,7 +166,7 @@ const SendButton: React.FC<any> = ({ onClick }) => (
 	</Button>
 );
 
-const SupportForm: React.FC<any> = ({ handleClose }) => {
+const SupportForm: React.FC<any> = ({ handleClose, customBackground }) => {
 	const [showBackdrop, setShowBackdrop] = React.useState<boolean>(false);
 	const [textEmail, setTextEmail] = React.useState<string>('');
 	const [textDesc, setTextDesc] = React.useState<string>('');
@@ -359,7 +359,7 @@ const SupportPopup: React.FC<any> = ({ handleClose }) => (
 	</Stack>
 );
 
-const MainFooter: React.FC<any> = ({ sxProps, children }) => {
+const MainFooter: React.FC<any> = ({ sxProps, children, customBackground }) => {
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	const [showForm, setShowForm] = React.useState<boolean>(false);
 	const [showPopup, setShowPopup] = React.useState<boolean>(false);
@@ -388,7 +388,7 @@ const MainFooter: React.FC<any> = ({ sxProps, children }) => {
 		<Box
 			component={'footer'}
 			sx={{
-				background: '#272B3F',
+				background: customBackground ? 'unset' : '#272B3F',
 				position: 'relative',
 				height: { xs: 'unset', md: 263 },
 			}}
