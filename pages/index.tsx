@@ -56,7 +56,8 @@ import Section8 from '../containers/home/section8';
 import { PopupApp } from '../containers/home/PopupApp';
 import Section9 from '../containers/home/section9';
 import { Box } from '@mui/system';
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { ParallaxBanner } from 'react-scroll-parallax';
 const Home: NextPage = () => {
 	const [height, setHeight] = useState<number>();
@@ -64,12 +65,16 @@ const Home: NextPage = () => {
 	const [statusPopup, setStatusPopup] = useState(false);
 	const [currentPage, setCurrentPage] = useState('1');
 	const isMobile767 = useMediaQuery('(max-width: 767px)');
+	const isMobile991 = useMediaQuery('(max-width: 991px)');
 
 	const windowHeightListener = () => {
 		setHeight(window.innerHeight);
 	};
 
-
+	useEffect(() => {
+		AOS.init();
+		AOS.refresh();
+	}, []);
 
 	useEffect(() => {
 		windowHeightListener();
@@ -104,7 +109,6 @@ const Home: NextPage = () => {
 		</Box >
 		,
 		<Box sx={{
-
 			height: height,
 			position: 'relative',
 			'@media (min-width: 3000px)': {
@@ -123,7 +127,7 @@ const Home: NextPage = () => {
 			<Section4 />
 		</Box >,
 		<Box key={"5"} sx={{
-			height: height,
+			height: isMobile991 ? 'auto' : height,
 
 			position: 'relative',
 			display: "flex",
@@ -182,6 +186,7 @@ const Home: NextPage = () => {
 	return (
 		<HomeLayoutNew sxProps={{ background: '#1C1E29' }} headerLandingPage={true} currentPage={currentPage}>
 			{SECTIONS}
+
 
 			<PopupApp statusPopup={statusPopup} handleToggleStatusPopup={setStatusPopup} />
 		</HomeLayoutNew>

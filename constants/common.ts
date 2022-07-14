@@ -11,8 +11,9 @@ export const MENU_ITEMS = [
 	{ title: 'Whitepaper', href: 'https://whitepaper.befitter.io/' },
 ];
 export const MENU_ITEMS_HOME = [
-	{ title: 'Staking', href: '/staking' },
-	{ title: 'HUB', href: 'https://hub.befitter.io/' },
+	// { title: 'Staking', href: '/staking' },
+	// { title: 'HUB', href: 'https://hub.befitter.io/' },
+	{title: 'MANIFESTO', href: '#'},
 	{ title: 'WHITEPAPER', href: 'https://whitepaper.befitter.io/' },
 	// { title: 'ABOUT', href: '#' },
 	// { title: 'CONTACT', href: '#' },

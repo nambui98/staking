@@ -16,15 +16,15 @@ const Loading: React.FC<any> = (props) => {
 					playsInline
 				>
 					<source
-						src={"assets/loading.webm"}
+						src={"assets/loading.mp4"}
 						type='video/mp4; codecs="hvc1"'
 					/>
 					<source
-						src={"assets/loading.webm"}
+						src={"assets/loading.mp4"}
 						type="video/webm"
 					/>
 					<source
-						src={"assets/loading.webm"}
+						src={"assets/loading.mp4"}
 						type="video/mov"
 					/>
 				</video>

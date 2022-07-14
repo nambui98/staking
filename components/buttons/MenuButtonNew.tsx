@@ -107,7 +107,7 @@ const MenuButton: React.FC<any> = ({ dark = true, customImage }) => {
 								sx={{
 									position: 'relative',
 									width: isMobile1140 ? '100vw' : 220,
-									height: isMobile1140 ? '100vh' : 188,
+									height: isMobile1140 ? '100vh' : 130,
 									marginRight: isMobile1140 ? 0 : '-16px',
 									marginTop: isMobile1140 ? 0 : '-20px'
 								}}
@@ -149,8 +149,10 @@ const MenuButton: React.FC<any> = ({ dark = true, customImage }) => {
 											</Link> : <ButtonLink onClick={handleCommingSoon}
 												variant="text"
 											>
-												<div>{title}</div>
-												<div>{title}</div>
+												<Box sx={hover}>
+														<div>{title}</div>
+														<div>{title}</div>
+													</Box>
 											</ButtonLink>
 										))}
 									</Stack>

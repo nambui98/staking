@@ -154,10 +154,10 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 									</MenuItem>
 								</Link>
 							))}
-							{!isMobile1500 && <MenuItem onClick={() => handleCommingSoon()} hover={true}>
+							{/* {!isMobile1500 && <MenuItem onClick={() => handleCommingSoon()} hover={true}>
 								<div>manifesto</div>
 								<div>manifesto</div>
-							</MenuItem>}
+							</MenuItem>} */}
 							<MenuButtonNew customImage={'40px'} />
 						</MainMenu>
 						{/* } */}

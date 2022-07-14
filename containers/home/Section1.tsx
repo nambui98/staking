@@ -143,7 +143,7 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 							marginRight: '16px'
 						},
 						'& img:first-of-type': {
-							maxWidth: '90px'
+							maxWidth: '80px'
 						}
 					}
 				}}>

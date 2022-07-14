@@ -40,11 +40,8 @@ const Section5: NextPage = () => {
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	return (
 		<Wrap sx={{
-			marginTop: { xs: '80px', sm: '0px' },
+			marginTop: { xs: '0', sm: '0px' },
 			position: 'relative',
-			// alignItems: { xs: "center", sm: 'normal' },
-			// display: 'flex',
-			// justifyContent: { xs: "center", sm: 'normal' },
 		}}>
 			<Box data-aos-offset="2400"
 
@@ -52,6 +49,16 @@ const Section5: NextPage = () => {
 					'@media (min-width: 768px)': {
 						'& img': {
 							transform: 'scale(1.4)'
+						}
+					},
+					'@media (max-width: 991px)': {
+						top: '50%',
+						left: '50%',
+						width: '100vw',
+						height: '100%',
+						transform: 'translate(-50%, -50%) !important',
+						'& img': {
+							height: '100%'
 						}
 					}
 				}}>
@@ -64,7 +71,10 @@ const Section5: NextPage = () => {
 					sx={{
 						alignItems: "flex-end",
 						justifyContent: { xs: "center", sm: 'normal' },
-						flexWrap: { xs: "wrap", sm: 'nowrap' }
+						flexWrap: { xs: "wrap", sm: 'nowrap' },
+						'@media (max-width: 991px)': {
+							marginBottom: '40px' 
+						}
 					}}
 				>
 
@@ -119,6 +129,10 @@ const Section5: NextPage = () => {
 						pr: 4,
 						pl: 4,
 						flexDirection: { xs: 'column', sm: 'row' },
+						'@media (max-width: 991px)': {
+							flexDirection: 'column',
+							backgroundImage: 'none'
+						}
 					}
 
 
@@ -185,6 +199,9 @@ const MenuItem = styled(Box)((props) => ({
 			opacity: 0,
 		}
 	},
+	'@media (max-width: 991px)': {
+		marginBottom: '48px'
+	}
 }))
 const Wrap = styled(Stack)({
 	padding: '0 16px',
