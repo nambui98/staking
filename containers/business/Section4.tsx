@@ -33,7 +33,7 @@ export const Section4 = () => {
 						</Title> */}
 					</Box>
 			}
-			<SubTitle sx={{ fontSize: { xs: "20px", sm: '48px' }, lineHeight: { xs: "30px", sm: '72px' } }}>A portion of the revenue in tokens are permanently destroyed via token burning. This immediately reduces the total supply of tokens.</SubTitle>
+			<SubTitle sx={{ fontSize: { xs: "20px", sm: '48px' }, lineHeight: { xs: "30px", sm: '72px' } }}>A  portion of the revenue in $HEE tokens are permanently destroyed via token burning. This immediately reduces the circulating supply of tokens.</SubTitle>
 			<Box sx={{ ...flex, justifyContent: "space-between", marginTop: { xs: "32px", md: "80px" }, flexDirection: { xs: "column", sm: "row" } }}>
 				<Box>
 					<Title sx={{}}>
