@@ -40,18 +40,42 @@ const Section5: NextPage = () => {
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	return (
 		<Wrap sx={{
-			marginTop: { xs: '88px', sm: '0px' }
-			// alignItems: { xs: "center", sm: 'normal' },
-			// display: 'flex',
-			// justifyContent: { xs: "center", sm: 'normal' },
+			marginTop: { xs: '0', sm: '0px' },
+			position: 'relative',
 		}}>
-			{/* <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage> */}
-			<Box display={'flex'} mb={4} alignItems="center" flexDirection={"column"} >
+			<Box data-aos-offset="2400"
+
+				data-aos-duration="1500" data-aos="fade-right" sx={{
+					position: 'absolute', top: '-280px', left: "0px", width: '100%',
+					'@media (min-width: 768px)': {
+						'& img': {
+							transform: 'scale(1.4)'
+						}
+					},
+					'@media (max-width: 991px)': {
+						top: '50%',
+						left: '50%',
+						width: '100vw',
+						height: '100%',
+						transform: 'translate(-50%, -50%) !important',
+						'& img': {
+							height: '100%'
+						}
+					}
+				}}>
+				<img width={"100%"} src={`assets/sec5/bg_2.png`} style={{ objectFit: "cover" }} alt="" />
+			</Box>
+
+
+			<Box display={'flex'} zIndex={1} mb={4} alignItems="center" flexDirection={"column"} >
 				<Box display={'flex'} mb={4}
 					sx={{
 						alignItems: "flex-end",
 						justifyContent: { xs: "center", sm: 'normal' },
-						flexWrap: { xs: "wrap", sm: 'nowrap' }
+						flexWrap: { xs: "wrap", sm: 'nowrap' },
+						'@media (max-width: 991px)': {
+							marginBottom: '40px'
+						}
 					}}
 				>
 
@@ -74,7 +98,7 @@ const Section5: NextPage = () => {
 						fontFamily='Electrofied'
 						fontStyle={'italic'}
 						fontWeight={800}
-						color="#31373E"
+						color="#fff"
 						mr={{ xs: 1, sm: 2 }}
 						ml={{ xs: 1, sm: 2 }}
 					>
@@ -105,7 +129,11 @@ const Section5: NextPage = () => {
 						width: '100%',
 						pr: 4,
 						pl: 4,
-						flexDirection: { xs: 'column', sm: 'row' }
+						flexDirection: { xs: 'column', sm: 'row' },
+						'@media (max-width: 991px)': {
+							flexDirection: 'column',
+							backgroundImage: 'none'
+						}
 					}
 
 
@@ -124,13 +152,11 @@ const Section5: NextPage = () => {
 
 
 							}}>
-								<BoxImage p={{ xs: 2, sm: 4 }}>
-									{
-										activeIndex == index ?
-											<img height={'48px'} src={item.active} />
-											: <img height={'48px'} src={item.inActive} />
-									}
-								</BoxImage>
+								<MenuItem >
+									<div>	<img height={'48px'} src={item.inActive} />
+									</div>
+									<div> <img height={'48px'} src={item.active} /></div>
+								</MenuItem>
 							</a>
 						})
 					}
@@ -143,7 +169,42 @@ const Section5: NextPage = () => {
 }
 
 export default Section5;
-
+const MenuItem = styled(Box)((props) => ({
+	padding: '0px 16px',
+	height: "50px",
+	borderRadius: '12px',
+	marginRight: 16,
+	// ...TEXT_STYLE(20, 600, '#FFF'),
+	fontFamily: 'BeVietnamPro',
+	textTransform: 'uppercase',
+	color: '#FFF',
+	cursor: 'pointer',
+	overflow: 'hidden',
+	transition: 'all .4s',
+	'& div': {
+		transition: 'all .2s',
+		'&:last-child': {
+			opacity: 0,
+			position: 'relative',
+		}
+	},
+	'&:last-of-type': {
+		marginRight: 0
+	},
+	'&:hover div': {
+		transform: "translateY(-100%)",
+		color: '#FF6D24',
+		'&:last-child': {
+			opacity: 1,
+		},
+		'&:first-child': {
+			opacity: 0,
+		}
+	},
+	'@media (max-width: 991px)': {
+		marginBottom: '48px'
+	}
+}))
 const Wrap = styled(Stack)({
 	padding: '0 16px',
 	maxWidth: '1120px',

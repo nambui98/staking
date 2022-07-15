@@ -1,5 +1,5 @@
 import { Box, Stack, styled, Tabs, Typography, useMediaQuery } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+// import { makeStyles } from "@mui/styles";
 import { NextPage } from "next";
 import { useState } from "react";
 import Tab from '@mui/material/Tab';
@@ -209,15 +209,14 @@ const Section3: NextPage = () => {
 	return (
 		<Box sx={{
 			// backgroundImage: `url(assets/bg_sec3.png)`,
-			backgroundColor: '#000',
+			backgroundColor: '#151515',
 			height: '100%',
 			width: "100%",
 			backgroundPosition: 'center',
 			backgroundRepeat: 'no-repeat',
 			backgroundSize: 'cover',
 			overflow: 'hidden',
-			// padding: '29px auto 50px',
-
+			marginTop: { xs: '0px', sm: 20 }
 		}}>
 
 			<Wrap sx={{
@@ -239,7 +238,7 @@ const Section3: NextPage = () => {
 
 				</Box>
 				<Box sx={{ width: '100%' }}>
-					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+					<Box>
 						<Tabs TabIndicatorProps={{
 							sx: {
 								background: "radial-gradient(50% 50% at 50% 50%, #FF6D24 0%, rgba(255, 109, 36, 0) 100%);",
@@ -261,6 +260,7 @@ const Section3: NextPage = () => {
 								flex: '1',
 								margin: isMobile ? "0 5px" : "0 30px",
 								WebkitTextStroke: '0.5px #fff',
+								zIndex: 1,
 								// WebkitTextFillColor: '#000',
 								// textShadow: '0 0 2px #fff',
 								// 						-webkit-text-stroke: 1px black;
@@ -277,6 +277,7 @@ const Section3: NextPage = () => {
 								margin: isMobile ? "0 5px" : "0 30px",
 								WebkitTextStroke: '0.5px #fff',
 								// textShadow: '0 0 2px #fff',
+								zIndex: 1,
 								fontStyle: 'italic',
 								fontFamily: 'Electrofied',
 								fontSize: isMobile ? (activeIndex == 1 ? '20px' : '16px') : activeIndex == 1 ? '32px' : '25px',
@@ -290,6 +291,7 @@ const Section3: NextPage = () => {
 								WebkitTextStroke: '0.5px #fff',
 								// textShadow: '0 0 2px #fff',
 								fontStyle: 'italic',
+								zIndex: 1,
 								fontFamily: 'Electrofied',
 								fontSize: isMobile ? (activeIndex == 2 ? '20px' : '16px') : activeIndex == 2 ? '32px' : '25px',
 								color: '#000'
@@ -299,13 +301,30 @@ const Section3: NextPage = () => {
 
 				</Box>
 			</Wrap>
-			<Box sx={{ position: 'relative', height: "60%" }}>
+			<Box sx={{
+				position: 'relative', height: "60%",
+			}}>
+				{
+					activeIndex == 1 && [
+						<Box key={1} sx={{
+
+							position: 'absolute',
+							top: "calc(50% + 70px)",
+							left: "50%",
+							transform: 'translate(-50%, -50%)',
+							width: { xs: "380px", md: "25%" }
+						}}>
+
+							<img width={"100%"} src="assets/dark/neon-orange-7.png" alt="" />
+						</Box>
+					]
+				}
 
 				{
 					data.map((item: itemType, index: number) => {
 						return <TabPanel key={index} value={activeIndex} index={index} >
 
-							<Box width={isMobile ? '85%' : 500} margin="auto" mt={5} >
+							<Box width={isMobile ? '85%' : "500px"} margin="auto" mt={5}  >
 								<Typography
 									// typography={'span'}
 									fontSize={{ xs: 14, sm: 16 }}
@@ -321,7 +340,15 @@ const Section3: NextPage = () => {
 									{item.subtitle}
 								</Typography>
 							</Box>
+							<Box data-aos-offset="1500"
 
+								data-aos-duration="1500" data-aos="fade-right" sx={{ position: "absolute", zIndex: 0, bottom: "0", left: "0px" }}>
+								<img width={"100%"} src={`assets/sec3/bg_left.png`} style={{ objectFit: "cover" }} alt="" />
+							</Box>
+							<Box data-aos-offset="1500"
+								data-aos-duration="1500" data-aos="fade-left" sx={{ position: "absolute", zIndex: 0, bottom: "0", right: "0px" }}>
+								<img width={"100%"} src={`assets/sec3/bg_right.png`} style={{ objectFit: "cover" }} alt="" />
+							</Box>
 
 							{item.typeContent == "image" ?
 								<Box display="flex" mt={5} alignItems={"center"} justifyContent="center" px={isTablet ? 4 : 0}>
@@ -359,9 +386,11 @@ const Section3: NextPage = () => {
 													// cursor: 'pointer', 
 													position: 'relative', height: "100%",
 													width: "100%",
+
 												}} onClick={() => {
 													// setSlideActiveIndex(index2 + (isTablet ? isMobile ? 2 : 3 : 5))
 												}}>
+
 													<Box sx={{
 														transition: '.8s all',
 														position: 'absolute',
@@ -376,6 +405,7 @@ const Section3: NextPage = () => {
 															objectFit: 'contain',
 															position: 'absolute',
 															inset: '0',
+
 															opacity: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? "1" : "0",
 															transform: slideActiveIndex == index2 + (isTablet ? isMobile ? 2 : 3 : 5) ? (isMobile || isBigDesktop ? "scale(1)" : "scale(1.3)") : (isMobile || isBigDesktop ? "scale(0.5)" : "scale(0.8)")
 														}} src={e.active} />
@@ -446,10 +476,10 @@ const Wrap = styled(Stack)({
 	padding: '0 16px',
 	maxWidth: '1120px',
 	margin: '0px auto 50px',
-	paddingTop: "65px"
-	// '@media (min-width: 560px)': {
-	// 	margin: '29px auto 80px',
-	// }
+	paddingTop: "65px",
+	'@media (max-width: 767px)': {
+		paddingTop: "24px",
+	}
 })
 
 const BoxOpenImage = styled(Box)({

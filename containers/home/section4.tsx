@@ -55,7 +55,7 @@ const Mobile: React.FC<any> = () => {
 						fontFamily='Electrofied'
 						fontStyle={'italic'}
 						fontWeight={800}
-						color="#31373E"
+						color={"#fff"}
 						// mb={5}
 						mr={2}
 						width="250px"
@@ -63,45 +63,45 @@ const Mobile: React.FC<any> = () => {
 						SOCIAL TOKEN
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
-						color="#5A6178"
+						color="#fff"
 						lineHeight="22px"
 						mt={1}
 					>
 						Stake to earn interest and FitterPass
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
-						color="#5A6178"
+						color="#fff"
 						lineHeight="22px"
 						mt={1}
 					>
 						Level up shoe NFT at some levels & Mint
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
-						color="#5A6178"
+						color="#fff"
 						lineHeight="22px"
 						mt={1}
 					>
 						Governance
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
-						color="#5A6178"
+						color="#fff"
 						lineHeight="22px"
 						mt={1}
 					>
 						Pay rental commission fee
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
-						color="#5A6178"
+						color="#fff"
 						lineHeight="22px"
 						mt={1}
 					>
@@ -116,16 +116,16 @@ const Mobile: React.FC<any> = () => {
 					>
 
 						<Typography
-							fontSize={{ xs: 12, sm: 16 }}
+							fontSize={{ xs: 14, sm: 16 }}
 							fontWeight={500}
-							color="#5A6178"
+							color="#fff"
 							lineHeight="22px"
 						>
 							Earn
 						</Typography>
 
 						<Typography
-							fontSize={{ xs: 12, sm: 16 }}
+							fontSize={{ xs: 14, sm: 16 }}
 							fontWeight={800}
 							color="#FF6D24"
 							ml={1}
@@ -136,18 +136,18 @@ const Mobile: React.FC<any> = () => {
 						</Typography>
 
 						<Typography
-							fontSize={{ xs: 12, sm: 16 }}
+							fontSize={{ xs: 14, sm: 16 }}
 							fontWeight={500}
-							color="#5A6178"
+							color="#fff"
 							lineHeight="22px"
 						>
 							in With Pet Mode,
 						</Typography>
 					</Box>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
-						color="#5A6178"
+						color="#fff"
 						lineHeight="22px"
 					>
 						Challenges, Staking
@@ -199,7 +199,7 @@ const Mobile: React.FC<any> = () => {
 						fontFamily='Electrofied'
 						fontStyle={'italic'}
 						fontWeight={800}
-						color="#31373E"
+						color={"#fff"}
 						// mb={5}
 						mr={2}
 						width="250px"
@@ -208,9 +208,9 @@ const Mobile: React.FC<any> = () => {
 						HEALTH TOKEN
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
-						color="#5A6178"
+						color="#fff"
 						textAlign={"right"}
 						mt={1}
 						lineHeight="22px"
@@ -218,9 +218,9 @@ const Mobile: React.FC<any> = () => {
 						Level up shoe NFT
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
-						color="#5A6178"
+						color="#fff"
 						textAlign={"right"}
 						mt={1}
 						lineHeight="22px"
@@ -228,9 +228,9 @@ const Mobile: React.FC<any> = () => {
 						Repair shoe NFT
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
-						color="#5A6178"
+						color="#fff"
 						textAlign={"right"}
 						mt={1}
 						lineHeight="22px"
@@ -238,9 +238,9 @@ const Mobile: React.FC<any> = () => {
 						Transaction fee
 					</Typography>
 					<Typography
-						fontSize={{ xs: 12, sm: 16 }}
+						fontSize={{ xs: 14, sm: 16 }}
 						fontWeight={500}
-						color="#5A6178"
+						color="#fff"
 						textAlign={"right"}
 						mt={1}
 						lineHeight="22px"
@@ -257,9 +257,9 @@ const Mobile: React.FC<any> = () => {
 					>
 
 						<Typography
-							fontSize={{ xs: 12, sm: 16 }}
+							fontSize={{ xs: 14, sm: 16 }}
 							fontWeight={500}
-							color="#5A6178"
+							color="#fff"
 							textAlign={"right"}
 							lineHeight="22px"
 						>
@@ -267,7 +267,7 @@ const Mobile: React.FC<any> = () => {
 						</Typography>
 
 						<Typography
-							fontSize={{ xs: 12, sm: 16 }}
+							fontSize={{ xs: 14, sm: 16 }}
 							fontWeight={800}
 							color="#1DB268"
 							ml={1}
@@ -280,9 +280,9 @@ const Mobile: React.FC<any> = () => {
 
 
 						<Typography
-							fontSize={{ xs: 12, sm: 16 }}
+							fontSize={{ xs: 14, sm: 16 }}
 							fontWeight={500}
-							color="#5A6178"
+							color="#fff"
 							textAlign={"right"}
 							lineHeight="22px"
 						>
@@ -297,10 +297,30 @@ const Mobile: React.FC<any> = () => {
 };
 const Section4: NextPage = () => {
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
-
+	const isMobile959 = useMediaQuery('(max-width: 959px)')
 
 	return (
+		<Wrap sx={{ marginTop: { xs: '0px !important', sm: '0px !important' }, paddingBottom: { xs: "80px", sm: "0px" }, display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+			<Box data-aos-offset="1400"
+
+				data-aos-duration="1500" data-aos="fade-right" sx={{ position: 'absolute', left: 0, top: "30%", }}>
+				<img width={"100%"} src={`assets/sec4/bg_left.png`} style={{ objectFit: "cover" }} alt="" />
+			</Box>
+			<Box data-aos-offset="1400"
+
+				data-aos-duration="1500" data-aos="fade-left" sx={{ position: 'absolute', right: 0, top: "30%" }}>
+				<img width={"100%"} src={`assets/sec4/bg_right.png`} style={{ objectFit: "cover" }} alt="" />
+			</Box>
+			{/* <Box sx={{ position: 'absolute', left: 0, top: "30%" }}>
 		<Wrap sx={{ marginTop: { xs: '0px !important', sm: '0px !important' }, display: 'flex', justifyContent: 'center' }}>
+			{!isMobile959 && <Box sx={{ position: 'absolute', left: 0, top: "30%" }}>
+
+				<img width="auto" src="assets/dark/neon-orange-4.png" />
+			</Box>}
+		{!isMobile959 &&	<Box sx={{ position: 'absolute', right: 0, top: "30%" }}>
+
+				<img width="auto" src="assets/dark/neon-green-4.png" />
+			</Box> */}
 			<Box display={'flex'} mb={4} mt={{ xs: 10, sm: 0 }} alignItems="center" flexDirection={"column"} sx={{
 
 			}}>
@@ -316,12 +336,12 @@ const Section4: NextPage = () => {
 					TOKENS
 				</Typography>
 				<Typography
-					fontSize={{ xs: 25, sm: 38 }}
+					fontSize={{ xs: 25, sm: 30 }}
 					textTransform="uppercase"
 					fontFamily='Electrofied'
 					fontStyle={'italic'}
 					fontWeight={800}
-					color="#31373E"
+					color="#fff"
 					mb={0.5}
 				>
 					UTILITIES
@@ -354,7 +374,7 @@ const Section4: NextPage = () => {
 								fontFamily='Electrofied'
 								fontStyle={'italic'}
 								fontWeight={800}
-								color="#31373E"
+								color="#fff"
 								// mb={5}
 								mr={2}
 								width="250px"
@@ -364,47 +384,87 @@ const Section4: NextPage = () => {
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#5A6178"
+								color="#fff"
 								lineHeight="22px"
 								mt={4}
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginRight: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Stake to earn interest and FitterPass
+								<img src={'assets/icons/dot-orange.svg'} />	Stake to earn interest and FitterPass
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#5A6178"
+								color="#fff"
 								lineHeight="22px"
 								mt={1}
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginRight: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Level up shoe NFT at some levels & Mint
+								<img src={'assets/icons/dot-orange.svg'} />	Level up shoe NFT at some levels & Mint
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#5A6178"
+								color="#fff"
 								lineHeight="22px"
 								mt={1}
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginRight: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Governance
+								<img src={'assets/icons/dot-orange.svg'} />	Governance
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#5A6178"
+								color="#fff"
 								lineHeight="22px"
 								mt={2}
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginRight: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Pay rental commission fee
+								<img src={'assets/icons/dot-orange.svg'} />	Pay rental commission fee
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#5A6178"
+								color="#fff"
 								lineHeight="22px"
 								mt={2}
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginRight: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Pay for some in-app purchases
+								<img src={'assets/icons/dot-orange.svg'} />	Pay for some in-app purchases
 							</Typography>
 							<Box sx={{
 								mt: 2,
@@ -413,44 +473,23 @@ const Section4: NextPage = () => {
 								justifyContent: "flex-start",
 							}}
 							>
-
 								<Typography
 									fontSize={{ xs: 16, sm: 16 }}
 									fontWeight={500}
-									color="#5A6178"
+									color="#fff"
 									lineHeight="22px"
+									sx={{
+										display: 'flex',
+										alignItems: 'flex-start',
+										'& img': {
+											marginRight: '8px',
+											marginTop: '4px'
+										}
+									}}
 								>
-									Earn
-								</Typography>
-
-								<Typography
-									fontSize={{ xs: 16, sm: 16 }}
-									fontWeight={800}
-									color="#FF6D24"
-									ml={1}
-									mr={1}
-									lineHeight="22px"
-								>
-									FIU
-								</Typography>
-
-								<Typography
-									fontSize={{ xs: 16, sm: 16 }}
-									fontWeight={500}
-									color="#5A6178"
-									lineHeight="22px"
-								>
-									in With Pet Mode,
+									<img src={'assets/icons/dot-orange.svg'} /> Earn FIU	in With Pet Mode, Challenges, Staking
 								</Typography>
 							</Box>
-							<Typography
-								fontSize={{ xs: 16, sm: 16 }}
-								fontWeight={500}
-								color="#5A6178"
-								lineHeight="22px"
-							>
-								Challenges, Staking
-							</Typography>
 
 						</Box>
 
@@ -463,11 +502,11 @@ const Section4: NextPage = () => {
 							<Box sx={{
 								position: 'absolute',
 								top: "70%",
-								left: "00px",
-								width: "300px",
-								height: "303px",
+								left: "0px",
+								width: "286px",
+								height: "351px",
 								transform: 'translateY(-50%)',
-								backgroundImage: `url(assets/bg_fiu1.png)`,
+								backgroundImage: `url(assets/dark/neon-orange-3.png)`,
 								// height: '100%',
 								backgroundPosition: 'center',
 								backgroundRepeat: 'no-repeat',
@@ -476,24 +515,25 @@ const Section4: NextPage = () => {
 							}}>
 								<BoxImageAnimation sx={{
 									position: 'absolute',
-									left: '50px'
+									left: '50px',
+									top: "40px"
 								}}>
-
 									<img width="226px" src="assets/fiu1.png" />
+
 								</BoxImageAnimation>
 							</Box>
 							<Box sx={{
 								position: 'absolute',
 								top: "50%",
 								right: "0",
-								width: "258px",
+								width: "246px",
 								height: "292px",
 								transform: 'translateY(-50%)',
-								backgroundImage: `url(assets/bg_hee1.png)`,
+								backgroundImage: `url(assets/dark/neon-green.png)`,
 								// height: '100%',
 								backgroundPosition: 'center',
 								backgroundRepeat: 'no-repeat',
-								backgroundSize: 'contain'
+								backgroundSize: 'cover'
 							}}>
 								<BoxImageAnimation sx={{
 									position: 'absolute',
@@ -509,21 +549,9 @@ const Section4: NextPage = () => {
 							<Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
 
 								<img width="40px" src="assets/HEE.png" />
-								<Typography fontSize="56px" fontFamily='Electrofied' className="text_gadient_second">
+								<Typography fontSize="56px" fontFamily='Electrofied' sx={{ paddingRight: "10px" }} className="text_gadient_second">
 									HEE
 								</Typography>
-								{/* <Typography
-							fontSize={{ xs: 15, sm: 56 }}
-							textTransform="uppercase"
-							fontFamily='Electrofied'
-							fontStyle={'italic'}
-							fontWeight={800}
-							color="#FF6D24"
-							// mb={5}
-							mr={2}
-						>
-							HEE
-						</Typography> */}
 							</Box>
 							<Typography
 								fontSize={{ xs: 16, sm: 24 }}
@@ -531,9 +559,7 @@ const Section4: NextPage = () => {
 								fontFamily='Electrofied'
 								fontStyle={'italic'}
 								fontWeight={800}
-								color="#31373E"
-								// mb={5}
-								// lineHeight="22px"
+								color="#fff"
 								mr={2}
 								width="250px"
 								textAlign={"right"}
@@ -543,42 +569,74 @@ const Section4: NextPage = () => {
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#5A6178"
+								color="#fff"
 								textAlign={"right"}
 								mt={4}
 								lineHeight="22px"
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginLeft: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Level up shoe NFT
+								Level up shoe NFT <img src={'assets/icons/dot-green.svg'} />
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#5A6178"
+								color="#fff"
 								textAlign={"right"}
 								mt={2}
 								lineHeight="22px"
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginLeft: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Repair shoe NFT
+								Repair shoe NFT <img src={'assets/icons/dot-green.svg'} />
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#5A6178"
+								color="#fff"
 								textAlign={"right"}
 								mt={2}
 								lineHeight="22px"
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginLeft: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Transaction fee
+								Transaction fee <img src={'assets/icons/dot-green.svg'} />
 							</Typography>
 							<Typography
 								fontSize={{ xs: 16, sm: 16 }}
 								fontWeight={500}
-								color="#5A6178"
+								color="#fff"
 								textAlign={"right"}
 								mt={2}
 								lineHeight="22px"
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-start',
+									'& img': {
+										marginLeft: '8px',
+										marginTop: '4px'
+									}
+								}}
 							>
-								Mint
+								Mint <img src={'assets/icons/dot-green.svg'} />
 							</Typography>
 
 							<Box sx={{
@@ -592,33 +650,19 @@ const Section4: NextPage = () => {
 								<Typography
 									fontSize={{ xs: 16, sm: 16 }}
 									fontWeight={500}
-									color="#5A6178"
+									color="#fff"
 									textAlign={"right"}
 									lineHeight="22px"
+									sx={{
+										display: 'flex',
+										alignItems: 'flex-start',
+										'& img': {
+											marginLeft: '8px',
+											marginTop: '4px'
+										}
+									}}
 								>
-									Earn
-								</Typography>
-
-								<Typography
-									fontSize={{ xs: 16, sm: 16 }}
-									fontWeight={800}
-									color="#1DB268"
-									ml={1}
-									mr={1}
-									textAlign={"right"}
-									lineHeight="22px"
-								>
-									HEE
-								</Typography>
-
-								<Typography
-									fontSize={{ xs: 16, sm: 16 }}
-									fontWeight={500}
-									color="#5A6178"
-									textAlign={"right"}
-									lineHeight="22px"
-								>
-									in all game modes.
+									Earn HEE in all game modes. <img src={'assets/icons/dot-green.svg'} />
 								</Typography>
 							</Box>
 
@@ -636,7 +680,7 @@ const Wrap = styled(Stack)({
 	padding: '0px 16px',
 	maxWidth: '1120px',
 	margin: '0px auto 0px',
-	backgroundImage: `url(assets/bg_sec4.png)`,
+	// backgroundImage: `url(assets/bg_sec4.png)`,
 	height: '100%',
 	backgroundPosition: 'center',
 	backgroundRepeat: 'no-repeat',

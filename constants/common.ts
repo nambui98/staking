@@ -11,14 +11,17 @@ export const MENU_ITEMS = [
 	{ title: 'Whitepaper', href: 'https://whitepaper.befitter.io/' },
 ];
 export const MENU_ITEMS_HOME = [
+	// { title: 'Staking', href: '/staking' },
+	// { title: 'HUB', href: 'https://hub.befitter.io/' },
+	{title: 'MANIFESTO', href: '#'},
 	{ title: 'WHITEPAPER', href: 'https://whitepaper.befitter.io/' },
-	{ title: 'ABOUT', href: '#' },
-	{ title: 'CONTACT', href: '#' },
+	// { title: 'ABOUT', href: '#' },
+	// { title: 'CONTACT', href: '#' },
 ];
 export const MENU_ITEMS_MOBILE = [
-	{ title: 'Staking', href: '#' },
+	{ title: 'Staking', href: '/staking' },
 	{ title: 'HUB', href: 'https://hub.befitter.io/' },
-	// { title: 'LITEPAPER', href: '/litePaper' },
+	{ title: 'BUSINESS PAPER', href: '/business' },
 	{ title: 'WHITEPAPER', href: 'https://whitepaper.befitter.io/' },
 	// { title: 'ABOUT', href: '#' },
 	// { title: 'CONTACT', href: '#' },
@@ -85,25 +88,25 @@ export const TEAM = {
 			name: 'Ba Nguyen',
 			role: 'CO-FOUNDER',
 			desc: `Ba had experience working on notable blockchain projects including Red Kite and GameFi.org. Before beFITTER, she was Icetea Labs due diligence leader who has evaluated and advised over 30 projects.`,
-			image: 'assets/home-team-1.png',
+			image: 'assets/team/banguyen.png',
 		},
 		{
 			name: 'Trang Doan',
 			role: 'Product owner',
 			desc: `Trang is a driven product owner with 8 years of experience in large-scale software development. She is also a passionate mentor at Mentori, a leading career orientation platform.`,
-			image: 'assets/home-team-2.png',
+			image: 'assets/team/trangdoan.png',
 		},
 		{
 			name: 'Ha Nguyen',
 			role: 'Head of development',
 			desc: `Ha has 10+ years of experience creating high-tech applications in various industries such as finance, business management… and more than one year of experience in blockchain.`,
-			image: 'assets/home-team-3.png',
+			image: 'assets/team/hanguyen.png',
 		},
 		{
 			name: 'Thai Trieu',
 			role: 'ART-direCtor',
 			desc: `Thai has 9 years of experience in the game industry as a concept artist and illustrator. He is also a crypto and NFT enthusiast.`,
-			image: 'assets/home-team-4.png',
+			image: 'assets/team/thaitrieu.png',
 		},
 	],
 };
@@ -111,7 +114,7 @@ export const TEAM = {
 export const ROADMAP = {
 	TITLE: 'MAP',
 	SUBTITLE: 'ROAD',
-	MAP: 'assets/home-roadmap-map.png',
+	MAP: 'assets/dark/map.png',
 	ROAD: 'assets/home-roadmap-road.png',
 	ICON_LIST: 'assets/icons/list.svg',
 	MILESTONES: [
@@ -125,7 +128,7 @@ export const ROADMAP = {
 		{
 			title: 'May - 2022',
 			items: [
-				`Seed Fund Raising`,
+				`Fund Raising`,
 				// `Launch Testnet`,
 				// `Bug Bounty`,
 				`NFTs Airdrop Campaign`,
@@ -140,7 +143,6 @@ export const ROADMAP = {
 				// `Launch Mainnet V1`, 
 				`Launch Testnet`,
 				`Coop w/All-in-one\ndiscovery Gaming Hub`,
-				`Launch Mainnet V1`,
 			],
 			top: 668,
 			ml: -435,
@@ -158,7 +160,7 @@ export const ROADMAP = {
 			],
 			top: 480,
 			ml: 18,
-			active: false,
+			active: true,
 		},
 		{
 			title: 'Q4 - 2022',

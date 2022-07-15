@@ -20,18 +20,22 @@ const Milestone: React.FC<any> = ({ sxProps, title, items, active }) => {
 	return (
 		<Box>
 			<Box sx={{
-				background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
-				padding: '2px',
+				// background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
+				backgroundImage: `url(assets/backgrounds/bt-bg.png)`,
+				backgroundRepeat: 'no-repeat',
+				backgroundSize: 'contain',
+				backgroundPosition: "center",
+				padding: '5px 20px',
 				width: 'max-content',
 			}}>
 				<Box sx={{
-					background: active ? 'transparent' : '#FFF',
+					// background: active ? 'transparent' : '#FFF',
 					p: .5,
 					width: 'max-content',
 				}}>
-					<Typography fontSize={{ xs: 20, sm: 24, md: 18, lg: 24 }} fontWeight={700}
+					<Typography fontSize={{ xs: 20, sm: 24, md: 18, lg: 20 }} fontWeight={700}
 						sx={{
-							color: active ? '#FFF' : '#31373E',
+							color: active ? '#FFF' : '#fff',
 						}}
 					>{title}</Typography>
 				</Box>
@@ -49,7 +53,7 @@ const Milestone: React.FC<any> = ({ sxProps, title, items, active }) => {
 							fontSize={{ xs: 16, sm: 18, md: 14, lg: 18 }}
 							fontWeight={400}
 							lineHeight="23px"
-							color="#5A6178"
+							color="#fff"
 							mb={1}
 						>
 							{text.split('\n').map((el, idx) => (
@@ -75,7 +79,7 @@ const RoadmapDesktop: React.FC<any> = () => {
 				position: 'relative',
 				overflow: 'hidden',
 				height: "100%",
-				marginTop: "88px !important"
+				marginTop: "80px !important"
 
 			}}
 		>
@@ -95,7 +99,6 @@ const RoadmapDesktop: React.FC<any> = () => {
 
 			</Box>
 			<Box sx={{
-				position: 'absolute',
 				backgroundImage: `url(${ROADMAP.MAP})`,
 				backgroundRepeat: 'no-repeat',
 				backgroundSize: 'cover',
@@ -131,7 +134,7 @@ const RoadmapDesktop: React.FC<any> = () => {
 const RoadmapMobile: React.FC<any> = () => {
 	return (
 		<Container sx={{ mb: 10 }}>
-			<Box display={'flex'} mt={10} alignItems="center" justifyContent="center">
+			<Box display={'flex'} mt={{sm: 10, xs: 0}} alignItems="center" justifyContent="center">
 
 				<Typography
 					fontSize={{ xs: 32, sm: 56 }}

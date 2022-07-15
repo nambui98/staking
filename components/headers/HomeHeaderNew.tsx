@@ -18,6 +18,7 @@ import {
 	LOGO,
 	HOME_LOGO,
 	HOME_BG_LOGO,
+	SECURICHAIN_LOGO,
 } from '../../constants/header';
 import { TEXT_STYLE } from '../../styles/common/textStyles';
 import { useRouter } from 'next/router';
@@ -27,37 +28,31 @@ import { toast } from 'react-toastify';
 
 const MAIN_MENU = [
 	{ name: 'HUB', link: 'https://hub.befitter.io/' },
-	{ name: 'whitepaper', link: 'https://whitepaper.befitter.io/' }
+	{ name: 'Business Paper', link: '/business' },
+	// { name: 'manifesto', link: '' }
 ]
+const BoxSecurichain = styled(Box)({
+	margin: 'auto auto auto 24px',
+	'@media (max-width: 1100px)': {
+		display: 'flex',
+		justifyContent: 'flex-end',
+		'& img': {
+			width: 98,
+			marginRight: -15,
+			marginTop: -4
+		}
+	},
+	'@media (max-width: 767px)': {
+		display: 'none',
+	}
+})
 
-const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, currentPage, customWhite }) => {
+const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, currentPage }) => {
 	const [statusPopup, setStatusPopup] = useState(false);
 	const isMobile992 = useMediaQuery('(max-width:992px)');
 	const isMobile = useMediaQuery('(max-width:599px)');
-	const stickTrigger = useScrollTrigger({
-		disableHysteresis: true,
-		threshold: 200,
-	});
-	const Logo: React.FC<any> = () => {
-		return (
-			<Link href={'/'}>
-				<Box
-					component={'a'}
-					sx={{
-						display: 'flex',
-						alignItems: 'center',
-						cursor: 'pointer',
-						'& img': {
-							maxWidth: '150px',
-							height: 'auto'
-						}
-					}}
-				>
-					<img src={customWhite && !stickTrigger ? 'assets/logo/logo-text-white.png' : LOGO} alt="Logo" width={'auto'} height={40} />
-				</Box>
-			</Link>
-		);
-	};
+	const isMobile1500 = useMediaQuery('(max-width: 1500px)');
+	const isMobile1140 = useMediaQuery('(max-width: 1140px)');
 
 	const handleCommingSoon = () => {
 		toast('COMING SOON!', {
@@ -71,6 +66,33 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 		});
 	}
 
+	const Logo: React.FC<any> = () => {
+		return (
+			<Link href={'/'}>
+				<Box
+					component={'a'}
+					sx={{
+						display: 'flex',
+						alignItems: 'center',
+						cursor: 'pointer',
+						'@media (max-width: 599px)': {
+							img: {
+								width: '33.33px',
+								height: 'auto'
+							}
+						}
+					}}
+				>
+					<img src={isMobile ? 'assets/logo/logo.png' : HOME_LOGO} alt="Logo" width={'auto'} height={40} />
+
+
+					<Link target="_blank" href={'https://www.securichain.io/audits/2022/beFITTERTokenAudit_Public.pdf'}><BoxSecurichain>{<img src={SECURICHAIN_LOGO} />}</BoxSecurichain></Link>
+
+				</Box>
+			</Link>
+		);
+	};
+
 	return (
 		<Box component={'header'}>
 			<AppBar
@@ -78,42 +100,70 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 				square
 				elevation={0}
 				sx={{
-					background: (customWhite && !stickTrigger) ? 'linear-gradient(180deg, rgba(0, 0, 0, 0.57) 0%, rgba(0, 0, 0, 0) 100%)' : ((currentPage === '1' && !stickTrigger) || (!stickTrigger && isMobile) ? 'linear-gradient(180deg, rgba(185, 185, 185, 0.4) 0%, rgba(177, 177, 177, 0) 100%)' : '#fff'),
+					backgroundColor: ' rgba(28, 30, 41, 0.5)',
+					backdropFilter: 'blur(24px)',
+					// background: (currentPage === '1' && !stickTrigger) || (!stickTrigger && isMobile) ? 'linear-gradient(180deg, rgba(185, 185, 185, 0.4) 0%, rgba(177, 177, 177, 0) 100%)' : '#fff',
 					// borderBottom: currentPage === '1' ? '0' : '1px solid #E9EAEF',
 					transition: 'all ease 0.2s ',
-					padding: currentPage === '1' ? '14px 0' : '0'
+					'@media (min-width: 768px)': {
+						padding: '2px 0',
+					}
 				}}
 			>
-				<Toolbar
+
+				<Box
 					sx={{
-						height: stickTrigger ? 80 : 'unset',
-						// borderBottom: stickTrigger ? '1px solid #E9EAEF' : 'unset',
+						display: 'flex',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+						padding: '0 16px !important',
+						'@media (min-width: 1500px)': {
+							padding: '0 120px !important'
+						}
 					}}
 				>
-					<Container
-						sx={{
-							display: 'flex',
-							justifyContent: 'space-between',
-							alignItems: 'center',
-							maxWidth: '1120px !important',
-							padding: '0 0 !important'
-						}}
-					>
-						<>
-							<Logo />
-							{!isMobile992 && <MainMenu>
-								<ButtonApp onClick={() => setStatusPopup(true)}><span>GET THE APP</span></ButtonApp>
-								<MenuItem onClick={() => handleCommingSoon()} hover={true} sx={{color: customWhite && !stickTrigger ? '#ffffff' : '#31373E' + '!important'}}>STAKING</MenuItem>
-								{MAIN_MENU?.map((item, index) => (
-									<Link key={index} href={item.link}>
-										<MenuItem sx={{color: customWhite && !stickTrigger ? '#ffffff' : '#31373E' + '!important'}} onClick={() => index === 0 ? handleCommingSoon() : null} hover={true}>{item.name}</MenuItem>
-									</Link>
-								))}
-							</MainMenu>}
-							{isMobile992 && <MenuButtonNew customImage={'40px'} dark={customWhite && !stickTrigger ? false : true} />}
-						</>
-					</Container>
-				</Toolbar>
+					<>
+						<Logo />
+						{/* {!isMobile992 &&  */}
+						<MainMenu>
+							<ButtonApp className="button" onClick={() => setStatusPopup(true)}>
+								<Box className="button-wrapper">
+									<Box className="text" sx={{
+										...TEXT_STYLE(20, 600, '#ffffff'), fontFamily: 'Electrofied',
+										fontStyle: 'italic',
+									}}>GET THE APP</Box>
+									<Box className="text2" sx={{
+										...TEXT_STYLE(20, 600, '#ffffff'), fontFamily: 'Electrofied',
+										fontStyle: 'italic',
+									}}>GET THE APP</Box>
+
+								</Box>
+							</ButtonApp>
+
+							{!isMobile1140 && <Link href={'/staking'}>
+								<MenuItem hover={true}>
+									<div>STAKING</div>
+									<div>STAKING</div>
+								</MenuItem>
+							</Link>}
+							{!isMobile1140 && MAIN_MENU?.map((item, index) => (
+								<Link key={index} href={item.link}>
+									<MenuItem hover={true}>
+										<div>{item.name}</div>
+										<div>{item.name}</div>
+									</MenuItem>
+								</Link>
+							))}
+							{/* {!isMobile1500 && <MenuItem onClick={() => handleCommingSoon()} hover={true}>
+								<div>manifesto</div>
+								<div>manifesto</div>
+							</MenuItem>} */}
+							<MenuButtonNew customImage={'40px'} />
+						</MainMenu>
+						{/* } */}
+					</>
+				</Box>
+
 			</AppBar>
 			<PopupApp statusPopup={statusPopup} handleToggleStatusPopup={setStatusPopup} />
 		</Box>
@@ -136,48 +186,77 @@ type menuItemProp = BoxProps & {
 	hover: boolean
 }
 const MenuItem = styled(Box)((props: menuItemProp) => ({
-	padding: '12px 16px',
+	padding: '0px 16px',
+	height: "20px",
 	borderRadius: '12px',
 	marginRight: 16,
-	...TEXT_STYLE(20, 600, '#31373E'),
+	...TEXT_STYLE(20, 600, '#FFF'),
 	fontFamily: 'BeVietnamPro',
 	textTransform: 'uppercase',
-	color: '#31373E',
+	color: '#FFF',
 	cursor: 'pointer',
+	overflow: 'hidden',
+	transition: 'all .4s',
+	'& div': {
+		transition: 'all .3s',
+		'&:last-child': {
+			opacity: 0,
+			position: 'relative',
+		}
+	},
 	'&:last-of-type': {
 		marginRight: 0
 	},
-	'&:hover': {
+	'&:hover div': {
+		transform: "translateY(-100%)",
 		color: '#FF6D24',
-		animation: props.hover ? 'shake .15s linear' : 'internal',
-	},
-	'@keyframes shake': {
-		'0%,100%': { transform: `translateY(0)` },
-		'30%': { transform: 'translateY(-10px)' },
-		'60%': { transform: 'translateY(10px)' },
-		'90%': { transform: 'translateY(-10px)' },
+		'&:last-child': {
+			opacity: 1,
+		},
+		'&:first-child': {
+			opacity: 0,
+		}
 	},
 }))
 const ButtonApp = styled(Button)({
-	background: '#FFFFFF',
-	boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)',
+	background: 'url(assets/backgrounds/bt-bg.png)',
+	height: '46px',
+	width: '198px',
+	borderRadius: "12px",
+	position: "relative",
+	textAlign: "center",
+	transition: "all 0.3s",
 	fontFamily: 'Electrofied',
 	fontStyle: 'italic',
 	padding: '5.5px 16px',
-	borderRadius: '12px',
 	marginRight: 16,
-	...TEXT_STYLE(20, 600, '#FF8A50'),
+	boxShadow: '0px 2px 8px rgba(0, 0, 0, 0)',
+	...TEXT_STYLE(20, 600, '#ffffff'),
+	'& div': {
+		overflow: 'hidden',
+		position: 'absolute',
+		width: '100%',
+		height: '100%',
+		left: 0,
+		color: '#fff',
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
+		// transition: 'top 5s'
+		transition: "all 0.3s",
+
+	},
 	'&:hover': {
 		background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
-		color: '#ffffff',
-		'& span': {
-			animation: 'shake .15s linear',
+		boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)',
+	},
+	'@media (max-width: 767px)': {
+		height: '31px !important',
+		width: 140,
+		backgroundPosition: '100%',
+		backgroundSize: 'cover',
+		'& div': {
+			...TEXT_STYLE(14, 600, '#ffffff'),
 		}
-	},
-	'@keyframes shake': {
-		'0%,100%': { transform: `translateY(0)` },
-		'30%': { transform: 'translateY(-10px)' },
-		'60%': { transform: 'translateY(10px)' },
-		'90%': { transform: 'translateY(-10px)' },
-	},
+	}
 })

@@ -46,7 +46,7 @@ export const BUSINESS_MODEL = {
   ],
   body2: <Typography><span>Challenge</span>: Users spend $FIU to join 1vs1 challenges or buy tickets to participate in a tournament,  where they have a chance to receive a higher reward than in solo activities. The organizer, which is beFITTER in the early stage, would take 5% of the winning pool.</Typography>,
   body3: [
-    <Typography><span>Transaction Fee</span>: A 2% fee on all NFT trades on the in-app NFT marketplac, 0.5% fee but not less than a fixed number when withdrawing a token from spending to wallet. Fee is paid by the token which is withdrawn (HEE,FIU,BNB). When withdrawing NFT, the fee is a fixed number of HEE. These fixed numbers ensure our system has enough gas fee to process the transaction.</Typography>,
+    <Typography><span>Transaction Fee</span>: A 2% fee on all NFT trades on the in-app NFT marketplace, 0.5% fee but not less than a fixed number when withdrawing a token from spending to wallet. Fee is paid by the token which is withdrawn (HEE,FIU,BNB). When withdrawing NFT, the fee is a fixed number of HEE. These fixed numbers ensure our system has enough gas fee to process the transaction.</Typography>,
     <Typography sx={{
       margin: '80px 0',
       '@media (max-width: 767px)': {
