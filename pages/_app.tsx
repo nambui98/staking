@@ -15,7 +15,7 @@ import '../styles/globals.scss';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { WalletProvider } from '../contexts/WalletContext';
-import { CommonProvider } from '../contexts/CommonContent';
+import { CommonProvider } from '../contexts/CommonContext';
 import Loading from '../components/loadding/loadding';
 
 

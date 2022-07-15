@@ -5,14 +5,18 @@ interface commonContextType {
     title: string
     message?: any
     status: boolean
-    handleToggleStatus: () => any
-    handleClickButton: () => any
+    handleToggleStatus: (status?: any) => void
+    handleHidePopup: (status?: any) => any
+    handleClickButton: any
     titleCustomColor?: any
     titleButton?: string
     popupType: any
     sx?: any
+  },
+  spinner: {
+    status: boolean
+    handleChangeStatus: (status?: boolean) => void
   }
-  handleClickButtonPopupNoti: () => void
 } 
 
 const CommonContext = createContext<commonContextType>({
@@ -21,13 +25,17 @@ const CommonContext = createContext<commonContextType>({
     message: null,
     status: false,
     handleToggleStatus: () => {},
+    handleHidePopup: () => {},
     handleClickButton: () => {},
     titleCustomColor: null,
     titleButton: '',
     popupType: null,
     sx: null
   },
-  handleClickButtonPopupNoti: () => {}
+  spinner: {
+    status: false,
+    handleChangeStatus: () => {}
+  }
 })
 export const useCommonContext = () => useContext(CommonContext);
 interface IProps {
@@ -39,16 +47,20 @@ export const CommonProvider: React.FC<IProps> = ({children}) => {
     message: '',
     status: false,
     handleToggleStatus: (status: any) => setPopupNoti({...popupNoti, ...status}),
-    handleClickButton: () => {},
+    handleHidePopup: () => setPopupNoti({...popupNoti, status: false}),
+    handleClickButton: null,
     titleCustomColor: '',
     titleButton: '',
     popupType: '',
     sx: ''
   })
-
+  const [spinner, setSpinner] = useState<any>({
+    status: false,
+    handleChangeStatus: (status: boolean) => setSpinner({...spinner, status})
+  })
   const value = {
     popupNoti,
-    handleClickButtonPopupNoti: () => null
+    spinner
   }
 
   return <CommonContext.Provider value={value}>{children}</CommonContext.Provider>

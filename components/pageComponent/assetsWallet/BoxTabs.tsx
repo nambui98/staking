@@ -10,18 +10,18 @@ import { BoxEmpty } from "./BoxEmpty";
 import { MysteryBoxTab } from "./MysteryBoxTab";
 import { TokenTab } from "./TokenTab";
 import addressBuyBox from '../../../abi/addressBuyBox.json';
-import { useCommonContext } from "../../../contexts/CommonContent";
+import { useCommonContext } from "../../../contexts/CommonContext";
+import { SendToSpending } from "./SenToSpending";
 
 export const Boxtabs = () => {
   const { walletAccount, bnbBalance, fiuBalance, heeBalance, ethersSigner, boxBalance } = useWalletContext();
-  const {popupNoti} = useCommonContext();
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [totalBox, setTotalBox] = useState<number>(0);
   const [currentTab, setCurrentTab] = useState<string>('');
   const [popupFormInfo, setPopupFormInfo] = useState<boolean>(false);
-  const [textEmail, setTextEmail] = useState<string>('');
   const [statusBuyBox, setStatusBuyBox] = useState<boolean>(false);
-
+  const [tokenChoose, setTokenChoose] = useState<string>('');
+  const [boxChoose, setBoxChoose] = useState<string>('');
 
   const handleSwitchTab = (tab: string) => {
     setCurrentTab(tab);
@@ -31,9 +31,9 @@ export const Boxtabs = () => {
   const renderBodyView = () => {
     switch (currentTab) {
       case TAB_NAME.token:
-        return <TokenTab />
+        return <TokenTab tokenChoose={tokenChoose} setTokenChoose={setTokenChoose} />
       case TAB_NAME.box:
-        return <MysteryBoxTab />
+        return <MysteryBoxTab boxChoose={boxChoose} setBoxChoose={setBoxChoose} />
       default:
         break;
     }
@@ -96,31 +96,7 @@ export const Boxtabs = () => {
         <BodyContent>
           {currentTab.length ? renderBodyView() : <BoxEmpty icon={ICON.shoe} emptyText={'Select assets to continue'} />}
         </BodyContent>
-        {currentTab.length ? <SendSpending>
-          <BoxInput>
-            <InputBottom>
-              <Label>beFITTER email</Label>
-              <CustomInput
-                fullWidth
-                required
-                value={textEmail}
-                placeholder={'Email'}
-                onChange={(e: any) => setTextEmail(e.target.value)}
-              />
-            </InputBottom>
-            {currentTab === TAB_NAME.token && <InputBottom>
-              <Label>Amount to send</Label>
-              <CustomInput
-                fullWidth
-                required
-                value={textEmail}
-                placeholder={'Amount'}
-                onChange={(e: any) => setTextEmail(e.target.value)}
-              />
-            </InputBottom>}
-            <ButtonSendSpending onClick={() => popupNoti.handleToggleStatus({status: true})}>Send to Spending</ButtonSendSpending>
-          </BoxInput>
-        </SendSpending> : null}
+        {currentTab.length ? <SendToSpending currentTab={currentTab} tokenChoose={tokenChoose} boxChoose={boxChoose} /> : null}
       </TabBody>
       <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
       {statusBuyBox && isMobile && !statusFormGetBonus && <BoxBonus><ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus></BoxBonus>}
@@ -132,53 +108,6 @@ export const Boxtabs = () => {
 const iconGray = {
   filter: 'invert(85%) sepia(61%) saturate(10%) hue-rotate(196deg) brightness(100%) contrast(115%)'
 }
-const BoxInput = styled(Box)({
-  '@media (min-width: 992px)': { 
-    display: 'flex', 
-    alignItems: 'flex-end' 
-  }
-})
-const InputBottom = styled(Box)({
-  marginBottom: 16,
-  '@media (min-width: 992px)': {
-    marginRight: 20,
-    marginBottom: 0
-  }
-})
-const ButtonSendSpending = styled(Button)({
-  padding: 8,
-  borderRadius: 12,
-  background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
-  color: '#ffffff',
-  ...TEXT_STYLE(16, 600),
-  marginLeft: 'auto',
-  textTransform: 'unset',
-  width: '100%',
-  '@media (min-width: 992px)': {
-    width: 188,
-  }
-})
-const SendSpending = styled(Box)({
-  marginTop: 16,
-  padding: 16,
-  background: '#F8F9FB',
-  borderRadius: 16,
-})
-const Label = styled(Typography)({
-  ...TEXT_STYLE(14, 500, '#5A6178'),
-  marginBottom: 8,
-})
-const CustomInput = styled(InputBase)({
-  '@media (min-width: 1280px)': {
-    width: 275,
-  },
-  '& .MuiInputBase-input': {
-    ...TEXT_STYLE(14, 500, '#31373E'),
-    padding: '10px 16px',
-    borderRadius: 8,
-    background: '#E9EAEF',
-  },
-});
 const BoxBonus = styled(Box)({
   textAlign: 'center',
   marginTop: 24,

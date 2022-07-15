@@ -1,6 +1,6 @@
-import { Backdrop, Box, CircularProgress, Stack, styled, Tooltip, Typography } from "@mui/material"
+import { Backdrop, Box, BoxProps, CircularProgress, Stack, styled, Tooltip, Typography } from "@mui/material"
 import { ethers } from "ethers";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BOX_DETAILS, ICON } from "../../../constants/assetsWallet";
 import { useWalletContext } from "../../../contexts/WalletContext"
 import { getBoxType, getOwnedBox } from "../../../libs/claim";
@@ -9,7 +9,12 @@ import { convertWalletAddress } from "../../../libs/utils/utils";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
 import { BoxEmpty } from "./BoxEmpty";
 
-export const MysteryBoxTab = () => {
+interface IProps {
+  boxChoose: string
+  setBoxChoose: (value: string) => void
+}
+
+export const MysteryBoxTab: React.FC<IProps> = ({boxChoose, setBoxChoose}) => {
   const { walletAccount, ethersSigner } = useWalletContext();
   const [listBoxType, setListBoxType] = useState<any[]>();
   const [statusLoading, setStatusLoading] = useState<boolean>(false)
@@ -63,7 +68,7 @@ export const MysteryBoxTab = () => {
   return (
     <Wrap sx={listBoxType?.length ? {} : {maxHeight: 'initial !important'}}>
       {listBoxType?.length ? listBoxType?.map((item, index) => (
-        <Item key={index}>
+        <Item active={boxChoose === item.boxId} key={index} onClick={() => setBoxChoose(boxChoose === item.boxId ? '' : item.boxId)} >
           <img src={item.image} />
           <Title>
             <Typography>{item.title}</Typography>
@@ -111,19 +116,23 @@ const Wrap = styled(Stack)({
     }
   }
 })
-const Item = styled(Box)({
+type itemProps = BoxProps & {
+  active: boolean
+}
+const Item = styled(Box)((props: itemProps) => ({
   display: 'flex',
   alignItems: 'center',
   padding: '8px 16px',
   borderRadius: 16,
   marginBottom: 8,
+  background: props.active ? '#FFE2D3' : 'transparent',
   '&:last-of-type': {
     marginBottom: 0
   },
   '&:hover': {
-    background: '#E9EAEF'
+    background: props.active ? '#FFE2D3' : '#E9EAEF'
   }
-})
+}))
 const Title = styled(Box)({
   marginLeft: 16,
   '& p:nth-of-type(1)': {

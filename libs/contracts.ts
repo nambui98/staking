@@ -14,6 +14,7 @@ import bfFiuTokenDev from '../abiDev/BFFiuToken.json';
 import bfShoeItemDev from '../abiDev/BFShoeItem.json';
 import bfBusdTokenDev from '../abiDev/BeFitterBusd.json';
 import bfShopDev from '../abiDev/BeFitterShop.json';
+import bfWallet from '../abiDev/BeFitterWallet.json'
 interface Map {
   [key: string]: any;
 }
@@ -52,3 +53,4 @@ export const bftShoeItem = {address: address.bFshoeItem, abi: (bfShoeItem as any
 export const bftClaimEnjin = { address: address.bFclaimEnjin, abi: (bfClaimBox as any).abi }
 export const bftBusdToken = {address: address.bFBusdToken, abi: bfBusdToken.abi}
 export const bftShop = {address: address.bFShop, abi: bfShop.abi}
+export const bftWallet = {address: address.bFWallet, abi: bfWallet.abi}

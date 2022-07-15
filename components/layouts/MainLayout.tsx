@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Box } from '@mui/material';
+import { Backdrop, Box, CircularProgress } from '@mui/material';
 
 import { META_TITLE, META_DESC } from '../../constants/head';
 import MainHeader from '../headers/MainHeader';
@@ -7,12 +7,12 @@ import MainFooter from '../footers/MainFooter';
 import { ConnectWallet } from '../pageComponent/marketplace/ConnectWallet';
 import { useWalletContext } from '../../contexts/WalletContext';
 import { PopupMessage } from '../pageComponent/claim/PopupMessage';
-import { useCommonContext } from '../../contexts/CommonContent';
+import { useCommonContext } from '../../contexts/CommonContext';
 
 
 const MainLayout: React.FC<any> = ({ sxProps, children, titlePage }) => {
-	const {setToggleActivePopup, activePopup} = useWalletContext();
-	const {popupNoti, handleClickButtonPopupNoti} = useCommonContext();
+	const { setToggleActivePopup, activePopup } = useWalletContext();
+	const { popupNoti, spinner } = useCommonContext();
 	return (
 		<>
 			<Head>
@@ -45,21 +45,28 @@ const MainLayout: React.FC<any> = ({ sxProps, children, titlePage }) => {
 				}}
 			>
 				<MainHeader />
-				<Box component="main" flexGrow={1} sx={{...sxProps}}>
+				<Box component="main" flexGrow={1} sx={{ ...sxProps }}>
 					{children}
 				</Box>
 				<ConnectWallet status={activePopup} handleToggleStatus={setToggleActivePopup} />
 				<MainFooter />
-				<PopupMessage 
-					status={popupNoti.status} 
-					title={popupNoti.title} 
-					handleToggleStatus={popupNoti.handleToggleStatus} 
+				<PopupMessage
+					status={popupNoti.status}
+					title={popupNoti.title}
+					handleToggleStatus={popupNoti.handleToggleStatus}
 					popupType={popupNoti.popupType}
 					message={popupNoti.message}
 					titleButton={popupNoti.titleButton}
 					titleCustomColor={popupNoti.titleCustomColor}
-					handleClickButton={popupNoti.handleClickButton}
+					handleClickButton={popupNoti.handleClickButton || popupNoti.handleHidePopup}
 				/>
+				<Backdrop
+					sx={{ color: '#FF6D24', zIndex: 2000 }}
+					className="backdrop-loading"
+					open={spinner.status}
+				>
+					<CircularProgress color="inherit" />
+				</Backdrop>
 			</Box>
 		</>
 	);
