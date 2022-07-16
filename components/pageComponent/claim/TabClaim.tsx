@@ -8,7 +8,7 @@ import { CLAIM_IMAGE } from "../../../constants/claim";
 import { PAGE } from "../../../constants/header";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { getClaimedBox, handleClaimBox } from "../../../libs/claim";
-import { bftClaimGamefi, bftClaimEnjin, bftClaimAlpha, bftClaimBeta } from "../../../libs/contracts";
+import { bftClaimGamefi, bftClaimEnjin, bftClaimAlphaBeta, bftClaimOther } from "../../../libs/contracts";
 import { convertWalletAddress } from "../../../libs/utils/utils";
 import { ClaimService } from "../../../services/claim.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
@@ -56,9 +56,9 @@ export const TabClaim = () => {
       if (res?.data?.status) {
         const claimContractGamefi = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
         const claimContractEnjinstarter = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
-        const claimContractAlpha = await new ethers.Contract(bftClaimAlpha.address, bftClaimAlpha.abi, ethersSigner);
-        const claimContractBeta = await new ethers.Contract(bftClaimBeta.address, bftClaimBeta.abi, ethersSigner);
-        const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), roundSelected === '1' ? claimContractAlpha : roundSelected === '2' ? claimContractBeta : roundSelected === "3" ? claimContractGamefi : claimContractEnjinstarter);
+        const claimContractAlphaBeta = await new ethers.Contract(bftClaimAlphaBeta.address, bftClaimAlphaBeta.abi, ethersSigner);
+        const claimContractOther = await new ethers.Contract(bftClaimOther.address, bftClaimOther.abi, ethersSigner);
+        const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), roundSelected === '1' ? claimContractAlphaBeta : roundSelected === '2' ? claimContractOther : roundSelected === "3" ? claimContractGamefi : claimContractEnjinstarter);
         setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount }) 
       } else {
         setDataClaim({claimed: 0, totalBox: 0})
@@ -75,10 +75,10 @@ export const TabClaim = () => {
     if (res?.data?.status) {
       const claimContractGamefi = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
       const claimContractEnjinstarter = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
-      const claimContractAlpha = await new ethers.Contract(bftClaimAlpha.address, bftClaimAlpha.abi, ethersSigner);
-      const claimContractBeta = await new ethers.Contract(bftClaimBeta.address, bftClaimBeta.abi, ethersSigner);
+      const claimContractAlphaBeta = await new ethers.Contract(bftClaimAlphaBeta.address, bftClaimAlphaBeta.abi, ethersSigner);
+      const claimContractOther = await new ethers.Contract(bftClaimOther.address, bftClaimOther.abi, ethersSigner);
       try {
-        const resultClaim: any = await handleClaimBox(walletAccount, roundSelected === '1' ? claimContractAlpha : roundSelected === '2' ? claimContractBeta : roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data);       
+        const resultClaim: any = await handleClaimBox(walletAccount, roundSelected === '1' ? claimContractAlphaBeta : roundSelected === '2' ? claimContractOther : roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data);       
         const checkStatus = setInterval( async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
           if(statusClaim?.status){
@@ -122,8 +122,8 @@ export const TabClaim = () => {
       setSelectItem([
         { title: 'GameFi.org', value: '3' },
         { title: 'Enjinstarter', value: '4' },
-        { title: 'Alpha Test Reward', value: '1' },
-        { title: 'Beta Test Reward', value: '2' },
+        { title: 'Alpha, Beta Test Reward', value: '1' },
+        { title: 'Other Events', value: '2' },
       ])
     }
   }, [currentTab])
