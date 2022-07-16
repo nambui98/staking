@@ -8,7 +8,7 @@ import { CLAIM_IMAGE } from "../../../constants/claim";
 import { PAGE } from "../../../constants/header";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { getClaimedBox, handleClaimBox } from "../../../libs/claim";
-import { bftClaimGamefi, bftClaimEnjin } from "../../../libs/contracts";
+import { bftClaimGamefi, bftClaimEnjin, bftClaimAlpha, bftClaimBeta } from "../../../libs/contracts";
 import { convertWalletAddress } from "../../../libs/utils/utils";
 import { ClaimService } from "../../../services/claim.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
@@ -56,7 +56,9 @@ export const TabClaim = () => {
       if (res?.data?.status) {
         const claimContractGamefi = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
         const claimContractEnjinstarter = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
-        const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), roundSelected === "3" ? claimContractGamefi : claimContractEnjinstarter);
+        const claimContractAlpha = await new ethers.Contract(bftClaimAlpha.address, bftClaimAlpha.abi, ethersSigner);
+        const claimContractBeta = await new ethers.Contract(bftClaimBeta.address, bftClaimBeta.abi, ethersSigner);
+        const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), roundSelected === '1' ? claimContractAlpha : roundSelected === '2' ? claimContractBeta : roundSelected === "3" ? claimContractGamefi : claimContractEnjinstarter);
         setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount }) 
       } else {
         setDataClaim({claimed: 0, totalBox: 0})
@@ -73,8 +75,10 @@ export const TabClaim = () => {
     if (res?.data?.status) {
       const claimContractGamefi = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
       const claimContractEnjinstarter = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
+      const claimContractAlpha = await new ethers.Contract(bftClaimAlpha.address, bftClaimAlpha.abi, ethersSigner);
+      const claimContractBeta = await new ethers.Contract(bftClaimBeta.address, bftClaimBeta.abi, ethersSigner);
       try {
-        const resultClaim: any = await handleClaimBox(walletAccount, roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data);       
+        const resultClaim: any = await handleClaimBox(walletAccount, roundSelected === '1' ? claimContractAlpha : roundSelected === '2' ? claimContractBeta : roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data);       
         const checkStatus = setInterval( async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
           if(statusClaim?.status){
@@ -153,8 +157,8 @@ export const TabClaim = () => {
             </BoxSelect>
           </FormControl>
           {roundSelected && dataClaim ? <DataClaimBox>
-            <Typography>Total {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.totalBox} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : CLAIM_IMAGE.boxSilver} /></span></Typography>
-            <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.claimed} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : CLAIM_IMAGE.boxSilver} /></span></Typography>
+            <Typography>Total {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.totalBox} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
+            <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.claimed} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
           </DataClaimBox> : <BoxBg><img src={CLAIM_IMAGE.bgClaim} /></BoxBg>}
           <ReCAPTCHA
             ref={recaptchaRef}
