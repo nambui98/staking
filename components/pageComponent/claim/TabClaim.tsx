@@ -160,11 +160,11 @@ export const TabClaim = () => {
             <Typography>Total {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.totalBox} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
             <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.claimed} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
           </DataClaimBox> : <BoxBg><img src={CLAIM_IMAGE.bgClaim} /></BoxBg>}
-          <ReCAPTCHA
+          {roundSelected && <ReCAPTCHA
             ref={recaptchaRef}
             sitekey={RECAPTCHA_SITE_KEY}
             onChange={onReCAPTCHAChange}
-          />
+          />}
         </Stack>
         <ButtonClaim active={checkStatusButton()} disabled={checkStatusButton() ? false : true} onClick={handleClaimButton}>Claim</ButtonClaim>
       </Stack>}
