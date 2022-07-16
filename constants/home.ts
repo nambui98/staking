@@ -179,6 +179,7 @@ type VideoSlide = {
 	mobileSrc?: string;
 	bigDecktopSrc?: string;
 	// poster?: string,
+	isMuted: boolean,
 	unplayable?: boolean;
 	ref?: any;
 };
@@ -193,6 +194,7 @@ export const videoSlides = (refs: any) => {
 			src: '/videos/IDO.mp4',
 			mobileSrc: '/videos/IDO-mobile.mp4',
 			bigDecktopSrc: '/videos/IDO2.mp4',
+			isMuted: false
 		},
 		// {
 		// 	src: '/videos/cycle.mp4',

@@ -42,12 +42,27 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 
 	useEffect(() => {
 		refSlide1.current?.load();
+		refSlide1.current.defaultMuted = false;
+		refSlide1.current.muted = false;
+		// refSlide2.current?.muted = false;
 		refSlide2.current?.load();
 		refSlide3.current?.load();
 		refSlide4.current?.load();
 		refSlide5.current?.load();
 	}, [isMobile, isBigDesktop]);
+	// useEffect(() => {
+	// 	if (!refSlide1.current) {
+	// 		return;
+	// 	}
 
+	// 	// if (isMuted) {
+	// 	//open bug since 2017 that you cannot set muted in video element https://github.com/facebook/react/issues/10389
+	// 	refSlide1.current.defaultMuted = false;
+	// 	refSlide1.current.muted = false;
+	// 	// }
+
+	// 	// refSlide1.current.srcObject = src;
+	// }, []);
 	useEffect(() => {
 		setHeightWindow(window.innerHeight)
 	}, [])
