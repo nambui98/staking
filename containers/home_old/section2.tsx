@@ -106,7 +106,7 @@ const Section2Old: NextPage = () => {
 
 		<Wrap sx={{
 			// marginTop: '-50px',
-			background: '#1C1E29'
+			background: '#151515'
 		}}>
 			{/* <BoxOpenImage><img src={BOX_IMAGE} /></BoxOpenImage> */}
 			<Box display={'flex'} mb={{ xs: 2, md: 4 }} alignItems="center" flexDirection={"column"}>
@@ -178,7 +178,7 @@ const Section2Old: NextPage = () => {
 								// transform: 'translateY(0)',
 								transition: 'all .6s',
 								opacity: index == activeIndex ? '1' : 0,
-								background: '#1C1E29'
+								background: '#151515'
 							}}>
 								<img width={"100%"} src={item.image} alt="" />
 							</BoxImage>

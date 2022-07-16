@@ -142,7 +142,7 @@ const Home: NextPage = () => {
 		</Box>,
 		<Box key={"6"} sx={{
 			'@media (min-width: 768px)': {
-				marginTop: '-100px'
+				marginTop: '-200px'
 			}
 		}}>
 			{/* <Box data-aos-offset="600"
@@ -184,7 +184,7 @@ const Home: NextPage = () => {
 	]
 	const isMobile = useMediaQuery('(max-width:599px)');
 	return (
-		<HomeLayoutNew sxProps={{ background: '#1E1E1E' }} headerLandingPage={true} currentPage={currentPage}>
+		<HomeLayoutNew sxProps={{ background: '#151515' }} headerLandingPage={true} currentPage={currentPage}>
 			{SECTIONS}
 
 
