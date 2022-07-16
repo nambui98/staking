@@ -147,14 +147,14 @@ export const TabClaim = () => {
               labelId="test-select-label"
               value={roundSelected}
               label="Select round"
-              onChange={e => (e.target.value === '3' || e.target.value === '4') && setRoundSelected(e.target.value as string)}
+              onChange={e => setRoundSelected(e.target.value as string)}
             >
-              {selecItem?.length && selecItem?.map((item: any, index: number) => <SelectItem sx={(item.value === '3' || item.value === '4') ? activeItem : {}} key={index} value={item.value}>{item.title}</SelectItem>)}
+              {selecItem?.length && selecItem?.map((item: any, index: number) => <SelectItem sx={activeItem} key={index} value={item.value}>{item.title}</SelectItem>)}
             </BoxSelect>
           </FormControl>
           {roundSelected && dataClaim ? <DataClaimBox>
-            <Typography>Total {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.totalBox} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : CLAIM_IMAGE.box} /></span></Typography>
-            <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.claimed} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : CLAIM_IMAGE.box} /></span></Typography>
+            <Typography>Total {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.totalBox} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : CLAIM_IMAGE.boxSilver} /></span></Typography>
+            <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.claimed} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : CLAIM_IMAGE.boxSilver} /></span></Typography>
           </DataClaimBox> : <BoxBg><img src={CLAIM_IMAGE.bgClaim} /></BoxBg>}
           <ReCAPTCHA
             ref={recaptchaRef}
@@ -313,6 +313,7 @@ const DataClaimBox = styled(Box)({
     alignItems: 'center'
   },
   '& img': {
-    marginLeft: '8px'
+    marginLeft: '8px',
+    maxWidth: '32px'
   }
 })
