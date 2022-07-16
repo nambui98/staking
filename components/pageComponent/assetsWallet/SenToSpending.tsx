@@ -46,45 +46,41 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
   }
 
   const depositToken = async (abiDetail: any, type: 'token' | 'box', boxId?: string) => {
-    const resDeposit = await handleDeposit(ethersSigner, abiDetail.address, amount, textEmail, type, boxId)
-    const checkStatus = setInterval(async () => {
-      const statusApprove = await ethersProvider.getTransactionReceipt(resDeposit.hash);
-      if (statusApprove?.status) {
-        spinner.handleChangeStatus(false)
-        updateBnbBalance()
-        popupNoti.handleToggleStatus({
-          status: true,
-          popupType: 'success',
-          title: 'Send succeeded!',
-          titleButton: 'OK',
-          message: currentTab === TAB_NAME.token ? null : 'Please check the item in your inventory on beFITTER app for unboxing.'
-        })
-        clearInterval(checkStatus)
-      }
-    }, 1000);
+    // const resDeposit = await handleDeposit(ethersSigner, abiDetail.address, amount, textEmail, type, boxId)
+    // const checkStatus = setInterval(async () => {
+    //   const statusApprove = await ethersProvider.getTransactionReceipt(resDeposit.hash);
+    //   if (statusApprove?.status) {
+    //     spinner.handleChangeStatus(false)
+    //     updateBnbBalance()
+    //     popupNoti.handleToggleStatus({
+    //       status: true,
+    //       popupType: 'success',
+    //       title: 'Send succeeded!',
+    //       titleButton: 'OK',
+    //       message: currentTab === TAB_NAME.token ? null : 'Please check the item in your inventory on beFITTER app for unboxing.'
+    //     })
+    //     clearInterval(checkStatus)
+    //   }
+    // }, 1000);
   }
 
   const handleSentToken = async () => {
     spinner.handleChangeStatus(true)
     const abiDetail = tokenChoose === 'fiu' ? bftFiuToken : bftHeetoken;
     try {
-      if (currentTab === TAB_NAME.token) {
-        const resAllowance = await getAllowance(walletAccount, ethersSigner, abiDetail);
-        if (resAllowance < parseFloat(amount)) {
-          const resApprove = await handleApprove(amount, ethersSigner, abiDetail);
-          const checkStatus = setInterval(async () => {
-            const statusApprove = await ethersProvider.getTransactionReceipt(resApprove.hash);
-            if (statusApprove?.status) {
-              updateBnbBalance()
-              depositToken(abiDetail, 'token');
-              clearInterval(checkStatus)
-            }
-          }, 1000);
-        } else {
-          depositToken(abiDetail, 'token')
-        }
+      const resAllowance = await getAllowance(walletAccount, ethersSigner, abiDetail);
+      if (resAllowance < parseFloat(amount)) {
+        const resApprove = await handleApprove(amount, ethersSigner, abiDetail);
+        const checkStatus = setInterval(async () => {
+          const statusApprove = await ethersProvider.getTransactionReceipt(resApprove.hash);
+          if (statusApprove?.status) {
+            updateBnbBalance()
+            depositToken(abiDetail, 'token');
+            clearInterval(checkStatus)
+          }
+        }, 1000);
       } else {
-        depositToken(bftBox, 'box')
+        depositToken(abiDetail, 'token')
       }
     } catch (error: any) {
       spinner.handleChangeStatus(false)
