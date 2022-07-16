@@ -42,8 +42,8 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 
 	useEffect(() => {
 		refSlide1.current?.load();
-		refSlide1.current.defaultMuted = false;
-		refSlide1.current.muted = false;
+		// refSlide1.current.defaultMuted = false;
+		// refSlide1.current.muted = false;
 		// refSlide2.current?.muted = false;
 		refSlide2.current?.load();
 		refSlide3.current?.load();
@@ -63,6 +63,8 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 
 	// 	// refSlide1.current.srcObject = src;
 	// }, []);
+
+
 	useEffect(() => {
 		setHeightWindow(window.innerHeight)
 	}, [])
