@@ -8,7 +8,7 @@ import { CLAIM_IMAGE } from "../../../constants/claim";
 import { PAGE } from "../../../constants/header";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { getClaimedBox, handleClaimBox } from "../../../libs/claim";
-import { bftClaimGamefi, bftClaimEnjin } from "../../../libs/contracts";
+import { bftClaimGamefi, bftClaimEnjin, bftClaimAlphaBeta, bftClaimOther } from "../../../libs/contracts";
 import { convertWalletAddress } from "../../../libs/utils/utils";
 import { ClaimService } from "../../../services/claim.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
@@ -56,7 +56,9 @@ export const TabClaim = () => {
       if (res?.data?.status) {
         const claimContractGamefi = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
         const claimContractEnjinstarter = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
-        const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), roundSelected === "3" ? claimContractGamefi : claimContractEnjinstarter);
+        const claimContractAlphaBeta = await new ethers.Contract(bftClaimAlphaBeta.address, bftClaimAlphaBeta.abi, ethersSigner);
+        const claimContractOther = await new ethers.Contract(bftClaimOther.address, bftClaimOther.abi, ethersSigner);
+        const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), roundSelected === '1' ? claimContractAlphaBeta : roundSelected === '2' ? claimContractOther : roundSelected === "3" ? claimContractGamefi : claimContractEnjinstarter);
         setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount }) 
       } else {
         setDataClaim({claimed: 0, totalBox: 0})
@@ -73,8 +75,10 @@ export const TabClaim = () => {
     if (res?.data?.status) {
       const claimContractGamefi = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
       const claimContractEnjinstarter = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
+      const claimContractAlphaBeta = await new ethers.Contract(bftClaimAlphaBeta.address, bftClaimAlphaBeta.abi, ethersSigner);
+      const claimContractOther = await new ethers.Contract(bftClaimOther.address, bftClaimOther.abi, ethersSigner);
       try {
-        const resultClaim: any = await handleClaimBox(walletAccount, roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data);       
+        const resultClaim: any = await handleClaimBox(walletAccount, roundSelected === '1' ? claimContractAlphaBeta : roundSelected === '2' ? claimContractOther : roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data);       
         const checkStatus = setInterval( async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
           if(statusClaim?.status){
@@ -118,8 +122,8 @@ export const TabClaim = () => {
       setSelectItem([
         { title: 'GameFi.org', value: '3' },
         { title: 'Enjinstarter', value: '4' },
-        { title: 'Alpha Test Reward', value: '1' },
-        { title: 'Beta Test Reward', value: '2' },
+        { title: 'Alpha, Beta Test Reward', value: '1' },
+        { title: 'Other Events', value: '2' },
       ])
     }
   }, [currentTab])
@@ -147,20 +151,20 @@ export const TabClaim = () => {
               labelId="test-select-label"
               value={roundSelected}
               label="Select round"
-              onChange={e => (e.target.value === '3' || e.target.value === '4') && setRoundSelected(e.target.value as string)}
+              onChange={e => setRoundSelected(e.target.value as string)}
             >
-              {selecItem?.length && selecItem?.map((item: any, index: number) => <SelectItem sx={(item.value === '3' || item.value === '4') ? activeItem : {}} key={index} value={item.value}>{item.title}</SelectItem>)}
+              {selecItem?.length && selecItem?.map((item: any, index: number) => <SelectItem sx={activeItem} key={index} value={item.value}>{item.title}</SelectItem>)}
             </BoxSelect>
           </FormControl>
           {roundSelected && dataClaim ? <DataClaimBox>
-            <Typography>Total {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.totalBox} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : CLAIM_IMAGE.box} /></span></Typography>
-            <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.claimed} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : CLAIM_IMAGE.box} /></span></Typography>
+            <Typography>Total {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.totalBox} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
+            <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.claimed} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
           </DataClaimBox> : <BoxBg><img src={CLAIM_IMAGE.bgClaim} /></BoxBg>}
-          <ReCAPTCHA
+          {roundSelected && <ReCAPTCHA
             ref={recaptchaRef}
             sitekey={RECAPTCHA_SITE_KEY}
             onChange={onReCAPTCHAChange}
-          />
+          />}
         </Stack>
         <ButtonClaim active={checkStatusButton()} disabled={checkStatusButton() ? false : true} onClick={handleClaimButton}>Claim</ButtonClaim>
       </Stack>}
@@ -313,6 +317,7 @@ const DataClaimBox = styled(Box)({
     alignItems: 'center'
   },
   '& img': {
-    marginLeft: '8px'
+    marginLeft: '8px',
+    maxWidth: '32px'
   }
 })
