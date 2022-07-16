@@ -11,7 +11,7 @@ export const Section4 = () => {
 					<Box sx={{ ...flex, alignItems: 'center', flexWrap: "wrap", columnGap: "16px" }}>
 						<Box sx={{display: 'flex', alignItems: 'center'}}>
 						<Title >
-							<Typography sx={{ background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)', textTransform: 'uppercase', fontFamily: 'Electrofied !important' }}>HEE Burning mechanism</Typography>
+							<Typography sx={{ background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)', textTransform: 'uppercase', fontFamily: 'Electrofied !important', fontStyle: 'italic',  paddingRight: '5px' }}>HEE Burning mechanism</Typography>
 
 						</Title>
 						</Box>
