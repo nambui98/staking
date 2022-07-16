@@ -121,7 +121,8 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 					fontStyle: 'italic',
 					'@media (min-width: 768px)': {
 						...TEXT_STYLE(16, 700, '#fff'),
-					}
+					},
+					textTransform: 'uppercase',
 				}}>IDO has been done on the July 16!</Box>
 				<Box sx={{
 					padding: '8px 0',
