@@ -45,8 +45,8 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
     return false
   }
 
-  const depositToken = async (abiDetail: any) => {
-    const resDeposit = await handleDeposit(ethersSigner, abiDetail.address, amount, textEmail, 'token')
+  const depositToken = async (abiDetail: any, type: 'token' | 'box', boxId?: string) => {
+    const resDeposit = await handleDeposit(ethersSigner, abiDetail.address, amount, textEmail, type, boxId)
     const checkStatus = setInterval(async () => {
       const statusApprove = await ethersProvider.getTransactionReceipt(resDeposit.hash);
       if (statusApprove?.status) {
@@ -76,15 +76,15 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
             const statusApprove = await ethersProvider.getTransactionReceipt(resApprove.hash);
             if (statusApprove?.status) {
               updateBnbBalance()
-              depositToken(abiDetail);
+              depositToken(abiDetail, 'token');
               clearInterval(checkStatus)
             }
           }, 1000);
         } else {
-          depositToken(abiDetail)
+          depositToken(abiDetail, 'token')
         }
       } else {
-        depositToken(bftBox)
+        depositToken(bftBox, 'box')
       }
     } catch (error: any) {
       spinner.handleChangeStatus(false)

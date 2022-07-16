@@ -15,9 +15,9 @@ export const getAllowance = async (walletAddress: string, ethersSigner: any, abi
   return convertAllowance;
 }
 
-export const handleDeposit = async (ethersSigner: any, tokenAddress: string, amount: string, email: string, type: 'token' | 'box') => {
+export const handleDeposit = async (ethersSigner: any, tokenAddress: string, amount: string, email: string, type: 'token' | 'box', boxId?: string) => {
   const walletContract = new ethers.Contract(bftWallet.address, bftWallet.abi, ethersSigner);
-  const parsePrice = ethers.utils.parseUnits(amount);
+  const parsePrice = ethers.utils.parseUnits(type === 'token' ? amount : boxId);
   const res = await type === 'token' ? walletContract.depositToken(tokenAddress, parsePrice, email) : walletContract.depositItem(tokenAddress, parsePrice, email);
   return res;
 }

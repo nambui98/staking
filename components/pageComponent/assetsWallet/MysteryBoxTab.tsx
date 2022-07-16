@@ -125,6 +125,7 @@ const Item = styled(Box)((props: itemProps) => ({
   padding: '8px 16px',
   borderRadius: 16,
   marginBottom: 8,
+  cursor: 'pointer',
   background: props.active ? '#FFE2D3' : 'transparent',
   '&:last-of-type': {
     marginBottom: 0
