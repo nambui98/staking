@@ -59,7 +59,7 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 		//open bug since 2017 that you cannot set muted in video element https://github.com/facebook/react/issues/10389
 		refSlide1.current.defaultMuted = false;
 		refSlide1.current.muted = false;
-		// refSlide1.current.play()
+		refSlide1.current.play()
 		// }
 
 		// refSlide1.current.srcObject = src;
