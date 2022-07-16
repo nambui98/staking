@@ -103,7 +103,53 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 					);
 				})}
 			</Swiper>
-			<BoxCountDown>
+			<Box sx={{
+				position: 'absolute',
+				bottom: 0,
+				left: '50%',
+				transform: 'translateX(-50%)',
+				zIndex: '2',
+				textAlign: 'center',
+				maxWidth: '1120px',
+				width: '100%',
+			}}>
+				<Box sx={{
+					padding: '4px 0',
+					background: 'linear-gradient(270deg, rgba(29, 178, 104, 0) 0%, #1DB268 29.17%, #1DB268 76.56%, rgba(29, 177, 103, 0) 100%)',
+					...TEXT_STYLE(14, 700, '#fff'),
+					fontFamily: 'Electrofied',
+					fontStyle: 'italic',
+					'@media (min-width: 768px)': {
+						...TEXT_STYLE(16, 700, '#fff'),
+					}
+				}}>IDO has been done on the July 16!</Box>
+				<Box sx={{
+					padding: '8px 0',
+					background: 'linear-gradient(90deg, rgba(255, 109, 36, 0) 0%, rgba(255, 109, 36, 0.7) 11.11%, rgba(255, 109, 36, 0) 95.65%)',
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'center',
+				}}>
+					<Typography sx={{
+						fontStyle: 'italic',
+						...TEXT_STYLE(14, 700, '#fff'),
+						fontFamily: 'Electrofied',
+						marginRight: '16px',
+						'@media (min-width: 768px)': {
+							...TEXT_STYLE(16, 700, '#fff'),
+						}
+					}}>LISTING IN</Typography>
+					<Typography sx={{
+						fontStyle: 'italic',
+						...TEXT_STYLE(16, 700, '#fff'),
+						fontFamily: 'Electrofied',
+						'@media (min-width: 768px)': {
+							...TEXT_STYLE(32, 700, '#fff'),
+						}
+					}}>13:00 UTC - 18/07/2022</Typography>
+				</Box>
+			</Box>
+			{/* <BoxCountDown>
 				<Box sx={{
 					'@media (min-width: 1024px)': {
 						display: 'flex',
@@ -167,7 +213,7 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 						<a href="https://gamefi.org/igo/befitter-igo" target={'_blank'}><img src={'assets/dark/gf2.png'} /></a>
 					</Box>
 				</Box>
-			</BoxCountDown>
+			</BoxCountDown> */}
 		</Wrap>
 	)
 }
