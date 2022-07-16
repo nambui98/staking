@@ -18,6 +18,7 @@ export const getAllowance = async (walletAddress: string, ethersSigner: any, abi
 export const handleDeposit = async (ethersSigner: any, tokenAddress: string, amount: string, email: string, type: 'token' | 'box', boxId?: string) => {
   const walletContract = new ethers.Contract(bftWallet.address, bftWallet.abi, ethersSigner);
   const parsePrice = type === 'box' && boxId ? ethers.utils.parseUnits(boxId) : ethers.utils.parseUnits(amount)
+  console.log(email, type, boxId)
   const res = await type === 'token' ? walletContract.depositToken(tokenAddress, parsePrice, email) : walletContract.depositItem(tokenAddress, parsePrice, email);
   return res;
 }
