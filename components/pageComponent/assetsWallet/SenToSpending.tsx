@@ -31,17 +31,17 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
 
   const handleCheckEmail = async () => {
     if (await checkEmail()) {
-      if(currentTab === TAB_NAME.token){
-        if(tokenChoose === 'hee' && parseFloat(heeBalance) >= parseFloat(amount)){
+      if (currentTab === TAB_NAME.token) {
+        if (tokenChoose === 'hee' && parseFloat(heeBalance) >= parseFloat(amount)) {
           return true
         }
-        if(tokenChoose === 'fiu' && parseFloat(fiuBalance) >= parseFloat(amount)){
+        if (tokenChoose === 'fiu' && parseFloat(fiuBalance) >= parseFloat(amount)) {
           return true
         }
       } else {
         return true
-      }      
-    } 
+      }
+    }
     return false
   }
 
@@ -68,19 +68,23 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
     spinner.handleChangeStatus(true)
     const abiDetail = tokenChoose === 'fiu' ? bftFiuToken : bftHeetoken;
     try {
-      const resAllowance = await getAllowance(walletAccount, ethersSigner, abiDetail);
-      if (resAllowance < parseFloat(amount)) {
-        const resApprove = await handleApprove(amount, ethersSigner, abiDetail);
-        const checkStatus = setInterval(async () => {
-          const statusApprove = await ethersProvider.getTransactionReceipt(resApprove.hash);
-          if (statusApprove?.status) {
-            updateBnbBalance()
-            depositToken(abiDetail);
-            clearInterval(checkStatus)
-          }
-        }, 1000);
+      if (currentTab === TAB_NAME.token) {
+        const resAllowance = await getAllowance(walletAccount, ethersSigner, abiDetail);
+        if (resAllowance < parseFloat(amount)) {
+          const resApprove = await handleApprove(amount, ethersSigner, abiDetail);
+          const checkStatus = setInterval(async () => {
+            const statusApprove = await ethersProvider.getTransactionReceipt(resApprove.hash);
+            if (statusApprove?.status) {
+              updateBnbBalance()
+              depositToken(abiDetail);
+              clearInterval(checkStatus)
+            }
+          }, 1000);
+        } else {
+          depositToken(abiDetail)
+        }
       } else {
-        depositToken(abiDetail)
+        depositToken(bftBox)
       }
     } catch (error: any) {
       spinner.handleChangeStatus(false)
@@ -108,7 +112,7 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
               <Typography>Item</Typography>
               <Box>{currentTab === TAB_NAME.token ? amount : `#${boxChoose}`} <img src={`assets/icons/${currentTab === TAB_NAME.token ? (tokenChoose === 'fiu' ? 'fiu' : 'hee') : 'box-classic'}.svg`} /></Box>
             </Box>
-            <MarketplaceButton title={'Confirm'} handleOnClick={() => currentTab === TAB_NAME.token ? handleSentToken() : depositToken(bftBox)} customStyle={{width: '100%', margin: '24px 0'}} />
+            <MarketplaceButton title={'Confirm'} handleOnClick={handleSentToken} customStyle={{ width: '100%', margin: '24px 0' }} />
             <Cancel onClick={() => popupNoti.handleHidePopup(false)}>Cancel</Cancel>
           </PopuBody>
         </Box>
