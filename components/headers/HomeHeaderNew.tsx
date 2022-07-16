@@ -27,7 +27,7 @@ import MenuButtonNew from '../buttons/MenuButtonNew';
 import { toast } from 'react-toastify';
 
 const MAIN_MENU = [
-	{ name: 'HUB', link: 'https://hub.befitter.io/' },
+	{ name: 'HUB', link: 'https://hub.befitter.io/claim' },
 	{ name: 'Business Paper', link: '/business' },
 	// { name: 'manifesto', link: '' }
 ]

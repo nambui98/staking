@@ -20,7 +20,7 @@ export const MENU_ITEMS_HOME = [
 ];
 export const MENU_ITEMS_MOBILE = [
 	{ title: 'Staking', href: '/staking' },
-	{ title: 'HUB', href: 'https://hub.befitter.io/' },
+	{ title: 'HUB', href: 'https://hub.befitter.io/claim' },
 	{ title: 'BUSINESS PAPER', href: '/business' },
 	{ title: 'WHITEPAPER', href: 'https://whitepaper.befitter.io/' },
 	// { title: 'ABOUT', href: '#' },
