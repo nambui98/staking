@@ -36,17 +36,7 @@ export const Section4 = () => {
 			<SubTitle sx={{ fontSize: { xs: "20px", sm: '48px' }, lineHeight: { xs: "30px", sm: '72px' } }}>A  portion of the revenue in $HEE tokens are permanently destroyed via token burning. This immediately reduces the circulating supply of tokens.</SubTitle>
 			<Box sx={{ ...flex, justifyContent: "space-between", marginTop: { xs: "32px", md: "80px" }, flexDirection: { xs: "column", sm: "row" } }}>
 				<Box>
-					<Title sx={{}}>
-						<Typography sx={{ background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)', textTransform: 'uppercase', fontWeight: "900", fontSize: { xm: "24px !important", sm: '48px !important' } }}>$FIU TOKEN</Typography>
-					</Title>
-					<TitleText sx={{ textTransform: 'uppercase', fontSize: { xm: "24px !important", sm: '32px !important' } }}></TitleText>
-					<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "64px" }, marginTop: { xs: "16px", md: "0px" } }}>  <Typography sx={{ lineHeight: { xs: "22px", sm: "64px" } }}>  25% Minting fee in $FIU </Typography></Details>
-					<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "64px" }, marginTop: { xs: "16px", md: "0px" } }}>  <Typography sx={{ lineHeight: { xs: "22px", sm: "64px" } }}>  25% Leveling up fee in $FIU </Typography></Details>
-					<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "64px" }, marginTop: { xs: "16px", md: "0px" } }}>  <Typography sx={{ lineHeight: { xs: "22px", sm: "64px" } }}>  25% Challenge rewards pool </Typography></Details>
-					<Details sx={{ '& span': { color: '#FF6D24' }, lineHeight: { xs: "22px", md: "64px" }, marginTop: { xs: "16px", md: "0px" } }}>  <Typography sx={{ lineHeight: { xs: "22px", sm: "64px" } }}>  1% of NFT Renting Rewards </Typography></Details>
-				</Box>
-				<Box sx={{ alignSelf: { xs: 'flex-end', sm: "auto" }, mt: "24px", '& p': {textAlign: 'right'}}}>
-					<Title>
+				<Title>
 						<Typography sx={{ background: 'linear-gradient(180deg, #8AFFC5 6.58%, #1DB167 80.6%)', textTransform: 'uppercase', fontWeight: "900", fontSize: { xm: "24px !important", sm: '48px !important' } }}>$HEE Token</Typography>
 					</Title>
 					<TitleText sx={{ textTransform: 'uppercase', fontSize: { xm: "24px !important", sm: '32px !important' } }}></TitleText>
