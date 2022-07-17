@@ -21,7 +21,8 @@ const addresses: Map = {
     bFBusdToken: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
     bFShop: '0xc4bcE7f9dF1126c352809eD422d0766a3C3ce18a',
     bFclaimAlphaBeta: '0xcd229a4e1140cf045bA9f3c1287B62cAe4aFA549',
-    bFclaimOther: '0xb01F92dd643B366686AAa856b9634E3F6799Fe2A'
+    bFclaimOther: '0xb01F92dd643B366686AAa856b9634E3F6799Fe2A',
+    bFclaimAlphaBeta2: '0x80F2086a0De59eF239D6F97ac2138496AE1181e2'
   },
   ['localhost']: {
 
@@ -40,3 +41,4 @@ export const bftBusdToken = {address: address.bFBusdToken, abi: bfBusdToken.abi}
 export const bftShop = {address: address.bFShop, abi: bfShop.abi}
 export const bftClaimAlphaBeta = {address: address.bFclaimAlphaBeta, abi: bfClaimBoxGamefi.abi}
 export const bftClaimOther = {address: address.bFclaimOther, abi: bfClaimBoxGamefi.abi}
+export const bftClaimAlphaBeta2 = {address: address.bFclaimAlphaBeta2, abi: bfClaimBoxGamefi.abi}

@@ -111,7 +111,26 @@ export const TabClaim = () => {
     getClaimedBoxNumber();
   }, [walletAccount, roundSelected])
 
-  useEffect(() => {
+  useEffect(() => {   
+    const checkAlphaBeta2 = async () => {
+      const res: any = await ClaimService.getAmount(walletAccount, captchaToken, '6', false);
+      if(res?.data?.status){
+        setSelectItem([
+          { title: 'GameFi.org', value: '3' },
+          { title: 'Enjinstarter', value: '4' },
+          { title: 'Alpha, Beta Test Reward 1', value: '1' },
+          { title: 'Alpha, Beta Test Reward 2', value: '6' },
+          { title: 'Other Events', value: '2' },
+        ])
+      } else {
+        setSelectItem([
+          { title: 'GameFi.org', value: '3' },
+          { title: 'Enjinstarter', value: '4' },
+          { title: 'Alpha, Beta Test Reward 1', value: '1' },
+          { title: 'Other Events', value: '2' },
+        ])
+      }
+    }
     if (currentTab === 'token') {
       setSelectItem([
         { title: 'Seed', value: 'Seed' },
@@ -119,12 +138,7 @@ export const TabClaim = () => {
         { title: 'Airdrop', value: 'Airdrop' },
       ])
     } else {
-      setSelectItem([
-        { title: 'GameFi.org', value: '3' },
-        { title: 'Enjinstarter', value: '4' },
-        { title: 'Alpha, Beta Test Reward', value: '1' },
-        { title: 'Other Events', value: '2' },
-      ])
+      checkAlphaBeta2();
     }
   }, [currentTab])
 
@@ -157,8 +171,8 @@ export const TabClaim = () => {
             </BoxSelect>
           </FormControl>
           {roundSelected && dataClaim ? <DataClaimBox>
-            <Typography>Total {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.totalBox} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
-            <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.claimed} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
+            <Typography>Total {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.totalBox} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2' || roundSelected === '6') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
+            <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.claimed} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2' || roundSelected === '6') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
           </DataClaimBox> : <BoxBg><img src={CLAIM_IMAGE.bgClaim} /></BoxBg>}
           {roundSelected && <ReCAPTCHA
             ref={recaptchaRef}
