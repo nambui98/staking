@@ -162,8 +162,12 @@ export const TabClaim = () => {
 
   useEffect(() => {
     currentTab == 'box' ? getClaimedBoxNumber() : getClaimedTokenNumber();
-    setDataClaim({claimed: 0, totalBox: 0})
   }, [walletAccount, roundSelected])
+
+  useEffect(() => {
+    setDataClaim({claimed: 0, totalBox: 0}),
+    setRoundSelected('')
+  }, [currentTab])
 
   useEffect(() => {
     if (currentTab === 'token') {
