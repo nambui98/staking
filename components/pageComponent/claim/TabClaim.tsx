@@ -229,7 +229,7 @@ export const TabClaim = () => {
           <MarketplaceButton customStyle={{width: '100%'}} title={'View in wallet'} handleOnClick={() => router.push(PAGE.ASSETS.link)} />
           {dataClaim.totalBox > dataClaim.claimed && <Typography sx={{cursor: 'pointer'}} onClick={() => window.location.reload()}>Claim more items</Typography>}
       </BodyPopupSuccess>
-      } status={popupSuccess} popupType="success" handleToggleStatus={() => window.location.reload()} />
+      } status={popupSuccess} popupType="success" handleToggleStatus={() => setPopupSuccess(false)} />
       <PopupMessage title="Error!" status={popupError} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError(false)}
         handleClickButton={() => setPopupError(false)} titleCustomColor={{ '& p': { color: '#FF6F61' } }} message="Something went wrong. Please try again!" />
       <Backdrop
