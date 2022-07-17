@@ -10,14 +10,14 @@ export const TokenTab = () => {
       <Item sx={ItemFiu}>
         <ItemLeft>
           <Title>Your balance</Title>
-          <Amount typeBnb={false}>{fiuBalance?.length && parseFloat(fiuBalance) > 0 ? parseFloat(fiuBalance).toFixed(4) : '0.00'}<span>FIU</span></Amount>
+          <Amount typeBnb={false}>{fiuBalance?.length && parseFloat(fiuBalance) > 0 ? parseFloat(fiuBalance) : '0.00'}<span>FIU</span></Amount>
         </ItemLeft>
         <ImageToken><img src={ICON.fiu} /></ImageToken>
       </Item>
       <Item sx={ItemHee}>
         <ItemLeft>
           <Title>Your balance</Title>
-          <Amount typeBnb={false}>{heeBalance?.length && parseFloat(heeBalance) > 0 ? parseFloat(heeBalance).toFixed(4) : '0.00'}<span>HEE</span></Amount>
+          <Amount typeBnb={false}>{heeBalance?.length && parseFloat(heeBalance) > 0 ? parseFloat(heeBalance) : '0.00'}<span>HEE</span></Amount>
         </ItemLeft>
         <ImageToken><img src={ICON.hee} /></ImageToken>
       </Item>
