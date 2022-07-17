@@ -120,15 +120,15 @@ export const TabClaim = () => {
         setSelectItem([
           { title: 'GameFi.org', value: '3' },
           { title: 'Enjinstarter', value: '4' },
-          { title: 'Alpha, Beta Test Reward 1', value: '1' },
-          { title: 'Alpha, Beta Test Reward 2', value: '6' },
+          { title: 'Alpha, Beta Test Reward', value: '1' },
+          { title: 'Alpha, Beta Test Reward extra', value: '6' },
           { title: 'Other Events', value: '2' },
         ])
       } else {
         setSelectItem([
           { title: 'GameFi.org', value: '3' },
           { title: 'Enjinstarter', value: '4' },
-          { title: 'Alpha, Beta Test Reward 1', value: '1' },
+          { title: 'Alpha, Beta Test Reward', value: '1' },
           { title: 'Other Events', value: '2' },
         ])
       }
