@@ -29,7 +29,8 @@ export const TabPools = () => {
 		{ name: 'FIU - Shared Pool', data: createData('-', '-', '-', '-', '-', '-', '-') },
 	];
 
-	const handleShowPopupPass = () => {
+	const handleShowPopupPass = (e: React.MouseEvent) => {
+		e.stopPropagation();
 		setStatusPopup({
 			status: true,
 			content: <Box>
@@ -48,7 +49,8 @@ export const TabPools = () => {
 		})
 	}
 
-	const handleShowPopupShared = () => {
+	const handleShowPopupShared = (e: React.MouseEvent) => {
+		e.stopPropagation();
 		setStatusPopup({
 			status: true,
 			content: <Box>
@@ -99,7 +101,7 @@ export const TabPools = () => {
 										key={index}
 										sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 									>
-										<TitleItem key={index}><img src={STAKING_ICON.fiu} /> {item.name} <span onClick={index === 0 ? handleShowPopupPass : handleShowPopupShared}>How it works?</span></TitleItem>
+										<TitleItem key={index}><img src={STAKING_ICON.fiu} /> {item.name} <span onClick={index === 0 ? (e: React.MouseEvent) => handleShowPopupPass(e) : (e: React.MouseEvent) => handleShowPopupShared(e)}>How it works?</span></TitleItem>
 										{/* <ComingSoon sx={{
                       top: index === 0 ? '0 !important' : 4
                     }}>coming soon</ComingSoon> */}

@@ -140,7 +140,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({ status, handleToggle, tit
 					// setContinueToStake(true)
 					setStateContent(4)
 
-				}} /> : <MarketplaceButton customStyle={{ marginTop: "auto" }} title={"Connect Wallet"} handleOnClick={() => { setToggleActivePopup(true) }} />
+				}} /> : <MarketplaceButton customStyle={{ width: "100%" }} title={"Connect Wallet"} handleOnClick={() => { setToggleActivePopup(true) }} />
 			}
 		</Box>
 	</>
