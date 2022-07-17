@@ -7,7 +7,7 @@ import { RECAPTCHA_SITE_KEY } from "../../../const";
 import { CLAIM_IMAGE } from "../../../constants/claim";
 import { PAGE } from "../../../constants/header";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
-import { getClaimedBox, handleClaimBox } from "../../../libs/claim";
+import { getClaimedBox, getClaimedToken, handleClaimBox, handleClaimToken } from "../../../libs/claim";
 import { bftClaimGamefi, bftClaimEnjin, bftClaimAlphaBeta, bftClaimOther } from "../../../libs/contracts";
 import { convertWalletAddress } from "../../../libs/utils/utils";
 import { ClaimService } from "../../../services/claim.service";
@@ -21,7 +21,7 @@ import { PopupMessage } from "./PopupMessage";
 export const TabClaim = () => {
   const router = useRouter();
   const {walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
-  const [currentTab, setCUrrentTab] = useState<'box' | 'token'>('box');
+  const [currentTab, setCurrentTab] = useState<'box' | 'token'>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [roundSelected, setRoundSelected] = useState<string>('');
   const [captchaToken, setCaptchaToken] = useState('');
@@ -69,6 +69,25 @@ export const TabClaim = () => {
     }
   }
 
+  const getClaimedTokenNumber = async () => {
+    if(!chainIdIsSupported) {
+      await changeNetwork(provider)
+    }
+    try {
+      const res: any = await ClaimService.getAmount((walletAccount.toLowerCase()), captchaToken, roundSelected, false);
+      if (res?.data?.status) {
+        const dataClaimed = await getClaimedToken(walletAccount, ethersSigner)
+        console.log(dataClaimed, 123)
+        setDataClaim({ claimed: parseInt(ethers.utils.formatEther(dataClaimed)), totalBox: res.data.amount }) 
+      } else {
+        setDataClaim({claimed: 0, totalBox: 0})
+      }
+    } catch (error) {
+      setDataClaim({claimed: 0, totalBox: 0})
+      console.log(error)
+    }
+  }
+
   const handleClaimButton = async () => {
     setStatusLoading(true)
     const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, true);
@@ -78,7 +97,8 @@ export const TabClaim = () => {
       const claimContractAlphaBeta = await new ethers.Contract(bftClaimAlphaBeta.address, bftClaimAlphaBeta.abi, ethersSigner);
       const claimContractOther = await new ethers.Contract(bftClaimOther.address, bftClaimOther.abi, ethersSigner);
       try {
-        const resultClaim: any = await handleClaimBox(walletAccount, roundSelected === '1' ? claimContractAlphaBeta : roundSelected === '2' ? claimContractOther : roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data);       
+        const resultClaim: any = currentTab === 'token' ? await handleClaimBox(walletAccount, roundSelected === '1' ? claimContractAlphaBeta : roundSelected === '2' ? claimContractOther : roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data) : 
+          await handleClaimToken(walletAccount, res.data, ethersSigner)   
         const checkStatus = setInterval( async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
           if(statusClaim?.status){
@@ -104,19 +124,51 @@ export const TabClaim = () => {
       setPopupError(true)
       setStatusLoading(false)
     }
+  }
 
+  const handleClaimTokenButton = async () => {
+    setStatusLoading(true)
+    const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, true);
+    if (res?.data?.status) {
+      try {
+        const resultClaim: any = await handleClaimToken(walletAccount, res.data, ethersSigner)   
+        const checkStatus = setInterval( async () => {
+          const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
+          if(statusClaim?.status){
+            setPopupSuccess(true);
+            setStatusLoading(false);
+            getClaimedBoxNumber();
+            setRoundSelected('');
+            updateBnbBalance();
+            clearInterval(checkStatus);
+          }
+        }, 1000);
+
+      } catch (error) {
+        setStatusLoading(false)
+        setPopupError(true)
+        console.log(error)
+      }
+    } else {
+      if(res?.data?.captchaValidation === false){
+        setTimeout(() => {
+          window.location.reload()
+        }, 2000);
+      }
+      setPopupError(true)
+      setStatusLoading(false)
+    }
   }
 
   useEffect(() => {
-    getClaimedBoxNumber();
+    currentTab == 'box' ? getClaimedBoxNumber() : getClaimedTokenNumber();
+    setDataClaim({claimed: 0, totalBox: 0})
   }, [walletAccount, roundSelected])
 
   useEffect(() => {
     if (currentTab === 'token') {
       setSelectItem([
-        { title: 'Seed', value: 'Seed' },
-        { title: 'Private', value: 'Private' },
-        { title: 'Airdrop', value: 'Airdrop' },
+        { title: 'Public Sale', value: '5' }
       ])
     } else {
       setSelectItem([
@@ -139,8 +191,8 @@ export const TabClaim = () => {
         <Typography sx={{ ...TEXT_STYLE(14, 500), marginBottom: '12px', color: '#5A6178' }}>I want to claim</Typography>
         <BoxTab>
           <Box>
-            <TabItem sx={{ marginRight: '4px' }} active={currentTab === 'box' ? true : false}>Box</TabItem>
-            <TabItem sx={{opacity: '0.4'}} active={currentTab === 'token' ? true : false}>Token</TabItem>
+            <TabItem sx={{ marginRight: '4px' }} active={currentTab === 'box' ? true : false} onClick={() => setCurrentTab('box')}>Box</TabItem>
+            <TabItem active={currentTab === 'token' ? true : false} onClick={() => setCurrentTab('token')}>Token</TabItem>
           </Box>
         </BoxTab>
         <Stack>
@@ -166,7 +218,7 @@ export const TabClaim = () => {
             onChange={onReCAPTCHAChange}
           />}
         </Stack>
-        <ButtonClaim active={checkStatusButton()} disabled={checkStatusButton() ? false : true} onClick={handleClaimButton}>Claim</ButtonClaim>
+        <ButtonClaim active={checkStatusButton()} disabled={checkStatusButton() ? false : true} onClick={() => currentTab === 'box' ? handleClaimButton() : handleClaimTokenButton()}>Claim</ButtonClaim>
       </Stack>}
       <PopupMessage title="You have successfully claimed your item!" message={
         <BodyPopupSuccess>
