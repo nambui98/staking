@@ -121,7 +121,7 @@ export const TabClaim = () => {
           { title: 'GameFi.org', value: '3' },
           { title: 'Enjinstarter', value: '4' },
           { title: 'Alpha, Beta Test Reward', value: '1' },
-          { title: 'Alpha, Beta Test Reward extra', value: '6' },
+          { title: 'Alpha, Beta Test Reward Extra', value: '6' },
           { title: 'Other Events', value: '2' },
         ])
       } else {
