@@ -38,6 +38,7 @@ import {
 	THE_TOKEN,
 } from '../constants/litePaper';
 import HomeLayout from '../components/layouts/HomeLayout';
+import HomeLayoutNew from '../components/layouts/HomeLayoutNew';
 
 const Banner: React.FC<any> = ({ isXs }) => (
 	<Stack
@@ -46,7 +47,8 @@ const Banner: React.FC<any> = ({ isXs }) => (
 		sx={{
 			position: 'relative',
 			overflow: 'hidden',
-			height: { xs: 569 * 0.6, sm: 569 },
+			height: { xs: 260, sm: 610 },
+			marginTop: {xs: '64px', sm: '76px'}
 		}}
 	>
 		<Box
@@ -56,11 +58,18 @@ const Banner: React.FC<any> = ({ isXs }) => (
 				backgroundRepeat: 'no-repeat',
 				backgroundSize: 'contain',
 				backgroundPosition: 'center',
-				width: { xs: 1920 * 0.6, sm: 1920 },
-				height: { xs: 569 * 0.6, sm: 569 },
+				width: { xs: '100%', sm: 1920 },
+				height: { xs: '100%', sm: '100%' },
 			}}
 		/>
-		<Stack alignItems="center" sx={{ position: 'relative', px: '10%' }}>
+		<Stack alignItems="center" sx={{ position: 'relative', px: '10%', 
+			'& img': {
+				maxWidth: '305px',
+				'@media (min-width: 768px)': {
+					maxWidth: '760px'
+				}
+			} 
+		}}>
 			<img src={TITLE} width={isXs ? '100%' : 'auto'} />
 			{/* <img src={isXs ? TITLE_MOBILE : TITLE} width={'auto'}/> */}
 		</Stack>
@@ -69,75 +78,56 @@ const Banner: React.FC<any> = ({ isXs }) => (
 
 const Token: React.FC<any> = ({ sxProps }) => {
 	return (
-		<Container sx={{ ...sxProps }}>
-			<Grid container>
-				<Grid item xs={12} md={4}>
-					<Box
-						sx={{
-							width: { xs: '80%', sm: '70%', md: '100%' },
-							height: 0,
-							pt: {
-								xs: `${(470 / 448) * 80}%`,
-								sm: `${(470 / 448) * 70}%`,
-								md: `${(470 / 448) * 100}%`,
-							},
-							mx: 'auto',
-							backgroundImage: `url(${TOKEN.POSTER})`,
-							backgroundRepeat: 'no-repeat',
-							backgroundSize: 'cover',
-						}}
-					/>
-				</Grid>
-				<Grid item xs>
+		<Container sx={{ maxWidth: '1728px !important', margin: '120px 0' }}>
+			<Box sx={{
+				display: 'flex',
+				'@media (max-width: 1279px)': {
+					flexDirection: 'column',
+				}
+			}}>
+				<Box sx={{
+					display: 'flex',
+					alignItems: 'center',
+					marginRight: '80px'
+				}}>
+					<img src={'assets/title-token-lp.png'} />
+				</Box>
+				<Box>
 					<Stack
-						px={{ xs: 0, sm: 2, md: 4 }}
 						justifyContent="center"
 						sx={{ height: '100%' }}
 					>
 						<Typography
-							variant="subtitle1"
-							fontSize={{ xs: 32, sm: 40 }}
-							fontStyle="italic"
-							color="#31373E"
-							sx={{
-								textTransform: 'uppercase',
-								textShadow: '1px 1px 0 #FFF, 2px 2px 0 #31373E',
-							}}
-						>
-							{TOKEN.SUBTITLE}
-						</Typography>
-						<Typography
-							variant="subtitle1"
-							component="span"
-							fontSize={{ xs: 42, sm: 64 }}
-							fontStyle="italic"
-							color="#FF6D24"
-							sx={{
-								textTransform: 'uppercase',
-								textShadow: '1px 1px 0 #FFF, 2px 2px 0 #FF6D24',
-							}}
-						>
-							{TOKEN.TITLE}
-						</Typography>
-						<Typography
-							fontSize={{ xs: 16, sm: 18 }}
-							fontWeight={500}
-							color="#5A6178"
+							fontSize={{ xs: 16, sm: 32 }}
+							fontWeight={600}
+							color="#ffffff"
 							lineHeight={1.5}
-							my={3}
+							sx={{
+								'& span': {
+									color: '#FF6D24'
+								},
+								'@media (max-width: 1279px)': {
+									marginTop: '24px'
+								}
+							}}
 						>
-							{TOKEN.DESC}
+							<span>beFitter</span> {TOKEN.DESC}
 						</Typography>
 					</Stack>
-				</Grid>
-			</Grid>
-			<Stack px={{ xs: 0, sm: 2, md: 4 }}>
+				</Box>
+			</Box>
+			<Stack >
 				<Typography
-					fontSize={{ xs: 16, sm: 18 }}
-					fontWeight={500}
-					color="#5A6178"
+					fontSize={{ xs: 16, sm: 32 }}
+					fontWeight={600}
+					color="#ffffff"
 					lineHeight={1.5}
-					my={3}
+					sx={{
+						margin: '40px 0 80px',
+						'@media (max-width: 767px)': {
+							marginTop: '24px 0'
+						}
+					}}
 				>
 					{TOKEN.TOKEN_DESC}
 				</Typography>
@@ -1114,20 +1104,20 @@ const LitePaper: NextPage = () => {
 	const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 
 	return (
-		<HomeLayout sxProps={{ background: '#fff' }} headerLandingPage={true}>
+		<HomeLayoutNew sxProps={{ background: '#1E1E1E' }} headerLandingPage={true}>
 			<Banner isXs={isXs} />
-			<Token sxProps={{ my: 15 }} />
-			<Mission sxProps={{ my: 15 }} />
-			<Game sxProps={{ my: 15 }} />
-			<Business sxProps={{ my: 15 }} />
-			<Charity sxProps={{ my: 15 }} />
-			<TheToken sxProps={{ my: 15 }} isXs={isXs} />
+			<Token />
+			<Mission />
+			<Game />
+			<Business />
+			<Charity />
+			<TheToken isXs={isXs} />
 			<Roadmap />
 			<FoundedBy sxProps={{ mb: 15 }} />
 			<Team sxProps={{ mb: 15 }} />
 			<App sxProps={{ mb: 15 }} />
 			<StayInTouch />
-		</HomeLayout>
+		</HomeLayoutNew>
 	);
 };
 

@@ -6,10 +6,10 @@ export const TOKEN = {
 	SUBTITLE: 'Make healthy lifestyle',
 	TITLE: 'irresistible',
 	TITLE_BG: 'assets/backgrounds/home-app.png',
-	DESC: 'beFITTER is a web3 fitnessfi and socialfi app that aims to build a healthier ecosystem helping users balance their life, improve mental & physical health, gain achievements and still get monetary incentives.',
+	DESC: 'is a web3 fitnessfi and socialfi app that aims to build a healthier ecosystem helping users balance their lives, improve their mental & physical health, gain achievements, and still get monetary incentives.',
 	TOKEN_DESC: `Users need to be equipped with NFT Shoes to get paid when they walk, run, cycle and join challenges with others. They even can equip NFT Pets as a companion to get more rewards.`,
-	TOKEN_IMG: 'assets/litePaper-token.png',
-	NFT_IMG: 'assets/litePaper-shoe.png',
+	TOKEN_IMG: 'assets/litePaper-token-v2.png',
+	NFT_IMG: 'assets/litePaper-shoe-v2.png',
 	CONTENT: [
 		{
 			title: {
