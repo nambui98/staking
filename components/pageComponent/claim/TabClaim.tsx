@@ -7,7 +7,7 @@ import { RECAPTCHA_SITE_KEY } from "../../../const";
 import { CLAIM_IMAGE } from "../../../constants/claim";
 import { PAGE } from "../../../constants/header";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
-import { getClaimedBox, getClaimedToken, handleClaimBox, handleClaimToken } from "../../../libs/claim";
+import { checkClaimedToken, getClaimedBox, getClaimedToken, handleClaimBox, handleClaimToken } from "../../../libs/claim";
 import { bftClaimGamefi, bftClaimEnjin, bftClaimAlphaBeta, bftClaimOther } from "../../../libs/contracts";
 import { convertWalletAddress, formatNumberWithCommas } from "../../../libs/utils/utils";
 import { ClaimService } from "../../../services/claim.service";
@@ -32,6 +32,7 @@ export const TabClaim = () => {
   const [popupError, setPopupError] = useState(false);
   const [popupSuccess, setPopupSuccess] = useState(false);
   const [statusLoading, setStatusLoading] = useState<boolean>(false);
+  const [checkClaimed, setCheckClaimed] = useState<boolean>(false);
 
   const onReCAPTCHAChange = async (captchaCode: any) => {
     if (!captchaCode) {
@@ -41,7 +42,7 @@ export const TabClaim = () => {
   }
 
   const checkStatusButton = () => {
-    if (dataClaim.totalBox > dataClaim.claimed && captchaToken.length && roundSelected.length) {
+    if (dataClaim.totalBox > dataClaim.claimed && captchaToken.length && roundSelected.length && checkClaimed) {
       return true
     }
     return false;
@@ -75,9 +76,10 @@ export const TabClaim = () => {
     }
     try {
       const res: any = await ClaimService.getAmount((walletAccount.toLowerCase()), captchaToken, roundSelected, false);
+      const dataCheckClaimed = await checkClaimedToken(walletAccount, ethersSigner)
+      parseInt(ethers.utils.formatEther(dataCheckClaimed)) > 0 ? setCheckClaimed(true) : setCheckClaimed(false)
       if (res?.data?.status) {
-        const dataClaimed = await getClaimedToken(walletAccount, ethersSigner)
-        console.log(dataClaimed, 123)
+        const dataClaimed = await getClaimedToken(walletAccount, ethersSigner)        
         setDataClaim({ claimed: parseInt(ethers.utils.formatEther(dataClaimed)), totalBox: res.data.amount }) 
       } else {
         setDataClaim({claimed: 0, totalBox: 0})
@@ -135,6 +137,7 @@ export const TabClaim = () => {
         const checkStatus = setInterval( async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
           if(statusClaim?.status){
+            console.log(statusClaim)
             setPopupSuccess(true);
             setStatusLoading(false);
             getClaimedBoxNumber();
