@@ -6,6 +6,7 @@ import bfFiuToken from '../abi/BFFiuToken.json';
 import bfShoeItem from '../abi/BFShoeItem.json';
 import bfBusdToken from '../abi/BeFitterBusd.json';
 import bfShop from '../abi/BeFitterShop.json';
+import bfClaimToken from '../abi/BeFitterClaimFiu.json';
 interface Map {
   [key: string]: any;
 }
@@ -16,13 +17,14 @@ const addresses: Map = {
     bFclaimBoxGamefi: '0x7f7f5971D45cA5EFAc225DA64299Fccb386a84B6',
     bFclaimEnjin: '0x49509ac5266B51c686D4B75AF7fed9B4E21210Ee',
     bFheeToken: '0x05031f56DAD9EDa2Ff7e0d0b675787cC72Dc4675',
-    bFfiuToken: '0x25FE4e58B463f0511f1dF848e3Afc3e97b8aB59f',
+    bFfiuToken: '0xEF7d50069406A2F5A53806f7250A6c0f17AD9dCD',
     bFshoeItem: '0x365B79e59080632E693D98e2A0A0e63625E51495',
     bFBusdToken: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
     bFShop: '0xc4bcE7f9dF1126c352809eD422d0766a3C3ce18a',
     bFclaimAlphaBeta: '0xcd229a4e1140cf045bA9f3c1287B62cAe4aFA549',
     bFclaimOther: '0xb01F92dd643B366686AAa856b9634E3F6799Fe2A',
-    bFclaimAlphaBeta2: '0x80F2086a0De59eF239D6F97ac2138496AE1181e2'
+    bFclaimAlphaBeta2: '0x80F2086a0De59eF239D6F97ac2138496AE1181e2',
+    bFclaimToken: '0xA1eDA0aBA0175050E0c123fc8E531B4b7526e0de'
   },
   ['localhost']: {
 
@@ -42,3 +44,4 @@ export const bftShop = {address: address.bFShop, abi: bfShop.abi}
 export const bftClaimAlphaBeta = {address: address.bFclaimAlphaBeta, abi: bfClaimBoxGamefi.abi}
 export const bftClaimOther = {address: address.bFclaimOther, abi: bfClaimBoxGamefi.abi}
 export const bftClaimAlphaBeta2 = {address: address.bFclaimAlphaBeta2, abi: bfClaimBoxGamefi.abi}
+export const bftClaimToken = {address: address.bFclaimToken, abi: bfClaimToken.abi}

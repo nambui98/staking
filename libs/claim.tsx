@@ -1,6 +1,6 @@
 
 import { ethers } from 'ethers';
-import { bftBox, bftShop } from './contracts';
+import { bftBox, bftClaimToken, bftShop } from './contracts';
 
 export const handleClaimBox = async (walletAddress: string, claimBoxContract: any, AddressAmount: any) => {
   const claim = await claimBoxContract.claim(walletAddress, AddressAmount.amount, AddressAmount.proof);
@@ -27,4 +27,28 @@ export const getAvailableBox = async (boxType: string, ethersSigner: any) => {
   const shopContract = await new ethers.Contract(bftShop.address, bftShop.abi, ethersSigner)
   const totalBox = await shopContract.getAvailableBox(boxType);
   return totalBox;
+}
+
+export const handleClaimToken = async (walletAddress: string, AddressAmount: any, ethersSigner: any) => {
+  const claimTokenContract = new ethers.Contract(bftClaimToken.address, bftClaimToken.abi, ethersSigner)
+  const res = await claimTokenContract.claim(walletAddress, AddressAmount.amount, AddressAmount.proof)
+  return res;
+}
+
+export const getClaimedToken = async (walletAddress: string, ethersSigner: any) => {
+  const claimTokenContract = new ethers.Contract(bftClaimToken.address, bftClaimToken.abi, ethersSigner)
+  const res = await claimTokenContract.getReleasedTokenAmount(walletAddress);
+  return res
+}
+
+export const checkClaimedToken = async (walletAddress: string, ethersSigner: any) => {
+  const claimTokenContract = new ethers.Contract(bftClaimToken.address, bftClaimToken.abi, ethersSigner)
+  const res = await claimTokenContract.getClaimableAmount(walletAddress)
+  return res
+}
+
+export const getLockedOf = async (walletAddress: string, ethersSigner: any) => {
+  const claimTokenContract = new ethers.Contract(bftClaimToken.address, bftClaimToken.abi, ethersSigner)
+  const res = await claimTokenContract.lockedOf(walletAddress)
+  return res
 }
