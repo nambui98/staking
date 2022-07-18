@@ -9,7 +9,7 @@ import { PAGE } from "../../../constants/header";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { getClaimedBox, getClaimedToken, handleClaimBox, handleClaimToken } from "../../../libs/claim";
 import { bftClaimGamefi, bftClaimEnjin, bftClaimAlphaBeta, bftClaimOther } from "../../../libs/contracts";
-import { convertWalletAddress } from "../../../libs/utils/utils";
+import { convertWalletAddress, formatNumberWithCommas } from "../../../libs/utils/utils";
 import { ClaimService } from "../../../services/claim.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
 import { MarketplaceButton } from "../../buttons/MarketplaceButton";
@@ -157,17 +157,6 @@ export const TabClaim = () => {
       }
       setPopupError(true)
       setStatusLoading(false)
-    }
-  }
-
-  const formatNumberWithCommas = (data: any) => {
-    const tks = (data as any).toString()?.split('.');
-    
-    if (tks?.length > 1) {
-      return tks[0]?.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '.' + tks[1];
-    }
-    else {
-      return tks[0]?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     }
   }
 
