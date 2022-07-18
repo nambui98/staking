@@ -4,12 +4,12 @@ export const convertWalletAddress = (walletAddress: string, start: number, end: 
 
 export const formatNumberWithCommas = (data: any) => {
   const tks = (data as any).toString()?.split('.');
-  const formatNumber = tks[0]?.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '.' + tks[1];
+  const formatNumber = tks[0]?.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '.' + tks[1];
    
   if (tks?.length > 1) {
     return tks[1].length > 4 ? parseFloat(formatNumber).toFixed(4) : formatNumber;
   }
   else {
-    return  tks[0]?.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+    return  tks[0]?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   }
 }

@@ -17,13 +17,13 @@ const addresses: Map = {
     bFclaimBoxGamefi: '0x7f7f5971D45cA5EFAc225DA64299Fccb386a84B6',
     bFclaimEnjin: '0x49509ac5266B51c686D4B75AF7fed9B4E21210Ee',
     bFheeToken: '0x05031f56DAD9EDa2Ff7e0d0b675787cC72Dc4675',
-    bFfiuToken: '0xe92e196f11c9b2BDEf24CDB047e04b3634f5CD09',
+    bFfiuToken: '0xEF7d50069406A2F5A53806f7250A6c0f17AD9dCD',
     bFshoeItem: '0x365B79e59080632E693D98e2A0A0e63625E51495',
     bFBusdToken: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
     bFShop: '0xc4bcE7f9dF1126c352809eD422d0766a3C3ce18a',
     bFclaimAlphaBeta: '0xcd229a4e1140cf045bA9f3c1287B62cAe4aFA549',
     bFclaimOther: '0xb01F92dd643B366686AAa856b9634E3F6799Fe2A',
-    bFclaimToken: '0x3Eae0ccC9748e65E4aB9065770d38702E422C450'
+    bFclaimToken: '0xA1eDA0aBA0175050E0c123fc8E531B4b7526e0de'
   },
   ['localhost']: {
 
