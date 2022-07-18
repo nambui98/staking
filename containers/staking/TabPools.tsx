@@ -1,9 +1,12 @@
-import { Box, Container, InputAdornment, InputBase, Stack, styled, Tab, Table, TableBody, TableCell, TableRow, Tabs, TextField, Typography } from "@mui/material"
-import { useState } from "react"
-import { DialogsItemStaking } from "../../components/dialogs/DialogsItemStaking";
+import { Backdrop, Box, CircularProgress, Container, InputAdornment, InputBase, Stack, styled, Tab, Table, TableBody, TableCell, TableRow, Tabs, TextField, Typography } from "@mui/material"
+import { useEffect, useState } from "react"
 import { PopupMessage } from "../../components/pageComponent/claim/PopupMessage";
+import { StateStaking } from "../../const";
 import { STAKING_ICON } from "../../constants/staking"
+import { changeNetwork, useWalletContext } from "../../contexts/WalletContext";
+import { getAllowanceStakingFiu, getBalanceFiuStaking, getBalancePass, getBalanceStaked, getCurrentProfit, getRemainingDelayTime, getStakingAmount, getUnstakeAmount, toClaimableTime } from "../../libs/staking";
 import { TEXT_STYLE } from "../../styles/common/textStyles"
+import { DialogsItemStaking } from "./components/DialogsItemStaking";
 
 function createData(status: string, reward: string, earned: string, tokenRemaining: string, lockUpTime: string, delayTime: string, total: string) {
 	return { status, reward, earned, tokenRemaining, lockUpTime, delayTime, total };
@@ -15,18 +18,28 @@ export const TabPools = () => {
 		status: false,
 		content: <Box></Box>
 	});
+	const [stateContentInit, setStateContentInit] = useState<StateStaking>(StateStaking.EnablePool)
+	const [isLoading, setIsLoading] = useState(false);
+	const [balanceFiu, setBalanceFiu] = useState('');
+	const [balanceSA, setBalanceSA] = useState('');
+	const [balanceCP, setBalanceCP] = useState('');
+	const [balanceUS, setBalanceUS] = useState('');
+	const [claimableTime, setClaimableTime] = useState('');
+	const [remainingDelayTime, setRemainingDelayTime] = useState('');
+	const [isEnable, setIsEnable] = useState<boolean>(false);
+	const { setToggleActivePopup, walletAccount, ethersSigner, ethersProvider, chainIdIsSupported, provider, refresh } = useWalletContext();
 	const [showDialogItem, setShowDialogItem] = useState<any>({
 		status: false,
 		title: "",
 		content: <Box></Box>
 	});
-
+	const [activeItem, setActiveItem] = useState<any>(null);
 	const rows = [
 		{
-			name: 'FIU - FITTER Pass', data: createData('-', '-', '-', '-', '-', '-', '-'),
+			name: 'FIU - FITTER Pass', data: createData('Staking', 'FITTER Pass', balanceCP, '-', 'None', '14 days', `${balanceSA} FIU`),
 
 		},
-		{ name: 'FIU - Shared Pool', data: createData('-', '-', '-', '-', '-', '-', '-') },
+		{ name: 'FIU - Shared Pool', data: createData('Staking', '-', '0', '-', 'None', '14 days', '0 FIU') },
 	];
 
 	const handleShowPopupPass = (e: React.MouseEvent) => {
@@ -71,6 +84,133 @@ export const TabPools = () => {
 			content: content
 		})
 	}
+	const getAllowance = async () => {
+		setIsLoading(true);
+		if (!chainIdIsSupported) {
+			await changeNetwork(provider)
+		}
+		if (walletAccount) {
+
+			const allowance = await getAllowanceStakingFiu(walletAccount, ethersSigner);
+			setIsLoading(false);
+			allowance > 0 && setIsEnable(true);
+		} else {
+			setIsLoading(false);
+		}
+	}
+	const getBalanceFiu = async () => {
+		setIsLoading(true);
+		if (!chainIdIsSupported) {
+			await changeNetwork(provider)
+		}
+		if (walletAccount) {
+
+			const balance = await getBalanceFiuStaking(walletAccount, ethersSigner);
+			setBalanceFiu(balance);
+		} else {
+			setBalanceFiu("0");
+			setIsLoading(false);
+		}
+	}
+	const getBalanceSA = async () => {
+		setIsLoading(true);
+		if (!chainIdIsSupported) {
+			await changeNetwork(provider)
+		}
+		if (walletAccount) {
+
+			const balance = await getStakingAmount(walletAccount, ethersSigner);
+			setBalanceSA(balance);
+		} else {
+			setBalanceSA("0");
+			setIsLoading(false);
+		}
+	}
+	const getBalanceCP = async () => {
+		setIsLoading(true);
+		if (!chainIdIsSupported) {
+			await changeNetwork(provider)
+		}
+		if (walletAccount) {
+
+			const balance = await getCurrentProfit(walletAccount, ethersSigner);
+			setBalanceCP(balance);
+		} else {
+			setBalanceCP("0");
+			setIsLoading(false);
+		}
+	}
+	const getUnstakeA = async () => {
+		setIsLoading(true);
+		if (!chainIdIsSupported) {
+			await changeNetwork(provider)
+		}
+		if (walletAccount) {
+
+			const balance = await getUnstakeAmount(walletAccount, ethersSigner);
+
+			setBalanceUS(balance);
+		} else {
+			setBalanceUS("0");
+			setIsLoading(false);
+		}
+	}
+	const toClaimableT = async () => {
+		setIsLoading(true);
+		if (!chainIdIsSupported) {
+			await changeNetwork(provider)
+		}
+		if (walletAccount) {
+
+			const balance = await toClaimableTime(walletAccount, ethersSigner);
+			debugger
+			setClaimableTime(balance);
+		} else {
+			setIsLoading(false);
+		}
+	}
+	const getRemainingDelayT = async () => {
+		setIsLoading(true);
+		if (!chainIdIsSupported) {
+			await changeNetwork(provider)
+		}
+		if (walletAccount) {
+
+			const balance = await getRemainingDelayTime(walletAccount, ethersSigner);
+			debugger
+			setRemainingDelayTime(balance);
+		} else {
+			setIsLoading(false);
+		}
+	}
+	useEffect(() => {
+		getAllowance()
+		getBalanceFiu()
+		getBalanceSA()
+		getBalanceCP()
+		getUnstakeA()
+		toClaimableT()
+		getRemainingDelayT()
+		// getBalanceP()
+		// getBalanceS()
+	}, [walletAccount, refresh])
+
+	useEffect(() => {
+		if (parseFloat(balanceSA) > 0) {
+			if (parseFloat(claimableTime) > 0) {
+				debugger
+				setStateContentInit(StateStaking.Staked);
+			} else {
+				setStateContentInit(StateStaking.Staked);
+			}
+		}
+
+	}, [balanceFiu,
+		balanceSA,
+		balanceCP,
+		balanceUS,
+		claimableTime])
+
 
 	return (
 		<Wrap>
@@ -96,10 +236,12 @@ export const TabPools = () => {
 								{rows.map((item, index) => (
 									<BoxTr
 										onClick={() => {
-											handleShowPopupDetail(item.name, item.data)
+											index === 0 &&
+												setActiveItem(index);
+											// handleShowPopupDetail(item.name, item.data)
 										}}
 										key={index}
-										sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+										sx={{ '&:last-child td, &:last-child th': { border: 0 }, background: index === activeItem ? "#FFE2D3" : "#fff" }}
 									>
 										<TitleItem key={index}><img src={STAKING_ICON.fiu} /> {item.name} <span onClick={index === 0 ? (e: React.MouseEvent) => handleShowPopupPass(e) : (e: React.MouseEvent) => handleShowPopupShared(e)}>How it works?</span></TitleItem>
 										{/* <ComingSoon sx={{
@@ -124,10 +266,32 @@ export const TabPools = () => {
 					{statusPopup.content}
 				</BodyPopup>} />
 
-			<DialogsItemStaking status={showDialogItem.status} handleToggle={() => setShowDialogItem({ ...showDialogItem, status: false })} title={showDialogItem.title} content={showDialogItem.content}>
+			<DialogsItemStaking
+				// status={showDialogItem.status} 
+				isEnable={isEnable}
+				stateContentInit={stateContentInit}
+				dataActive={rows[activeItem]}
+				status={activeItem !== null}
+				// handleToggle={() => setShowDialogItem({ ...showDialogItem, status: false })}
+				handleToggle={() => setActiveItem(null)}
+				title={showDialogItem.title}
+				content={showDialogItem.content}
+				balanceFiu={balanceFiu}
+				balanceSA={balanceSA}
+				balanceCP={balanceCP}
+				balanceUS={balanceUS}
+				claimableTime={claimableTime}
+				remainingDelayTime={remainingDelayTime}
+			>
 
 			</DialogsItemStaking>
-		</Wrap>
+			{/* <Backdrop
+				sx={{ color: '#FF6D24', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+				open={isLoading}
+			>
+				<CircularProgress color="inherit" />
+			</Backdrop> */}
+		</Wrap >
 	)
 }
 

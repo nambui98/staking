@@ -6,37 +6,46 @@ import bfFiuToken from '../abi/BFFiuToken.json';
 import bfShoeItem from '../abi/BFShoeItem.json';
 import bfBusdToken from '../abi/BeFitterBusd.json';
 import bfShop from '../abi/BeFitterShop.json';
+import beFITTERTokenStaking from '../abi/BeFITTERTokenStaking.json';
+import beFitterPass from '../abi/BeFitterPass.json';
+import beFitterStake from '../abi/BeFitterStake.json';
 interface Map {
-  [key: string]: any;
+	[key: string]: any;
 }
 
 const addresses: Map = {
-  ['deployment']: { // bscTestnet
-    bFBox: '0x62ae395292dC3B55654419F237438bcB4656E57d',
-    bFclaimBoxGamefi: '0x7f7f5971D45cA5EFAc225DA64299Fccb386a84B6',
-    bFclaimEnjin: '0x49509ac5266B51c686D4B75AF7fed9B4E21210Ee',
-    bFheeToken: '0x05031f56DAD9EDa2Ff7e0d0b675787cC72Dc4675',
-    bFfiuToken: '0x25FE4e58B463f0511f1dF848e3Afc3e97b8aB59f',
-    bFshoeItem: '0x365B79e59080632E693D98e2A0A0e63625E51495',
-    bFBusdToken: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
-    bFShop: '0xc4bcE7f9dF1126c352809eD422d0766a3C3ce18a',
-    bFclaimAlphaBeta: '0xcd229a4e1140cf045bA9f3c1287B62cAe4aFA549',
-    bFclaimOther: '0xb01F92dd643B366686AAa856b9634E3F6799Fe2A'
-  },
-  ['localhost']: {
+	['deployment']: { // bscTestnet
+		bFBox: '0x62ae395292dC3B55654419F237438bcB4656E57d',
+		bFclaimBoxGamefi: '0x7f7f5971D45cA5EFAc225DA64299Fccb386a84B6',
+		bFclaimEnjin: '0x49509ac5266B51c686D4B75AF7fed9B4E21210Ee',
+		bFheeToken: '0x05031f56DAD9EDa2Ff7e0d0b675787cC72Dc4675',
+		bFfiuToken: '0x25FE4e58B463f0511f1dF848e3Afc3e97b8aB59f',
+		bFshoeItem: '0x365B79e59080632E693D98e2A0A0e63625E51495',
+		bFBusdToken: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+		bFShop: '0xc4bcE7f9dF1126c352809eD422d0766a3C3ce18a',
+		bFclaimAlphaBeta: '0xcd229a4e1140cf045bA9f3c1287B62cAe4aFA549',
+		bFclaimOther: '0xb01F92dd643B366686AAa856b9634E3F6799Fe2A',
+		beFITTERTokenStaking: '0xFF7168E94Fd6d4eDDc652459DC08B89822e457f5',
+		beFITTERPassStaking: '0x1A0bd1f84D3Ef14e974CBc069FAE1aaDb8C80e9c',
+		beFITTERStakeStaking: '0x3c4cF13a11f2D09D8319cECc7c72872f06e2FC46',
+	},
+	['localhost']: {
 
-  },
+	},
 }
 const addressKey = process.env.NEXT_PUBLIC_ADDRESS || 'deployment';
 const address = addresses[addressKey] || addresses['deployment'];
 
-export const bftBox = { address: address.bFBox, abi: bfBox.abi}
+export const bftBox = { address: address.bFBox, abi: bfBox.abi }
 export const bftClaimGamefi = { address: address.bFclaimBoxGamefi, abi: bfClaimBoxGamefi.abi }
-export const bftHeetoken = {address: address.bFheeToken, abi: bfHeeToken.abi}
-export const bftFiuToken = {address: address.bFfiuToken, abi: bfFiuToken.abi}
-export const bftShoeItem = {address: address.bFshoeItem, abi: (bfShoeItem as any).abi}
+export const bftHeetoken = { address: address.bFheeToken, abi: bfHeeToken.abi }
+export const bftFiuToken = { address: address.bFfiuToken, abi: bfFiuToken.abi }
+export const bftShoeItem = { address: address.bFshoeItem, abi: (bfShoeItem as any).abi }
 export const bftClaimEnjin = { address: address.bFclaimEnjin, abi: (bfClaimBoxGamefi as any).abi }
-export const bftBusdToken = {address: address.bFBusdToken, abi: bfBusdToken.abi}
-export const bftShop = {address: address.bFShop, abi: bfShop.abi}
-export const bftClaimAlphaBeta = {address: address.bFclaimAlphaBeta, abi: bfClaimBoxGamefi.abi}
-export const bftClaimOther = {address: address.bFclaimOther, abi: bfClaimBoxGamefi.abi}
+export const bftBusdToken = { address: address.bFBusdToken, abi: bfBusdToken.abi }
+export const bftShop = { address: address.bFShop, abi: bfShop.abi }
+export const bftClaimAlphaBeta = { address: address.bFclaimAlphaBeta, abi: bfClaimBoxGamefi.abi }
+export const bftClaimOther = { address: address.bFclaimOther, abi: bfClaimBoxGamefi.abi }
+export const bftFiuTokenStaking = { address: address.beFITTERTokenStaking, abi: beFITTERTokenStaking.abi }
+export const beFITTERPassStaking = { address: address.beFITTERPassStaking, abi: beFitterPass.abi }
+export const beFITTERStakeStaking = { address: address.beFITTERStakeStaking, abi: beFitterStake.abi }
