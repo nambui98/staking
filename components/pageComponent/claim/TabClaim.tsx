@@ -140,7 +140,13 @@ export const TabClaim = () => {
         { title: 'Airdrop', value: 'Airdrop' },
       ])
     } else {
-      checkAlphaBeta2();
+      setSelectItem([
+        { title: 'GameFi.org', value: '3' },
+        { title: 'Enjinstarter', value: '4' },
+        { title: 'Alpha, Beta Test Reward', value: '1' },
+        { title: 'Alpha, Beta Test Reward Extra', value: '6' },
+        { title: 'Other Events', value: '2' },
+      ])
     }
   }, [currentTab])
 
