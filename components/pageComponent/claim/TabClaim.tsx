@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { RECAPTCHA_SITE_KEY } from "../../../const";
-import { CLAIM_IMAGE } from "../../../constants/claim";
+import { CLAIM_IMAGE, CLAIM_TOKEN_TIME } from "../../../constants/claim";
 import { PAGE } from "../../../constants/header";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { checkClaimedToken, getClaimedBox, getClaimedToken, handleClaimBox, handleClaimToken } from "../../../libs/claim";
@@ -16,11 +16,20 @@ import { MarketplaceButton } from "../../buttons/MarketplaceButton";
 import { ConnectBox } from "./ConnectBox";
 import { PopupMessage } from "./PopupMessage";
 
-// const RECAPTCHA_SITE_KEY = "6Lc275cgAAAAAAHHwNMoAh448YXBi-jz3AeS-4A9"
+const bodyPopupTokenTime = () => {
+  return <BodyPopupTokenTime>
+    <TitleTokenTime><span>TIME (UTC)</span> <span>PERCENT</span></TitleTokenTime>
+    <InnerTokenTime>
+      {CLAIM_TOKEN_TIME?.map((item, index) => <Box key={index}>
+        <Typography>{item.day}</Typography>{item.time} <span>{item.percent}</span>
+      </Box>)}
+    </InnerTokenTime>
+  </BodyPopupTokenTime>
+}
 
 export const TabClaim = () => {
   const router = useRouter();
-  const {walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
+  const { walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
   const [currentTab, setCurrentTab] = useState<'box' | 'token'>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [roundSelected, setRoundSelected] = useState<string>('');
@@ -33,6 +42,7 @@ export const TabClaim = () => {
   const [popupSuccess, setPopupSuccess] = useState(false);
   const [statusLoading, setStatusLoading] = useState<boolean>(false);
   const [checkClaimed, setCheckClaimed] = useState<boolean>(false);
+  const [tokenTimeStatus, setTokenTimeStatus] = useState<boolean>(false);
 
   const onReCAPTCHAChange = async (captchaCode: any) => {
     if (!captchaCode) {
@@ -49,7 +59,7 @@ export const TabClaim = () => {
   }
 
   const getClaimedBoxNumber = async () => {
-    if(!chainIdIsSupported) {
+    if (!chainIdIsSupported) {
       await changeNetwork(provider)
     }
     try {
@@ -60,18 +70,18 @@ export const TabClaim = () => {
         const claimContractAlphaBeta = await new ethers.Contract(bftClaimAlphaBeta.address, bftClaimAlphaBeta.abi, ethersSigner);
         const claimContractOther = await new ethers.Contract(bftClaimOther.address, bftClaimOther.abi, ethersSigner);
         const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), roundSelected === '1' ? claimContractAlphaBeta : roundSelected === '2' ? claimContractOther : roundSelected === "3" ? claimContractGamefi : claimContractEnjinstarter);
-        setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount }) 
+        setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount })
       } else {
-        setDataClaim({claimed: 0, totalBox: 0})
+        setDataClaim({ claimed: 0, totalBox: 0 })
       }
     } catch (error) {
-      setDataClaim({claimed: 0, totalBox: 0})
+      setDataClaim({ claimed: 0, totalBox: 0 })
       console.log(error)
     }
   }
 
   const getClaimedTokenNumber = async () => {
-    if(!chainIdIsSupported) {
+    if (!chainIdIsSupported) {
       await changeNetwork(provider)
     }
     try {
@@ -79,13 +89,13 @@ export const TabClaim = () => {
       const dataCheckClaimed = await checkClaimedToken(walletAccount, ethersSigner)
       parseInt(ethers.utils.formatEther(dataCheckClaimed)) > 0 ? setCheckClaimed(true) : setCheckClaimed(false)
       if (res?.data?.status) {
-        const dataClaimed = await getClaimedToken(walletAccount, ethersSigner)        
-        setDataClaim({ claimed: parseInt(ethers.utils.formatEther(dataClaimed)), totalBox: res.data.amount }) 
+        const dataClaimed = await getClaimedToken(walletAccount, ethersSigner)
+        setDataClaim({ claimed: parseInt(ethers.utils.formatEther(dataClaimed)), totalBox: res.data.amount })
       } else {
-        setDataClaim({claimed: 0, totalBox: 0})
+        setDataClaim({ claimed: 0, totalBox: 0 })
       }
     } catch (error) {
-      setDataClaim({claimed: 0, totalBox: 0})
+      setDataClaim({ claimed: 0, totalBox: 0 })
       console.log(error)
     }
   }
@@ -99,11 +109,11 @@ export const TabClaim = () => {
       const claimContractAlphaBeta = await new ethers.Contract(bftClaimAlphaBeta.address, bftClaimAlphaBeta.abi, ethersSigner);
       const claimContractOther = await new ethers.Contract(bftClaimOther.address, bftClaimOther.abi, ethersSigner);
       try {
-        const resultClaim: any = currentTab === 'token' ? await handleClaimBox(walletAccount, roundSelected === '1' ? claimContractAlphaBeta : roundSelected === '2' ? claimContractOther : roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data) : 
-          await handleClaimToken(walletAccount, res.data, ethersSigner)   
-        const checkStatus = setInterval( async () => {
+        const resultClaim: any = currentTab === 'token' ? await handleClaimBox(walletAccount, roundSelected === '1' ? claimContractAlphaBeta : roundSelected === '2' ? claimContractOther : roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data) :
+          await handleClaimToken(walletAccount, res.data, ethersSigner)
+        const checkStatus = setInterval(async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
-          if(statusClaim?.status){
+          if (statusClaim?.status) {
             setPopupSuccess(true);
             setStatusLoading(false);
             getClaimedBoxNumber();
@@ -118,7 +128,7 @@ export const TabClaim = () => {
         setPopupError(true)
       }
     } else {
-      if(res?.data?.captchaValidation === false){
+      if (res?.data?.captchaValidation === false) {
         setTimeout(() => {
           window.location.reload()
         }, 2000);
@@ -133,10 +143,10 @@ export const TabClaim = () => {
     const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, true);
     if (res?.data?.status) {
       try {
-        const resultClaim: any = await handleClaimToken(walletAccount, res.data, ethersSigner)   
-        const checkStatus = setInterval( async () => {
+        const resultClaim: any = await handleClaimToken(walletAccount, res.data, ethersSigner)
+        const checkStatus = setInterval(async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
-          if(statusClaim?.status){
+          if (statusClaim?.status) {
             console.log(statusClaim)
             setPopupSuccess(true);
             setStatusLoading(false);
@@ -153,7 +163,7 @@ export const TabClaim = () => {
         console.log(error)
       }
     } else {
-      if(res?.data?.captchaValidation === false){
+      if (res?.data?.captchaValidation === false) {
         setTimeout(() => {
           window.location.reload()
         }, 2000);
@@ -168,8 +178,8 @@ export const TabClaim = () => {
   }, [walletAccount, roundSelected])
 
   useEffect(() => {
-    setDataClaim({claimed: 0, totalBox: 0}),
-    setRoundSelected('')
+    setDataClaim({ claimed: 0, totalBox: 0 }),
+      setRoundSelected('')
   }, [currentTab])
 
   useEffect(() => {
@@ -224,15 +234,17 @@ export const TabClaim = () => {
             sitekey={RECAPTCHA_SITE_KEY}
             onChange={onReCAPTCHAChange}
           />}
+          {currentTab === 'token' && <ClaimTime onClick={() => setTokenTimeStatus(true)}>Claim time</ClaimTime>}
         </Stack>
         <ButtonClaim active={checkStatusButton()} disabled={checkStatusButton() ? false : true} onClick={() => currentTab === 'box' ? handleClaimButton() : handleClaimTokenButton()}>Claim</ButtonClaim>
       </Stack>}
       <PopupMessage title="You have successfully claimed your item!" message={
         <BodyPopupSuccess>
-          <MarketplaceButton customStyle={{width: '100%'}} title={'View in wallet'} handleOnClick={() => router.push(PAGE.ASSETS.link)} />
-          {dataClaim.totalBox > dataClaim.claimed && <Typography sx={{cursor: 'pointer'}} onClick={() => window.location.reload()}>Claim more items</Typography>}
-      </BodyPopupSuccess>
+          <MarketplaceButton customStyle={{ width: '100%' }} title={'View in wallet'} handleOnClick={() => router.push(PAGE.ASSETS.link)} />
+        </BodyPopupSuccess>
       } status={popupSuccess} popupType="success" handleToggleStatus={() => setPopupSuccess(false)} />
+
+      <PopupMessage title="Token Claim time" message={bodyPopupTokenTime()} status={tokenTimeStatus} handleToggleStatus={() => setTokenTimeStatus(false)} />
       <PopupMessage title="Error!" status={popupError} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError(false)}
         handleClickButton={() => setPopupError(false)} titleCustomColor={{ '& p': { color: '#FF6F61' } }} message="Something went wrong. Please try again!" />
       <Backdrop
@@ -254,6 +266,58 @@ const Wrap = styled(Stack)({
   backgroundColor: '#ffffff',
   justifyContent: 'center',
   textAlign: 'center'
+})
+const ClaimTime = styled(Box)({
+  textDecoration: 'underline',
+  cursor: 'pointer',
+  textAlign: 'center',
+  marginTop: 10,
+  ...TEXT_STYLE(16, 500, '#5A6178')
+})
+const BodyPopupTokenTime = styled(Box)({
+
+})
+const TitleTokenTime = styled(Typography)({
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginBottom: 24,
+  ...TEXT_STYLE(16, 600, '#5A6178')
+})
+const InnerTokenTime = styled(Box)({
+  maxHeight: 506,
+  overflow: 'auto',
+  paddingRight: 10,
+  '&::-webkit-scrollbar': {
+    width: 4,
+  },
+  '&::-webkit-scrollbar-track': {
+    background: '#E9EAEF',
+    borderRadius: 10
+  },
+  '&::-webkit-scrollbar-thumb': {
+    background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
+    borderRadius: 10
+  },
+  '&::-webkit-scrollbar-thumb:hover': {
+    background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)'
+  },
+
+  '& div': {
+    textAlign: 'left',
+    display: 'flex',
+    padding: '8px 0',
+    ...TEXT_STYLE(16, 500, '#31373E'),
+    '& span': {
+      marginLeft: 'auto'
+    }
+  },
+  '& div:nth-child(2n)': {
+    background: '#F8F9FB'
+  },
+  '& p': {
+    minWidth: 95,
+    marginRight: 16
+  }
 })
 const BodyPopupSuccess = styled(Box)({
   display: 'flex',
