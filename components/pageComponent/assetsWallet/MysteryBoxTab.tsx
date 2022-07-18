@@ -12,6 +12,7 @@ import { BoxEmpty } from "./BoxEmpty";
 interface IProps {
   boxChoose: string
   setBoxChoose: (value: string) => void
+  listBoxType: any[]
 }
 
 export const MysteryBoxTab: React.FC<IProps> = ({boxChoose, setBoxChoose}) => {

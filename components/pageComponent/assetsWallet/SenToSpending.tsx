@@ -13,9 +13,10 @@ interface IProps {
   currentTab: string
   tokenChoose: string
   boxChoose: string
+  getListBox: () => any
 }
 
-export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxChoose }) => {
+export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxChoose, getListBox }) => {
   const { popupNoti, spinner } = useCommonContext();
   const { walletAccount, ethersSigner, ethersProvider, updateBnbBalance, fiuBalance, heeBalance } = useWalletContext();
   const [textEmail, setTextEmail] = useState<string>('');
@@ -46,28 +47,49 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
   }
 
   const deposit = async (abiDetail: any, type: 'token' | 'box', boxId?: string) => {
-    const resDeposit = await handleDeposit(ethersSigner, abiDetail.address, amount, textEmail, type, boxId)
-    const checkStatus = setInterval(async () => {
-      const statusApprove = await ethersProvider.getTransactionReceipt(resDeposit.hash);
-      if (statusApprove?.status) {
-        spinner.handleChangeStatus(false)
-        updateBnbBalance()
-        popupNoti.handleToggleStatus({
-          status: true,
-          popupType: 'success',
-          title: 'Send succeeded!',
-          titleButton: 'OK',
-          message: currentTab === TAB_NAME.token ? null : 'Please check the item in your inventory on beFITTER app for unboxing.'
-        })
-        clearInterval(checkStatus)
-      }
-    }, 1000);
+    try {
+      const resDeposit = await handleDeposit(ethersSigner, abiDetail.address, amount, textEmail, type, boxId)
+      const checkStatus = setInterval(async () => {
+        const statusApprove = await ethersProvider.getTransactionReceipt(resDeposit.hash);
+        if (statusApprove?.status) {
+          spinner.handleChangeStatus(false)
+          updateBnbBalance()
+          type === 'box' && getListBox();
+          popupNoti.handleToggleStatus({
+            status: true,
+            popupType: 'success',
+            title: 'Send succeeded!',
+            titleButton: 'OK',
+            message: currentTab === TAB_NAME.token ? null : 'Please check the item in your inventory on beFITTER app for unboxing.'
+          })
+          clearInterval(checkStatus)
+        }
+      }, 1000);
+    } catch (error: any) {
+      spinner.handleChangeStatus(false)
+      popupNoti.handleToggleStatus({
+        status: true,
+        popupType: 'error',
+        title: 'Error!',
+        message: error.reason || 'Something went wrong. Please try again!',
+        titleCustomColor: { '& p': { color: '#FF6F61' } },
+        titleButton: 'Try again',
+      })
+    }
   }
 
   const handleSentBox = async () => {
     spinner.handleChangeStatus(true)
     try {
-      await deposit(bftBox, 'box', boxChoose)
+      const resApprove = await handleApprove(boxChoose, ethersSigner, bftBox, 'box');
+      const checkStatus = setInterval(async () => {
+        const statusApprove = await ethersProvider.getTransactionReceipt(resApprove.hash);
+        if (statusApprove?.status) {
+          updateBnbBalance()
+          clearInterval(checkStatus)
+          await deposit(bftBox, 'box', boxChoose);          
+        }
+      }, 1000);
     } catch (error: any) {
       spinner.handleChangeStatus(false)
       popupNoti.handleToggleStatus({
@@ -92,8 +114,8 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
           const statusApprove = await ethersProvider.getTransactionReceipt(resApprove.hash);
           if (statusApprove?.status) {
             updateBnbBalance()
-            await deposit(abiDetail, 'token');
             clearInterval(checkStatus)
+            await deposit(abiDetail, 'token');
           }
         }, 1000);
       } else {
@@ -179,8 +201,8 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
             onChange={(e: any) => setAmount(e.target.value)}
           />
         </InputBottom>}
-        <ButtonSendSpending sx={{ background: checkStatusSendButton() ? 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)' : '#E9EAEF' }} 
-        onClick={handleClickButton} disabled={!checkStatusSendButton()}>Send to Spending</ButtonSendSpending>
+        <ButtonSendSpending sx={{ background: checkStatusSendButton() ? 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)' : '#E9EAEF' }}
+          onClick={handleClickButton} disabled={!checkStatusSendButton()}>Send to Spending</ButtonSendSpending>
       </BoxInput>
     </SendSpending>
   )

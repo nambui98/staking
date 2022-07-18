@@ -1,8 +1,8 @@
 import { Box, BoxProps, Button, InputBase, Stack, styled, Typography, useMediaQuery } from "@mui/material"
 import { useEffect, useState } from "react";
-import { ICON, IMAGE, TAB_ITEM, TAB_NAME } from "../../../constants/assetsWallet";
+import { BOX_DETAILS, ICON, IMAGE, TAB_ITEM, TAB_NAME } from "../../../constants/assetsWallet";
 import { useWalletContext } from "../../../contexts/WalletContext"
-import { getOwnedBox } from "../../../libs/claim";
+import { getBoxType, getOwnedBox } from "../../../libs/claim";
 import { MarketplaceService } from "../../../services/user.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
 import { FormInfomationPopup } from "../marketplace/FormInfomationPopup";
@@ -12,9 +12,12 @@ import { TokenTab } from "./TokenTab";
 import addressBuyBox from '../../../abi/addressBuyBox.json';
 import { useCommonContext } from "../../../contexts/CommonContext";
 import { SendToSpending } from "./SenToSpending";
+import { ethers } from "ethers";
+import { bftBox } from "../../../libs/contracts";
 
 export const Boxtabs = () => {
   const { walletAccount, bnbBalance, fiuBalance, heeBalance, ethersSigner, boxBalance } = useWalletContext();
+  const { spinner } = useCommonContext();
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [totalBox, setTotalBox] = useState<number>(0);
   const [currentTab, setCurrentTab] = useState<string>('');
@@ -22,6 +25,7 @@ export const Boxtabs = () => {
   const [statusBuyBox, setStatusBuyBox] = useState<boolean>(false);
   const [tokenChoose, setTokenChoose] = useState<string>('');
   const [boxChoose, setBoxChoose] = useState<string>('');
+  const [listBoxType, setListBoxType] = useState<any[]>([]);
 
   const handleSwitchTab = (tab: string) => {
     setCurrentTab(tab);
@@ -33,7 +37,7 @@ export const Boxtabs = () => {
       case TAB_NAME.token:
         return <TokenTab tokenChoose={tokenChoose} setTokenChoose={setTokenChoose} />
       case TAB_NAME.box:
-        return <MysteryBoxTab boxChoose={boxChoose} setBoxChoose={setBoxChoose} />
+        return <MysteryBoxTab boxChoose={boxChoose} setBoxChoose={setBoxChoose} listBoxType={listBoxType} />
       default:
         break;
     }
@@ -63,9 +67,43 @@ export const Boxtabs = () => {
     }
   }
 
+  const getListBox = async () => {
+    spinner.handleChangeStatus(true)
+    const boxContract = await new ethers.Contract(bftBox.address, bftBox.abi, ethersSigner);
+    const res = await getOwnedBox(walletAccount, ethersSigner);
+    const boxType = await res?.map(async (item: any) => {
+      const res = await getBoxType(item, boxContract);
+      return {id: item, type: res};
+    })
+    Promise.all(boxType).then((values) => {
+      const newData = values?.reduce((init, item) => {
+        if (item.type === 'gold') {
+          init.push({
+            ...BOX_DETAILS.gold,
+            boxId: ethers.utils.formatUnits(item.id, 'wei')
+          })
+        } else if(item.type === 'silver'){
+          init.push({
+            ...BOX_DETAILS.silver,
+            boxId: ethers.utils.formatUnits(item.id, 'wei')
+          })
+        } else if(item.type === 'diamond'){
+          init.push({
+            ...BOX_DETAILS.diamond,
+            boxId: ethers.utils.formatUnits(item.id, 'wei')
+          })
+        }
+        return init
+      }, [])
+      setListBoxType(newData)
+      spinner.handleChangeStatus(false)
+    });
+  }
+
   useEffect(() => {
     getTotalBox();
-    checkAddressBuyBox()
+    checkAddressBuyBox();
+    getListBox();
   }, [walletAccount])
 
   return (
@@ -96,7 +134,7 @@ export const Boxtabs = () => {
         <BodyContent>
           {currentTab.length ? renderBodyView() : <BoxEmpty icon={ICON.shoe} emptyText={'Select assets to continue'} />}
         </BodyContent>
-        {currentTab.length ? <SendToSpending currentTab={currentTab} tokenChoose={tokenChoose} boxChoose={boxChoose} /> : null}
+        {currentTab.length ? <SendToSpending currentTab={currentTab} tokenChoose={tokenChoose} boxChoose={boxChoose} getListBox={getListBox} /> : null}
       </TabBody>
       <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
       {statusBuyBox && isMobile && !statusFormGetBonus && <BoxBonus><ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus></BoxBonus>}
