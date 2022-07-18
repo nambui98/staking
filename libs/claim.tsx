@@ -46,3 +46,9 @@ export const checkClaimedToken = async (walletAddress: string, ethersSigner: any
   const res = await claimTokenContract.getClaimableAmount(walletAddress)
   return res
 }
+
+export const getLockedOf = async (walletAddress: string, ethersSigner: any) => {
+  const claimTokenContract = new ethers.Contract(bftClaimToken.address, bftClaimToken.abi, ethersSigner)
+  const res = await claimTokenContract.lockedOf(walletAddress)
+  return res
+}
