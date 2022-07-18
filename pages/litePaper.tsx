@@ -44,6 +44,7 @@ import { LoginTicket } from 'google-auth-library';
 import Section8 from '../containers/home/section8';
 import Section4 from '../containers/home/section4';
 import Section9 from '../containers/home/section9';
+import TokenLitepaper from '../containers/litePaper/Token';
 
 const Banner: React.FC<any> = ({ isXs }) => (
 	<Stack
@@ -703,174 +704,6 @@ const Charity: React.FC<any> = ({ sxProps }) => (
 	</Container>
 );
 
-const PieChart: React.FC<any> = ({ sxProps, isXs }) => {
-	return (
-		<ReactEcharts
-			style={{ height: '500px', width: '100%' }}
-			option={{
-				// title: {
-				// 	text: "某站点用户访问来源",
-				// 	subtext: "纯属虚构",
-				// 	x: "center"
-				// },
-				tooltip: {
-					show: true,
-					trigger: 'item',
-					// formatter: "{a} <br/>{b} : {c} ({d}%)",
-					formatter: '{b} {d}%',
-					textStyle: {
-						fontSize: isXs ? 10 : 14,
-						fontFamily: 'BeVietnamPro',
-					},
-				},
-				legend: {
-					show: isXs,
-					orient: 'horizontal',
-					bottom: 0,
-					data: THE_TOKEN.DISTRIBUTION.PIE.data.map((el) => el.name),
-				},
-				series: [
-					{
-						// name: "访问来源",
-						type: 'pie',
-						radius: ['55%', '90%'],
-						center: ['50%', '50%'],
-						animationDuration: 5000,
-						data: THE_TOKEN.DISTRIBUTION.PIE.data,
-						avoidLabelOverlap: true,
-						bottom: '25%',
-						label: {
-							show: !isXs,
-							position: 'outside',
-							alignTo: 'none',
-							formatter: '{b} {d}%',
-							// formatter: '{name|{b}}\n{time|{c}%}',
-							minMargin: 5,
-							edgeDistance: 5,
-							textStyle: {
-								fontSize: isXs ? 10 : 16,
-								fontFamily: 'BeVietnamPro',
-								color: '#5A6178',
-							},
-						},
-						labelLine: {
-							show: false,
-							length: 5,
-							length2: 0,
-							maxSurfaceAngle: 80,
-						},
-						itemStyle: {
-							borderColor: '#fff',
-							borderWidth: 1,
-							emphasis: {
-								label: {
-									show: false,
-									fontSize: 18,
-									fontWeight: 600,
-									fontFamily: 'BeVietnamPro',
-								},
-								// shadowBlur: 10,
-								// shadowOffsetX: 0,
-								// shadowColor: "rgba(0, 0, 0, 0.5)"
-							},
-						},
-					},
-				],
-				color: THE_TOKEN.DISTRIBUTION.PIE.color,
-			}}
-		/>
-	);
-};
-
-const StackAreaChart: React.FC<any> = ({ sxProps, isXs }) => {
-	return (
-		<ReactEcharts
-			style={{
-				height: isXs ? '500px' : '800px',
-				width: '100%',
-				// fontFamily: 'BeVietnamPro',
-				// fontWeight: 500,
-				// fontSize: 16,
-			}}
-			option={{
-				tooltip: {
-					show: true,
-					trigger: 'axis',
-					axisPointer: {
-						type: 'cross',
-						axis: 'auto',
-						label: {
-							backgroundColor: '#6a7985',
-						},
-					},
-					position: function (
-						pos: any,
-						params: any,
-						dom: any,
-						rect: any,
-						size: any
-					) {
-						// tooltip will be fixed on the right if mouse hovering on the left,
-						// and on the left if hovering on the right.
-						var obj: any = {};
-						obj[['top', 'bottom'][+(pos[1] < size.viewSize[1] / 2)]] = 5;
-						obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
-						return obj;
-					},
-					textStyle: {
-						fontSize: 10,
-					},
-				},
-				grid: {
-					left: isXs ? '3%' : 0,
-					right: isXs ? '4%' : 0,
-					bottom: isXs ? '22%' : '7%',
-					containLabel: true,
-				},
-				legend: {
-					show: true,
-					orient: 'horizontal',
-					bottom: 0,
-					data: THE_TOKEN.DISTRIBUTION.STACK.series.map((el) => el.name),
-					textStyle: {
-						// fontFamily: 'BeVietnamPro',
-					},
-				},
-				xAxis: [
-					{
-						type: 'category',
-						boundaryGap: false,
-						data: THE_TOKEN.DISTRIBUTION.STACK.X,
-					},
-				],
-				yAxis: [
-					{
-						type: 'value',
-					},
-				],
-				series: THE_TOKEN.DISTRIBUTION.STACK.series.map((el, idx) => ({
-					name: el.name,
-					smooth: true,
-					type: 'line',
-					stack: 'Total',
-					areaStyle: {},
-					// emphasis: {
-					// 	focus: 'series',
-					// },
-					data: el.data,
-					showSymbol: false,
-					label: {
-						fontFamily: 'BeVietnamPro',
-						fontWeight: 500,
-						fontSize: isXs ? 14 : 16,
-					},
-				})),
-				color: THE_TOKEN.DISTRIBUTION.STACK.color,
-			}}
-		/>
-	);
-};
-
 const LitePaper: NextPage = () => {
 	const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 	const [height, setHeight] = useState<number>();
@@ -895,20 +728,10 @@ const LitePaper: NextPage = () => {
 				height: { xs: "auto", sm: height },
 				position: 'relative',
 				'@media (min-width: 960px)': {
-					maxHeight: '600px'
+					// maxHeight: '600px'
 				}
 			}}>
-				<Section4 customStyle={{
-					maxWidth: '1728px !important',
-					margin: '20px auto',
-					paddingTop: '20px',
-					'@media (min-width: 768px)': {
-						margin: '40px auto 60px',
-					},
-					'& .section-aos': {
-						display: 'none'
-					}
-				}} />
+				<TokenLitepaper />
 			</Box >
 
 			<Section8 />
