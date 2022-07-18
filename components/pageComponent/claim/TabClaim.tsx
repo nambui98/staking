@@ -29,7 +29,7 @@ const bodyPopupTokenTime = () => {
 
 export const TabClaim = () => {
   const router = useRouter();
-  const { walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
+  const {walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
   const [currentTab, setCurrentTab] = useState<'box' | 'token'>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [roundSelected, setRoundSelected] = useState<string>('');
@@ -43,6 +43,7 @@ export const TabClaim = () => {
   const [statusLoading, setStatusLoading] = useState<boolean>(false);
   const [checkClaimed, setCheckClaimed] = useState<boolean>(false);
   const [tokenTimeStatus, setTokenTimeStatus] = useState<boolean>(false);
+  const [claimAble, setClaimAble] = useState<any>('')
 
   const onReCAPTCHAChange = async (captchaCode: any) => {
     if (!captchaCode) {
@@ -88,6 +89,7 @@ export const TabClaim = () => {
       const res: any = await ClaimService.getAmount((walletAccount.toLowerCase()), captchaToken, roundSelected, false);
       const dataCheckClaimed = await checkClaimedToken(walletAccount, ethersSigner)
       parseInt(ethers.utils.formatEther(dataCheckClaimed)) > 0 ? setCheckClaimed(true) : setCheckClaimed(false)
+      setClaimAble(ethers.utils.formatEther(dataCheckClaimed))
       if (res?.data?.status) {
         const dataClaimed = await getClaimedToken(walletAccount, ethersSigner)
         setDataClaim({ claimed: parseInt(ethers.utils.formatEther(dataClaimed)), totalBox: res.data.amount })
@@ -228,6 +230,7 @@ export const TabClaim = () => {
           {roundSelected && dataClaim ? <DataClaimBox>
             <Typography>Total {currentTab === 'token' ? 'Token' : 'Box'} <span>{formatNumberWithCommas(dataClaim.totalBox)} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
             <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{formatNumberWithCommas(dataClaim.claimed)} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
+            {currentTab === 'token' && <Typography sx={{ margin: '20px 0' }}>Claimable Token<span>{claimAble ? formatNumberWithCommas(parseFloat(claimAble)) : '0'} <img src={CLAIM_IMAGE.fiu} /></span></Typography>}
           </DataClaimBox> : <BoxBg><img src={CLAIM_IMAGE.bgClaim} /></BoxBg>}
           {roundSelected && <ReCAPTCHA
             ref={recaptchaRef}
@@ -284,9 +287,12 @@ const TitleTokenTime = styled(Typography)({
   ...TEXT_STYLE(16, 600, '#5A6178')
 })
 const InnerTokenTime = styled(Box)({
-  maxHeight: 506,
+  maxHeight: 306,
   overflow: 'auto',
   paddingRight: 10,
+  '@media (min-width: 768px)': {
+    maxHeight: 506,
+  },
   '&::-webkit-scrollbar': {
     width: 4,
   },

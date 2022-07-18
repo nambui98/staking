@@ -8,9 +8,9 @@ export const CLAIM_IMAGE = {
 
 export const CLAIM_TOKEN_TIME = [
   {day: '18/07/2022', time: '13:15', percent: '12%'},
-  {day: '18/07/2022', time: '13:15', percent: '4%'},
-  {day: '18/07/2022', time: '13:15', percent: '4%'},
-  {day: '18/07/2022', time: '13:15', percent: '4%'},
+  {day: '18/10/2022', time: '13:15', percent: '4%'},
+  {day: '18/11/2022', time: '13:15', percent: '4%'},
+  {day: '18/12/2022', time: '13:15', percent: '4%'},
   {day: '18/01/2023', time: '13:15', percent: '4%'},
   {day: '18/02/2023', time: '13:15', percent: '4%'},
   {day: '18/03/2023', time: '13:15', percent: '4%'},
