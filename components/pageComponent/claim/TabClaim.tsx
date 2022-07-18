@@ -65,6 +65,7 @@ export const TabClaim = () => {
     }
     try {
       const res: any = await ClaimService.getAmount((walletAccount.toLowerCase()), captchaToken, roundSelected, false);
+      setCheckClaimed(true)
       if (res?.data?.status) {
         const claimContractGamefi = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
         const claimContractEnjinstarter = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
@@ -94,7 +95,6 @@ export const TabClaim = () => {
         setCheckClaimed(true)
       } else {
         parseInt(ethers.utils.formatEther(dataCheckClaimed)) > 0 ? setCheckClaimed(true) : setCheckClaimed(false)
-        setClaimAble(ethers.utils.formatEther(dataCheckClaimed))
       }
       if (res?.data?.status) {
         const dataClaimed = await getClaimedToken(walletAccount, ethersSigner)
