@@ -29,7 +29,8 @@ const bodyPopupTokenTime = () => {
 
 export const TabClaim = () => {
   const router = useRouter();
-  const {walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
+  const {setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
+  const walletAccount = '0xD08Efc40300D55433d6091604a125604aDbdDE95'
   const [currentTab, setCurrentTab] = useState<'box' | 'token'>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [roundSelected, setRoundSelected] = useState<string>('');
@@ -89,8 +90,8 @@ export const TabClaim = () => {
       const res: any = await ClaimService.getAmount((walletAccount.toLowerCase()), captchaToken, roundSelected, false);
       const dataLockedOf = await getLockedOf(walletAccount, ethersSigner)
       const dataCheckClaimed = await checkClaimedToken(walletAccount, ethersSigner)
-      console.log(ethers.utils.formatEther(dataLockedOf), 123)
-      if(parseFloat(ethers.utils.formatEther(dataLockedOf)) > 0){
+      console.log(parseFloat(ethers.utils.formatEther(dataLockedOf)), 123)
+      if(parseFloat(ethers.utils.formatEther(dataLockedOf)) === 0){
         setCheckClaimed(true)
       } else {
         parseInt(ethers.utils.formatEther(dataCheckClaimed)) > 0 ? setCheckClaimed(true) : setCheckClaimed(false)
