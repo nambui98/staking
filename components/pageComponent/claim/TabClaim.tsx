@@ -119,8 +119,7 @@ export const TabClaim = () => {
       const claimContractOther = await new ethers.Contract(bftClaimOther.address, bftClaimOther.abi, ethersSigner);
       const claimContractAlphaBeta2 = await new ethers.Contract(bftClaimAlphaBeta2.address, bftClaimAlphaBeta2.abi, ethersSigner);
       try {
-        const resultClaim: any = currentTab === 'token' ? await handleClaimBox(walletAccount, roundSelected === '1' ? claimContractAlphaBeta : roundSelected === '2' ? claimContractOther : roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data) :
-          await handleClaimToken(walletAccount, res.data, ethersSigner)
+        const resultClaim: any = await handleClaimBox(walletAccount, roundSelected === '6' ? claimContractAlphaBeta2 : roundSelected === '1' ? claimContractAlphaBeta : roundSelected === '2' ? claimContractOther : roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data)
         const checkStatus = setInterval(async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
           if (statusClaim?.status) {
@@ -187,26 +186,11 @@ export const TabClaim = () => {
     currentTab == 'box' ? getClaimedBoxNumber() : getClaimedTokenNumber();
   }, [walletAccount, roundSelected])
 
+  useEffect(() => {
+    setRoundSelected('')
+  }, [currentTab])
+
   useEffect(() => {   
-    const checkAlphaBeta2 = async () => {
-      const res: any = await ClaimService.getAmount(walletAccount, captchaToken, '6', false);
-      if(res?.data?.status){
-        setSelectItem([
-          { title: 'GameFi.org', value: '3' },
-          { title: 'Enjinstarter', value: '4' },
-          { title: 'Alpha, Beta Test Reward', value: '1' },
-          { title: 'Alpha, Beta Test Reward Extra', value: '6' },
-          { title: 'Other Events', value: '2' },
-        ])
-      } else {
-        setSelectItem([
-          { title: 'GameFi.org', value: '3' },
-          { title: 'Enjinstarter', value: '4' },
-          { title: 'Alpha, Beta Test Reward', value: '1' },
-          { title: 'Other Events', value: '2' },
-        ])
-      }
-    }
     if (currentTab === 'token') {
       setSelectItem([
         { title: 'Public Sale', value: '5' }
