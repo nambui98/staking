@@ -23,7 +23,7 @@ const Business = () => {
 				<Banner
 					customStyle={{
 						'& video': {
-							maxHeight: '960px',
+							// maxHeight: '960px',
 						},
 					}}
 				/>

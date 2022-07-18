@@ -728,7 +728,7 @@ const LitePaper: NextPage = () => {
 				height: { xs: "auto", sm: height },
 				position: 'relative',
 				'@media (min-width: 960px)': {
-					// maxHeight: '600px'
+					maxHeight: '800px'
 				}
 			}}>
 				<TokenLitepaper />
