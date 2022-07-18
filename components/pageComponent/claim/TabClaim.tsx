@@ -160,6 +160,17 @@ export const TabClaim = () => {
     }
   }
 
+  const formatNumberWithCommas = (data: any) => {
+    const tks = (data as any).toString()?.split('.');
+    
+    if (tks?.length > 1) {
+      return tks[0]?.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '.' + tks[1];
+    }
+    else {
+      return tks[0]?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    }
+  }
+
   useEffect(() => {
     currentTab == 'box' ? getClaimedBoxNumber() : getClaimedTokenNumber();
   }, [walletAccount, roundSelected])
@@ -213,8 +224,8 @@ export const TabClaim = () => {
             </BoxSelect>
           </FormControl>
           {roundSelected && dataClaim ? <DataClaimBox>
-            <Typography>Total {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.totalBox} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
-            <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.claimed} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
+            <Typography>Total {currentTab === 'token' ? 'Token' : 'Box'} <span>{formatNumberWithCommas(dataClaim.totalBox)} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
+            <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{formatNumberWithCommas(dataClaim.claimed)} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
           </DataClaimBox> : <BoxBg><img src={CLAIM_IMAGE.bgClaim} /></BoxBg>}
           {roundSelected && <ReCAPTCHA
             ref={recaptchaRef}
