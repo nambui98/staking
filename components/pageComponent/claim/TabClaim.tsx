@@ -236,7 +236,7 @@ export const TabClaim = () => {
           {roundSelected && dataClaim ? <DataClaimBox>
             <Typography>Total {currentTab === 'token' ? 'Token' : 'Box'} <span>{formatNumberWithCommas(dataClaim.totalBox)} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
             <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{formatNumberWithCommas(dataClaim.claimed)} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
-            {currentTab === 'token' && <Typography sx={{ margin: '20px 0' }}>Claimable Token<span>{claimAble ? formatNumberWithCommas(parseFloat(claimAble)) : '0'} <img src={CLAIM_IMAGE.fiu} /></span></Typography>}
+            {/* {currentTab === 'token' && <Typography sx={{ margin: '20px 0' }}>Claimable Token<span>{claimAble ? formatNumberWithCommas(parseFloat(claimAble)) : '0'} <img src={CLAIM_IMAGE.fiu} /></span></Typography>} */}
           </DataClaimBox> : <BoxBg><img src={CLAIM_IMAGE.bgClaim} /></BoxBg>}
           {roundSelected && <ReCAPTCHA
             ref={recaptchaRef}
