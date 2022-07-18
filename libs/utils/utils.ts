@@ -6,9 +6,9 @@ export const formatNumberWithCommas = (data: any) => {
   const tks = (data as any).toString()?.split('.');
   
   if (tks?.length > 1) {
-    return tks[0]?.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '.' + tks[1];
+    return tks[0]?.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '.' + tks[1];
   }
   else {
-    return tks[0]?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    return tks[0]?.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
   }
 }
