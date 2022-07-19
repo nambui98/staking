@@ -83,7 +83,7 @@ export const Unstake = (props: Props) => {
 	}
 	const handleValueWithPercent = (percent: number) => {
 		let valueCal = percent * parseFloat(balanceSA);
-		if (valueCal <= parseFloat(balanceSA)) {
+		if (valueCal <= parseFloat(balanceSA) && valueCal != 0) {
 			setValue((percent * parseFloat(balanceSA)).toString());
 			setMessageError("")
 		} else {
