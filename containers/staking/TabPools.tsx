@@ -50,16 +50,30 @@ export const TabPools = () => {
 			status: true,
 			content: <Box>
 				<Typography><b>Fitter Pass:</b></Typography>
+
 				<Typography>1.Stake FIU, minimum 1000 FIU.</Typography>
-				<Typography>2.Earn Fitter Pass</Typography>
+
+				<Typography>2.Earn Fitter Pass.</Typography>
+
 				<Typography>3.You have to stake at least 24h to receive Pass.</Typography>
-				<Typography>4.For every 1000 FIU staked per 960h, you earn one Fitter Pass.</Typography>
+
+				<Typography>4.Fitter Pass will be given to your account in every block of 24h from the last moment you stake/unstake</Typography>
+
+				<Typography>5.For every 1000 FIU staked per 960h, you earn one Fitter Pass.</Typography>
+
 				<Typography>For every 40.000 FIU staked per 24h, you earn one Fitter Pass.</Typography>
+
 				<Typography>For every 80.000 FIU staked per 24h, you earn 2 Fitter Passes,....</Typography>
+
 				<Typography>The more token you stake, the more reward you will receive.</Typography>
-				<Typography>5.Specially, in the first 72 hours from this campaign begin, the reward will be doubled.</Typography>
-				<Typography>Ex: With 20.000 FIU staked per 24h, you earn 2 Fitter Passes.</Typography>
-				<Typography>6.Staking does have a short cooldown period of 7days, meaning once you want to exit, you have to wait 7days.</Typography>
+
+				<Typography>6.Specially, in the first 72 hours from this campaign begin, the reward will be doubled.</Typography>
+
+				<Typography>Ex: With 20.000 FIU staked per 24h, you earn 1 Fitter Passes.</Typography>
+
+				<Typography>7.Staking does have a short cooldown period of 7days, meaning once you want to exit, you have to wait 7days.</Typography>
+
+				<Typography>Important note: If you change your stake amount (stake more or partical unstake ), system will recalculate 24h period from that time and amount. Finished rewards will remain but fractional staking rewards will be cleared.</Typography>
 			</Box>
 		})
 	}
@@ -220,7 +234,7 @@ export const TabPools = () => {
 		if (parseFloat(balanceSA) > 0) {
 			setStatusRow('STAKING')
 		} else {
-			setStatusRow('UNSTAKE')
+			setStatusRow('UNSTAKED')
 			// if (parseFloat(balanceFiu) > 0) {
 
 			// } else {

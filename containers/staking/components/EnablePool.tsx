@@ -73,7 +73,7 @@ export const EnablePool = (props: Props) => {
 			<Item>
 				<TitleItem >REWARD</TitleItem>
 				<ValueItem>
-					FITTER pass
+					Fitter Pass
 				</ValueItem>
 			</Item>
 			<Box mt="auto" width={"100%"} sx={{ paddingTop: "16px", borderTop: "1px solid #E9EAEF" }}>
