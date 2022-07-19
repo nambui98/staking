@@ -124,11 +124,17 @@ export const UnstakedSuccess = (props: Props) => {
 }
 export const UnstakeAgain = (props: Props) => {
 	const handleContinueUnStaking = () => {
-
+		props.setStateContent(StateStaking.Unstake);
 	}
 	const handleCancel = () => {
-
+		props.setStateContent(StateStaking.UnstakedSuccess);
 	}
+	const time = () => {
+		let time = new Date();
+		return moment(time.setDate(7)).utc().format('HH:mm DD/MM/yyyy');
+	}
+	console.log(time());
+
 	return (
 		<>
 			<Box sx={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", height: "100%" }}>
@@ -137,7 +143,7 @@ export const UnstakeAgain = (props: Props) => {
 
 						<img src={MARKETPLACE_ICON.infocircle} alt="" />
 					</Box>
-					<Typography fontSize={14} color="#31373E" fontWeight={500} lineHeight="20px" mt={{ xs: '10px', sm: "28px" }}>You have unstaked an amount of token before and currently have reward waiting to be withdrawn. If you still continue unstaking, the delay time will be extended until <span style={{ color: '#FF6F61' }}>00:00 30/7/2022 GMT +7</span>. Do you want to continue?</Typography>
+					<Typography fontSize={14} color="#31373E" fontWeight={500} lineHeight="20px" mt={{ xs: '10px', sm: "28px" }}>You have to wait until <span style={{ color: '#FF6F61' }}>${time()}</span> UTC to withdraw your token(s). Do you want to continue?</Typography>
 					{/* <Typography fontSize={14} color="#FF6F61" fontWeight={500} lineHeight="20px" mt="28px">YOU ARE UNSTAKING.</Typography> */}
 				</Box>
 			</Box>

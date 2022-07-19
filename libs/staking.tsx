@@ -98,3 +98,8 @@ export const getTotalStakingToken = async (ethersSigner: any) => {
 	const balance = await beFITTERStakeStakingContract.getTotalStakingToken();
 	return ethers.utils.formatEther(balance)
 }
+export const getStakingStatus = async (walletAccount: any, ethersSigner: any) => {
+	const beFITTERStakeStakingContract = new ethers.Contract(beFITTERStakeStaking.address, beFITTERStakeStaking.abi, ethersSigner);
+	const balance = await beFITTERStakeStakingContract.getStakingStatus(walletAccount)
+	return ethers.utils.formatUnits(balance, 'wei');
+}

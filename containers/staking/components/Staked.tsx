@@ -103,7 +103,7 @@ export const Staked = (props: Props) => {
 			titleWarning: '',
 			titleButton: 'I know and want to stake',
 			haveCancel: true,
-			contentWarning: `If you stake more now, factional staking rewards (${getTime()} hours of ${balanceSA} tokens) will be cleared.24h period will be reset and continue to be calculated right at the moment you stake more. You should wait for that staking finishes in (xx hours).`,
+			contentWarning: `If you stake more now, factional staking rewards (${getTime()} hours of ${balanceSA} tokens) will be cleared.24h period will be reset and continue to be calculated right at the moment you stake more. You should wait for that staking finishes in (${(24 - parseInt(getTime())).toFixed(1)} hours).`,
 			functionWarning: () => {
 				setStateContent(StateStaking.StakeProcess)
 			},

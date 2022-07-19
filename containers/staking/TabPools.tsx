@@ -4,7 +4,7 @@ import { PopupMessage } from "../../components/pageComponent/claim/PopupMessage"
 import { StateStaking } from "../../const";
 import { STAKING_ICON } from "../../constants/staking"
 import { changeNetwork, useWalletContext } from "../../contexts/WalletContext";
-import { getAllowanceStakingFiu, getBalanceFiuStaking, getBalancePass, getBalanceStaked, getCurrentProfit, getRemainingDelayTime, getStakingAmount, getTotalStakingToken, getUnstakeAmount, toClaimableTime } from "../../libs/staking";
+import { getAllowanceStakingFiu, getBalanceFiuStaking, getBalancePass, getBalanceStaked, getCurrentProfit, getRemainingDelayTime, getStakingAmount, getStakingStatus, getTotalStakingToken, getUnstakeAmount, toClaimableTime } from "../../libs/staking";
 import { TEXT_STYLE } from "../../styles/common/textStyles"
 import { DialogsItemStaking } from "./components/DialogsItemStaking";
 
@@ -73,7 +73,7 @@ export const TabPools = () => {
 
 				<Typography>7.Staking does have a short cooldown period of 7days, meaning once you want to exit, you have to wait 7days.</Typography>
 
-				<Typography>Important note: If you change your stake amount (stake more or partical unstake ), system will recalculate 24h period from that time and amount. Finished rewards will remain but fractional staking rewards will be cleared.</Typography>
+				<Typography><b>Important note:</b> If you change your stake amount (stake more or partical unstake ), system will recalculate 24h period from that time and amount. Finished rewards will remain but fractional staking rewards will be cleared.</Typography>
 			</Box>
 		})
 	}
@@ -109,7 +109,15 @@ export const TabPools = () => {
 
 			const allowance = await getAllowanceStakingFiu(walletAccount, ethersSigner);
 			// setIsLoading(false);
-			allowance > 0 && setIsEnable(true);
+			if (allowance > 0) {
+				// setStateContentInit(StateStaking.EnablePool);
+				setIsEnable(true);
+				// setTabCurrent(1);
+			} else {
+				// setTabCurrent(0);
+				setIsEnable(false);
+			}
+
 		} else {
 			// setIsLoading(false);
 		}
@@ -209,9 +217,34 @@ export const TabPools = () => {
 			setIsLoading(false);
 		}
 	}
+	// const statusMap ={
+	// 	0:'-',
+	// 	1:'STAKING',
+	// }
+	const getStakingS = async () => {
+		setIsLoading(true);
+		if (!chainIdIsSupported) {
+			await changeNetwork(provider)
+		}
+		if (ethersSigner && walletAccount) {
+			const status = await getStakingStatus(walletAccount, ethersSigner);
+			if (parseInt(status) === 0) {
+				setStatusRow('-');
+			} else if (parseInt(status) === 1) {
+				setStatusRow('STAKING');
+			} else {
+				setStatusRow('UNSTAKED');
+			}
+			debugger
+			// setStatusRow('STAKING')
+		} else {
+			setStatusRow('-')
+		}
+	}
 	const getAll = async () => {
 		setIsLoading(true);
 		await Promise.all([
+			// getStakingS(),
 			getAllowance(),
 			getBalanceFiu(),
 			getBalanceSA(),
@@ -231,16 +264,16 @@ export const TabPools = () => {
 	}, [walletAccount, refresh])
 	console.log(balanceUS)
 	useEffect(() => {
-		if (parseFloat(balanceSA) > 0) {
-			setStatusRow('STAKING')
-		} else {
-			setStatusRow('UNSTAKED')
-			// if (parseFloat(balanceFiu) > 0) {
+		// if (parseFloat(balanceSA) > 0) {
+		// 	setStatusRow('STAKING')
+		// } else {
+		// 	setStatusRow('-')
+		// 	// if (parseFloat(balanceFiu) > 0) {
 
-			// } else {
-			// 	setStatusRow('-')
-			// }
-		}
+		// 	// } else {
+		// 	// 	setStatusRow('-')
+		// 	// }
+		// }
 		if (parseFloat(balanceSA) > 0 || parseFloat(balanceUS) > 0) {
 			setStateContentInit(StateStaking.Staked);
 		} else {
@@ -365,6 +398,7 @@ export const TabPools = () => {
 				totalStakingToken={totalStakingToken}
 				claimableTime={claimableTime}
 				remainingDelayTime={remainingDelayTime}
+				setStateContentInit={setStateContentInit}
 			>
 
 			</DialogsItemStaking>

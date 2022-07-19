@@ -10,15 +10,17 @@ type Props = {
 	setStateContent: Function
 	setIsLoading: Function
 	handleClickError: Function
+	setStateContentInit: Function
 }
 
 export const EnablePool = (props: Props) => {
-	const { setIsLoading, handleClickError } = props;
+	const { setIsLoading, handleClickError, setStateContentInit } = props;
 	const { setToggleActivePopup, walletAccount, ethersSigner, ethersProvider } = useWalletContext();
 
 	const [continueToStake, setContinueToStake] = useState<Boolean>(false);
 
 	const handleContinueToStake = () => {
+		setStateContentInit(StateStaking.StakeProcess);
 		props.setStateContent(StateStaking.StakeProcess)
 	}
 	const handleEnable = async () => {
@@ -56,11 +58,11 @@ export const EnablePool = (props: Props) => {
 			</Item>
 			<Item>
 				<TitleItem >START TIME JOIN</TitleItem>
-				<ValueItem>00:00 24/12/2022</ValueItem>
+				<ValueItem>16:00 UTC 19/07/2022</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem >End time JOIN</TitleItem>
-				<ValueItem>0:00 24/12/2022</ValueItem>
+				<ValueItem>16:00 UTC 03/08/2022</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem >stake amount (min)</TitleItem>

@@ -15,7 +15,7 @@ import { StakeProcess } from "./StakeProcess"
 import { Success } from "./Success"
 import { TransactionHistory } from "./TransactionHistory"
 import { Unstake } from "./Unstake"
-import { UnstakedSuccess } from "./UnstakedSuccess"
+import { UnstakeAgain, UnstakedSuccess } from "./UnstakedSuccess"
 import { UnstakeWarrning } from "./UnstakeWarrning"
 import { WithDraw, WithDrawWarning } from "./WithDraw"
 
@@ -41,6 +41,7 @@ interface IProps {
 	stateContentInit: StateStaking
 	claimableTime: string
 	remainingDelayTime: string
+	setStateContentInit: Function
 }
 
 export const DialogsItemStaking: React.FC<IProps> = ({
@@ -55,7 +56,8 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 	stateContentInit,
 	claimableTime,
 	remainingDelayTime,
-	totalStakingToken }) => {
+	totalStakingToken,
+	setStateContentInit }) => {
 
 	const [stateContent, setStateContent] = useState<StateStaking | null>(stateContentInit);
 	const [success, setSuccess] = useState<any>({
@@ -111,17 +113,12 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 
 	return (
 		<Dialog sx={borderRadius} onClose={() => {
-			// setStateContent(0);
-			if (stateContent === StateStaking.TransactionHistory) {
-				setStateContent(StateStaking.StakeProcess);
-			}
+			setStateContent(stateContentInit);
 			handleToggle()
 		}} open={status}>
 			<Wrap >
 				<Box onClick={() => {
-					if (stateContent === StateStaking.TransactionHistory) {
-						setStateContent(StateStaking.StakeProcess);
-					}
+					setStateContent(stateContentInit);
 					handleToggle()
 				}} sx={closeIcon}><img src={'assets/icons/close.svg'} /></Box>
 				<TitlePopup>
@@ -136,7 +133,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 					{dataActive && dataActive.name}
 				</TitlePopup>
 				{
-					stateContent === StateStaking.EnablePool ? <EnablePool setStateContent={setStateContent} setIsLoading={setIsLoading} handleClickError={handleClickError} /> :
+					stateContent === StateStaking.EnablePool ? <EnablePool setStateContentInit={setStateContentInit} setStateContent={setStateContent} setIsLoading={setIsLoading} handleClickError={handleClickError} /> :
 						stateContent === StateStaking.StakeProcess ? <StakeProcess
 							balanceFiu={balanceFiu}
 							balanceSA={balanceSA}
@@ -198,18 +195,30 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 												setStateContent={setStateContent}
 												handleClickSuccess={handleClickSuccess}
 												handleClickError={handleClickError} /> :
-												stateContent === StateStaking.WithDrawWarning ? <WithDrawWarning
+												stateContent === StateStaking.UnstakeAgain ? <UnstakeAgain
+													balanceFiu={balanceFiu}
+													balanceSA={balanceSA}
+													balanceCP={balanceCP}
 													balanceUS={balanceUS}
-													remainingDelayTime={remainingDelayTime}
-
+													claimableTime={claimableTime}
 													setIsLoading={setIsLoading}
 													setStateContent={setStateContent}
 													handleClickSuccess={handleClickSuccess}
-													handleClickError={handleClickError} /> :
-													stateContent === StateStaking.TransactionHistory ? <TransactionHistory setStateContent={setStateContent} /> :
-														stateContent === StateStaking.Success ? <Success success={success} setStateContent={setStateContent} /> :
-															stateContent === StateStaking.Error ? <Error setStateContent={setStateContent} error={error} /> :
-																<Box></Box>
+													handleClickError={handleClickError}
+													handleClickWarning={handleClickWarning} /> :
+													stateContent === StateStaking.WithDrawWarning
+														? <WithDrawWarning
+															balanceUS={balanceUS}
+															remainingDelayTime={remainingDelayTime}
+
+															setIsLoading={setIsLoading}
+															setStateContent={setStateContent}
+															handleClickSuccess={handleClickSuccess}
+															handleClickError={handleClickError} /> :
+														stateContent === StateStaking.TransactionHistory ? <TransactionHistory setStateContent={setStateContent} /> :
+															stateContent === StateStaking.Success ? <Success success={success} setStateContent={setStateContent} /> :
+																stateContent === StateStaking.Error ? <Error setStateContent={setStateContent} error={error} /> :
+																	<Box></Box>
 				}
 				{/* <Box mt="auto" width={"100%"} sx={{ paddingTop: "16px", borderTop: "1px solid #E9EAEF" }}>
 			 	{walletAccount ?
