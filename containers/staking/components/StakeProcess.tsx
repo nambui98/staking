@@ -84,7 +84,7 @@ export const StakeProcess = ({
 	}
 	const handleValueWithPercent = (percent: number) => {
 		let valueCal = percent * parseFloat(balanceFiu);
-		if (valueCal < parseFloat(balanceFiu)) {
+		if (valueCal <= parseFloat(balanceFiu)) {
 			setValue((percent * parseFloat(balanceFiu)).toString());
 			setMessageError("")
 		} else {
