@@ -50,7 +50,7 @@ export const getStakingAmount = async (walletAccount: any, ethersSigner: any) =>
 export const getCurrentProfit = async (walletAccount: any, ethersSigner: any) => {
 	const beFITTERStakeStakingContract = new ethers.Contract(beFITTERStakeStaking.address, beFITTERStakeStaking.abi, ethersSigner);
 	const balance = await beFITTERStakeStakingContract.getCurrentProfit(walletAccount)
-	debugger
+	// debugger
 	return ethers.utils.formatUnits(balance, 'wei');
 }
 export const getUnstakeAmount = async (walletAccount: any, ethersSigner: any) => {
@@ -74,13 +74,13 @@ export const unStake = async (price: string, ethersSigner: any) => {
 export const toClaimableTime = async (walletAccount: any, ethersSigner: any) => {
 	const beFITTERStakeStakingContract = new ethers.Contract(beFITTERStakeStaking.address, beFITTERStakeStaking.abi, ethersSigner);
 	const balance = await beFITTERStakeStakingContract.getClaimableTime(walletAccount)
-	debugger
+	// debugger
 	return ethers.utils.formatUnits(balance, 'wei');
 }
 export const getRemainingDelayTime = async (walletAccount: any, ethersSigner: any) => {
 	const beFITTERStakeStakingContract = new ethers.Contract(beFITTERStakeStaking.address, beFITTERStakeStaking.abi, ethersSigner);
 	const balance = await beFITTERStakeStakingContract.getRemainingDelayTime(walletAccount)
-	debugger
+	// debugger
 	return ethers.utils.formatUnits(balance, 'wei');
 }
 export const withDraw = async (ethersSigner: any) => {
@@ -101,5 +101,7 @@ export const getTotalStakingToken = async (ethersSigner: any) => {
 export const getStakingStatus = async (walletAccount: any, ethersSigner: any) => {
 	const beFITTERStakeStakingContract = new ethers.Contract(beFITTERStakeStaking.address, beFITTERStakeStaking.abi, ethersSigner);
 	const balance = await beFITTERStakeStakingContract.getStakingStatus(walletAccount)
+	console.log("aaaa" + ethers.utils.formatUnits(balance, 'wei'));
 	return ethers.utils.formatUnits(balance, 'wei');
+
 }

@@ -235,7 +235,7 @@ export const TabPools = () => {
 			} else {
 				setStatusRow('UNSTAKED');
 			}
-			debugger
+			// debugger
 			// setStatusRow('STAKING')
 		} else {
 			setStatusRow('-')
@@ -244,7 +244,7 @@ export const TabPools = () => {
 	const getAll = async () => {
 		setIsLoading(true);
 		await Promise.all([
-			// getStakingS(),
+			getStakingS(),
 			getAllowance(),
 			getBalanceFiu(),
 			getBalanceSA(),
@@ -261,7 +261,7 @@ export const TabPools = () => {
 		getTotalStakingT()
 		// getBalanceP()
 		// getBalanceS()
-	}, [walletAccount, refresh])
+	}, [walletAccount, refresh, ethersSigner])
 	console.log(balanceUS)
 	useEffect(() => {
 		// if (parseFloat(balanceSA) > 0) {
