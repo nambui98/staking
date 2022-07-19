@@ -63,7 +63,9 @@ export const WithDraw = (props: Props) => {
 	}
 
 	const timeUTC = () => {
-		let time = new Date(new Date().getTime() + parseFloat(remainingDelayTime));
+		let time = new Date();
+		time.setSeconds(time.getSeconds() + parseInt(remainingDelayTime));
+
 		return `${time.getUTCHours()}:${time.getUTCMinutes()} ${time.getUTCDate()}/${time.getUTCMonth() + 1}/${time.getUTCFullYear()}`
 
 	}
