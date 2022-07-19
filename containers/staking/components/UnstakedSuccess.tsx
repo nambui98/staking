@@ -50,7 +50,12 @@ export const UnstakedSuccess = (props: Props) => {
 			<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={600} mt="8px" textTransform={"uppercase"}>{balanceSA} FIU</Typography>
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>current  PROFIT</Typography>
 			<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>{balanceCP} FITTER PASS</Typography>
-			<Item sx={{ background: "#E9EAEF", marginRight: '-24px', marginLeft: "-24px", padding: "5px", justifyContent: "center !important" }}>
+			<Item sx={{
+				background: "#E9EAEF", marginRight: '-24px', marginLeft: "-24px", padding: "5px", justifyContent: "center !important", '@media (max-width: 650px)': {
+					marginRight: '-16px',
+					marginLeft: "-16px",
+				}
+			}}>
 				<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="8px">Available to claim at {timeUTC()}</Typography>
 			</Item>
 
@@ -96,7 +101,7 @@ export const UnstakeAgain = (props: Props) => {
 
 						<img src={MARKETPLACE_ICON.infocircle} alt="" />
 					</Box>
-					<Typography fontSize={14} color="#31373E" fontWeight={500} lineHeight="20px" mt="28px">You have unstaked an amount of token before and currently have reward waiting to be withdrawn. If you still continue unstaking, the delay time will be extended until <span style={{ color: '#FF6F61' }}>00:00 30/7/2022 GMT +7</span>. Do you want to continue?</Typography>
+					<Typography fontSize={14} color="#31373E" fontWeight={500} lineHeight="20px" mt={{ xs: '10px', sm: "28px" }}>You have unstaked an amount of token before and currently have reward waiting to be withdrawn. If you still continue unstaking, the delay time will be extended until <span style={{ color: '#FF6F61' }}>00:00 30/7/2022 GMT +7</span>. Do you want to continue?</Typography>
 					{/* <Typography fontSize={14} color="#FF6F61" fontWeight={500} lineHeight="20px" mt="28px">YOU ARE UNSTAKING.</Typography> */}
 				</Box>
 			</Box>

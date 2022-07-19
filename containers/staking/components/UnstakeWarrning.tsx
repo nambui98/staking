@@ -42,7 +42,7 @@ export const UnstakeWarrning = (props: Props) => {
 
 						<img src={MARKETPLACE_ICON.infocircle} alt="" />
 					</Box>
-					<Typography fontSize={14} color="#FF6F61" fontWeight={500} lineHeight="20px" mt="28px">YOU ARE UNSTAKING.</Typography>
+					<Typography fontSize={14} color="#FF6F61" fontWeight={500} lineHeight="20px" mt={{ xs: '10px', sm: "28px" }}>YOU ARE UNSTAKING.</Typography>
 					<Typography fontSize={14} color="#31373E" fontWeight={500} lineHeight="20px" mt="4px">The amount of TOKEN that you unstaked will not be continuously calculated. You can withdraw after the withdrawal delay time. If you only want to CLAIM the reward, please go back and click on the CLAIM button.</Typography>
 				</Box>
 			</Box>

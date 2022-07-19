@@ -94,13 +94,15 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 		<Dialog sx={borderRadius} onClose={() => {
 			// setStateContent(0);
 			if (stateContent === StateStaking.TransactionHistory) {
-				setStateContent(null);
+				setStateContent(StateStaking.StakeProcess);
 			}
 			handleToggle()
 		}} open={status}>
 			<Wrap >
 				<Box onClick={() => {
-					// setStateContent(0);
+					if (stateContent === StateStaking.TransactionHistory) {
+						setStateContent(StateStaking.StakeProcess);
+					}
 					handleToggle()
 				}} sx={closeIcon}><img src={'assets/icons/close.svg'} /></Box>
 				<TitlePopup>
@@ -278,12 +280,19 @@ const ValueItem = styled(Typography)({
 
 const Wrap = styled(Stack)({
 	position: 'relative',
-	padding: '0 16px 16px',
+	padding: '16px 16px 0px 16px',
+	// margin: "16px 0px",
+	overflowY: 'auto',
 	width: 'calc(100vw - 32px)',
+	height: 'calc(100vh - 32px)',
 	'@media (min-width: 650px)': {
 		width: '360px',
 		height: "465px",
-		padding: '16px 24px 24px',
+		padding: '16px',
+	},
+	'@media (max-width: 650px)': {
+		padding: '0px 16px 0px 16px',
+		margin: "16px 0px 16px 0px"
 	}
 })
 const TitlePopup = styled(DialogTitle)({

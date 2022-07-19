@@ -316,9 +316,18 @@ const Wrap = styled(Stack)({
 
 })
 const customWidthPopup = {
+	'@media (max-width: 650px)': {
+		marginBottom: "16px",
+		marginTop: "16px",
+		paddingTop: '0px'
+	},
 	'@media (min-width: 650px)': {
 		width: '541px !important',
 		paddingTop: '8px'
+	},
+	'@media (max-height: 720px)': {
+		overflowY: 'auto',
+		height: 'calc(100vh - 32px)',
 	}
 }
 const BodyPopup = styled(Box)({

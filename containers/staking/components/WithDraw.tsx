@@ -78,7 +78,18 @@ export const WithDraw = (props: Props) => {
 			</Box>
 			{
 				parseFloat(remainingDelayTime) > 0 &&
-				<Item sx={{ background: "#E9EAEF", mt: "auto !important", marginRight: '-24px', marginLeft: "-24px", padding: "5px", justifyContent: "center !important" }}>
+				<Item sx={{
+					background: "#E9EAEF",
+					mt: "auto !important",
+					marginRight: '-24px',
+					marginLeft: "-24px",
+					padding: "5px",
+					justifyContent: "center !important",
+					'@media (max-width: 650px)': {
+						marginRight: '-16px',
+						marginLeft: "-16px",
+					}
+				}}>
 					<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="8px">Available to withdraw at {timeUTC()}</Typography>
 				</Item>
 			}
