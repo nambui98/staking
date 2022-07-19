@@ -1,4 +1,4 @@
-import { Box, BoxProps, Container, styled, Typography } from '@mui/material';
+import { Box, BoxProps, Container, Link, styled, Typography } from '@mui/material';
 import HomeLayoutNew from '../components/layouts/HomeLayoutNew';
 import { Banner } from '../containers/business/Banner';
 import { BusinessModel } from '../containers/business/BusinessModel';
@@ -162,7 +162,7 @@ const Business = () => {
 						that inflation with cryptocurrency or NFTs is always bad. At low,
 						stable levels (especially at the beginning when apps have to attract
 						early adopters), it encourages people to buy, thereby stimulating
-						economic growth. fullest.
+						economic growth.
 					</Typography>
 				</BoxTextImage>
 
@@ -179,10 +179,10 @@ const Business = () => {
 						there is a hard cap in place with beFITTER governance{' '}
 						<span style={{ color: '#FF6D24' }}>$FIU</span> token. Regarding the{' '}
 						<span style={{ color: '#1DB268' }}>$HEE</span> token, even though it
-						has unlimited supplies, The beFITTER protocol has disinflationary
+						has unlimited supplies, <br></br><br></br> The beFITTER protocol has disinflationary
 						measures that slow the rate of inflation over time. The main one is
 						the burning mechanism that is transparently published in our{' '}
-						<span>Business Paper.</span>
+						<Link href='/business'><span style={{textDecoration: 'underline'}}>Business Paper.</span></Link>
 					</Typography>
 					<BoxImage xsWidth={212} mdWidth={567} isMt>
 						<img src={'assets/manifesto-2.png'} />
@@ -289,18 +289,6 @@ const Business = () => {
 						social media communication. The ultimate goal is to keep the fire
 						alive among those who already love us, and among those who will
 						sooner or later find us and stay with us.
-					</Typography>
-				</BoxTextImage>
-				<BoxTextImage>
-					<Typography mt={{ xs: 3, md: 10 }}>
-						We’ve witnessed dozens of projects down because of not winning trust
-						from their communities. beFITTER, on the other hand, is confident
-						not to make the same mistake because we assembled some of the best
-						talents in town who bring sanity into the game. We have you by our
-						side because we’ve put in an excellent performance. It’s not an
-						exaggeration. It’s a fact. The future is bright for us as we will
-						continue to conquer new heights. And we are not going to trade our
-						community for anything. That’s our spirit!
 					</Typography>
 				</BoxTextImage>
 				<BoxTextImage>
