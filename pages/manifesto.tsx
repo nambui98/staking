@@ -85,16 +85,16 @@ const Business = () => {
 			</Box>
 
 			<BoxImgText top={1100} right={1}>
-				<img src={'images/imgleft.png'} />
+				<img src={'images/imgRight.png'} />
 			</BoxImgText>
 			<BoxImgText top={2140} left={1}>
-				<img src={'images/imgRight.png'} />
-			</BoxImgText>
-			<BoxImgText top={3100} right={1}>
 				<img src={'images/imgleft.png'} />
 			</BoxImgText>
-			<BoxImgText top={4180} left={1}>
+			<BoxImgText top={3100} right={1}>
 				<img src={'images/imgRight.png'} />
+			</BoxImgText>
+			<BoxImgText top={4180} left={1}>
+				<img src={'images/imgleft.png'} />
 			</BoxImgText>
 			<Container sx={{ maxWidth: { xl: 1680 + 48 }, position: 'relative' }}>
 				<TitleSection sx={{ margin: '24px 0' }}>
