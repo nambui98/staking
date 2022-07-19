@@ -88,3 +88,13 @@ export const withDraw = async (ethersSigner: any) => {
 	const res = await beFITTERStakeStakingContract.withdrawStakingToken();
 	return res;
 }
+export const claimReward = async (ethersSigner: any) => {
+	const beFITTERStakeStakingContract = new ethers.Contract(beFITTERStakeStaking.address, beFITTERStakeStaking.abi, ethersSigner);
+	const res = await beFITTERStakeStakingContract.claimReward();
+	return res;
+}
+export const getTotalStakingToken = async (ethersSigner: any) => {
+	const beFITTERStakeStakingContract = new ethers.Contract(beFITTERStakeStaking.address, beFITTERStakeStaking.abi, ethersSigner);
+	const balance = await beFITTERStakeStakingContract.getTotalStakingToken();
+	return ethers.utils.formatEther(balance)
+}

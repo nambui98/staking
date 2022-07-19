@@ -8,7 +8,7 @@ import bfBusdToken from '../abi/BeFitterBusd.json';
 import bfShop from '../abi/BeFitterShop.json';
 import beFITTERTokenStaking from '../abi/BeFITTERTokenStaking.json';
 import beFitterPass from '../abi/BeFitterPass.json';
-import beFitterStake from '../abi/BeFitterStake.json';
+import beFitterStake from '../abi/BeFitterStaking.json';
 interface Map {
 	[key: string]: any;
 }
@@ -25,9 +25,9 @@ const addresses: Map = {
 		bFShop: '0xc4bcE7f9dF1126c352809eD422d0766a3C3ce18a',
 		bFclaimAlphaBeta: '0xcd229a4e1140cf045bA9f3c1287B62cAe4aFA549',
 		bFclaimOther: '0xb01F92dd643B366686AAa856b9634E3F6799Fe2A',
-		beFITTERTokenStaking: '0xFF7168E94Fd6d4eDDc652459DC08B89822e457f5',
-		beFITTERPassStaking: '0x1A0bd1f84D3Ef14e974CBc069FAE1aaDb8C80e9c',
-		beFITTERStakeStaking: '0x3c4cF13a11f2D09D8319cECc7c72872f06e2FC46',
+		beFITTERTokenStaking: '0x581e5cc078d305cDD2360947c82d1E11cdd1CA50',
+		beFITTERPassStaking: '0x086FA5a0CaE466Eb367e2894c1366a8d43D29c4f',
+		beFITTERStakeStaking: '0x9355d56d3267fE3381E49C6522C2b668ffBb6b65',
 	},
 	['localhost']: {
 

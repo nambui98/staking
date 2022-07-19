@@ -37,6 +37,7 @@ interface IProps {
 	balanceSA: string
 	balanceCP: string
 	balanceUS: string
+	totalStakingToken: string
 	stateContentInit: StateStaking
 	claimableTime: string
 	remainingDelayTime: string
@@ -53,7 +54,8 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 	balanceUS,
 	stateContentInit,
 	claimableTime,
-	remainingDelayTime }) => {
+	remainingDelayTime,
+	totalStakingToken }) => {
 
 	const [stateContent, setStateContent] = useState<StateStaking | null>(stateContentInit);
 	const [success, setSuccess] = useState<any>({
@@ -129,6 +131,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 								balanceCP={balanceCP}
 								balanceUS={balanceUS}
 								claimableTime={claimableTime}
+								setIsLoading={setIsLoading}
 								setStateContent={setStateContent}
 								handleClickSuccess={handleClickSuccess}
 								handleClickError={handleClickError} /> :

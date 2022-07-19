@@ -73,7 +73,9 @@ export const StakeProcess = ({
 				}
 			}, 1000);
 		} catch (error: any) {
-			console.log(error.message);
+			let indexReason = error.message.search("reason=");
+			console.log(error.message.substring(indexReason).split(',')[0].split(':')[1].split());
+
 			setIsLoading(false);
 			handleClickError({
 				titleError: 'Something went wrong, please try again',
@@ -86,8 +88,14 @@ export const StakeProcess = ({
 
 	}
 	const handleValueWithPercent = (percent: number) => {
-		setValue((percent * parseFloat(balanceFiu)).toString());
-		setMessageError("")
+		let valueCal = percent * parseFloat(balanceFiu);
+		if (valueCal < parseFloat(balanceFiu)) {
+			setValue((percent * parseFloat(balanceFiu)).toString());
+			setMessageError("")
+		} else {
+			setValue(valueCal.toString())
+			setMessageError("Insufficient balance")
+		}
 	}
 	return (
 		<>
@@ -107,12 +115,18 @@ export const StakeProcess = ({
 						placeholder=""
 						onChange={(e) => {
 							if (Number(e.target.value)) {
-								if (parseFloat(e.target.value) > parseFloat(balanceFiu)) {
-									setValue(e.target.value)
-									setMessageError("Insufficient balance")
+								if (parseFloat(e.target.value) > 0) {
+
+									if (parseFloat(e.target.value) > parseFloat(balanceFiu)) {
+										setValue(e.target.value)
+										setMessageError("Insufficient balance")
+									} else {
+										setValue(e.target.value)
+										setMessageError("")
+									}
 								} else {
 									setValue(e.target.value)
-									setMessageError("")
+									setMessageError("Please enter a positive number")
 								}
 							} else {
 								setMessageError('Please enter valid number')

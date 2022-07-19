@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
 import { StateStaking } from '../../../const';
 import { useWalletContext } from '../../../contexts/WalletContext';
+import { claimReward } from '../../../libs/staking';
 
 type Props = {
 	setStateContent: Function;
@@ -14,6 +15,7 @@ type Props = {
 	balanceCP: string
 	balanceUS: string
 	claimableTime: string
+	setIsLoading: Function
 }
 
 export const Staked = (props: Props) => {
@@ -26,17 +28,41 @@ export const Staked = (props: Props) => {
 		setStateContent,
 		handleClickSuccess,
 		handleClickError,
+		setIsLoading
 	} = props;
-	const [isClaim, setIsClaim] = useState<Boolean>(false)
-	const handleClaim = () => {
-		handleClickSuccess({
-			titleSuccess: 'Claim successfully!',
-			functionSuccess: () => {
-				setStateContent(StateStaking.Staked)
-			},
-			stateContentNew: StateStaking.Success
-		})
+	const { ethersSigner, ethersProvider, setRefresh, refresh } = useWalletContext();
+	const handleClaim = async () => {
+		setIsLoading(true)
+		try {
+			const res = await claimReward(ethersSigner);
+			const checkStatus = setInterval(async () => {
+				const statusApprove = await ethersProvider.getTransactionReceipt(res.hash);
+				if (statusApprove?.status) {
+					setIsLoading(false)
+					setRefresh(!refresh)
+					handleClickSuccess({
+						titleSuccess: 'Claim successfully!',
+						functionSuccess: () => {
+							setStateContent(StateStaking.Staked)
+						},
+						stateContentNew: StateStaking.Success
+					})
+					clearInterval(checkStatus)
+				}
+			}, 1000);
+		} catch (error: any) {
+			let indexReason = error.message.search("reason=");
+			console.log(error.message.substring(indexReason).split(',')[0].split(':')[1].split());
 
+			setIsLoading(false);
+			handleClickError({
+				titleError: 'Something went wrong, please try again',
+				functionError: () => {
+					setStateContent(StateStaking.Staked)
+				},
+				stateContentNew: StateStaking.Error
+			})
+		}
 	}
 
 	const handleUnStake = () => {
@@ -58,16 +84,20 @@ export const Staked = (props: Props) => {
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>STAKING</Typography>
 			<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={600} mt="8px" textTransform={"uppercase"}>{balanceSA} FIU</Typography>
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>current  PROFIT</Typography>
+			{/* {
+				parseFloat(claimableTime) > 0 && <Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>{balanceCP} FITTER PASS</Typography>} */}
+
 			{
-				parseFloat(claimableTime) > 0 && <Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>{balanceCP} FITTER PASS</Typography>}
-			{
-				parseFloat(claimableTime) <= 0 && <Typography fontSize={16} color="#1DB268" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>+{balanceCP} FITTER PASS</Typography>}
+				parseFloat(claimableTime) <= 0 && parseFloat(balanceCP) > 0 ?
+					<Typography fontSize={16} color="#1DB268" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>+{balanceCP} FITTER PASS</Typography>
+					: <Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>{balanceCP} FITTER PASS</Typography>
+			}
 			{parseFloat(claimableTime) > 0 && <Item sx={{ background: "#E9EAEF", marginRight: '-24px', marginLeft: "-24px", padding: "5px", justifyContent: "center !important" }}>
 				<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="8px">Available to claim at {timeUTC()}</Typography>
 			</Item>}
 
 			{
-				parseFloat(claimableTime) <= 0 && <Item sx={{
+				parseFloat(claimableTime) <= 0 && parseFloat(balanceCP) > 0 && <Item sx={{
 					justifyContent: "center !important",
 				}}>
 					<MarketplaceButton customStyle={{ width: "160px" }} title={"Claim"} handleOnClick={handleClaim} />
