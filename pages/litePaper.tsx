@@ -274,15 +274,13 @@ const Mission: React.FC<any> = ({ sxProps }) => {
 					<Typography>{MISSION.SUBTITLE}</Typography>
 					<Typography><span>&</span>{MISSION.TITLE}</Typography>
 				</Box>
-				<Grid container mt={5}>
-					<Grid item xs={12} md={5}>
+				<Grid container mt={10}>
+					<Grid item mr={{ xs: 0, md: 10 }} xs={12} md={5} sx={{
+						width: '100%',
+						maxWidth: '582px !important',
+					}}>
 						<Stack justifyContent="center" alignItems="center" px={2}>
-							<Box
-								sx={{
-									width: '100%',
-									maxWidth: 420,
-								}}
-							>
+							<Box>
 								<img src={MISSION.IMAGE1} width={'100%'} height={'auto'} />
 							</Box>
 						</Stack>
@@ -312,7 +310,7 @@ const Mission: React.FC<any> = ({ sxProps }) => {
 				>
 					<Grid item xs>
 						<Stack
-							justifyContent={{ xs: 'center', md: 'flex-end' }}
+							justifyContent={{ xs: 'center', md: 'center' }}
 							sx={{ height: '100%' }}
 							mt={{ xs: 2, md: 0 }}
 						>
@@ -326,14 +324,12 @@ const Mission: React.FC<any> = ({ sxProps }) => {
 							</Typography>
 						</Stack>
 					</Grid>
-					<Grid item xs={12} md={5}>
+					<Grid item ml={{ xs: 2, md: 10 }} xs={12} md={5} sx={{
+						width: '100%',
+						maxWidth: '352px !important',
+					}}>
 						<Stack justifyContent="center" alignItems="center" px={2}>
-							<Box
-								sx={{
-									width: '100%',
-									maxWidth: 352,
-								}}
-							>
+							<Box>
 								<img src={MISSION.IMAGE2} width={'100%'} height={'auto'} />
 							</Box>
 						</Stack>
@@ -341,89 +337,6 @@ const Mission: React.FC<any> = ({ sxProps }) => {
 				</Grid>
 			</Container>
 		</Box>
-	);
-};
-
-const App: React.FC<any> = ({ sxProps }) => {
-	return (
-		<Stack
-			alignItems="center"
-			sx={{
-				position: 'relative',
-				overflow: 'hidden',
-				...sxProps,
-			}}
-		>
-			<Box
-				sx={{
-					position: 'relative',
-					width: '100%',
-					minWidth: 1920,
-				}}
-			>
-				<Box
-					sx={{
-						position: 'absolute',
-						top: 0,
-						left: 0,
-					}}
-				>
-					<img src={APP.BG} width="auto" height="auto" />
-				</Box>
-			</Box>
-			<Container sx={{ position: 'relative' }}>
-				<Grid container>
-					<Grid item xs={12} md={5}>
-						<Stack justifyContent="center" alignItems="center" px={2}>
-							<Box
-								sx={{
-									width: '100%',
-									maxWidth: 420,
-								}}
-							>
-								<img src={APP.POSTER} width={'100%'} height={'auto'} />
-							</Box>
-						</Stack>
-					</Grid>
-					<Grid item xs>
-						<Stack
-							justifyContent="center"
-							sx={{
-								height: '100%',
-							}}
-						>
-							<Stack
-								alignItems={{ xs: 'center', md: 'flex-start' }}
-								justifyContent="center"
-								mb={5}
-							>
-								<Box
-									sx={{
-										width: '100%',
-										maxWidth: 551,
-									}}
-								>
-									<img src={APP.TITLE} width={'100%'} height={'auto'} />
-								</Box>
-							</Stack>
-							<Grid container spacing={2}>
-								{APP.BUTTON.map((el, idx) => (
-									<Grid key={idx} item xs={6} lg={4}>
-										<AppStoreButton
-											disabled={!el.href}
-											subtitle={el.href ? el.subtitle : el.subtitle0}
-											title={el.title}
-											icon={el.icon}
-											href={el.href}
-										/>
-									</Grid>
-								))}
-							</Grid>
-						</Stack>
-					</Grid>
-				</Grid>
-			</Container>
-		</Stack>
 	);
 };
 
@@ -663,15 +576,16 @@ const Charity: React.FC<any> = ({ sxProps }) => (
 			lineHeight={1.5}
 			color="#ffffff"
 			my={5}
-			mt={{ xs: 3, sm: 5 }}
-			px={3}
+			mt={{ xs: 3, md: 10 }}
+			mb={{ xs: 3, md: 10 }}
+			px={{ xs: 0, md: 3 }}
 		>
 			{CHARITY.DESC}
 		</Typography>
-		<Stack spacing={6}>
+		<Stack spacing={{ xs: 5, md: 10 }}>
 			{CHARITY.ITEMS.map((el, idx) => (
 				<Stack key={idx}>
-					<Stack direction="row" alignItems="center" spacing={1} mb={2} sx={{
+					<Stack direction="row" alignItems="center" spacing={1} mb={{ xs: 2, md: idx === 2 ? 5 : 3 }} sx={{
 						'@media (max-width: 767px)': {
 							display: 'flex',
 							flexDirection: 'column',
@@ -734,7 +648,7 @@ const LitePaper: NextPage = () => {
 				<TokenLitepaper />
 			</Box >
 
-			<Section8 />
+			<Section8 customMap={'assets/litepaper-map.png'} />
 			<Box sx={{
 				backgroundColor: "#151515",
 				position: 'relative',

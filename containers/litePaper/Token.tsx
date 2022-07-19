@@ -282,7 +282,7 @@ const TokenLitepaper: React.FC<any> = () => {
 									alignItems: 'flex-start',
 									'& img': {
 										marginRight: '8px',
-										marginTop: '13px'
+										marginTop: '18px'
 									}
 								}}
 							>
@@ -299,7 +299,7 @@ const TokenLitepaper: React.FC<any> = () => {
 									alignItems: 'flex-start',
 									'& img': {
 										marginRight: '8px',
-										marginTop: '13px'
+										marginTop: '18px'
 									}
 								}}
 							>
@@ -316,7 +316,7 @@ const TokenLitepaper: React.FC<any> = () => {
 									alignItems: 'flex-start',
 									'& img': {
 										marginRight: '8px',
-										marginTop: '13px'
+										marginTop: '18px'
 									}
 								}}
 							>
@@ -333,7 +333,7 @@ const TokenLitepaper: React.FC<any> = () => {
 									alignItems: 'flex-start',
 									'& img': {
 										marginRight: '8px',
-										marginTop: '13px'
+										marginTop: '18px'
 									}
 								}}
 							>
@@ -350,7 +350,7 @@ const TokenLitepaper: React.FC<any> = () => {
 									alignItems: 'flex-start',
 									'& img': {
 										marginRight: '8px',
-										marginTop: '13px'
+										marginTop: '18px'
 									}
 								}}
 							>
@@ -373,7 +373,7 @@ const TokenLitepaper: React.FC<any> = () => {
 										alignItems: 'flex-start',
 										'& img': {
 											marginRight: '8px',
-											marginTop: '13px'
+											marginTop: '18px'
 										}
 									}}
 								>
@@ -468,7 +468,7 @@ const TokenLitepaper: React.FC<any> = () => {
 									alignItems: 'flex-start',
 									'& img': {
 										marginLeft: '8px',
-										marginTop: '13px'
+										marginTop: '18px'
 									}
 								}}
 							>
@@ -486,7 +486,7 @@ const TokenLitepaper: React.FC<any> = () => {
 									alignItems: 'flex-start',
 									'& img': {
 										marginLeft: '8px',
-										marginTop: '13px'
+										marginTop: '18px'
 									}
 								}}
 							>
@@ -504,7 +504,7 @@ const TokenLitepaper: React.FC<any> = () => {
 									alignItems: 'flex-start',
 									'& img': {
 										marginLeft: '8px',
-										marginTop: '13px'
+										marginTop: '18px'
 									}
 								}}
 							>
@@ -522,7 +522,7 @@ const TokenLitepaper: React.FC<any> = () => {
 									alignItems: 'flex-start',
 									'& img': {
 										marginLeft: '8px',
-										marginTop: '13px'
+										marginTop: '18px'
 									}
 								}}
 							>
@@ -548,7 +548,7 @@ const TokenLitepaper: React.FC<any> = () => {
 										alignItems: 'flex-start',
 										'& img': {
 											marginLeft: '8px',
-											marginTop: '13px'
+											marginTop: '18px'
 										}
 									}}
 								>
