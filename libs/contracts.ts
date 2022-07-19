@@ -10,6 +10,7 @@ import beFITTERTokenStaking from '../abi/BeFITTERTokenStaking.json';
 import beFitterPass from '../abi/BeFitterPass.json';
 import beFitterStake from '../abi/BeFitterStaking.json';
 import bfClaimToken from '../abi/BeFitterClaimFiu.json';
+
 interface Map {
 	[key: string]: any;
 }
@@ -49,6 +50,7 @@ export const bftClaimEnjin = { address: address.bFclaimEnjin, abi: (bfClaimBoxGa
 export const bftBusdToken = { address: address.bFBusdToken, abi: bfBusdToken.abi }
 export const bftShop = { address: address.bFShop, abi: bfShop.abi }
 export const bftClaimAlphaBeta = { address: address.bFclaimAlphaBeta, abi: bfClaimBoxGamefi.abi }
+export const bftClaimAlphaBeta2 = {address: address.bFclaimAlphaBeta2, abi: bfClaimBoxGamefi.abi}
 export const bftClaimOther = { address: address.bFclaimOther, abi: bfClaimBoxGamefi.abi }
 export const bftFiuTokenStaking = { address: address.beFITTERTokenStaking, abi: beFITTERTokenStaking.abi }
 export const beFITTERPassStaking = { address: address.beFITTERPassStaking, abi: beFitterPass.abi }
