@@ -194,8 +194,11 @@ const Section9: React.FC<any> = ({ sxProps }) => {
 			position: 'relative',
 			mt: {
 				xs: '0', sm: '0px'
+			},
+			paddingBottom: '50px',
+			'@media (max-width: 767px)': {
+				paddingBottom: '110px'
 			}
-
 		}}>
 			<Box sx={{ position: 'relative', marginTop: 'auto', display: 'flex', justifyContent: 'center', marginBottom: { xs: 1, sm: '40px' }, mt: { xs: "24px", sm: "40px" }, columnGap: '20px' }}>
 				<StayInTouch />
