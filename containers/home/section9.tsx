@@ -99,7 +99,7 @@ const MAIN_FOOTER = [
 	{ title: 'STAKING', link: '/staking' },
 	{ title: 'HUB', link: 'https://hub.befitter.io/claim' },
 	{ title: 'BUSINESS PAGE', link: '/business' },
-	{ title: 'MANIFESTO', link: '' },
+	{ title: 'MANIFESTO', link: '/manifesto' },
 	{ title: 'WHITEPAPER', link: 'https://whitepaper.befitter.io/' },
 ]
 const StayInTouch: React.FC<any> = ({ sxProps }) => {
