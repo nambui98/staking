@@ -283,6 +283,7 @@ const Wrap = styled(Stack)({
 	padding: '16px 16px 0px 16px',
 	// margin: "16px 0px",
 	overflowY: 'auto',
+	overflowX: "hidden",
 	width: 'calc(100vw - 32px)',
 	height: 'calc(100vh - 32px)',
 	'@media (min-width: 650px)': {

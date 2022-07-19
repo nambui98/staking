@@ -93,10 +93,10 @@ export const Staked = (props: Props) => {
 			}
 			{parseFloat(claimableTime) > 0 && <Item sx={{
 				background: "#E9EAEF", marginRight: '-24px', marginLeft: "-24px", padding: "5px", justifyContent: "center !important",
-				'@media (max-width: 650px)': {
-					marginRight: '-16px',
-					marginLeft: "-16px",
-				}
+				// '@media (max-width: 650px)': {
+				// 	marginRight: '-16px !important',
+				// 	marginLeft: "-16px !important",
+				// }
 			}}>
 				<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="8px">Available to claim at {timeUTC()}</Typography>
 			</Item>}
@@ -116,7 +116,7 @@ export const Staked = (props: Props) => {
 					Withdraw
 				</ButtonOutline>
 			</Item>
-			<Item sx={{
+			{/* <Item sx={{
 				justifyContent: "center !important",
 				mt: "8px !important",
 				cursor: 'pointer'
@@ -126,7 +126,7 @@ export const Staked = (props: Props) => {
 				<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={600} mt="8px" sx={{
 					textDecoration: "underline"
 				}}>Transaction history</Typography>
-			</Item>
+			</Item> */}
 
 
 		</>
@@ -157,5 +157,9 @@ const Item = styled(Box)({
 	display: "flex",
 	alignItems: "center",
 	justifyContent: "space-between",
-	marginTop: "25px"
+	marginTop: "25px",
+	'@media (max-width: 650px)': {
+		marginRight: '-16px !important',
+		marginLeft: "-16px !important",
+	}
 })
