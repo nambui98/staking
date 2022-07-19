@@ -219,15 +219,25 @@ const Business = () => {
 						},
 					}}
 				>
-					<Typography mt={{ xs: 3, md: 20 }} mb={{ xs: 4 }}>
+					<Typography mt={{ xs: 3, md: 20 }} mb={{ xs: 4 }} sx={{position: 'relative', zIndex: '2'}}>
 						A legitimate question to ask is: What if we can combine boosting
 						people’s well-being with reducing the amount of carbon emitted?
 						There are a bunch of great ways to repay our planet Earth including
 						planting or reusing, yet the best alternative is to offset the
 						carbon footprint. Yes, curb it before it’s even born.
 					</Typography>
-					<BoxImage xsWidth={343} mdWidth={450}>
-						<img src={'assets/manifesto-3.png'} />
+					<BoxImage xsWidth={343} mdWidth={450} sx={{position:'relative'}}>
+						<img style={{position: 'relative', zIndex: '2'}} src={'assets/manifesto-3.png'} />
+						<Box sx={{
+							position: 'absolute',
+							bottom: '10px',
+							right: 'calc(30%)',
+							'@media (min-width: 768px)': {
+								'& img': {
+									width: '1101px !important'
+								}
+							}
+						}}><img src={'assets/litepaper-line.png'} /></Box>
 					</BoxImage>
 				</BoxTextImage>
 				<BoxTextImage>
