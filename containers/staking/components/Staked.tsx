@@ -70,7 +70,8 @@ export const Staked = (props: Props) => {
 		setStateContent(StateStaking.WithDraw)
 	}
 	const timeUTC = () => {
-		let time = new Date(new Date().getTime() + parseFloat(claimableTime));
+		let time = new Date();
+		time.setSeconds(time.getSeconds() + parseInt(claimableTime));
 		return `${time.getUTCHours()}:${time.getUTCMinutes()} ${time.getUTCDate()}/${time.getUTCMonth() + 1}/${time.getUTCFullYear()}`
 
 	}

@@ -35,7 +35,9 @@ export const UnstakedSuccess = (props: Props) => {
 		setStateContent(StateStaking.WithDraw)
 	}
 	const timeUTC = () => {
-		let time = new Date(new Date().getTime() + parseFloat(claimableTime));
+		let time = new Date();
+		time.setSeconds(time.getSeconds() + parseInt(claimableTime));
+		debugger
 		return `${time.getUTCHours()}:${time.getUTCMinutes()} ${time.getUTCDate()}/${time.getUTCMonth() + 1}/${time.getUTCFullYear()}`
 
 	}
