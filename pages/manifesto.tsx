@@ -100,11 +100,18 @@ const Business = () => {
 				<TitleSection sx={{ margin: '24px 0' }}>
 					We <span>inspire people</span> to stay healthy
 				</TitleSection>
-				<BoxTextImage>
+				<BoxTextImage sx={{
+					'& img': {
+						'@media (max-width: 767px)': {
+							maxWidth: '136px',
+							marginTop: '24px'
+						}
+					}
+				}}>
 					<Typography
 						mr={{ xs: 0, md: 15 }}
 						sx={{
-							maxWidth: '1014px',
+							maxWidth: '1014px',							
 						}}
 					>
 						Fitness apps are not something new. However, opening one and letting
@@ -127,7 +134,7 @@ const Business = () => {
 						position: 'relative',
 					}}
 				>
-					<Typography sx={{ marginRight: '100px' }}>
+					<Typography>
 						Don’t get us wrong, the earning aspect here doesn’t just refer to
 						the monetary benefit. It’s the social benefit that we also aim for.
 						beFITTER encourages regular exercise to tackle the problem of
@@ -204,6 +211,11 @@ const Business = () => {
 					sx={{
 						'@media (min-width: 768px)': {
 							marginRight: '120px',
+						},
+						'@media (max-width: 767px)': {
+							'& img': {
+								maxWidth: '245px'
+							}
 						},
 					}}
 				>
