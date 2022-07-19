@@ -37,9 +37,10 @@ export const EnablePool = (props: Props) => {
 
 
 		} catch (error: any) {
+			const message = error.reason;
 			setIsLoading(false);
 			handleClickError({
-				titleError: 'Something went wrong, please try again',
+				titleError: message,
 				functionError: () => {
 					props.setStateContent(StateStaking.EnablePool)
 				},

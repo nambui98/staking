@@ -48,10 +48,10 @@ export const WithDraw = (props: Props) => {
 					}
 				}, 1000);
 			} catch (error: any) {
-				console.log(error.message);
+				const message = error.reason;
 				setIsLoading(false);
 				handleClickError({
-					titleError: 'Something went wrong, please try again',
+					titleError: message,
 					functionError: () => {
 						setStateContent(StateStaking.WithDraw)
 					},
@@ -124,10 +124,10 @@ export const WithDrawWarning = (props: Props) => {
 				}
 			}, 1000);
 		} catch (error: any) {
-			console.log(error.message);
+			const message = error.reason;
 			setIsLoading(false);
 			handleClickError({
-				titleError: 'Something went wrong, please try again',
+				titleError: message,
 				functionError: () => {
 					setStateContent(StateStaking.WithDraw)
 				},

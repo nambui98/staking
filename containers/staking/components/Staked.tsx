@@ -51,12 +51,10 @@ export const Staked = (props: Props) => {
 				}
 			}, 1000);
 		} catch (error: any) {
-			let indexReason = error.message.search("reason=");
-			console.log(error.message.substring(indexReason).split(',')[0].split(':')[1].split());
-
+			const message = error.reason;
 			setIsLoading(false);
 			handleClickError({
-				titleError: 'Something went wrong, please try again',
+				titleError: message,
 				functionError: () => {
 					setStateContent(StateStaking.Staked)
 				},

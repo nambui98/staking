@@ -1,9 +1,6 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
-import { styled } from '@mui/styles'
-import { log } from 'console';
-import { doubleclicksearch } from 'googleapis/build/src/apis/doubleclicksearch';
-import { title } from 'process';
-import React, { useState } from 'react'
+import { styled } from '@mui/styles';
+import { useState } from 'react';
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
 import { StateStaking } from '../../../const';
 import { useWalletContext } from '../../../contexts/WalletContext';
@@ -73,12 +70,10 @@ export const StakeProcess = ({
 				}
 			}, 1000);
 		} catch (error: any) {
-			let indexReason = error.message.search("reason=");
-			console.log(error.message.substring(indexReason).split(',')[0].split(':')[1].split());
-
+			const message = error.reason;
 			setIsLoading(false);
 			handleClickError({
-				titleError: 'Something went wrong, please try again',
+				titleError: message,
 				functionError: () => {
 					setStateContent(StateStaking.StakeProcess)
 				},
@@ -116,7 +111,6 @@ export const StakeProcess = ({
 						onChange={(e) => {
 							if (Number(e.target.value)) {
 								if (parseFloat(e.target.value) > 0) {
-
 									if (parseFloat(e.target.value) > parseFloat(balanceFiu)) {
 										setValue(e.target.value)
 										setMessageError("Insufficient balance")
