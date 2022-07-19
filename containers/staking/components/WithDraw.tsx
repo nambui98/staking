@@ -154,7 +154,7 @@ export const WithDrawWarning = (props: Props) => {
 
 	}
 	const handleCancel = () => {
-
+		setStateContent(StateStaking.UnstakedSuccess)
 	}
 	return (
 		<>
