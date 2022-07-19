@@ -106,8 +106,13 @@ export const StakeProcess = ({
 						placeholder=""
 						onChange={(e) => {
 							if (Number(e.target.value)) {
-								setValue(e.target.value)
-								setMessageError("")
+								if (parseFloat(e.target.value) > parseFloat(balanceFiu)) {
+									setValue(e.target.value)
+									setMessageError("Insufficient balance")
+								} else {
+									setValue(e.target.value)
+									setMessageError("")
+								}
 							} else {
 								setMessageError('Please enter valid number')
 								setValue(e.target.value)
@@ -122,7 +127,7 @@ export const StakeProcess = ({
 				messageError &&
 				<Item sx={{ mt: "8px !important" }}>
 					<TitleItem ></TitleItem>
-					<ValueItem>		<Typography sx={{ ...TEXT_STYLE(12, 500, "#FF6F61"), }}>Please enter valid number</Typography>
+					<ValueItem>		<Typography sx={{ ...TEXT_STYLE(12, 500, "#FF6F61"), }}>{messageError}</Typography>
 					</ValueItem>
 				</Item>
 			}

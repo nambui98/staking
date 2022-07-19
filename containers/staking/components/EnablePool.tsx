@@ -70,12 +70,9 @@ export const EnablePool = (props: Props) => {
 				<ValueItem>-</ValueItem>
 			</Item>
 			<Item>
-
 				<TitleItem >REWARD</TitleItem>
 				<ValueItem>
-					{
-						continueToStake ? "1 FITTER pass/ 3 days/ 5000 FIU" : 'FITTER pass'
-					}
+					FITTER pass
 				</ValueItem>
 			</Item>
 			<Box mt="auto" width={"100%"} sx={{ paddingTop: "16px", borderTop: "1px solid #E9EAEF" }}>

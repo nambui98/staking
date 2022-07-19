@@ -109,8 +109,13 @@ export const Unstake = (props: Props) => {
 					placeholder=""
 					onChange={(e) => {
 						if (Number(e.target.value)) {
-							setValue(e.target.value)
-							setMessageError("")
+							if (parseFloat(e.target.value) > parseFloat(balanceSA)) {
+								setValue(e.target.value)
+								setMessageError("Insufficient balance")
+							} else {
+								setValue(e.target.value)
+								setMessageError("")
+							}
 						} else {
 							setMessageError('Please enter valid number')
 							setValue(e.target.value)
