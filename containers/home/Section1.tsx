@@ -105,7 +105,7 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 				})}
 			</Swiper>
 			<Box sx={{
-				position: 'absolute',
+				position: 'fixed',
 				bottom: 0,
 				left: '50%',
 				transform: 'translateX(-50%)',

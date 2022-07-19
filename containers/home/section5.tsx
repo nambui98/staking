@@ -93,6 +93,9 @@ const Section5: NextPage = () => {
 						flexWrap: { xs: "wrap", sm: 'nowrap' },
 						'@media (max-width: 991px)': {
 							marginBottom: '40px'
+						},
+						'@media (max-width: 767px)': {
+							marginBottom: '0'
 						}
 					}}
 				>
@@ -220,7 +223,12 @@ const MenuItem = styled(Box)((props) => ({
 		}
 	},
 	'@media (max-width: 991px)': {
-		marginBottom: '48px'
+		marginBottom: '30px'
+	},
+	'&': {
+		'@media (max-width: 767px)': {
+			transform: 'scale(0.75)'
+		}
 	}
 }))
 const Wrap = styled(Stack)({
