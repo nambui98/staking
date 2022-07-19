@@ -27,6 +27,7 @@ export const TabPools = () => {
 	const [claimableTime, setClaimableTime] = useState('');
 	const [remainingDelayTime, setRemainingDelayTime] = useState('');
 	const [totalStakingToken, setTotalStakingToken] = useState('');
+	const [statusRow, setStatusRow] = useState('-');
 	const [isEnable, setIsEnable] = useState<boolean>(false);
 	const { setToggleActivePopup, walletAccount, ethersSigner, ethersProvider, chainIdIsSupported, provider, refresh } = useWalletContext();
 	const [showDialogItem, setShowDialogItem] = useState<any>({
@@ -37,7 +38,7 @@ export const TabPools = () => {
 	const [activeItem, setActiveItem] = useState<any>(null);
 	const rows = [
 		{
-			name: 'Fitter Pass', title: 'Fitter Pass Drops - Flexible', isComingSoon: false, data: createData('Staking', 'Fitter Pass', balanceCP, '-', 'None', '7 days', `${totalStakingToken} FIU`),
+			name: 'Fitter Pass', title: 'Fitter Pass Drops - Flexible', isComingSoon: false, data: createData(statusRow, 'Fitter Pass', balanceCP, '-', 'None', '7 days', `${totalStakingToken} FIU`),
 
 		},
 		{ name: 'Shared Pool', title: 'Shared Pool', isComingSoon: true, data: createData('-', '-', '0', '-', 'None', '14 days', '0 FIU') },
@@ -86,21 +87,21 @@ export const TabPools = () => {
 		})
 	}
 	const getAllowance = async () => {
-		setIsLoading(true);
+		// setIsLoading(true);
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider)
 		}
 		if (walletAccount) {
 
 			const allowance = await getAllowanceStakingFiu(walletAccount, ethersSigner);
-			setIsLoading(false);
+			// setIsLoading(false);
 			allowance > 0 && setIsEnable(true);
 		} else {
-			setIsLoading(false);
+			// setIsLoading(false);
 		}
 	}
 	const getBalanceFiu = async () => {
-		setIsLoading(true);
+		// setIsLoading(true);
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider)
 		}
@@ -110,11 +111,11 @@ export const TabPools = () => {
 			setBalanceFiu(balance);
 		} else {
 			setBalanceFiu("0");
-			setIsLoading(false);
+			// setIsLoading(false);
 		}
 	}
 	const getBalanceSA = async () => {
-		setIsLoading(true);
+		// setIsLoading(true);
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider)
 		}
@@ -124,11 +125,11 @@ export const TabPools = () => {
 			setBalanceSA(balance);
 		} else {
 			setBalanceSA("0");
-			setIsLoading(false);
+			// setIsLoading(false);
 		}
 	}
 	const getBalanceCP = async () => {
-		setIsLoading(true);
+		// setIsLoading(true);
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider)
 		}
@@ -138,11 +139,11 @@ export const TabPools = () => {
 			setBalanceCP(balance);
 		} else {
 			setBalanceCP("0");
-			setIsLoading(false);
+			// setIsLoading(false);
 		}
 	}
 	const getUnstakeA = async () => {
-		setIsLoading(true);
+		// setIsLoading(true);
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider)
 		}
@@ -153,11 +154,11 @@ export const TabPools = () => {
 			setBalanceUS(balance);
 		} else {
 			setBalanceUS("0");
-			setIsLoading(false);
+			// setIsLoading(false);
 		}
 	}
 	const toClaimableT = async () => {
-		setIsLoading(true);
+		// setIsLoading(true);
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider)
 		}
@@ -166,11 +167,11 @@ export const TabPools = () => {
 			const balance = await toClaimableTime(walletAccount, ethersSigner);
 			setClaimableTime(balance);
 		} else {
-			setIsLoading(false);
+			// setIsLoading(false);
 		}
 	}
 	const getRemainingDelayT = async () => {
-		setIsLoading(true);
+		// setIsLoading(true);
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider)
 		}
@@ -179,7 +180,6 @@ export const TabPools = () => {
 			const balance = await getRemainingDelayTime(walletAccount, ethersSigner);
 			setRemainingDelayTime(balance);
 		} else {
-			setIsLoading(false);
 		}
 	}
 	const getTotalStakingT = async () => {
@@ -188,35 +188,52 @@ export const TabPools = () => {
 			await changeNetwork(provider)
 		}
 		if (ethersSigner) {
-
 			const balance = await getTotalStakingToken(ethersSigner);
-			debugger
 			setTotalStakingToken(balance);
 		} else {
 			setTotalStakingToken('0');
 			setIsLoading(false);
 		}
 	}
+	const getAll = async () => {
+		setIsLoading(true);
+		await Promise.all([
+			getAllowance(),
+			getBalanceFiu(),
+			getBalanceSA(),
+			getBalanceCP(),
+			getUnstakeA(),
+			toClaimableT(),
+			getRemainingDelayT(),
+
+		])
+		setIsLoading(false);
+	}
 	useEffect(() => {
-		getAllowance()
-		getBalanceFiu()
-		getBalanceSA()
-		getBalanceCP()
-		getUnstakeA()
-		toClaimableT()
-		getRemainingDelayT()
+		getAll()
 		getTotalStakingT()
 		// getBalanceP()
 		// getBalanceS()
 	}, [walletAccount, refresh])
-
+	console.log(balanceUS)
 	useEffect(() => {
+		if (parseFloat(balanceSA) > 0) {
+			setStatusRow('STAKING')
+		} else {
+			setStatusRow('UNSTAKE')
+			// if (parseFloat(balanceFiu) > 0) {
+
+			// } else {
+			// 	setStatusRow('-')
+			// }
+		}
 		if (parseFloat(balanceSA) > 0 || parseFloat(balanceUS) > 0) {
 			setStateContentInit(StateStaking.Staked);
 		} else {
 			if (isEnable) {
 				setStateContentInit(StateStaking.StakeProcess);
 			} else {
+				setStatusRow('-')
 				setStateContentInit(StateStaking.EnablePool);
 			}
 		}
@@ -225,7 +242,8 @@ export const TabPools = () => {
 		balanceSA,
 		balanceCP,
 		balanceUS,
-		claimableTime])
+		claimableTime,
+		walletAccount])
 
 
 	return (
@@ -336,12 +354,12 @@ export const TabPools = () => {
 			>
 
 			</DialogsItemStaking>
-			{/* <Backdrop
-				sx={{ color: '#FF6D24', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+			<Backdrop
+				sx={{ zIndex: 1100, color: '#FF6D24' }}
 				open={isLoading}
 			>
 				<CircularProgress color="inherit" />
-			</Backdrop> */}
+			</Backdrop>
 		</Wrap >
 	)
 }

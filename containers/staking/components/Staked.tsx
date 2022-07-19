@@ -11,6 +11,7 @@ type Props = {
 	setStateContent: Function;
 	handleClickSuccess: Function;
 	handleClickError: Function;
+	handleClickWarning: Function;
 	balanceFiu: string
 	balanceSA: string
 	balanceCP: string
@@ -29,7 +30,8 @@ export const Staked = (props: Props) => {
 		setStateContent,
 		handleClickSuccess,
 		handleClickError,
-		setIsLoading
+		setIsLoading,
+		handleClickWarning
 	} = props;
 	const { ethersSigner, ethersProvider, setRefresh, refresh } = useWalletContext();
 	const handleClaim = async () => {
@@ -52,7 +54,7 @@ export const Staked = (props: Props) => {
 				}
 			}, 1000);
 		} catch (error: any) {
-			const message = error.reason;
+			const message = error.reason || "Something went wrong, please try again";
 			setIsLoading(false);
 			handleClickError({
 				titleError: message,
@@ -65,21 +67,55 @@ export const Staked = (props: Props) => {
 	}
 
 	const handleUnStake = () => {
-		setStateContent(StateStaking.UnstakeWarrning)
+		handleClickWarning({
+			titleWarning: 'YOU ARE UNSTAKING.',
+			titleButton: 'Continue Unstaking',
+			haveCancel: false,
+			contentWarning: `The number of TOKENs that you unstaked now will no longer be used to calculate your rewards. You can only withdraw after the withdrawal delay time. Finished Fitter Pass will remain but fractional staking rewards (${getTime()} hours of ${balanceSA} tokens) will be cleared. If you only want to CLAIM the reward, please go back and click on the CLAIM button.`,
+			functionWarning: () => {
+				setStateContent(StateStaking.Unstake)
+			},
+			stateContentNew: StateStaking.UnstakeWarrning
+		})
 	}
 	const handleWithDraw = () => {
 		setStateContent(StateStaking.WithDraw)
 	}
 	const timeUTC = () => {
-		let time = new Date(claimableTime);
-		return moment(time).format('hh:mm DD/MM/yyyy');
+		let time = new Date(parseInt(claimableTime) * 1000);
+		return moment(time).utc().format('HH:mm DD/MM/yyyy');
 		// time.setSeconds(time.getSeconds() + parseInt(claimableTime));
 		// return `${time.getUTCHours()}:${time.getUTCMinutes()} ${time.getUTCDate()}/${time.getUTCMonth() + 1}/${time.getUTCFullYear()}`
 
 	}
+	const getTime = () => {
+		var x = (Date.now() / 1000 - parseInt(claimableTime)) % 86400 / 3600;
+		if (x < 0) {
+			return (24 + x).toFixed(1)
+		} else {
+			return x.toFixed(1)
+		}
+	}
+	console.log(claimableTime);
+
+	const handleStakeMore = () => {
+		handleClickWarning({
+			titleWarning: '',
+			titleButton: 'I know and want to stake',
+			haveCancel: true,
+			contentWarning: `If you stake more now, factional staking rewards (${getTime()} hours of ${balanceSA} tokens) will be cleared.24h period will be reset and continue to be calculated right at the moment you stake more. You should wait for that staking finishes in (xx hours).`,
+			functionWarning: () => {
+				setStateContent(StateStaking.StakeProcess)
+			},
+			stateContentNew: StateStaking.UnstakeWarrning,
+			functionCancel: () => {
+				setStateContent(StateStaking.Staked)
+			},
+		})
+	}
 	return (
 		<>
-			<ButtonOutline onClick={() => setStateContent(StateStaking.StakeProcess)} sx={{ marginTop: "25px" }} variant="text">
+			<ButtonOutline onClick={handleStakeMore} sx={{ marginTop: "25px" }} variant="text">
 				Stake more
 			</ButtonOutline>
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>STAKING</Typography>

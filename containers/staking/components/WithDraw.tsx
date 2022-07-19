@@ -49,7 +49,7 @@ export const WithDraw = (props: Props) => {
 					}
 				}, 1000);
 			} catch (error: any) {
-				const message = error.reason;
+				const message = error.reason || "Something went wrong, please try again";
 				setIsLoading(false);
 				handleClickError({
 					titleError: message,
@@ -65,7 +65,7 @@ export const WithDraw = (props: Props) => {
 
 	const timeUTC = () => {
 		let time = new Date(remainingDelayTime);
-		return moment(time).format('hh:mm DD/MM/yyyy');
+		return moment(time).format('HH:mm DD/MM/yyyy');
 		// time.setSeconds(time.getSeconds() + parseInt(remainingDelayTime));
 
 		// return `${time.getUTCHours()}:${time.getUTCMinutes()} ${time.getUTCDate()}/${time.getUTCMonth() + 1}/${time.getUTCFullYear()}`
@@ -139,7 +139,7 @@ export const WithDrawWarning = (props: Props) => {
 				}
 			}, 1000);
 		} catch (error: any) {
-			const message = error.reason;
+			const message = error.reason || "Something went wrong, please try again";
 			setIsLoading(false);
 			handleClickError({
 				titleError: message,

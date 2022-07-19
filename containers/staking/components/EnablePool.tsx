@@ -37,7 +37,7 @@ export const EnablePool = (props: Props) => {
 
 
 		} catch (error: any) {
-			const message = error.reason;
+			const message = error.reason || "Something went wrong, please try again";
 			setIsLoading(false);
 			handleClickError({
 				titleError: message,

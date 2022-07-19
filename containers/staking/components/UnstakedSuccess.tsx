@@ -11,6 +11,7 @@ type Props = {
 	setStateContent: Function,
 	handleClickSuccess: Function;
 	handleClickError: Function;
+	handleClickWarning: Function;
 	setIsLoading: Function;
 	balanceFiu: string
 	balanceSA: string
@@ -22,6 +23,7 @@ export const UnstakedSuccess = (props: Props) => {
 	const { setStateContent,
 		handleClickSuccess,
 		handleClickError,
+		handleClickWarning,
 		setIsLoading,
 		balanceFiu,
 		balanceSA,
@@ -37,15 +39,50 @@ export const UnstakedSuccess = (props: Props) => {
 	}
 	const timeUTC = () => {
 		let time = new Date(claimableTime);
-		return moment(time).format('hh:mm DD/MM/yyyy');
+		return moment(time).format('HH:mm DD/MM/yyyy');
 		// time.setSeconds(time.getSeconds() + parseInt(claimableTime));
 		// debugger
 		// return `${time.getUTCHours()}:${time.getUTCMinutes()} ${time.getUTCDate()}/${time.getUTCMonth() + 1}/${time.getUTCFullYear()}`
 
 	}
+	// const handleStakeMore = () => {
+	// 	handleClickWarning({
+	// 		titleWarning: '',
+	// 		titleButton: 'I know and want to stake',
+	// 		haveCancel: true,
+	// 		contentWarning: `If you stake more now, factional staking rewards (xx hours of ${balanceSA} tokens) will be cleared.24h period will be reset and continue to be calculated right at the moment you stake more. You should wait for that staking finishes in (xx hours).`,
+	// 		functionWarning: () => {
+	// 			setStateContent(StateStaking.StakeProcess)
+	// 		},
+	// 		stateContentNew: StateStaking.UnstakeWarrning
+	// 	})
+	// }
+	const getTime = () => {
+		var x = (Date.now() / 1000 - parseInt(claimableTime)) % 86400 / 3600;
+		if (x < 0) {
+			return (24 + x).toFixed(1)
+		} else {
+			return x.toFixed(1)
+		}
+	}
+	const handleStakeMore = () => {
+		handleClickWarning({
+			titleWarning: '',
+			titleButton: 'I know and want to stake',
+			haveCancel: true,
+			contentWarning: `The number of TOKENs that you unstaked now will no longer be used to calculate your rewards. You can only withdraw after the withdrawal delay time. Finished Fitter Pass will remain but fractional staking rewards (${getTime()} hours of ${balanceSA} tokens) will be cleared. If you only want to CLAIM the reward, please go back and click on the CLAIM button.`,
+			functionWarning: () => {
+				setStateContent(StateStaking.StakeProcess)
+			},
+			stateContentNew: StateStaking.UnstakeWarrning,
+			functionCancel: () => {
+				setStateContent(StateStaking.UnstakedSuccess)
+			},
+		})
+	}
 	return (
 		<>
-			<ButtonOutline onClick={() => setStateContent(StateStaking.StakeProcess)} sx={{ marginTop: "25px" }} variant="text">
+			<ButtonOutline onClick={handleStakeMore} sx={{ marginTop: "25px" }} variant="text">
 				Stake more
 			</ButtonOutline>
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>STAKING</Typography>

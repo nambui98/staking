@@ -18,6 +18,14 @@ type Props = {
 	balanceCP: string
 	balanceUS: string
 	claimableTime: string
+	warning: {
+		titleWarning: string,
+		contentWarning: string,
+		titleButton: string,
+		haveCancel: false,
+		functionWarning: () => any
+		functionCancel: () => any
+	};
 }
 export const UnstakeWarrning = (props: Props) => {
 	const { setStateContent,
@@ -28,12 +36,16 @@ export const UnstakeWarrning = (props: Props) => {
 		balanceSA,
 		balanceCP,
 		balanceUS,
-		claimableTime } = props;
+		claimableTime,
+		warning } = props;
 	const { ethersSigner, ethersProvider, setRefresh, refresh } = useWalletContext();
 	const handleContinueUnStaking = () => {
-		setStateContent(StateStaking.Unstake)
+		warning.functionWarning();
+		// setStateContent(StateStaking.Unstake)
 	}
-
+	const handleCancel = () => {
+		warning.functionCancel();
+	}
 	return (
 		<>
 			<Box sx={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", height: "100%" }}>
@@ -42,17 +54,42 @@ export const UnstakeWarrning = (props: Props) => {
 
 						<img src={MARKETPLACE_ICON.infocircle} alt="" />
 					</Box>
-					<Typography fontSize={14} color="#FF6F61" fontWeight={500} lineHeight="20px" mt={{ xs: '10px', sm: "28px" }}>YOU ARE UNSTAKING.</Typography>
-					<Typography fontSize={14} color="#31373E" fontWeight={500} lineHeight="20px" mt="4px">The amount of TOKEN that you unstaked will not be continuously calculated. You can withdraw after the withdrawal delay time. If you only want to CLAIM the reward, please go back and click on the CLAIM button.</Typography>
+					<Typography fontSize={14} color="#FF6F61" fontWeight={500} lineHeight="20px" mt={{ xs: '10px', sm: "28px" }}>{warning.titleWarning}</Typography>
+					<Typography fontSize={14} color="#31373E" fontWeight={500} lineHeight="20px" mt="4px">{warning.contentWarning}</Typography>
 				</Box>
 			</Box>
 			<Box mt="auto" width={"100%"} sx={{ paddingTop: "16px", borderTop: "1px solid #E9EAEF" }}>
-				<MarketplaceButton customStyle={{ width: "100%" }} title={"Continue Unstaking"} handleOnClick={handleContinueUnStaking} />
+				<MarketplaceButton customStyle={{ width: "100%" }} title={warning.titleButton} handleOnClick={handleContinueUnStaking} />
 			</Box>
+			{
+				warning.haveCancel &&
+				<ButtonOutline onClick={handleCancel} sx={{ marginTop: "8px" }} variant="text">
+					Cancel
+				</ButtonOutline>
+			}
 		</>
 	)
 }
+const ButtonOutline = styled(Button)({
+	color: "#5A6178",
+	background: "transparent",
+	borderRadius: "12px",
+	border: "1px solid #A7ACB8",
+	// padding: "5px 5px",
+	// minWidth: "35px",
 
+	minHeight: "56px",
+	textTransform: "none",
+	transition: 'all .3s',
+	"&:hover": {
+		background: "#FF8A50",
+		border: "0px",
+		color: '#fff'
+	},
+	':disabled': {
+
+	}
+})
 const Search = styled(TextField)({
 	'& .MuiOutlinedInput-root': {
 		padding: '8px 16px',

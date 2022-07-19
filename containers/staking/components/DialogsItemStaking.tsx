@@ -66,6 +66,14 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 		titleError: '',
 		functionError: ''
 	});
+	const [warning, setWarning] = useState<any>({
+		titleWarning: '',
+		titleButton: '',
+		haveCancel: false,
+		contentWarning: '',
+		functionWarning: '',
+		functionCancel: ''
+	});
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
@@ -86,6 +94,17 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 		setError({
 			titleError: titleError,
 			functionError: functionError
+		})
+	}
+	const handleClickWarning = ({ titleWarning = "", contentWarning = "", haveCancel = false, titleButton = "", functionCancel = null, functionWarning = null, stateContentNew = null }: { titleWarning: String, contentWarning: String, haveCancel: boolean, titleButton: String, functionWarning: Function | null, functionCancel: Function | null, stateContentNew: StateStaking | null }) => {
+		setStateContent(stateContentNew);
+		setWarning({
+			titleWarning: titleWarning,
+			titleButton: titleButton,
+			haveCancel: haveCancel,
+			contentWarning: contentWarning,
+			functionWarning: functionWarning,
+			functionCancel: functionCancel
 		})
 	}
 	console.log(stateContent);
@@ -136,7 +155,8 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 								setIsLoading={setIsLoading}
 								setStateContent={setStateContent}
 								handleClickSuccess={handleClickSuccess}
-								handleClickError={handleClickError} /> :
+								handleClickError={handleClickError}
+								handleClickWarning={handleClickWarning} /> :
 								stateContent === StateStaking.UnstakeWarrning ? <UnstakeWarrning
 
 									balanceFiu={balanceFiu}
@@ -144,6 +164,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 									balanceCP={balanceCP}
 									balanceUS={balanceUS}
 									claimableTime={claimableTime}
+									warning={warning}
 									setIsLoading={setIsLoading}
 									setStateContent={setStateContent}
 									handleClickSuccess={handleClickSuccess}
@@ -159,6 +180,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 										setStateContent={setStateContent}
 										handleClickSuccess={handleClickSuccess}
 										handleClickError={handleClickError}
+										handleClickWarning={handleClickWarning}
 									/> :
 										stateContent === StateStaking.Unstake ? <Unstake
 											balanceFiu={balanceFiu}
@@ -179,6 +201,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 												stateContent === StateStaking.WithDrawWarning ? <WithDrawWarning
 													balanceUS={balanceUS}
 													remainingDelayTime={remainingDelayTime}
+
 													setIsLoading={setIsLoading}
 													setStateContent={setStateContent}
 													handleClickSuccess={handleClickSuccess}
