@@ -153,7 +153,7 @@ export const StakeProcess = ({
 			</Item>
 			<Item sx={{ mt: "16px !important" }}>
 				<TitleItem >TOTAL reward earned</TitleItem>
-				<ValueItem>{balanceCP} FITTER Pass</ValueItem>
+				<ValueItem>{balanceCP} Fitter Pass</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem >estimated daily rewards</TitleItem>

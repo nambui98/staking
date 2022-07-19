@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from '@mui/material';
 import { styled } from '@mui/styles'
+import moment from 'moment';
 import React, { useState } from 'react'
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
 import { StateStaking } from '../../../const';
@@ -63,10 +64,11 @@ export const WithDraw = (props: Props) => {
 	}
 
 	const timeUTC = () => {
-		let time = new Date();
-		time.setSeconds(time.getSeconds() + parseInt(remainingDelayTime));
+		let time = new Date(remainingDelayTime);
+		return moment(time).format('hh:mm DD/MM/yyyy');
+		// time.setSeconds(time.getSeconds() + parseInt(remainingDelayTime));
 
-		return `${time.getUTCHours()}:${time.getUTCMinutes()} ${time.getUTCDate()}/${time.getUTCMonth() + 1}/${time.getUTCFullYear()}`
+		// return `${time.getUTCHours()}:${time.getUTCMinutes()} ${time.getUTCDate()}/${time.getUTCMonth() + 1}/${time.getUTCFullYear()}`
 
 	}
 	return (
@@ -90,7 +92,7 @@ export const WithDraw = (props: Props) => {
 						marginLeft: "-16px",
 					}
 				}}>
-					<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="8px">Available to withdraw at {timeUTC()}</Typography>
+					<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="8px">Available to withdraw at {timeUTC()} UTC</Typography>
 				</Item>
 			}
 

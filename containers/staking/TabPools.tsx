@@ -1,4 +1,4 @@
-import { Backdrop, Box, CircularProgress, Container, InputAdornment, InputBase, Stack, styled, Tab, Table, TableBody, TableCell, TableRow, Tabs, TextField, Typography } from "@mui/material"
+import { Backdrop, Box, CircularProgress, Container, InputAdornment, InputBase, Stack, styled, Tab, Table, TableBody, TableCell, TableRow, TableRowProps, Tabs, TextField, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { PopupMessage } from "../../components/pageComponent/claim/PopupMessage";
 import { StateStaking } from "../../const";
@@ -37,7 +37,7 @@ export const TabPools = () => {
 	const [activeItem, setActiveItem] = useState<any>(null);
 	const rows = [
 		{
-			name: 'FITTER Pass', title: 'FITTER Pass', isComingSoon: false, data: createData('Staking', 'FITTER Pass', balanceCP, '-', 'None', '7 days', `${totalStakingToken} FIU`),
+			name: 'Fitter Pass', title: 'Fitter Pass Drops - Flexible', isComingSoon: false, data: createData('Staking', 'Fitter Pass', balanceCP, '-', 'None', '7 days', `${totalStakingToken} FIU`),
 
 		},
 		{ name: 'Shared Pool', title: 'Shared Pool', isComingSoon: true, data: createData('-', '-', '0', '-', 'None', '14 days', '0 FIU') },
@@ -48,16 +48,16 @@ export const TabPools = () => {
 		setStatusPopup({
 			status: true,
 			content: <Box>
-				<Typography><b>FITTER Pass:</b></Typography>
+				<Typography><b>Fitter Pass:</b></Typography>
 				<Typography>1.Stake FIU, minimum 1000 FIU.</Typography>
-				<Typography>2.Earn FITTER Pass</Typography>
+				<Typography>2.Earn Fitter Pass</Typography>
 				<Typography>3.You have to stake at least 24h to receive Pass.</Typography>
-				<Typography>4.For every 1000 FIU staked per 960h, you earn one FITTER Pass.</Typography>
-				<Typography>For every 40.000 FIU staked per 24h, you earn one FITTER Pass.</Typography>
-				<Typography>For every 80.000 FIU staked per 24h, you earn 2 FITTER Passes,....</Typography>
+				<Typography>4.For every 1000 FIU staked per 960h, you earn one Fitter Pass.</Typography>
+				<Typography>For every 40.000 FIU staked per 24h, you earn one Fitter Pass.</Typography>
+				<Typography>For every 80.000 FIU staked per 24h, you earn 2 Fitter Passes,....</Typography>
 				<Typography>The more token you stake, the more reward you will receive.</Typography>
 				<Typography>5.Specially, in the first 72 hours from this campaign begin, the reward will be doubled.</Typography>
-				<Typography>Ex: With 20.000 FIU staked per 24h, you earn 2 FITTER Passes.</Typography>
+				<Typography>Ex: With 20.000 FIU staked per 24h, you earn 2 Fitter Passes.</Typography>
 				<Typography>6.Staking does have a short cooldown period of 7days, meaning once you want to exit, you have to wait 7days.</Typography>
 			</Box>
 		})
@@ -249,31 +249,63 @@ export const TabPools = () => {
 					<Box sx={{ overflowX: 'auto' }}>
 						<Table sx={{ minWidth: '100%' }} aria-label="simple table">
 							<TableBody sx={{ width: '100%' }}>
-								{rows.map((item, index) => (
-									<BoxTr
-										onClick={() => {
-											index === 0 &&
-												setActiveItem(index);
-											// handleShowPopupDetail(item.name, item.data)
-										}}
-										key={index}
-										sx={{ '&:last-child td, &:last-child th': { border: 0 }, background: index === activeItem ? "#FFE2D3" : "#fff" }}
-									>
-										<TitleItem key={index}><img src={STAKING_ICON.fiu} /> {item.title} <span onClick={index === 0 ? (e: React.MouseEvent) => handleShowPopupPass(e) : (e: React.MouseEvent) => handleShowPopupShared(e)}>How it works?</span></TitleItem>
-										{
-											item.isComingSoon && <ComingSoon sx={{
-												top: index === 0 ? '0 !important' : 4
-											}}>coming soon</ComingSoon>
-										}
-										<Item sx={{ paddingLeft: '8px', borderRadiusTopleft: '12px' }} align="left">Status <Box>{item.data.status}</Box></Item>
-										<Item align="left">{index === 0 ? 'Reward' : 'APR'} <Box>{item.data.reward}</Box></Item>
-										<Item align="left">CLAIMABLE <Box>{item.data.earned}</Box></Item>
-										<Item align="left">Token remaining <Box>{item.data.tokenRemaining}</Box></Item>
-										<Item align="left">Lock-up time <Box>{item.data.lockUpTime}</Box></Item>
-										<Item align="left">Withdrawal delay time <Box>{item.data.delayTime}</Box></Item>
-										<Item align="left">Total staked <Box>{item.data.total}</Box></Item>
-									</BoxTr>
-								))}
+								{rows.map((item, index) => {
+									if (tabCurrent === 1 && index !== 1 && isEnable) {
+										return (
+											<BoxTr
+												isComingSoon={item.isComingSoon}
+												onClick={() => {
+													index === 0 &&
+														setActiveItem(index);
+													// handleShowPopupDetail(item.name, item.data)
+												}}
+												key={index}
+												sx={{ '&:last-child td, &:last-child th': { border: 0 }, background: index === activeItem ? "#FFE2D3" : "#fff" }}
+											>
+												<TitleItem key={index}><img src={STAKING_ICON.fiu} /> {item.title} <span style={{ textDecoration: 'underline' }} onClick={index === 0 ? (e: React.MouseEvent) => handleShowPopupPass(e) : (e: React.MouseEvent) => handleShowPopupShared(e)}>How it works?</span></TitleItem>
+												{
+													item.isComingSoon && <ComingSoon sx={{
+														top: index === 0 ? '0 !important' : 4
+													}}>coming soon</ComingSoon>
+												}
+												<Item sx={{ paddingLeft: '8px', borderRadiusTopleft: '12px' }} align="left">Status <Box>{item.data.status}</Box></Item>
+												<Item align="left" sx={{ textTransform: "none" }}>{index === 0 ? 'REWARD' : 'APR'} <Box>{item.data.reward}</Box></Item>
+												<Item align="left">CLAIMABLE <Box>{item.data.earned}</Box></Item>
+												<Item align="left">Token remaining <Box>{item.data.tokenRemaining}</Box></Item>
+												<Item align="left">Lock-up time <Box>{item.data.lockUpTime}</Box></Item>
+												<Item align="left">Withdrawal delay time <Box>{item.data.delayTime}</Box></Item>
+												<Item align="left">Total in pool<Box>{item.data.total}</Box></Item>
+											</BoxTr>
+										)
+									} else if (tabCurrent === 0) {
+										return (
+											<BoxTr
+												isComingSoon={item.isComingSoon}
+												onClick={() => {
+													index === 0 &&
+														setActiveItem(index);
+													// handleShowPopupDetail(item.name, item.data)
+												}}
+												key={index}
+												sx={{ '&:last-child td, &:last-child th': { border: 0 }, background: index === activeItem ? "#FFE2D3" : "#fff" }}
+											>
+												<TitleItem key={index}><img src={STAKING_ICON.fiu} /> {item.title} <span style={{ textDecoration: 'underline' }} onClick={index === 0 ? (e: React.MouseEvent) => handleShowPopupPass(e) : (e: React.MouseEvent) => handleShowPopupShared(e)}>How it works?</span></TitleItem>
+												{
+													item.isComingSoon && <ComingSoon sx={{
+														top: index === 0 ? '0 !important' : 4
+													}}>coming soon</ComingSoon>
+												}
+												<Item sx={{ paddingLeft: '8px', borderRadiusTopleft: '12px' }} align="left">Status <Box>{item.data.status}</Box></Item>
+												<Item align="left" sx={{ textTransform: "none" }}>{index === 0 ? 'REWARD' : 'APR'} <Box>{item.data.reward}</Box></Item>
+												<Item align="left">CLAIMABLE <Box>{item.data.earned}</Box></Item>
+												<Item align="left">Token remaining <Box>{item.data.tokenRemaining}</Box></Item>
+												<Item align="left">Lock-up time <Box>{item.data.lockUpTime}</Box></Item>
+												<Item align="left">Withdrawal delay time <Box>{item.data.delayTime}</Box></Item>
+												<Item align="left">Total in pool<Box>{item.data.total}</Box></Item>
+											</BoxTr>
+										)
+									}
+								})}
 							</TableBody>
 						</Table>
 					</Box>
@@ -406,15 +438,27 @@ const Body = styled(Box)({
 	//   padding: 8
 	// }
 })
-const BoxTr = styled(TableRow)({
+type itemProps = TableRowProps & {
+	isComingSoon: boolean
+}
+const BoxTr = styled(TableRow)((props: itemProps) => ({
 	background: '#FFFFFF',
 	position: 'sticky',
 	transition: 'all .3s',
 	cursor: 'pointer',
 	':hover': {
-		background: "#FFE2D3"
+		background: !props.isComingSoon ? "#FFE2D3" : 'none'
 	}
-})
+}))
+// const BoxTr = styled(TableRow)({
+// 	background: '#FFFFFF',
+// 	position: 'sticky',
+// 	transition: 'all .3s',
+// 	cursor: 'pointer',
+// 	':hover': {
+// 		background: "#FFE2D3"
+// 	}
+// })
 const Item = styled(TableCell)({
 	paddingTop: 40,
 	paddingBottom: 16,

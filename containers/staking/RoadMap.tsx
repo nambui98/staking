@@ -113,6 +113,7 @@ const Image = styled(Box)({
 const Name = styled(Typography)({
 	...TEXT_STYLE(14, 500, '#31373E'),
 	// marginBottom: 10,
+	textAlign: "left",
 	'@media (min-width: 768px)': {
 		// marginBottom: 0
 	}
