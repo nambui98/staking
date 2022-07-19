@@ -36,6 +36,24 @@ const Section5: NextPage = () => {
 			link: 'https://gamefi.org/',
 			title: 'Gamefi'
 		},
+		{
+			active: 'assets/partners/bybit-active.png',
+			inActive: 'assets/partners/bybit-gray.png',
+			link: 'https://www.bybit.com/en-US/trade/spot/FIU/USDT',
+			title: 'Bybit'
+		},
+		{
+			active: 'assets/partners/huobi-active.png',
+			inActive: 'assets/partners/huobi-gray.png',
+			link: 'https://www.huobi.com/en-us/exchange/fiu_usdt/',
+			title: 'Huobi'
+		},
+		{
+			active: 'assets/partners/gate-active.png',
+			inActive: 'assets/partners/gate-gray.png',
+			link: 'https://www.gate.io/trade/FIU_USDT',
+			title: 'Gate'
+		},
 	];
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	return (
@@ -80,7 +98,7 @@ const Section5: NextPage = () => {
 				>
 
 					<Typography
-						fontSize={{ xs: 32, sm: 40 }}
+						fontSize={{ xs: 32, sm: 56 }}
 						textTransform="uppercase"
 						fontFamily='Electrofied'
 						fontStyle={'italic'}
@@ -105,7 +123,7 @@ const Section5: NextPage = () => {
 						&
 					</Typography>
 					<Typography
-						fontSize={{ xs: 32, sm: 40 }}
+						fontSize={{ xs: 32, sm: 56 }}
 						textTransform="uppercase"
 						fontFamily='Electrofied'
 						fontStyle={'italic'}
@@ -119,20 +137,19 @@ const Section5: NextPage = () => {
 
 				<Box display={'flex'} alignItems={'center'} sx={
 					{
-
-						backgroundImage: { xs: 'none', sm: `url(assets/bg_sec5.png)` },
-						// height: '100%',
-						backgroundPosition: 'center',
-						backgroundRepeat: 'no-repeat',
-						backgroundSize: 'contain',
-						height: { xs: '100%', sm: '128px' },
-						width: '100%',
+						width: 'auto',
 						pr: 4,
 						pl: 4,
 						flexDirection: { xs: 'column', sm: 'row' },
-						'@media (max-width: 991px)': {
+						flexWrap: 'wrap',
+						background: '#F8F9FB',
+						borderRadius: '16px',
+						padding: '40px 0 0',
+						justifyContent: 'center',
+						'@media (max-width: 767px)': {
 							flexDirection: 'column',
-							backgroundImage: 'none'
+							backgroundImage: 'none',
+							background: 'none'
 						}
 					}
 
@@ -153,9 +170,9 @@ const Section5: NextPage = () => {
 
 							}}>
 								<MenuItem >
-									<div>	<img height={'48px'} src={item.inActive} />
+									<div>	<img height={index === 4 || index === 5 || index === 6 ? 'auto' : '57px'} src={item.inActive} />
 									</div>
-									<div> <img height={'48px'} src={item.active} /></div>
+									<div> <img height={index === 4 || index === 5 || index === 6 ? 'auto' : '57px'} src={item.active} /></div>
 								</MenuItem>
 							</a>
 						})
@@ -170,7 +187,8 @@ const Section5: NextPage = () => {
 
 export default Section5;
 const MenuItem = styled(Box)((props) => ({
-	padding: '0px 16px',
+	padding: '0px 32px',
+	marginBottom: 40,
 	height: "50px",
 	borderRadius: '12px',
 	marginRight: 16,
