@@ -27,7 +27,7 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
     if (res?.data?.data.exist) {
       return true
     }
-    return true
+    return false
   }
 
   const handleCheckEmailAmount = async () => {
