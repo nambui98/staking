@@ -632,7 +632,7 @@ const LitePaper: NextPage = () => {
 
 	return (
 		<HomeLayoutNew sxProps={{ background: '#1E1E1E' }} headerLandingPage={true}>
-			<Banner isXs={isXs} />
+			{/* <Banner isXs={isXs} />
 			<Token />
 			<Mission />
 			<Game />
@@ -654,7 +654,7 @@ const LitePaper: NextPage = () => {
 				position: 'relative',
 			}} key={"9"}>
 				<Section9 />
-			</Box>
+			</Box> */}
 		</HomeLayoutNew>
 	);
 };
