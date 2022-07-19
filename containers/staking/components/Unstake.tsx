@@ -83,6 +83,7 @@ export const Unstake = (props: Props) => {
 	}
 	const handleValueWithPercent = (percent: number) => {
 		setValue((percent * parseFloat(balanceSA)).toString());
+		setMessageError("")
 	}
 	return (
 		<>

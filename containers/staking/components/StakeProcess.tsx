@@ -87,6 +87,7 @@ export const StakeProcess = ({
 	}
 	const handleValueWithPercent = (percent: number) => {
 		setValue((percent * parseFloat(balanceFiu)).toString());
+		setMessageError("")
 	}
 	return (
 		<>
