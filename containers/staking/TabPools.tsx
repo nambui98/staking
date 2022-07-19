@@ -211,7 +211,7 @@ export const TabPools = () => {
 	}, [walletAccount, refresh])
 
 	useEffect(() => {
-		if (parseFloat(balanceSA) > 0) {
+		if (parseFloat(balanceSA) > 0 || parseFloat(balanceUS) > 0) {
 			setStateContentInit(StateStaking.Staked);
 		} else {
 			if (isEnable) {
