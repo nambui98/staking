@@ -14,28 +14,38 @@ const Business = () => {
 			sxProps={{ background: '#111021' }}
 			headerLandingPage={true}
 			customWhite={true}
+			position="relative"
 		>
 			<Box
 				sx={{
-					position: 'relative',
+					'@media (max-width: 767px)': {
+						width: '100%',
+					},
 				}}
 			>
-				<Banner
-					customStyle={{
-						'& video': {
-							// maxHeight: '960px',
+				<Box
+					height={{ md: 960 }}
+					sx={{
+						'@media (max-width: 767px)': {
+							height: '415px',
 						},
 					}}
-				/>
+				>
+					<img
+						src={'images/banner_desktop.svg'}
+						alt="banner"
+						style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+					/>
+				</Box>
 				<Box
 					sx={{
 						width: '100%',
 						maxWidth: '1668px',
 						padding: '0 24px',
 						position: 'absolute',
-						top: '50%',
+						top: '1%',
 						left: '50%',
-						transform: 'translate(-50%, -50%)',
+						transform: 'translateX(-50%)',
 						'& p': {
 							...TEXT_STYLE(56, 700, '#FFFFFF'),
 							fontStyle: 'italic',
@@ -51,6 +61,7 @@ const Business = () => {
 							'& p': {
 								...TEXT_STYLE(120, 700, '#FFFFFF'),
 							},
+							top: '4%',
 						},
 					}}
 				>
@@ -60,9 +71,12 @@ const Business = () => {
 							'@media (min-width: 1280px)': {
 								...TEXT_STYLE(56, 700, '#FFFFFF'),
 							},
+							'@media (max-width: 767px)': {
+								marginTop: '40px',
+							},
 						}}
 					>
-						beFITTER
+						BEFITTER
 					</Typography>
 					<Typography>
 						We <span>Energize</span> People
@@ -70,8 +84,20 @@ const Business = () => {
 				</Box>
 			</Box>
 
-			<Container sx={{ maxWidth: { xl: 1680 + 48 } }}>
-				<TitleSection>
+			<BoxImgText top={1100} right={1}>
+				<img src={'images/imgleft.png'} />
+			</BoxImgText>
+			<BoxImgText top={2140} left={1}>
+				<img src={'images/imgRight.png'} />
+			</BoxImgText>
+			<BoxImgText top={3100} right={1}>
+				<img src={'images/imgleft.png'} />
+			</BoxImgText>
+			<BoxImgText top={4180} left={1}>
+				<img src={'images/imgRight.png'} />
+			</BoxImgText>
+			<Container sx={{ maxWidth: { xl: 1680 + 48 }, position: 'relative' }}>
+				<TitleSection sx={{ margin: '24px 0' }}>
 					We <span>inspire people</span> to stay healthy
 				</TitleSection>
 				<BoxTextImage>
@@ -94,12 +120,14 @@ const Business = () => {
 						<img src={'assets/manifesto-1.png'} />
 					</Box>
 				</BoxTextImage>
+
 				<BoxTextImage
 					sx={{
 						marginTop: '24px !important',
+						position: 'relative',
 					}}
 				>
-					<Typography>
+					<Typography sx={{ marginRight: '100px' }}>
 						Don’t get us wrong, the earning aspect here doesn’t just refer to
 						the monetary benefit. It’s the social benefit that we also aim for.
 						beFITTER encourages regular exercise to tackle the problem of
@@ -115,6 +143,7 @@ const Business = () => {
 				<TitleSection>
 					We create <span>a sustainable economy</span>
 				</TitleSection>
+
 				<BoxTextImage
 					sx={{
 						marginTop: '24px !important',
@@ -129,6 +158,7 @@ const Business = () => {
 						economic growth. fullest.
 					</Typography>
 				</BoxTextImage>
+
 				<BoxTextImage>
 					<Typography
 						mr={{ xs: 0, md: 5 }}
@@ -284,6 +314,13 @@ type widthImage = {
 	mdWidth?: number;
 	isMt?: boolean;
 };
+
+type location = {
+	top?: number;
+	left?: number;
+	right?: number;
+	bottom?: number;
+};
 const BoxTextImage = styled(Box)((props: textImageProps) => ({
 	display: 'flex',
 	flexDirection: 'column',
@@ -315,7 +352,8 @@ const TitleSection = styled(Box)({
 	},
 	'@media (min-width: 768px)': {
 		...TEXT_STYLE(48, 600, '#F8F9FB'),
-		margin: '120px 0 16px',
+		margin: '80px 0 16px',
+		position: 'relative',
 	},
 });
 
@@ -326,6 +364,21 @@ const BoxImage = styled(Box)((props: widthImage) => ({
 		'@media (min-width: 768px)': {
 			width: props.mdWidth,
 			marginTop: props.isMt && '80px',
+			position: 'relative',
 		},
+	},
+}));
+
+const BoxImgText = styled(Box)((props: location) => ({
+	display: 'none',
+	'@media (min-width: 768px)': {
+		display: 'block',
+		position: 'absolute',
+		opacity: 0.2,
+		right: props.right,
+		top: props.top,
+		left: props.left,
+		bottom: props.bottom,
+		'& img': {},
 	},
 }));
