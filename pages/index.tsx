@@ -59,6 +59,7 @@ import { Box } from '@mui/system';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { ParallaxBanner } from 'react-scroll-parallax';
+import Ambassadors from '../containers/home/ambassadors';
 const Home: NextPage = () => {
 	const [height, setHeight] = useState<number>();
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
@@ -172,6 +173,7 @@ const Home: NextPage = () => {
 				<Section7 />
 			</ParallaxBanner>}
 		</Box>,
+		<Ambassadors />,
 		<Box key={"8"} >
 			<Section8 />
 		</Box>,

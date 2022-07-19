@@ -2,34 +2,35 @@ import { Box, Stack, styled, Typography, TypographyProps } from "@mui/material"
 import { useWalletContext } from "../../../contexts/WalletContext"
 import { ICON } from "../../../constants/assetsWallet";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
+import { formatNumberWithCommas } from "../../../libs/utils/utils";
 
 export const TokenTab = () => {
-	const { fiuBalance, heeBalance, bnbBalance } = useWalletContext();
-	return (
-		<Wrap>
-			<Item sx={ItemFiu}>
-				<ItemLeft>
-					<Title>Your balance</Title>
-					<Amount typeBnb={false}>{fiuBalance?.length && parseFloat(fiuBalance) > 0 ? parseFloat(fiuBalance).toFixed(4) : '0.00'}<span>FIU</span></Amount>
-				</ItemLeft>
-				<ImageToken><img src={ICON.fiu} /></ImageToken>
-			</Item>
-			<Item sx={ItemHee}>
-				<ItemLeft>
-					<Title>Your balance</Title>
-					<Amount typeBnb={false}>{heeBalance?.length && parseFloat(heeBalance) > 0 ? parseFloat(heeBalance).toFixed(4) : '0.00'}<span>HEE</span></Amount>
-				</ItemLeft>
-				<ImageToken><img src={ICON.hee} /></ImageToken>
-			</Item>
-			<Item sx={ItemBnb}>
-				<ItemLeft>
-					<Title sx={{ color: '#31373E' }}>Your balance</Title>
-					<Amount typeBnb={true}>{bnbBalance?.length && parseFloat(bnbBalance) > 0 ? parseFloat(bnbBalance).toFixed(4) : '0.00'} <span>BNB</span></Amount>
-				</ItemLeft>
-				<ImageToken><img src={ICON.bnbBig} /></ImageToken>
-			</Item>
-		</Wrap>
-	)
+  const {fiuBalance, heeBalance, bnbBalance} = useWalletContext();
+  return (
+    <Wrap>
+      <Item sx={ItemFiu}>
+        <ItemLeft>
+          <Title>Your balance</Title>
+          <Amount typeBnb={false}>{fiuBalance?.length && parseFloat(fiuBalance) > 0 ? formatNumberWithCommas(parseFloat(fiuBalance)) : '0.00'}<span>FIU</span></Amount>
+        </ItemLeft>
+        <ImageToken><img src={ICON.fiu} /></ImageToken>
+      </Item>
+      <Item sx={ItemHee}>
+        <ItemLeft>
+          <Title>Your balance</Title>
+          <Amount typeBnb={false}>{heeBalance?.length && parseFloat(heeBalance) > 0 ? formatNumberWithCommas(parseFloat(heeBalance)) : '0.00'}<span>HEE</span></Amount>
+        </ItemLeft>
+        <ImageToken><img src={ICON.hee} /></ImageToken>
+      </Item>
+      <Item sx={ItemBnb}>
+        <ItemLeft>
+          <Title sx={{color: '#31373E'}}>Your balance</Title>
+          <Amount typeBnb={true}>{bnbBalance?.length && parseFloat(bnbBalance) > 0 ? parseFloat(bnbBalance).toFixed(4) : '0.00'} <span>BNB</span></Amount>
+        </ItemLeft>
+        <ImageToken><img src={ICON.bnbBig} /></ImageToken>
+      </Item>
+    </Wrap>
+  )
 }
 
 const Wrap = styled(Stack)({

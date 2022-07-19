@@ -295,19 +295,19 @@ const Mobile: React.FC<any> = () => {
 		</Box >
 	);
 };
-const Section4: NextPage = () => {
+const Section4: React.FC<any> = ({customStyle}) => {
 	const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	const isMobile959 = useMediaQuery('(max-width: 959px)')
 
 	return (
-		<Wrap sx={{ marginTop: { xs: '0px !important', sm: '0px !important' }, paddingBottom: { xs: "80px", sm: "0px" }, display: 'flex', justifyContent: 'center', overflow: 'hidden' }}>
+		<Wrap sx={{ marginTop: { xs: '0px !important', sm: '0px !important' }, paddingBottom: { xs: "80px", sm: "0px" }, display: 'flex', justifyContent: 'center', overflow: 'hidden', ...customStyle }}>
 			<Box data-aos-offset="1400"
-
+				className="section-aos"
 				data-aos-duration="1500" data-aos="fade-right" sx={{ position: 'absolute', left: 0, top: "30%", }}>
 				<img width={"100%"} src={`assets/sec4/bg_left.png`} style={{ objectFit: "cover" }} alt="" />
 			</Box>
 			<Box data-aos-offset="1400"
-
+				className="section-aos"
 				data-aos-duration="1500" data-aos="fade-left" sx={{ position: 'absolute', right: 0, top: "30%" }}>
 				<img width={"100%"} src={`assets/sec4/bg_right.png`} style={{ objectFit: "cover" }} alt="" />
 			</Box>

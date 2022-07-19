@@ -141,10 +141,13 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 							</ButtonApp>
 
 							{!isMobile1140 && <Link href={'/staking'}>
-								<MenuItem hover={true}>
-									<div>STAKING</div>
-									<div>STAKING</div>
-								</MenuItem>
+								<Box sx={{position: 'relative'}}>
+									<Hot className='animationArrow'>Hot</Hot>
+									<MenuItem hover={true}>									
+										<div>STAKING</div>
+										<div>STAKING</div>
+									</MenuItem>
+								</Box>								
 							</Link>}
 							{!isMobile1140 && MAIN_MENU?.map((item, index) => (
 								<Link key={index} href={item.link}>
@@ -172,10 +175,16 @@ const HomeHeaderNew: React.FC<any> = ({ sxProps, children, headerLandingPage, cu
 
 export default HomeHeaderNew;
 
-const LinkItem = styled(Link)({
-	'&:hover': {
-
-	}
+const Hot = styled(Box)({
+	position: 'absolute',
+	right: '1px',
+	top: '-12px',
+	background: '#FF6F61',
+	borderRadius: 4,
+	padding: '2px 5px',
+	...TEXT_STYLE(10, 700, '#ffffff'),
+	fontStyle: 'italic',
+	textTransform: 'uppercase',
 })
 const MainMenu = styled(Stack)({
 	flexDirection: 'row',
@@ -186,7 +195,7 @@ type menuItemProp = BoxProps & {
 	hover: boolean
 }
 const MenuItem = styled(Box)((props: menuItemProp) => ({
-	padding: '0px 16px',
+	padding: '0px 25px',
 	height: "20px",
 	borderRadius: '12px',
 	marginRight: 16,

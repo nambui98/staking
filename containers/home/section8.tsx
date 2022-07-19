@@ -71,7 +71,7 @@ const Milestone: React.FC<any> = ({ sxProps, title, items, active }) => {
 	)
 };
 
-const RoadmapDesktop: React.FC<any> = () => {
+const RoadmapDesktop: React.FC<any> = ({customMap}) => {
 	return (
 		<Stack
 			alignItems="center"
@@ -99,7 +99,7 @@ const RoadmapDesktop: React.FC<any> = () => {
 
 			</Box>
 			<Box sx={{
-				backgroundImage: `url(${ROADMAP.MAP})`,
+				backgroundImage: `url(${customMap ? customMap : ROADMAP.MAP})`,
 				backgroundRepeat: 'no-repeat',
 				backgroundSize: 'cover',
 				backgroundPosition: 'center',
@@ -160,12 +160,12 @@ const RoadmapMobile: React.FC<any> = () => {
 	)
 };
 
-const Section8: React.FC<any> = ({ sxProps }) => {
+const Section8: React.FC<any> = ({ sxProps, customMap }) => {
 	const isSm = useMediaQuery((theme: Theme) =>
 		theme.breakpoints.down('md')
 	);
 
-	return isSm ? <RoadmapMobile /> : <RoadmapDesktop />;
+	return isSm ? <RoadmapMobile /> : <RoadmapDesktop customMap={customMap} />;
 };
 
 export default Section8;

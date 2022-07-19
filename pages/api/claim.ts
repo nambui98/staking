@@ -4,6 +4,8 @@ import AlphaBetaData from "../../abi/merkle-alpha-beta-boxes.json";
 import OtherData from "../../abi/merkle-other-event.json";
 import GameFiData from "../../abi/merkle-claim-gamefi.json";
 import EnjinstarterData from "../../abi/merkle-claim-enjin.json";
+import AlphaBetaData2 from "../../abi/merkle-alpha-beta-boxes-2.json"; 
+import PublicSaleData from "../../abi/merkle-claim-fiu.json"
 const { serverRuntimeConfig } = getConfig();
 
 export default async function handler(req: any, res: any) {
@@ -29,7 +31,20 @@ export default async function handler(req: any, res: any) {
 				}
 			);
 			const captchaValidation = await response.json();
-			const findData = await (round === '1' ? AlphaBetaData : round === '2' ? OtherData : round === '3' ? GameFiData : EnjinstarterData as any).merkleData.claimData[walletAddress.toLowerCase()];
+
+			const checkRound = () => {
+				switch (round) {
+					case '1': return AlphaBetaData
+					case '2': return OtherData
+					case '3': return GameFiData
+					case '4': return EnjinstarterData
+					case '5': return PublicSaleData
+					case '6': return AlphaBetaData2
+					default:
+						break;
+				}
+			}
+			const findData = await (checkRound() as any)?.merkleData.claimData[walletAddress.toLowerCase()];
 			if (requireCaptcha) {
 				if (captchaValidation.success) {
 					if (findData) {

@@ -1,9 +1,9 @@
 import { Box, styled } from "@mui/material"
 import { BANNER } from "../../constants/business"
 
-export const Banner = () => {
+export const Banner: React.FC<any> = ({customStyle}) => {
   return (
-    <Wrap>
+    <Wrap sx={{...customStyle}}>
       <video
         autoPlay
         loop
