@@ -14,7 +14,7 @@ deploy_production:
     - scp -r .next/* "$PRD_HOST:~/befitter-homepage/.next"
     - ssh "$PRD_HOST" 'yarn start > /dev/null 2>&1 &'
   tags:
-    - befitter-website
+    - release
   only:
     - master
   when: manual
