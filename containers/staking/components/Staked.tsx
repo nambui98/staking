@@ -125,11 +125,12 @@ export const Staked = (props: Props) => {
 				parseFloat(claimableTime) > 0 && <Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>{balanceCP} FITTER PASS</Typography>} */}
 
 			{
-				parseFloat(claimableTime) <= 0 && parseFloat(balanceCP) > 0 ?
+				// parseFloat(claimableTime) <= 0 &&
+				parseFloat(balanceCP) > 0 ?
 					<Typography fontSize={16} color="#1DB268" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>+{balanceCP} FITTER PASS</Typography>
 					: <Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>{balanceCP} FITTER PASS</Typography>
 			}
-			{parseFloat(claimableTime) > 0 && <Item sx={{
+			{parseFloat(balanceCP) <= 0 && <Item sx={{
 				background: "#E9EAEF", marginRight: '-24px', marginLeft: "-24px", padding: "5px", justifyContent: "center !important",
 				// '@media (max-width: 650px)': {
 				// 	marginRight: '-16px !important',
@@ -140,7 +141,8 @@ export const Staked = (props: Props) => {
 			</Item>}
 
 			{
-				parseFloat(claimableTime) <= 0 && parseFloat(balanceCP) > 0 && <Item sx={{
+				// parseFloat(claimableTime) <= 0 && 
+				parseFloat(balanceCP) > 0 && <Item sx={{
 					justifyContent: "center !important",
 				}}>
 					<MarketplaceButton customStyle={{ width: "160px" }} title={"Claim"} handleOnClick={handleClaim} />
