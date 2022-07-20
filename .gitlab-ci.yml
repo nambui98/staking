@@ -8,10 +8,12 @@ deploy_production:
     # - yarn remove eslint && yarn add --dev eslint@"<8.0.0"
     - yarn install
     - yarn build
-    - ssh "$PRD_USER@$PRD_HOST" './killall-website-process.sh || true'
+    - ssh "$PRD_USER@$PRD_HOST" './killall-next-process.sh || true'
     - ssh "$PRD_USER@$PRD_HOST" 'rm -rf ~/befitter-homepage || true'
     - ssh "$PRD_USER@$PRD_HOST" 'mkdir -p ~/befitter-homepage/.next || true'
-    - scp -r .next/* "$PRD_USER@$PRD_HOST:~/befitter-homepage/.next"
+    - scp -r .next "$PRD_USER@$PRD_HOST:~/befitter-homepage/"
+    - scp -r package.json "$PRD_USER@$PRD_HOST:~/befitter-homepage/"
+    - scp -r node_modules "$PRD_USER@$PRD_HOST:~/befitter-homepage/"
     - ssh "$PRD_USER@$PRD_HOST" 'yarn start > /dev/null 2>&1 &'
   tags:
     - release
