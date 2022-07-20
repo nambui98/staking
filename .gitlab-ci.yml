@@ -21,8 +21,6 @@ deploy_production:
     - master
   when: manual
 
-  stages:
-  - deploy
 
 deploy_production_old:
   stage: deploy
