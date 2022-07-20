@@ -10,6 +10,9 @@ import { BoxEmpty } from "./BoxEmpty";
 import { MysteryBoxTab } from "./MysteryBoxTab";
 import { TokenTab } from "./TokenTab";
 import addressBuyBox from '../../../abi/addressBuyBox.json';
+import { beFITTERPassStaking } from "../../../libs/contracts";
+import { ethers, utils } from "ethers"
+import { FitterPassTab } from "./FitterPass";
 
 export const Boxtabs = () => {
   const { walletAccount, bnbBalance, fiuBalance, heeBalance, ethersSigner, boxBalance } = useWalletContext();
@@ -18,6 +21,7 @@ export const Boxtabs = () => {
   const [currentTab, setCurrentTab] = useState<string>('');
   const [popupFormInfo, setPopupFormInfo] = useState<boolean>(false);
   const [statusBuyBox, setStatusBuyBox] = useState<boolean>(false);
+  const [fitterPassBalance, setFitterPassBalance] = useState<any>(0)
 
 
   const handleSwitchTab = (tab: string) => {
@@ -31,6 +35,8 @@ export const Boxtabs = () => {
         return <TokenTab />
       case TAB_NAME.box:
         return <MysteryBoxTab />
+      case TAB_NAME.fitterPass:
+        return <FitterPassTab fitterPassBalance={fitterPassBalance} />  
       default:
         break;
     }
@@ -60,10 +66,21 @@ export const Boxtabs = () => {
     }
   }
 
+  const getTotalFitterPass = async () => {
+    const contract = new ethers.Contract(beFITTERPassStaking.address, beFITTERPassStaking.abi, ethersSigner);
+    const balance = await contract.balanceOf(walletAccount, '0')
+    const formatBalance = ethers.utils.formatEther(balance)
+    formatBalance && setFitterPassBalance(parseFloat(formatBalance))
+  }
+
   useEffect(() => {
     getTotalBox();
     checkAddressBuyBox()
   }, [walletAccount])
+
+  useEffect(() => {
+    getTotalFitterPass()
+  }, [walletAccount, currentTab])
 
   return (
     <Wrap>
@@ -79,7 +96,7 @@ export const Boxtabs = () => {
                 <img style={!item.active ? iconGray : {}} src={item.icon} />{!isMobile ?
                   <Typography sx={!item.active ? { color: '#A7ACB8 !important' } : {}}>{item.title}</Typography> : currentTab === item.title && <Typography>{item.title}</Typography>}
                 {!item.active && !isMobile && <span>Coming soon</span>}
-                {!isMobile && item.active && index > 0 && <Typography>{totalBox}</Typography>}
+                {!isMobile && item.active && index > 0 && <Typography>{index === 4 ? fitterPassBalance : totalBox}</Typography>}
               </TabItem>
             ))}
           </TabBox>
