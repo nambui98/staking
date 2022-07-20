@@ -14,7 +14,7 @@ deploy_production:
     - scp -r ./* "$PRD_USER@$PRD_HOST:~/befitter-homepage/"
     #- scp -r package.json "$PRD_USER@$PRD_HOST:~/befitter-homepage/"
     #- scp -r node_modules "$PRD_USER@$PRD_HOST:~/befitter-homepage/"
-    - ssh "$PRD_USER@$PRD_HOST" 'yarn install; yarn build; yarn start > /dev/null 2>&1 &'
+    - ssh "$PRD_USER@$PRD_HOST" 'cd befitter-homepage; yarn install; yarn build; yarn start > /dev/null 2>&1 &'
   tags:
     - release
   only:
