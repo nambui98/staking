@@ -245,7 +245,7 @@ export const TabPools = () => {
 	const getAll = async () => {
 		setIsLoading(true);
 		await Promise.all([
-			// getStakingS(),
+			getStakingS(),
 			getAllowance(),
 			getBalanceFiu(),
 			getBalanceSA(),
