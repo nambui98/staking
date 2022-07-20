@@ -6,6 +6,7 @@ import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton
 import { StateStaking } from '../../../const';
 import { MARKETPLACE_ICON } from '../../../constants/marketplace';
 import { useWalletContext } from '../../../contexts/WalletContext';
+import { formatMoney } from '../../../libs/utils/utils';
 
 type Props = {
 	setStateContent: Function,
@@ -71,7 +72,7 @@ export const UnstakedSuccess = (props: Props) => {
 			titleWarning: '',
 			titleButton: 'I know and want to stake',
 			haveCancel: true,
-			contentWarning: `The number of TOKENs that you unstaked now will no longer be used to calculate your rewards. You can only withdraw after the withdrawal delay time. Finished Fitter Pass will remain but fractional staking rewards (${getTime()} hours of ${balanceSA} tokens) will be cleared. If you only want to CLAIM the reward, please go back and click on the CLAIM button.`,
+			contentWarning: `The number of TOKENs that you unstaked now will no longer be used to calculate your rewards. You can only withdraw after the withdrawal delay time. Finished Fitter Pass will remain but fractional staking rewards (${getTime()} hours of ${formatMoney(balanceSA)} tokens) will be cleared. If you only want to CLAIM the reward, please go back and click on the CLAIM button.`,
 			functionWarning: () => {
 				setStateContent(StateStaking.StakeProcess)
 			},
@@ -87,7 +88,7 @@ export const UnstakedSuccess = (props: Props) => {
 				Stake more
 			</ButtonOutline>
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>STAKING</Typography>
-			<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={600} mt="8px" textTransform={"uppercase"}>{balanceSA} FIU</Typography>
+			<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={600} mt="8px" textTransform={"uppercase"}>{formatMoney(balanceSA)} FIU</Typography>
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>current  PROFIT</Typography>
 			<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>{balanceCP} FITTER PASS</Typography>
 			<Item sx={{

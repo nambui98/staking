@@ -66,7 +66,7 @@ export const EnablePool = (props: Props) => {
 			</Item>
 			<Item>
 				<TitleItem >stake amount (min)</TitleItem>
-				<ValueItem>1000 FIU/1 person</ValueItem>
+				<ValueItem>4000 FIU/1 person</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem >stake amount (mAX)</TitleItem>
