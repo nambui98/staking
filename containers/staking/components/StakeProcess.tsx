@@ -113,12 +113,18 @@ export const StakeProcess = ({
 							let valueParse = e.target.value.replace(/,/g, "")
 							if (Number(valueParse)) {
 								if (parseFloat(valueParse) > 0) {
-									if (parseFloat(valueParse) > parseFloat(balanceFiu)) {
+									if (parseFloat(valueParse) < 4000) {
 										setValue(valueParse)
-										setMessageError("Insufficient balance")
+										setMessageError("You need to stake minimum 4000")
 									} else {
-										setValue(valueParse)
-										setMessageError("")
+
+										if (parseFloat(valueParse) > parseFloat(balanceFiu)) {
+											setValue(valueParse)
+											setMessageError("Insufficient balance")
+										} else {
+											setValue(valueParse)
+											setMessageError("")
+										}
 									}
 								} else {
 									setValue(valueParse)

@@ -52,7 +52,7 @@ export const TabPools = () => {
 			content: <Box>
 				<Typography><b>Fitter Pass:</b></Typography>
 
-				<Typography>1.Stake FIU, minimum 1000 FIU.</Typography>
+				<Typography>1.Stake FIU, minimum 4000 FIU.</Typography>
 
 				<Typography>2.Earn Fitter Pass.</Typography>
 
@@ -60,11 +60,11 @@ export const TabPools = () => {
 
 				<Typography>4.Fitter Pass will be given to your account in every block of 24h from the last moment you stake/unstake</Typography>
 
-				<Typography>5.For every 1000 FIU staked per 960h, you earn one Fitter Pass.</Typography>
+				<Typography>5.For every 4000 FIU staked per 240h, you earn one Fitter Pass.</Typography>
 
 				<Typography>For every 40.000 FIU staked per 24h, you earn one Fitter Pass.</Typography>
 
-				<Typography>For every 80.000 FIU staked per 24h, you earn 2 Fitter Passes,....</Typography>
+				<Typography>For every 80.000 FIU staked per 48h, you earn 2 Fitter Passes,....</Typography>
 
 				<Typography>The more token you stake, the more reward you will receive.</Typography>
 

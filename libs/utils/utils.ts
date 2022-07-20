@@ -23,5 +23,5 @@ export const formatMoney = (number: string, fixed?: number) => {
 	}
 	console.log(parseFloat(newValue));
 	// console.log(parseFloat(number).toLocaleString('en-US', { style: undefined, currency: undefined, maximumFractionDigits: fixed || 5 }))
-	return parseFloat(newValue).toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: fixed || 5 })
+	return parseFloat(newValue).toLocaleString('en-US', { style: undefined, currency: undefined, maximumFractionDigits: fixed || 5 })
 }
