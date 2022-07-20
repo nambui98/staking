@@ -31,12 +31,14 @@ function MyApp({ Component, pageProps }: AppProps) {
 		};
 	}, [router.events]);
 	useEffect(() => {
-		// const handleStart = (url: String) => {
-		// 	url !== router.pathname ? setLoading(true) : setTimeout(() => setLoading(false), 1000);
-		// };
+		const handleStart = (url: String) => {
+			if (url === router.pathname) {
+				setLoading(false);
+			}
+		};
 		const handleComplete = (url: string) => setTimeout(() => setLoading(false), 1000)
 
-		// router.events.on("routeChangeStart", handleStart);
+		router.events.on("routeChangeStart", handleStart);
 		router.events.on("routeChangeComplete", handleComplete);
 		router.events.on("routeChangeError", handleComplete);
 	}, [router]);
