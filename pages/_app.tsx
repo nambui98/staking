@@ -32,9 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 	}, [router.events]);
 	useEffect(() => {
 		const handleStart = (url: String) => {
-			if (url === router.pathname) {
-				setLoading(false);
-			}
+			url !== router.pathname ? setLoading(true) : setTimeout(() => setLoading(false), 1000);
 		};
 		const handleComplete = (url: string) => setTimeout(() => setLoading(false), 1000)
 
