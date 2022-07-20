@@ -12,7 +12,7 @@ deploy_production:
     - ssh "$PRD_HOST" 'rm -rf ~/befitter-homepage || true'
     - ssh "$PRD_HOST" 'mkdir -p ~/befitter-homepage/.next || true'
     - scp -r .next/* "$PRD_HOST:~/befitter-homepage/.next"
-    - ssh "$PRD_HOST" 'yarn start > /dev/null 2>&1 &'
+    - ssh "$PRD_USER$PRD_HOST" 'yarn start > /dev/null 2>&1 &'
   tags:
     - release
   only:
