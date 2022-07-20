@@ -69,6 +69,7 @@ export const Boxtabs = () => {
 
   const getListBox = async () => {
     spinner.handleChangeStatus(true)
+    await getTotalBox()
     const boxContract = await new ethers.Contract(bftBox.address, bftBox.abi, ethersSigner);
     const res = await getOwnedBox(walletAccount, ethersSigner);
     const boxType = await res?.map(async (item: any) => {

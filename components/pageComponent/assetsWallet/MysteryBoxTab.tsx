@@ -15,9 +15,8 @@ interface IProps {
   listBoxType: any[]
 }
 
-export const MysteryBoxTab: React.FC<IProps> = ({boxChoose, setBoxChoose}) => {
+export const MysteryBoxTab: React.FC<IProps> = ({boxChoose, setBoxChoose, listBoxType}) => {
   const { walletAccount, ethersSigner } = useWalletContext();
-  const [listBoxType, setListBoxType] = useState<any[]>();
   const [statusLoading, setStatusLoading] = useState<boolean>(false)
 
   const tooltipBody = (data: any) => {
@@ -27,44 +26,6 @@ export const MysteryBoxTab: React.FC<IProps> = ({boxChoose, setBoxChoose}) => {
       <TooltipItem><Box><img src={ICON.shoeGray} /></Box><Typography>Standard Shoe</Typography> <Typography>{data.detail.standard}</Typography></TooltipItem>
     </BodyTooltip>
   }
-
-  const getListBox = async () => {
-    setStatusLoading(true);
-    const boxContract = await new ethers.Contract(bftBox.address, bftBox.abi, ethersSigner);
-    const res = await getOwnedBox(walletAccount, ethersSigner);
-    const boxType = await res?.map(async (item: any) => {
-      const res = await getBoxType(item, boxContract);
-      return {id: item, type: res};
-    })
-    Promise.all(boxType).then((values) => {
-      const newData = values?.reduce((init, item) => {
-        if (item.type === 'gold') {
-          init.push({
-            ...BOX_DETAILS.gold,
-            boxId: ethers.utils.formatUnits(item.id, 'wei')
-          })
-        } else if(item.type === 'silver'){
-          init.push({
-            ...BOX_DETAILS.silver,
-            boxId: ethers.utils.formatUnits(item.id, 'wei')
-          })
-        } else if(item.type === 'diamond'){
-          init.push({
-            ...BOX_DETAILS.diamond,
-            boxId: ethers.utils.formatUnits(item.id, 'wei')
-          })
-        }
-        return init
-      }, [])
-      setListBoxType(newData)
-      setStatusLoading(false)
-    });
-  }
-
-
-  useEffect(() => {
-    getListBox()
-  }, [walletAccount])
 
   return (
     <Wrap sx={listBoxType?.length ? {} : {maxHeight: 'initial !important'}}>
