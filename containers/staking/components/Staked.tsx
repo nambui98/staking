@@ -6,6 +6,7 @@ import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton
 import { StateStaking } from '../../../const';
 import { useWalletContext } from '../../../contexts/WalletContext';
 import { claimReward } from '../../../libs/staking';
+import { formatMoney } from '../../../libs/utils/utils';
 
 type Props = {
 	setStateContent: Function;
@@ -71,7 +72,7 @@ export const Staked = (props: Props) => {
 			titleWarning: 'YOU ARE UNSTAKING.',
 			titleButton: 'Continue Unstaking',
 			haveCancel: false,
-			contentWarning: `The number of TOKENs that you unstaked now will no longer be used to calculate your rewards. You can only withdraw after the withdrawal delay time. Finished Fitter Pass will remain but fractional staking rewards (${getTime()} hours of ${balanceSA} tokens) will be cleared. If you only want to CLAIM the reward, please go back and click on the CLAIM button.`,
+			contentWarning: `The number of TOKENs that you unstaked now will no longer be used to calculate your rewards. You can only withdraw after the withdrawal delay time. Finished Fitter Pass will remain but fractional staking rewards (${getTime()} hours of ${formatMoney(balanceSA)} tokens) will be cleared. If you only want to CLAIM the reward, please go back and click on the CLAIM button.`,
 			functionWarning: () => {
 				setStateContent(StateStaking.Unstake)
 			},
@@ -103,7 +104,7 @@ export const Staked = (props: Props) => {
 			titleWarning: '',
 			titleButton: 'I know and want to stake',
 			haveCancel: true,
-			contentWarning: `If you stake more now, factional staking rewards (${getTime()} hours of ${balanceSA} tokens) will be cleared.24h period will be reset and continue to be calculated right at the moment you stake more. You should wait for that staking finishes in (${(24 - parseInt(getTime())).toFixed(1)} hours).`,
+			contentWarning: `If you stake more now, factional staking rewards (${getTime()} hours of ${formatMoney(balanceSA)} tokens) will be cleared.24h period will be reset and continue to be calculated right at the moment you stake more. You should wait for that staking finishes in (${(24 - parseInt(getTime())).toFixed(1)} hours).`,
 			functionWarning: () => {
 				setStateContent(StateStaking.StakeProcess)
 			},
@@ -119,7 +120,7 @@ export const Staked = (props: Props) => {
 				Stake more
 			</ButtonOutline>
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>STAKING</Typography>
-			<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={600} mt="8px" textTransform={"uppercase"}>{balanceSA} FIU</Typography>
+			<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={600} mt="8px" textTransform={"uppercase"}>{formatMoney(balanceSA)} FIU</Typography>
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>current  PROFIT</Typography>
 			{/* {
 				parseFloat(claimableTime) > 0 && <Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>{balanceCP} FITTER PASS</Typography>} */}

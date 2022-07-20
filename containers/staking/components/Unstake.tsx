@@ -6,6 +6,7 @@ import { StateStaking } from '../../../const';
 import { MARKETPLACE_ICON } from '../../../constants/marketplace';
 import { useWalletContext } from '../../../contexts/WalletContext';
 import { unStake } from '../../../libs/staking';
+import { formatMoney } from '../../../libs/utils/utils';
 import { TEXT_STYLE } from '../../../styles/common/textStyles';
 
 type Props = {
@@ -95,11 +96,11 @@ export const Unstake = (props: Props) => {
 		<>
 			<Item>
 				<TitleItem>Token</TitleItem>
-				<ValueItem>{balanceFiu} FIU</ValueItem>
+				<ValueItem>{formatMoney(balanceFiu)} FIU</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem>Staking</TitleItem>
-				<ValueItem>{balanceSA} FIU</ValueItem>
+				<ValueItem>{formatMoney(balanceSA)} FIU</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem>current profit</TitleItem>
@@ -107,25 +108,36 @@ export const Unstake = (props: Props) => {
 			</Item>
 			<Item>
 				<TitleItem>WITHDRAWAL DELAY TIME</TitleItem>
-				<ValueItem>14 DAYS</ValueItem>
+				<ValueItem>7 DAYS</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem>unstake amount</TitleItem>
 				<ValueItem>	<Search
+					// value={value && value !== '-' ? formatMoney(value) : ''}
 					value={value}
+
 					placeholder=""
 					onChange={(e) => {
-						if (Number(e.target.value)) {
-							if (parseFloat(e.target.value) > parseFloat(balanceSA)) {
-								setValue(e.target.value)
-								setMessageError("Insufficient balance")
+						let valueParse = e.target.value.replace(/,/g, "")
+						// debugger
+						if (Number(valueParse)) {
+							if (parseFloat(valueParse) > 0) {
+								if (parseFloat(valueParse) > parseFloat(balanceSA)) {
+									setValue(valueParse)
+									setMessageError("Insufficient balance")
+								} else {
+									setValue(valueParse)
+									setMessageError("")
+								}
 							} else {
-								setValue(e.target.value)
-								setMessageError("")
+								setValue(valueParse)
+								setMessageError("Please enter a positive number")
 							}
+
 						} else {
+							// debugger
 							setMessageError('Please enter valid number')
-							setValue(e.target.value)
+							setValue(valueParse)
 
 						}
 					}}
@@ -137,7 +149,7 @@ export const Unstake = (props: Props) => {
 				messageError &&
 				<Item sx={{ mt: "8px !important" }}>
 					<TitleItem ></TitleItem>
-					<ValueItem>		<Typography sx={{ ...TEXT_STYLE(12, 500, "#FF6F61"), }}>Please enter valid number</Typography>
+					<ValueItem>		<Typography sx={{ ...TEXT_STYLE(12, 500, "#FF6F61"), }}>{messageError}</Typography>
 					</ValueItem>
 				</Item>
 			}

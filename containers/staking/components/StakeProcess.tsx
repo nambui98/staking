@@ -5,6 +5,7 @@ import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton
 import { StateStaking } from '../../../const';
 import { useWalletContext } from '../../../contexts/WalletContext';
 import { stake } from '../../../libs/staking';
+import { formatMoney } from '../../../libs/utils/utils';
 import { TEXT_STYLE } from '../../../styles/common/textStyles';
 
 type Props = {
@@ -96,35 +97,37 @@ export const StakeProcess = ({
 		<>
 			<Item>
 				<TitleItem>your current balance</TitleItem>
-				<ValueItem>{balanceFiu} FIU</ValueItem>
+				<ValueItem>{formatMoney(balanceFiu)} FIU</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem >your current amount staked</TitleItem>
-				<ValueItem>{balanceSA} FIU</ValueItem>
+				<ValueItem>{formatMoney(balanceSA)} FIU</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem >you want to stake</TitleItem>
 				<ValueItem>
 					<Search
-						value={value}
+						value={value ? formatMoney(value) : ''}
 						placeholder=""
 						onChange={(e) => {
-							if (Number(e.target.value)) {
-								if (parseFloat(e.target.value) > 0) {
-									if (parseFloat(e.target.value) > parseFloat(balanceFiu)) {
-										setValue(e.target.value)
+							let valueParse = e.target.value.replace(/,/g, "")
+							if (Number(valueParse)) {
+								if (parseFloat(valueParse) > 0) {
+									if (parseFloat(valueParse) > parseFloat(balanceFiu)) {
+										setValue(valueParse)
 										setMessageError("Insufficient balance")
 									} else {
-										setValue(e.target.value)
+										setValue(valueParse)
 										setMessageError("")
 									}
 								} else {
-									setValue(e.target.value)
+									setValue(valueParse)
 									setMessageError("Please enter a positive number")
 								}
 							} else {
+								debugger
 								setMessageError('Please enter valid number')
-								setValue(e.target.value)
+								setValue(valueParse)
 
 							}
 						}}
