@@ -25,7 +25,7 @@ export const FitterPassTab: React.FC<IProps> = ({fitterPassBalance}) => {
           <img src={FITTER_PASS.image} />
           <Title>
             <Typography>{FITTER_PASS.title}</Typography>
-            <Typography>{index + 1}</Typography>
+            {/* <Typography>{index + 1}</Typography> */}
           </Title>
         </Item>
       )) : <BoxEmpty icon={ICON.fitterPass} emptyText={'no fitter pass'} />}

@@ -61,7 +61,7 @@ const networks: Map = {
 	}
 };
 const networkKey = process.env.NEXT_PUBLIC_NETWORK || 'bscMainnet';
-const network = networks['bscTestnet'];
+const network = networks['bscMainnet'];
 const supportedChainIds = [network.chainId];
 
 interface wallerContextType {
@@ -160,7 +160,7 @@ export const WalletProvider: React.FC<IProps> = ({ children }) => {
 		if (walletAccount && ethersSigner) {
 			// const _claim = new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
 			// const _heeContract = new ethers.Contract(bftHeetoken.address, bftHeetoken.abi, ethersSigner);
-			// const _fiuContract = new ethers.Contract(bftFiuToken.address, bftFiuToken.abi, ethersSigner);
+			const _fiuContract = new ethers.Contract(bftFiuToken.address, bftFiuToken.abi, ethersSigner);
 			// const _shoeContract = new ethers.Contract(bftShoeItem.address, bftShoeItem.abi, ethersSigner);
 			// const _boxContract = new ethers.Contract(bftBox.address, bftBox.abi, ethersSigner);
 			// const _busdContract = new ethers.Contract(bftBusdToken.address, bftBusdToken.abi, ethersSigner);
@@ -168,16 +168,16 @@ export const WalletProvider: React.FC<IProps> = ({ children }) => {
 
 			//GET balance
 			const balance = await ethersProvider.getBalance(walletAccount);
-			// const [fiu] = await Promise.all([
-			// 	// _heeContract.balanceOf(walletAccount),
-			// 	_fiuContract.balanceOf(walletAccount),
-			// 	// _shoeContract.balanceOf(walletAccount),
-			// 	// _boxContract.balanceOf(walletAccount),
-			// 	// _busdContract.balanceOf(walletAccount)
-			// ])
+			const [fiu] = await Promise.all([
+				// _heeContract.balanceOf(walletAccount),
+				_fiuContract.balanceOf(walletAccount),
+				// _shoeContract.balanceOf(walletAccount),
+				// _boxContract.balanceOf(walletAccount),
+				// _busdContract.balanceOf(walletAccount)
+			])
 			setBnbBalance(ethers.utils.formatEther(balance))
 			// setHeebalance(ethers.utils.formatEther(hee))
-			// setFiuBalance(ethers.utils.formatEther(fiu))
+			setFiuBalance(ethers.utils.formatEther(fiu))
 			// setShoeBalance(ethers.utils.formatUnits(shoe, 'wei'))
 			// setBoxBalance(ethers.utils.formatUnits(box, 'wei'))
 			// setBusdBalance(ethers.utils.formatUnits(busd))
