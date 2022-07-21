@@ -14,5 +14,5 @@ deploy_production:
   tags:
     - release
   only:
-    - master
+    - main
   when: manual
