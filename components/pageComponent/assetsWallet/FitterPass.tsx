@@ -25,7 +25,7 @@ export const FitterPassTab: React.FC<IProps> = ({fitterPassBalance}) => {
           <img src={FITTER_PASS.image} />
           <Title>
             <Typography>{FITTER_PASS.title}</Typography>
-            <Typography>{FITTER_PASS.id}</Typography>
+            {/* <Typography>{FITTER_PASS.id}</Typography> */}
           </Title>
         </Item>
       )) : <BoxEmpty icon={ICON.fitterPass} emptyText={'no fitter pass'} />}
@@ -81,7 +81,6 @@ const Title = styled(Box)({
   marginLeft: 16,
   '& p:nth-of-type(1)': {
     ...TEXT_STYLE(16, 500),
-    marginBottom: 6,
     '@media (min-width: 830px)': {
       minWidth: 172
     }
