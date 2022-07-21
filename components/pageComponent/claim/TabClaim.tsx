@@ -1,4 +1,4 @@
-import { Backdrop, Box, Button, ButtonProps, CircularProgress, FormControl, InputLabel, MenuItem, Select, Stack, styled, Typography } from "@mui/material"
+import { Backdrop, Box, Button, ButtonProps, CircularProgress, FormControl, InputLabel, MenuItem, Select, Stack, styled, Typography, useMediaQuery } from "@mui/material"
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
@@ -13,6 +13,7 @@ import { convertWalletAddress, formatNumberWithCommas } from "../../../libs/util
 import { ClaimService } from "../../../services/claim.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
 import { MarketplaceButton } from "../../buttons/MarketplaceButton";
+import { ClockUtc } from "../../clockUtc";
 import { ConnectBox } from "./ConnectBox";
 import { PopupMessage } from "./PopupMessage";
 
@@ -29,6 +30,7 @@ const bodyPopupTokenTime = () => {
 
 export const TabClaim = () => {
   const router = useRouter();
+  const isMobile = useMediaQuery('(max-width: 767px)');
   const {walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
   const [currentTab, setCurrentTab] = useState<'box' | 'token'>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
@@ -262,6 +264,7 @@ export const TabClaim = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
+      {!isMobile && <ClockUtc/>}
     </Wrap>
   )
 }

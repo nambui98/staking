@@ -15,7 +15,7 @@ import {
 	LinkProps
 } from '@mui/material';
 import MenuButton from '../buttons/MenuButton';
-import { HEADER_ICON, HEADER_ICON_BNB, LOGO, MAIN_PAGE, PAGE } from '../../constants/header';
+import { HEADER_ICON, HEADER_ICON_BNB, HOME_LOGO, LOGO, MAIN_PAGE, PAGE } from '../../constants/header';
 import { useRouter } from 'next/router';
 import { useWalletContext } from '../../contexts/WalletContext';
 import { isBoxedPrimitive } from 'util/types';
@@ -24,10 +24,12 @@ import { SECURICHAIN_LOGO } from '../../constants/header';
 import { MainMenuButton } from '../buttons/MainMenuButton';
 import { TEXT_STYLE } from '../../styles/common/textStyles';
 import { convertWalletAddress } from '../../libs/utils/utils';
+import { ClockUtc } from '../clockUtc';
 
 const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 	const { asPath } = useRouter();
 	const isMobile = useMediaQuery('(max-width: 767px)');
+	const isMobile570 = useMediaQuery('(max-width: 570px)');
 	const { setToggleActivePopup, walletAccount, setWalletAccount, bnbBalance } = useWalletContext();
 	const [userInfo, setUserInfo] = useState({ walletAddress: walletAccount });
 	const [activePopoverAddress, setActiveProverAddress] = React.useState<HTMLButtonElement | null>(null);
@@ -49,7 +51,12 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 
 
 	return (
-		<Box component={'header'} sx={{ marginBottom: '125px', '@media (min-width: 1100px)': {marginBottom: '62px'} }}>
+		<Box component={'header'} sx={{ marginBottom: '125px', 
+		'@media (min-width: 1100px)': {marginBottom: '62px'},
+		'@media (max-width: 767px)': {
+			marginBottom: '170px'
+		} 
+		}}>
 			<AppBar
 				color="transparent"
 				square
@@ -80,11 +87,12 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 										cursor: 'pointer',
 									}}
 								>
-									<img src={LOGO} alt="Logo" width={'auto'} height={40} />
+									<img src={isMobile570 ? 'assets/logo/logo.png' : LOGO} alt="Logo" width={'auto'} height={40} />
 								</Logo>
 							</Link>
-							<BoxSecurichain>{<img src={SECURICHAIN_LOGO} />}</BoxSecurichain>
+							<Link href={'https://www.securichain.io/audits/2022/beFITTERTokenAudit_Public.pdf'}><BoxSecurichain>{<img src={SECURICHAIN_LOGO} />}</BoxSecurichain></Link>
 						</BoxLogo>
+						{isMobile && <ClockUtc/>}
 						<BoxMenuItem>
 							{MAIN_PAGE.map((item, index) => (
 								<Link key={index} href={item.active ? item.link : '#'}>
@@ -123,8 +131,10 @@ export default MainHeader;
 
 const Logo = styled(Box)({
 	'& img': {
-		'@media (max-width: 767px)': {
-			width: 150
+		'@media (max-width: 570px)': {
+			marginBottom: '7px',
+			width: 33,
+			height: 33
 		}
 	}
 })
@@ -238,6 +248,7 @@ const ButtonAddress = styled(Button)({
 
 const BoxSecurichain = styled(Box)({
 	margin: 'auto auto auto 24px',
+	cursor: 'pointer',
 	'@media (max-width: 1100px)': {
 		margin: 0,
 		display: 'flex',

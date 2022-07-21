@@ -2,7 +2,7 @@ import { Box, BoxProps, Button, Stack, styled, Typography, useMediaQuery } from 
 import { useEffect, useState } from "react";
 import { ICON, IMAGE, TAB_ITEM, TAB_NAME } from "../../../constants/assetsWallet";
 import { useWalletContext } from "../../../contexts/WalletContext"
-import { getOwnedBox } from "../../../libs/claim";
+import { getOwnedBox, getOwnedFitterPass } from "../../../libs/claim";
 import { MarketplaceService } from "../../../services/user.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
 import { FormInfomationPopup } from "../marketplace/FormInfomationPopup";
@@ -13,6 +13,7 @@ import addressBuyBox from '../../../abi/addressBuyBox.json';
 import { beFITTERPassStaking } from "../../../libs/contracts";
 import { ethers, utils } from "ethers"
 import { FitterPassTab } from "./FitterPass";
+import { ClockUtc } from "../../clockUtc";
 
 export const Boxtabs = () => {
   const { walletAccount, bnbBalance, fiuBalance, heeBalance, ethersSigner, boxBalance } = useWalletContext();
@@ -67,11 +68,16 @@ export const Boxtabs = () => {
   }
 
   const getTotalFitterPass = async () => {
-    const contract = new ethers.Contract(beFITTERPassStaking.address, beFITTERPassStaking.abi, ethersSigner);
-    const balance = await contract.balanceOf(walletAccount, '0')
-    const formatBalance = ethers.utils.formatUnits(balance, 'wei')
-    console.log(formatBalance, 123)
-    formatBalance && setFitterPassBalance(parseFloat(formatBalance))
+    try {
+      const res = await getOwnedFitterPass(walletAccount, ethersSigner)
+      if (res) {
+        setFitterPassBalance(parseFloat(res))
+      } else {
+        setFitterPassBalance(0)
+      }
+    } catch (error) {
+      setFitterPassBalance(0)
+    }
   }
 
   useEffect(() => {
@@ -112,6 +118,8 @@ export const Boxtabs = () => {
       </TabBody>
       <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
       {statusBuyBox && isMobile && !statusFormGetBonus && <BoxBonus><ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus></BoxBonus>}
+
+      {!isMobile && <ClockUtc/>}
     </Wrap>
   )
 }
@@ -155,6 +163,7 @@ const Wrap = styled(Stack)({
     borderRadius: 16,
     background: '#F8F9FB',
     flexDirection: 'column',
+    marginTop: 10,
   }
 })
 const TabLeft = styled(Stack)({
