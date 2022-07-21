@@ -3,9 +3,10 @@ import { useEffect, useState } from "react"
 import { TEXT_STYLE } from "../../styles/common/textStyles"
 
 export const ClockUtc = () => {
+  const date = new Date();
   const [hoursUtc, setHoursUtc] = useState<number>(0);
   const [minuteUtc, setMinuteUtc] = useState<number>(0);
-  const [month, setMonth] = useState<number>(0);
+  const [month, setMonth] = useState<number>(date.getUTCMonth() + 1);
   const [seconds, setSeconds] = useState<number>(0);
   const [timeUtc, setTimeUtc] = useState<string>('')
   const [dayUtc, setDayUtc] = useState<string>('')
@@ -19,7 +20,6 @@ export const ClockUtc = () => {
       setDayUtc(`${date.getUTCDate() + '/' + month + '/' + date.getUTCFullYear()}`)
     }, 1000)
   }
-  const date = new Date();
 
   useEffect(() => {
     clock()
