@@ -77,6 +77,8 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 		functionCancel: ''
 	});
 	const [isLoading, setIsLoading] = useState(false);
+	const [unStakePrice, setUnStakePrice] = useState(0);
+
 
 	useEffect(() => {
 		setStateContent(stateContentInit)
@@ -173,6 +175,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 										balanceCP={balanceCP}
 										balanceUS={balanceUS}
 										claimableTime={claimableTime}
+										unStakePrice={unStakePrice}
 										setIsLoading={setIsLoading}
 										setStateContent={setStateContent}
 										handleClickSuccess={handleClickSuccess}
@@ -185,6 +188,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 											balanceCP={balanceCP}
 											balanceUS={balanceUS}
 											setIsLoading={setIsLoading}
+											setUnStakePrice={setUnStakePrice}
 											setStateContent={setStateContent}
 											handleClickSuccess={handleClickSuccess}
 											handleClickError={handleClickError} /> :
@@ -202,6 +206,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 													balanceUS={balanceUS}
 													claimableTime={claimableTime}
 													setIsLoading={setIsLoading}
+													unStakePrice={unStakePrice}
 													setStateContent={setStateContent}
 													handleClickSuccess={handleClickSuccess}
 													handleClickError={handleClickError}
