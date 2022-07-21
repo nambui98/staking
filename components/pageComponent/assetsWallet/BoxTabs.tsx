@@ -2,7 +2,7 @@ import { Box, BoxProps, Button, Stack, styled, Typography, useMediaQuery } from 
 import { useEffect, useState } from "react";
 import { ICON, IMAGE, TAB_ITEM, TAB_NAME } from "../../../constants/assetsWallet";
 import { useWalletContext } from "../../../contexts/WalletContext"
-import { getOwnedBox } from "../../../libs/claim";
+import { getOwnedBox, getOwnedFitterPass } from "../../../libs/claim";
 import { MarketplaceService } from "../../../services/user.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
 import { FormInfomationPopup } from "../marketplace/FormInfomationPopup";
@@ -10,6 +10,10 @@ import { BoxEmpty } from "./BoxEmpty";
 import { MysteryBoxTab } from "./MysteryBoxTab";
 import { TokenTab } from "./TokenTab";
 import addressBuyBox from '../../../abi/addressBuyBox.json';
+import { beFITTERPassStaking } from "../../../libs/contracts";
+import { ethers, utils } from "ethers"
+import { FitterPassTab } from "./FitterPass";
+import { ClockUtc } from "../../clockUtc";
 
 export const Boxtabs = () => {
   const { walletAccount, bnbBalance, fiuBalance, heeBalance, ethersSigner, boxBalance } = useWalletContext();
@@ -18,6 +22,7 @@ export const Boxtabs = () => {
   const [currentTab, setCurrentTab] = useState<string>('');
   const [popupFormInfo, setPopupFormInfo] = useState<boolean>(false);
   const [statusBuyBox, setStatusBuyBox] = useState<boolean>(false);
+  const [fitterPassBalance, setFitterPassBalance] = useState<any>(0)
 
 
   const handleSwitchTab = (tab: string) => {
@@ -31,6 +36,8 @@ export const Boxtabs = () => {
         return <TokenTab />
       case TAB_NAME.box:
         return <MysteryBoxTab />
+      case TAB_NAME.fitterPass:
+        return <FitterPassTab fitterPassBalance={fitterPassBalance} />  
       default:
         break;
     }
@@ -60,10 +67,27 @@ export const Boxtabs = () => {
     }
   }
 
+  const getTotalFitterPass = async () => {
+    try {
+      const res = await getOwnedFitterPass(walletAccount, ethersSigner)
+      if (res) {
+        setFitterPassBalance(parseFloat(res))
+      } else {
+        setFitterPassBalance(0)
+      }
+    } catch (error) {
+      setFitterPassBalance(0)
+    }
+  }
+
   useEffect(() => {
     getTotalBox();
     checkAddressBuyBox()
   }, [walletAccount])
+
+  useEffect(() => {
+    getTotalFitterPass()
+  }, [walletAccount, currentTab])
 
   return (
     <Wrap>
@@ -79,7 +103,7 @@ export const Boxtabs = () => {
                 <img style={!item.active ? iconGray : {}} src={item.icon} />{!isMobile ?
                   <Typography sx={!item.active ? { color: '#A7ACB8 !important' } : {}}>{item.title}</Typography> : currentTab === item.title && <Typography>{item.title}</Typography>}
                 {!item.active && !isMobile && <span>Coming soon</span>}
-                {!isMobile && item.active && index > 0 && <Typography>{totalBox}</Typography>}
+                {!isMobile && item.active && index > 0 && <Typography>{index === 4 ? fitterPassBalance : totalBox}</Typography>}
               </TabItem>
             ))}
           </TabBox>
@@ -94,6 +118,8 @@ export const Boxtabs = () => {
       </TabBody>
       <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
       {statusBuyBox && isMobile && !statusFormGetBonus && <BoxBonus><ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus></BoxBonus>}
+
+      {!isMobile && <ClockUtc/>}
     </Wrap>
   )
 }
@@ -137,6 +163,7 @@ const Wrap = styled(Stack)({
     borderRadius: 16,
     background: '#F8F9FB',
     flexDirection: 'column',
+    marginTop: 10,
   }
 })
 const TabLeft = styled(Stack)({
