@@ -24,6 +24,6 @@ export const handleDeposit = async (ethersSigner: any, tokenAddress: string, amo
 
 export const handleDepositBnb = async (ethersSigner: any, email: string, amount: string) => {
   const walletContract = new ethers.Contract(bftWallet.address, bftWallet.abi, ethersSigner);
-  const res = await walletContract.depositBNB(email);
+  const res = await walletContract.depositBNB(email, {value: ethers.utils.parseUnits(amount, 18)});
   return res;
 }
