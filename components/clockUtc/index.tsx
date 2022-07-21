@@ -5,6 +5,8 @@ import { TEXT_STYLE } from "../../styles/common/textStyles"
 export const ClockUtc = () => {
   const [hoursUtc, setHoursUtc] = useState<number>(0);
   const [minuteUtc, setMinuteUtc] = useState<number>(0);
+  const [month, setMonth] = useState<number>(0);
+  const [seconds, setSeconds] = useState<number>(0);
   const [timeUtc, setTimeUtc] = useState<string>('')
   const [dayUtc, setDayUtc] = useState<string>('')
   const clock = () => {
@@ -12,13 +14,20 @@ export const ClockUtc = () => {
       const date = new Date();
       setHoursUtc(date.getUTCHours())
       setMinuteUtc(date.getUTCMinutes())
+      setSeconds(date.getSeconds())
       setTimeUtc(`${date.getUTCHours() + ':' + date.getUTCMinutes()}`)
-      setDayUtc(`${date.getUTCDate() + '/' + date.getUTCMonth() + '/' + date.getUTCFullYear()}`)
+      setDayUtc(`${date.getUTCDate() + '/' + month + '/' + date.getUTCFullYear()}`)
     }, 1000)
   }
+  const date = new Date();
 
   useEffect(() => {
     clock()
+  }, [month])
+
+  useEffect(() => {
+    const date = new Date();
+    setMonth(date.getUTCMonth() + 1)
   }, [])
   return (
     <Wrap>
@@ -33,7 +42,7 @@ export const ClockUtc = () => {
           marginBottom: '0',
           marginRight: '12px'
         }
-      }}><img src={'assets/icons/clock.svg'} /> {hoursUtc < 10 && '0'}{hoursUtc}:{minuteUtc < 10 && '0'}{minuteUtc} UTC</Box>
+      }}><img src={'assets/icons/clock.svg'} /> {hoursUtc < 10 && '0'}{hoursUtc}:{minuteUtc < 10 && '0'}{minuteUtc}:{seconds} UTC</Box>
       <Box sx={{
         textAlign: 'right'
       }}>{dayUtc}</Box>
@@ -49,10 +58,12 @@ const Wrap = styled(Box)({
   right: 0,
   top: '70px',
   zIndex: 4,
+  minWidth: 130,
   '@media (max-width: 1099px)': {
-    top: '130px'
+    top: '130px',
   },
   '@media (max-width: 767px)': {
+    minWidth: 'unset',
     position: 'static',
     width: '100%',
     order: 3,
