@@ -61,7 +61,7 @@ const networks: Map = {
 	}
 };
 const networkKey = process.env.NEXT_PUBLIC_NETWORK || 'bscMainnet';
-const network = networks['bscMainnet'];
+const network = networks['bscTestnet'];
 const supportedChainIds = [network.chainId];
 
 interface wallerContextType {

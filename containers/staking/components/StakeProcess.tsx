@@ -3,6 +3,7 @@ import { styled } from '@mui/styles';
 import { useState } from 'react';
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
 import { StateStaking } from '../../../const';
+import { MARKETPLACE_ICON } from '../../../constants/marketplace';
 import { useWalletContext } from '../../../contexts/WalletContext';
 import { stake } from '../../../libs/staking';
 import { formatMoney } from '../../../libs/utils/utils';
@@ -103,7 +104,7 @@ export const StakeProcess = ({
 				<TitleItem >your current amount staked</TitleItem>
 				<ValueItem>{formatMoney(balanceSA)} FIU</ValueItem>
 			</Item>
-			<Item>
+			<Item sx={{ mt: '16px!important' }}>
 				<TitleItem >you want to stake</TitleItem>
 				<ValueItem>
 					<Search
@@ -113,17 +114,28 @@ export const StakeProcess = ({
 							let valueParse = e.target.value.replace(/,/g, "")
 							if (Number(valueParse)) {
 								if (parseFloat(valueParse) > 0) {
-									if (parseFloat(valueParse) < 4000) {
-										setValue(valueParse)
-										setMessageError("You need to stake minimum 4000")
-									} else {
-
+									if (parseFloat(balanceSA) < 4000 && parseFloat(balanceSA) !== 0) {
 										if (parseFloat(valueParse) > parseFloat(balanceFiu)) {
 											setValue(valueParse)
 											setMessageError("Insufficient balance")
 										} else {
 											setValue(valueParse)
 											setMessageError("")
+										}
+									} else {
+
+										if (parseFloat(valueParse) < 4000) {
+											setValue(valueParse)
+											setMessageError("You need to stake minimum 4000")
+										} else {
+
+											if (parseFloat(valueParse) > parseFloat(balanceFiu)) {
+												setValue(valueParse)
+												setMessageError("Insufficient balance")
+											} else {
+												setValue(valueParse)
+												setMessageError("")
+											}
 										}
 									}
 								} else {
@@ -160,17 +172,22 @@ export const StakeProcess = ({
 
 				</ValueItem>
 			</Item>
-			<Item sx={{ mt: "16px !important" }}>
+			<Item sx={{ mt: "18px !important" }}>
 				<TitleItem >TOTAL reward earned</TitleItem>
 				<ValueItem>{balanceCP} Fitter Pass</ValueItem>
 			</Item>
-			<Item>
+			<Item sx={{ mt: "18px !important" }}>
 				<TitleItem >estimated daily rewards</TitleItem>
 				<ValueItem>-</ValueItem>
 			</Item>
-			<Item>
+			<Item sx={{ mt: "18px !important" }}>
 				<TitleItem >estimated daily apr</TitleItem>
 				<ValueItem>-</ValueItem>
+			</Item>
+			<Item sx={{ mt: '8px !important' }}>
+				<ValueItem sx={{ mr: '8px !important' }}>	<img src={"assets/icons/info-circle2.svg"} alt="" /></ValueItem>
+
+				<TitleItem sx={{ fontSize: '10px !important', textTransform: 'none !important', color: "#FF6D24 !important" }}>Please make sure that the total amount of tokens you stake is enough to earn at least a Fitter Pass before this pool is closed</TitleItem>
 			</Item>
 			<Box mt="auto" width={"100%"} sx={{ paddingTop: "16px", borderTop: "1px solid #E9EAEF" }}>
 				<MarketplaceButton disabled={!value || messageError ? true : false} customStyle={{ width: "100%" }} title={"Stake"} handleOnClick={handleStake} />

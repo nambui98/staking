@@ -2,13 +2,13 @@ import bfBox from '../abi/BeFitterBox.json';
 import bfClaimBoxGamefi from '../abi/BeFitterClaim.json';
 import bfClaimEnjin from '../abi/merkle-claim-enjin.json';
 import bfHeeToken from '../abi/BFHeeToken.json';
-import bfFiuToken from '../abi/BeFITTERTokenStaking.json';
+import bfFiuToken from '../abi/BeFITTERToken_testnet.json';
 import bfShoeItem from '../abi/BFShoeItem.json';
 import bfBusdToken from '../abi/BeFitterBusd.json';
 import bfShop from '../abi/BeFitterShop.json';
-import beFITTERTokenStaking from '../abi/BeFITTERTokenStaking.json';
-import beFitterPass from '../abi/BeFitterPass.json';
-import beFitterStake from '../abi/BeFitterStaking.json';
+import beFITTERTokenStaking from '../abi/BeFITTERToken_testnet.json';
+import beFitterPass from '../abi/BeFitterPass_testnet.json';
+import beFitterStake from '../abi/BeFitterStaking_testnet.json';
 import bfClaimToken from '../abi/BeFitterClaimFiu.json';
 
 interface Map {
@@ -21,15 +21,15 @@ const addresses: Map = {
 		bFclaimBoxGamefi: '0x7f7f5971D45cA5EFAc225DA64299Fccb386a84B6',
 		bFclaimEnjin: '0x49509ac5266B51c686D4B75AF7fed9B4E21210Ee',
 		bFheeToken: '0x05031f56DAD9EDa2Ff7e0d0b675787cC72Dc4675',
-		bFfiuToken: '0xEF7d50069406A2F5A53806f7250A6c0f17AD9dCD',
+		bFfiuToken: '0xD171004a5e8A0C01b433529C44433FEa766D2d03',
 		bFshoeItem: '0x365B79e59080632E693D98e2A0A0e63625E51495',
 		bFBusdToken: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
 		bFShop: '0xc4bcE7f9dF1126c352809eD422d0766a3C3ce18a',
 		bFclaimAlphaBeta: '0xcd229a4e1140cf045bA9f3c1287B62cAe4aFA549',
 		bFclaimOther: '0xb01F92dd643B366686AAa856b9634E3F6799Fe2A',
-		beFITTERTokenStaking: '0xEF7d50069406A2F5A53806f7250A6c0f17AD9dCD',
-		beFITTERPassStaking: '0x67A022f85F792414E6c51f3E175385F5bDEd7E4C',
-		beFITTERStakeStaking: '0xF7d21298B4499F582725F50053F7b4C1cc510f56',
+		beFITTERTokenStaking: '0xD171004a5e8A0C01b433529C44433FEa766D2d03',
+		beFITTERPassStaking: '0x92C1ef30e445fea3aD03E6ca4775D44F08925c82',
+		beFITTERStakeStaking: '0x43832e1a628e91CaFAE75ff1EB70BbF3478e27B3',
 		bFclaimAlphaBeta2: '0x80F2086a0De59eF239D6F97ac2138496AE1181e2',
 		bFclaimToken: '0xA1eDA0aBA0175050E0c123fc8E531B4b7526e0de'
 
