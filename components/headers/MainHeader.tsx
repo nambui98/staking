@@ -26,12 +26,13 @@ import { TEXT_STYLE } from '../../styles/common/textStyles';
 import { convertWalletAddress } from '../../libs/utils/utils';
 
 const MainHeader: React.FC<any> = ({ sxProps, children }) => {
-	const { asPath } = useRouter();
+	const { asPath } = useRouter()
 	const isMobile = useMediaQuery('(max-width: 767px)');
 	const { setToggleActivePopup, walletAccount, setWalletAccount, bnbBalance } = useWalletContext();
 	const [userInfo, setUserInfo] = useState({ walletAddress: walletAccount });
 	const [activePopoverAddress, setActiveProverAddress] = React.useState<HTMLButtonElement | null>(null);
 	const open = Boolean(activePopoverAddress);
+	const [activeUrl, setActiveUrl] = useState(useRouter().asPath)
 
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		setActiveProverAddress(event.currentTarget);
@@ -40,6 +41,13 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 	const handleClose = () => {
 		setActiveProverAddress(null);
 	};
+	
+	const handleClickLogo = (link: string) => {
+		let a = document.createElement('a');
+		// a.target = '_blank';
+		a.href = link;
+		a.click();
+	}
 
 	useEffect(() => {
 		if (UserService.getCurrentUser()) {
@@ -70,7 +78,7 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 							alignItems: 'center'
 						}}
 					>
-						<BoxLogo>
+						<BoxLogo onClick={() => handleClickLogo(PAGE.HOME.link)}>
 							<Link href={PAGE.HOME.link}>
 								<Logo
 									component={'a'}
