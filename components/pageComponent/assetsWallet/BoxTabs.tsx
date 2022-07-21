@@ -14,6 +14,7 @@ import { useCommonContext } from "../../../contexts/CommonContext";
 import { SendToSpending } from "./SenToSpending";
 import { ethers } from "ethers";
 import { bftBox } from "../../../libs/contracts";
+import { formatMoney } from "../../../libs/utils/utils";
 
 export const Boxtabs = () => {
   const { walletAccount, bnbBalance, fiuBalance, heeBalance, ethersSigner, boxBalance } = useWalletContext();
@@ -113,7 +114,7 @@ export const Boxtabs = () => {
         <BoxBodyLeft>
           <Top>
             <Address>{walletAccount?.slice(0, 6) + '...' + walletAccount?.slice(-3)}</Address>
-            <BnbBalance>{bnbBalance?.length && parseFloat(bnbBalance) > 0 ? parseFloat(bnbBalance).toFixed(4) : '0.00'} <img src={ICON.bnbSmall} /></BnbBalance>
+            <BnbBalance>{bnbBalance?.length && parseFloat(bnbBalance) > 0 ? formatMoney(bnbBalance) : '0.00'} <img src={ICON.bnbSmall} /></BnbBalance>
           </Top>
           <TabBox>
             {TAB_ITEM?.map((item, index) => (

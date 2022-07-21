@@ -4,7 +4,7 @@ import { TAB_NAME } from "../../../constants/assetsWallet";
 import { useCommonContext } from "../../../contexts/CommonContext";
 import { useWalletContext } from "../../../contexts/WalletContext";
 import { checkVerifyEmail } from "../../../libs/apis/marketplace";
-import { getAllowance, handleApprove, handleDeposit } from "../../../libs/assets";
+import { getAllowance, handleApprove, handleDeposit, handleDepositBnb } from "../../../libs/assets";
 import { bftBox, bftFiuToken, bftHeetoken } from "../../../libs/contracts";
 import { TEXT_STYLE } from "../../../styles/common/textStyles"
 import { MarketplaceButton } from "../../buttons/MarketplaceButton";
@@ -18,9 +18,10 @@ interface IProps {
 
 export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxChoose, getListBox }) => {
   const { popupNoti, spinner } = useCommonContext();
-  const { walletAccount, ethersSigner, ethersProvider, updateBnbBalance, fiuBalance, heeBalance } = useWalletContext();
+  const { walletAccount, ethersSigner, ethersProvider, updateBnbBalance, fiuBalance, heeBalance, bnbBalance } = useWalletContext();
   const [textEmail, setTextEmail] = useState<string>('');
   const [amount, setAmount] = useState<string>('');
+  const [statusButtonSent, setStatusButtonSent] = useState<boolean>(false);
 
   const checkEmail = async () => {
     const res = await checkVerifyEmail(textEmail)
@@ -37,6 +38,9 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
           return true
         }
         if (tokenChoose === 'fiu' && parseFloat(fiuBalance) >= parseFloat(amount)) {
+          return true
+        }
+        if (tokenChoose === 'bnb' && parseFloat(bnbBalance) >= parseFloat(amount)) {
           return true
         }
       } else {
@@ -62,16 +66,19 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
     }
   }
 
-  const deposit = async (abiDetail: any, type: 'token' | 'box', boxId?: string) => {
+  const deposit = async (abiDetail: any, type: 'token' | 'box' | 'bnb', boxId?: string) => {
     spinner.handleChangeStatus(true)
     try {
-      const resDeposit = await handleDeposit(ethersSigner, abiDetail.address, amount, textEmail, type, boxId)
+      const resDeposit = type === 'bnb' ? await handleDepositBnb(ethersSigner, textEmail, amount) : await handleDeposit(ethersSigner, abiDetail.address, amount, textEmail, type, boxId)
       const checkStatus = setInterval(async () => {
         const statusApprove = await ethersProvider.getTransactionReceipt(resDeposit.hash);
         if (statusApprove?.status) {
           spinner.handleChangeStatus(false)
           updateBnbBalance()
           type === 'box' && getListBox();
+          setStatusButtonSent(false)
+          setTextEmail('')
+          setAmount('')
           popupNoti.handleToggleStatus({
             status: true,
             popupType: 'success',
@@ -95,7 +102,7 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
     }
   }
 
-  const handleSentBox = async () => {
+  const handleApproveBox = async () => {
     spinner.handleChangeStatus(true)
     try {
       const resApprove = await handleApprove(boxChoose, ethersSigner, bftBox, 'box');
@@ -105,8 +112,7 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
           spinner.handleChangeStatus(false)
           updateBnbBalance()
           clearInterval(checkStatus)
-          handleClickButton()
-          // await deposit(bftBox, 'box', boxChoose);          
+          setStatusButtonSent(true)       
         }
       }, 1000);
     } catch (error: any) {
@@ -122,7 +128,7 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
     }
   }
 
-  const handleSentToken = async () => {
+  const handleApproveToken = async () => {
     spinner.handleChangeStatus(true)
     const abiDetail = tokenChoose === 'fiu' ? bftFiuToken : bftHeetoken;
     try {
@@ -133,8 +139,7 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
           spinner.handleChangeStatus(false)
           updateBnbBalance()
           clearInterval(checkStatus)
-          handleClickButton()
-          // await deposit(abiDetail, 'token');
+          setStatusButtonSent(true)
         }
       }, 1000);
     } catch (error: any) {
@@ -153,40 +158,28 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
   const handleSentSpending = () => {
     const abiDetail = tokenChoose === 'fiu' ? bftFiuToken : bftHeetoken;
     if (currentTab === TAB_NAME.token) {
-      deposit(abiDetail, 'token')
+      tokenChoose === 'bnb' ? deposit(abiDetail, 'bnb') : deposit(abiDetail, 'token')
     } else {
       deposit(bftBox, 'box', boxChoose);
     }
   }
 
   const handleClickButton = async () => {
-    if (await handleCheckEmailAmount()) {
-      popupNoti.handleToggleStatus({
-        status: true,
-        title: 'Sending item',
-        message: <Box>
-          <TitleConfirm>Sending this item to <span>{textEmail}</span> on beFITTER?</TitleConfirm>
-          <PopuBody>
-            <Box>
-              <Typography>Item</Typography>
-              <Box>{currentTab === TAB_NAME.token ? amount : `#${boxChoose}`} <img src={`assets/icons/${currentTab === TAB_NAME.token ? (tokenChoose === 'fiu' ? 'fiu' : 'hee') : 'box-classic'}.svg`} /></Box>
-            </Box>
-            <MarketplaceButton title={'Confirm'} handleOnClick={handleSentSpending} customStyle={{ width: '100%', margin: '24px 0' }} />
-            <Cancel onClick={() => popupNoti.handleHidePopup()}>Cancel</Cancel>
-          </PopuBody>
-        </Box>,
-      })
-    } else {
-      spinner.handleChangeStatus(false)
-      popupNoti.handleToggleStatus({
-        status: true,
-        popupType: 'error',
-        title: 'Error!',
-        message: await checkEmail() ? 'You balance is insufficient' : 'You should sign up on our app first to continue',
-        titleCustomColor: { '& p': { color: '#FF6F61' } },
-        titleButton: 'Try again',
-      })
-    }
+    popupNoti.handleToggleStatus({
+      status: true,
+      title: 'Sending item',
+      message: <Box>
+        <TitleConfirm>Sending this item to <span>{textEmail}</span> on beFITTER?</TitleConfirm>
+        <PopuBody>
+          <Box>
+            <Typography>Item</Typography>
+            <Box>{currentTab === TAB_NAME.token ? amount : `#${boxChoose}`} <img src={`assets/icons/${currentTab === TAB_NAME.token ? (tokenChoose === 'fiu' ? 'fiu' : 'hee') : 'box-classic'}.svg`} /></Box>
+          </Box>
+          <MarketplaceButton title={'Confirm'} handleOnClick={handleSentSpending} customStyle={{ width: '100%', margin: '24px 0' }} />
+          <Cancel onClick={() => popupNoti.handleHidePopup()}>Cancel</Cancel>
+        </PopuBody>
+      </Box>,
+    })
   }
   const checkStatusSendButton = () => {
     if (currentTab === TAB_NAME.token) {
@@ -201,10 +194,26 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
     return false;
   }
 
+  const handleClickButtonSent = () => {
+    if(statusButtonSent){
+      handleCheckMail(handleClickButton)
+    } else {
+      if(currentTab === TAB_NAME.token){
+        tokenChoose === 'bnb' ? handleCheckMail(() => deposit(null, 'bnb')) : handleCheckMail(handleApproveToken)
+      } else{
+        handleCheckMail(handleApproveBox)
+      }
+    }
+  }
+
   useEffect(() => {
     setAmount('')
     setTextEmail('')
   }, [currentTab])
+
+  useEffect(() => {
+    setStatusButtonSent(false)
+  }, [tokenChoose, currentTab])
 
   return (
     <SendSpending>
@@ -231,7 +240,7 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
           />
         </InputBottom>}
         <ButtonSendSpending sx={{ background: checkStatusSendButton() ? 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)' : '#E9EAEF' }}
-          onClick={() => currentTab === TAB_NAME.token ? handleCheckMail(handleSentToken) : handleCheckMail(handleSentBox)} disabled={!checkStatusSendButton()}>Approve</ButtonSendSpending>
+          onClick={handleClickButtonSent} disabled={!checkStatusSendButton()}>{statusButtonSent ? 'Send to Spending' : 'Approve'}</ButtonSendSpending>
       </BoxInput>
     </SendSpending>
   )

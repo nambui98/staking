@@ -2,6 +2,7 @@ import { Box, BoxProps, Stack, styled, Typography, TypographyProps } from "@mui/
 import { useWalletContext } from "../../../contexts/WalletContext"
 import { ICON } from "../../../constants/assetsWallet";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
+import { formatMoney } from "../../../libs/utils/utils";
 
 interface IProps {
   tokenChoose: string
@@ -15,21 +16,21 @@ export const TokenTab: React.FC<IProps> = ({tokenChoose, setTokenChoose}) => {
       <Item tokenName={tokenChoose === 'fiu' ? 'fiu' : ''} sx={ItemFiu} onClick={() => setTokenChoose('fiu')}>
         <ItemLeft>
           <Title>Your balance</Title>
-          <Amount typeBnb={false}>{fiuBalance?.length && parseFloat(fiuBalance) > 0 ? parseFloat(fiuBalance) : '0.00'}<span>FIU</span></Amount>
+          <Amount typeBnb={false}>{fiuBalance?.length && parseFloat(fiuBalance) > 0 ? formatMoney(fiuBalance) : '0.00'}<span>FIU</span></Amount>
         </ItemLeft>
         <ImageToken><img src={ICON.fiu} /></ImageToken>
       </Item>
       <Item tokenName={tokenChoose === 'hee' ? 'hee' : ''} sx={ItemHee} onClick={() => setTokenChoose('hee')}>
         <ItemLeft>
           <Title>Your balance</Title>
-          <Amount typeBnb={false}>{heeBalance?.length && parseFloat(heeBalance) > 0 ? parseFloat(heeBalance) : '0.00'}<span>HEE</span></Amount>
+          <Amount typeBnb={false}>{heeBalance?.length && parseFloat(heeBalance) > 0 ? formatMoney(heeBalance) : '0.00'}<span>HEE</span></Amount>
         </ItemLeft>
         <ImageToken><img src={ICON.hee} /></ImageToken>
       </Item>
-      <Item tokenName={''} sx={ItemBnb}>
+      <Item tokenName={tokenChoose === 'bnb' ? 'bnb' : ''} sx={ItemBnb} onClick={() => setTokenChoose('bnb')}>
         <ItemLeft>
           <Title sx={{color: '#31373E'}}>Your balance</Title>
-          <Amount typeBnb={true}>{bnbBalance?.length && parseFloat(bnbBalance) > 0 ? parseFloat(bnbBalance).toFixed(4) : '0.00'} <span>BNB</span></Amount>
+          <Amount typeBnb={true}>{bnbBalance?.length && parseFloat(bnbBalance) > 0 ? formatMoney(bnbBalance) : '0.00'} <span>BNB</span></Amount>
         </ItemLeft>
         <ImageToken><img src={ICON.bnbBig} /></ImageToken>
       </Item>
@@ -73,7 +74,7 @@ const Item = styled(Box)((props: itemProps) => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  border: `2px solid ${props.tokenName ? (props.tokenName === 'fiu' ? '#FF612F' : '#1DB268') : '#F8F9FB'}`,
+  border: `2px solid ${props.tokenName ? (props.tokenName === 'fiu' ? '#FF612F' : props.tokenName === 'hee' ? '#1DB268' : '#FFC83A') : '#F8F9FB'}`,
   borderWidth: 2,
   '@media (min-width: 768px)': {
     marginBottom: 24,

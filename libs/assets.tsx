@@ -21,3 +21,9 @@ export const handleDeposit = async (ethersSigner: any, tokenAddress: string, amo
   const res = await type === 'token' ? walletContract.depositToken(tokenAddress, parsePrice, email) : walletContract.depositItem(tokenAddress, parsePrice, email);
   return res;
 }
+
+export const handleDepositBnb = async (ethersSigner: any, email: string, amount: string) => {
+  const walletContract = new ethers.Contract(bftWallet.address, bftWallet.abi, ethersSigner);
+  const res = await walletContract.depositBNB(email);
+  return res;
+}

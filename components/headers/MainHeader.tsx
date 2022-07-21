@@ -23,7 +23,7 @@ import { UserService } from '../../services/user.service';
 import { SECURICHAIN_LOGO } from '../../constants/header';
 import { MainMenuButton } from '../buttons/MainMenuButton';
 import { TEXT_STYLE } from '../../styles/common/textStyles';
-import { convertWalletAddress } from '../../libs/utils/utils';
+import { convertWalletAddress, formatMoney } from '../../libs/utils/utils';
 
 const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 	const { asPath } = useRouter();
@@ -95,7 +95,7 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 						{walletAccount ?
 							<WalletAccount>
 								<WalletAccountChain>BSC Mainnet</WalletAccountChain>
-								<WalletAccountAddress>{bnbBalance?.length && parseFloat(bnbBalance) > 0 ? parseFloat(bnbBalance).toFixed(4) : '0.00'} <img src={HEADER_ICON_BNB} />									
+								<WalletAccountAddress>{bnbBalance?.length && parseFloat(bnbBalance) > 0 ? formatMoney(bnbBalance) : '0.00'} <img src={HEADER_ICON_BNB} />									
 									<ButtonAddress onClick={handleClick}>{convertWalletAddress(walletAccount, 6, 3)}</ButtonAddress>
 									<ActiveProver
 										open={open}
