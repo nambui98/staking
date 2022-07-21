@@ -6,6 +6,7 @@ import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton
 import { StateStaking } from '../../../const';
 import { MARKETPLACE_ICON } from '../../../constants/marketplace';
 import { useWalletContext } from '../../../contexts/WalletContext';
+import { unStake } from '../../../libs/staking';
 import { formatMoney } from '../../../libs/utils/utils';
 
 type Props = {
@@ -19,6 +20,7 @@ type Props = {
 	balanceCP: string
 	balanceUS: string
 	claimableTime: string
+	unStakePrice: number
 }
 export const UnstakedSuccess = (props: Props) => {
 	const { setStateContent,
@@ -125,11 +127,39 @@ export const UnstakedSuccess = (props: Props) => {
 	)
 }
 export const UnstakeAgain = (props: Props) => {
-	const handleContinueUnStaking = () => {
-		props.setStateContent(StateStaking.Unstake);
+	const { setIsLoading, handleClickSuccess, handleClickError, setStateContent, unStakePrice } = props;
+	const { ethersSigner, ethersProvider, setRefresh, refresh } = useWalletContext();
+	const handleContinueUnStaking = async () => {
+		setIsLoading(true)
+		try {
+			const res = await unStake(unStakePrice.toString(), ethersSigner);
+			setIsLoading(false)
+			if (res?.status) {
+				setRefresh(!refresh)
+				handleClickSuccess({
+					titleSuccess: 'Unstake successfully!',
+					functionSuccess: () => {
+						setStateContent(StateStaking.UnstakedSuccess)
+					},
+					stateContentNew: StateStaking.Success
+				})
+			}
+
+		} catch (error: any) {
+			const message = error.reason || "Something went wrong, please try again";
+			setIsLoading(false);
+			handleClickError({
+				titleError: message,
+				functionError: () => {
+					setStateContent(StateStaking.Unstake)
+				},
+				stateContentNew: StateStaking.Error
+			})
+		}
+		// props.setStateContent(StateStaking.Unstake);
 	}
 	const handleCancel = () => {
-		props.setStateContent(StateStaking.UnstakedSuccess);
+		props.setStateContent(StateStaking.Unstake);
 	}
 	const time = () => {
 		let time = new Date();
@@ -145,13 +175,13 @@ export const UnstakeAgain = (props: Props) => {
 
 						<img src={MARKETPLACE_ICON.infocircle} alt="" />
 					</Box>
-					<Typography fontSize={14} color="#31373E" fontWeight={500} lineHeight="20px" mt={{ xs: '10px', sm: "28px" }}>You have to wait until <span style={{ color: '#FF6F61' }}>${time()}</span> UTC to withdraw your token(s). Do you want to continue?</Typography>
+					<Typography fontSize={14} color="#31373E" fontWeight={500} lineHeight="20px" mt={{ xs: '10px', sm: "28px" }}>You have to wait until <span style={{ color: '#FF6F61' }}>{time()} UTC </span>to withdraw. Penalty fee is required if you want to withdraw your token(s) sooner.<br /><br /> Do you want to continue?</Typography>
 					{/* <Typography fontSize={14} color="#FF6F61" fontWeight={500} lineHeight="20px" mt="28px">YOU ARE UNSTAKING.</Typography> */}
 				</Box>
 			</Box>
 			<Box mt="auto" width={"100%"} sx={{ paddingTop: "16px", borderTop: "1px solid #E9EAEF" }}>
-				<MarketplaceButton customStyle={{ width: "100%" }} title={"Continue Unstaking"} handleOnClick={handleContinueUnStaking} />
-				<ButtonOutline onClick={handleCancel} sx={{ marginTop: "25px", color: "#31373E", height: "38px", flex: 1, borderColor: "#E9EAEF" }} variant="text">
+				<MarketplaceButton customStyle={{ width: "100%" }} title={"Continue"} handleOnClick={handleContinueUnStaking} />
+				<ButtonOutline onClick={handleCancel} sx={{ marginTop: "8px", width: "100%", color: "#31373E", height: "38px", flex: 1, borderColor: "#E9EAEF" }} variant="text">
 					Cancel
 				</ButtonOutline>
 			</Box>

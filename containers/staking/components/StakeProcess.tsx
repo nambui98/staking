@@ -108,7 +108,7 @@ export const StakeProcess = ({
 				<TitleItem >you want to stake</TitleItem>
 				<ValueItem>
 					<Search
-						value={value ? formatMoney(value) : ''}
+						value={value}
 						placeholder=""
 						onChange={(e) => {
 							let valueParse = e.target.value.replace(/,/g, "")

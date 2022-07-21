@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/styles'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
 import { StateStaking } from '../../../const';
 import { MARKETPLACE_ICON } from '../../../constants/marketplace';
@@ -18,6 +18,7 @@ type Props = {
 	balanceSA: string
 	balanceCP: string
 	balanceUS: string
+	setUnStakePrice: Function
 }
 const percents = [
 	{
@@ -46,40 +47,20 @@ export const Unstake = (props: Props) => {
 		balanceFiu,
 		balanceSA,
 		balanceCP,
-		balanceUS } = props;
+		balanceUS,
+		setUnStakePrice } = props;
 	const [value, setValue] = useState('');
 	const [messageError, setMessageError] = useState('');
 	const { ethersSigner, ethersProvider, setRefresh, refresh } = useWalletContext();
+
+	useEffect(() => {
+		setUnStakePrice(0);
+	}, [])
+
 	const handleUnStake = async () => {
-		setIsLoading(true)
-		try {
-			const res = await unStake(value, ethersSigner);
-			const checkStatus = setInterval(async () => {
-				const statusApprove = await ethersProvider.getTransactionReceipt(res.hash);
-				if (statusApprove?.status) {
-					setIsLoading(false)
-					setRefresh(!refresh)
-					handleClickSuccess({
-						titleSuccess: 'Unstake successfully!',
-						functionSuccess: () => {
-							setStateContent(StateStaking.UnstakedSuccess)
-						},
-						stateContentNew: StateStaking.Success
-					})
-					clearInterval(checkStatus)
-				}
-			}, 1000);
-		} catch (error: any) {
-			const message = error.reason || "Something went wrong, please try again";
-			setIsLoading(false);
-			handleClickError({
-				titleError: message,
-				functionError: () => {
-					setStateContent(StateStaking.Unstake)
-				},
-				stateContentNew: StateStaking.Error
-			})
-		}
+		setUnStakePrice(value)
+		setStateContent(StateStaking.UnstakeAgain)
+
 
 	}
 	const handleValueWithPercent = (percent: number) => {
@@ -165,7 +146,9 @@ export const Unstake = (props: Props) => {
 			</Item>
 
 			<Box mt="auto" width={"100%"} sx={{ paddingTop: "16px", borderTop: "1px solid #E9EAEF" }}>
-				<MarketplaceButton disabled={!value || messageError ? true : false} customStyle={{ width: "100%" }} title={"Unstake"} handleOnClick={handleUnStake} />
+				<MarketplaceButton
+					disabled={!value || messageError ? true : false}
+					customStyle={{ width: "100%" }} title={"Unstake"} handleOnClick={handleUnStake} />
 			</Box></>
 	)
 }

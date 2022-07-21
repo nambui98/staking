@@ -69,7 +69,8 @@ export const unStake = async (price: string, ethersSigner: any) => {
 	const beFITTERStakeStakingContract = new ethers.Contract(beFITTERStakeStaking.address, beFITTERStakeStaking.abi, ethersSigner);
 	const parsePrice = ethers.utils.parseUnits(price)
 	const res = await beFITTERStakeStakingContract.unstake(parsePrice)
-	return res;
+
+	return res.wait();
 }
 export const toClaimableTime = async (walletAccount: any, ethersSigner: any) => {
 	const beFITTERStakeStakingContract = new ethers.Contract(beFITTERStakeStaking.address, beFITTERStakeStaking.abi, ethersSigner);
