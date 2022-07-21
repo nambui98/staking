@@ -96,11 +96,11 @@ export const StakeProcess = ({
 	}
 	return (
 		<>
-			<Item>
+			<Item sx={{ mt: '16px!important' }}>
 				<TitleItem>your current balance</TitleItem>
 				<ValueItem>{formatMoney(balanceFiu)} FIU</ValueItem>
 			</Item>
-			<Item>
+			<Item sx={{ mt: '16px!important' }}>
 				<TitleItem >your current amount staked</TitleItem>
 				<ValueItem>{formatMoney(balanceSA)} FIU</ValueItem>
 			</Item>
@@ -114,7 +114,7 @@ export const StakeProcess = ({
 							let valueParse = e.target.value.replace(/,/g, "")
 							if (Number(valueParse)) {
 								if (parseFloat(valueParse) > 0) {
-									if (parseFloat(balanceSA) < 4000 && parseFloat(balanceSA) !== 0) {
+									if (parseFloat(balanceSA) >= 4000) {
 										if (parseFloat(valueParse) > parseFloat(balanceFiu)) {
 											setValue(valueParse)
 											setMessageError("Insufficient balance")
@@ -123,12 +123,10 @@ export const StakeProcess = ({
 											setMessageError("")
 										}
 									} else {
-
-										if (parseFloat(valueParse) < 4000) {
+										if ((parseFloat(valueParse) + parseFloat(balanceSA)) < 4000) {
 											setValue(valueParse)
 											setMessageError("You need to stake minimum 4000")
 										} else {
-
 											if (parseFloat(valueParse) > parseFloat(balanceFiu)) {
 												setValue(valueParse)
 												setMessageError("Insufficient balance")
@@ -138,6 +136,30 @@ export const StakeProcess = ({
 											}
 										}
 									}
+									// if (parseFloat(balanceSA) >= 4000) {
+									// 	if (parseFloat(valueParse) > parseFloat(balanceFiu)) {
+									// 		setValue(valueParse)
+									// 		setMessageError("Insufficient balance")
+									// 	} else {
+									// 		setValue(valueParse)
+									// 		setMessageError("")
+									// 	}
+									// } else {
+
+									// 	if (parseFloat(valueParse) < 4000) {
+									// 		setValue(valueParse)
+									// 		setMessageError("You need to stake minimum 4000")
+									// 	} else {
+
+									// 		if (parseFloat(valueParse) > parseFloat(balanceFiu)) {
+									// 			setValue(valueParse)
+									// 			setMessageError("Insufficient balance")
+									// 		} else {
+									// 			setValue(valueParse)
+									// 			setMessageError("")
+									// 		}
+									// 	}
+									// }
 								} else {
 									setValue(valueParse)
 									setMessageError("Please enter a positive number")
