@@ -69,7 +69,8 @@ export const Boxtabs = () => {
   const getTotalFitterPass = async () => {
     const contract = new ethers.Contract(beFITTERPassStaking.address, beFITTERPassStaking.abi, ethersSigner);
     const balance = await contract.balanceOf(walletAccount, '0')
-    const formatBalance = ethers.utils.formatEther(balance)
+    const formatBalance = ethers.utils.formatUnits(balance, 'wei')
+    console.log(formatBalance, 123)
     formatBalance && setFitterPassBalance(parseFloat(formatBalance))
   }
 
