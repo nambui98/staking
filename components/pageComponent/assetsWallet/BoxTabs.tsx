@@ -2,7 +2,7 @@ import { Box, BoxProps, Button, InputBase, Stack, styled, Typography, useMediaQu
 import { useEffect, useState } from "react";
 import { BOX_DETAILS, ICON, IMAGE, TAB_ITEM, TAB_NAME } from "../../../constants/assetsWallet";
 import { useWalletContext } from "../../../contexts/WalletContext"
-import { getBoxType, getOwnedBox } from "../../../libs/claim";
+import { getBoxType, getOwnedBox, getOwnedFitterPass } from "../../../libs/claim";
 import { MarketplaceService } from "../../../services/user.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
 import { FormInfomationPopup } from "../marketplace/FormInfomationPopup";
@@ -12,9 +12,12 @@ import { TokenTab } from "./TokenTab";
 import addressBuyBox from '../../../abi/addressBuyBox.json';
 import { useCommonContext } from "../../../contexts/CommonContext";
 import { SendToSpending } from "./SenToSpending";
-import { ethers } from "ethers";
 import { bftBox } from "../../../libs/contracts";
 import { formatMoney } from "../../../libs/utils/utils";
+import { beFITTERPassStaking } from "../../../libs/contracts";
+import { ethers, utils } from "ethers"
+import { FitterPassTab } from "./FitterPass";
+import { ClockUtc } from "../../clockUtc";
 
 export const Boxtabs = () => {
   const { walletAccount, bnbBalance, fiuBalance, heeBalance, ethersSigner, boxBalance } = useWalletContext();
@@ -27,6 +30,8 @@ export const Boxtabs = () => {
   const [tokenChoose, setTokenChoose] = useState<string>('');
   const [boxChoose, setBoxChoose] = useState<string>('');
   const [listBoxType, setListBoxType] = useState<any[]>([]);
+  const [fitterPassBalance, setFitterPassBalance] = useState<any>(0)
+
 
   const handleSwitchTab = (tab: string) => {
     setCurrentTab(tab);
@@ -39,6 +44,8 @@ export const Boxtabs = () => {
         return <TokenTab tokenChoose={tokenChoose} setTokenChoose={setTokenChoose} />
       case TAB_NAME.box:
         return <MysteryBoxTab boxChoose={boxChoose} setBoxChoose={setBoxChoose} listBoxType={listBoxType} currentTab={currentTab} />
+      case TAB_NAME.fitterPass:
+        return <FitterPassTab fitterPassBalance={fitterPassBalance} />
       default:
         break;
     }
@@ -75,7 +82,7 @@ export const Boxtabs = () => {
     const res = await getOwnedBox(walletAccount, ethersSigner);
     const boxType = await res?.map(async (item: any) => {
       const res = await getBoxType(item, boxContract);
-      return {id: item, type: res};
+      return { id: item, type: res };
     })
     Promise.all(boxType).then((values) => {
       const newData = values?.reduce((init, item) => {
@@ -84,12 +91,12 @@ export const Boxtabs = () => {
             ...BOX_DETAILS.gold,
             boxId: ethers.utils.formatUnits(item.id, 'wei')
           })
-        } else if(item.type === 'silver'){
+        } else if (item.type === 'silver') {
           init.push({
             ...BOX_DETAILS.silver,
             boxId: ethers.utils.formatUnits(item.id, 'wei')
           })
-        } else if(item.type === 'diamond'){
+        } else if (item.type === 'diamond') {
           init.push({
             ...BOX_DETAILS.diamond,
             boxId: ethers.utils.formatUnits(item.id, 'wei')
@@ -101,12 +108,28 @@ export const Boxtabs = () => {
       spinner.handleChangeStatus(false)
     });
   }
+  const getTotalFitterPass = async () => {
+    try {
+      const res = await getOwnedFitterPass(walletAccount, ethersSigner)
+      if (res) {
+        setFitterPassBalance(parseFloat(res))
+      } else {
+        setFitterPassBalance(0)
+      }
+    } catch (error) {
+      setFitterPassBalance(0)
+    }
+  }
 
   useEffect(() => {
     getTotalBox();
     checkAddressBuyBox();
     getListBox();
   }, [walletAccount])
+
+  useEffect(() => {
+    getTotalFitterPass()
+  }, [walletAccount, currentTab])
 
   return (
     <Wrap>
@@ -122,7 +145,7 @@ export const Boxtabs = () => {
                 <img style={!item.active ? iconGray : {}} src={item.icon} />{!isMobile ?
                   <Typography sx={!item.active ? { color: '#A7ACB8 !important' } : {}}>{item.title}</Typography> : currentTab === item.title && <Typography>{item.title}</Typography>}
                 {!item.active && !isMobile && <span>Coming soon</span>}
-                {!isMobile && item.active && index > 0 && <Typography>{totalBox}</Typography>}
+                {!isMobile && item.active && index > 0 && <Typography>{index === 4 ? fitterPassBalance : totalBox}</Typography>}
               </TabItem>
             ))}
           </TabBox>
@@ -140,6 +163,8 @@ export const Boxtabs = () => {
       </TabBody>
       <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
       {statusBuyBox && isMobile && !statusFormGetBonus && <BoxBonus><ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus></BoxBonus>}
+
+      {!isMobile && <ClockUtc />}
     </Wrap>
   )
 }
@@ -183,6 +208,7 @@ const Wrap = styled(Stack)({
     borderRadius: 16,
     // background: '#F8F9FB',
     flexDirection: 'column',
+    marginTop: 10,
   }
 })
 const TabLeft = styled(Stack)({

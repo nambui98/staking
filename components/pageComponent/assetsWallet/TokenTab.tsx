@@ -39,11 +39,11 @@ export const TokenTab: React.FC<IProps> = ({tokenChoose, setTokenChoose}) => {
 }
 
 const Wrap = styled(Stack)({
-  marginTop: 16,
-  width: '100%',
-  '@media (min-width: 768px)': {
-    marginTop: 0
-  }
+	marginTop: 16,
+	width: '100%',
+	'@media (min-width: 768px)': {
+		marginTop: 0
+	}
 })
 const Title = styled(Typography)({
   ...TEXT_STYLE(12, 600, '#ffffff'),
@@ -51,18 +51,18 @@ const Title = styled(Typography)({
   textTransform: 'uppercase',
 })
 type amountProps = TypographyProps & {
-  typeBnb: boolean
+	typeBnb: boolean
 }
 const Amount = styled(Typography)((props: amountProps) => ({
-  ...TEXT_STYLE(32, 600, props.typeBnb ? '#31373E' : '#ffffff'),
-  display: 'flex',
-  '@media (min-width: 768px)': {
-    ...TEXT_STYLE(40, 600, props.typeBnb ? '#31373E' : '#ffffff'),
-  },
-  '& span': {
-    ...TEXT_STYLE(16, 500, props.typeBnb ? '#31373E' : '#F8F9FB'),
-    marginLeft: 8
-  }
+	...TEXT_STYLE(32, 600, props.typeBnb ? '#31373E' : '#ffffff'),
+	display: 'flex',
+	'@media (min-width: 768px)': {
+		...TEXT_STYLE(40, 600, props.typeBnb ? '#31373E' : '#ffffff'),
+	},
+	'& span': {
+		...TEXT_STYLE(16, 500, props.typeBnb ? '#31373E' : '#F8F9FB'),
+		marginLeft: 8
+	}
 }))
 type itemProps = BoxProps & {
   tokenName: string
@@ -97,14 +97,14 @@ const ItemLeft = styled(Box)({
 
 })
 const ImageToken = styled(Box)({
-  lineHeight: 0
+	lineHeight: 0
 })
 const ItemFiu = {
-  background: 'linear-gradient(84.49deg, #FF612F 2.08%, rgba(255, 109, 36, 0) 70.33%)'
+	background: 'linear-gradient(84.49deg, #FF612F 2.08%, rgba(255, 109, 36, 0) 70.33%)'
 }
 const ItemHee = {
-  background: 'linear-gradient(84.49deg, #1DB268 2.08%, rgba(29, 178, 104, 0) 67.71%)'
+	background: 'linear-gradient(84.49deg, #1DB268 2.08%, rgba(29, 178, 104, 0) 67.71%)'
 }
 const ItemBnb = {
-  background: 'linear-gradient(84.49deg, #FFC83A 2.08%, rgba(255, 200, 58, 0) 67.19%)'
+	background: 'linear-gradient(84.49deg, #FFC83A 2.08%, rgba(255, 200, 58, 0) 67.19%)'
 }

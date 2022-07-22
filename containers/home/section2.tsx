@@ -193,7 +193,7 @@ const Section2: NextPage = () => {
 
 						</Box>
 						<Box sx={{
-							backgroundColor: "#1C1E29",
+							backgroundColor: "#151515",
 							borderRadius: "50%",
 							position: 'relative',
 							// padding: "20px",

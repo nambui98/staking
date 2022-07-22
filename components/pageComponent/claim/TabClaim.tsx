@@ -1,27 +1,38 @@
-import { Backdrop, Box, Button, ButtonProps, CircularProgress, FormControl, InputLabel, MenuItem, Select, Stack, styled, Typography } from "@mui/material"
+import { Backdrop, Box, Button, ButtonProps, CircularProgress, FormControl, InputLabel, MenuItem, Select, Stack, styled, Typography, useMediaQuery } from "@mui/material"
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { RECAPTCHA_SITE_KEY } from "../../../const";
-import { CLAIM_IMAGE } from "../../../constants/claim";
+import { CLAIM_IMAGE, CLAIM_TOKEN_TIME } from "../../../constants/claim";
 import { PAGE } from "../../../constants/header";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
-import { getClaimedBox, handleClaimBox } from "../../../libs/claim";
-import { bftClaimGamefi, bftClaimEnjin } from "../../../libs/contracts";
-import { convertWalletAddress } from "../../../libs/utils/utils";
+import { checkClaimedToken, getClaimedBox, getClaimedToken, getLockedOf, handleClaimBox, handleClaimToken } from "../../../libs/claim";
+import { bftClaimGamefi, bftClaimEnjin, bftClaimAlphaBeta, bftClaimOther, bftClaimAlphaBeta2 } from "../../../libs/contracts";
+import { convertWalletAddress, formatNumberWithCommas } from "../../../libs/utils/utils";
 import { ClaimService } from "../../../services/claim.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
 import { MarketplaceButton } from "../../buttons/MarketplaceButton";
+import { ClockUtc } from "../../clockUtc";
 import { ConnectBox } from "./ConnectBox";
 import { PopupMessage } from "./PopupMessage";
 
-// const RECAPTCHA_SITE_KEY = "6Lc275cgAAAAAAHHwNMoAh448YXBi-jz3AeS-4A9"
+const bodyPopupTokenTime = () => {
+  return <BodyPopupTokenTime>
+    <TitleTokenTime><span>TIME (UTC)</span> <span>PERCENT</span></TitleTokenTime>
+    <InnerTokenTime>
+      {CLAIM_TOKEN_TIME?.map((item, index) => <Box key={index}>
+        <Typography>{item.day}</Typography>{item.time} <span>{item.percent}</span>
+      </Box>)}
+    </InnerTokenTime>
+  </BodyPopupTokenTime>
+}
 
 export const TabClaim = () => {
   const router = useRouter();
+  const isMobile = useMediaQuery('(max-width: 767px)');
   const {walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
-  const [currentTab, setCUrrentTab] = useState<'box' | 'token'>('box');
+  const [currentTab, setCurrentTab] = useState<'box' | 'token'>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [roundSelected, setRoundSelected] = useState<string>('');
   const [captchaToken, setCaptchaToken] = useState('');
@@ -32,6 +43,9 @@ export const TabClaim = () => {
   const [popupError, setPopupError] = useState(false);
   const [popupSuccess, setPopupSuccess] = useState(false);
   const [statusLoading, setStatusLoading] = useState<boolean>(false);
+  const [checkClaimed, setCheckClaimed] = useState<boolean>(false);
+  const [tokenTimeStatus, setTokenTimeStatus] = useState<boolean>(false);
+  const [claimAble, setClaimAble] = useState<any>('')
 
   const onReCAPTCHAChange = async (captchaCode: any) => {
     if (!captchaCode) {
@@ -41,28 +55,58 @@ export const TabClaim = () => {
   }
 
   const checkStatusButton = () => {
-    if (dataClaim.totalBox > dataClaim.claimed && captchaToken.length && roundSelected.length) {
+    if (dataClaim.totalBox > dataClaim.claimed && captchaToken.length && roundSelected.length && checkClaimed) {
       return true
     }
     return false;
   }
 
   const getClaimedBoxNumber = async () => {
-    if(!chainIdIsSupported) {
+    if (!chainIdIsSupported) {
       await changeNetwork(provider)
     }
     try {
       const res: any = await ClaimService.getAmount((walletAccount.toLowerCase()), captchaToken, roundSelected, false);
+      setCheckClaimed(true)
       if (res?.data?.status) {
         const claimContractGamefi = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
         const claimContractEnjinstarter = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
-        const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), roundSelected === "3" ? claimContractGamefi : claimContractEnjinstarter);
+        const claimContractAlphaBeta = await new ethers.Contract(bftClaimAlphaBeta.address, bftClaimAlphaBeta.abi, ethersSigner);
+        const claimContractOther = await new ethers.Contract(bftClaimOther.address, bftClaimOther.abi, ethersSigner);
+        const claimContractAlphaBeta2 = await new ethers.Contract(bftClaimAlphaBeta2.address, bftClaimAlphaBeta2.abi, ethersSigner);
+        const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), roundSelected === '1' ? claimContractAlphaBeta : roundSelected === '2' ? claimContractOther : roundSelected === '6' ? claimContractAlphaBeta2 : roundSelected === "3" ? claimContractGamefi : claimContractEnjinstarter);
         setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount }) 
       } else {
-        setDataClaim({claimed: 0, totalBox: 0})
+        setDataClaim({ claimed: 0, totalBox: 0 })
       }
     } catch (error) {
-      setDataClaim({claimed: 0, totalBox: 0})
+      setDataClaim({ claimed: 0, totalBox: 0 })
+      console.log(error)
+    }
+  }
+
+  const getClaimedTokenNumber = async () => {
+    if (!chainIdIsSupported) {
+      await changeNetwork(provider)
+    }
+    try {
+      const res: any = await ClaimService.getAmount((walletAccount.toLowerCase()), captchaToken, roundSelected, false);
+      const dataLockedOf = await getLockedOf(walletAccount, ethersSigner)
+      const dataCheckClaimed = await checkClaimedToken(walletAccount, ethersSigner)
+      console.log(parseFloat(ethers.utils.formatEther(dataLockedOf)), 123)
+      if(parseFloat(ethers.utils.formatEther(dataLockedOf)) === 0){
+        setCheckClaimed(true)
+      } else {
+        parseInt(ethers.utils.formatEther(dataCheckClaimed)) > 0 ? setCheckClaimed(true) : setCheckClaimed(false)
+      }
+      if (res?.data?.status) {
+        const dataClaimed = await getClaimedToken(walletAccount, ethersSigner)
+        setDataClaim({ claimed: parseInt(ethers.utils.formatEther(dataClaimed)), totalBox: res.data.amount })
+      } else {
+        setDataClaim({ claimed: 0, totalBox: 0 })
+      }
+    } catch (error) {
+      setDataClaim({ claimed: 0, totalBox: 0 })
       console.log(error)
     }
   }
@@ -73,11 +117,14 @@ export const TabClaim = () => {
     if (res?.data?.status) {
       const claimContractGamefi = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
       const claimContractEnjinstarter = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
+      const claimContractAlphaBeta = await new ethers.Contract(bftClaimAlphaBeta.address, bftClaimAlphaBeta.abi, ethersSigner);
+      const claimContractOther = await new ethers.Contract(bftClaimOther.address, bftClaimOther.abi, ethersSigner);
+      const claimContractAlphaBeta2 = await new ethers.Contract(bftClaimAlphaBeta2.address, bftClaimAlphaBeta2.abi, ethersSigner);
       try {
-        const resultClaim: any = await handleClaimBox(walletAccount, roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data);       
-        const checkStatus = setInterval( async () => {
+        const resultClaim: any = await handleClaimBox(walletAccount, roundSelected === '6' ? claimContractAlphaBeta2 : roundSelected === '1' ? claimContractAlphaBeta : roundSelected === '2' ? claimContractOther : roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data)
+        const checkStatus = setInterval(async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
-          if(statusClaim?.status){
+          if (statusClaim?.status) {
             setPopupSuccess(true);
             setStatusLoading(false);
             getClaimedBoxNumber();
@@ -92,7 +139,7 @@ export const TabClaim = () => {
         setPopupError(true)
       }
     } else {
-      if(res?.data?.captchaValidation === false){
+      if (res?.data?.captchaValidation === false) {
         setTimeout(() => {
           window.location.reload()
         }, 2000);
@@ -100,26 +147,63 @@ export const TabClaim = () => {
       setPopupError(true)
       setStatusLoading(false)
     }
+  }
 
+  const handleClaimTokenButton = async () => {
+    setStatusLoading(true)
+    const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, true);
+    if (res?.data?.status) {
+      try {
+        const resultClaim: any = await handleClaimToken(walletAccount, res.data, ethersSigner)
+        const checkStatus = setInterval(async () => {
+          const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
+          if (statusClaim?.status) {
+            console.log(statusClaim)
+            setPopupSuccess(true);
+            setStatusLoading(false);
+            getClaimedBoxNumber();
+            setRoundSelected('');
+            updateBnbBalance();
+            clearInterval(checkStatus);
+          }
+        }, 1000);
+
+      } catch (error) {
+        setStatusLoading(false)
+        setPopupError(true)
+        console.log(error)
+      }
+    } else {
+      if (res?.data?.captchaValidation === false) {
+        setTimeout(() => {
+          window.location.reload()
+        }, 2000);
+      }
+      setPopupError(true)
+      setStatusLoading(false)
+    }
   }
 
   useEffect(() => {
-    getClaimedBoxNumber();
+    currentTab == 'box' ? getClaimedBoxNumber() : getClaimedTokenNumber();
   }, [walletAccount, roundSelected])
 
   useEffect(() => {
+    setRoundSelected('')
+  }, [currentTab])
+
+  useEffect(() => {   
     if (currentTab === 'token') {
       setSelectItem([
-        { title: 'Seed', value: 'Seed' },
-        { title: 'Private', value: 'Private' },
-        { title: 'Airdrop', value: 'Airdrop' },
+        { title: 'Public Sale', value: '5' }
       ])
     } else {
       setSelectItem([
         { title: 'GameFi.org', value: '3' },
         { title: 'Enjinstarter', value: '4' },
-        { title: 'Alpha Test Reward', value: '1' },
-        { title: 'Beta Test Reward', value: '2' },
+        { title: 'Alpha, Beta Test Reward', value: '1' },
+        { title: 'Alpha, Beta Test Reward Extra', value: '6' },
+        { title: 'Other Events', value: '2' },
       ])
     }
   }, [currentTab])
@@ -135,8 +219,8 @@ export const TabClaim = () => {
         <Typography sx={{ ...TEXT_STYLE(14, 500), marginBottom: '12px', color: '#5A6178' }}>I want to claim</Typography>
         <BoxTab>
           <Box>
-            <TabItem sx={{ marginRight: '4px' }} active={currentTab === 'box' ? true : false}>Box</TabItem>
-            <TabItem sx={{opacity: '0.4'}} active={currentTab === 'token' ? true : false}>Token</TabItem>
+            <TabItem sx={{ marginRight: '4px' }} active={currentTab === 'box' ? true : false} onClick={() => setCurrentTab('box')}>Box</TabItem>
+            <TabItem active={currentTab === 'token' ? true : false} onClick={() => setCurrentTab('token')}>Token</TabItem>
           </Box>
         </BoxTab>
         <Stack>
@@ -147,29 +231,31 @@ export const TabClaim = () => {
               labelId="test-select-label"
               value={roundSelected}
               label="Select round"
-              onChange={e => (e.target.value === '3' || e.target.value === '4') && setRoundSelected(e.target.value as string)}
+              onChange={e => setRoundSelected(e.target.value as string)}
             >
-              {selecItem?.length && selecItem?.map((item: any, index: number) => <SelectItem sx={(item.value === '3' || item.value === '4') ? activeItem : {}} key={index} value={item.value}>{item.title}</SelectItem>)}
+              {selecItem?.length && selecItem?.map((item: any, index: number) => <SelectItem sx={activeItem} key={index} value={item.value}>{item.title}</SelectItem>)}
             </BoxSelect>
           </FormControl>
           {roundSelected && dataClaim ? <DataClaimBox>
-            <Typography>Total {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.totalBox} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : CLAIM_IMAGE.box} /></span></Typography>
-            <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.claimed} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : CLAIM_IMAGE.box} /></span></Typography>
+            <Typography>Total {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.totalBox} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2' || roundSelected === '6') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
+            <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.claimed} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2' || roundSelected === '6') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
           </DataClaimBox> : <BoxBg><img src={CLAIM_IMAGE.bgClaim} /></BoxBg>}
-          <ReCAPTCHA
+          {roundSelected && <ReCAPTCHA
             ref={recaptchaRef}
             sitekey={RECAPTCHA_SITE_KEY}
             onChange={onReCAPTCHAChange}
-          />
+          />}
+          {currentTab === 'token' && <ClaimTime onClick={() => setTokenTimeStatus(true)}>Claim time</ClaimTime>}
         </Stack>
-        <ButtonClaim active={checkStatusButton()} disabled={checkStatusButton() ? false : true} onClick={handleClaimButton}>Claim</ButtonClaim>
+        <ButtonClaim active={checkStatusButton()} disabled={checkStatusButton() ? false : true} onClick={() => currentTab === 'box' ? handleClaimButton() : handleClaimTokenButton()}>Claim</ButtonClaim>
       </Stack>}
       <PopupMessage title="You have successfully claimed your item!" message={
         <BodyPopupSuccess>
-          <MarketplaceButton customStyle={{width: '100%'}} title={'View in wallet'} handleOnClick={() => router.push(PAGE.ASSETS.link)} />
-          {dataClaim.totalBox > dataClaim.claimed && <Typography sx={{cursor: 'pointer'}} onClick={() => window.location.reload()}>Claim more items</Typography>}
-      </BodyPopupSuccess>
-      } status={popupSuccess} popupType="success" handleToggleStatus={() => window.location.reload()} />
+          <MarketplaceButton customStyle={{ width: '100%' }} title={'View in wallet'} handleOnClick={() => router.push(PAGE.ASSETS.link)} />
+        </BodyPopupSuccess>
+      } status={popupSuccess} popupType="success" handleToggleStatus={() => setPopupSuccess(false)} />
+
+      <PopupMessage title="Token Claim time" message={bodyPopupTokenTime()} status={tokenTimeStatus} handleToggleStatus={() => setTokenTimeStatus(false)} />
       <PopupMessage title="Error!" status={popupError} titleButton="Try again" popupType="error" handleToggleStatus={() => setPopupError(false)}
         handleClickButton={() => setPopupError(false)} titleCustomColor={{ '& p': { color: '#FF6F61' } }} message="Something went wrong. Please try again!" />
       <Backdrop
@@ -178,6 +264,7 @@ export const TabClaim = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
+      {!isMobile && <ClockUtc/>}
     </Wrap>
   )
 }
@@ -191,6 +278,61 @@ const Wrap = styled(Stack)({
   backgroundColor: '#ffffff',
   justifyContent: 'center',
   textAlign: 'center'
+})
+const ClaimTime = styled(Box)({
+  textDecoration: 'underline',
+  cursor: 'pointer',
+  textAlign: 'center',
+  marginTop: 10,
+  ...TEXT_STYLE(16, 500, '#5A6178')
+})
+const BodyPopupTokenTime = styled(Box)({
+
+})
+const TitleTokenTime = styled(Typography)({
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginBottom: 24,
+  ...TEXT_STYLE(16, 600, '#5A6178')
+})
+const InnerTokenTime = styled(Box)({
+  maxHeight: 306,
+  overflow: 'auto',
+  paddingRight: 10,
+  '@media (min-width: 768px)': {
+    maxHeight: 506,
+  },
+  '&::-webkit-scrollbar': {
+    width: 4,
+  },
+  '&::-webkit-scrollbar-track': {
+    background: '#E9EAEF',
+    borderRadius: 10
+  },
+  '&::-webkit-scrollbar-thumb': {
+    background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
+    borderRadius: 10
+  },
+  '&::-webkit-scrollbar-thumb:hover': {
+    background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)'
+  },
+
+  '& div': {
+    textAlign: 'left',
+    display: 'flex',
+    padding: '8px 0',
+    ...TEXT_STYLE(16, 500, '#31373E'),
+    '& span': {
+      marginLeft: 'auto'
+    }
+  },
+  '& div:nth-child(2n)': {
+    background: '#F8F9FB'
+  },
+  '& p': {
+    minWidth: 95,
+    marginRight: 16
+  }
 })
 const BodyPopupSuccess = styled(Box)({
   display: 'flex',
@@ -313,6 +455,7 @@ const DataClaimBox = styled(Box)({
     alignItems: 'center'
   },
   '& img': {
-    marginLeft: '8px'
+    marginLeft: '8px',
+    maxWidth: '32px'
   }
 })

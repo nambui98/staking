@@ -13,6 +13,7 @@ export const ICON = {
   shoeYellow: 'assets/icons/rare-yellow.svg',
   shoeGray: 'assets/icons/standard-gray.svg',
   gift: 'assets/icons/gift.svg',
+  fitterPass: 'assets/icons/fitterpass.svg'
 }
 
 export const IMAGE = {
@@ -53,7 +54,8 @@ export const TAB_NAME = {
   token: 'Token',
   shoe: 'Shoes',
   box: 'Mystery Boxes',
-  pet: 'Pets'
+  pet: 'Pets',
+  fitterPass: 'Fitter Pass'
 }
 
 export const TAB_ITEM = [
@@ -61,6 +63,7 @@ export const TAB_ITEM = [
   {title: TAB_NAME.shoe, icon: ICON.shoe, active: false},
   {title: TAB_NAME.box, icon: ICON.box, active: true},
   {title: TAB_NAME.pet, icon: ICON.pet, active: false},
+  {title: TAB_NAME.fitterPass, icon: ICON.fitterPass, active: true},
 ]
 
 export const BOX_DETAILS = {
@@ -94,4 +97,10 @@ export const BOX_DETAILS = {
       iconic: '10%'
     }
   }
+}
+
+export const FITTER_PASS = {
+  title: 'Fitter Pass',
+  id: '0',
+  image: 'assets/fitterPass.png'
 }

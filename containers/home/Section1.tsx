@@ -1,4 +1,4 @@
-import { Box, Stack, styled, Typography, useMediaQuery } from "@mui/material"
+import { Box, Link, Stack, styled, Typography, useMediaQuery } from "@mui/material"
 import React, { useEffect, useRef, useState } from "react";
 import {
 	videoSlides,
@@ -7,6 +7,7 @@ import {
 	CHALLENGE,
 	NUMBER,
 	WORKS,
+	LIST_LOGO,
 } from '../../constants/home';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination } from 'swiper';
@@ -103,7 +104,38 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 					);
 				})}
 			</Swiper>
-			<BoxCountDown>
+			<Box sx={{
+				position: 'fixed',
+				zIndex: '4',
+				bottom: 0,
+				left: '50%',
+				transform: 'translateX(-50%)',
+				textAlign: 'center',
+				maxWidth: '1120px',
+				width: '100%',
+			}}>
+				<Box sx={{
+					padding: '8px 0 0',
+					background: 'linear-gradient(180deg, rgba(28, 30, 41, 0) 0%, #1C1E29 100%)',
+					display: 'flex',
+					flexWrap: 'wrap',
+					alignItems: 'center',
+					justifyContent: 'center',
+					'@media (min-width: 768px)': {
+						padding: '4px 0',
+						background: 'linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 0.01%, rgba(255, 255, 255, 0.38) 50.82%, rgba(255, 255, 255, 0) 95.65%)'
+					}
+				}}>
+					{LIST_LOGO?.map((item, index) => (
+						<a href={item.url} key={index} target="_blank">
+							<Exchanges key={index} ><img style={{
+								width: index === 0 ? '65%' : index === 1 ? '80%' : index === 2 ? '70%' : index === 3 ? '93%' : index === 4 ? '85%' : '65%',
+							}} src={item.image} /> <BoxLive><img src='assets/live.gif' /></BoxLive></Exchanges>
+						</a>
+					))}
+				</Box>
+			</Box>
+			{/* <BoxCountDown>
 				<Box sx={{
 					'@media (min-width: 1024px)': {
 						display: 'flex',
@@ -167,7 +199,7 @@ export const Section1: React.FC<IProps> = ({ handleStatusPopup, statusPopup }) =
 						<a href="https://gamefi.org/igo/befitter-igo" target={'_blank'}><img src={'assets/dark/gf2.png'} /></a>
 					</Box>
 				</Box>
-			</BoxCountDown>
+			</BoxCountDown> */}
 		</Wrap>
 	)
 }
@@ -225,5 +257,39 @@ const TitleCountDown = styled(Box)({
 		'& img': {
 			width: 90,
 		}
+	}
+})
+const Exchanges = styled(Box)({
+	borderRadius: 24,
+	background: '#151515',
+	margin: '0 8px',
+	padding: '10px 5px',
+	width: 104,
+	height: 40,
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'center',
+	lineHeight: 0,
+	position: 'relative',
+	marginBottom: 16,
+	'& img': {
+		width: '100%'
+	},
+	'@media (min-width: 768px)': {
+		width: 144,
+		height: 48,
+		marginBottom: 0
+	},
+	'@media (min-width: 768px) and (max-width: 959px)': {
+		marginBottom: 10
+	}
+})
+const BoxLive = styled(Box)({
+	position: 'absolute',
+	right: 0,
+	top: -19,
+	'@media (min-width: 768px)': {
+		right: -4,
+		top: -13,
 	}
 })

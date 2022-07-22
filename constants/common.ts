@@ -13,14 +13,14 @@ export const MENU_ITEMS = [
 export const MENU_ITEMS_HOME = [
 	// { title: 'Staking', href: '/staking' },
 	// { title: 'HUB', href: 'https://hub.befitter.io/' },
-	{title: 'MANIFESTO', href: '#'},
+	{title: 'MANIFESTO', href: '/manifesto'},
 	{ title: 'WHITEPAPER', href: 'https://whitepaper.befitter.io/' },
 	// { title: 'ABOUT', href: '#' },
 	// { title: 'CONTACT', href: '#' },
 ];
 export const MENU_ITEMS_MOBILE = [
 	{ title: 'Staking', href: '/staking' },
-	{ title: 'HUB', href: 'https://hub.befitter.io/' },
+	{ title: 'HUB', href: 'https://hub.befitter.io/claim' },
 	{ title: 'BUSINESS PAPER', href: '/business' },
 	{ title: 'WHITEPAPER', href: 'https://whitepaper.befitter.io/' },
 	// { title: 'ABOUT', href: '#' },

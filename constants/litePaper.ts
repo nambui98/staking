@@ -6,10 +6,10 @@ export const TOKEN = {
 	SUBTITLE: 'Make healthy lifestyle',
 	TITLE: 'irresistible',
 	TITLE_BG: 'assets/backgrounds/home-app.png',
-	DESC: 'beFITTER is a web3 fitnessfi and socialfi app that aims to build a healthier ecosystem helping users balance their life, improve mental & physical health, gain achievements and still get monetary incentives.',
+	DESC: 'is a web3 fitnessfi and socialfi app that aims to build a healthier ecosystem helping users balance their lives, improve their mental & physical health, gain achievements, and still get monetary incentives.',
 	TOKEN_DESC: `Users need to be equipped with NFT Shoes to get paid when they walk, run, cycle and join challenges with others. They even can equip NFT Pets as a companion to get more rewards.`,
-	TOKEN_IMG: 'assets/litePaper-token.png',
-	NFT_IMG: 'assets/litePaper-shoe.png',
+	TOKEN_IMG: 'assets/litePaper-token-v2.png',
+	NFT_IMG: 'assets/litePaper-shoe-v2.png',
 	CONTENT: [
 		{
 			title: {
@@ -100,7 +100,7 @@ export const TOKEN = {
 };
 export const MISSION = {
 	TITLE: 'MISSION',
-	SUBTITLE: 'VISION &',
+	SUBTITLE: 'VISION',
 	IMAGE1: 'assets/litePaper-mission-1.png',
 	IMAGE2: 'assets/litePaper-mission-2.png',
 	BG: 'assets/backgrounds/litePaper-mission-bg.png',
@@ -145,7 +145,7 @@ export const GAME = {
 	ITEMS: [
 		{
 			image: 'assets/litePaper-game-item-1.png',
-			title: 'Solo',
+			title: 'assets/solo-lp.png',
 			desc: `Start earning for doing activities such as walking, running, cycling or more on your own.`,
 			borderColor: '#A7ACB8',
 			borderSize: '2px',
@@ -154,7 +154,7 @@ export const GAME = {
 		},
 		{
 			image: 'assets/litePaper-game-item-2.png',
-			title: 'With pet',
+			title: 'assets/withpet-lp.png',
 			desc: `Take good care of our virtual work-out companion and it will reward you with bonus token.`,
 			borderColor: '#7669EC',
 			borderImage: 'linear-gradient(88.32deg, #8C81F7 0%, #7669EC 100%)',
@@ -164,7 +164,7 @@ export const GAME = {
 		},
 		{
 			image: 'assets/litePaper-game-item-3.png',
-			title: '1 vs 1',
+			title: 'assets/1vs1-lp.png',
 			desc: `Challenge your friend, family or a matched person to go on a competition.`,
 			borderColor: '#FFCC77',
 			borderImage:
@@ -176,7 +176,7 @@ export const GAME = {
 		},
 		{
 			image: 'assets/litePaper-game-item-4.png',
-			title: 'Tournament',
+			title: 'assets/tourbament-lp.png',
 			desc: `Push yourself with weekly, monthly tournaments where you compete with others to be among top ranks in leader boards.`,
 			borderColor: '#FF612F',
 			borderImage:
@@ -191,6 +191,7 @@ export const GAME = {
 export const BUSINESS = {
 	TITLE: 'BUSINESS',
 	SUBTITLE: 'MODEL',
+	BODY: 'The whole ecosystem of beFITTER is powered by a token economy that enables in-app activities and pays for transactions fees. See detail in:',
 	BG: 'assets/backgrounds/litePaper-business.png',
 	FLOW: {
 		TITLE: 'REVENUE FLOW',

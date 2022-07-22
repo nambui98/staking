@@ -179,6 +179,7 @@ type VideoSlide = {
 	mobileSrc?: string;
 	bigDecktopSrc?: string;
 	// poster?: string,
+	isMuted: boolean,
 	unplayable?: boolean;
 	ref?: any;
 };
@@ -193,6 +194,7 @@ export const videoSlides = (refs: any) => {
 			src: '/videos/IDO.mp4',
 			mobileSrc: '/videos/IDO-mobile.mp4',
 			bigDecktopSrc: '/videos/IDO2.mp4',
+			isMuted: false
 		},
 		// {
 		// 	src: '/videos/cycle.mp4',
@@ -213,3 +215,12 @@ export const videoSlides = (refs: any) => {
 		ref: refs[idx],
 	}));
 };
+
+export const LIST_LOGO = [
+	{image: 'assets/icons/bybit.svg', url: 'https://www.bybit.com/en-US/trade/spot/FIU/USDT'},
+	{image: 'assets/icons/gate.svg', url: 'https://www.gate.io/trade/FIU_USDT'},
+	{image: 'assets/icons/huobi.svg', url: 'https://www.huobi.com/en-us/exchange/fiu_usdt/'},
+	{image: 'assets/icons/pancake.svg', url: 'https://pancakeswap.finance/swap?inputCurrency=0xe9e7cea3dedca5984780bafc599bd69add087d56&outputCurrency=0xef7d50069406a2f5a53806f7250a6c0f17ad9dcd'},
+	{image: 'assets/icons/mexc.svg', url: 'https://www.mexc.com/exchange/FIU_USDT'},
+	{image: 'assets/icons/bidget.svg', url: 'https://www.bitget.com/en/spot/FIUUSDT_SPBL'},
+]
