@@ -1,31 +1,36 @@
-import { Box, Stack, styled, Typography, TypographyProps } from "@mui/material"
+import { Box, BoxProps, Stack, styled, Typography, TypographyProps } from "@mui/material"
 import { useWalletContext } from "../../../contexts/WalletContext"
 import { ICON } from "../../../constants/assetsWallet";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
-import { formatNumberWithCommas } from "../../../libs/utils/utils";
+import { formatMoney } from "../../../libs/utils/utils";
 
-export const TokenTab = () => {
+interface IProps {
+  tokenChoose: string
+  setTokenChoose: (value: string) => void
+}
+
+export const TokenTab: React.FC<IProps> = ({tokenChoose, setTokenChoose}) => {
   const {fiuBalance, heeBalance, bnbBalance} = useWalletContext();
   return (
     <Wrap>
-      <Item sx={ItemFiu}>
+      <Item tokenName={tokenChoose === 'fiu' ? 'fiu' : ''} sx={ItemFiu} onClick={() => setTokenChoose('fiu')}>
         <ItemLeft>
           <Title>Your balance</Title>
-          <Amount typeBnb={false}>{fiuBalance?.length && parseFloat(fiuBalance) > 0 ? formatNumberWithCommas(parseFloat(fiuBalance)) : '0.00'}<span>FIU</span></Amount>
+          <Amount typeBnb={false}>{fiuBalance?.length && parseFloat(fiuBalance) > 0 ? formatMoney(fiuBalance) : '0.00'}<span>FIU</span></Amount>
         </ItemLeft>
         <ImageToken><img src={ICON.fiu} /></ImageToken>
       </Item>
-      <Item sx={ItemHee}>
+      <Item tokenName={tokenChoose === 'hee' ? 'hee' : ''} sx={ItemHee} onClick={() => setTokenChoose('hee')}>
         <ItemLeft>
           <Title>Your balance</Title>
-          <Amount typeBnb={false}>{heeBalance?.length && parseFloat(heeBalance) > 0 ? formatNumberWithCommas(parseFloat(heeBalance)) : '0.00'}<span>HEE</span></Amount>
+          <Amount typeBnb={false}>{heeBalance?.length && parseFloat(heeBalance) > 0 ? formatMoney(heeBalance) : '0.00'}<span>HEE</span></Amount>
         </ItemLeft>
         <ImageToken><img src={ICON.hee} /></ImageToken>
       </Item>
-      <Item sx={ItemBnb}>
+      <Item tokenName={tokenChoose === 'bnb' ? 'bnb' : ''} sx={ItemBnb} onClick={() => setTokenChoose('bnb')}>
         <ItemLeft>
           <Title sx={{color: '#31373E'}}>Your balance</Title>
-          <Amount typeBnb={true}>{bnbBalance?.length && parseFloat(bnbBalance) > 0 ? parseFloat(bnbBalance).toFixed(4) : '0.00'} <span>BNB</span></Amount>
+          <Amount typeBnb={true}>{bnbBalance?.length && parseFloat(bnbBalance) > 0 ? formatMoney(bnbBalance) : '0.00'} <span>BNB</span></Amount>
         </ItemLeft>
         <ImageToken><img src={ICON.bnbBig} /></ImageToken>
       </Item>
@@ -41,8 +46,9 @@ const Wrap = styled(Stack)({
 	}
 })
 const Title = styled(Typography)({
-	...TEXT_STYLE(12, 600, '#ffffff'),
-	marginBottom: 8
+  ...TEXT_STYLE(12, 600, '#ffffff'),
+  marginBottom: 8,
+  textTransform: 'uppercase',
 })
 type amountProps = TypographyProps & {
 	typeBnb: boolean
@@ -58,29 +64,35 @@ const Amount = styled(Typography)((props: amountProps) => ({
 		marginLeft: 8
 	}
 }))
-const Item = styled(Box)({
-	marginBottom: 8,
-	borderRadius: 12,
-	padding: '16px 18px 16px 24px',
-	display: 'flex',
-	justifyContent: 'space-between',
-	alignItems: 'center',
-	'@media (min-width: 768px)': {
-		marginBottom: 24,
-		padding: '19px 18px 19px 24px',
-	},
-	'&:last-of-type': {
-		marginBottom: 0
-	},
-	'& img': {
-		width: 52,
-		height: 52,
-		'@media (min-width: 768px)': {
-			width: 85,
-			height: 85
-		}
-	}
-})
+type itemProps = BoxProps & {
+  tokenName: string
+}
+const Item = styled(Box)((props: itemProps) => ({
+  marginBottom: 8,
+  borderRadius: 12,
+  cursor: 'pointer',
+  padding: '16px 18px 16px 24px',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  border: `2px solid ${props.tokenName ? (props.tokenName === 'fiu' ? '#FF612F' : props.tokenName === 'hee' ? '#1DB268' : '#FFC83A') : '#F8F9FB'}`,
+  borderWidth: 2,
+  '@media (min-width: 768px)': {
+    marginBottom: 24,
+    padding: '19px 18px 19px 24px',
+  },
+  '&:last-of-type': {
+    marginBottom: 0
+  },
+  '& img': {
+    width: 52,
+    height: 52,
+    '@media (min-width: 768px)': {
+      width: 85,
+      height: 85
+    }
+  }
+}))
 const ItemLeft = styled(Box)({
 
 })

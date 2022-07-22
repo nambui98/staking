@@ -15,6 +15,7 @@ import '../styles/globals.scss';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { WalletProvider } from '../contexts/WalletContext';
+import { CommonProvider } from '../contexts/CommonContext';
 import Loading from '../components/loadding/loadding';
 
 
@@ -46,20 +47,18 @@ function MyApp({ Component, pageProps }: AppProps) {
 	}, []);
 	return (
 		<>
-
 			<ThemeProvider theme={theme}>
-
 				<WalletProvider>
-					{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-					<CssBaseline />
-					<Loading loading={loading} />
-					{/* <NextNProgress color="#FF6D24" /> */}
-					<Component {...pageProps} />
-					<ToastContainer />
+					<CommonProvider>
+						{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+						<CssBaseline />
+						<Loading loading={loading} />
+						<Component {...pageProps} />
+						<ToastContainer />
+					</CommonProvider>
 				</WalletProvider>
 			</ThemeProvider >
 		</>
-
 	)
 }
 export default MyApp
