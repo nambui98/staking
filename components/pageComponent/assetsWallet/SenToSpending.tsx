@@ -14,7 +14,7 @@ interface IProps {
   tokenChoose: string
   boxChoose: string
   getListBox: () => any
-  setBoxChoose: () => any
+  setBoxChoose: any
 }
 
 export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxChoose, getListBox, setBoxChoose }) => {
