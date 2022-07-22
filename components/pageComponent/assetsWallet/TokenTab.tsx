@@ -47,7 +47,8 @@ const Wrap = styled(Stack)({
 })
 const Title = styled(Typography)({
   ...TEXT_STYLE(12, 600, '#ffffff'),
-  marginBottom: 8
+  marginBottom: 8,
+  textTransform: 'uppercase',
 })
 type amountProps = TypographyProps & {
   typeBnb: boolean

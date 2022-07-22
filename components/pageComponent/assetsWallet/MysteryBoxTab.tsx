@@ -13,9 +13,10 @@ interface IProps {
   boxChoose: string
   setBoxChoose: (value: string) => void
   listBoxType: any[]
+  currentTab: string
 }
 
-export const MysteryBoxTab: React.FC<IProps> = ({boxChoose, setBoxChoose, listBoxType}) => {
+export const MysteryBoxTab: React.FC<IProps> = ({boxChoose, setBoxChoose, listBoxType, currentTab}) => {
   const { walletAccount, ethersSigner } = useWalletContext();
   const [statusLoading, setStatusLoading] = useState<boolean>(false)
 
@@ -26,6 +27,10 @@ export const MysteryBoxTab: React.FC<IProps> = ({boxChoose, setBoxChoose, listBo
       <TooltipItem><Box><img src={ICON.shoeGray} /></Box><Typography>Standard Shoe</Typography> <Typography>{data.detail.standard}</Typography></TooltipItem>
     </BodyTooltip>
   }
+
+  useEffect(() => {
+    setBoxChoose('')
+  }, [currentTab])
 
   return (
     <Wrap sx={listBoxType?.length ? {} : {maxHeight: 'initial !important'}}>

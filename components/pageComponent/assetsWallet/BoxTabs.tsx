@@ -38,7 +38,7 @@ export const Boxtabs = () => {
       case TAB_NAME.token:
         return <TokenTab tokenChoose={tokenChoose} setTokenChoose={setTokenChoose} />
       case TAB_NAME.box:
-        return <MysteryBoxTab boxChoose={boxChoose} setBoxChoose={setBoxChoose} listBoxType={listBoxType} />
+        return <MysteryBoxTab boxChoose={boxChoose} setBoxChoose={setBoxChoose} listBoxType={listBoxType} currentTab={currentTab} />
       default:
         break;
     }
