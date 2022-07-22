@@ -244,6 +244,9 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
         <ButtonSendSpending sx={{ background: checkStatusSendButton() ? 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)' : '#E9EAEF' }}
           onClick={handleClickButtonSent} disabled={!checkStatusSendButton()}>{statusButtonSent ? 'Send to Spending' : 'Approve'}</ButtonSendSpending>
       </BoxInput>
+      <Typography mt={2} sx={{
+        ...TEXT_STYLE(16, 700, '#ff8446')
+      }}>Don't forget to select your asset !</Typography>
     </SendSpending>
   )
 }
