@@ -14,9 +14,10 @@ interface IProps {
   tokenChoose: string
   boxChoose: string
   getListBox: () => any
+  setBoxChoose: () => any
 }
 
-export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxChoose, getListBox }) => {
+export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxChoose, getListBox, setBoxChoose }) => {
   const { popupNoti, spinner } = useCommonContext();
   const { walletAccount, ethersSigner, ethersProvider, updateBnbBalance, fiuBalance, heeBalance, bnbBalance } = useWalletContext();
   const [textEmail, setTextEmail] = useState<string>('');
@@ -78,6 +79,7 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
           type === 'box' && getListBox();
           setStatusButtonSent(false)
           setTextEmail('')
+          setBoxChoose('')
           setAmount('')
           popupNoti.handleToggleStatus({
             status: true,
