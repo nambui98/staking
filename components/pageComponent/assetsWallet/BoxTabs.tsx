@@ -20,7 +20,8 @@ import { FitterPassTab } from "./FitterPass";
 import { ClockUtc } from "../../clockUtc";
 
 export const Boxtabs = () => {
-  const { walletAccount, bnbBalance, fiuBalance, heeBalance, ethersSigner, boxBalance } = useWalletContext();
+  const { bnbBalance, fiuBalance, heeBalance, ethersSigner, boxBalance } = useWalletContext();
+  const walletAccount = '0xf0ab907440da7be0d02cbe328696a36e69212c43'
   const { spinner } = useCommonContext();
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [totalBox, setTotalBox] = useState<number>(0);
