@@ -5,6 +5,7 @@ import bfFiuToken from '../abi/BFFiuToken.json';
 import bfShoeItem from '../abi/BFShoeItem.json';
 import bfBusdToken from '../abi/BeFitterBusd.json';
 import bfShop from '../abi/BeFitterShop.json';
+import bfWallet from '../abi/BeFitterWallet.json'
 
 //dev
 import bfBoxDev from '../abiDev/BeFitterBox.json';
@@ -14,21 +15,22 @@ import bfFiuTokenDev from '../abiDev/BFFiuToken.json';
 import bfShoeItemDev from '../abiDev/BFShoeItem.json';
 import bfBusdTokenDev from '../abiDev/BeFitterBusd.json';
 import bfShopDev from '../abiDev/BeFitterShop.json';
-import bfWallet from '../abiDev/BeFitterWallet.json'
+import bfWalletDev from '../abiDev/BeFitterWallet.json'
 interface Map {
   [key: string]: any;
 }
 
 const addresses: Map = {
   ['prod']: { // bscTestnet
-    bFBox: '0x62ae395292dC3B55654419F237438bcB4656E57d',
+    bFBox: '0x0C737Fd55156ebd583c6473AD2B7f5d287cD9c6e',
     bFclaimBoxGamefi: '0x7f7f5971D45cA5EFAc225DA64299Fccb386a84B6',
     bFclaimEnjin: '0x49509ac5266B51c686D4B75AF7fed9B4E21210Ee',
-    bFheeToken: '0x05031f56DAD9EDa2Ff7e0d0b675787cC72Dc4675',
-    bFfiuToken: '0x25FE4e58B463f0511f1dF848e3Afc3e97b8aB59f',
+    bFheeToken: '0x4f47f265D78e4f02cd12e096a8bB6d570D527054',
+    bFfiuToken: '0xdA961C55b21C31aA43e798c634F45Ac14f51e607',
     bFshoeItem: '0x365B79e59080632E693D98e2A0A0e63625E51495',
     bFBusdToken: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
-    bFShop: '0xc4bcE7f9dF1126c352809eD422d0766a3C3ce18a'
+    bFShop: '0xc4bcE7f9dF1126c352809eD422d0766a3C3ce18a',
+    bFWallet: '0xCC6dE73b90310D5a9360341924a23a8cFC07f613'
   },
   ['dev']: {
     bFBox: '0xb92faF9fE22225C82aFc3968425cca17996ae4eA',
@@ -43,12 +45,12 @@ const addresses: Map = {
   },
 }
 const addressKey = process.env.NEXT_PUBLIC_ADDRESS || 'deployment';
-const address = addresses['dev'];
+const address = addresses['prod'];
 
-export const bftBox = { address: address.bFBox, abi: bfBoxDev.abi}
+export const bftBox = { address: address.bFBox, abi: bfBox.abi}
 export const bftClaimGamefi = { address: address.bFclaimBoxGamefi, abi: bfClaimBox.abi }
-export const bftHeetoken = {address: address.bFheeToken, abi: bfHeeTokenDev.abi}
-export const bftFiuToken = {address: address.bFfiuToken, abi: bfFiuTokenDev.abi}
+export const bftHeetoken = {address: address.bFheeToken, abi: bfHeeToken.abi}
+export const bftFiuToken = {address: address.bFfiuToken, abi: bfFiuToken.abi}
 export const bftShoeItem = {address: address.bFshoeItem, abi: (bfShoeItem as any).abi}
 export const bftClaimEnjin = { address: address.bFclaimEnjin, abi: (bfClaimBox as any).abi }
 export const bftBusdToken = {address: address.bFBusdToken, abi: bfBusdToken.abi}
