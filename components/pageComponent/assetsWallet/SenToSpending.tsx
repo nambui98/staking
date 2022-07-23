@@ -228,7 +228,6 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
             value={textEmail}
             placeholder={'Email'}
             onChange={(e: any) => setTextEmail(e.target.value)}
-            disabled={true}
           />
         </InputBottom>
         {currentTab === TAB_NAME.token && <InputBottom>
@@ -240,18 +239,14 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
             value={amount}
             placeholder={'Amount'}
             onChange={(e: any) => setAmount(e.target.value)}
-            disabled={true}
           />
         </InputBottom>}
         <ButtonSendSpending sx={{ background: checkStatusSendButton() ? 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)' : '#E9EAEF' }}
           onClick={handleClickButtonSent} disabled={!checkStatusSendButton()}>{statusButtonSent ? 'Send to Spending' : 'Approve'}</ButtonSendSpending>
       </BoxInput>
-      {/* <Typography mt={2} sx={{
-        ...TEXT_STYLE(16, 700, '#ff8446')
-      }}>Don't forget to select your asset !</Typography> */}
       <Typography mt={2} sx={{
         ...TEXT_STYLE(16, 700, '#ff8446')
-      }}>This feature is under maintenance, please try again later !</Typography>
+      }}>Don't forget to select your asset !</Typography>
     </SendSpending>
   )
 }
