@@ -39,7 +39,7 @@ export const TabClaim = () => {
   const [dataClaim, setDataClaim] = useState<{ totalBox: number, claimed: number }>({
     totalBox: 0, claimed: 0
   })
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
   const [popupError, setPopupError] = useState(false);
   const [popupSuccess, setPopupSuccess] = useState(false);
   const [statusLoading, setStatusLoading] = useState<boolean>(false);
