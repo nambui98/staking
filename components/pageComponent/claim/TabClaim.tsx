@@ -8,7 +8,7 @@ import { CLAIM_IMAGE, CLAIM_TOKEN_TIME } from "../../../constants/claim";
 import { PAGE } from "../../../constants/header";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { checkClaimedToken, getClaimedBox, getClaimedToken, getLockedOf, handleClaimBox, handleClaimToken } from "../../../libs/claim";
-import { bftClaimGamefi, bftClaimEnjin, bftClaimAlphaBeta, bftClaimOther, bftClaimAlphaBeta2 } from "../../../libs/contracts";
+import { bftClaimGamefi, bftClaimEnjin, bftClaimAlphaBeta, bftClaimOther, bftClaimAlphaBeta2, bftClaimTokenAirdrop, bftClaimToken } from "../../../libs/contracts";
 import { convertWalletAddress, formatNumberWithCommas } from "../../../libs/utils/utils";
 import { ClaimService } from "../../../services/claim.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
@@ -31,7 +31,8 @@ const bodyPopupTokenTime = () => {
 export const TabClaim = () => {
   const router = useRouter();
   const isMobile = useMediaQuery('(max-width: 767px)');
-  const {walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
+  const {setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
+  const walletAccount = '0x8f522535f239cd794f7d23df0a4d54b1c133a8dc'
   const [currentTab, setCurrentTab] = useState<'box' | 'token'>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [roundSelected, setRoundSelected] = useState<string>('');
@@ -91,8 +92,8 @@ export const TabClaim = () => {
     }
     try {
       const res: any = await ClaimService.getAmount((walletAccount.toLowerCase()), captchaToken, roundSelected, false);
-      const dataLockedOf = await getLockedOf(walletAccount, ethersSigner)
-      const dataCheckClaimed = await checkClaimedToken(walletAccount, ethersSigner)
+      const dataLockedOf = await getLockedOf(walletAccount, ethersSigner, roundSelected === '5' ? bftClaimToken.address : bftClaimTokenAirdrop.address)
+      const dataCheckClaimed = await checkClaimedToken(walletAccount, ethersSigner, roundSelected === '5' ? bftClaimToken.address : bftClaimTokenAirdrop.address)
       console.log(parseFloat(ethers.utils.formatEther(dataLockedOf)), 123)
       if(parseFloat(ethers.utils.formatEther(dataLockedOf)) === 0){
         setCheckClaimed(true)
@@ -100,7 +101,7 @@ export const TabClaim = () => {
         parseInt(ethers.utils.formatEther(dataCheckClaimed)) > 0 ? setCheckClaimed(true) : setCheckClaimed(false)
       }
       if (res?.data?.status) {
-        const dataClaimed = await getClaimedToken(walletAccount, ethersSigner)
+        const dataClaimed = await getClaimedToken(walletAccount, ethersSigner, roundSelected === '5' ? bftClaimToken.address : bftClaimTokenAirdrop.address)
         setDataClaim({ claimed: parseInt(ethers.utils.formatEther(dataClaimed)), totalBox: res.data.amount })
       } else {
         setDataClaim({ claimed: 0, totalBox: 0 })
@@ -154,7 +155,7 @@ export const TabClaim = () => {
     const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, true);
     if (res?.data?.status) {
       try {
-        const resultClaim: any = await handleClaimToken(walletAccount, res.data, ethersSigner)
+        const resultClaim: any = await handleClaimToken(walletAccount, res.data, ethersSigner, roundSelected === '5' ? bftClaimToken.address : bftClaimTokenAirdrop.address)
         const checkStatus = setInterval(async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
           if (statusClaim?.status) {
@@ -195,7 +196,8 @@ export const TabClaim = () => {
   useEffect(() => {   
     if (currentTab === 'token') {
       setSelectItem([
-        { title: 'Public Sale', value: '5' }
+        { title: 'Public Sale', value: '5' },
+        { title: 'Airdrop FIU', value: '7' },
       ])
     } else {
       setSelectItem([
