@@ -50,7 +50,8 @@ export type row = {
 	numberOfBlocks: number,
 	stakingTime: number | string,
 	tokenAmount: number,
-	fpNum: number
+	fpNum: number,
+	withdrawn: number
 }
 export default function lockedHook(props: Props) {
 	const { setIsLoading, setStateContentInitLocked } = props;

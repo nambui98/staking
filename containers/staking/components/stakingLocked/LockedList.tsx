@@ -48,7 +48,7 @@ const columns: readonly Column[] = [
 		id: 'lockedTime',
 		label: 'LOCK DURATION',
 		minWidth: 120,
-		format: (value: number) => value.toString() + ' DAYS',
+		format: (value: number) => (value / 60 / 60 / 24).toString() + ' DAYS',
 	},
 	{
 		id: 'fpNum',
@@ -105,7 +105,7 @@ export const LockedList = (props: Props) => {
 			return {
 				...e,
 				// stakingTime: timeUTC(parseInt(e.stakingTime.toString())),
-				lockedTime: e.lockedTime / 60 / 60 / 24
+				// lockedTime: e.lockedTime 
 			}
 		}).filter(e => timeUTC(parseInt(e.stakingTime.toString())) === time);
 		return {
@@ -166,9 +166,16 @@ export const LockedList = (props: Props) => {
 											<TableRow hover role="checkbox" tabIndex={-1} key={index}>
 												{columns.map((column) => {
 													if (column.id == 'widthdraw') {
-														return <TableCell onClick={() => handleWithDraw(row)} sx={{ fontSize: '12px', color: "#55C8FC", padding: '8px 8px', borderBottom: 'none', cursor: 'pointer' }} key={column.id} align={column.align}>
-															Withdraw
-														</TableCell>
+														if (!row.withdrawn) {
+
+															return <TableCell onClick={() => handleWithDraw(row)} sx={{ fontSize: '12px', color: "#55C8FC", padding: '8px 8px', borderBottom: 'none', cursor: 'pointer' }} key={column.id} align={column.align}>
+																Withdraw
+															</TableCell>
+														} else {
+															return <TableCell onClick={() => { }} sx={{ fontSize: '12px', color: '#898E9E', padding: '8px 8px', borderBottom: 'none', cursor: 'pointer' }} key={column.id} align={column.align}>
+																Withdrawn
+															</TableCell>
+														}
 													} else {
 
 														const value = row[column.id];

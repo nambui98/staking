@@ -12,6 +12,7 @@ export const approveStakingLocked = async (price: string, ethersSigner: any) => 
 export const getAllUserStaking = async (walletAccount: any, ethersSigner: any) => {
 	const beFITTERlockedPoolContract = new ethers.Contract(beFITTERlockedPool.address, beFITTERlockedPool.abi, ethersSigner);
 	const data = await beFITTERlockedPoolContract.getAllUserStaking(walletAccount);
+	debugger
 	return data
 };
 export const getMinimalStakingTime = async (blockNum: string, lockedTime: string, ethersSigner: any) => {
@@ -57,4 +58,10 @@ export const getBalanceLocked = async (ethersSigner: any) => {
 export const configStakingLocked = {
 	valueTokenBlock: 40000,
 	valueEstimated: 0.8,
+	minWithDrawTime: 3,
+	maxWithDrawTime: 30,
+	maxEarningPass: 31,
+	blockNum: 8,
+	minLockedTime: 3,
+	delayTime: 7
 }

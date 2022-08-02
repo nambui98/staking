@@ -8,7 +8,7 @@ import { StateStaking, StateStakingLocked } from '../../../../const';
 import { MARKETPLACE_ICON } from '../../../../constants/marketplace';
 import { useWalletContext } from '../../../../contexts/WalletContext';
 import { convertBigNumber, row } from '../../../../libs/hooks/lockedHook';
-import { withDrawLocked } from '../../../../libs/stakingLocked';
+import { configStakingLocked, withDrawLocked } from '../../../../libs/stakingLocked';
 import { formatMoney } from '../../../../libs/utils/utils';
 
 type Props = {
@@ -69,9 +69,11 @@ export const WithDraw = (props: Props) => {
 	let time: Date | null = null;
 	if (row?.stakingTime) {
 		time = new Date(parseInt(row?.stakingTime.toString()) * 1000);
-		time.setDate(time.getDate() + row.lockedTime);
-		let now = new Date();
-		isDisabled = time.getTime() > now.getTime();
+		time.setSeconds(time.getSeconds() + row.lockedTime + configStakingLocked.delayTime);
+		let now = Date.now();
+		console.log(time.getTime())
+		isDisabled = time.getTime() > now;
+		debugger
 	}
 	const timeUTC = () => {
 		if (time) {
@@ -98,7 +100,7 @@ export const WithDraw = (props: Props) => {
 				</Item>
 				<Item>
 					<TitleItem>WITHDRAWAL DELAY TIME</TitleItem>
-					<ValueItem>{row?.lockedTime} DAYS</ValueItem>
+					<ValueItem>{configStakingLocked.delayTime} DAYS</ValueItem>
 				</Item>
 			</Box>
 			{isDisabled && (
@@ -123,7 +125,7 @@ export const WithDraw = (props: Props) => {
 						fontWeight={500}
 						mt="8px"
 					>
-						Available to withdraw at {timeUTC()}
+						Available to withdraw at {timeUTC()} UTC
 					</Typography>
 				</Item>
 			)}

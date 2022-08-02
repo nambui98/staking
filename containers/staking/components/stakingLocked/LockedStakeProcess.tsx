@@ -10,7 +10,7 @@ import { formatMoney } from '../../../../libs/utils/utils';
 import { TEXT_STYLE } from '../../../../styles/common/textStyles';
 import ArrowUp from './icons/arrow_up.svg';
 import ArrowDown from './icons/arrow_down.svg';
-import { approveStakingLocked, configStakingLocked, getMinimalStakingTime, stakeLocked } from '../../../../libs/stakingLocked';
+import { approveStakingLocked, configStakingLocked, stakeLocked } from '../../../../libs/stakingLocked';
 
 type Props = {
 	setStateContent: Function;
@@ -47,21 +47,31 @@ export const LockedStakeProcess = ({
 	setIsLoading,
 	handleClickError,
 }: Props) => {
-	let [value, setValue] = useState(0);
-	let [valueDay, setValueDay] = useState(3);
+	let [blockNum, setBlockNum] = useState(1);
+	let [lockDuration, setLockDuration] = useState(3);
 	let [lockDurationSuggest, setLockDurationSuggest] = useState(0);
 	let [lockDurationError, setLockDurationError] = useState(false);
 	const [status, setStatus] = useState(0);
 	const [messageError, setMessageError] = useState('');
 	const { ethersSigner, ethersProvider, walletAccount, setRefresh, refresh } =
 		useWalletContext();
+
+	const getMinimalStakingTime = () => {
+
+		let maxP = Math.ceil(configStakingLocked.maxEarningPass / configStakingLocked.valueEstimated);
+		let ret = Math.ceil(maxP / blockNum);
+		debugger
+		return Math.max(ret, configStakingLocked.minLockedTime);
+	}
 	const handleApprove = async () => {
+		// let estimateFPRes = Math.floor(value * parseInt(day) * configStakingLocked.valueEstimated);
 		setIsLoading(true);
 		try {
-			const day = await getMinimalStakingTime(value.toString(), valueDay.toString(), ethersSigner);
+			const day = getMinimalStakingTime();
+			debugger
 			setLockDurationSuggest(0)
 			setLockDurationError(false);
-			if (day === valueDay.toString()) {
+			if (day >= lockDuration) {
 				const res = await approveStakingLocked(tokenRequired.toString(), ethersSigner);
 				setIsLoading(false)
 				setStatus(res.status);
@@ -71,9 +81,8 @@ export const LockedStakeProcess = ({
 			} else {
 				setIsLoading(false)
 				setLockDurationError(true);
-				setValueDay(parseInt(day));
-				// setValueDay(parseInt(day))
-				setLockDurationSuggest(parseInt(day));
+				setLockDuration(day);
+				setLockDurationSuggest(day);
 			}
 
 		} catch (error: any) {
@@ -92,7 +101,7 @@ export const LockedStakeProcess = ({
 	const handleStake = async () => {
 		setIsLoading(true);
 		try {
-			const res = await stakeLocked(value.toString(), valueDay.toString(), ethersSigner);
+			const res = await stakeLocked(blockNum.toString(), lockDuration.toString(), ethersSigner);
 			debugger
 			setIsLoading(false)
 			if (res?.status) {
@@ -121,22 +130,24 @@ export const LockedStakeProcess = ({
 	};
 
 	const handleClickIncrement = () => {
-		setValue((preV) => (preV = preV > 11 ? 12 : (preV += 1)));
+		setBlockNum((preV) => (preV = preV > 11 ? 12 : (preV += 1)));
 	};
 
 	const handleClickDecrement = () => {
-		setValue((preV) => (preV = preV < 1 ? 0 : (preV -= 1)));
+		setBlockNum((preV) => (preV = preV < 1 ? 0 : (preV -= 1)));
 	};
 
 	const handleClickIncrementDay = () => {
-		setValueDay((preV) => (preV = preV > 29 ? 30 : (preV += 1)));
+		setLockDurationError(false)
+		setLockDuration((preV) => (preV = preV > 29 ? 30 : (preV += 1)));
 	};
 
 	const handleClickDecrementDay = () => {
-		setValueDay((preV) => (preV = preV < 1 ? 0 : (preV -= 1)));
+		setLockDurationError(false)
+		setLockDuration((preV) => (preV = preV < 1 ? 0 : (preV -= 1)));
 	};
-	const tokenRequired = value * configStakingLocked.valueTokenBlock;
-	const estimatedReceivableRewards = valueDay > 2 ? Math.floor(value * valueDay * configStakingLocked.valueEstimated) : 0;
+	const tokenRequired = blockNum * configStakingLocked.valueTokenBlock;
+	const estimatedReceivableRewards = lockDuration > 2 ? Math.floor(blockNum * lockDuration * configStakingLocked.valueEstimated) : 0;
 	return (
 		<Box >
 			<Item sx={{ mt: '16px!important' }}>
@@ -146,13 +157,13 @@ export const LockedStakeProcess = ({
 			<Item sx={{ mt: '16px!important' }}>
 				<TitleItem sx={{ mr: "auto" }}>Choose your block(s)</TitleItem>
 				<ValueItem>
-					<Search value={value} placeholder="" />
+					<Search value={blockNum} placeholder="" />
 				</ValueItem>
 				<Box sx={{ marginLeft: '8px' }}>
-					<ButtonCustom variant="text" disabled={value === 12 || status === 1} onClick={handleClickIncrement}>
+					<ButtonCustom variant="text" disabled={blockNum === 12 || status === 1} onClick={handleClickIncrement}>
 						<ArrowUp />
 					</ButtonCustom>
-					<ButtonCustom variant="text" disabled={value === 0 || status === 1} sx={{ mt: "2px" }} onClick={handleClickDecrement}>
+					<ButtonCustom variant="text" disabled={blockNum === 0 || status === 1} sx={{ mt: "2px" }} onClick={handleClickDecrement}>
 						<ArrowDown />
 					</ButtonCustom>
 
@@ -161,10 +172,10 @@ export const LockedStakeProcess = ({
 			<Item sx={{ mt: "8px !important" }}>
 				<TitleItem ></TitleItem>
 				<ValueItem sx={{ display: "flex", gap: "8px" }}>
-					<ButtonPercent disabled={status === 1} onClick={() => { setValue(1) }} variant="text">
+					<ButtonPercent disabled={status === 1} onClick={() => { setBlockNum(1) }} variant="text">
 						Min (1)
 					</ButtonPercent>
-					<ButtonPercent disabled={status === 1} onClick={() => { setValue(12) }} variant="text">
+					<ButtonPercent disabled={status === 1} onClick={() => { setBlockNum(12) }} variant="text">
 						Max (12)
 					</ButtonPercent>
 
@@ -192,14 +203,14 @@ export const LockedStakeProcess = ({
 			<Item sx={{ display: 'flex', mt: '16px !important' }}>
 				<TitleItem sx={{ mr: "auto" }}>Lock duration (days)</TitleItem>
 				<ValueItem>
-					<Search value={valueDay} placeholder="" />
+					<Search value={lockDuration} placeholder="" />
 				</ValueItem>
 
 				<Box sx={{ marginLeft: '8px' }}>
-					<ButtonCustom variant="text" disabled={valueDay === 30 || status === 1} onClick={handleClickIncrementDay}>
+					<ButtonCustom variant="text" disabled={lockDuration === 30 || status === 1} onClick={handleClickIncrementDay}>
 						<ArrowUp />
 					</ButtonCustom>
-					<ButtonCustom variant="text" disabled={valueDay < 4 || status === 1} sx={{ mt: "2px" }} onClick={handleClickDecrementDay}>
+					<ButtonCustom variant="text" disabled={lockDuration < 4 || status === 1} sx={{ mt: "2px" }} onClick={handleClickDecrementDay}>
 						<ArrowDown />
 					</ButtonCustom>
 				</Box>
@@ -207,10 +218,16 @@ export const LockedStakeProcess = ({
 			<Item sx={{ mt: "8px !important" }}>
 				<TitleItem ></TitleItem>
 				<ValueItem sx={{ display: "flex", gap: "8px" }}>
-					<ButtonPercent onClick={() => { setValueDay(3) }} disabled={status === 1} variant="text">
+					<ButtonPercent onClick={() => {
+						setLockDurationError(false)
+						setLockDuration(3)
+					}} disabled={status === 1} variant="text">
 						Min (3)
 					</ButtonPercent>
-					<ButtonPercent onClick={() => { setValueDay(30) }} disabled={status === 1} variant="text">
+					<ButtonPercent onClick={() => {
+						setLockDurationError(false)
+						setLockDuration(30)
+					}} disabled={status === 1} variant="text">
 						Max (30)
 					</ButtonPercent>
 
@@ -246,9 +263,9 @@ export const LockedStakeProcess = ({
 					</Box>
 				</TitleItem>
 				<ValueItem
-					sx={{ display: 'flex', alignItems: 'center', marginRight: '-20px' }}
+					sx={{ display: 'flex', alignItems: 'center' }}
 				>
-					<span>{estimatedReceivableRewards}</span>
+					<span>{Math.min(estimatedReceivableRewards, 31)}</span>
 					<img src="images/ffPase.svg" alt="" />
 				</ValueItem>
 			</Item>
@@ -263,8 +280,8 @@ export const LockedStakeProcess = ({
 							height: '54px',
 						}}
 					>
-						MAXIMUM RECEIVABLE REWARDS EXCEEDED!
-						Suggest: With {lockDurationSuggest.toString()} day(s) of lock duration, you can optimize your rewards without locking your token for too long.
+						You have reached maximum reward!<br />
+						Suggest: With {lockDurationSuggest.toString()} days of lock duration, you still maximize your rewards without locking your token for too long.
 					</TitleItem>
 				</Item>
 			}
@@ -276,13 +293,13 @@ export const LockedStakeProcess = ({
 				{
 					status === 1 ?
 						<MarketplaceButton
-							disabled={!value || messageError || tokenRequired > parseFloat(balanceFiu) ? true : false}
+							disabled={!blockNum || messageError || tokenRequired > parseFloat(balanceFiu) ? true : false}
 							customStyle={{ width: '100%' }}
 							title={'Stake'}
 							handleOnClick={handleStake}
 						/>
 						: <MarketplaceButton
-							disabled={!value || messageError || tokenRequired > parseFloat(balanceFiu) || valueDay < 3 ? true : false}
+							disabled={!blockNum || messageError || tokenRequired > parseFloat(balanceFiu) || lockDuration < 3 ? true : false}
 							customStyle={{ width: '100%' }}
 							title={'Approve'}
 							handleOnClick={handleApprove}

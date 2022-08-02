@@ -86,7 +86,6 @@ export const TabPools = () => {
 		(previousValue, currentValue: row) => previousValue + currentValue.fpNum,
 		0
 	) : 0;
-	debugger
 	const rows = [
 		{
 			name: 'Fitter Pass',
@@ -107,6 +106,12 @@ export const TabPools = () => {
 			title: 'Fitter Pass Drops - Locked',
 			isComingSoon: false,
 			data: createData(`${dataMyStakingLock && dataMyStakingLock?.length > 0 ? 'Staking' : '-'}`, 'Fitter Pass', `${totalFitterPassLocked}`, '-', '3 - 30 days', '7 days', `${totalInPool} FIU`),
+		},
+		{
+			name: 'FIU - Shared Pool',
+			title: 'FIU - Shared Pool',
+			isComingSoon: true,
+			data: createData('-', '-', '-', '-', '-', '-', ''),
 		},
 	];
 
@@ -142,7 +147,7 @@ export const TabPools = () => {
 					</Typography>
 
 					<Typography mb={1}>
-						For every 80.000 FIU staked per 48h, you earn 2 Fitter Passes,....
+						For every 80.000 FIU staked per 24h, you earn 2 Fitter Passes,....
 					</Typography>
 
 					<Typography mb={1}>
@@ -209,7 +214,7 @@ export const TabPools = () => {
 						<b>Fitter Pass - Locked: </b>
 					</Typography>
 					<Typography mb={1}>1. Stake FIU - Earn Fitter Pass</Typography>
-					<Typography mb={1}>2. <p>Stake amount is calculated by block unit. 1 block is equivalent to 40,000 FIU</p> </Typography>
+					<Typography mb={1}>2. Stake amount is calculated by block unit. 1 block is equivalent to 40,000 FIU </Typography>
 					<Typography mb={1}>3. Minimum stake amount required is 1 block;  maximum 12 blocks</Typography>
 					<Typography mb={1}>4. Minimum lock-up duration is 3 days ; maximum 30 days</Typography>
 					<Typography fontWeight={600} mb={1}>
@@ -314,7 +319,7 @@ export const TabPools = () => {
 													<Box>{item.data.reward}</Box>
 												</Item>
 												<Item align="left">
-													CLAIMABLE <Box>{item.data.earned}</Box>
+													{index === 1 ? 'EARNED' : "CLAIMABLE"}	 <Box>{item.data.earned}</Box>
 												</Item>
 												<Item align="left">
 													Token remaining <Box>{item.data.tokenRemaining}</Box>
@@ -326,7 +331,7 @@ export const TabPools = () => {
 													Withdrawal delay time <Box>{item.data.delayTime}</Box>
 												</Item>
 												<Item align="left">
-													Total in pool<Box>{formatMoney(item.data.total)}</Box>
+													Total in pool<Box>{formatMoney(item.data.total)} FIU</Box>
 												</Item>
 											</BoxTr>
 										);
@@ -384,7 +389,7 @@ export const TabPools = () => {
 													<Box>{item.data.reward}</Box>
 												</Item>
 												<Item align="left">
-													CLAIMABLE <Box>{item.data.earned}</Box>
+													{index === 1 ? 'EARNED' : "CLAIMABLE"} <Box>{item.data.earned}</Box>
 												</Item>
 												<Item align="left">
 													Token remaining <Box>{item.data.tokenRemaining}</Box>
@@ -396,7 +401,7 @@ export const TabPools = () => {
 													Withdrawal delay time <Box>{item.data.delayTime}</Box>
 												</Item>
 												<Item align="left">
-													Total in pool<Box>{formatMoney(item.data.total)}</Box>
+													Total in pool<Box>{item.data.total ? formatMoney(item.data.total) + ' FIU' : '-'} </Box>
 												</Item>
 											</BoxTr>
 										);
