@@ -156,7 +156,7 @@ export const LockedStakeProcess = ({
 			</Item>
 			<Item sx={{ mt: '16px!important' }}>
 				<TitleItem sx={{ mr: "auto" }}>Choose your block(s)</TitleItem>
-				<ValueItem>
+				<ValueItem sx={{ pointerEvents: "none" }}>
 					<Search value={blockNum} placeholder="" />
 				</ValueItem>
 				<Box sx={{ marginLeft: '8px' }}>
@@ -202,7 +202,7 @@ export const LockedStakeProcess = ({
 			}
 			<Item sx={{ display: 'flex', mt: '16px !important' }}>
 				<TitleItem sx={{ mr: "auto" }}>Lock duration (days)</TitleItem>
-				<ValueItem>
+				<ValueItem sx={{ pointerEvents: "none" }}>
 					<Search value={lockDuration} placeholder="" />
 				</ValueItem>
 
