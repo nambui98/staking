@@ -282,7 +282,7 @@ export const LockedStakeProcess = ({
 							handleOnClick={handleStake}
 						/>
 						: <MarketplaceButton
-							disabled={!value || messageError || tokenRequired > parseFloat(balanceFiu) ? true : false}
+							disabled={!value || messageError || tokenRequired > parseFloat(balanceFiu) || valueDay < 3 ? true : false}
 							customStyle={{ width: '100%' }}
 							title={'Approve'}
 							handleOnClick={handleApprove}

@@ -270,7 +270,7 @@ export const TabPools = () => {
 												}}
 												key={index}
 												sx={{
-													'&:last-child td, &:last-child th': { border: 0 },
+													'&:last-child td, &:last-child th': { borderRadius: "8px" },
 													background: index === activeItem ? '#FFE2D3' : '#fff',
 												}}
 											>
@@ -341,7 +341,7 @@ export const TabPools = () => {
 												}}
 												key={index}
 												sx={{
-													'&:last-child td, &:last-child th': { border: 0 },
+													'&:last-child td, &:last-child th': { borderRadius: "8px" },
 													background: index === activeItem ? '#FFE2D3' : '#fff',
 												}}
 											>
@@ -554,7 +554,8 @@ const BoxTr = styled(TableRow)((props: itemProps) => ({
 	position: 'sticky',
 	transition: 'all .3s',
 	cursor: 'pointer',
-	':hover': {
+
+	'&:hover': {
 		background: !props.isComingSoon ? '#FFE2D3' : 'none',
 	},
 }));
