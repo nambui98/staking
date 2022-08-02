@@ -1,6 +1,6 @@
 
 import { ethers } from 'ethers';
-import { bftBox, bftClaimToken, bftShop } from './contracts';
+import { beFITTERPassStaking, bftBox, bftClaimToken, bftShop } from './contracts';
 
 export const handleClaimBox = async (walletAddress: string, claimBoxContract: any, AddressAmount: any) => {
   const claim = await claimBoxContract.claim(walletAddress, AddressAmount.amount, AddressAmount.proof);
@@ -51,4 +51,11 @@ export const getLockedOf = async (walletAddress: string, ethersSigner: any) => {
   const claimTokenContract = new ethers.Contract(bftClaimToken.address, bftClaimToken.abi, ethersSigner)
   const res = await claimTokenContract.lockedOf(walletAddress)
   return res
+}
+
+export const getOwnedFitterPass = async (walletAddress: string, ethersSigner: any) => {
+  const contract = new ethers.Contract(beFITTERPassStaking.address, beFITTERPassStaking.abi, ethersSigner);
+  const balance = await contract.balanceOf(walletAddress, '0')
+  const formatBalance = ethers.utils.formatUnits(balance, 'wei')
+  return formatBalance;
 }

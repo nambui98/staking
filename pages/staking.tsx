@@ -1,15 +1,18 @@
-import { Stack, styled } from "@mui/material"
+import { Stack, styled, useMediaQuery } from "@mui/material"
+import { ClockUtc } from "../components/clockUtc"
 import MainLayout from "../components/layouts/MainLayout"
 import { RoadMap } from "../containers/staking/RoadMap"
 import { TabPools } from "../containers/staking/TabPools"
 
 const Staking = () => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
   return (
     <MainLayout titlePage='beFITTER - Staking pools' sxProps={{ background: '#fff' }}>
       <Wrap>
         <TabPools/>
         <RoadMap/>
       </Wrap>
+      {!isMobile && <ClockUtc/>}
     </MainLayout>
   )
 }
