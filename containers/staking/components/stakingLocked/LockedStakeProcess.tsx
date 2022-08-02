@@ -48,7 +48,7 @@ export const LockedStakeProcess = ({
 	handleClickError,
 }: Props) => {
 	let [value, setValue] = useState(0);
-	let [valueDay, setValueDay] = useState(0);
+	let [valueDay, setValueDay] = useState(3);
 	let [lockDurationSuggest, setLockDurationSuggest] = useState(0);
 	let [lockDurationError, setLockDurationError] = useState(false);
 	const [status, setStatus] = useState(0);
@@ -136,7 +136,7 @@ export const LockedStakeProcess = ({
 		setValueDay((preV) => (preV = preV < 1 ? 0 : (preV -= 1)));
 	};
 	const tokenRequired = value * configStakingLocked.valueTokenBlock;
-	const estimatedReceivableRewards = Math.floor(value * valueDay * configStakingLocked.valueEstimated);
+	const estimatedReceivableRewards = valueDay > 2 ? Math.floor(value * valueDay * configStakingLocked.valueEstimated) : 0;
 	return (
 		<Box >
 			<Item sx={{ mt: '16px!important' }}>
