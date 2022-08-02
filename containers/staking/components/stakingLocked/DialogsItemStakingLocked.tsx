@@ -11,35 +11,42 @@ import {
 	CircularProgress,
 	InputAdornment,
 	Stack,
+	StackProps,
 	styled,
 	TextField,
 	Typography,
 } from '@mui/material';
 
-import { EnablePool } from './EnablePool';
-import { StakeProcess } from './StakeProcess';
 import { Success } from './Success';
-import { Staked } from './Staked';
 import { Error } from './Error';
 import { WithDraw } from './WithDraw';
-import { StateStaking } from '../../../../const';
+import { StateStakingLocked } from '../../../../const';
+import { STAKING_ICON } from '../../../../constants/staking';
+import { Locked } from './Locked';
+import { LockedStakeProcess } from './LockedStakeProcess';
+import { LockedList } from './LockedList';
+import { row } from '../../../../libs/hooks/lockedHook';
 
 interface IProps {
 	status: boolean;
+	balanceFiu: string;
 	handleToggle: () => any;
 	dataActive: any;
 	setStateContentInit: Function;
-	stateContentInit: StateStaking;
+	stateContentInit: StateStakingLocked;
+	dataMyStakingLock: row[] | undefined
 }
 
 export const DialogItemStakingLocked: React.FC<IProps> = ({
 	status,
+	balanceFiu,
 	handleToggle,
 	dataActive,
 	stateContentInit,
 	setStateContentInit,
+	dataMyStakingLock
 }) => {
-	const [stateContent, setStateContent] = useState<StateStaking | null>(
+	const [stateContent, setStateContent] = useState<StateStakingLocked | null>(
 		stateContentInit
 	);
 
@@ -52,6 +59,7 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 	});
 
 	const [isLoading, setIsLoading] = useState(false);
+	const [row, setRow] = useState<row | null>();
 
 	const [error, setError] = useState<any>({
 		titleError: 'Something went wrong, please try again',
@@ -77,7 +85,7 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 	}: {
 		titleSuccess: String;
 		functionSuccess: Function | null;
-		stateContentNew: StateStaking | null;
+		stateContentNew: StateStakingLocked | null;
 	}) => {
 		setStateContent(stateContentNew);
 		setSuccess({
@@ -92,7 +100,7 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 	}: {
 		titleError: String;
 		functionError: Function | null;
-		stateContentNew: StateStaking | null;
+		stateContentNew: StateStakingLocked | null;
 	}) => {
 		setStateContent(stateContentNew);
 		setError({
@@ -100,7 +108,17 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 			functionError: functionError,
 		});
 	};
-
+	const propsPass = {
+		balanceFiu,
+		setIsLoading,
+		setSuccess,
+		setStateContent,
+		handleClickSuccess,
+		handleClickError,
+		dataMyStakingLock,
+		setRow,
+		row
+	};
 	return (
 		<Dialog
 			sx={borderRadius}
@@ -110,7 +128,7 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 			}}
 			open={status}
 		>
-			<Wrap>
+			<Wrap isBig={stateContent === StateStakingLocked.LockedList}>
 				<Box
 					onClick={() => {
 						setStateContent(stateContentInit);
@@ -121,162 +139,38 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 					<img src={'assets/icons/close.svg'} />
 				</Box>
 				<TitlePopup>
-					{stateContent === StateStaking.WithDraw && (
-						<img
-							src={STAKING_ICON.arrowLeftGray}
-							alt=""
-							onClick={() => setStateContent(StateStaking.UnstakedSuccess)}
-						/>
-					)}
 					<img src="assets/icons/fiu.svg" alt="" />
 					{dataActive && dataActive.name}
 				</TitlePopup>
-				{/* <StakeProcess
-					balanceFiu={'90000'}
-					balanceSA={'90000'}
-					balanceCP={'90000'}
-					setIsLoading={setIsLoading}
-					setSuccess={setSuccess}
-					setStateContent={setStateContent}
-					handleClickSuccess={handleClickSuccess}
-					handleClickError={handleClickError}
-				/> */}
-				<WithDraw
-					// balanceUS={balanceUS}
-					// remainingDelayTime={remainingDelayTime}
-					setIsLoading={setIsLoading}
-					setStateContent={setStateContent}
-					handleClickSuccess={handleClickSuccess}
-					handleClickError={handleClickError}
-				/>
 				{
-					// stateContent == StateStaking.StakeProcess ? (
-					// 	// <EnablePool
-					// 	// 	setStateContentInit={setStateContentInit}
-					// 	// 	setStateContent={setStateContent}
-					// 	// 	setIsLoading={setIsLoading}
-					// 	// 	handleClickError={handleClickError}
-					// 	// />
-					// 	<StakeProcess
-					// 		balanceFiu={'90000'}
-					// 		balanceSA={'90000'}
-					// 		balanceCP={'90000'}
-					// 		setIsLoading={setIsLoading}
-					// 		setSuccess={setSuccess}
-					// 		setStateContent={setStateContent}
-					// 		handleClickSuccess={handleClickSuccess}
-					// 		handleClickError={handleClickError}
-					// 	/>
-					// ) : (
-					// 	<h1>hello</h1>
-					// )
-					// stateContent === StateStaking.StakeProcess ? (
-					// 	<StakeProcess
-					// 		balanceFiu={balanceFiu}
-					// 		balanceSA={balanceSA}
-					// 		balanceCP={balanceCP}
-					// 		setIsLoading={setIsLoading}
-					// 		setSuccess={setSuccess}
-					// 		setStateContent={setStateContent}
-					// 		handleClickSuccess={handleClickSuccess}
-					// 		handleClickError={handleClickError}
-					// 	/>
-					// ) : stateContent === StateStaking.Staked ? (
-					// 	<Staked
-					// 		balanceFiu={balanceFiu}
-					// 		balanceSA={balanceSA}
-					// 		balanceCP={balanceCP}
-					// 		balanceUS={balanceUS}
-					// 		claimableTime={claimableTime}
-					// 		setIsLoading={setIsLoading}
-					// 		setStateContent={setStateContent}
-					// 		handleClickSuccess={handleClickSuccess}
-					// 		handleClickError={handleClickError}
-					// 		handleClickWarning={handleClickWarning}
-					// 	/>
-					// ) : stateContent === StateStaking.UnstakeWarrning ? (
-					// 	<UnstakeWarrning
-					// 		balanceFiu={balanceFiu}
-					// 		balanceSA={balanceSA}
-					// 		balanceCP={balanceCP}
-					// 		balanceUS={balanceUS}
-					// 		claimableTime={claimableTime}
-					// 		warning={warning}
-					// 		setIsLoading={setIsLoading}
-					// 		setStateContent={setStateContent}
-					// 		handleClickSuccess={handleClickSuccess}
-					// 		handleClickError={handleClickError}
-					// 	/>
-					// ) : stateContent === StateStaking.UnstakedSuccess ? (
-					// 	<UnstakedSuccess
-					// 		balanceFiu={balanceFiu}
-					// 		balanceSA={balanceSA}
-					// 		balanceCP={balanceCP}
-					// 		balanceUS={balanceUS}
-					// 		claimableTime={claimableTime}
-					// 		unStakePrice={unStakePrice}
-					// 		setIsLoading={setIsLoading}
-					// 		setStateContent={setStateContent}
-					// 		handleClickSuccess={handleClickSuccess}
-					// 		handleClickError={handleClickError}
-					// 		handleClickWarning={handleClickWarning}
-					// 	/>
-					// ) : stateContent === StateStaking.Unstake ? (
-					// 	<Unstake
-					// 		balanceFiu={balanceFiu}
-					// 		balanceSA={balanceSA}
-					// 		balanceCP={balanceCP}
-					// 		balanceUS={balanceUS}
-					// 		setIsLoading={setIsLoading}
-					// 		setUnStakePrice={setUnStakePrice}
-					// 		setStateContent={setStateContent}
-					// 		handleClickSuccess={handleClickSuccess}
-					// 		handleClickError={handleClickError}
-					// 	/>
-					// ) : stateContent === StateStaking.WithDraw ? (
-					// 	<WithDraw
-					// 		balanceUS={balanceUS}
-					// 		remainingDelayTime={remainingDelayTime}
-					// 		setIsLoading={setIsLoading}
-					// 		setStateContent={setStateContent}
-					// 		handleClickSuccess={handleClickSuccess}
-					// 		handleClickError={handleClickError}
-					// 	/>
-					// ) : stateContent === StateStaking.UnstakeAgain ? (
-					// 	<UnstakeAgain
-					// 		balanceFiu={balanceFiu}
-					// 		balanceSA={balanceSA}
-					// 		balanceCP={balanceCP}
-					// 		balanceUS={balanceUS}
-					// 		claimableTime={claimableTime}
-					// 		setIsLoading={setIsLoading}
-					// 		unStakePrice={unStakePrice}
-					// 		setStateContent={setStateContent}
-					// 		handleClickSuccess={handleClickSuccess}
-					// 		handleClickError={handleClickError}
-					// 		handleClickWarning={handleClickWarning}
-					// 	/>
-					// ) : stateContent === StateStaking.WithDrawWarning ? (
-					// 	<WithDrawWarning
-					// 		balanceUS={balanceUS}
-					// 		remainingDelayTime={remainingDelayTime}
-					// 		setIsLoading={setIsLoading}
-					// 		setStateContent={setStateContent}
-					// 		handleClickSuccess={handleClickSuccess}
-					// 		handleClickError={handleClickError}
-					// 	/>
-					// ) : stateContent === StateStaking.TransactionHistory ? (
-					// 	<TransactionHistory setStateContent={setStateContent} />
-					// ) : stateContent === StateStaking.Success ? (
-					// 	<Success success={success} setStateContent={setStateContent} />
-					// ) : stateContent === StateStaking.Error ? (
-					// 	<Error setStateContent={setStateContent} error={error} />
-					// ) : (
-					// 	<Box></Box>
-					// )
+					stateContent == StateStakingLocked.Locked ?
+						<Locked
+							setStateContentInit={setStateContentInit}
+							setStateContent={setStateContent}
+							setIsLoading={setIsLoading}
+							handleClickError={handleClickError}
+						/> :
+						stateContent == StateStakingLocked.LockedStakeProcess ?
+							<LockedStakeProcess  {...propsPass} /> :
+							stateContent == StateStakingLocked.LockedList ?
+								<LockedList  {...propsPass} /> :
+								stateContent === StateStakingLocked.WithDraw ? (
+									<WithDraw {...propsPass} />
+								) :
+									stateContent === StateStakingLocked.Success ? (
+										<Success success={success} setStateContent={setStateContent} />
+									) : stateContent === StateStakingLocked.Error ? (
+										<Error setStateContent={setStateContent} error={error} />
+									) : <Box></Box>
 				}
 			</Wrap>
-		</Dialog>
+			<Backdrop
+				sx={{ color: '#FF6D24', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+				open={isLoading}
+			>
+				<CircularProgress color="inherit" />
+			</Backdrop>
+		</Dialog >
 	);
 };
 
@@ -310,22 +204,24 @@ const TitlePopup = styled(DialogTitle)({
 		...TEXT_STYLE(16, 600),
 	},
 });
-
-const Wrap = styled(Stack)({
+type stackPropsNew = StackProps & {
+	isBig: boolean;
+};
+const Wrap = styled(Stack)((props: stackPropsNew) => ({
 	position: 'relative',
 	padding: '16px 16px 0px 16px',
-	// margin: "16px 0px",
 	overflowY: 'auto',
 	overflowX: 'hidden',
 	width: 'calc(100vw - 32px)',
-	height: 'calc(100vh - 32px)',
+	height: "auto",
+	// height: 'calc(100vh - 32px)',
 	'@media (min-width: 650px)': {
-		width: '360px',
-		height: '490px',
+		width: props.isBig ? '434px' : '360px',
+		// height: '490px',
 		padding: '16px',
 	},
 	'@media (max-width: 650px)': {
 		padding: '0px 16px 0px 16px',
 		margin: '16px 0px 16px 0px',
 	},
-});
+}));

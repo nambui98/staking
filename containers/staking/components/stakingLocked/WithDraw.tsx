@@ -1,20 +1,22 @@
 import { Box, Button, Typography } from '@mui/material';
 import { styled } from '@mui/styles';
+import { ethers } from 'ethers';
 import moment from 'moment';
 import React, { useState } from 'react';
 import { MarketplaceButton } from '../../../../components/buttons/MarketplaceButton';
-import { StateStaking } from '../../../../const';
+import { StateStaking, StateStakingLocked } from '../../../../const';
 import { MARKETPLACE_ICON } from '../../../../constants/marketplace';
 import { useWalletContext } from '../../../../contexts/WalletContext';
-import { withDraw } from '../../../../libs/staking';
+import { convertBigNumber, row } from '../../../../libs/hooks/lockedHook';
+import { withDrawLocked } from '../../../../libs/stakingLocked';
+import { formatMoney } from '../../../../libs/utils/utils';
 
 type Props = {
 	setStateContent: Function;
 	handleClickSuccess: Function;
 	handleClickError: Function;
 	setIsLoading: Function;
-	// balanceUS: string
-	// remainingDelayTime: string
+	row: row | null | undefined;
 };
 export const WithDraw = (props: Props) => {
 	const {
@@ -24,6 +26,7 @@ export const WithDraw = (props: Props) => {
 		handleClickError,
 		// remainingDelayTime,
 		setIsLoading,
+		row
 	} = props;
 	const { ethersSigner, ethersProvider, setRefresh, refresh } =
 		useWalletContext();
@@ -31,47 +34,48 @@ export const WithDraw = (props: Props) => {
 		// if (parseFloat(remainingDelayTime) > 0) {
 		// 	setStateContent(StateStaking.WithDrawWarning);
 		// } else {
-		// 	setIsLoading(true);
-		// 	try {
-		// 		const res = await withDraw(ethersSigner);
-		// 		const checkStatus = setInterval(async () => {
-		// 			const statusApprove = await ethersProvider.getTransactionReceipt(
-		// 				res.hash
-		// 			);
-		// 			if (statusApprove?.status) {
-		// 				setIsLoading(false);
-		// 				setRefresh(!refresh);
-		// 				handleClickSuccess({
-		// 					titleSuccess: 'Withdraw successfully!',
-		// 					functionSuccess: () => {
-		// 						setStateContent(StateStaking.WithDraw);
-		// 					},
-		// 					stateContentNew: StateStaking.Success,
-		// 				});
-		// 				clearInterval(checkStatus);
-		// 			}
-		// 		}, 1000);
-		// 	} catch (error: any) {
-		// 		const message =
-		// 			error.reason || 'Something went wrong, please try again';
-		// 		setIsLoading(false);
-		// 		handleClickError({
-		// 			titleError: message,
-		// 			functionError: () => {
-		// 				setStateContent(StateStaking.WithDraw);
-		// 			},
-		// 			stateContentNew: StateStaking.Error,
-		// 		});
-		// 	}
-		// }
+		setIsLoading(true);
+		try {
+			const res = await withDrawLocked(row?.sId ?? 0, ethersSigner);
+			if (res?.status) {
+				setRefresh(!refresh)
+				handleClickSuccess({
+					titleSuccess: 'Withdraw successfully!',
+					functionSuccess: () => {
+						setStateContent(StateStakingLocked.LockedList);
+					},
+					stateContentNew: StateStakingLocked.Success,
+				});
+			}
+		} catch (error: any) {
+			debugger
+			const message =
+				error.reason || 'Something went wrong, please try again';
+			setIsLoading(false);
+			handleClickError({
+				titleError: message,
+				functionError: () => {
+					setStateContent(StateStakingLocked.LockedList);
+				},
+				stateContentNew: StateStakingLocked.Error,
+			});
+		}
+
 	};
 
+
+	let isDisabled = false;
+	let time: Date | null = null;
+	if (row?.stakingTime) {
+		time = new Date(parseInt(row?.stakingTime.toString()) * 1000);
+		time.setDate(time.getDate() + row.lockedTime);
+		let now = new Date();
+		isDisabled = time.getTime() > now.getTime();
+	}
 	const timeUTC = () => {
-		// console.log(remainingDelayTime);
-		// let time = new Date();
-		// time.setSeconds(time.getSeconds() + parseInt(remainingDelayTime));
-		// return moment(time).utc().format('HH:mm DD/MM/yyyy');
-		// return `${time.getUTCHours()}:${time.getUTCMinutes()} ${time.getUTCDate()}/${time.getUTCMonth() + 1}/${time.getUTCFullYear()}`
+		if (time) {
+			return moment(time).utc().format('HH:mm DD/MM/yyyy');
+		}
 	};
 	return (
 		<Box
@@ -79,28 +83,24 @@ export const WithDraw = (props: Props) => {
 				display: 'flex',
 				justifyContent: 'space-between',
 				flexDirection: 'column',
-				height: '100%',
+				height: '400px',
 			}}
 		>
 			<Box sx={{ flex: 1 }}>
 				<Item>
-					<TitleItem>Token</TitleItem>
-					<ValueItem>70000 FIU</ValueItem>
-				</Item>
-				<Item>
 					<TitleItem>available amount</TitleItem>
-					<ValueItem>40000 FIU</ValueItem>
+					<ValueItem>{row?.tokenAmount && formatMoney(ethers.utils.formatEther(convertBigNumber(row?.tokenAmount)))} FIU</ValueItem>
 				</Item>
 				<Item>
 					<TitleItem>current profit</TitleItem>
-					<ValueItem>40000 FITTER PASS</ValueItem>
+					<ValueItem>{row?.fpNum} FITTER PASS</ValueItem>
 				</Item>
 				<Item>
 					<TitleItem>WITHDRAWAL DELAY TIME</TitleItem>
-					<ValueItem>7 DAYS</ValueItem>
+					<ValueItem>{row?.lockedTime} DAYS</ValueItem>
 				</Item>
 			</Box>
-			{true && (
+			{isDisabled && (
 				<Item
 					sx={{
 						background: '#E9EAEF',
@@ -122,7 +122,7 @@ export const WithDraw = (props: Props) => {
 						fontWeight={500}
 						mt="8px"
 					>
-						Available to withdraw at 08:23 11/7/2022
+						Available to withdraw at {timeUTC()}
 					</Typography>
 				</Item>
 			)}
@@ -137,7 +137,7 @@ export const WithDraw = (props: Props) => {
 				}}
 			>
 				<MarketplaceButton
-					// disabled={parseFloat(balanceUS) <= 0}
+					disabled={isDisabled}
 					customStyle={{ width: '100%' }}
 					title={'Withdraw'}
 					handleOnClick={handleWithdraw}

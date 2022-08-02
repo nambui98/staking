@@ -19,14 +19,14 @@ export const Error = (props: Props) => {
 		error.functionError();
 	};
 	return (
-		<>
+		<Box >
 			<Box
 				sx={{
+					height: "400px",
 					display: 'flex',
 					justifyContent: 'center',
 					flexDirection: 'column',
 					alignItems: 'center',
-					height: '100%',
 				}}
 			>
 				<Box sx={{ textAlign: 'center' }}>
@@ -43,7 +43,7 @@ export const Error = (props: Props) => {
 				title={'Try again'}
 				handleOnClick={handleTryAgain}
 			/>
-		</>
+		</Box>
 	);
 };
 

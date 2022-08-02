@@ -17,6 +17,15 @@ export enum StateStaking {
 	Error,
 }
 
+
 export enum StateStakingLocked {
-	EnablePool,
+	Locked,
+	LockedApprove,
+	LockedStakeProcess,
+	LockedList,
+	LockedUnstake,
+	WithDraw,
+	Success,
+	Error,
+
 }

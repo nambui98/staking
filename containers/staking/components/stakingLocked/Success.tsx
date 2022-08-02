@@ -15,16 +15,16 @@ type Props = {
 };
 
 export const Success = (props: Props) => {
-	const handleContinue = () => {};
+	const handleContinue = () => { };
 	return (
 		<>
 			<Box
 				sx={{
+					height: "400px",
 					display: 'flex',
 					justifyContent: 'center',
 					flexDirection: 'column',
 					alignItems: 'center',
-					height: '100%',
 				}}
 			>
 				<Box sx={{ textAlign: 'center' }}>

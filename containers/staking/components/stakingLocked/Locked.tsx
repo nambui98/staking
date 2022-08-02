@@ -13,7 +13,7 @@ type Props = {
 	setStateContentInit: Function;
 };
 
-export const EnablePool = (props: Props) => {
+export const Locked = (props: Props) => {
 	const { setIsLoading, handleClickError, setStateContentInit } = props;
 	const { setToggleActivePopup, walletAccount, ethersSigner, ethersProvider } =
 		useWalletContext();
@@ -101,28 +101,15 @@ export const EnablePool = (props: Props) => {
 				width={'100%'}
 				sx={{ paddingTop: '16px', borderTop: '1px solid #E9EAEF' }}
 			>
-				{walletAccount ? (
-					continueToStake ? (
-						<MarketplaceButton
-							customStyle={{ width: '100%' }}
-							title={'Continue to stake'}
-							handleOnClick={handleContinueToStake}
-						/>
-					) : (
-						<MarketplaceButton
-							customStyle={{ width: '100%' }}
-							title={'Enable'}
-						/>
-					)
-				) : (
-					<MarketplaceButton
-						customStyle={{ width: '100%' }}
-						title={'Connect Wallet'}
-						handleOnClick={() => {
-							setToggleActivePopup(true);
-						}}
-					/>
-				)}
+
+				<MarketplaceButton
+					customStyle={{ width: '100%' }}
+					title={'Connect Wallet'}
+					handleOnClick={() => {
+						setToggleActivePopup(true);
+					}}
+				/>
+
 			</Box>
 		</>
 	);

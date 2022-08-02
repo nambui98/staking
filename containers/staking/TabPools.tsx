@@ -19,9 +19,11 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { PopupMessage } from '../../components/pageComponent/claim/PopupMessage';
-import { StateStaking } from '../../const';
+import { StateStaking, StateStakingLocked } from '../../const';
 import { STAKING_ICON } from '../../constants/staking';
 import { changeNetwork, useWalletContext } from '../../contexts/WalletContext';
+import lockedHook from '../../libs/hooks/lockedHook';
+import stakingHook from '../../libs/hooks/stakingHook';
 import {
 	getAllowanceStakingFiu,
 	getBalanceFiuStaking,
@@ -69,25 +71,26 @@ export const TabPools = () => {
 	const [stateContentInit, setStateContentInit] = useState<StateStaking>(
 		StateStaking.StakeProcess
 	);
+	const [stateContentInitLocked, setStateContentInitLocked] = useState<StateStakingLocked>(
+		StateStakingLocked.LockedStakeProcess
+	);
 	const [isLoading, setIsLoading] = useState(false);
-	const [balanceFiu, setBalanceFiu] = useState('');
-	const [balanceSA, setBalanceSA] = useState('');
-	const [balanceCP, setBalanceCP] = useState('');
-	const [balanceUS, setBalanceUS] = useState('');
-	const [claimableTime, setClaimableTime] = useState('');
-	const [remainingDelayTime, setRemainingDelayTime] = useState('');
-	const [totalStakingToken, setTotalStakingToken] = useState('');
-	const [statusRow, setStatusRow] = useState('-');
-	const [isEnable, setIsEnable] = useState<boolean>(false);
-	const {
-		setToggleActivePopup,
-		walletAccount,
-		ethersSigner,
-		ethersProvider,
-		chainIdIsSupported,
-		provider,
-		refresh,
-	} = useWalletContext();
+	const { balanceFiu,
+		balanceSA,
+		balanceCP,
+		balanceUS,
+		isEnable,
+		totalStakingToken,
+		claimableTime,
+		remainingDelayTime,
+		statusRow } = stakingHook({
+			setIsLoading,
+			setStateContentInit
+		})
+	const { dataMyStakingLock } = lockedHook({
+		setIsLoading,
+		setStateContentInitLocked
+	})
 	const [showDialogItem, setShowDialogItem] = useState<any>({
 		status: false,
 		title: '',
@@ -214,193 +217,6 @@ export const TabPools = () => {
 			content: content,
 		});
 	};
-	const getAllowance = async () => {
-		// setIsLoading(true);
-		if (!chainIdIsSupported) {
-			await changeNetwork(provider);
-		}
-		if (walletAccount) {
-			const allowance = await getAllowanceStakingFiu(
-				walletAccount,
-				ethersSigner
-			);
-			// setIsLoading(false);
-			if (allowance > 0) {
-				// setStateContentInit(StateStaking.EnablePool);
-				setIsEnable(true);
-				// setTabCurrent(1);
-			} else {
-				// setTabCurrent(0);
-				setIsEnable(false);
-			}
-		} else {
-			// setIsLoading(false);
-		}
-	};
-	const getBalanceFiu = async () => {
-		// setIsLoading(true);
-		if (!chainIdIsSupported) {
-			await changeNetwork(provider);
-		}
-		if (walletAccount) {
-			const balance = await getBalanceFiuStaking(walletAccount, ethersSigner);
-			setBalanceFiu(balance);
-		} else {
-			setBalanceFiu('0');
-			// setIsLoading(false);
-		}
-	};
-	const getBalanceSA = async () => {
-		// setIsLoading(true);
-		if (!chainIdIsSupported) {
-			await changeNetwork(provider);
-		}
-		if (walletAccount) {
-			const balance = await getStakingAmount(walletAccount, ethersSigner);
-			setBalanceSA(balance);
-		} else {
-			setBalanceSA('0');
-			// setIsLoading(false);
-		}
-	};
-	const getBalanceCP = async () => {
-		// setIsLoading(true);
-		if (!chainIdIsSupported) {
-			await changeNetwork(provider);
-		}
-		if (walletAccount) {
-			const balance = await getCurrentProfit(walletAccount, ethersSigner);
-			setBalanceCP(balance);
-		} else {
-			setBalanceCP('0');
-			// setIsLoading(false);
-		}
-	};
-	const getUnstakeA = async () => {
-		// setIsLoading(true);
-		if (!chainIdIsSupported) {
-			await changeNetwork(provider);
-		}
-		if (walletAccount) {
-			const balance = await getUnstakeAmount(walletAccount, ethersSigner);
-
-			setBalanceUS(balance);
-		} else {
-			setBalanceUS('0');
-			// setIsLoading(false);
-		}
-	};
-	const toClaimableT = async () => {
-		// setIsLoading(true);
-		if (!chainIdIsSupported) {
-			await changeNetwork(provider);
-		}
-		if (walletAccount) {
-			const balance = await toClaimableTime(walletAccount, ethersSigner);
-			setClaimableTime(balance);
-		} else {
-			// setIsLoading(false);
-		}
-	};
-	const getRemainingDelayT = async () => {
-		// setIsLoading(true);
-		if (!chainIdIsSupported) {
-			await changeNetwork(provider);
-		}
-		if (walletAccount) {
-			const balance = await getRemainingDelayTime(walletAccount, ethersSigner);
-			setRemainingDelayTime(balance);
-		} else {
-		}
-	};
-	const getTotalStakingT = async () => {
-		setIsLoading(true);
-		if (!chainIdIsSupported) {
-			await changeNetwork(provider);
-		}
-		if (ethersSigner) {
-			const balance = await getTotalStakingToken(ethersSigner);
-			setTotalStakingToken(balance);
-		} else {
-			setTotalStakingToken('0');
-			setIsLoading(false);
-		}
-	};
-	// const statusMap ={
-	// 	0:'-',
-	// 	1:'STAKING',
-	// }
-	const getStakingS = async () => {
-		setIsLoading(true);
-		if (!chainIdIsSupported) {
-			await changeNetwork(provider);
-		}
-		if (ethersSigner && walletAccount) {
-			const status = await getStakingStatus(walletAccount, ethersSigner);
-			if (parseInt(status) === 0) {
-				setStatusRow('-');
-			} else if (parseInt(status) === 1) {
-				setStatusRow('STAKING');
-			} else {
-				setStatusRow('UNSTAKED');
-			}
-			// debugger
-			// setStatusRow('STAKING')
-		} else {
-			setStatusRow('-');
-		}
-	};
-	const getAll = async () => {
-		setIsLoading(true);
-		await Promise.all([
-			getStakingS(),
-			getAllowance(),
-			getBalanceFiu(),
-			getBalanceSA(),
-			getBalanceCP(),
-			getUnstakeA(),
-			toClaimableT(),
-			getRemainingDelayT(),
-		]);
-		setIsLoading(false);
-	};
-	useEffect(() => {
-		getAll();
-		getTotalStakingT();
-		// getBalanceP()
-		// getBalanceS()
-	}, [walletAccount, refresh, ethersSigner]);
-	console.log(balanceUS);
-	useEffect(() => {
-		// if (parseFloat(balanceSA) > 0) {
-		// 	setStatusRow('STAKING')
-		// } else {
-		// 	setStatusRow('-')
-		// 	// if (parseFloat(balanceFiu) > 0) {
-
-		// 	// } else {
-		// 	// 	setStatusRow('-')
-		// 	// }
-		// }
-		if (parseFloat(balanceSA) > 0 || parseFloat(balanceUS) > 0) {
-			setStateContentInit(StateStaking.Staked);
-		} else {
-			if (isEnable) {
-				setStateContentInit(StateStaking.StakeProcess);
-			} else {
-				setStatusRow('-');
-				setStateContentInit(StateStaking.EnablePool);
-			}
-		}
-	}, [
-		balanceFiu,
-		balanceSA,
-		balanceCP,
-		balanceUS,
-		claimableTime,
-		walletAccount,
-	]);
-
 	return (
 		<Wrap>
 			<Container sx={{ maxWidth: 1120 }}>
@@ -455,9 +271,9 @@ export const TabPools = () => {
 														onClick={
 															index === 0
 																? (e: React.MouseEvent) =>
-																		handleShowPopupPass(e)
+																	handleShowPopupPass(e)
 																: (e: React.MouseEvent) =>
-																		handleShowPopupShared(e)
+																	handleShowPopupShared(e)
 														}
 													>
 														How it works?
@@ -524,9 +340,9 @@ export const TabPools = () => {
 														onClick={
 															index === 0
 																? (e: React.MouseEvent) =>
-																		handleShowPopupPass(e)
+																	handleShowPopupPass(e)
 																: (e: React.MouseEvent) =>
-																		handleShowPopupShared(e)
+																	handleShowPopupShared(e)
 														}
 													>
 														How it works?
@@ -613,10 +429,12 @@ export const TabPools = () => {
 			></DialogsItemStaking>
 			<DialogItemStakingLocked
 				status={activeItemLocked}
+				balanceFiu={balanceFiu}
 				dataActive={rows[activeItemLocked]}
 				handleToggle={() => setActiveItemLocked(null)}
-				stateContentInit={stateContentInit}
+				stateContentInit={stateContentInitLocked}
 				setStateContentInit={setStateContentInit}
+				dataMyStakingLock={dataMyStakingLock}
 			/>
 			<Backdrop sx={{ zIndex: 1100, color: '#FF6D24' }} open={isLoading}>
 				<CircularProgress color="inherit" />
