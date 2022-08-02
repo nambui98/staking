@@ -37,6 +37,7 @@ export const WithDraw = (props: Props) => {
 		setIsLoading(true);
 		try {
 			const res = await withDrawLocked(row?.sId ?? 0, ethersSigner);
+			setIsLoading(false);
 			if (res?.status) {
 				setRefresh(!refresh)
 				handleClickSuccess({
