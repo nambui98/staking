@@ -94,7 +94,7 @@ export const LockedList = (props: Props) => {
 
 	const timeUTC = (timeStamp: number) => {
 		let time = new Date(timeStamp * 1000);
-		return moment(time).utc().format('Do MMMM YYYY');
+		return moment(time).utc().format('DD MMMM YYYY');
 	}
 	const arrayDays = dataMyStakingLock?.map((item: row) => {
 		return timeUTC(parseInt(item.stakingTime.toString()))

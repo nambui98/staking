@@ -63,7 +63,7 @@ const addresses: Map = {
 		beFITTERStakeStaking: '0x43832e1a628e91CaFAE75ff1EB70BbF3478e27B3',
 		bFclaimAlphaBeta2: '0x80F2086a0De59eF239D6F97ac2138496AE1181e2',
 		bFclaimToken: '0xA1eDA0aBA0175050E0c123fc8E531B4b7526e0de',
-		beFITTERlockedPool: '0x69605EB93adCE8267EF1a8FDF0815ED2ea7C1280',
+		beFITTERlockedPool: '0xDedDEb7A2445052A15204555218e1910A3523f7a',
 
 	},
 	['deployment']: { // bscTestnet
