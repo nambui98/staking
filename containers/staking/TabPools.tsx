@@ -19,7 +19,7 @@ import { useState } from 'react';
 import { PopupMessage } from '../../components/pageComponent/claim/PopupMessage';
 import { StateStaking, StateStakingLocked } from '../../const';
 import { STAKING_ICON } from '../../constants/staking';
-import lockedHook from '../../libs/hooks/lockedHook';
+import lockedHook, { row } from '../../libs/hooks/lockedHook';
 import stakingHook from '../../libs/hooks/stakingHook';
 import { formatMoney } from '../../libs/utils/utils';
 import { TEXT_STYLE } from '../../styles/common/textStyles';
@@ -82,6 +82,11 @@ export const TabPools = () => {
 	});
 	const [activeItem, setActiveItem] = useState<any>(null);
 	const [activeItemLocked, setActiveItemLocked] = useState<any>(null);
+	const totalFitterPassLocked = dataMyStakingLock && dataMyStakingLock?.length > 0 ? dataMyStakingLock?.reduce(
+		(previousValue, currentValue: row) => previousValue + currentValue.fpNum,
+		0
+	) : 0;
+	debugger
 	const rows = [
 		{
 			name: 'Fitter Pass',
@@ -99,9 +104,9 @@ export const TabPools = () => {
 		},
 		{
 			name: 'Fitter Pass - Locked',
-			title: 'Fitter Pass - Locked',
+			title: 'Fitter Pass Drops - Locked',
 			isComingSoon: false,
-			data: createData(`${dataMyStakingLock && dataMyStakingLock?.length > 0 ? 'Staking' : '-'}`, 'Fitter Pass', '0', '-', '3 - 30 days', '7 days', `${totalInPool} FIU`),
+			data: createData(`${dataMyStakingLock && dataMyStakingLock?.length > 0 ? 'Staking' : '-'}`, 'Fitter Pass', `${totalFitterPassLocked}`, '-', '3 - 30 days', '7 days', `${totalInPool} FIU`),
 		},
 	];
 
@@ -111,54 +116,54 @@ export const TabPools = () => {
 			status: true,
 			content: (
 				<Box>
-					<Typography>
+					<Typography mb={1}>
 						<b>Fitter Pass:</b>
 					</Typography>
 
-					<Typography>1.Stake FIU, minimum 4000 FIU.</Typography>
+					<Typography mb={1}>1.Stake FIU, minimum 4000 FIU.</Typography>
 
-					<Typography>2.Earn Fitter Pass.</Typography>
+					<Typography mb={1}>2.Earn Fitter Pass.</Typography>
 
-					<Typography>
+					<Typography mb={1}>
 						3.You have to stake at least 24h to receive Pass.
 					</Typography>
 
-					<Typography>
+					<Typography mb={1}>
 						4.Fitter Pass will be given to your account in every block of 24h
 						from the last moment you stake/unstake
 					</Typography>
 
-					<Typography>
+					<Typography mb={1}>
 						5.For every 4000 FIU staked per 240h, you earn one Fitter Pass.
 					</Typography>
 
-					<Typography>
+					<Typography mb={1}>
 						For every 40.000 FIU staked per 24h, you earn one Fitter Pass.
 					</Typography>
 
-					<Typography>
+					<Typography mb={1}>
 						For every 80.000 FIU staked per 48h, you earn 2 Fitter Passes,....
 					</Typography>
 
-					<Typography>
+					<Typography mb={1}>
 						The more token you stake, the more reward you will receive.
 					</Typography>
 
-					<Typography>
+					<Typography mb={1}>
 						6.Specially, in the first 72 hours from this campaign begin, the
 						reward will be doubled.
 					</Typography>
 
-					<Typography>
+					<Typography mb={1}>
 						Ex: With 20.000 FIU staked per 24h, you earn 1 Fitter Passes.
 					</Typography>
 
-					<Typography>
+					<Typography mb={1}>
 						7.Staking does have a short cooldown period of 7days, meaning once
 						you want to exit, you have to wait 7days.
 					</Typography>
 
-					<Typography>
+					<Typography mb={1}>
 						<b>Important note:</b> If you change your stake amount (stake more
 						or partical unstake ), system will recalculate 24h period from that
 						time and amount. Finished rewards will remain but fractional staking
@@ -175,20 +180,43 @@ export const TabPools = () => {
 			status: true,
 			content: (
 				<Box>
-					<Typography>
+					<Typography mb={1}>
 						<b>Shared Pool: </b>
 					</Typography>
-					<Typography>1.Stake FIU, minimum 1000 FIU.</Typography>
-					<Typography>2.Earn FIU</Typography>
-					<Typography>3.High-yield in return, take place in 1 month</Typography>
-					<Typography>4.Unlimited number of stakers and token</Typography>
-					<Typography>
+					<Typography mb={1}>1.Stake FIU, minimum 1000 FIU.</Typography>
+					<Typography mb={1}>2.Earn FIU</Typography>
+					<Typography mb={1}>3.High-yield in return, take place in 1 month</Typography>
+					<Typography mb={1}>4.Unlimited number of stakers and token</Typography>
+					<Typography mb={1}>
 						5.In the first 3 days from this campaign begin, you have chance to
 						get double the reward.
 					</Typography>
-					<Typography>
+					<Typography mb={1}>
 						6.Staking does have a short cooldown period of 14 days, meaning once
 						you want to exit, you have to wait 14 days.
+					</Typography>
+				</Box>
+			),
+		});
+	};
+	const handleShowPopupLocked = (e: React.MouseEvent) => {
+		e.stopPropagation();
+		setStatusPopup({
+			status: true,
+			content: (
+				<Box>
+					<Typography mb={1}>
+						<b>Fitter Pass - Locked: </b>
+					</Typography>
+					<Typography mb={1}>1. Stake FIU - Earn Fitter Pass</Typography>
+					<Typography mb={1}>2. <p>Stake amount is calculated by block unit. 1 block is equivalent to 40,000 FIU</p> </Typography>
+					<Typography mb={1}>3. Minimum stake amount required is 1 block;  maximum 12 blocks</Typography>
+					<Typography mb={1}>4. Minimum lock-up duration is 3 days ; maximum 30 days</Typography>
+					<Typography fontWeight={600} mb={1}>
+						5. Fitter Pass(es) will be immediately sent to your account right after you successfully stake.
+					</Typography>
+					<Typography mb={1}>
+						6.Staking reward has its limit with maximum of 31 Fitter Passes per one staking action
 					</Typography>
 				</Box>
 			),
@@ -254,8 +282,10 @@ export const TabPools = () => {
 															index === 0
 																? (e: React.MouseEvent) =>
 																	handleShowPopupPass(e)
-																: (e: React.MouseEvent) =>
-																	handleShowPopupShared(e)
+																: index === 1 ? (e: React.MouseEvent) =>
+																	handleShowPopupLocked(e)
+																	: (e: React.MouseEvent) =>
+																		handleShowPopupShared(e)
 														}
 													>
 														How it works?
@@ -280,7 +310,7 @@ export const TabPools = () => {
 													Status <Box>{item.data.status}</Box>
 												</Item>
 												<Item align="left" sx={{ textTransform: 'none' }}>
-													{index === 0 ? 'REWARD' : 'APR'}{' '}
+													{'REWARD'}
 													<Box>{item.data.reward}</Box>
 												</Item>
 												<Item align="left">
@@ -323,8 +353,9 @@ export const TabPools = () => {
 															index === 0
 																? (e: React.MouseEvent) =>
 																	handleShowPopupPass(e)
-																: (e: React.MouseEvent) =>
-																	handleShowPopupShared(e)
+																: index === 1 ? (e: React.MouseEvent) =>
+																	handleShowPopupLocked(e)
+																	: (e: React.MouseEvent) => handleShowPopupShared(e)
 														}
 													>
 														How it works?
@@ -349,7 +380,7 @@ export const TabPools = () => {
 													Status <Box>{item.data.status}</Box>
 												</Item>
 												<Item align="left" sx={{ textTransform: 'none' }}>
-													{index === 0 ? 'REWARD' : 'APR'}{' '}
+													{'REWARD'}
 													<Box>{item.data.reward}</Box>
 												</Item>
 												<Item align="left">

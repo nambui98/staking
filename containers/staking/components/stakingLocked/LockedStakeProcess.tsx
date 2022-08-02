@@ -47,8 +47,8 @@ export const LockedStakeProcess = ({
 	setIsLoading,
 	handleClickError,
 }: Props) => {
-	let [value, setValue] = useState(1);
-	let [valueDay, setValueDay] = useState(12);
+	let [value, setValue] = useState(0);
+	let [valueDay, setValueDay] = useState(0);
 	let [lockDurationSuggest, setLockDurationSuggest] = useState(0);
 	let [lockDurationError, setLockDurationError] = useState(false);
 	const [status, setStatus] = useState(0);
