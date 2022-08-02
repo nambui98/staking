@@ -3,9 +3,7 @@ import {
 	Box,
 	CircularProgress,
 	Container,
-	InputAdornment,
-	InputBase,
-	Stack,
+	InputAdornment, Stack,
 	styled,
 	Tab,
 	Table,
@@ -15,28 +13,14 @@ import {
 	TableRowProps,
 	Tabs,
 	TextField,
-	Typography,
+	Typography
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { PopupMessage } from '../../components/pageComponent/claim/PopupMessage';
 import { StateStaking, StateStakingLocked } from '../../const';
 import { STAKING_ICON } from '../../constants/staking';
-import { changeNetwork, useWalletContext } from '../../contexts/WalletContext';
 import lockedHook from '../../libs/hooks/lockedHook';
 import stakingHook from '../../libs/hooks/stakingHook';
-import {
-	getAllowanceStakingFiu,
-	getBalanceFiuStaking,
-	getBalancePass,
-	getBalanceStaked,
-	getCurrentProfit,
-	getRemainingDelayTime,
-	getStakingAmount,
-	getStakingStatus,
-	getTotalStakingToken,
-	getUnstakeAmount,
-	toClaimableTime,
-} from '../../libs/staking';
 import { formatMoney } from '../../libs/utils/utils';
 import { TEXT_STYLE } from '../../styles/common/textStyles';
 import { DialogsItemStaking } from './components/DialogsItemStaking';
@@ -87,7 +71,7 @@ export const TabPools = () => {
 			setIsLoading,
 			setStateContentInit
 		})
-	const { dataMyStakingLock } = lockedHook({
+	const { dataMyStakingLock, totalInPool } = lockedHook({
 		setIsLoading,
 		setStateContentInitLocked
 	})
@@ -117,7 +101,7 @@ export const TabPools = () => {
 			name: 'Fitter Pass - Locked',
 			title: 'Fitter Pass - Locked',
 			isComingSoon: false,
-			data: createData('-', '-', '0', '-', 'None', '14 days', '0 FIU'),
+			data: createData(`${dataMyStakingLock && dataMyStakingLock?.length > 0 ? 'Staking' : '-'}`, 'Fitter Pass', '0', '-', '3 - 30 days', '7 days', `${totalInPool} FIU`),
 		},
 	];
 
@@ -255,8 +239,6 @@ export const TabPools = () => {
 												isComingSoon={item.isComingSoon}
 												onClick={() => {
 													index === 0 && setActiveItem(index);
-
-													// handleShowPopupDetail(item.name, item.data)
 												}}
 												key={index}
 												sx={{

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { StateStaking, StateStakingLocked } from '../../const';
 import { changeNetwork, useWalletContext } from '../../contexts/WalletContext';
 import { getAllowanceStakingFiu, } from '../staking';
-import { getAllowanceStakingLocked, getAllUserStaking } from '../stakingLocked';
+import { getAllowanceStakingLocked, getAllUserStaking, getBalanceLocked } from '../stakingLocked';
 type Props = {
 	setIsLoading: Function;
 	setStateContentInitLocked: Function
@@ -57,6 +57,7 @@ export default function lockedHook(props: Props) {
 	const [statusRow, setStatusRow] = useState('-');
 	const [dataMyStakingLock, setDataMyStakingLock] = useState<row[]>();
 	const [isEnable, setIsEnable] = useState<boolean>(false);
+	const [totalInPool, setTotalInPool] = useState("0");
 	const {
 		setToggleActivePopup,
 		walletAccount,
@@ -68,7 +69,6 @@ export default function lockedHook(props: Props) {
 	} = useWalletContext();
 
 	const getAllowance = async () => {
-		// setIsLoading(true);
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
@@ -77,23 +77,17 @@ export default function lockedHook(props: Props) {
 				walletAccount,
 				ethersSigner
 			);
-			// setIsLoading(false);
 			console.log(allowance);
 			debugger
 			if (allowance > 0) {
-				// setStateContentInit(StateStaking.EnablePool);
 				setIsEnable(true);
-				// setTabCurrent(1);
 			} else {
-				// setTabCurrent(0);
 				setIsEnable(false);
 			}
 		} else {
-			// setIsLoading(false);
 		}
 	};
 	const getAllUserS = async () => {
-		// setIsLoading(true);
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
@@ -109,14 +103,26 @@ export default function lockedHook(props: Props) {
 				setStateContentInitLocked(StateStakingLocked.LockedList);
 			}
 		} else {
-			// setIsLoading(false);
 		}
+	};
+	const getBalance = async () => {
+		if (!chainIdIsSupported) {
+			await changeNetwork(provider);
+		}
+		if (ethersSigner) {
+			const data = await getBalanceLocked(
+				ethersSigner
+			);
+			setTotalInPool(data);
+		}
+
 	};
 	const getAll = async () => {
 		setIsLoading(true);
 		await Promise.all([
 			getAllowance(),
-			getAllUserS()
+			getAllUserS(),
+			getBalance()
 		]);
 		setIsLoading(false);
 	};
@@ -135,7 +141,8 @@ export default function lockedHook(props: Props) {
 
 	return {
 		isEnable,
-		dataMyStakingLock
+		dataMyStakingLock,
+		totalInPool
 	}
 }
 

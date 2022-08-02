@@ -47,6 +47,13 @@ export const getAllowanceStakingLocked = async (walletAddress: string, ethersSig
 	const convertAllowance = parseFloat(ethers.utils.formatUnits(res));
 	return convertAllowance;
 }
+
+export const getBalanceLocked = async (ethersSigner: any) => {
+	const beFITTERPassStakingContract = new ethers.Contract(bftFiuTokenStaking.address, bftFiuTokenStaking.abi, ethersSigner);
+	const balance = await beFITTERPassStakingContract.balanceOf(beFITTERlockedPool.address)
+	return ethers.utils.formatEther(balance)
+}
+
 export const configStakingLocked = {
 	valueTokenBlock: 40000,
 	valueEstimated: 0.8,
