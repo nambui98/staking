@@ -29,26 +29,26 @@ export const getAvailableBox = async (boxType: string, ethersSigner: any) => {
   return totalBox;
 }
 
-export const handleClaimToken = async (walletAddress: string, AddressAmount: any, ethersSigner: any) => {
-  const claimTokenContract = new ethers.Contract(bftClaimToken.address, bftClaimToken.abi, ethersSigner)
+export const handleClaimToken = async (walletAddress: string, AddressAmount: any, ethersSigner: any, contractClaim: string) => {
+  const claimTokenContract = new ethers.Contract(contractClaim, bftClaimToken.abi, ethersSigner)
   const res = await claimTokenContract.claim(walletAddress, AddressAmount.amount, AddressAmount.proof)
   return res;
 }
 
-export const getClaimedToken = async (walletAddress: string, ethersSigner: any) => {
-  const claimTokenContract = new ethers.Contract(bftClaimToken.address, bftClaimToken.abi, ethersSigner)
+export const getClaimedToken = async (walletAddress: string, ethersSigner: any, contractClaim: string) => {
+  const claimTokenContract = new ethers.Contract(contractClaim, bftClaimToken.abi, ethersSigner)
   const res = await claimTokenContract.getReleasedTokenAmount(walletAddress);
   return res
 }
 
-export const checkClaimedToken = async (walletAddress: string, ethersSigner: any) => {
-  const claimTokenContract = new ethers.Contract(bftClaimToken.address, bftClaimToken.abi, ethersSigner)
+export const checkClaimedToken = async (walletAddress: string, ethersSigner: any, contractClaim: string) => {
+  const claimTokenContract = new ethers.Contract(contractClaim, bftClaimToken.abi, ethersSigner)
   const res = await claimTokenContract.getClaimableAmount(walletAddress)
   return res
 }
 
-export const getLockedOf = async (walletAddress: string, ethersSigner: any) => {
-  const claimTokenContract = new ethers.Contract(bftClaimToken.address, bftClaimToken.abi, ethersSigner)
+export const getLockedOf = async (walletAddress: string, ethersSigner: any, contractClaim: string) => {
+  const claimTokenContract = new ethers.Contract(contractClaim, bftClaimToken.abi, ethersSigner)
   const res = await claimTokenContract.lockedOf(walletAddress)
   return res
 }

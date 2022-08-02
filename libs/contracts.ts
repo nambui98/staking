@@ -43,6 +43,7 @@ const addresses: Map = {
 		beFITTERStakeStaking: '0xF7d21298B4499F582725F50053F7b4C1cc510f56',
 		bFclaimAlphaBeta2: '0x80F2086a0De59eF239D6F97ac2138496AE1181e2',
 		bFclaimToken: '0xA1eDA0aBA0175050E0c123fc8E531B4b7526e0de',
+		bFclaimTokenAirdrop: '0xb77b00AEEF5631362aC3cA8dE6bD70Cc412452Dd'
   },
   ['dev']: {
     bFBox: '0xb92faF9fE22225C82aFc3968425cca17996ae4eA',
@@ -107,3 +108,4 @@ export const beFITTERPassStaking = { address: address.beFITTERPassStaking, abi: 
 export const beFITTERStakeStaking = { address: address.beFITTERStakeStaking, abi: beFitterStake.abi }
 export const bftClaimToken = { address: address.bFclaimToken, abi: bfClaimToken.abi }
 export const bftWallet = {address: address.bFWallet, abi: bfWallet.abi}
+export const bftClaimTokenAirdrop = { address: address.bFclaimTokenAirdrop, abi: bfClaimToken.abi }
