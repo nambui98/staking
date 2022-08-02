@@ -1,23 +1,23 @@
-import { Box, BoxProps, Button, InputBase, Stack, styled, Typography, useMediaQuery } from "@mui/material"
+import { Box, BoxProps, Button, Stack, styled, Typography, useMediaQuery } from "@mui/material";
+import { ethers } from "ethers";
 import { useEffect, useState } from "react";
-import { BOX_DETAILS, ICON, IMAGE, TAB_ITEM, TAB_NAME } from "../../../constants/assetsWallet";
-import { useWalletContext } from "../../../contexts/WalletContext"
-import { getBoxType, getOwnedBox, getOwnedFitterPass } from "../../../libs/claim";
-import { MarketplaceService } from "../../../services/user.service";
-import { TEXT_STYLE } from "../../../styles/common/textStyles";
-import { FormInfomationPopup } from "../marketplace/FormInfomationPopup";
-import { BoxEmpty } from "./BoxEmpty";
-import { MysteryBoxTab } from "./MysteryBoxTab";
-import { TokenTab } from "./TokenTab";
 import addressBuyBox from '../../../abi/addressBuyBox.json';
+import { BOX_DETAILS, ICON, IMAGE, TAB_ITEM, TAB_NAME } from "../../../constants/assetsWallet";
 import { useCommonContext } from "../../../contexts/CommonContext";
-import { SendToSpending } from "./SenToSpending";
+import { useWalletContext } from "../../../contexts/WalletContext";
+import { getBoxType, getOwnedBox, getOwnedFitterPass } from "../../../libs/claim";
 import { bftBox } from "../../../libs/contracts";
 import { formatMoney } from "../../../libs/utils/utils";
-import { beFITTERPassStaking } from "../../../libs/contracts";
-import { ethers, utils } from "ethers"
-import { FitterPassTab } from "./FitterPass";
+import { MarketplaceService } from "../../../services/user.service";
+import { TEXT_STYLE } from "../../../styles/common/textStyles";
 import { ClockUtc } from "../../clockUtc";
+import { FormInfomationPopup } from "../marketplace/FormInfomationPopup";
+import { BoxEmpty } from "./BoxEmpty";
+import { BoxShoes } from "./BoxShoes";
+import { FitterPassTab } from "./FitterPass";
+import { MysteryBoxTab } from "./MysteryBoxTab";
+import { SendToSpending } from "./SenToSpending";
+import { TokenTab } from "./TokenTab";
 
 export const Boxtabs = () => {
   const {walletAccount, bnbBalance, fiuBalance, heeBalance, ethersSigner, boxBalance } = useWalletContext();
@@ -30,7 +30,8 @@ export const Boxtabs = () => {
   const [tokenChoose, setTokenChoose] = useState<string>('');
   const [boxChoose, setBoxChoose] = useState<string>('');
   const [listBoxType, setListBoxType] = useState<any[]>([]);
-  const [fitterPassBalance, setFitterPassBalance] = useState<any>(0)
+  const [fitterPassBalance, setFitterPassBalance] = useState<any>(0);
+  const [shoeChoose, setShoeChoose] = useState<string>('');
 
 
   const handleSwitchTab = (tab: string) => {
@@ -46,6 +47,8 @@ export const Boxtabs = () => {
         return <MysteryBoxTab boxChoose={boxChoose} setBoxChoose={setBoxChoose} listBoxType={listBoxType} currentTab={currentTab} />
       case TAB_NAME.fitterPass:
         return <FitterPassTab fitterPassBalance={fitterPassBalance} />
+      case TAB_NAME.shoe:
+        return <BoxShoes shoeChoose={shoeChoose} setShoeChoose={setShoeChoose} />  
       default:
         break;
     }

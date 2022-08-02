@@ -60,7 +60,7 @@ export const TAB_NAME = {
 
 export const TAB_ITEM = [
   {title: TAB_NAME.token, icon: ICON.buyCrypto, active: true},
-  {title: TAB_NAME.shoe, icon: ICON.shoe, active: false},
+  {title: TAB_NAME.shoe, icon: ICON.shoe, active: true},
   {title: TAB_NAME.box, icon: ICON.box, active: true},
   {title: TAB_NAME.pet, icon: ICON.pet, active: false},
   {title: TAB_NAME.fitterPass, icon: ICON.fitterPass, active: true},
