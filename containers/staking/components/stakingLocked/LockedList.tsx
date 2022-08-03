@@ -175,7 +175,7 @@ export const LockedList = (props: Props) => {
 																Withdraw
 															</TableCell>
 														} else {
-															return <TableCell onClick={() => { }} sx={{ fontSize: '12px', color: '#898E9E', padding: '8px 8px', borderBottom: 'none', cursor: 'pointer' }} key={column.id} align={column.align}>
+															return <TableCell sx={{ fontSize: '12px', color: '#898E9E', padding: '8px 8px', borderBottom: 'none' }} key={column.id} align={column.align}>
 																Withdrawn
 															</TableCell>
 														}
