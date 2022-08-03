@@ -259,7 +259,7 @@ export const LockedStakeProcess = ({
 							textTransform: 'none',
 						}}
 					>
-						Maximum: 31 Fitter Passses
+						Maximum: 31 Fitter Passes
 					</Box>
 				</TitleItem>
 				<ValueItem
