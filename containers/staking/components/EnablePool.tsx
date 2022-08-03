@@ -80,8 +80,8 @@ export const EnablePool = (props: Props) => {
 			</Item>
 			<Box mt="auto" width={"100%"} sx={{ paddingTop: "16px", borderTop: "1px solid #E9EAEF" }}>
 				{walletAccount ?
-					continueToStake ? <MarketplaceButton customStyle={{ width: "100%" }} title={"Continue to stake"} handleOnClick={handleContinueToStake} /> :
-						<MarketplaceButton customStyle={{ width: "100%" }} title={"Enable"} handleOnClick={handleEnable} /> : <MarketplaceButton customStyle={{ width: "100%" }} title={"Connect Wallet"} handleOnClick={() => { setToggleActivePopup(true) }} />
+					continueToStake ? <MarketplaceButton customStyle={{ width: "100%" }} disabled title={"Continue to stake"} handleOnClick={handleContinueToStake} /> :
+						<MarketplaceButton customStyle={{ width: "100%" }} disabled title={"Enable"} handleOnClick={handleEnable} /> : <MarketplaceButton disabled customStyle={{ width: "100%" }} title={"Connect Wallet"} handleOnClick={() => { setToggleActivePopup(true) }} />
 				}
 			</Box>
 		</>
