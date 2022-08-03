@@ -13,7 +13,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useEffect, useState } from 'react';
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
-import { BoxAuction } from '../../../const';
+import { BoxAuction, StateStaking } from '../../../const';
 import { MARKETPLACE_ICON } from '../../../constants/marketplace';
 import { STAKING_ICON } from '../../../constants/staking';
 import { useWalletContext } from '../../../contexts/WalletContext';
@@ -23,9 +23,9 @@ import { AssetsEvent } from './AssetsEvent';
 import { BurnAssets } from './BurnAssets';
 import { Burned } from './Burned';
 
-interface IProps {}
+interface IProps { }
 
-export const ShowAction: React.FC<IProps> = ({}) => {
+export const ShowAction: React.FC<IProps> = ({ }) => {
 	const [stateContent, setStateContent] = useState<BoxAuction | null>(null);
 	// stateContentInit
 	const [success, setSuccess] = useState<any>({
@@ -58,7 +58,7 @@ export const ShowAction: React.FC<IProps> = ({}) => {
 	}: {
 		titleSuccess: String;
 		functionSuccess: Function | null;
-		stateContentNew: StateStaking | null;
+		stateContentNew: BoxAuction | null;
 	}) => {
 		setStateContent(stateContentNew);
 		setSuccess({
@@ -73,7 +73,7 @@ export const ShowAction: React.FC<IProps> = ({}) => {
 	}: {
 		titleError: String;
 		functionError: Function | null;
-		stateContentNew: StateStaking | null;
+		stateContentNew: BoxAuction | null;
 	}) => {
 		setStateContent(stateContentNew);
 		setError({
@@ -96,7 +96,7 @@ export const ShowAction: React.FC<IProps> = ({}) => {
 		titleButton: String;
 		functionWarning: Function | null;
 		functionCancel: Function | null;
-		stateContentNew: StateStaking | null;
+		stateContentNew: BoxAuction | null;
 	}) => {
 		setStateContent(stateContentNew);
 		setWarning({
