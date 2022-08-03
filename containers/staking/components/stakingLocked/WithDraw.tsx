@@ -96,7 +96,7 @@ export const WithDraw = (props: Props) => {
 				</Item>
 				<Item>
 					<TitleItem>current profit</TitleItem>
-					<ValueItem>{row?.fpNum} FITTER PASS</ValueItem>
+					<ValueItem>{row?.fpNum} FITTER PASSES</ValueItem>
 				</Item>
 				<Item>
 					<TitleItem>WITHDRAWAL DELAY TIME</TitleItem>
