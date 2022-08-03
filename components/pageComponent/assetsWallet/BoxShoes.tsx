@@ -6,6 +6,7 @@ import { BoxProps, styled, Typography, useMediaQuery } from '@mui/material';
 import { TEXT_STYLE } from '../../../styles/common/textStyles';
 import { BoxEmpty } from './BoxEmpty';
 import { ICON } from '../../../constants/assetsWallet';
+import { formatMoney } from '../../../libs/utils/utils';
 
 interface IProps {
 	shoeChoose: string
@@ -52,7 +53,7 @@ export const BoxShoes: React.FC<IProps> = ({ shoeChoose, setShoeChoose, listShoe
 							</ShoeDetailsItem>
 							<ShoeDetailsItem>
 								<img src="assets/icons/shieldGreen.svg" style={{ float: 'left', marginRight: 12 }} />
-								<Box><Typography>Condition</Typography><Typography>{item.info?.condition}%</Typography></Box>
+								<Box><Typography>Condition</Typography><Typography>{formatMoney(item.info?.condition)}%</Typography></Box>
 							</ShoeDetailsItem>
 							<ShoeDetailsItem>
 								<img src={`assets/icons/shoeMint${checkImageMint(item.info?.minted)}.svg`} style={{ float: 'left', marginRight: 8 }} />
@@ -88,7 +89,7 @@ export const BoxShoes: React.FC<IProps> = ({ shoeChoose, setShoeChoose, listShoe
 								</ShoeDetailsItem>
 								<ShoeDetailsItem>
 									<img src="assets/icons/shieldGreen.svg" style={{ float: 'left'}} />
-									<Box><Typography>{item.info?.condition}%</Typography></Box>
+									<Box><Typography>{formatMoney(item.info?.condition)}%</Typography></Box>
 								</ShoeDetailsItem>
 								<ShoeDetailsItem>
 									<img src={`assets/icons/shoeMint${checkImageMint(item.info?.minted)}.svg`} style={{ float: 'left'}} />
