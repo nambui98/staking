@@ -69,7 +69,7 @@ export const WithDraw = (props: Props) => {
 	let time: Date | null = null;
 	if (row?.stakingTime) {
 		time = new Date(parseInt(row?.stakingTime.toString()) * 1000);
-		time.setSeconds(time.getSeconds() + row.lockedTime + configStakingLocked.delayTime * 60);
+		time.setSeconds(time.getSeconds() + row.lockedTime + configStakingLocked.delayTime * 60 * 60 * 24);
 		let now = Date.now();
 		console.log(time.getTime())
 		isDisabled = time.getTime() > now;
