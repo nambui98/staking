@@ -5,6 +5,7 @@ import addressBuyBox from '../../../abi/addressBuyBox.json';
 import { BOX_DETAILS, ICON, IMAGE, TAB_ITEM, TAB_NAME } from "../../../constants/assetsWallet";
 import { useCommonContext } from "../../../contexts/CommonContext";
 import { useWalletContext } from "../../../contexts/WalletContext";
+import { getBalanceShoes, getListShoes } from "../../../libs/assets";
 import { getBoxType, getOwnedBox, getOwnedFitterPass } from "../../../libs/claim";
 import { bftBox } from "../../../libs/contracts";
 import { formatMoney } from "../../../libs/utils/utils";
@@ -32,7 +33,8 @@ export const Boxtabs = () => {
   const [listBoxType, setListBoxType] = useState<any[]>([]);
   const [fitterPassBalance, setFitterPassBalance] = useState<any>(0);
   const [shoeChoose, setShoeChoose] = useState<string>('');
-
+  const [totalShoes, setTotalShoes] = useState<string>('0')
+  const [listShoes, setListShoes] = useState<any[]>([]);
 
   const handleSwitchTab = (tab: string) => {
     setCurrentTab(tab);
@@ -48,7 +50,7 @@ export const Boxtabs = () => {
       case TAB_NAME.fitterPass:
         return <FitterPassTab fitterPassBalance={fitterPassBalance} />
       case TAB_NAME.shoe:
-        return <BoxShoes shoeChoose={shoeChoose} setShoeChoose={setShoeChoose} />  
+        return <BoxShoes shoeChoose={shoeChoose} setShoeChoose={setShoeChoose} listShoes={listShoes} />  
       default:
         break;
     }
@@ -65,6 +67,17 @@ export const Boxtabs = () => {
     } catch (error) {
       setTotalBox(0)
     }
+  }
+
+  const getTotalShoes = async () => {
+    const res = await getBalanceShoes(ethersSigner, walletAccount);
+    res && setTotalShoes(ethers.utils.formatUnits(res, 'wei'))
+  }
+
+  const handleGetListShoes = async () => {
+    const res = await getListShoes(ethersSigner, walletAccount);
+    const listShoesId = res?.map((item: any, index: number) => ethers.utils.formatUnits(item, 'wei'))
+     
   }
 
   const checkAddressBuyBox = async () => {
@@ -123,6 +136,13 @@ export const Boxtabs = () => {
       setFitterPassBalance(0)
     }
   }
+  const renderBalanceOf = (tabName: string) => {
+    switch (tabName) {
+      case 'Shoes': return totalShoes
+      case 'Mystery Boxes': return totalBox
+      case 'Fitter Pass': return fitterPassBalance
+    }
+  }
 
   useEffect(() => {
     getTotalBox();
@@ -132,6 +152,8 @@ export const Boxtabs = () => {
 
   useEffect(() => {
     getTotalFitterPass()
+    getTotalShoes()
+    handleGetListShoes()
   }, [walletAccount, currentTab])
 
   return (
@@ -148,7 +170,7 @@ export const Boxtabs = () => {
                 <img style={!item.active ? iconGray : {}} src={item.icon} />{!isMobile ?
                   <Typography sx={!item.active ? { color: '#A7ACB8 !important' } : {}}>{item.title}</Typography> : currentTab === item.title && <Typography>{item.title}</Typography>}
                 {!item.active && !isMobile && <span>Coming soon</span>}
-                {!isMobile && item.active && index > 0 && <Typography>{index === 4 ? fitterPassBalance : totalBox}</Typography>}
+                {!isMobile && item.active && index > 0 && <Typography>{renderBalanceOf(item.title)}</Typography>}
               </TabItem>
             ))}
           </TabBox>
@@ -162,7 +184,17 @@ export const Boxtabs = () => {
         <BodyContent>
           {currentTab.length ? renderBodyView() : <BoxEmpty icon={ICON.shoe} emptyText={'Select assets to continue'} />}
         </BodyContent>
-        {currentTab.length && currentTab !== TAB_NAME.fitterPass ? <SendToSpending setBoxChoose={setBoxChoose} currentTab={currentTab} tokenChoose={tokenChoose} boxChoose={boxChoose} getListBox={getListBox} /> : null}
+        {currentTab.length && currentTab !== TAB_NAME.fitterPass ? 
+        <SendToSpending 
+          setBoxChoose={setBoxChoose} 
+          currentTab={currentTab} 
+          tokenChoose={tokenChoose} 
+          boxChoose={boxChoose} 
+          getListBox={getListBox} 
+          shoesChoose={shoeChoose}
+          setShoeChoose={setShoeChoose}
+          getListShoes={handleGetListShoes} /> : 
+        null}
       </TabBody>
       <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
       {statusBuyBox && isMobile && !statusFormGetBonus && <BoxBonus><ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus></BoxBonus>}

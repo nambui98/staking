@@ -9,7 +9,7 @@ interface leaderboardProps {
 
 export const getLeaderboardData = async (params: leaderboardProps) => {
   return vhIdRequest({
-    url: `fitx/leaderboard?type=${params.type}&limit=${params.limit}&offset=${params.offset}&leaderboardType=1`,
+    url: `https://api.befitter.io/fitx/leaderboard?type=${params.type}&limit=${params.limit}&offset=${params.offset}&leaderboardType=1`,
     method: 'get',
   })
 }
