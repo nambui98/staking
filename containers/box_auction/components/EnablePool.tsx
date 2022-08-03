@@ -43,30 +43,30 @@ export const EnablePool = (props: Props) => {
 	};
 	return (
 		<>
-			<Item sx={{ mt: '0 !important' }}>
+			<ItemRow sx={{ mt: '0 !important' }}>
 				<TitleItem>TOTAL AMOUNT</TitleItem>
 				<ValueItem>Unlimited</ValueItem>
-			</Item>
-			<Item>
+			</ItemRow>
+			<ItemRow>
 				<TitleItem>START TIME JOIN</TitleItem>
 				<ValueItem>16:00 UTC 19/07/2022</ValueItem>
-			</Item>
-			<Item>
+			</ItemRow>
+			<ItemRow>
 				<TitleItem>End time JOIN</TitleItem>
 				<ValueItem>16:00 UTC 03/08/2022</ValueItem>
-			</Item>
-			<Item>
+			</ItemRow>
+			<ItemRow>
 				<TitleItem>stake amount (min)</TitleItem>
 				<ValueItem>4000 FIU/1 person</ValueItem>
-			</Item>
-			<Item>
+			</ItemRow>
+			<ItemRow>
 				<TitleItem>stake amount (mAX)</TitleItem>
 				<ValueItem>-</ValueItem>
-			</Item>
-			<Item>
+			</ItemRow>
+			<ItemRow>
 				<TitleItem>REWARD</TitleItem>
 				<ValueItem>Fitter Pass</ValueItem>
-			</Item>
+			</ItemRow>
 			<Box
 				mt="auto"
 				width={'100%'}
@@ -93,7 +93,7 @@ export const EnablePool = (props: Props) => {
 	);
 };
 
-const Item = styled(Box)({
+const ItemRow = styled(Box)({
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'space-between',

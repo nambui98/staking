@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { bftFiuTokenStaking, beFITTERStakeStaking, beFITTERlockedPool, beFITTERPassStaking, beFITTERBurningEvent } from "./contracts";
+import { bftFiuTokenStaking, beFITTERlockedPool, beFITTERPassStaking, beFITTERBurningEvent } from "./contracts";
 
 export const setApprovalForAll = async (ethersSigner: any) => {
 	const beFITTERPassStakingContract = new ethers.Contract(beFITTERPassStaking.address, beFITTERPassStaking.abi, ethersSigner);
