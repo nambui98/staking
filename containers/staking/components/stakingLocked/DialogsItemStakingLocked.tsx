@@ -50,9 +50,6 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 		stateContentInit
 	);
 
-	console.log('daksfiuewhf', stateContent);
-	console.log('daksfiuewhffdfdfd', stateContentInit);
-
 	const [success, setSuccess] = useState<any>({
 		titleSuccess: 'Staked successfully!',
 		functionSuccess: '',
@@ -75,7 +72,10 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 	});
 
 	useEffect(() => {
-		setStateContent(stateContentInit);
+		if (stateContent !== StateStakingLocked.Success && stateContent !== StateStakingLocked.Error) {
+
+			setStateContent(stateContentInit);
+		}
 	}, [stateContentInit]);
 
 	const handleClickSuccess = ({
@@ -139,6 +139,15 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 					<img src={'assets/icons/close.svg'} />
 				</Box>
 				<TitlePopup>
+					{stateContent === StateStakingLocked.WithDraw && (
+						<img
+							src={STAKING_ICON.arrowLeftGray}
+							height="24px"
+							style={{ marginRight: "8px" }}
+							alt=""
+							onClick={() => setStateContent(StateStakingLocked.LockedList)}
+						/>
+					)}
 					<img src="assets/icons/fiu.svg" alt="" />
 					{dataActive && dataActive.name}
 				</TitlePopup>

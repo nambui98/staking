@@ -63,5 +63,5 @@ export const configStakingLocked = {
 	maxEarningPass: 31,
 	blockNum: 8,
 	minLockedTime: 3,
-	delayTime: 7
+	delayTime: 7,
 }

@@ -207,7 +207,7 @@ export const LockedStakeProcess = ({
 				</ValueItem>
 
 				<Box sx={{ marginLeft: '8px' }}>
-					<ButtonCustom variant="text" disabled={lockDuration === 30 || status === 1} onClick={handleClickIncrementDay}>
+					<ButtonCustom variant="text" sx={{ marginBottom: "4px" }} disabled={lockDuration === 30 || status === 1} onClick={handleClickIncrementDay}>
 						<ArrowUp />
 					</ButtonCustom>
 					<ButtonCustom variant="text" disabled={lockDuration < 4 || status === 1} sx={{ mt: "2px" }} onClick={handleClickDecrementDay}>
@@ -343,6 +343,7 @@ const ButtonCustom = styled(Button)({
 	alignItems: 'center',
 	justifyContent: 'center',
 	'&>svg': {
+		pointerEvents: "none",
 		stroke: "#55C8FC",
 	},
 	'&:hover': {

@@ -69,7 +69,7 @@ export const WithDraw = (props: Props) => {
 	let time: Date | null = null;
 	if (row?.stakingTime) {
 		time = new Date(parseInt(row?.stakingTime.toString()) * 1000);
-		time.setSeconds(time.getSeconds() + row.lockedTime + configStakingLocked.delayTime);
+		time.setSeconds(time.getSeconds() + row.lockedTime + configStakingLocked.delayTime * 60);
 		let now = Date.now();
 		console.log(time.getTime())
 		isDisabled = time.getTime() > now;
@@ -96,11 +96,11 @@ export const WithDraw = (props: Props) => {
 				</Item>
 				<Item>
 					<TitleItem>current profit</TitleItem>
-					<ValueItem>{row?.fpNum} FITTER PASSES</ValueItem>
+					<ValueItem>{row?.fpNum} FITTER PASS(ES)</ValueItem>
 				</Item>
 				<Item>
 					<TitleItem>WITHDRAWAL DELAY TIME</TitleItem>
-					<ValueItem>{configStakingLocked.delayTime} DAYS</ValueItem>
+					<ValueItem>{configStakingLocked.delayTime} days</ValueItem>
 				</Item>
 			</Box>
 			{isDisabled && (

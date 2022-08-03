@@ -42,13 +42,16 @@ const columns: readonly Column[] = [
 		id: 'tokenAmount',
 		label: 'STAKING',
 		minWidth: 70,
-		format: (value: number) => formatMoney(ethers.utils.formatEther(convertBigNumber(value))),
+		format: (value: number) => formatMoney(ethers.utils.formatEther(convertBigNumber(value))) + ' FIU',
 	},
 	{
 		id: 'lockedTime',
 		label: 'LOCK DURATION',
 		minWidth: 120,
-		format: (value: number) => (value / 60 / 60 / 24).toString() + ' DAYS',
+		format: (value: number) => {
+			let lockDuration = value / 60 / 60 / 24;
+			return lockDuration.toString().length < 3 ? lockDuration.toString() : lockDuration.toFixed(4) + ' DAYS';
+		}
 	},
 	{
 		id: 'fpNum',
