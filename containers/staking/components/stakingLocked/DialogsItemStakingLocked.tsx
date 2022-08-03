@@ -123,7 +123,7 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 		<Dialog
 			sx={borderRadius}
 			onClose={() => {
-				// setStateContent(stateContentInit);
+				setStateContent(stateContentInit);
 				handleToggle();
 			}}
 			open={status}

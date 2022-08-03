@@ -5,6 +5,7 @@ import { MarketplaceButton } from '../../../../components/buttons/MarketplaceBut
 import { StateStaking } from '../../../../const';
 import { useWalletContext } from '../../../../contexts/WalletContext';
 import { approveStakingFiu } from '../../../../libs/staking';
+import { formatMoney } from '../../../../libs/utils/utils';
 
 type Props = {
 	setStateContent: Function;
@@ -66,7 +67,7 @@ export const Locked = (props: Props) => {
 			</Item>
 			<Item>
 				<TitleItem>stake amount (min)</TitleItem>
-				<ValueItem>4000 FIU/1 person</ValueItem>
+				<ValueItem>{formatMoney('40000')} FIU/1 person</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem>stake amount (mAX)</TitleItem>
@@ -76,25 +77,23 @@ export const Locked = (props: Props) => {
 				<TitleItem>REWARD</TitleItem>
 				<ValueItem>Fitter Pass</ValueItem>
 			</Item>
-			<Item>
+			<Item mb={"8px"} mt="38px !important">
 				<img
-					src="images/icon_red.png"
+					src="assets/icons/info-circle2.svg"
 					alt=""
-					style={{ marginBottom: '37px' }}
 				/>
-				<span
-					style={{
+				<Typography
+					sx={{
 						fontWeight: 500,
 						fontSize: '10px',
 						lineHeight: '16px',
 						color: '#FF6D24',
 						marginLeft: '10px',
-						marginBottom: '37px',
 					}}
 				>
 					Fitter Pass(es) will be immediately sent to your account right after
 					you successfully stake.
-				</span>
+				</Typography>
 			</Item>
 			<Box
 				mt="auto"
