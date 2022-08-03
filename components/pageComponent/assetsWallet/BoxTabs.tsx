@@ -79,14 +79,16 @@ export const Boxtabs = () => {
     await getTotalShoes();
     const res = await getListShoes(ethersSigner, walletAccount);
     const listShoesId = await res?.map((item: any, index: number) => ethers.utils.formatUnits(item, 'wei'))
-    const listShoesDetails = await listShoesId?.reduce(async (init: any, item: any) => {
+
+    const listShoesDetails = listShoesId.map(async (item: any) => {
       const response = await getShoesDetails(item);
       if(response.status === 200 && response.data.meta.code === 0){
-        init.push(response.data.data)
+        return response.data.data
       }
-      return init;
-    }, [])
-    setListShoes(listShoesDetails)
+    })
+    Promise.all(listShoesDetails).then((value) => {
+      setListShoes(value)
+    })
   }
 
   const checkAddressBuyBox = async () => {
