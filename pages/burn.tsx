@@ -12,9 +12,9 @@ const BoxAuction = () => {
 			sxProps={{ background: '#fff' }}
 		>
 			<Wrap>
-				<TabPoolAuction />
+				{/* <TabPoolAuction /> */}
 
-				<RoadMapAuction />
+				{/* <RoadMapAuction /> */}
 			</Wrap>
 			{/* {!isMobile && <ClockUtc/>} */}
 		</MainLayout>
