@@ -13,7 +13,7 @@ type Props = {
 export function AssetsEvent(props: Props) {
 	const { setStateContent, stateContent } = props;
 
-	const handleEnable = async () => {
+	const handleConfirm = async () => {
 		setStateContent(BoxAuction.BurnAssets);
 	};
 
@@ -73,7 +73,7 @@ export function AssetsEvent(props: Props) {
 				<MarketplaceButton
 					customStyle={{ width: '100%' }}
 					title={'Confirm'}
-					handleOnClick={handleEnable}
+					handleOnClick={handleConfirm}
 				/>
 			</Box>
 		</Box>

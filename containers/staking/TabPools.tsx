@@ -10,6 +10,7 @@ import {
 	Table,
 	TableBody,
 	TableCell,
+	TableCellProps,
 	TableRow,
 	TableRowProps,
 	Tabs,
@@ -90,11 +91,12 @@ export const TabPools = () => {
 		(previousValue, currentValue: row) => previousValue + currentValue.fpNum,
 		0
 	) : 0;
+	//status = 1: coming soon, 2: active, 3: closed
 	const rows = [
 		{
 			name: 'Fitter Pass',
 			title: 'Fitter Pass Drops - Flexible',
-			isComingSoon: false,
+			status: 3,
 			data: createData(
 				statusRow,
 				'Fitter Pass',
@@ -108,13 +110,13 @@ export const TabPools = () => {
 		{
 			name: 'Fitter Pass - Locked',
 			title: 'Fitter Pass Drops - Locked',
-			isComingSoon: false,
+			status: 2,
 			data: createData(`${dataMyStakingLock && dataMyStakingLock?.length > 0 ? 'Staking' : '-'}`, 'Fitter Pass', `${totalFitterPassLocked}`, '-', '3 - 30 days', '7 days', `${totalInPool} FIU`),
 		},
 		{
 			name: 'FIU - Shared Pool',
 			title: 'FIU - Shared Pool',
-			isComingSoon: true,
+			status: 1,
 			data: createData('-', '-', '-', '-', '-', '-', ''),
 		},
 	];
@@ -288,7 +290,7 @@ export const TabPools = () => {
 									if (tabCurrent === 1 && index !== 1 && isEnable) {
 										return (
 											<BoxTr
-												isComingSoon={item.isComingSoon}
+												status={item.status}
 												onClick={() => {
 													index === 0 && setActiveItem(index);
 												}}
@@ -315,14 +317,15 @@ export const TabPools = () => {
 														How it works?
 													</span>
 												</TitleItem>
-												{item.isComingSoon && (
-													<ComingSoon
+												{item.status !== 1 && (
+													<Status
+														status={item.status}
 														sx={{
 															top: index === 0 ? '0 !important' : 4,
 														}}
 													>
-														coming soon
-													</ComingSoon>
+														{item.status === 3 ? 'closed' : 'coming soon'}
+													</Status>
 												)}
 												<Item
 													sx={{
@@ -357,7 +360,7 @@ export const TabPools = () => {
 									} else if (tabCurrent === 0) {
 										return (
 											<BoxTr
-												isComingSoon={item.isComingSoon}
+												status={item.status}
 												onClick={() => {
 													index === 0 && setActiveItem(index);
 													index === 1 && setActiveItemLocked(index);
@@ -385,14 +388,15 @@ export const TabPools = () => {
 														How it works?
 													</span>
 												</TitleItem>
-												{item.isComingSoon && (
-													<ComingSoon
+												{item.status !== 2 && (
+													<Status
+														status={item.status}
 														sx={{
 															top: index === 0 ? '0 !important' : 4,
 														}}
 													>
-														coming soon
-													</ComingSoon>
+														{item.status === 3 ? 'closed' : 'coming soon'}
+													</Status>
 												)}
 												<Item
 													sx={{
@@ -505,15 +509,22 @@ const BodyPopup = styled(Box)({
 		color: '#31373E',
 	},
 });
-const ComingSoon = styled(TableCell)({
+
+type statusProps = TableCellProps & {
+	status: number;
+};
+
+const Status = styled(TableCell)((props: statusProps) => ({
 	position: 'absolute',
 	top: 4,
 	right: 0,
 	padding: 8,
-	background: '#FFC83A',
+	borderRadius: '10px',
+	background: props.status === 1 ? '#FFC83A' : '#5A6178',
 	textTransform: 'uppercase',
-	...TEXT_STYLE(12, 600, '#31373E'),
-});
+	...TEXT_STYLE(12, 600, props.status === 1 ? '#31373E' : '#fff'),
+}));
+
 const Top = styled(Box)({
 	justifyContent: 'space-between',
 	alignItems: 'center',
@@ -574,7 +585,7 @@ const Event = styled(Link)({
 	width: "100%",
 });
 type itemProps = TableRowProps & {
-	isComingSoon: boolean;
+	status: number;
 };
 const BoxTr = styled(TableRow)((props: itemProps) => ({
 	background: '#FFFFFF',
@@ -583,7 +594,7 @@ const BoxTr = styled(TableRow)((props: itemProps) => ({
 	cursor: 'pointer',
 
 	'&:hover': {
-		background: !props.isComingSoon ? '#FFE2D3' : 'none',
+		background: props.status !== 1 ? '#FFE2D3' : 'none',
 	},
 }));
 // const BoxTr = styled(TableRow)({

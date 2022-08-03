@@ -263,6 +263,7 @@ export const TabPoolAuction = () => {
 				</Top>
 				<Body>
 					<Box sx={{ overflowX: 'auto', borderRadius: '16px' }}>
+
 						<Accordion onChange={handleChange}>
 							{rows.map((item, index) => {
 								return (
@@ -271,60 +272,68 @@ export const TabPoolAuction = () => {
 										id="panel1d-header"
 										key={index}
 									>
-										<TitleItem key={index}>
-											<img src={STAKING_ICON.fiu} /> {item.title}{' '}
-											<span
-												style={{ textDecoration: 'underline' }}
-												onClick={
-													index === 0
-														? (e: React.MouseEvent) => handleShowPopupPass(e)
-														: (e: React.MouseEvent) => handleShowPopupShared(e)
-												}
-											>
-												How it works?
-											</span>
-										</TitleItem>
-										{item.isComingSoon && (
-											<ComingSoon
-												sx={{
-													top: index === 0 ? '0 !important' : 4,
-												}}
-											>
-												coming soon
-											</ComingSoon>
-										)}
-										<Item
-											sx={{
-												paddingLeft: '8px',
-												borderRadiusTopleft: '12px',
-											}}
-											align="left"
-										>
-											Status{' '}
-											<Box sx={{ fontSize: '14px' }}>{item.data.status}</Box>
-										</Item>
-										<Item align="left" sx={{ textTransform: 'none' }}>
-											{index === 0 ? 'REWARD' : 'APR'}{' '}
-											<Box>{item.data.reward}</Box>
-										</Item>
-										<Item align="left">
-											Earned <Box>{item.data.earned}</Box>
-										</Item>
-										<Item align="left">
-											Token remaining <Box>{item.data.tokenRemaining}</Box>
-										</Item>
-										<Item align="left">
-											Lock-up time <Box>{item.data.lockUpTime}</Box>
-										</Item>
-										<Item align="left">
-											Withdrawal delay time <Box>{item.data.delayTime}</Box>
-										</Item>
-										<Item align="left">
-											Total in pool
-											<Box sx={{ textTransform: 'none' }}>
-												{formatMoney(item.data.total)} Fitter Pass
-											</Box>
-										</Item>
+
+										<Table>
+											<TableBody >
+												<TableRow>
+													<TitleItem key={index}>
+														<img src={STAKING_ICON.fiu} /> {item.title}{' '}
+														<span
+															style={{ textDecoration: 'underline' }}
+															onClick={
+																index === 0
+																	? (e: React.MouseEvent) => handleShowPopupPass(e)
+																	: (e: React.MouseEvent) => handleShowPopupShared(e)
+															}
+														>
+															How it works?
+														</span>
+													</TitleItem>
+													{item.isComingSoon && (
+														<ComingSoon
+															sx={{
+																top: index === 0 ? '0 !important' : 4,
+															}}
+														>
+															coming soon
+														</ComingSoon>
+													)}
+													<Item
+														sx={{
+															paddingLeft: '8px',
+															borderRadiusTopleft: '12px',
+														}}
+														align="left"
+													>
+														Status{' '}
+														<Box sx={{ fontSize: '14px' }}>{item.data.status}</Box>
+													</Item>
+													<Item align="left" sx={{ textTransform: 'none' }}>
+														{index === 0 ? 'REWARD' : 'APR'}{' '}
+														<Box>{item.data.reward}</Box>
+													</Item>
+													<Item align="left">
+														Earned <Box>{item.data.earned}</Box>
+													</Item>
+													<Item align="left">
+														Token remaining <Box>{item.data.tokenRemaining}</Box>
+													</Item>
+													<Item align="left">
+														Lock-up time <Box>{item.data.lockUpTime}</Box>
+													</Item>
+													<Item align="left">
+														Withdrawal delay time <Box>{item.data.delayTime}</Box>
+													</Item>
+													<Item align="left">
+														Total in pool
+														<Box sx={{ textTransform: 'none' }}>
+															{formatMoney(item.data.total)} Fitter Pass
+														</Box>
+													</Item>
+												</TableRow>
+											</TableBody>
+										</Table>
+
 									</AccordionSummary>
 								);
 							})}
@@ -332,6 +341,7 @@ export const TabPoolAuction = () => {
 								<ShowAction></ShowAction>
 							</AccordionDetails>
 						</Accordion>
+
 					</Box>
 				</Body>
 			</Container>
