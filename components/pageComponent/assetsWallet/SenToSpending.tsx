@@ -112,6 +112,7 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
   }
 
   const handleApproveBox = async () => {
+    console.log(123123123)
     spinner.handleChangeStatus(true)
     try {
       const resApprove = await handleApprove(boxChoose, ethersSigner, bftBox, 'box');
@@ -236,7 +237,7 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
       if (currentTab === TAB_NAME.token) {
         tokenChoose === 'bnb' ? handleCheckMail(() => deposit(null, 'bnb')) : handleCheckMail(handleApproveToken)
       } else {
-        currentTab === TAB_NAME.box ? handleCheckMail(() => handleApproveBox) : handleCheckMail(handleApproveShoes)
+        currentTab === TAB_NAME.box ? handleCheckMail(handleApproveBox) : handleCheckMail(handleApproveShoes)
       }
     }
   }

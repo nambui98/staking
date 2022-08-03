@@ -5,6 +5,7 @@ import addressBuyBox from '../../../abi/addressBuyBox.json';
 import { BOX_DETAILS, ICON, IMAGE, TAB_ITEM, TAB_NAME } from "../../../constants/assetsWallet";
 import { useCommonContext } from "../../../contexts/CommonContext";
 import { useWalletContext } from "../../../contexts/WalletContext";
+import { getShoesDetails } from "../../../libs/apis/assets";
 import { getBalanceShoes, getListShoes } from "../../../libs/assets";
 import { getBoxType, getOwnedBox, getOwnedFitterPass } from "../../../libs/claim";
 import { bftBox } from "../../../libs/contracts";
@@ -75,9 +76,17 @@ export const Boxtabs = () => {
   }
 
   const handleGetListShoes = async () => {
+    await getTotalShoes();
     const res = await getListShoes(ethersSigner, walletAccount);
-    const listShoesId = res?.map((item: any, index: number) => ethers.utils.formatUnits(item, 'wei'))
-     
+    const listShoesId = await res?.map((item: any, index: number) => ethers.utils.formatUnits(item, 'wei'))
+    const listShoesDetails = await listShoesId?.reduce(async (init: any, item: any) => {
+      const response = await getShoesDetails(item);
+      if(response.status === 200 && response.data.meta.code === 0){
+        init.push(response.data.data)
+      }
+      return init;
+    }, [])
+    setListShoes(listShoesDetails)
   }
 
   const checkAddressBuyBox = async () => {

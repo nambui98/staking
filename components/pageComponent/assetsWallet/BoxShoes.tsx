@@ -4,205 +4,8 @@ import Box from '@mui/system/Box';
 import { CheckboxMarketplace } from '../../checkbox/CheckboxMarketplace';
 import { BoxProps, styled, Typography, useMediaQuery } from '@mui/material';
 import { TEXT_STYLE } from '../../../styles/common/textStyles';
-
-const data = [
-	{
-		"id": "daf73f74-0706-11ed-a133-56000410d61b",
-		"playerUserId": "ff5146a8-daa6-11ec-88f3-560003c6fce7",
-		"name": null,
-		"description": null,
-		"imageLink": "https://cdn.befitter.io/nft/1-1-8-1-3-5-1-3.png",
-		"modelLink": "https://cdn.befitter.io/shoes_trans/?type=1&top-form=1&top-color=8&bot-form=1&bot-color=3&mid-form=1&mid-form2=3&mid-color=5",
-		"type": "SHOES",
-		"info": {
-			"luck": 8,
-			"rare": 1,
-			"type": "Daily",
-			"level": 5,
-			"range": 17,
-			"minted": 1,
-			"midForm": 1,
-			"midType": 3,
-			"support": 16,
-			"topForm": 1,
-			"baseLuck": 8,
-			"midColor": 5,
-			"topColor": 8,
-			"baseRange": 17,
-			"condition": 100,
-			"bottomForm": 1,
-			"durability": 10,
-			"baseSupport": 16,
-			"bottomColor": 3,
-			"energyBonus": 0,
-			"mintMaximum": 7,
-			"upLevelPoints": 12,
-			"baseDurability": 10
-		},
-		"equipped": false,
-		"parent0": "bb233990-06ad-11ed-ad5e-acde48001122",
-		"parent1": "bb238062-06ad-11ed-ad5e-acde48001122",
-		"tokenId": 5019,
-		"status": "INTERNAL",
-		"progressTime": null,
-		"progressTimeLeft": null,
-		"mintCoolDownTimeLeft": null,
-		"createdAt": "2022-07-19T02:02:34.316390Z",
-		"updatedAt": "2022-07-19T02:02:34.316390Z",
-		"lastSell": null,
-		"internalStatus": "normal",
-		"parent": null,
-		"children": null,
-		"sellingPriceAmount": null
-	},
-	{
-		"id": "daf73f74-0706-11ed-a133-56000410d61b",
-		"playerUserId": "ff5146a8-daa6-11ec-88f3-560003c6fce7",
-		"name": null,
-		"description": null,
-		"imageLink": "https://cdn.befitter.io/nft/1-1-8-1-3-5-1-3.png",
-		"modelLink": "https://cdn.befitter.io/shoes_trans/?type=1&top-form=1&top-color=8&bot-form=1&bot-color=3&mid-form=1&mid-form2=3&mid-color=5",
-		"type": "SHOES",
-		"info": {
-			"luck": 8,
-			"rare": 1,
-			"type": "Daily",
-			"level": 5,
-			"range": 17,
-			"minted": 1,
-			"midForm": 1,
-			"midType": 3,
-			"support": 16,
-			"topForm": 1,
-			"baseLuck": 8,
-			"midColor": 5,
-			"topColor": 8,
-			"baseRange": 17,
-			"condition": 100,
-			"bottomForm": 1,
-			"durability": 10,
-			"baseSupport": 16,
-			"bottomColor": 3,
-			"energyBonus": 0,
-			"mintMaximum": 7,
-			"upLevelPoints": 12,
-			"baseDurability": 10
-		},
-		"equipped": false,
-		"parent0": "bb233990-06ad-11ed-ad5e-acde48001122",
-		"parent1": "bb238062-06ad-11ed-ad5e-acde48001122",
-		"tokenId": 5012,
-		"status": "INTERNAL",
-		"progressTime": null,
-		"progressTimeLeft": null,
-		"mintCoolDownTimeLeft": null,
-		"createdAt": "2022-07-19T02:02:34.316390Z",
-		"updatedAt": "2022-07-19T02:02:34.316390Z",
-		"lastSell": null,
-		"internalStatus": "normal",
-		"parent": null,
-		"children": null,
-		"sellingPriceAmount": null
-	},
-	{
-		"id": "daf73f74-0706-11ed-a133-56000410d61b",
-		"playerUserId": "ff5146a8-daa6-11ec-88f3-560003c6fce7",
-		"name": null,
-		"description": null,
-		"imageLink": "https://cdn.befitter.io/nft/1-1-8-1-3-5-1-3.png",
-		"modelLink": "https://cdn.befitter.io/shoes_trans/?type=1&top-form=1&top-color=8&bot-form=1&bot-color=3&mid-form=1&mid-form2=3&mid-color=5",
-		"type": "SHOES",
-		"info": {
-			"luck": 8,
-			"rare": 1,
-			"type": "Daily",
-			"level": 5,
-			"range": 17,
-			"minted": 1,
-			"midForm": 1,
-			"midType": 3,
-			"support": 16,
-			"topForm": 1,
-			"baseLuck": 8,
-			"midColor": 5,
-			"topColor": 8,
-			"baseRange": 17,
-			"condition": 100,
-			"bottomForm": 1,
-			"durability": 10,
-			"baseSupport": 16,
-			"bottomColor": 3,
-			"energyBonus": 0,
-			"mintMaximum": 7,
-			"upLevelPoints": 12,
-			"baseDurability": 10
-		},
-		"equipped": false,
-		"parent0": "bb233990-06ad-11ed-ad5e-acde48001122",
-		"parent1": "bb238062-06ad-11ed-ad5e-acde48001122",
-		"tokenId": 5012,
-		"status": "INTERNAL",
-		"progressTime": null,
-		"progressTimeLeft": null,
-		"mintCoolDownTimeLeft": null,
-		"createdAt": "2022-07-19T02:02:34.316390Z",
-		"updatedAt": "2022-07-19T02:02:34.316390Z",
-		"lastSell": null,
-		"internalStatus": "normal",
-		"parent": null,
-		"children": null,
-		"sellingPriceAmount": null
-	},
-	{
-		"id": "daf73f74-0706-11ed-a133-56000410d61b",
-		"playerUserId": "ff5146a8-daa6-11ec-88f3-560003c6fce7",
-		"name": null,
-		"description": null,
-		"imageLink": "https://cdn.befitter.io/nft/1-1-8-1-3-5-1-3.png",
-		"modelLink": "https://cdn.befitter.io/shoes_trans/?type=1&top-form=1&top-color=8&bot-form=1&bot-color=3&mid-form=1&mid-form2=3&mid-color=5",
-		"type": "SHOES",
-		"info": {
-			"luck": 8,
-			"rare": 1,
-			"type": "Daily",
-			"level": 5,
-			"range": 17,
-			"minted": 1,
-			"midForm": 1,
-			"midType": 3,
-			"support": 16,
-			"topForm": 1,
-			"baseLuck": 8,
-			"midColor": 5,
-			"topColor": 8,
-			"baseRange": 17,
-			"condition": 100,
-			"bottomForm": 1,
-			"durability": 10,
-			"baseSupport": 16,
-			"bottomColor": 3,
-			"energyBonus": 0,
-			"mintMaximum": 7,
-			"upLevelPoints": 12,
-			"baseDurability": 10
-		},
-		"equipped": false,
-		"parent0": "bb233990-06ad-11ed-ad5e-acde48001122",
-		"parent1": "bb238062-06ad-11ed-ad5e-acde48001122",
-		"tokenId": 5012,
-		"status": "INTERNAL",
-		"progressTime": null,
-		"progressTimeLeft": null,
-		"mintCoolDownTimeLeft": null,
-		"createdAt": "2022-07-19T02:02:34.316390Z",
-		"updatedAt": "2022-07-19T02:02:34.316390Z",
-		"lastSell": null,
-		"internalStatus": "normal",
-		"parent": null,
-		"children": null,
-		"sellingPriceAmount": null
-	}
-]
+import { BoxEmpty } from './BoxEmpty';
+import { ICON } from '../../../constants/assetsWallet';
 
 interface IProps {
 	shoeChoose: string
@@ -227,17 +30,17 @@ export const BoxShoes: React.FC<IProps> = ({ shoeChoose, setShoeChoose, listShoe
 	}
 
 	return (
-		<Wrap>
-			{data?.map((item, index) => (
-				!isMobile1024 ? <Item key={index} active={item.tokenId.toString() === shoeChoose}>
+		<Wrap sx={{maxHeight: listShoes?.length ? '465px' : 'auto' }}>
+			{listShoes?.length ? listShoes?.map((item, index) => (
+				!isMobile1024 ? <Item key={index} active={item.token_id.toString() === shoeChoose}>
 					<ItemLeft>
 						<BoxImage>
-							<img src={item.imageLink} />
-							<BoxCheckBox onClick={() => setShoeChoose(shoeChoose === item.tokenId.toString() ? '' : item.tokenId.toString())}>
-								<CheckboxMarketplace type='green' label='1' active={item.tokenId.toString() === shoeChoose} /></BoxCheckBox>
+							<img src={item.image_link} />
+							<BoxCheckBox onClick={() => setShoeChoose(shoeChoose === item.token_id.toString() ? '' : item.token_id.toString())}>
+								<CheckboxMarketplace type='green' label='1' active={item.token_id.toString() === shoeChoose} /></BoxCheckBox>
 						</BoxImage>
 						<ShoeInfo sx={{ marginLeft: '16px' }}>
-							<ShoeId>#{item.tokenId.toString()}</ShoeId>
+							<ShoeId>#{item.token_id.toString()}</ShoeId>
 							<Box sx={{ display: 'flex' }}><ShoeType>{item?.info?.type}</ShoeType><ShowRarity>{item.info?.rare === 1 ? 'S' : item.info?.rare === 2 ? 'R' : 'I'}</ShowRarity></Box>
 						</ShoeInfo>
 					</ItemLeft>
@@ -267,12 +70,12 @@ export const BoxShoes: React.FC<IProps> = ({ shoeChoose, setShoeChoose, listShoe
 						</Box>
 					</ItemRight>
 				</Item> :
-					<Item key={index} active={item.tokenId.toString() === shoeChoose} onClick={() => setShoeChoose(shoeChoose === item.tokenId.toString() ? '' : item.tokenId.toString())}>
+					<Item key={index} active={item.token_id.toString() === shoeChoose} onClick={() => setShoeChoose(shoeChoose === item.token_id.toString() ? '' : item.token_id.toString())}>
 						<ItemLeft>
 							<BoxImage>
-								<img src={item.imageLink} />
+								<img src={item.image_link} />
 							</BoxImage>
-							<ShoeId>#{item.tokenId.toString()}</ShoeId>
+							<ShoeId>#{item.token_id.toString()}</ShoeId>
 						</ItemLeft>
 						<ItemRight>
 							<Box sx={{ display: 'flex', marginBottom: isMobile1024 ? '8px' : 0 }}>
@@ -303,13 +106,12 @@ export const BoxShoes: React.FC<IProps> = ({ shoeChoose, setShoeChoose, listShoe
 						</ItemRight>
 					</Item>
 
-			))}
+			)) : <BoxEmpty icon={ICON.shoe} emptyText={'no shoes'} />}
 		</Wrap>
 	);
 }
 
 const Wrap = styled(Box)({
-	maxHeight: 465,
 	overflow: 'auto',
 	marginTop: 8,
 	'@media (min-width: 768px)': {
