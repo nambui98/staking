@@ -25,7 +25,7 @@ import { STAKING_ICON } from '../../../../constants/staking';
 import { Locked } from './Locked';
 import { LockedStakeProcess } from './LockedStakeProcess';
 import { LockedList } from './LockedList';
-import { row } from '../../../../libs/hooks/lockedHook';
+import { row } from '../../../../libs/hooks/useLockedHook';
 
 interface IProps {
 	status: boolean;
@@ -225,7 +225,7 @@ const Wrap = styled(Stack)((props: stackPropsNew) => ({
 	height: "auto",
 	// height: 'calc(100vh - 32px)',
 	'@media (min-width: 650px)': {
-		width: props.isBig ? '434px' : '360px',
+		width: props.isBig ? '464px' : '360px',
 		// height: '490px',
 		padding: '16px',
 	},

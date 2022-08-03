@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { MarketplaceButton } from '../../../../components/buttons/MarketplaceButton';
 import { StateStaking, StateStakingLocked } from '../../../../const';
 import { useWalletContext } from '../../../../contexts/WalletContext';
-import { convertBigNumber, row } from '../../../../libs/hooks/lockedHook';
+import { convertBigNumber, row } from '../../../../libs/hooks/useLockedHook';
 import { claimReward } from '../../../../libs/staking';
 import { formatMoney } from '../../../../libs/utils/utils';
 
@@ -41,7 +41,7 @@ const columns: readonly Column[] = [
 	{
 		id: 'tokenAmount',
 		label: 'STAKING',
-		minWidth: 70,
+		minWidth: 80,
 		format: (value: number) => formatMoney(ethers.utils.formatEther(convertBigNumber(value))) + ' FIU',
 	},
 	{

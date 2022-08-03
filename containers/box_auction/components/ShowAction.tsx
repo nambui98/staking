@@ -108,7 +108,14 @@ export const ShowAction: React.FC<IProps> = ({ }) => {
 			functionCancel: functionCancel,
 		});
 	};
-
+	const propsPass = {
+		setIsLoading,
+		setSuccess,
+		stateContent,
+		setStateContent,
+		handleClickSuccess,
+		handleClickError,
+	};
 	return (
 		<Box>
 			<Box
@@ -119,10 +126,7 @@ export const ShowAction: React.FC<IProps> = ({ }) => {
 			>
 				<Wrap isBorder={stateContent === null}>
 					<EnablePool
-						setStateContent={setStateContent}
-						// setIsLoading={setIsLoading}
-						// handleClickError={handleClickError}stateContent
-						stateContent={stateContent}
+						{...propsPass}
 					/>
 				</Wrap>
 				{stateContent === BoxAuction.AssetsEvent ? (

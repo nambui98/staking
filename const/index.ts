@@ -34,4 +34,6 @@ export enum BoxAuction {
 	AssetsEvent,
 	BurnAssets,
 	Burned,
+	Success,
+	Error,
 }

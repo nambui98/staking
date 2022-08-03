@@ -11,7 +11,8 @@ import beFitterPass from '../abi/BeFitterPass_testnet.json';
 import beFitterStake from '../abi/BeFitterStaking_testnet.json';
 import bfClaimToken from '../abi/BeFitterClaimFiu.json';
 //dev
-import bflockedPool from '../abi/FitterPassLockedPool.json';
+import bflockedPool from '../abi/FitterPassLockedPool_testnet.json';
+import bfBurningEvent from '../abi/FitterPassBurningEvent_testnet.json';
 
 //dev
 import bfBoxDev from '../abiDev/BeFitterBox.json';
@@ -64,6 +65,7 @@ const addresses: Map = {
 		bFclaimAlphaBeta2: '0x80F2086a0De59eF239D6F97ac2138496AE1181e2',
 		bFclaimToken: '0xA1eDA0aBA0175050E0c123fc8E531B4b7526e0de',
 		beFITTERlockedPool: '0x965BB192F76fa788044BCBb54E8015A587dDe366',
+		beFITTERBurningEvent: '0xeF543Bb344B1d954ee2e1c52EE7a5f0260bc7c25',
 
 	},
 	['deployment']: { // bscTestnet
@@ -120,3 +122,4 @@ export const bftClaimToken = { address: address.bFclaimToken, abi: bfClaimToken.
 export const bftWallet = { address: address.bFWallet, abi: bfWallet.abi }
 export const beFITTERlockedPool = { address: address.beFITTERlockedPool, abi: bflockedPool.abi }
 export const bftClaimTokenAirdrop = { address: address.bFclaimTokenAirdrop, abi: bfClaimToken.abi }
+export const beFITTERBurningEvent = { address: address.beFITTERBurningEvent, abi: bfBurningEvent.abi }

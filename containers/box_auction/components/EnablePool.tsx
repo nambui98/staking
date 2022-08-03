@@ -4,22 +4,42 @@ import React, { useState } from 'react';
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
 import { BoxAuction } from '../../../const';
 import { useWalletContext } from '../../../contexts/WalletContext';
+import { setApprovalForAll } from '../../../libs/burn';
 
 type Props = {
 	setStateContent: Function;
-	// setIsLoading: Function;
-	// handleClickError: Function;
+	setIsLoading: Function;
+	handleClickError: Function;
+	handleClickSuccess: Function;
 	// setStateContentInit: Function;
 	stateContent: BoxAuction | null;
 };
 
 export const EnablePool = (props: Props) => {
-	const { setStateContent, stateContent } = props;
-	const { setToggleActivePopup, walletAccount, ethersSigner, ethersProvider } =
+	const { setStateContent, stateContent, setIsLoading, handleClickSuccess, handleClickError } = props;
+	const { setToggleActivePopup, walletAccount, ethersSigner, ethersProvider, setRefresh, refresh } =
 		useWalletContext();
 
-	const handleEnable = async () => {
-		setStateContent(BoxAuction.AssetsEvent);
+	const handleApprove = async () => {
+		setIsLoading(true);
+		try {
+			const res = await setApprovalForAll(ethersSigner);
+			setIsLoading(false)
+			if (res?.status) {
+				setRefresh(!refresh)
+				setStateContent(BoxAuction.AssetsEvent);
+			}
+		} catch (error: any) {
+			const message = error.reason || 'Something went wrong, please try again';
+			setIsLoading(false);
+			handleClickError({
+				titleError: message,
+				functionError: () => {
+					setStateContent(BoxAuction.EnablePool);
+				},
+				stateContentNew: BoxAuction.Error,
+			});
+		}
 	};
 	return (
 		<>
@@ -56,7 +76,7 @@ export const EnablePool = (props: Props) => {
 					<MarketplaceButton
 						customStyle={{ width: '100%' }}
 						title={stateContent ? 'Approved' : 'Approve'}
-						handleOnClick={handleEnable}
+						handleOnClick={handleApprove}
 						disabled={stateContent ? true : false}
 					/>
 				) : (

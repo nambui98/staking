@@ -7,7 +7,7 @@ type Props = {
 	setStateContentInit: Function
 };
 
-export default function stakingHook(props: Props) {
+export default function userStakingHook(props: Props) {
 	const { setIsLoading, setStateContentInit } = props;
 
 	const [balanceFiu, setBalanceFiu] = useState('');

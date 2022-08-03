@@ -59,11 +59,11 @@ export const Locked = (props: Props) => {
 			</Item>
 			<Item>
 				<TitleItem>START TIME JOIN</TitleItem>
-				<ValueItem>16:00 UTC 19/07/2022</ValueItem>
+				<ValueItem>09:00 UTC 03/08/2022</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem>End time JOIN</TitleItem>
-				<ValueItem>16:00 UTC 03/08/2022</ValueItem>
+				<ValueItem>09:00 UTC 10/08/2022</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem>stake amount (min)</TitleItem>

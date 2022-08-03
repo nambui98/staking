@@ -7,7 +7,7 @@ import { MarketplaceButton } from '../../../../components/buttons/MarketplaceBut
 import { StateStaking, StateStakingLocked } from '../../../../const';
 import { MARKETPLACE_ICON } from '../../../../constants/marketplace';
 import { useWalletContext } from '../../../../contexts/WalletContext';
-import { convertBigNumber, row } from '../../../../libs/hooks/lockedHook';
+import { convertBigNumber, row } from '../../../../libs/hooks/useLockedHook';
 import { configStakingLocked, withDrawLocked } from '../../../../libs/stakingLocked';
 import { formatMoney } from '../../../../libs/utils/utils';
 

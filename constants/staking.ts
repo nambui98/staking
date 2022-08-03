@@ -15,6 +15,13 @@ export const ROAD_MAP = {
 	items: [
 		{
 			image: STAKING_IMAGE.ftpass,
+			title: 'Fitter Pass Drops - Flexible',
+			status: true,
+			isUpcomming: false,
+			textStatus: 'LIVE'
+		},
+		{
+			image: STAKING_IMAGE.ftpass,
 			title: 'Fitter Pass Drops - Locked',
 			status: true,
 			isUpcomming: false,

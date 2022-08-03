@@ -32,6 +32,7 @@ import MuiAccordionSummary, {
 	AccordionSummaryProps,
 } from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
+import userBurnHook from '../../libs/hooks/useBurnHook';
 
 const Accordion = styled((props: AccordionProps) => (
 	<MuiAccordion disableGutters elevation={0} square {...props} />
@@ -112,19 +113,15 @@ export const TabPoolAuction = () => {
 		StateStaking.EnablePool
 	);
 	const [isLoading, setIsLoading] = useState(false);
-	const [balanceFiu, setBalanceFiu] = useState('');
-	const [balanceSA, setBalanceSA] = useState('');
-	const [balanceCP, setBalanceCP] = useState('');
-	const [balanceUS, setBalanceUS] = useState('');
-	const [claimableTime, setClaimableTime] = useState('');
-	const [remainingDelayTime, setRemainingDelayTime] = useState('');
-	const [totalStakingToken, setTotalStakingToken] = useState('');
-	const [statusRow, setStatusRow] = useState('-');
-	const [isEnable, setIsEnable] = useState<boolean>(false);
-
-	const [activeItem, setActiveItem] = useState<any>(null);
-	const [open, setOpen] = useState<boolean>(false);
-
+	const {
+		totalStake,
+		balanceFT,
+		numberBurned,
+		isEnable,
+		statusRow } = userBurnHook({
+			setIsLoading,
+			setStateContentInit
+		})
 	const rows = [
 		{
 			name: 'Fitter Pass',
@@ -133,11 +130,11 @@ export const TabPoolAuction = () => {
 			data: createData(
 				statusRow,
 				'Mystery Box',
-				balanceCP,
+				'0',
 				'-',
 				'None',
 				'None',
-				`${totalStakingToken} Fitter Pass`
+				`${totalStake} Fitter Pass`
 			),
 		},
 	];
@@ -311,7 +308,7 @@ export const TabPoolAuction = () => {
 											<Box>{item.data.reward}</Box>
 										</Item>
 										<Item align="left">
-											Earned <Box>{item.data.earned}0</Box>
+											Earned <Box>{item.data.earned}</Box>
 										</Item>
 										<Item align="left">
 											Token remaining <Box>{item.data.tokenRemaining}</Box>

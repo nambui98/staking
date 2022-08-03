@@ -3,7 +3,8 @@ import {
 	Box,
 	CircularProgress,
 	Container,
-	InputAdornment, Stack,
+	InputAdornment,
+	Stack,
 	styled,
 	Tab,
 	Table,
@@ -15,12 +16,15 @@ import {
 	TextField,
 	Typography
 } from '@mui/material';
+import Link from 'next/link';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { PopupMessage } from '../../components/pageComponent/claim/PopupMessage';
 import { StateStaking, StateStakingLocked } from '../../const';
 import { STAKING_ICON } from '../../constants/staking';
-import lockedHook, { row } from '../../libs/hooks/lockedHook';
-import stakingHook from '../../libs/hooks/stakingHook';
+import userLockedHook from '../../libs/hooks/useLockedHook';
+import lockedHook, { row } from '../../libs/hooks/useLockedHook';
+import userStakingHook from '../../libs/hooks/userStakingHook';
 import { formatMoney } from '../../libs/utils/utils';
 import { TEXT_STYLE } from '../../styles/common/textStyles';
 import { DialogsItemStaking } from './components/DialogsItemStaking';
@@ -67,11 +71,11 @@ export const TabPools = () => {
 		totalStakingToken,
 		claimableTime,
 		remainingDelayTime,
-		statusRow } = stakingHook({
+		statusRow } = userStakingHook({
 			setIsLoading,
 			setStateContentInit
 		})
-	const { dataMyStakingLock, totalInPool } = lockedHook({
+	const { dataMyStakingLock, totalInPool } = userLockedHook({
 		setIsLoading,
 		setStateContentInitLocked
 	})
@@ -237,7 +241,22 @@ export const TabPools = () => {
 	return (
 		<Wrap>
 			<Container sx={{ maxWidth: 1120 }}>
-				<Top>
+				{/* <Event href={''} > */}
+				<a onClick={() => {
+					toast('COMING SOON!', {
+						position: "top-center",
+						autoClose: 2000,
+						hideProgressBar: true,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+					});
+				}}>
+					<img src="assets/staking/bannerBurn.png" width={"100%"} alt="" />
+				</a>
+				{/* </Event> */}
+				<Top sx={{ mt: 2 }}>
 					<BoxTabs value={tabCurrent}>
 						<TabItem
 							className={tabCurrent === 0 ? 'Mui-selected' : ''}
@@ -550,6 +569,9 @@ const Body = styled(Box)({
 	//   background: '#FFFFFF',
 	//   padding: 8
 	// }
+});
+const Event = styled(Link)({
+	width: "100%",
 });
 type itemProps = TableRowProps & {
 	isComingSoon: boolean;
