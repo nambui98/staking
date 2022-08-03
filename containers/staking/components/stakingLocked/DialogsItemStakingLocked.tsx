@@ -143,7 +143,7 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 						<img
 							src={STAKING_ICON.arrowLeftGray}
 							height="24px"
-							style={{ marginRight: "8px" }}
+							style={{ marginRight: "8px", cursor: 'pointer', }}
 							alt=""
 							onClick={() => setStateContent(StateStakingLocked.LockedList)}
 						/>
