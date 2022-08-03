@@ -1,4 +1,4 @@
-import { Box, Button, styled, Typography } from '@mui/material';
+import { Box, Button, ButtonProps, styled, Typography } from '@mui/material';
 import { useState, ChangeEvent } from 'react';
 import { BoxAuction } from '../../../const';
 
@@ -296,42 +296,30 @@ export function Burned(props: Props) {
 							ml: '8px',
 						}}
 					>
-						<Button
+						<ButtonCustom
+							isDisabled={active !== 'top10'}
+							variant="text"
 							sx={{
-								backgroundColor: active === 'top10' ? '#D9F2FD' : '#E9EAEF',
-								borderRadius: '4px',
 								width: '55px',
-								padding: '4px 8px',
-								fontSize: '12px',
-								boxShadow: 'none',
-								color: active === 'top10' ? '#55C8FC' : '#A7ACB8',
-								'&:hover': {
-									backgroundColor: active === 'top10' ? '#D9F2FD' : '#E9EAEF',
-									// boxShadow: 'none',
-								},
+								height: '26px',
+								mr: "8px"
 							}}
 							onClick={() => setActive('top10')}
 						>
 							Top 10
-						</Button>
-						<Button
+						</ButtonCustom>
+						<ButtonCustom
+							isDisabled={active !== 'top50'}
+							variant="text"
+							// disabled
 							sx={{
-								backgroundColor: active === 'top50' ? '#D9F2FD' : '#E9EAEF',
-								borderRadius: '4px',
 								width: '55px',
-								padding: '4px 8px',
-								boxShadow: 'none',
-								fontSize: '12px',
-								ml: '8px',
-								color: active === 'top50' ? '#55C8FC' : '#A7ACB8',
-								'&:hover': {
-									backgroundColor: active === 'top50' ? '#D9F2FD' : '#E9EAEF',
-								},
+								height: '26px'
 							}}
 							onClick={() => setActive('top50')}
 						>
 							Top 50
-						</Button>
+						</ButtonCustom>
 					</Box>{' '}
 				</Box>
 				{/* table */}
@@ -384,8 +372,8 @@ export function Burned(props: Props) {
 														{column.format && typeof value === 'number'
 															? column.format(value)
 															: typeof value === 'function'
-															? value()
-															: value}
+																? value()
+																: value}
 													</TableCell>
 												);
 											})}
@@ -422,22 +410,18 @@ export function Burned(props: Props) {
 						<TitleItem>PRIZE</TitleItem>
 						<ValueItem>-</ValueItem>
 					</Item>
-					<Button
+					<ButtonCustom
+						isDisabled={true}
+						variant="text"
 						sx={{
 							width: '72px',
 							height: '34px',
-							borderRadius: '8px',
-							backgroundColor: '#E9EAEF',
-							color: '#A7ACB8',
-							fontSize: '12px',
-							'&:hover': {
-								background: '#E9EAEF',
-							},
+
 							alignSelf: 'end',
 						}}
 					>
 						CLAIM
-					</Button>
+					</ButtonCustom>
 				</Box>
 				<Box
 					sx={{
@@ -465,35 +449,63 @@ export function Burned(props: Props) {
 						<ValueItem>Fitter Pass</ValueItem>
 						<ValueItem>1</ValueItem>
 					</Item>
-					<Button
+					<ButtonCustom
+						isDisabled={true}
+						variant="text"
 						sx={{
 							width: '72px',
 							height: '34px',
-							borderRadius: '8px',
-							backgroundColor: '#E9EAEF',
-							color: '#A7ACB8',
-							fontSize: '12px',
-							'&:hover': {
-								background: '#E9EAEF',
-							},
 							alignSelf: 'end',
 						}}
 					>
 						CLAIM
-					</Button>
+					</ButtonCustom>
 				</Box>
 				<Box sx={{ padding: '16px' }}>
 					<MarketplaceButton
 						customStyle={{ width: '100%' }}
 						title={'BURN MORE'}
 						handleOnClick={handleEnable}
-						// disabled={stateContent ? true : false}
+					// disabled={stateContent ? true : false}
 					/>
 				</Box>
 			</Box>
 		</Box>
 	);
 }
+
+type buttonNew = ButtonProps & {
+	isDisabled: boolean | null;
+};
+const ButtonCustom = styled(Button)
+	((props: buttonNew) => ({
+		color: props.isDisabled ? "#A7ACB8" : "#55C8FC",
+		background: props.isDisabled ? "#E9EAEF" : "#D9F2FD",
+		borderRadius: '4px',
+		padding: '0px !important',
+		minWidth: '32px !important',
+		height: '16px',
+		border: 'none',
+		textTransform: 'none',
+		display: "flex",
+		alignItems: 'center',
+		justifyContent: 'center',
+		fontSize: '12px',
+		'&>svg': {
+			pointerEvents: "none",
+			stroke: props.isDisabled ? "#A7ACB8" : "#55C8FC",
+		},
+		'&:hover': {
+			background: ' #d0edfa !important',
+			color: "#55C8FC",
+		},
+		'&:disabled': {
+			background: '#E9EAEF',
+			'&>svg': {
+				stroke: "#A7ACB8"
+			}
+		}
+	}));
 
 const Item = styled(Box)({
 	display: 'flex',

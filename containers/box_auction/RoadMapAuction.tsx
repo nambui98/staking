@@ -8,7 +8,7 @@ import {
 	useMediaQuery,
 } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { ROAD_MAP, STAKING_ICON, STAKING_IMAGE } from '../../constants/staking';
+import { ROAD_MAP_AUCTION, STAKING_ICON, STAKING_IMAGE } from '../../constants/staking';
 import { TEXT_STYLE } from '../../styles/common/textStyles';
 import { Pagination, Navigation } from 'swiper';
 import 'swiper/css';
@@ -37,7 +37,7 @@ export const RoadMapAuction = () => {
 						}}
 						modules={[Navigation, Pagination]}
 					>
-						{ROAD_MAP.items?.map((item, index) => (
+						{ROAD_MAP_AUCTION.items?.map((item, index) => (
 							<SwiperSlide key={index}>
 								<Item
 									active={item.status.toString()}

@@ -1,8 +1,10 @@
-import { Box, styled, Typography, Button, InputBase } from '@mui/material';
+import { Box, styled, Typography, Button, InputBase, TextField } from '@mui/material';
 import { useState, useRef } from 'react';
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
 import { BoxAuction } from '../../../const';
-
+import ArrowUp from '../../staking/components/stakingLocked/icons/arrow_up.svg';
+import ArrowDown from '../../staking/components/stakingLocked/icons/arrow_down.svg';
+import { TEXT_STYLE } from '../../../styles/common/textStyles';
 type Props = {
 	setStateContent: Function;
 	// setIsLoading: Function;
@@ -35,7 +37,7 @@ export function BurnAssets(props: Props) {
 		>
 			<Item sx={{ mt: '0 !important' }}>
 				<TitleItem>YOU CURRENT ASSETS</TitleItem>
-				<ValueItem>23 Fitter Passes</ValueItem>
+				<ValueItem fontWeight={'600 !important'}>23 Fitter Passes</ValueItem>
 			</Item>
 			<Box
 				sx={{
@@ -51,76 +53,38 @@ export function BurnAssets(props: Props) {
 				number of Fitter pass(es) you want to burn:
 			</Box>
 			<Box
-				sx={{ justifyContent: 'center', display: 'flex', alignItems: 'center' }}
+				sx={{ justifyContent: 'center', display: 'flex', alignItems: 'flex-start' }}
 			>
-				<InputBase
-					sx={{
-						border: '1px solid #E9EAEF',
-						borderRadius: '4px',
-						background: '#F8F9FB',
-						height: '34px',
-						'& .css-yz9k0d-MuiInputBase-input': {
-							textAlign: 'right',
-							padding: '8px 12px',
-						},
-					}}
-					defaultValue={count}
-					value={count}
-				/>
+				<Box>
 
-				<Box
-					sx={{
-						display: 'flex',
-						flexDirection: 'column',
-						ml: '8px',
-						mb: '4px',
-					}}
-				>
-					<Button
+					<ValueItem sx={{ pointerEvents: "none" }}>
+						<InputCustom value={1} placeholder="" />
+					</ValueItem>
+					<ButtonCustom
 						sx={{
-							backgroundColor: '#D9F2FD',
-							borderRadius: '4px',
-							minWidth: '32px',
-							width: '32px',
-							mb: '2px',
-							boxShadow: 'none',
-							height: '16px',
+							width: "32px ",
+							height: "24px",
+							marginLeft: "auto",
+							mt: '4px',
+							fontWeight: "400",
+							fontSize: "12px"
 						}}
+						variant="text"
 					>
-						<img src="images/arrow-up.svg" alt="arrow-up" />
-					</Button>
-					<Button
-						sx={{
-							backgroundColor: '#D9F2FD',
-							borderRadius: '4px',
-							minWidth: '32px',
-							boxShadow: 'none',
-							width: '32px',
-							height: '16px',
-						}}
-					>
-						<img
-							style={{ transform: 'rotate(180deg)' }}
-							src="images/arrow-up.svg"
-							alt="arrow-up"
-						/>
-					</Button>
+						All
+					</ButtonCustom>
+				</Box>
+
+				<Box sx={{ marginLeft: '8px' }}>
+					<ButtonCustom variant="text" >
+						<ArrowUp />
+					</ButtonCustom>
+					<ButtonCustom variant="text" sx={{ mt: "2px" }} >
+						<ArrowDown />
+					</ButtonCustom>
 				</Box>
 			</Box>
-			<Button
-				sx={{
-					backgroundColor: '#D9F2FD',
-					borderRadius: '4px',
-					width: '32px',
-					boxShadow: 'none',
-					color: '#55C8FC',
-					fontSize: '12px',
-					marginLeft: '205px',
-					padding: '4px 8px',
-				}}
-			>
-				All
-			</Button>
+
 
 			<Box sx={{ display: 'flex', mt: '16px' }}>
 				<img src="images/info-circle.svg" alt="info-circle" />
@@ -155,7 +119,32 @@ export function BurnAssets(props: Props) {
 		</Box>
 	);
 }
-
+const ButtonCustom = styled(Button)({
+	color: '#55C8FC',
+	background: ' #D9F2FD',
+	borderRadius: '4px',
+	padding: '0px !important',
+	minWidth: '32px !important',
+	height: '16px',
+	border: 'none',
+	textTransform: 'none',
+	display: "flex",
+	alignItems: 'center',
+	justifyContent: 'center',
+	'&>svg': {
+		pointerEvents: "none",
+		stroke: "#55C8FC",
+	},
+	'&:hover': {
+		background: ' #d0edfa !important',
+	},
+	'&:disabled': {
+		background: '#E9EAEF',
+		'&>svg': {
+			stroke: "#A7ACB8"
+		}
+	}
+});
 const Item = styled(Box)({
 	display: 'flex',
 	alignItems: 'center',
@@ -174,4 +163,28 @@ const ValueItem = styled(Typography)({
 	color: '#31373E',
 	fontWeight: '500',
 	lineHeight: '18px',
+});
+const InputCustom = styled(TextField)({
+	'& .MuiOutlinedInput-root': {
+		padding: '8px 16px',
+		background: '#F8F9FB',
+		borderRadius: 4,
+		width: '160px',
+		height: 34,
+		flex: 1,
+		border: '1px solid #E9EAEF',
+	},
+	'& input': {
+		padding: 0,
+		textAlign: 'right',
+		...TEXT_STYLE(12, 500, '#31373E'),
+	},
+	'& fieldset': { display: 'none' },
+	'@media (max-width: 767px)': {
+		width: '100%',
+		'& .MuiOutlinedInput-root': {
+			width: '100%',
+			height: 35,
+		},
+	},
 });

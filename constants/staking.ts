@@ -15,13 +15,6 @@ export const ROAD_MAP = {
 	items: [
 		{
 			image: STAKING_IMAGE.ftpass,
-			title: 'Box Auction',
-			status: true,
-			isUpcomming: false,
-			textStatus: 'LIVE',
-		},
-		{
-			image: STAKING_IMAGE.ftpass,
 			title: 'Fitter Pass Drops - Locked',
 			status: true,
 			isUpcomming: false,
@@ -58,5 +51,17 @@ export const ROAD_MAP = {
 			textStatus: 'Upcoming'
 
 		}
+	]
+}
+export const ROAD_MAP_AUCTION = {
+	items: [
+		{
+			image: STAKING_IMAGE.ftpass,
+			title: 'Box Auction',
+			status: true,
+			isUpcomming: false,
+			textStatus: 'LIVE',
+		},
+
 	]
 }
