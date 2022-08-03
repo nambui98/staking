@@ -29,3 +29,9 @@ export enum StateStakingLocked {
 	Error,
 
 }
+export enum BoxAuction {
+	EnablePool,
+	AssetsEvent,
+	BurnAssets,
+	Burned,
+}

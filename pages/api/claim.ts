@@ -6,6 +6,7 @@ import GameFiData from "../../abi/merkle-claim-gamefi.json";
 import EnjinstarterData from "../../abi/merkle-claim-enjin.json";
 import AlphaBetaData2 from "../../abi/merkle-alpha-beta-boxes-2.json"; 
 import PublicSaleData from "../../abi/merkle-claim-fiu.json"
+import Airdrop from "../../abi/merkle-claim-fiu-airdrop.json"
 const { serverRuntimeConfig } = getConfig();
 
 export default async function handler(req: any, res: any) {
@@ -40,6 +41,7 @@ export default async function handler(req: any, res: any) {
 					case '4': return EnjinstarterData
 					case '5': return PublicSaleData
 					case '6': return AlphaBetaData2
+					case '7': return Airdrop
 					default:
 						break;
 				}

@@ -119,3 +119,4 @@ export const beFITTERStakeStaking = { address: address.beFITTERStakeStaking, abi
 export const bftClaimToken = { address: address.bFclaimToken, abi: bfClaimToken.abi }
 export const bftWallet = { address: address.bFWallet, abi: bfWallet.abi }
 export const beFITTERlockedPool = { address: address.beFITTERlockedPool, abi: bflockedPool.abi }
+export const bftClaimTokenAirdrop = { address: address.bFclaimTokenAirdrop, abi: bfClaimToken.abi }
