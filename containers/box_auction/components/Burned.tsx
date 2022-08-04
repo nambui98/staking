@@ -1,5 +1,5 @@
 import { Box, Button, ButtonProps, styled, Typography } from '@mui/material';
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect, useCallback } from 'react';
 import { BoxAuction } from '../../../const';
 
 import Paper from '@mui/material/Paper';
@@ -11,31 +11,37 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
+import axios from 'axios';
+import { convertWalletAddress } from '../../../libs/utils/utils';
+import { useWalletContext } from '../../../contexts/WalletContext';
 
 interface Column {
-	id: 'rank' | 'wallet' | 'filterPass' | 'prize';
+	id: 'rank' | 'walletAddress' | 'amount' | 'prize';
 	label: string;
 	minWidth?: number;
 	align?: 'right' | 'left';
-	format?: (value: number) => string;
+	format?: (value: string) => string;
 }
 
 const columns: readonly Column[] = [
 	{ id: 'rank', label: 'RANK', minWidth: 50, align: 'left' },
-	{ id: 'wallet', label: 'WALLET ID', minWidth: 100, align: 'left' },
 	{
-		id: 'filterPass',
+		id: 'walletAddress', label: 'WALLET ID', minWidth: 100, align: 'left',
+		format: (value: string) => convertWalletAddress(value.toString(), 6, 3)
+	},
+	{
+		id: 'amount',
 		label: 'FITTER PASS(es)',
 		minWidth: 103,
 		align: 'left',
-		format: (value: number) => value.toLocaleString('en-US'),
+		format: (value: string) => value.toString(),
 	},
 	{
 		id: 'prize',
 		label: 'PRIZE',
 		minWidth: 35,
 		align: 'left',
-		format: (value: number) => value.toLocaleString('en-US'),
+		format: (value: string) => value.toString(),
 	},
 ];
 
@@ -43,203 +49,16 @@ interface Data {
 	rank: number;
 	wallet: string;
 	filterPass: number;
-	prize: Function;
 }
 
 function createData(
 	rank: number,
 	wallet: string,
 	filterPass: number,
-	prize: Function
 ): Data {
-	return { rank, wallet, filterPass, prize };
+	return { rank, wallet, filterPass };
 }
 
-const rows = [
-	createData(1, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(2, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(3, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(4, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(5, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(6, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(7, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(8, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(9, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(10, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-];
-
-const row50 = [
-	createData(1, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(2, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(3, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(4, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(5, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(6, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(7, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(8, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(9, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(10, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(1, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(2, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(3, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(4, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(5, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(6, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(7, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(8, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(9, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(10, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(1, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(2, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(3, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(4, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(5, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(6, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(7, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(8, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(9, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(10, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(1, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(2, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(3, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(4, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(5, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(6, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(7, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(8, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(9, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(10, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(1, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(2, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(3, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(4, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(5, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(6, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(7, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(8, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(9, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-	createData(10, '0xDec...94c2', 24, () => (
-		<img src="images/box.svg" alt="box" />
-	)),
-];
 
 type Props = {
 	setStateContent: Function;
@@ -249,13 +68,61 @@ type Props = {
 	stateContent: BoxAuction | null;
 	numberBurned: string
 };
-
+type row = {
+	id: string;
+	walletAddress: string;
+	amount: string;
+	rank: string;
+}
 export function Burned(props: Props) {
 	const { setStateContent, stateContent, numberBurned } = props;
-
-	const [active, setActive] = useState<string>('top10');
+	const { walletAccount } = useWalletContext();
+	const [limit, setLimit] = useState<number>(10);
 	const [page, setPage] = useState(0);
+	const [dataLeaderBoard, setDataLeaderBoard] = useState<row[]>();
+	const [dataMe, setDataMe] = useState<row>();
 	const [rowsPerPage, setRowsPerPage] = useState(10);
+
+	const getDataMe = useCallback(
+		() => {
+			axios.get(
+				`https://leaderboard.befitter.io/fitter/leaderboard/me?walletAddress=${walletAccount}`, {
+				headers: {
+					"Content-Type": "application/json"
+				}
+			}
+			).then((res) => {
+				if (res.status === 200) {
+					debugger
+					setDataMe(res.data.data);
+				}
+			})
+		},
+		[walletAccount],
+	)
+	const getData = useCallback(
+		() => {
+			axios.get(
+				`https://leaderboard.befitter.io/fitter/leaderboard?limit=${limit}&offset=0`, {
+				headers: {
+					"Content-Type": "application/json"
+				}
+			}
+			).then((res) => {
+				if (res.status === 200) {
+					setDataLeaderBoard(res.data.data);
+				}
+			})
+		},
+		[limit],
+	)
+
+
+	useEffect(() => {
+		getData();
+		getDataMe();
+	}, [limit])
+
 
 	const handleChangePage = (event: unknown, newPage: number) => {
 		setPage(newPage);
@@ -272,20 +139,15 @@ export function Burned(props: Props) {
 
 	return (
 		<Box sx={{ display: 'flex', borderLeft: '1px solid #E9EAEF' }}>
-			<Box sx={{ width: '372px', padding: '16px', position: 'relative' }}>
-				<Box sx={{ position: 'absolute', inset: 0, backgroundColor: '#cacaca50', zIndex: 10, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-					<Typography variant="h3" color="#4d4b4b">Coming soon</Typography>
-				</Box>
+			<Box sx={{ width: '372px', padding: '16px' }}>
 				<Box
 					sx={{
 						display: 'flex',
 						justifyContent: 'space-between',
 						mb: '10px',
-
 						// alignItems: 'center',
 					}}
 				>
-
 					<h3
 						style={{
 							color: '#FF6F61',
@@ -303,33 +165,33 @@ export function Burned(props: Props) {
 						}}
 					>
 						<ButtonCustom
-							isDisabled={active !== 'top10'}
+							isDisabled={limit !== 10}
 							variant="text"
 							sx={{
 								width: '55px',
 								height: '26px',
 								mr: "8px"
 							}}
-							onClick={() => setActive('top10')}
+							onClick={() => setLimit(10)}
 						>
 							Top 10
 						</ButtonCustom>
 						<ButtonCustom
-							isDisabled={active !== 'top50'}
+							isDisabled={limit !== 50}
 							variant="text"
 							// disabled
 							sx={{
 								width: '55px',
 								height: '26px'
 							}}
-							onClick={() => setActive('top50')}
+							onClick={() => setLimit(50)}
 						>
 							Top 50
 						</ButtonCustom>
 					</Box>{' '}
 				</Box>
 				{/* table */}
-				{/* <Paper sx={{ width: '100%', overflow: 'hidden', boxShadow: 'none' }}>
+				<Paper sx={{ width: '100%', overflow: 'hidden', boxShadow: 'none' }}>
 					<TableContainer sx={{ maxHeight: 308, border: 'none' }}>
 						<Table stickyHeader aria-label="sticky table">
 							<TableHead>
@@ -352,7 +214,7 @@ export function Burned(props: Props) {
 								</TableRow>
 							</TableHead>
 							<TableBody>
-								{(active === 'top10' ? rows : row50).map((row) => {
+								{dataLeaderBoard && dataLeaderBoard?.map((row) => {
 									return (
 										<TableRow
 											hover
@@ -361,6 +223,22 @@ export function Burned(props: Props) {
 											key={row.rank}
 										>
 											{columns.map((column) => {
+												if (column.id === "prize") {
+													return <TableCell
+														key={column.id}
+														align={column.align}
+														sx={{
+															borderBottom: 'none',
+															padding: '4px 0',
+															fontSize: '12px',
+															color: '#31373E',
+															fontWeight: '500',
+															fontFamily: 'BeVietNamPro',
+														}}
+													>
+														<img src="images/box.svg" alt="box" />
+													</TableCell>
+												}
 												const value = row[column.id];
 												return (
 													<TableCell
@@ -375,11 +253,9 @@ export function Burned(props: Props) {
 															fontFamily: 'BeVietNamPro',
 														}}
 													>
-														{column.format && typeof value === 'number'
+														{column.format && typeof value === 'string'
 															? column.format(value)
-															: typeof value === 'function'
-																? value()
-																: value}
+															: value}
 													</TableCell>
 												);
 											})}
@@ -389,7 +265,7 @@ export function Burned(props: Props) {
 							</TableBody>
 						</Table>
 					</TableContainer>
-				</Paper> */}
+				</Paper>
 			</Box>
 			<Box sx={{ borderLeft: '1px solid #E9EAEF' }}>
 				<Box
@@ -406,11 +282,11 @@ export function Burned(props: Props) {
 				>
 					<Item sx={{ mt: '0 !important' }}>
 						<TitleItem>BURNED</TitleItem>
-						<ValueItem>{numberBurned} Fitter Passes</ValueItem>
+						<ValueItem>{dataMe?.amount} Fitter Passes</ValueItem>
 					</Item>
 					<Item sx={{ mt: '0 !important' }}>
 						<TitleItem>YOUR RANK</TitleItem>
-						<ValueItem>-</ValueItem>
+						<ValueItem>{dataMe?.rank}</ValueItem>
 					</Item>
 					<Item sx={{ mt: '0 !important', mb: '8px' }}>
 						<TitleItem>PRIZE</TitleItem>
