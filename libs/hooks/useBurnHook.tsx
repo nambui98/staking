@@ -39,6 +39,9 @@ export default function userBurnHook(props: Props) {
 				setIsRegister(false);
 				setIsApproved(false);
 			}
+		} else {
+			setIsRegister(false);
+			setIsApproved(false);
 		}
 	};
 	const isRegisteredGet = async () => {
@@ -59,6 +62,9 @@ export default function userBurnHook(props: Props) {
 				// setStateContentInit(BoxAuction.AssetsEvent)
 				setStatusRow('-')
 			}
+		} else {
+			setStatusRow('-')
+			setIsRegister(false)
 		}
 	};
 	const totalStakeGet = async () => {
@@ -108,6 +114,7 @@ export default function userBurnHook(props: Props) {
 	useEffect(() => {
 		totalStakeGet();
 		getAll();
+		debugger
 	}, [walletAccount, refresh, ethersSigner]);
 
 	return {
