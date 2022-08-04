@@ -97,7 +97,7 @@ export const TabClaim = () => {
       if(parseFloat(ethers.utils.formatEther(dataLockedOf)) === 0){
         setCheckClaimed(true)
       } else {
-        if(parseInt(ethers.utils.formatEther(dataCheckClaimed)) >= 0){
+        if(parseInt(ethers.utils.formatEther(dataCheckClaimed)) > 0){
           setCheckClaimed(true)
         } else {
           setCheckClaimed(false)
