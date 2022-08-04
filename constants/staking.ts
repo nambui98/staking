@@ -6,7 +6,7 @@ export const STAKING_ICON = {
 
 export const STAKING_IMAGE = {
 	box: 'assets/3box.png',
-	ftpass: 'images/boxs.svg',
+	ftpass: 'assets/ftpass.png',
 	smartPhone: 'assets/smartphone.png',
 	boxGray: 'assets/3box-gray.png',
 };
@@ -58,7 +58,7 @@ export const ROAD_MAP = {
 export const ROAD_MAP_AUCTION = {
 	items: [
 		{
-			image: STAKING_IMAGE.ftpass,
+			image: STAKING_IMAGE.box,
 			title: 'Box Auction',
 			status: true,
 			isUpcomming: false,

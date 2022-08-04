@@ -35,7 +35,7 @@ export const RoadMap = () => {
 						{ROAD_MAP.items?.map((item, index) => (
 							<SwiperSlide key={index}>
 								<Item status={item.status} isUpcomming={item.status === 1}>
-									<Image sx={{ opacity: 1 }}><img src={item.status === 2 ? item.image : STAKING_IMAGE.boxGray} /></Image>
+									<Image sx={{ opacity: 1 }}><img src={item.status !== 1 ? item.image : STAKING_IMAGE.boxGray} /></Image>
 									<Box sx={{
 										display: 'flex',
 										flexDirection: 'column',
