@@ -142,34 +142,46 @@ export const TabPoolAuction = () => {
 			status: true,
 			content: (
 				<Box>
-
-					<Typography mb={1}>1.Burn Fitter Pass - Get Diamond and Gold Genesis NFT Box</Typography>
-
-					<Typography mb={1}>2.You are required to burn 2 Fitter Passes to participate for the very first time</Typography>
-
-					<Typography mb={1}>
-						3.The top 50 ranked participants who burn the largest number of Fitter Passes will each receive a Genesis NFT Box with estimated price no less than $500.
-					</Typography>
-
-					<Typography mb={1}>
-						4.Event takes place in 5 days ( Aug 5 - Aug 10)
-					</Typography>
-
-					<Typography mb={1}>
-						5.After this time, winner list will be determined.
-						<br />
-						&ensp;	Top 1-10: get 1 Diamond Box/each
-						<br />
-						&ensp;	Top 11-50: get 1 Gold Box/each
-						<br />
-						&ensp;	All Fitter Passes from this winner list will be burned
-						<br />
-						&ensp;	Participants who are not named in this list will get their Fitter Passes back, excluding the 2-Fitter Pass participation fee
-					</Typography>
-
-					<Typography mb={1}>
-						6.Reward and refund will be paid to users after event is closed
-					</Typography>
+					<ItemHowItWord>
+						<Typography mb={1}>1.</Typography>
+						<Typography mb={1} ml={1}>Burn Fitter Pass - Get Diamond and Gold Genesis NFT Box</Typography>
+					</ItemHowItWord>
+					<ItemHowItWord>
+						<Typography mb={1}>2.</Typography>
+						<Typography mb={1} ml={1}>You are required to burn 2 Fitter Passes to participate for the very first time</Typography>
+					</ItemHowItWord>
+					<ItemHowItWord>
+						<Typography mb={1}>3.</Typography>
+						<Typography mb={1} ml={1}>
+							The top 50 ranked participants who burn the largest number of Fitter Passes will each receive a Genesis NFT Box with estimated price no less than $500.
+						</Typography>
+					</ItemHowItWord>
+					<ItemHowItWord>
+						<Typography mb={1}>4.</Typography>
+						<Typography mb={1} ml={1}>
+							Event takes place in 5 days ( Aug 5 - Aug 10)
+						</Typography>
+					</ItemHowItWord>
+					<ItemHowItWord>
+						<Typography mb={1}>5.</Typography>
+						<Typography mb={1} ml={1}>
+							After this time, winner list will be determined.
+							<br />
+							Top 1-10: get 1 Diamond Box/each
+							<br />
+							Top 11-50: get 1 Gold Box/each
+							<br />
+							All Fitter Passes from this winner list will be burned
+							<br />
+							Participants who are not named in this list will get their Fitter Passes back, excluding the 2-Fitter Pass participation fee
+						</Typography>
+					</ItemHowItWord>
+					<ItemHowItWord>
+						<Typography mb={1}>6.</Typography>
+						<Typography mb={1} ml={1}>
+							Reward and refund will be paid to users after event is closed
+						</Typography>
+					</ItemHowItWord>
 
 
 				</Box>
@@ -309,6 +321,18 @@ export const TabPoolAuction = () => {
 		</Wrap>
 	);
 };
+
+const ItemHowItWord = styled(Box)({
+	display: 'flex',
+	alignItems: 'flex-start',
+	color: "#31373E",
+	fontWeight: "500",
+	fontSize: "14px",
+	'& > p:first-child': {
+		paddingRight: "8px",
+		width: "14px"
+	}
+})
 
 const Wrap = styled(Stack)({
 	'@media (min-width: 900px)': {
