@@ -283,7 +283,7 @@ const BodyContent = styled(Box)({
     paddingRight: 9
   },
   '@media (max-width: 767px)': {
-    padding: '0 16px 16px',
+    padding: '0 8px 8px',
     borderRadius: '0 0 16px 16px',
     background: '#F8F9FB'
   }

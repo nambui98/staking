@@ -30,30 +30,32 @@ export const BoxShoes: React.FC<IProps> = ({ shoeChoose, setShoeChoose, listShoe
 		}
 	}
 
+	console.log(listShoes)
+
 	return (
 		<Wrap sx={{maxHeight: listShoes?.length ? '465px' : 'auto' }}>
 			{listShoes?.length ? listShoes?.map((item, index) => (
-				!isMobile1024 ? <Item key={index} active={item.token_id.toString() === shoeChoose}>
+				!isMobile1024 ? <Item key={index} active={`${item.tokenId}` === shoeChoose}>
 					<ItemLeft>
 						<BoxImage>
-							<img src={item.image_link} />
-							<BoxCheckBox onClick={() => setShoeChoose(shoeChoose === item.token_id.toString() ? '' : item.token_id.toString())}>
-								<CheckboxMarketplace type='green' label='1' active={item.token_id.toString() === shoeChoose} /></BoxCheckBox>
+							<img src={item.imageLink} />
+							<BoxCheckBox onClick={() => setShoeChoose(shoeChoose === `${item.tokenId}` ? '' : `${item.tokenId}`)}>
+								<CheckboxMarketplace type='green' label='1' active={`${item.tokenId}` === shoeChoose} /></BoxCheckBox>
 						</BoxImage>
 						<ShoeInfo sx={{ marginLeft: '16px' }}>
-							<ShoeId>#{item.token_id.toString()}</ShoeId>
+							<ShoeId>#{`${item.tokenId}`}</ShoeId>
 							<Box sx={{ display: 'flex' }}><ShoeType>{item?.info?.type}</ShoeType><ShowRarity>{item.info?.rare === 1 ? 'S' : item.info?.rare === 2 ? 'R' : 'I'}</ShowRarity></Box>
 						</ShoeInfo>
 					</ItemLeft>
 					<ItemRight>
-						<Box>
+						<Box sx={{minWidth: '126px'}}>
 							<ShoeDetailsItem>
 								<img src="assets/icons/triangle.svg" style={{ float: 'left', marginRight: 10 }} />
 								<Box><Typography>Level</Typography><Typography>{item.info?.level}</Typography></Box>
 							</ShoeDetailsItem>
 							<ShoeDetailsItem>
 								<img src="assets/icons/shieldGreen.svg" style={{ float: 'left', marginRight: 12 }} />
-								<Box><Typography>Condition</Typography><Typography>{formatMoney(item.info?.condition)}%</Typography></Box>
+								<Box><Typography>Condition</Typography><Typography>{formatMoney(item.info?.condition, 3)}%</Typography></Box>
 							</ShoeDetailsItem>
 							<ShoeDetailsItem>
 								<img src={`assets/icons/shoeMint${checkImageMint(item.info?.minted)}.svg`} style={{ float: 'left', marginRight: 8 }} />
@@ -62,21 +64,21 @@ export const BoxShoes: React.FC<IProps> = ({ shoeChoose, setShoeChoose, listShoe
 							</ShoeDetailsItem>
 						</Box>
 
-						<Box sx={{ flex: 1 }}>
+						<BoxAttr>
 							<AttrItem><img src="assets/icons/batteryFull.svg" /><AttrValue>{item.info?.energyBonus}</AttrValue></AttrItem>
 							<AttrItem><img src="assets/icons/shieldTick.svg" /><Process process={`${item.info?.durability}%`}></Process><AttrValue>{item.info?.durability}</AttrValue></AttrItem>
 							<AttrItem><img src="assets/icons/settingOrange.svg" /><Process process={`${item.info?.support}%`}></Process><AttrValue>{item.info?.support}</AttrValue></AttrItem>
 							<AttrItem><img src="assets/icons/magicStar.svg" /><Process process={`${item.info?.luck}%`}></Process><AttrValue>{item.info?.luck}</AttrValue></AttrItem>
 							<AttrItem><img src="assets/icons/routeSquare.svg" /><Process process={`${item.info?.range}%`}></Process><AttrValue>{item.info?.range}</AttrValue></AttrItem>
-						</Box>
+						</BoxAttr>
 					</ItemRight>
 				</Item> :
-					<Item key={index} active={item.token_id.toString() === shoeChoose} onClick={() => setShoeChoose(shoeChoose === item.token_id.toString() ? '' : item.token_id.toString())}>
+					<Item key={index} active={`${item.tokenId}` === shoeChoose} onClick={() => setShoeChoose(shoeChoose === `${item.tokenId}` ? '' : `${item.tokenId}`)}>
 						<ItemLeft>
 							<BoxImage>
-								<img src={item.image_link} />
+								<img src={item.imageLink} />
 							</BoxImage>
-							<ShoeId>#{item.token_id.toString()}</ShoeId>
+							<ShoeId>#{`${item.tokenId}`}</ShoeId>
 						</ItemLeft>
 						<ItemRight>
 							<Box sx={{ display: 'flex', marginBottom: isMobile1024 ? '8px' : 0 }}>
@@ -89,7 +91,7 @@ export const BoxShoes: React.FC<IProps> = ({ shoeChoose, setShoeChoose, listShoe
 								</ShoeDetailsItem>
 								<ShoeDetailsItem>
 									<img src="assets/icons/shieldGreen.svg" style={{ float: 'left'}} />
-									<Box><Typography>{formatMoney(item.info?.condition)}%</Typography></Box>
+									<Box><Typography>{formatMoney(item.info?.condition, 3)}%</Typography></Box>
 								</ShoeDetailsItem>
 								<ShoeDetailsItem>
 									<img src={`assets/icons/shoeMint${checkImageMint(item.info?.minted)}.svg`} style={{ float: 'left'}} />
@@ -133,6 +135,12 @@ const Wrap = styled(Box)({
 			background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)'
 		}
 	}
+})
+
+const BoxAttr = styled(Box)({
+	marginLeft: 'auto',
+	width: '100%',
+	maxWidth: 241
 })
 
 type itemProps = BoxProps & {
@@ -238,7 +246,7 @@ const ShoeDetailsItem = styled(Box)({
 		}
 	},
 	'@media (min-width: 1024px)': {
-		marginRight: 80,
+		// marginRight: 80,
 	}
 })
 const AttrItem = styled(Box)({
