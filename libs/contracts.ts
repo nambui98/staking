@@ -48,6 +48,7 @@ const addresses: Map = {
 		bFclaimToken: '0xA1eDA0aBA0175050E0c123fc8E531B4b7526e0de',
 		beFITTERlockedPool: '0x201D5542386B3fC5fC90c51dd43e44B4638FF15c',
 		beFITTERBurningEvent: '0xeF543Bb344B1d954ee2e1c52EE7a5f0260bc7c25',
+		bFclaimTokenAirdrop: '0xb77b00AEEF5631362aC3cA8dE6bD70Cc412452Dd'
 	},
 	['dev']: {
 		bFBox: '0xb92faF9fE22225C82aFc3968425cca17996ae4eA',
