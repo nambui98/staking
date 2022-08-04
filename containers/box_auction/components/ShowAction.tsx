@@ -69,7 +69,7 @@ export const ShowAction: React.FC<IProps> = ({
 		} else {
 			setStateContent(null);
 		}
-	}, [isApproved]);
+	}, [isApproved, isRegister]);
 
 	const handleClickSuccess = ({
 		titleSuccess = '',

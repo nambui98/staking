@@ -131,7 +131,7 @@ export const TabPoolAuction = () => {
 				'-',
 				'None',
 				'None',
-				`${totalStake} Fitter Pass`
+				`${totalStake} Fitter Passes`
 			),
 		},
 	];
