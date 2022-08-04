@@ -11,11 +11,11 @@ const BoxAuction = () => {
 			titlePage="beFITTER - Staking pools"
 			sxProps={{ background: '#fff' }}
 		>
-			{/* <Wrap>
+			<Wrap>
 				<TabPoolAuction />
 
 				<RoadMapAuction />
-			</Wrap> */}
+			</Wrap>
 			{/* {!isMobile && <ClockUtc/>} */}
 		</MainLayout>
 	);

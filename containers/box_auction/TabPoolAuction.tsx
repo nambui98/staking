@@ -109,18 +109,15 @@ export const TabPoolAuction = () => {
 		status: false,
 		content: <Box></Box>,
 	});
-	const [stateContentInit, setStateContentInit] = useState<StateStaking>(
-		StateStaking.EnablePool
-	);
 	const [isLoading, setIsLoading] = useState(false);
 	const {
 		totalStake,
 		balanceFT,
 		numberBurned,
-		isEnable,
+		isApproved,
+		isRegister,
 		statusRow } = userBurnHook({
-			setIsLoading,
-			setStateContentInit
+			setIsLoading
 		})
 	const rows = [
 		{
@@ -139,99 +136,45 @@ export const TabPoolAuction = () => {
 		},
 	];
 
-	const handleShowPopupPass = (e: React.MouseEvent) => {
+	const handleShowBurn = (e: React.MouseEvent) => {
 		e.stopPropagation();
 		setStatusPopup({
 			status: true,
 			content: (
 				<Box>
-					<Typography>
-						<b>Fitter Pass:</b>
+
+					<Typography mb={1}>1.Burn Fitter Pass - Get Diamond and Gold Genesis NFT Box</Typography>
+
+					<Typography mb={1}>2.You are required to burn 2 Fitter Passes to participate for the very first time</Typography>
+
+					<Typography mb={1}>
+						3.The top 50 ranked participants who burn the largest number of Fitter Passes will each receive a Genesis NFT Box with estimated price no less than $500.
 					</Typography>
 
-					<Typography>1.Stake FIU, minimum 4000 FIU.</Typography>
-
-					<Typography>2.Earn Fitter Pass.</Typography>
-
-					<Typography>
-						3.You have to stake at least 24h to receive Pass.
+					<Typography mb={1}>
+						4.Event takes place in 5 days ( Aug 5 - Aug 10)
 					</Typography>
 
-					<Typography>
-						4.Fitter Pass will be given to your account in every block of 24h
-						from the last moment you stake/unstake
+					<Typography mb={1}>
+						5.After this time, winner list will be determined.
+						<br />
+						&ensp;	Top 1-10: get 1 Diamond Box/each
+						<br />
+						&ensp;	Top 11-50: get 1 Gold Box/each
+						<br />
+						&ensp;	All Fitter Passes from this winner list will be burned
+						<br />
+						&ensp;	Participants who are not named in this list will get their Fitter Passes back, excluding the 2-Fitter Pass participation fee
 					</Typography>
 
-					<Typography>
-						5.For every 4000 FIU staked per 240h, you earn one Fitter Pass.
+					<Typography mb={1}>
+						6.Reward and refund will be paid to users after event is closed
 					</Typography>
 
-					<Typography>
-						For every 40.000 FIU staked per 24h, you earn one Fitter Pass.
-					</Typography>
 
-					<Typography>
-						For every 80.000 FIU staked per 48h, you earn 2 Fitter Passes,....
-					</Typography>
-
-					<Typography>
-						The more token you stake, the more reward you will receive.
-					</Typography>
-
-					<Typography>
-						6.Specially, in the first 72 hours from this campaign begin, the
-						reward will be doubled.
-					</Typography>
-
-					<Typography>
-						Ex: With 20.000 FIU staked per 24h, you earn 1 Fitter Passes.
-					</Typography>
-
-					<Typography>
-						7.Staking does have a short cooldown period of 7days, meaning once
-						you want to exit, you have to wait 7days.
-					</Typography>
-
-					<Typography>
-						<b>Important note:</b> If you change your stake amount (stake more
-						or partical unstake ), system will recalculate 24h period from that
-						time and amount. Finished rewards will remain but fractional staking
-						rewards will be cleared.
-					</Typography>
 				</Box>
 			),
 		});
-	};
-
-	const handleShowPopupShared = (e: React.MouseEvent) => {
-		e.stopPropagation();
-		setStatusPopup({
-			status: true,
-			content: (
-				<Box>
-					<Typography>
-						<b>Shared Pool: </b>
-					</Typography>
-					<Typography>1.Stake FIU, minimum 1000 FIU.</Typography>
-					<Typography>2.Earn FIU</Typography>
-					<Typography>3.High-yield in return, take place in 1 month</Typography>
-					<Typography>4.Unlimited number of stakers and token</Typography>
-					<Typography>
-						5.In the first 3 days from this campaign begin, you have chance to
-						get double the reward.
-					</Typography>
-					<Typography>
-						6.Staking does have a short cooldown period of 14 days, meaning once
-						you want to exit, you have to wait 14 days.
-					</Typography>
-				</Box>
-			),
-		});
-	};
-
-	const handleChange = () => {
-		// console.log('jshfje', e);
-		// console.log('jshfdsafdje', expland);
 	};
 
 	return (
@@ -264,7 +207,7 @@ export const TabPoolAuction = () => {
 				<Body>
 					<Box sx={{ overflowX: 'auto', borderRadius: '16px' }}>
 
-						<Accordion onChange={handleChange}>
+						<Accordion onChange={() => { }}>
 							{rows.map((item, index) => {
 								return (
 									<AccordionSummary
@@ -281,9 +224,7 @@ export const TabPoolAuction = () => {
 														<span
 															style={{ textDecoration: 'underline' }}
 															onClick={
-																index === 0
-																	? (e: React.MouseEvent) => handleShowPopupPass(e)
-																	: (e: React.MouseEvent) => handleShowPopupShared(e)
+																(e: React.MouseEvent) => handleShowBurn(e)
 															}
 														>
 															How it works?
@@ -338,7 +279,11 @@ export const TabPoolAuction = () => {
 								);
 							})}
 							<AccordionDetails>
-								<ShowAction></ShowAction>
+								<ShowAction
+									isApproved={isApproved}
+									isRegister={isRegister}
+									balanceFT={balanceFT}
+									numberBurned={numberBurned}></ShowAction>
 							</AccordionDetails>
 						</Accordion>
 

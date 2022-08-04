@@ -5,6 +5,7 @@ import {
 	CircularProgress,
 	InputAdornment,
 	Stack,
+	StackProps,
 	styled,
 	TextField,
 	Typography,
@@ -22,10 +23,21 @@ import { EnablePool } from './EnablePool';
 import { AssetsEvent } from './AssetsEvent';
 import { BurnAssets } from './BurnAssets';
 import { Burned } from './Burned';
+import { Success } from './Success';
+import { Error } from './Error';
 
-interface IProps { }
+interface IProps {
+	isApproved: boolean;
+	isRegister: boolean;
+	balanceFT: string;
+	numberBurned: string;
+}
 
-export const ShowAction: React.FC<IProps> = ({ }) => {
+export const ShowAction: React.FC<IProps> = ({
+	isApproved,
+	isRegister,
+	balanceFT,
+	numberBurned }) => {
 	const [stateContent, setStateContent] = useState<BoxAuction | null>(null);
 	// stateContentInit
 	const [success, setSuccess] = useState<any>({
@@ -47,9 +59,17 @@ export const ShowAction: React.FC<IProps> = ({ }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [unStakePrice, setUnStakePrice] = useState(0);
 
-	// useEffect(() => {
-	// 	setStateContent(stateContentInit);
-	// }, [stateContentInit]);
+	useEffect(() => {
+		if (isApproved) {
+			if (isRegister) {
+				setStateContent(BoxAuction.BurnAssets);
+			} else {
+				setStateContent(BoxAuction.AssetsEvent);
+			}
+		} else {
+			setStateContent(null);
+		}
+	}, [isApproved]);
 
 	const handleClickSuccess = ({
 		titleSuccess = '',
@@ -124,27 +144,35 @@ export const ShowAction: React.FC<IProps> = ({ }) => {
 					display: 'flex',
 				}}
 			>
-				<Wrap isBorder={stateContent === null}>
+				<Wrap isborder={stateContent === null}>
 					<EnablePool
 						{...propsPass}
+						isApproved={isApproved}
 					/>
 				</Wrap>
 				{stateContent === BoxAuction.AssetsEvent ? (
 					<AssetsEvent
-						setStateContent={setStateContent}
-						stateContent={stateContent}
+						{...propsPass}
+						balanceFT={balanceFT}
 					/>
 				) : stateContent === BoxAuction.BurnAssets ? (
 					<BurnAssets
-						setStateContent={setStateContent}
-						stateContent={stateContent}
+						{...propsPass}
+						balanceFT={balanceFT}
 					/>
 				) : stateContent === BoxAuction.Burned ? (
 					<Burned
 						setStateContent={setStateContent}
 						stateContent={stateContent}
+						numberBurned={numberBurned}
 					/>
-				) : null}
+				) : stateContent === BoxAuction.Success ? (
+					<Success success={success} setStateContent={setStateContent} />
+				) : stateContent === BoxAuction.Error ? (
+					<Error setStateContent={setStateContent} error={error} />
+				) : (
+					<Box></Box>
+				)}
 			</Box>
 			<Backdrop
 				sx={{ color: '#FF6D24', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -207,8 +235,10 @@ const ButtonStakeMore = styled(Button)({
 	},
 	':disabled': {},
 });
-
-const Wrap = styled(Stack)(({ isBorder }: { isBorder: boolean }) => ({
+type stackPropsNew = StackProps & {
+	isborder: boolean;
+};
+const Wrap = styled(Stack)(({ isborder }: stackPropsNew) => ({
 	position: 'relative',
 	padding: '16px 16px 0px 16px',
 	// margin: "16px 0px",
@@ -225,7 +255,7 @@ const Wrap = styled(Stack)(({ isBorder }: { isBorder: boolean }) => ({
 		padding: '0px 16px 0px 16px',
 		margin: '16px 0px 16px 0px',
 	},
-	borderRight: isBorder ? '0.5px solid #E9EAEF' : '0',
+	borderRight: isborder ? '0.5px solid #E9EAEF' : '0',
 }));
 
 // const borderRadius = {

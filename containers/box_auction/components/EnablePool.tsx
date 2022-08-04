@@ -3,6 +3,7 @@ import { styled } from '@mui/styles';
 import React, { useState } from 'react';
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
 import { BoxAuction } from '../../../const';
+import { MARKETPLACE_ICON } from '../../../constants/marketplace';
 import { useWalletContext } from '../../../contexts/WalletContext';
 import { setApprovalForAll } from '../../../libs/burn';
 
@@ -13,11 +14,13 @@ type Props = {
 	handleClickSuccess: Function;
 	// setStateContentInit: Function;
 	stateContent: BoxAuction | null;
+	isApproved: boolean;
 };
 
 export const EnablePool = (props: Props) => {
-	const { setStateContent, stateContent, setIsLoading, handleClickSuccess, handleClickError } = props;
-	const { setToggleActivePopup, walletAccount, ethersSigner, ethersProvider, setRefresh, refresh } =
+	const { setStateContent, setIsLoading, handleClickSuccess, handleClickError, isApproved } = props;
+	const [error, setError] = useState<string>('')
+	const { setToggleActivePopup, walletAccount, ethersSigner, setRefresh, refresh } =
 		useWalletContext();
 
 	const handleApprove = async () => {
@@ -26,21 +29,43 @@ export const EnablePool = (props: Props) => {
 			const res = await setApprovalForAll(ethersSigner);
 			setIsLoading(false)
 			if (res?.status) {
+				setError("")
 				setRefresh(!refresh)
 				setStateContent(BoxAuction.AssetsEvent);
 			}
 		} catch (error: any) {
 			const message = error.reason || 'Something went wrong, please try again';
 			setIsLoading(false);
-			handleClickError({
-				titleError: message,
-				functionError: () => {
-					setStateContent(BoxAuction.EnablePool);
-				},
-				stateContentNew: BoxAuction.Error,
-			});
+			setError(message)
 		}
 	};
+	if (error) {
+		return <Box height={"100%"}>
+			<Box
+				sx={{
+					display: 'flex',
+					justifyContent: 'center',
+					flexDirection: 'column',
+					alignItems: 'center',
+					height: 'calc(100% - 56px)'
+				}}
+			>
+				<Box sx={{ textAlign: 'center' }}>
+					<Box>
+						<img src={MARKETPLACE_ICON.CLOSE_ICON} alt="" />
+					</Box>
+					<Typography fontSize={14} color="#31373E" fontWeight={500} mt="28px">
+						{error}
+					</Typography>
+				</Box>
+			</Box>
+			<MarketplaceButton
+				customStyle={{ width: '100%', mt: 'auto' }}
+				title={'Try again'}
+				handleOnClick={() => setError('')}
+			/>
+		</Box>
+	}
 	return (
 		<>
 			<ItemRow sx={{ mt: '0 !important' }}>
@@ -49,15 +74,15 @@ export const EnablePool = (props: Props) => {
 			</ItemRow>
 			<ItemRow>
 				<TitleItem>START TIME JOIN</TitleItem>
-				<ValueItem>16:00 UTC 19/07/2022</ValueItem>
+				<ValueItem>00:00 05/08/2022</ValueItem>
 			</ItemRow>
 			<ItemRow>
 				<TitleItem>End time JOIN</TitleItem>
-				<ValueItem>16:00 UTC 03/08/2022</ValueItem>
+				<ValueItem>00:00 10/08/2022</ValueItem>
 			</ItemRow>
 			<ItemRow>
 				<TitleItem>stake amount (min)</TitleItem>
-				<ValueItem>4000 FIU/1 person</ValueItem>
+				<ValueItem>-</ValueItem>
 			</ItemRow>
 			<ItemRow>
 				<TitleItem>stake amount (mAX)</TitleItem>
@@ -65,7 +90,7 @@ export const EnablePool = (props: Props) => {
 			</ItemRow>
 			<ItemRow>
 				<TitleItem>REWARD</TitleItem>
-				<ValueItem>Fitter Pass</ValueItem>
+				<ValueItem>Mystery Box</ValueItem>
 			</ItemRow>
 			<Box
 				mt="auto"
@@ -75,9 +100,9 @@ export const EnablePool = (props: Props) => {
 				{walletAccount ? (
 					<MarketplaceButton
 						customStyle={{ width: '100%' }}
-						title={stateContent ? 'Approved' : 'Approve'}
+						title={isApproved ? 'Approved' : 'Approve'}
 						handleOnClick={handleApprove}
-						disabled={stateContent ? true : false}
+						disabled={isApproved ? true : false}
 					/>
 				) : (
 					<MarketplaceButton

@@ -1,20 +1,48 @@
 import { Box, styled, Typography } from '@mui/material';
 import { BoxAuction } from '../../../const';
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
+import { useWalletContext } from '../../../contexts/WalletContext';
+import { register } from '../../../libs/burn';
+import { useState } from 'react';
+import { Error } from './Error';
+import { MARKETPLACE_ICON } from '../../../constants/marketplace';
 
 type Props = {
 	setStateContent: Function;
-	// setIsLoading: Function;
-	// handleClickError: Function;
+	setIsLoading: Function;
+	handleClickError: Function;
+	handleClickSuccess: Function;
 	// setStateContentInit: Function;
 	stateContent: BoxAuction | null;
+	balanceFT: string
 };
 
 export function AssetsEvent(props: Props) {
-	const { setStateContent, stateContent } = props;
-
+	const { setStateContent, handleClickError, setIsLoading, handleClickSuccess, balanceFT } = props;
+	const { ethersSigner, ethersProvider, setRefresh, refresh } = useWalletContext();
 	const handleConfirm = async () => {
-		setStateContent(BoxAuction.BurnAssets);
+		// setStateContent(BoxAuction.BurnAssets);
+		setIsLoading(true);
+		try {
+			const res = await register(ethersSigner);
+			setIsLoading(false)
+
+			if (res?.status) {
+				setRefresh(!refresh)
+				setStateContent(BoxAuction.BurnAssets);
+			}
+		} catch (error: any) {
+			const message = error.reason || 'Something went wrong, please try again';
+			setIsLoading(false);
+			handleClickError({
+				titleError: message,
+				functionError: () => {
+					setStateContent(BoxAuction.AssetsEvent);
+				},
+				stateContentNew: BoxAuction.Error,
+			});
+		}
+
 	};
 
 	return (
@@ -30,9 +58,13 @@ export function AssetsEvent(props: Props) {
 				borderLeft: '1px solid #E9EAEF',
 			}}
 		>
+
+
+
+
 			<Item sx={{ mt: '0 !important' }}>
 				<TitleItem>YOU CURRENT ASSETS</TitleItem>
-				<ValueItem>23 Fitter Passes</ValueItem>
+				<ValueItem>{balanceFT} Fitter Passes</ValueItem>
 			</Item>
 			<Box sx={{ textAlign: 'center', margin: '24px 0' }}>
 				<img src="images/Group-icon.svg" alt="" />
@@ -49,18 +81,33 @@ export function AssetsEvent(props: Props) {
 				<span style={{ color: '#FF6D24' }}>2 Fitter Passes</span> to participate
 				in this event
 			</Typography>
-			<Box
-				sx={{
-					color: '#4FD190',
-					display: 'flex',
-					justifyContent: 'center',
-					mt: '19px',
-					alignItems: 'center',
-				}}
-			>
-				<img src="images/tick-circle.svg" alt="" />
-				<span style={{ marginRight: '10px' }}>Eligible amount</span>
-			</Box>
+			{
+				parseInt(balanceFT) > 1 ?
+					<Box
+						sx={{
+							color: '#4FD190',
+							display: 'flex',
+							justifyContent: 'center',
+							mt: '19px',
+							alignItems: 'center',
+						}}
+					>
+						<img src="images/tick-circle.svg" alt="" />
+						<span style={{ marginLeft: '10px' }}>Eligible amount</span>
+					</Box> :
+					<Box
+						sx={{
+							color: '#FF6F61',
+							display: 'flex',
+							justifyContent: 'center',
+							mt: '19px',
+							alignItems: 'center',
+						}}
+					>
+						<img src={MARKETPLACE_ICON.CLOSE_ICON} width="30px" alt="" />
+						<span style={{ marginLeft: '10px' }}>Not adequate</span>
+					</Box>
+			}
 
 			<Box
 				mt="auto"
@@ -73,9 +120,11 @@ export function AssetsEvent(props: Props) {
 				<MarketplaceButton
 					customStyle={{ width: '100%' }}
 					title={'Confirm'}
+					disabled={parseInt(balanceFT) < 2}
 					handleOnClick={handleConfirm}
 				/>
 			</Box>
+
 		</Box>
 	);
 }

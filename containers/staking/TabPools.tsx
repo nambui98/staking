@@ -243,21 +243,13 @@ export const TabPools = () => {
 	return (
 		<Wrap>
 			<Container sx={{ maxWidth: 1120 }}>
-				{/* <Event href={''} > */}
-				<a onClick={() => {
-					toast('COMING SOON!', {
-						position: "top-center",
-						autoClose: 2000,
-						hideProgressBar: true,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-					});
-				}}>
-					<img src="assets/staking/bannerBurn.png" width={"100%"} alt="" />
-				</a>
-				{/* </Event> */}
+				<Event href={'/burn'} >
+					<a
+
+					>
+						<img src="assets/staking/bannerBurn.png" width={"100%"} alt="" />
+					</a>
+				</Event>
 				<Top sx={{ mt: 2 }}>
 					<BoxTabs value={tabCurrent}>
 						<TabItem

@@ -247,10 +247,11 @@ type Props = {
 	// handleClickError: Function;
 	// setStateContentInit: Function;
 	stateContent: BoxAuction | null;
+	numberBurned: string
 };
 
 export function Burned(props: Props) {
-	const { setStateContent, stateContent } = props;
+	const { setStateContent, stateContent, numberBurned } = props;
 
 	const [active, setActive] = useState<string>('top10');
 	const [page, setPage] = useState(0);
@@ -271,15 +272,20 @@ export function Burned(props: Props) {
 
 	return (
 		<Box sx={{ display: 'flex', borderLeft: '1px solid #E9EAEF' }}>
-			<Box sx={{ width: '372px', padding: '16px' }}>
+			<Box sx={{ width: '372px', padding: '16px', position: 'relative' }}>
+				<Box sx={{ position: 'absolute', inset: 0, backgroundColor: '#cacaca50', zIndex: 10, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+					<Typography variant="h3" color="#4d4b4b">Coming soon</Typography>
+				</Box>
 				<Box
 					sx={{
 						display: 'flex',
 						justifyContent: 'space-between',
 						mb: '10px',
+
 						// alignItems: 'center',
 					}}
 				>
+
 					<h3
 						style={{
 							color: '#FF6F61',
@@ -323,7 +329,7 @@ export function Burned(props: Props) {
 					</Box>{' '}
 				</Box>
 				{/* table */}
-				<Paper sx={{ width: '100%', overflow: 'hidden', boxShadow: 'none' }}>
+				{/* <Paper sx={{ width: '100%', overflow: 'hidden', boxShadow: 'none' }}>
 					<TableContainer sx={{ maxHeight: 308, border: 'none' }}>
 						<Table stickyHeader aria-label="sticky table">
 							<TableHead>
@@ -383,7 +389,7 @@ export function Burned(props: Props) {
 							</TableBody>
 						</Table>
 					</TableContainer>
-				</Paper>
+				</Paper> */}
 			</Box>
 			<Box sx={{ borderLeft: '1px solid #E9EAEF' }}>
 				<Box
@@ -400,11 +406,11 @@ export function Burned(props: Props) {
 				>
 					<Item sx={{ mt: '0 !important' }}>
 						<TitleItem>BURNED</TitleItem>
-						<ValueItem>23 Fitter Passes</ValueItem>
+						<ValueItem>{numberBurned} Fitter Passes</ValueItem>
 					</Item>
 					<Item sx={{ mt: '0 !important' }}>
 						<TitleItem>YOUR RANK</TitleItem>
-						<ValueItem>999</ValueItem>
+						<ValueItem>-</ValueItem>
 					</Item>
 					<Item sx={{ mt: '0 !important', mb: '8px' }}>
 						<TitleItem>PRIZE</TitleItem>
@@ -412,6 +418,7 @@ export function Burned(props: Props) {
 					</Item>
 					<ButtonCustom
 						isDisabled={true}
+						disabled
 						variant="text"
 						sx={{
 							width: '72px',
@@ -445,12 +452,13 @@ export function Burned(props: Props) {
 					</Item>
 					<Item sx={{ mt: '0 !important', mb: '8px' }}>
 						{/* <TitleItem>PRIZE</TitleItem> */}
-						<ValueItem>04:20 24 Jul 2022</ValueItem>
-						<ValueItem>Fitter Pass</ValueItem>
-						<ValueItem>1</ValueItem>
+						<ValueItem>-</ValueItem>
+						<ValueItem>-</ValueItem>
+						<ValueItem>-</ValueItem>
 					</Item>
 					<ButtonCustom
 						isDisabled={true}
+						disabled
 						variant="text"
 						sx={{
 							width: '72px',

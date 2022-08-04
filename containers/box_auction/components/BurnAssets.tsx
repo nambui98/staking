@@ -5,20 +5,48 @@ import { BoxAuction } from '../../../const';
 import ArrowUp from '../../staking/components/stakingLocked/icons/arrow_up.svg';
 import ArrowDown from '../../staking/components/stakingLocked/icons/arrow_down.svg';
 import { TEXT_STYLE } from '../../../styles/common/textStyles';
+import { addFitterPass } from '../../../libs/burn';
+import { useWalletContext } from '../../../contexts/WalletContext';
 type Props = {
 	setStateContent: Function;
-	// setIsLoading: Function;
-	// handleClickError: Function;
-	// setStateContentInit: Function;
+	setIsLoading: Function;
+	handleClickSuccess: Function;
+	handleClickError: Function;
 	stateContent: BoxAuction | null;
+	balanceFT: string
 };
 
 export function BurnAssets(props: Props) {
-	const { setStateContent, stateContent } = props;
-	let [count, setCount] = useState<number>(1);
+	const { setStateContent, stateContent, balanceFT, setIsLoading, handleClickSuccess, handleClickError } = props;
+	const { ethersSigner, ethersProvider, setRefresh, refresh } = useWalletContext();
+	const [burnNumber, setBurnNumber] = useState<number>(1);
+	const handleConfirm = async () => {
 
-	const handleEnable = () => {
-		setStateContent(BoxAuction.Burned);
+		setIsLoading(true);
+		try {
+			const res = await addFitterPass(burnNumber, ethersSigner);
+			setIsLoading(false)
+			if (res?.status) {
+				setRefresh(!refresh)
+				handleClickSuccess({
+					titleSuccess: 'Confirmed successfully!',
+					functionSuccess: () => {
+						setStateContent(BoxAuction.Burned);
+					},
+					stateContentNew: BoxAuction.Success,
+				});
+			}
+		} catch (error: any) {
+			const message = error.reason || 'Something went wrong, please try again';
+			setIsLoading(false);
+			handleClickError({
+				titleError: message,
+				functionError: () => {
+					setStateContent(BoxAuction.BurnAssets);
+				},
+				stateContentNew: BoxAuction.Error,
+			});
+		}
 	};
 
 	return (
@@ -37,7 +65,7 @@ export function BurnAssets(props: Props) {
 		>
 			<Item sx={{ mt: '0 !important' }}>
 				<TitleItem>YOU CURRENT ASSETS</TitleItem>
-				<ValueItem fontWeight={'600 !important'}>23 Fitter Passes</ValueItem>
+				<ValueItem fontWeight={'600 !important'}>{balanceFT} Fitter Passes</ValueItem>
 			</Item>
 			<Box
 				sx={{
@@ -58,7 +86,7 @@ export function BurnAssets(props: Props) {
 				<Box>
 
 					<ValueItem sx={{ pointerEvents: "none" }}>
-						<InputCustom value={1} placeholder="" />
+						<InputCustom value={burnNumber} placeholder="" />
 					</ValueItem>
 					<ButtonCustom
 						sx={{
@@ -70,16 +98,17 @@ export function BurnAssets(props: Props) {
 							fontSize: "12px"
 						}}
 						variant="text"
+						onClick={() => setBurnNumber(parseInt(balanceFT))}
 					>
 						All
 					</ButtonCustom>
 				</Box>
 
 				<Box sx={{ marginLeft: '8px' }}>
-					<ButtonCustom variant="text" >
+					<ButtonCustom variant="text" disabled={burnNumber === parseInt(balanceFT)} onClick={() => setBurnNumber((preV) => (preV = preV > parseInt(balanceFT) - 1 ? parseInt(balanceFT) : (preV += 1)))}>
 						<ArrowUp />
 					</ButtonCustom>
-					<ButtonCustom variant="text" sx={{ mt: "2px" }} >
+					<ButtonCustom variant="text" disabled={burnNumber === 1} onClick={() => setBurnNumber((preV) => (preV = preV < 2 ? 1 : (preV -= 1)))} sx={{ mt: "2px" }} >
 						<ArrowDown />
 					</ButtonCustom>
 				</Box>
@@ -113,7 +142,7 @@ export function BurnAssets(props: Props) {
 				<MarketplaceButton
 					customStyle={{ width: '100%' }}
 					title={'Confirm'}
-					handleOnClick={handleEnable}
+					handleOnClick={handleConfirm}
 				/>
 			</Box>
 		</Box>

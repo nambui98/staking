@@ -4,17 +4,17 @@ import { changeNetwork, useWalletContext } from '../../contexts/WalletContext';
 import { balanceOf, getBalanceFP, getNumberOfFP, isApprovedForAll, isRegistered } from '../burn';
 type Props = {
 	setIsLoading: Function;
-	setStateContentInit: Function
 };
 
 export default function userBurnHook(props: Props) {
-	const { setIsLoading, setStateContentInit } = props;
+	const { setIsLoading } = props;
 
 	const [totalStake, setTotalStake] = useState('');
 	const [balanceFT, setBalanceFT] = useState('');
 	const [numberBurned, setNumberBurned] = useState('');
 	const [statusRow, setStatusRow] = useState('-');
-	const [isEnable, setIsEnable] = useState<boolean>(false);
+	const [isApproved, setIsApproved] = useState<boolean>(false);
+	const [isRegister, setIsRegister] = useState<boolean>(false);
 	const {
 		walletAccount,
 		ethersSigner,
@@ -32,10 +32,12 @@ export default function userBurnHook(props: Props) {
 				walletAccount,
 				ethersSigner
 			);
+			debugger
 			if (isApproved) {
-				setIsEnable(true);
+				setIsApproved(true);
 			} else {
-				setIsEnable(false);
+				setIsRegister(false);
+				setIsApproved(false);
 			}
 		}
 	};
@@ -50,10 +52,12 @@ export default function userBurnHook(props: Props) {
 			);
 			if (checkIsRegistered) {
 				setStatusRow('Joined')
-				setStateContentInit(BoxAuction.BurnAssets)
+				setIsRegister(true)
+				// setStateContentInit(BoxAuction.BurnAssets)
 			} else {
-				setStateContentInit(BoxAuction.AssetsEvent)
-				setStatusRow('Not join yet')
+				setIsRegister(false)
+				// setStateContentInit(BoxAuction.AssetsEvent)
+				setStatusRow('-')
 			}
 		}
 	};
@@ -110,7 +114,8 @@ export default function userBurnHook(props: Props) {
 		totalStake,
 		balanceFT,
 		numberBurned,
-		isEnable,
-		statusRow
+		isApproved,
+		statusRow,
+		isRegister
 	}
 }

@@ -1,17 +1,17 @@
 import bfBox from '../abi/BeFitterBox.json';
 import bfClaimBox from '../abi/BeFitterClaim.json';
 import bfHeeToken from '../abi/BFHeeToken.json';
-import bfFiuToken from '../abi/BeFITTERToken.json';
+import bfFiuToken from '../abi/BeFITTERToken_testnet.json';
 import bfShoeItem from '../abi/BFShoeItem.json';
 import bfBusdToken from '../abi/BeFitterBusd.json';
 import bfShop from '../abi/BeFitterShop.json';
 import bfWallet from '../abi/BeFitterWallet.json'
-import beFITTERTokenStaking from '../abi/BeFITTERToken.json';
-import beFitterPass from '../abi/BeFitterPass.json';
-import beFitterStake from '../abi/BeFitterStaking.json';
+import beFITTERTokenStaking from '../abi/BeFITTERToken_testnet.json';
+import beFitterPass from '../abi/BeFitterPass_testnet.json';
+import beFitterStake from '../abi/BeFitterStaking_testnet.json';
 import bfClaimToken from '../abi/BeFitterClaimFiu.json';
 //dev
-import bflockedPool from '../abi/FitterPassLockedPool.json';
+import bflockedPool from '../abi/FitterPassLockedPool_testnet.json';
 import bfBurningEvent from '../abi/FitterPassBurningEvent_testnet.json';
 
 //dev
@@ -62,12 +62,12 @@ const addresses: Map = {
 		bFclaimAlphaBeta: '0xcd229a4e1140cf045bA9f3c1287B62cAe4aFA549',
 		bFclaimOther: '0xb01F92dd643B366686AAa856b9634E3F6799Fe2A',
 		beFITTERTokenStaking: '0x1E8Ac4d341419eD887063B5baF62b772616D96Bf',
-		beFITTERPassStaking: '0xB755307Cc0577fD96A9b12D777651A42664030b9',
+		beFITTERPassStaking: '0x67b3B7c43E9Cb58B68151b3D5498176061C11A88',
 		beFITTERStakeStaking: '0x43832e1a628e91CaFAE75ff1EB70BbF3478e27B3',
 		bFclaimAlphaBeta2: '0x80F2086a0De59eF239D6F97ac2138496AE1181e2',
 		bFclaimToken: '0xA1eDA0aBA0175050E0c123fc8E531B4b7526e0de',
 		beFITTERlockedPool: '0x965BB192F76fa788044BCBb54E8015A587dDe366',
-		beFITTERBurningEvent: '0xeF543Bb344B1d954ee2e1c52EE7a5f0260bc7c25',
+		beFITTERBurningEvent: '0x42Da8c061b473c5C8E865C3a54e7127eA27C3587',
 
 	},
 	['deployment']: { // bscTestnet
@@ -93,7 +93,7 @@ const addresses: Map = {
 	},
 }
 const addressKey = process.env.NEXT_PUBLIC_ADDRESS || 'deployment';
-const address = addresses['prod'];
+const address = addresses['dev'];
 
 // export const bftBox = { address: address.bFBox, abi: bfBox.abi}
 // export const bftClaimGamefi = { address: address.bFclaimBoxGamefi, abi: bfClaimBox.abi }
