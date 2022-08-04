@@ -126,7 +126,7 @@ export function BurnAssets(props: Props) {
 						marginLeft: '10px',
 					}}
 				>
-					The amount you spent decides your rank compared to others. The higher
+					The amount you spent decides your rank compared to others. <br />The higher
 					the rank is, the higher the probability of winning good prize.{' '}
 				</span>
 			</Box>
