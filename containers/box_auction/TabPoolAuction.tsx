@@ -268,7 +268,7 @@ export const TabPoolAuction = () => {
 													<Item align="left">
 														Total in pool
 														<Box sx={{ textTransform: 'none' }}>
-															{formatMoney(item.data.total)} Fitter Pass
+															{formatMoney(item.data.total)} Fitter Passes
 														</Box>
 													</Item>
 												</TableRow>
