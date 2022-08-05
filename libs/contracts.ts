@@ -1,18 +1,18 @@
 import bfBox from '../abi/BeFitterBox.json';
 import bfClaimBox from '../abi/BeFitterClaim.json';
 import bfHeeToken from '../abi/BFHeeToken.json';
-import bfFiuToken from '../abi/BeFITTERToken_testnet.json';
+import bfFiuToken from '../abi/BeFITTERToken.json';
 import bfShoeItem from '../abi/BFShoeItem.json';
 import bfBusdToken from '../abi/BeFitterBusd.json';
 import bfShop from '../abi/BeFitterShop.json';
 import bfWallet from '../abi/BeFitterWallet.json'
-import beFITTERTokenStaking from '../abi/BeFITTERToken_testnet.json';
-import beFitterPass from '../abi/BeFitterPass_testnet.json';
-import beFitterStake from '../abi/BeFitterStaking_testnet.json';
+import beFITTERTokenStaking from '../abi/BeFITTERToken.json';
+import beFitterPass from '../abi/BeFitterPass.json';
+import beFitterStake from '../abi/BeFitterStaking.json';
 import bfClaimToken from '../abi/BeFitterClaimFiu.json';
 //dev
-import bflockedPool from '../abi/FitterPassLockedPool_testnet.json';
-import bfBurningEvent from '../abi/FitterPassBurningEvent_testnet.json';
+import bflockedPool from '../abi/FitterPassLockedPool.json';
+import bfBurningEvent from '../abi/FitterPassBurningEvent.json';
 
 //dev
 import bfBoxDev from '../abiDev/BeFitterBox.json';
@@ -47,7 +47,7 @@ const addresses: Map = {
 		bFclaimAlphaBeta2: '0x80F2086a0De59eF239D6F97ac2138496AE1181e2',
 		bFclaimToken: '0xA1eDA0aBA0175050E0c123fc8E531B4b7526e0de',
 		beFITTERlockedPool: '0x201D5542386B3fC5fC90c51dd43e44B4638FF15c',
-		beFITTERBurningEvent: '0xeF543Bb344B1d954ee2e1c52EE7a5f0260bc7c25',
+		beFITTERBurningEvent: '0xB8a7874946355E4012fA04381dC51Fe85FC01d7a',
 		bFclaimTokenAirdrop: '0xb77b00AEEF5631362aC3cA8dE6bD70Cc412452Dd'
 	},
 	['dev']: {
@@ -94,7 +94,7 @@ const addresses: Map = {
 	},
 }
 const addressKey = process.env.NEXT_PUBLIC_ADDRESS || 'deployment';
-const address = addresses['dev'];
+const address = addresses['prod'];
 
 // export const bftBox = { address: address.bFBox, abi: bfBox.abi}
 // export const bftClaimGamefi = { address: address.bFclaimBoxGamefi, abi: bfClaimBox.abi }
