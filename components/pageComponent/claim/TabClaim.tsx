@@ -56,6 +56,7 @@ export const TabClaim = () => {
 
   const checkStatusButton = () => {
     if (dataClaim.totalBox > dataClaim.claimed && captchaToken.length && roundSelected.length && checkClaimed) {
+      
       return true
     }
     return false;
@@ -93,11 +94,14 @@ export const TabClaim = () => {
       const res: any = await ClaimService.getAmount((walletAccount.toLowerCase()), captchaToken, roundSelected, false);
       const dataLockedOf = await getLockedOf(walletAccount, ethersSigner, roundSelected === '5' ? bftClaimToken.address : bftClaimTokenAirdrop.address)
       const dataCheckClaimed = await checkClaimedToken(walletAccount, ethersSigner, roundSelected === '5' ? bftClaimToken.address : bftClaimTokenAirdrop.address)
-      console.log(parseFloat(ethers.utils.formatEther(dataLockedOf)), 123)
       if(parseFloat(ethers.utils.formatEther(dataLockedOf)) === 0){
         setCheckClaimed(true)
       } else {
-        parseInt(ethers.utils.formatEther(dataCheckClaimed)) > 0 ? setCheckClaimed(true) : setCheckClaimed(false)
+        if(parseInt(ethers.utils.formatEther(dataCheckClaimed)) > 0){
+          setCheckClaimed(true)
+        } else {
+          setCheckClaimed(false)
+        }
       }
       if (res?.data?.status) {
         const dataClaimed = await getClaimedToken(walletAccount, ethersSigner, roundSelected === '5' ? bftClaimToken.address : bftClaimTokenAirdrop.address)
