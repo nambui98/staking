@@ -85,8 +85,14 @@ export function BurnAssets(props: Props) {
 			>
 				<Box>
 
-					<ValueItem sx={{ pointerEvents: "none" }}>
-						<InputCustom value={burnNumber} placeholder="" />
+					<ValueItem>
+						<InputCustom type="number" inputProps={{ min: 4, max: 10 }} value={burnNumber} onChange={(e) => {
+							if (parseInt(e.target.value) > parseInt(balanceFT)) {
+								setBurnNumber(parseInt(balanceFT));
+							} else {
+								setBurnNumber(parseInt(e.target.value))
+							}
+						}} placeholder="" />
 					</ValueItem>
 					<ButtonCustom
 						sx={{
@@ -207,6 +213,12 @@ const InputCustom = styled(TextField)({
 		padding: 0,
 		textAlign: 'right',
 		...TEXT_STYLE(12, 500, '#31373E'),
+		'&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
+			// webkitAppearance: 'none',
+			' -webkit-appearance': 'none',
+			//  - webkit - appearance: none;
+			margin: 0
+		}
 	},
 	'& fieldset': { display: 'none' },
 	'@media (max-width: 767px)': {
