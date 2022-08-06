@@ -103,7 +103,7 @@ export function Burned(props: Props) {
 	const getData = useCallback(
 		() => {
 			axios.get(
-				`https://leaderboard.befitter.io/fitter/leaderboard?limit=${limit}&offset=0`, {
+				`https://leaderboard.befitter.io/fitter/leaderboard?limit=${limit===50?40:10}&offset=${limit===50?10:0}`, {
 				headers: {
 					"Content-Type": "application/json"
 				}
@@ -137,6 +137,16 @@ export function Burned(props: Props) {
 		setStateContent(BoxAuction.BurnAssets);
 	};
 	const isMobile = useMediaQuery('(max-width: 767px)');
+
+	const getPize=(value:number)=>{
+		if(value<11){
+			return <img src="assets/box-diamond-small.png" alt="box" />
+		}
+		if(value <51){
+			return	<img src="assets/box-gold-small.png" alt="box" />
+		}
+		return '-'
+	}
 	return (
 		<Box sx={{ display: 'flex', flexDirection:isMobile?'column':'row', flex:1, borderLeft:isMobile?0: '1px solid #E9EAEF' }}>
 			<Box sx={{ width: isMobile?'auto':'372px', padding:isMobile?'16px 0': '16px' }}>
@@ -214,7 +224,7 @@ export function Burned(props: Props) {
 								</TableRow>
 							</TableHead>
 							<TableBody>
-								{dataLeaderBoard && (limit===10? dataLeaderBoard: (dataLeaderBoard.length>10? dataLeaderBoard.slice(11, dataLeaderBoard.length):null) )?.map((row) => {
+								{dataLeaderBoard && dataLeaderBoard?.map((row) => {
 									return (
 										<TableRow
 											hover
@@ -236,7 +246,8 @@ export function Burned(props: Props) {
 															fontFamily: 'BeVietNamPro',
 														}}
 													>
-														<img src="images/box.svg" alt="box" />
+														{row.rank?getPize(parseInt(row.rank)):'-'}
+														{/* <img src="images/box.svg" alt="box" /> */}
 													</TableCell>
 												}
 												const value = row[column.id];
@@ -282,15 +293,15 @@ export function Burned(props: Props) {
 				>
 					<Item sx={{ mt: '0 !important' }}>
 						<TitleItem>BURNED</TitleItem>
-						<ValueItem>{dataMe?.amount} Fitter Passes</ValueItem>
+						<ValueItem>{dataMe?.amount??0} Fitter Passes</ValueItem>
 					</Item>
 					<Item sx={{ mt: '0 !important' }}>
 						<TitleItem>YOUR RANK</TitleItem>
-						<ValueItem>{dataMe?.rank}</ValueItem>
+						<ValueItem>{dataMe?.rank??'-'}</ValueItem>
 					</Item>
 					<Item sx={{ mt: '0 !important', mb: '8px' }}>
 						<TitleItem>PRIZE</TitleItem>
-						<ValueItem>-</ValueItem>
+						<ValueItem>{dataMe?.rank?getPize(parseInt(dataMe?.rank)):'-'}</ValueItem>
 					</Item>
 					<ButtonCustom
 						isDisabled={true}
