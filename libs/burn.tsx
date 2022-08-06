@@ -11,26 +11,21 @@ export const setApprovalForAll = async (ethersSigner: any) => {
 export const isApprovedForAll = async (walletAccount: any, ethersSigner: any) => {
 	const beFITTERPassStakingContract = new ethers.Contract(beFITTERPassStaking.address, beFITTERPassStaking.abi, ethersSigner);
 	const data = await beFITTERPassStakingContract.isApprovedForAll(walletAccount, beFITTERBurningEvent.address);
-	debugger
 	return data
 };
 export const register = async (ethersSigner: any) => {
 	const beFITTERBurningEventContract = new ethers.Contract(beFITTERBurningEvent.address, beFITTERBurningEvent.abi, ethersSigner);
-	debugger
 	const data = await beFITTERBurningEventContract.register();
-	debugger
 	return data.wait();
 };
 export const isRegistered = async (walletAccount: any, ethersSigner: any) => {
 	const beFITTERBurningEventContract = new ethers.Contract(beFITTERBurningEvent.address, beFITTERBurningEvent.abi, ethersSigner);
 	const data = await beFITTERBurningEventContract.isRegistered(walletAccount);
-	debugger
 	return data
 };
 export const addFitterPass = async (value: number, ethersSigner: any) => {
 	const beFITTERBurningEventContract = new ethers.Contract(beFITTERBurningEvent.address, beFITTERBurningEvent.abi, ethersSigner);
 	const data = await beFITTERBurningEventContract.addFitterPass(value);
-	debugger
 	return data.wait();
 };
 
@@ -72,7 +67,6 @@ export const addFitterPass = async (value: number, ethersSigner: any) => {
 export const balanceOf = async (ethersSigner: any) => {
 	const beFITTERPassStakingContract = new ethers.Contract(beFITTERPassStaking.address, beFITTERPassStaking.abi, ethersSigner);
 	const balance = await beFITTERPassStakingContract.balanceOf(beFITTERBurningEvent.address, 0)
-	debugger
 	return ethers.utils.formatUnits(balance, 'wei')
 }
 export const getBalanceFP = async (walletAccount: any, ethersSigner: any) => {

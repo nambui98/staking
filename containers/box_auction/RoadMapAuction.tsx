@@ -24,7 +24,7 @@ export const RoadMapAuction = () => {
 
 	return (
 		<Wrap>
-			<Container sx={{ width: 1120 }}>
+			<Container sx={{ maxWidth: 1120 }}>
 				<Inner>
 					<Title>Road map</Title>
 					<Swiper

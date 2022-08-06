@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/styles';
 import React, { useState } from 'react';
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
@@ -15,20 +15,23 @@ type Props = {
 
 export const Error = (props: Props) => {
 	const { error } = props;
+	const isMobile = useMediaQuery('(max-width: 767px)');
+
 	const handleTryAgain = () => {
 		error.functionError();
 	};
 	return (
 		<Box
 			sx={{
+				height: '375px',
 				'@media (min-width: 650px)': {
 					width: '422px',
-					height: '375px',
+			
 					padding: '16px',
 				},
 				display: 'flex',
 				flexDirection: 'column',
-				borderLeft: '1px solid #E9EAEF',
+				borderLeft:isMobile?0: '1px solid #E9EAEF',
 			}}
 		>
 

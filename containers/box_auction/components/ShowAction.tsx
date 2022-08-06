@@ -136,12 +136,17 @@ export const ShowAction: React.FC<IProps> = ({
 		handleClickSuccess,
 		handleClickError,
 	};
+	
 	return (
 		<Box>
 			<Box
 				sx={{
 					backgroundColor: '#FFFFFF',
 					display: 'flex',
+					'@media (max-width: 767px)': {
+						flexDirection:"column"
+
+					},
 				}}
 			>
 				<Wrap isborder={stateContent === null}>
@@ -150,6 +155,8 @@ export const ShowAction: React.FC<IProps> = ({
 						isApproved={isApproved}
 					/>
 				</Wrap>
+				<Wrap isborder={false} sx={{flex:1}}>
+
 				{stateContent === BoxAuction.AssetsEvent ? (
 					<AssetsEvent
 						{...propsPass}
@@ -173,6 +180,7 @@ export const ShowAction: React.FC<IProps> = ({
 				) : (
 					<Box></Box>
 				)}
+				</Wrap>
 			</Box>
 			<Backdrop
 				sx={{ color: '#FF6D24', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -241,14 +249,15 @@ type stackPropsNew = StackProps & {
 const Wrap = styled(Stack)(({ isborder }: stackPropsNew) => ({
 	position: 'relative',
 	padding: '16px 16px 0px 16px',
+
 	// margin: "16px 0px",
 	overflowY: 'auto',
 	overflowX: 'hidden',
-	width: 'calc(100vw - 32px)',
-	height: 'calc(100vh - 32px)',
+	// width: 'calc(100vw - 32px)',
+	// height: 'calc(100vh - 32px)',
 	'@media (min-width: 650px)': {
 		width: '422px',
-		height: '375px',
+		height: '450px',
 		padding: '16px',
 	},
 	'@media (max-width: 650px)': {

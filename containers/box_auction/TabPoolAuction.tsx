@@ -159,7 +159,7 @@ export const TabPoolAuction = () => {
 					<ItemHowItWord>
 						<Typography mb={1}>4.</Typography>
 						<Typography mb={1} ml={1}>
-							Event takes place in 5 days ( Aug 5 - Aug 10)
+							Event takes place in 5 days ( Aug 06 - Aug 12)
 						</Typography>
 					</ItemHowItWord>
 					<ItemHowItWord>
@@ -191,7 +191,7 @@ export const TabPoolAuction = () => {
 
 	return (
 		<Wrap>
-			<Container sx={{ width: 1120 }}>
+			<Container sx={{ maxWidth: 1120 }}>
 				<Top>
 					<BoxTabs value={tabCurrent}>
 						<TabItem
@@ -219,13 +219,21 @@ export const TabPoolAuction = () => {
 				<Body>
 					<Box sx={{ overflowX: 'auto', borderRadius: '16px' }}>
 
-						<Accordion onChange={() => { }}>
+						<Accordion  onChange={() => { }}>
 							{rows.map((item, index) => {
 								return (
 									<AccordionSummary
 										aria-controls="panel1d-content"
 										id="panel1d-header"
 										key={index}
+										sx={{ overflowX: 'auto',
+										'@media (max-width: 767px)': {
+											// width: '0px',
+											' .MuiAccordionSummary-content': {
+												width: '0px',
+										
+											},
+										},}}
 									>
 
 										<Table>

@@ -74,11 +74,11 @@ export const EnablePool = (props: Props) => {
 			</ItemRow>
 			<ItemRow>
 				<TitleItem>START TIME JOIN</TitleItem>
-				<ValueItem>00:00 05/08/2022</ValueItem>
+				<ValueItem>09:00 06/08/2022</ValueItem>
 			</ItemRow>
 			<ItemRow>
 				<TitleItem>End time JOIN</TitleItem>
-				<ValueItem>00:00 10/08/2022</ValueItem>
+				<ValueItem>09:00 12/08/2022</ValueItem>
 			</ItemRow>
 			<ItemRow>
 				<TitleItem>stake amount (min)</TitleItem>

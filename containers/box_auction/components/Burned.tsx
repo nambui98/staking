@@ -1,4 +1,4 @@
-import { Box, Button, ButtonProps, styled, Typography } from '@mui/material';
+import { Box, Button, ButtonProps, styled, Typography, useMediaQuery } from '@mui/material';
 import { useState, ChangeEvent, useEffect, useCallback } from 'react';
 import { BoxAuction } from '../../../const';
 
@@ -93,7 +93,7 @@ export function Burned(props: Props) {
 			}
 			).then((res) => {
 				if (res.status === 200) {
-					debugger
+					
 					setDataMe(res.data.data);
 				}
 			})
@@ -130,16 +130,16 @@ export function Burned(props: Props) {
 
 	const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
 		setRowsPerPage(+event.target.value);
-		setPage(0);
+		setPage(0);  
 	};
 
 	const handleEnable = () => {
 		setStateContent(BoxAuction.BurnAssets);
 	};
-
+	const isMobile = useMediaQuery('(max-width: 767px)');
 	return (
-		<Box sx={{ display: 'flex', borderLeft: '1px solid #E9EAEF' }}>
-			<Box sx={{ width: '372px', padding: '16px' }}>
+		<Box sx={{ display: 'flex', flexDirection:isMobile?'column':'row', flex:1, borderLeft:isMobile?0: '1px solid #E9EAEF' }}>
+			<Box sx={{ width: isMobile?'auto':'372px', padding:isMobile?'16px 0': '16px' }}>
 				<Box
 					sx={{
 						display: 'flex',
@@ -214,7 +214,7 @@ export function Burned(props: Props) {
 								</TableRow>
 							</TableHead>
 							<TableBody>
-								{dataLeaderBoard && dataLeaderBoard?.map((row) => {
+								{dataLeaderBoard && (limit===10? dataLeaderBoard: (dataLeaderBoard.length>10? dataLeaderBoard.slice(11, dataLeaderBoard.length):null) )?.map((row) => {
 									return (
 										<TableRow
 											hover
@@ -267,7 +267,7 @@ export function Burned(props: Props) {
 					</TableContainer>
 				</Paper>
 			</Box>
-			<Box sx={{ borderLeft: '1px solid #E9EAEF' }}>
+			<Box sx={{ borderLeft:isMobile?'0px' : '1px solid #E9EAEF' }}>
 				<Box
 					sx={{
 						'@media (min-width: 650px)': {
@@ -277,7 +277,7 @@ export function Burned(props: Props) {
 						},
 						display: 'flex',
 						flexDirection: 'column',
-						borderBottom: '1px solid #E9EAEF',
+						borderBottom:isMobile?0: '1px solid #E9EAEF'
 					}}
 				>
 					<Item sx={{ mt: '0 !important' }}>
@@ -315,6 +315,7 @@ export function Burned(props: Props) {
 						},
 						display: 'flex',
 						flexDirection: 'column',
+						paddingBottom:"16px",
 						borderBottom: '1px solid #E9EAEF',
 					}}
 				>
@@ -345,7 +346,7 @@ export function Burned(props: Props) {
 						CLAIM
 					</ButtonCustom>
 				</Box>
-				<Box sx={{ padding: '16px' }}>
+				<Box sx={{ padding: '16px 16px 0 16px', mt:"auto" }}>
 					<MarketplaceButton
 						customStyle={{ width: '100%' }}
 						title={'BURN MORE'}

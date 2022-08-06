@@ -18,7 +18,7 @@ export const formatMoney = (number: string, fixed?: number) => {
 	console.log(number[number.length - 1]);
 	var newValue = number;
 	if (newValue[newValue.length - 1] === '.') {
-		debugger
+		// debugger
 		newValue = parseFloat(newValue).toFixed(1)
 	}
 	console.log(parseFloat(newValue));

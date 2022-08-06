@@ -1,4 +1,4 @@
-import { Box, styled, Typography } from '@mui/material';
+import { Box, styled, Typography, useMediaQuery } from '@mui/material';
 import { BoxAuction } from '../../../const';
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
 import { useWalletContext } from '../../../contexts/WalletContext';
@@ -44,7 +44,7 @@ export function AssetsEvent(props: Props) {
 		}
 
 	};
-
+	const isMobile = useMediaQuery('(max-width: 767px)');
 	return (
 		<Box
 			sx={{
@@ -55,7 +55,7 @@ export function AssetsEvent(props: Props) {
 				},
 				display: 'flex',
 				flexDirection: 'column',
-				borderLeft: '1px solid #E9EAEF',
+				borderLeft:isMobile?0: '1px solid #E9EAEF',
 			}}
 		>
 

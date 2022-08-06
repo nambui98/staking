@@ -1,4 +1,4 @@
-import { Box, styled, Typography, Button, InputBase, TextField } from '@mui/material';
+import { Box, styled, Typography, Button, InputBase, TextField, useMediaQuery } from '@mui/material';
 import { useState, useRef } from 'react';
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
 import { BoxAuction } from '../../../const';
@@ -21,46 +21,48 @@ export function BurnAssets(props: Props) {
 	const { ethersSigner, ethersProvider, setRefresh, refresh } = useWalletContext();
 	const [burnNumber, setBurnNumber] = useState<number>(1);
 	const handleConfirm = async () => {
-
-		setIsLoading(true);
-		try {
-			const res = await addFitterPass(burnNumber, ethersSigner);
-			setIsLoading(false)
-			if (res?.status) {
-				setRefresh(!refresh)
-				handleClickSuccess({
-					titleSuccess: 'Confirmed successfully!',
-					functionSuccess: () => {
-						setStateContent(BoxAuction.Burned);
-					},
-					stateContentNew: BoxAuction.Success,
-				});
-			}
-		} catch (error: any) {
-			const message = error.reason || 'Something went wrong, please try again';
-			setIsLoading(false);
-			handleClickError({
-				titleError: message,
-				functionError: () => {
-					setStateContent(BoxAuction.BurnAssets);
-				},
-				stateContentNew: BoxAuction.Error,
-			});
-		}
+		setStateContent(BoxAuction.Burned);
+		// setIsLoading(true);
+		// try {
+		// 	const res = await addFitterPass(burnNumber, ethersSigner);
+		// 	setIsLoading(false)
+		// 	if (res?.status) {
+		// 		setRefresh(!refresh)
+		// 		handleClickSuccess({
+		// 			titleSuccess: 'Confirmed successfully!',
+		// 			functionSuccess: () => {
+		// 				setStateContent(BoxAuction.Burned);
+		// 			},
+		// 			stateContentNew: BoxAuction.Success,
+		// 		});
+		// 	}
+		// } catch (error: any) {
+		// 	const message = error.reason || 'Something went wrong, please try again';
+		// 	setIsLoading(false);
+		// 	handleClickError({
+		// 		titleError: message,
+		// 		functionError: () => {
+		// 			setStateContent(BoxAuction.BurnAssets);
+		// 		},
+		// 		stateContentNew: BoxAuction.Error,
+		// 	});
+		// }
 	};
+	const isMobile = useMediaQuery('(max-width: 767px)');
 
 	return (
 		<Box
 			sx={{
 				'@media (min-width: 650px)': {
 					width: '422px',
-					height: '375px',
-					padding: '16px',
+					height: '100%',
+					padding: '0 16px',
 				},
 				display: 'flex',
 				flexDirection: 'column',
 				fontFamily: 'BeVietnamPro',
-				borderLeft: '1px solid #E9EAEF',
+				// borderLeft: '1px solid #E9EAEF',
+				borderLeft:isMobile?0: '1px solid #E9EAEF',
 			}}
 		>
 			<Item sx={{ mt: '0 !important' }}>
@@ -86,12 +88,19 @@ export function BurnAssets(props: Props) {
 				<Box>
 
 					<ValueItem>
-						<InputCustom type="number" inputProps={{ min: 4, max: 10 }} value={burnNumber} onChange={(e) => {
+						<InputCustom type="number"  inputProps={{ min: 4, max: 10 }} value={burnNumber}  onChange={(e) => {
 							if (parseInt(e.target.value) > parseInt(balanceFT)) {
 								setBurnNumber(parseInt(balanceFT));
-							} else {
+							} else  if(parseInt(e.target.value)<1 || e.target.value.trim()==='') {
+								setBurnNumber(1)
+							}else{
+
 								setBurnNumber(parseInt(e.target.value))
 							}
+							// if (parseInt(e.target.value) > parseInt(balanceFT)) {
+							// 	setBurnNumber(parseInt(balanceFT));
+							// } else {
+							// }
 						}} placeholder="" />
 					</ValueItem>
 					<ButtonCustom
@@ -147,6 +156,7 @@ export function BurnAssets(props: Props) {
 			>
 				<MarketplaceButton
 					customStyle={{ width: '100%' }}
+					disabled={burnNumber?false:true}
 					title={'Confirm'}
 					handleOnClick={handleConfirm}
 				/>
@@ -224,7 +234,7 @@ const InputCustom = styled(TextField)({
 	'@media (max-width: 767px)': {
 		width: '100%',
 		'& .MuiOutlinedInput-root': {
-			width: '100%',
+			width: '100px',
 			height: 35,
 		},
 	},

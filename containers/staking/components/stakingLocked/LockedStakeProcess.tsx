@@ -60,7 +60,6 @@ export const LockedStakeProcess = ({
 
 		let maxP = Math.ceil(configStakingLocked.maxEarningPass / configStakingLocked.valueEstimated);
 		let ret = Math.ceil(maxP / blockNum);
-		debugger
 		return Math.max(ret, configStakingLocked.minLockedTime);
 	}
 	const handleApprove = async () => {
@@ -68,7 +67,6 @@ export const LockedStakeProcess = ({
 		setIsLoading(true);
 		try {
 			const day = getMinimalStakingTime();
-			debugger
 			setLockDurationSuggest(0)
 			setLockDurationError(false);
 			if (day >= lockDuration) {
@@ -102,7 +100,6 @@ export const LockedStakeProcess = ({
 		setIsLoading(true);
 		try {
 			const res = await stakeLocked(blockNum.toString(), lockDuration.toString(), ethersSigner);
-			debugger
 			setIsLoading(false)
 			if (res?.status) {
 				setRefresh(!refresh)
@@ -117,7 +114,6 @@ export const LockedStakeProcess = ({
 		} catch (error: any) {
 			// setStatus(0);
 			const message = error.reason || 'Something went wrong, please try again';
-			debugger
 			setIsLoading(false);
 			handleClickError({
 				titleError: message,

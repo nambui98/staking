@@ -32,7 +32,7 @@ export default function userBurnHook(props: Props) {
 				walletAccount,
 				ethersSigner
 			);
-			debugger
+			
 			if (isApproved) {
 				setIsApproved(true);
 			} else {
@@ -114,7 +114,7 @@ export default function userBurnHook(props: Props) {
 	useEffect(() => {
 		totalStakeGet();
 		getAll();
-		debugger
+		
 	}, [walletAccount, refresh, ethersSigner]);
 
 	return {

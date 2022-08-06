@@ -49,7 +49,6 @@ export const WithDraw = (props: Props) => {
 				});
 			}
 		} catch (error: any) {
-			debugger
 			const message =
 				error.reason || 'Something went wrong, please try again';
 			setIsLoading(false);
@@ -73,7 +72,6 @@ export const WithDraw = (props: Props) => {
 		let now = Date.now();
 		console.log(time.getTime())
 		isDisabled = time.getTime() > now;
-		debugger
 	}
 	const timeUTC = () => {
 		if (time) {

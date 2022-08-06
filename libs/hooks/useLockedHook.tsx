@@ -79,7 +79,7 @@ export default function userLockedHook(props: Props) {
 				ethersSigner
 			);
 			console.log(allowance);
-			debugger
+			// debugger
 			if (allowance > 0) {
 				setIsEnable(true);
 			} else {
@@ -99,7 +99,7 @@ export default function userLockedHook(props: Props) {
 			);
 			setDataMyStakingLock(convertData(data));
 			console.log(convertData(data));
-			debugger
+			// debugger
 			if (data.length > 0) {
 				setStateContentInitLocked(StateStakingLocked.LockedList);
 			}
