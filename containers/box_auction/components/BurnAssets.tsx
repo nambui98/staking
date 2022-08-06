@@ -21,32 +21,31 @@ export function BurnAssets(props: Props) {
 	const { ethersSigner, ethersProvider, setRefresh, refresh } = useWalletContext();
 	const [burnNumber, setBurnNumber] = useState<number>(1);
 	const handleConfirm = async () => {
-		setStateContent(BoxAuction.Burned);
-		// setIsLoading(true);
-		// try {
-		// 	const res = await addFitterPass(burnNumber, ethersSigner);
-		// 	setIsLoading(false)
-		// 	if (res?.status) {
-		// 		setRefresh(!refresh)
-		// 		handleClickSuccess({
-		// 			titleSuccess: 'Confirmed successfully!',
-		// 			functionSuccess: () => {
-		// 				setStateContent(BoxAuction.Burned);
-		// 			},
-		// 			stateContentNew: BoxAuction.Success,
-		// 		});
-		// 	}
-		// } catch (error: any) {
-		// 	const message = error.reason || 'Something went wrong, please try again';
-		// 	setIsLoading(false);
-		// 	handleClickError({
-		// 		titleError: message,
-		// 		functionError: () => {
-		// 			setStateContent(BoxAuction.BurnAssets);
-		// 		},
-		// 		stateContentNew: BoxAuction.Error,
-		// 	});
-		// }
+		setIsLoading(true);
+		try {
+			const res = await addFitterPass(burnNumber, ethersSigner);
+			setIsLoading(false)
+			if (res?.status) {
+				setRefresh(!refresh)
+				handleClickSuccess({
+					titleSuccess: 'Confirmed successfully!',
+					functionSuccess: () => {
+						setStateContent(BoxAuction.Burned);
+					},
+					stateContentNew: BoxAuction.Success,
+				});
+			}
+		} catch (error: any) {
+			const message = error.reason || 'Something went wrong, please try again';
+			setIsLoading(false);
+			handleClickError({
+				titleError: message,
+				functionError: () => {
+					setStateContent(BoxAuction.BurnAssets);
+				},
+				stateContentNew: BoxAuction.Error,
+			});
+		}
 	};
 	const isMobile = useMediaQuery('(max-width: 767px)');
 
