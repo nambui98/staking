@@ -1,6 +1,7 @@
 import {
 	Backdrop,
 	Box,
+	Button,
 	CircularProgress,
 	Container,
 	InputAdornment,
@@ -11,6 +12,9 @@ import {
 	Table,
 	TableBody,
 	TableCell,
+	TableContainer,
+	TableContainerProps,
+	TableHead,
 	TableRow,
 	TableRowProps,
 	Tabs,
@@ -23,7 +27,7 @@ import { StateStaking } from '../../const';
 import { STAKING_ICON } from '../../constants/staking';
 import { changeNetwork, useWalletContext } from '../../contexts/WalletContext';
 import { ShowAction } from './components/ShowAction';
-
+import Paper from '@mui/material/Paper';
 import { formatMoney } from '../../libs/utils/utils';
 import { TEXT_STYLE } from '../../styles/common/textStyles';
 
@@ -33,6 +37,7 @@ import MuiAccordionSummary, {
 } from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import userBurnHook from '../../libs/hooks/useBurnHook';
+import { DialogLeaderBoard } from './components/DialogLeaderBoard';
 
 const Accordion = styled((props: AccordionProps) => (
 	<MuiAccordion disableGutters elevation={0} square {...props} />
@@ -105,6 +110,7 @@ function createData(
 
 export const TabPoolAuction = () => {
 	const [tabCurrent, setTabCurrent] = useState<number>(0);
+	const [showLeaderBoard, setShowLeaderBoard] = useState<boolean>(false);
 	const [statusPopup, setStatusPopup] = useState<any>({
 		status: false,
 		content: <Box></Box>,
@@ -219,26 +225,80 @@ export const TabPoolAuction = () => {
 				<Body>
 					<Box sx={{ overflowX: 'auto', borderRadius: '16px' }}>
 
-						<Accordion  onChange={() => { }}>
+						<Accordion onChange={() => { }}>
 							{rows.map((item, index) => {
 								return (
 									<AccordionSummary
 										aria-controls="panel1d-content"
 										id="panel1d-header"
 										key={index}
-										sx={{ overflowX: 'auto',
-										'@media (max-width: 767px)': {
-											// width: '0px',
-											' .MuiAccordionSummary-content': {
-												width: '0px',
-										
-											},
-										},}}
-									>
+										sx={{
+											height: "180px",
+											paddingBottom: "50px",
+											// display: 'flex',
+											// flexDirection: 'column',
+											overflowX: 'auto',
+											'@media (max-width: 767px)': {
+												// width: '0px',
+												' .MuiAccordionSummary-content': {
+													width: '0px',
 
-										<Table>
-											<TableBody >
-												<TableRow>
+												},
+											},
+										}}
+									>
+										<Box sx={{
+											display: 'flex',
+											flexDirection: 'column',
+											overflowX: 'auto',
+											width: '100%',
+										}}>
+
+											<Box>
+												<TableContainerCus component={Paper}>
+													<Table sx={{ minWidth: 1020 }} aria-label="simple table">
+														<TableHead>
+															<TableRow>
+																<TableCell >Status</TableCell>
+																<TableCell align="left">Reward</TableCell>
+																<TableCell align="left">Earned</TableCell>
+																<TableCell align="left">Token remaining</TableCell>
+																<TableCell align="left">Lock-up time</TableCell>
+																<TableCell align="left">Withdrawal delay time</TableCell>
+																<TableCell align="left">Total staked</TableCell>
+															</TableRow>
+														</TableHead>
+														<TableBody>
+															{rows.map((row) => (
+																<TableRow
+																	key={row.name}
+																	sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+																>
+
+																	<TableCell component="th" scope="row">
+																		{statusRow}
+																	</TableCell>
+																	<TableCell align="left">Mystery Box</TableCell>
+																	<TableCell align="left">0</TableCell>
+																	<TableCell align="left">-</TableCell>
+																	<TableCell align="left">None</TableCell>
+																	<TableCell align="left">None</TableCell>
+																	<TableCell align="left">		{formatMoney(item.data.total)} Fitter Passes</TableCell>
+																</TableRow>
+															))}
+														</TableBody>
+
+
+														{/* {item.isComingSoon && (
+																		<ComingSoon
+																			sx={{
+																				top: index === 0 ? '0 !important' : 4,
+																			}}
+																		>
+																			coming soon
+																		</ComingSoon>
+																	)} */}
+													</Table>
 													<TitleItem key={index}>
 														<img src={STAKING_ICON.fiu} /> {item.title}{' '}
 														<span
@@ -250,51 +310,81 @@ export const TabPoolAuction = () => {
 															How it works?
 														</span>
 													</TitleItem>
-													{item.isComingSoon && (
-														<ComingSoon
-															sx={{
-																top: index === 0 ? '0 !important' : 4,
-															}}
-														>
-															coming soon
-														</ComingSoon>
-													)}
-													<Item
-														sx={{
-															paddingLeft: '8px',
-															borderRadiusTopleft: '12px',
-														}}
-														align="left"
-													>
-														Status{' '}
-														<Box sx={{ fontSize: '14px' }}>{item.data.status}</Box>
-													</Item>
-													<Item align="left" sx={{ textTransform: 'none' }}>
-														{index === 0 ? 'REWARD' : 'APR'}{' '}
-														<Box>{item.data.reward}</Box>
-													</Item>
-													<Item align="left">
-														Earned <Box>{item.data.earned}</Box>
-													</Item>
-													<Item align="left">
-														Token remaining <Box>{item.data.tokenRemaining}</Box>
-													</Item>
-													<Item align="left">
-														Lock-up time <Box>{item.data.lockUpTime}</Box>
-													</Item>
-													<Item align="left">
-														Withdrawal delay time <Box>{item.data.delayTime}</Box>
-													</Item>
-													<Item align="left">
-														Total in pool
-														<Box sx={{ textTransform: 'none' }}>
-															{formatMoney(item.data.total)} Fitter Passes
-														</Box>
-													</Item>
-												</TableRow>
-											</TableBody>
-										</Table>
+												</TableContainerCus>
+												{/* <Table>
+													<TableBody >
+														<TableRow>
+															<TitleItem key={index}>
+																<img src={STAKING_ICON.fiu} /> {item.title}{' '}
+																<span
+																	style={{ textDecoration: 'underline' }}
+																	onClick={
+																		(e: React.MouseEvent) => handleShowBurn(e)
+																	}
+																>
+																	How it works?
+																</span>
+															</TitleItem>
 
+															{item.isComingSoon && (
+																<ComingSoon
+																	sx={{
+																		top: index === 0 ? '0 !important' : 4,
+																	}}
+																>
+																	coming soon
+																</ComingSoon>
+															)}
+															<Item
+																sx={{
+																	paddingLeft: '8px',
+																	borderRadiusTopleft: '12px',
+																}}
+																align="left"
+															>
+																Status{' '}
+																<Box sx={{ fontSize: '14px' }}>{item.data.status}</Box>
+															</Item>
+															<Item align="left" sx={{ textTransform: 'none' }}>
+																{index === 0 ? 'REWARD' : 'APR'}{' '}
+																<Box>{item.data.reward}</Box>
+															</Item>
+															<Item align="left">
+																Earned <Box>{item.data.earned}</Box>
+															</Item>
+															<Item align="left">
+																Token remaining <Box>{item.data.tokenRemaining}</Box>
+															</Item>
+															<Item align="left">
+																Lock-up time <Box>{item.data.lockUpTime}</Box>
+															</Item>
+															<Item align="left">
+																Withdrawal delay time <Box>{item.data.delayTime}</Box>
+															</Item>
+															<Item align="left">
+																Total in pool
+																<Box sx={{ textTransform: 'none' }}>
+																	{formatMoney(item.data.total)} Fitter Passes
+																</Box>
+															</Item>
+														</TableRow>
+													</TableBody>
+												</Table> */}
+											</Box>
+											<Box>
+
+												<ButtonOutline
+													onClick={(e: React.MouseEvent) => {
+														e.stopPropagation();
+														setShowLeaderBoard(true)
+													}}
+													sx={{ width: "150px", maxHeight: "28px" }}
+													variant="text"
+												>
+													View Leaderboard
+												</ButtonOutline>
+											</Box>
+										</Box>
 									</AccordionSummary>
 								);
 							})}
@@ -326,10 +416,67 @@ export const TabPoolAuction = () => {
 			<Backdrop sx={{ zIndex: 1100, color: '#FF6D24' }} open={isLoading}>
 				<CircularProgress color="inherit" />
 			</Backdrop>
-		</Wrap>
+			<DialogLeaderBoard
+				status={showLeaderBoard}
+				handleToggle={(e: React.MouseEvent) => {
+					e.stopPropagation();
+					// debugger
+					setShowLeaderBoard(false)
+				}}
+			/>
+		</Wrap >
 	);
 };
+type tableContainerProps = TableContainerProps & {
+	component: any;
+};
+const TableContainerCus = styled(TableContainer)((props: tableContainerProps) => ({
+	background: 'transparent',
+	boxShadow: 'none',
+	marginTop: "50px",
+	'& .MuiTableHead-root': {
 
+		'& .MuiTableCell-root': {
+			border: 'none',
+			color: "#898E9E",
+			fontFamily: 'BeVietnamPro',
+			fontWeight: 500,
+			fontSize: '12px',
+			textTransform: 'uppercase',
+		}
+	},
+	'& .MuiTableBody-root': {
+
+		'& .MuiTableCell-root': {
+			paddingTop: "0px",
+			border: 'none',
+			color: "#31373E",
+			fontFamily: 'BeVietnamPro',
+			fontWeight: 500,
+			fontSize: '14px',
+		}
+	}
+}));
+const ButtonOutline = styled(Button)({
+	color: '#5A6178',
+	background: 'transparent',
+	borderRadius: '8px',
+	border: '1px solid #A7ACB8',
+	// padding: "5px 5px",
+	// minWidth: "35px",
+
+	minHeight: '28px',
+	textTransform: 'none',
+	transition: 'all .3s',
+	fontSize: "12px",
+	fontWeight: 600,
+	'&:hover': {
+		background: '#FF8A50',
+		border: '0px',
+		color: '#fff',
+	},
+	':disabled': {},
+});
 const ItemHowItWord = styled(Box)({
 	display: 'flex',
 	alignItems: 'flex-start',
@@ -464,7 +611,7 @@ const Item = styled(TableCell)({
 	},
 });
 
-const TitleItem = styled(TableCell)({
+const TitleItem = styled(Box)({
 	position: 'absolute',
 	top: 0,
 	borderBottom: 0,

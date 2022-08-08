@@ -62,14 +62,20 @@ export const ShowAction: React.FC<IProps> = ({
 	useEffect(() => {
 		if (isApproved) {
 			if (isRegister) {
-				setStateContent(BoxAuction.BurnAssets);
+				// debugger
+				if (parseInt(numberBurned) > 0) {
+					setStateContent(BoxAuction.Burned);
+				} else {
+
+					setStateContent(BoxAuction.BurnAssets);
+				}
 			} else {
 				setStateContent(BoxAuction.AssetsEvent);
 			}
 		} else {
 			setStateContent(null);
 		}
-	}, [isApproved, isRegister]);
+	}, [isApproved, isRegister, numberBurned]);
 
 	const handleClickSuccess = ({
 		titleSuccess = '',
@@ -136,7 +142,7 @@ export const ShowAction: React.FC<IProps> = ({
 		handleClickSuccess,
 		handleClickError,
 	};
-	
+
 	return (
 		<Box>
 			<Box
@@ -144,7 +150,7 @@ export const ShowAction: React.FC<IProps> = ({
 					backgroundColor: '#FFFFFF',
 					display: 'flex',
 					'@media (max-width: 767px)': {
-						flexDirection:"column"
+						flexDirection: "column"
 
 					},
 				}}
@@ -155,31 +161,31 @@ export const ShowAction: React.FC<IProps> = ({
 						isApproved={isApproved}
 					/>
 				</Wrap>
-				<Wrap isborder={false} sx={{flex:1}}>
+				<Wrap isborder={false} sx={{ flex: 1 }}>
 
-				{stateContent === BoxAuction.AssetsEvent ? (
-					<AssetsEvent
-						{...propsPass}
-						balanceFT={balanceFT}
-					/>
-				) : stateContent === BoxAuction.BurnAssets ? (
-					<BurnAssets
-						{...propsPass}
-						balanceFT={balanceFT}
-					/>
-				) : stateContent === BoxAuction.Burned ? (
-					<Burned
-						setStateContent={setStateContent}
-						stateContent={stateContent}
-						numberBurned={numberBurned}
-					/>
-				) : stateContent === BoxAuction.Success ? (
-					<Success success={success} setStateContent={setStateContent} />
-				) : stateContent === BoxAuction.Error ? (
-					<Error setStateContent={setStateContent} error={error} />
-				) : (
-					<Box></Box>
-				)}
+					{stateContent === BoxAuction.AssetsEvent ? (
+						<AssetsEvent
+							{...propsPass}
+							balanceFT={balanceFT}
+						/>
+					) : stateContent === BoxAuction.BurnAssets ? (
+						<BurnAssets
+							{...propsPass}
+							balanceFT={balanceFT}
+						/>
+					) : stateContent === BoxAuction.Burned ? (
+						<Burned
+							setStateContent={setStateContent}
+							stateContent={stateContent}
+							numberBurned={numberBurned}
+						/>
+					) : stateContent === BoxAuction.Success ? (
+						<Success success={success} setStateContent={setStateContent} />
+					) : stateContent === BoxAuction.Error ? (
+						<Error setStateContent={setStateContent} error={error} />
+					) : (
+						<Box></Box>
+					)}
 				</Wrap>
 			</Box>
 			<Backdrop

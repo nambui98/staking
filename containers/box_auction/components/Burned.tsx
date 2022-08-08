@@ -93,7 +93,7 @@ export function Burned(props: Props) {
 			}
 			).then((res) => {
 				if (res.status === 200) {
-					
+
 					setDataMe(res.data.data);
 				}
 			})
@@ -103,7 +103,7 @@ export function Burned(props: Props) {
 	const getData = useCallback(
 		() => {
 			axios.get(
-				`https://leaderboard.befitter.io/fitter/leaderboard?limit=${limit===50?40:10}&offset=${limit===50?10:0}`, {
+				`https://leaderboard.befitter.io/fitter/leaderboard?limit=${limit === 50 ? 40 : 10}&offset=${limit === 50 ? 10 : 0}`, {
 				headers: {
 					"Content-Type": "application/json"
 				}
@@ -130,7 +130,7 @@ export function Burned(props: Props) {
 
 	const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
 		setRowsPerPage(+event.target.value);
-		setPage(0);  
+		setPage(0);
 	};
 
 	const handleEnable = () => {
@@ -138,18 +138,18 @@ export function Burned(props: Props) {
 	};
 	const isMobile = useMediaQuery('(max-width: 767px)');
 
-	const getPize=(value:number)=>{
-		if(value<11){
+	const getPize = (value: number) => {
+		if (value < 11) {
 			return <img src="assets/box-diamond-small.png" alt="box" />
 		}
-		if(value <51){
-			return	<img src="assets/box-gold-small.png" alt="box" />
+		if (value < 51) {
+			return <img src="assets/box-gold-small.png" alt="box" />
 		}
 		return '-'
 	}
 	return (
-		<Box sx={{ display: 'flex', flexDirection:isMobile?'column':'row', flex:1, borderLeft:isMobile?0: '1px solid #E9EAEF' }}>
-			<Box sx={{ width: isMobile?'auto':'372px', padding:isMobile?'16px 0': '16px' }}>
+		<Box sx={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', flex: 1, borderLeft: isMobile ? 0 : '1px solid #E9EAEF' }}>
+			<Box sx={{ width: isMobile ? 'auto' : '372px', padding: isMobile ? '16px 0' : '16px' }}>
 				<Box
 					sx={{
 						display: 'flex',
@@ -166,7 +166,7 @@ export function Burned(props: Props) {
 							lineHeight: '18px',
 						}}
 					>
-						END IN 14 DAYS 20 HOURS
+						{/* END IN 14 DAYS 20 HOURS */}
 					</h3>
 					<Box
 						sx={{
@@ -246,7 +246,7 @@ export function Burned(props: Props) {
 															fontFamily: 'BeVietNamPro',
 														}}
 													>
-														{row.rank?getPize(parseInt(row.rank)):'-'}
+														{row.rank ? getPize(parseInt(row.rank)) : '-'}
 														{/* <img src="images/box.svg" alt="box" /> */}
 													</TableCell>
 												}
@@ -278,7 +278,7 @@ export function Burned(props: Props) {
 					</TableContainer>
 				</Paper>
 			</Box>
-			<Box sx={{ borderLeft:isMobile?'0px' : '1px solid #E9EAEF' }}>
+			<Box sx={{ borderLeft: isMobile ? '0px' : '1px solid #E9EAEF' }}>
 				<Box
 					sx={{
 						'@media (min-width: 650px)': {
@@ -288,20 +288,20 @@ export function Burned(props: Props) {
 						},
 						display: 'flex',
 						flexDirection: 'column',
-						borderBottom:isMobile?0: '1px solid #E9EAEF'
+						borderBottom: isMobile ? 0 : '1px solid #E9EAEF'
 					}}
 				>
 					<Item sx={{ mt: '0 !important' }}>
 						<TitleItem>BURNED</TitleItem>
-						<ValueItem>{dataMe?.amount??0} Fitter Passes</ValueItem>
+						<ValueItem>{dataMe?.amount ?? 0} Fitter Passes</ValueItem>
 					</Item>
 					<Item sx={{ mt: '0 !important' }}>
 						<TitleItem>YOUR RANK</TitleItem>
-						<ValueItem>{dataMe?.rank??'-'}</ValueItem>
+						<ValueItem>{dataMe?.rank ?? '-'}</ValueItem>
 					</Item>
 					<Item sx={{ mt: '0 !important', mb: '8px' }}>
 						<TitleItem>PRIZE</TitleItem>
-						<ValueItem>{dataMe?.rank?getPize(parseInt(dataMe?.rank)):'-'}</ValueItem>
+						<ValueItem>{dataMe?.rank ? getPize(parseInt(dataMe?.rank)) : '-'}</ValueItem>
 					</Item>
 					<ButtonCustom
 						isDisabled={true}
@@ -326,7 +326,7 @@ export function Burned(props: Props) {
 						},
 						display: 'flex',
 						flexDirection: 'column',
-						paddingBottom:"16px",
+						paddingBottom: "16px",
 						borderBottom: '1px solid #E9EAEF',
 					}}
 				>
@@ -357,7 +357,7 @@ export function Burned(props: Props) {
 						CLAIM
 					</ButtonCustom>
 				</Box>
-				<Box sx={{ padding: '16px 16px 0 16px', mt:"auto" }}>
+				<Box sx={{ padding: '16px 16px 0 16px', mt: "auto" }}>
 					<MarketplaceButton
 						customStyle={{ width: '100%' }}
 						title={'BURN MORE'}
