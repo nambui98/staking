@@ -93,7 +93,7 @@ export const SendToSpending: React.FC<IProps> = ({ currentTab, tokenChoose, boxC
             popupType: 'success',
             title: 'Send succeeded!',
             titleButton: 'OK',
-            message: currentTab === TAB_NAME.token ? null : 'Please check the item in your inventory on beFITTER app for unboxing.'
+            message: currentTab === TAB_NAME.token ? null : `Please check the item in your inventory on beFITTER app ${currentTab === TAB_NAME.box ? 'for unboxing.' : ''}`
           })
           clearInterval(checkStatus)
         }

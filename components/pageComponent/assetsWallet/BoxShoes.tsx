@@ -50,15 +50,15 @@ export const BoxShoes: React.FC<IProps> = ({ shoeChoose, setShoeChoose, listShoe
 					<ItemRight>
 						<Box sx={{minWidth: '126px'}}>
 							<ShoeDetailsItem>
-								<img src="assets/icons/triangle.svg" style={{ float: 'left', marginRight: 10 }} />
+								<img src="assets/icons/triangle.svg" style={{ float: 'left' }} />
 								<Box><Typography>Level</Typography><Typography>{item.info?.level}</Typography></Box>
 							</ShoeDetailsItem>
 							<ShoeDetailsItem>
-								<img src="assets/icons/shieldGreen.svg" style={{ float: 'left', marginRight: 12 }} />
+								<img src="assets/icons/shieldGreen.svg" style={{ float: 'left' }} />
 								<Box><Typography>Condition</Typography><Typography>{formatMoney(item.info?.condition, 3)}%</Typography></Box>
 							</ShoeDetailsItem>
 							<ShoeDetailsItem>
-								<img src={`assets/icons/shoeMint${checkImageMint(item.info?.minted)}.svg`} style={{ float: 'left', marginRight: 8 }} />
+								<img src={`assets/icons/shoeMint${checkImageMint(item.info?.minted)}.svg`} style={{ float: 'left' }} />
 								<Box><Typography>Shoe Mint</Typography><Typography>{item.info?.minted}/7</Typography>
 								</Box>
 							</ShoeDetailsItem>
@@ -185,7 +185,7 @@ const BoxImage = styled(Box)({
 	'& img': {
 		width: 72,
 		'@media (min-width: 768px)': {
-			width: 124
+			width: 150
 		}
 	}
 })

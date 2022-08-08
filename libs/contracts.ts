@@ -36,20 +36,20 @@ const addresses: Map = {
 
 const address = addresses[ENVIRONMENT_SWITCH];
 
-export const bftBox = { address: address.bFBox, abi: (ENVIRONMENT_SWITCH === 'prod' ? bfBox : bfBoxDev).abi }
-export const bftClaimGamefi = { address: address.bFclaimBoxGamefi, abi: (ENVIRONMENT_SWITCH === 'prod' ? bfClaimBox : bfClaimBoxDev).abi }
-export const bftHeetoken = { address: address.bFheeToken, abi: (ENVIRONMENT_SWITCH === 'prod' ? bfHeeToken : bfHeeTokenDev).abi }
-export const bftFiuToken = { address: address.bFfiuToken, abi: (ENVIRONMENT_SWITCH === 'prod' ? bfFiuToken : bfFiuTokenDev).abi }
-export const bftShoeItem = { address: address.bFshoeItem, abi: (ENVIRONMENT_SWITCH === 'prod' ? bfShoeItem : bfShoeItemDev).abi }
-export const bftClaimEnjin = { address: address.bFclaimEnjin, abi: (ENVIRONMENT_SWITCH === 'prod' ? bfClaimBox : bfClaimBoxDev).abi }
+export const bftBox = { address: address.bFBox, abi: bfBox.abi }
+export const bftClaimGamefi = { address: address.bFclaimBoxGamefi, abi: bfClaimBox.abi }
+export const bftHeetoken = { address: address.bFheeToken, abi: bfHeeToken.abi }
+export const bftFiuToken = { address: address.bFfiuToken, abi: bfFiuToken.abi }
+export const bftShoeItem = { address: address.bFshoeItem, abi: bfShoeItemDev.abi }
+export const bftClaimEnjin = { address: address.bFclaimEnjin, abi: bfClaimBox.abi }
 export const bftBusdToken = { address: address.bFBusdToken, abi: bfBusdToken.abi }
 export const bftShop = { address: address.bFShop, abi: bfShop.abi }
-export const bftClaimAlphaBeta = { address: address.bFclaimAlphaBeta, abi: (ENVIRONMENT_SWITCH === 'prod' ? bfClaimBox : bfClaimBoxDev).abi }
-export const bftClaimAlphaBeta2 = { address: address.bFclaimAlphaBeta2, abi: (ENVIRONMENT_SWITCH === 'prod' ? bfClaimBox : bfClaimBoxDev).abi }
-export const bftClaimOther = { address: address.bFclaimOther, abi: (ENVIRONMENT_SWITCH === 'prod' ? bfClaimBox : bfClaimBoxDev).abi }
+export const bftClaimAlphaBeta = { address: address.bFclaimAlphaBeta, abi: bfClaimBox.abi }
+export const bftClaimAlphaBeta2 = { address: address.bFclaimAlphaBeta2, abi: bfClaimBox.abi }
+export const bftClaimOther = { address: address.bFclaimOther, abi: bfClaimBox.abi }
 export const bftFiuTokenStaking = { address: address.beFITTERTokenStaking, abi: beFITTERTokenStaking.abi }
 export const beFITTERPassStaking = { address: address.beFITTERPassStaking, abi: beFitterPass.abi }
 export const beFITTERStakeStaking = { address: address.beFITTERStakeStaking, abi: beFitterStake.abi }
 export const bftClaimToken = { address: address.bFclaimToken, abi: bfClaimToken.abi }
-export const bftWallet = {address: address.bFWallet, abi: (ENVIRONMENT_SWITCH === 'prod' ? bfWallet : bfWalletDev).abi}
+export const bftWallet = {address: address.bFWallet, abi: bfWallet.abi}
 export const bftClaimTokenAirdrop = { address: address.bFclaimTokenAirdrop, abi: bfClaimToken.abi }
