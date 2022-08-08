@@ -1,3 +1,3 @@
-import Claim from './claim/index'
+import Staking from './staking';
 
-export default Claim;
+export default Staking;
