@@ -48,14 +48,15 @@ export function AssetsEvent(props: Props) {
 	return (
 		<Box
 			sx={{
+				width: "100%",
 				'@media (min-width: 650px)': {
 					width: '422px',
-					height: '375px',
-					padding: '16px',
+					height: '100%',
+					padding: '0 16px',
 				},
 				display: 'flex',
 				flexDirection: 'column',
-				borderLeft:isMobile?0: '1px solid #E9EAEF',
+				borderLeft: isMobile ? 0 : '1px solid #E9EAEF',
 			}}
 		>
 
@@ -66,7 +67,7 @@ export function AssetsEvent(props: Props) {
 				<TitleItem>YOU CURRENT ASSETS</TitleItem>
 				<ValueItem>{balanceFT} Fitter Passes</ValueItem>
 			</Item>
-			<Box sx={{ textAlign: 'center', margin: '24px 0' }}>
+			<Box sx={{ textAlign: 'center', margin: '24px 0', mt: "auto !important" }}>
 				<img src="images/Group-icon.svg" alt="" />
 			</Box>
 			<Typography
@@ -125,7 +126,7 @@ export function AssetsEvent(props: Props) {
 				/>
 			</Box>
 
-		</Box>
+		</Box >
 	);
 }
 

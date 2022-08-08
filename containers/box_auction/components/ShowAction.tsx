@@ -261,6 +261,7 @@ const Wrap = styled(Stack)(({ isborder }: stackPropsNew) => ({
 	overflowX: 'hidden',
 	// width: 'calc(100vw - 32px)',
 	// height: 'calc(100vh - 32px)',
+	width: "100%",
 	'@media (min-width: 650px)': {
 		width: '422px',
 		height: '450px',

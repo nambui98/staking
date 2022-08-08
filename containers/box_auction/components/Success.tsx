@@ -25,6 +25,7 @@ export const Success = (props: Props) => {
 	return (
 		<Box
 			sx={{
+				width: "100%",
 				'@media (min-width: 650px)': {
 					width: '422px',
 					height: '375px',
@@ -32,7 +33,7 @@ export const Success = (props: Props) => {
 				},
 				display: 'flex',
 				flexDirection: 'column',
-				borderLeft:isMobile?0: '1px solid #E9EAEF',
+				borderLeft: isMobile ? 0 : '1px solid #E9EAEF',
 			}}
 		>
 

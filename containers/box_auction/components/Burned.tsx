@@ -149,7 +149,7 @@ export function Burned(props: Props) {
 	}
 	return (
 		<Box sx={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', flex: 1, borderLeft: isMobile ? 0 : '1px solid #E9EAEF' }}>
-			<Box sx={{ width: isMobile ? 'auto' : '372px', padding: isMobile ? '16px 0' : '16px' }}>
+			<Box sx={{ width: isMobile ? 'auto' : '372px', padding: isMobile ? '16px 0' : '0px 16px' }}>
 				<Box
 					sx={{
 						display: 'flex',
@@ -202,7 +202,7 @@ export function Burned(props: Props) {
 				</Box>
 				{/* table */}
 				<Paper sx={{ width: '100%', overflow: 'hidden', boxShadow: 'none' }}>
-					<TableContainer sx={{ maxHeight: 308, border: 'none' }}>
+					<TableContainer sx={{ maxHeight: "380px", border: 'none' }}>
 						<Table stickyHeader aria-label="sticky table">
 							<TableHead>
 								<TableRow>
@@ -278,13 +278,13 @@ export function Burned(props: Props) {
 					</TableContainer>
 				</Paper>
 			</Box>
-			<Box sx={{ borderLeft: isMobile ? '0px' : '1px solid #E9EAEF' }}>
+			<Box sx={{ borderLeft: isMobile ? '0px' : '1px solid #E9EAEF', display: 'flex', flexDirection: "column" }}>
 				<Box
 					sx={{
 						'@media (min-width: 650px)': {
 							width: '306px',
 							height: '160px',
-							padding: '16px',
+							padding: isMobile ? '16px 0' : '0px 16px'
 						},
 						display: 'flex',
 						flexDirection: 'column',
@@ -357,7 +357,7 @@ export function Burned(props: Props) {
 						CLAIM
 					</ButtonCustom>
 				</Box>
-				<Box sx={{ padding: '16px 16px 0 16px', mt: "auto" }}>
+				<Box sx={{ padding: isMobile ? '16px 0px 0 0px' : '16px 16px 0 16px', mt: "auto" }}>
 					<MarketplaceButton
 						customStyle={{ width: '100%' }}
 						title={'BURN MORE'}

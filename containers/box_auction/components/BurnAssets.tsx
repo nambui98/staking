@@ -52,6 +52,7 @@ export function BurnAssets(props: Props) {
 	return (
 		<Box
 			sx={{
+				width: "100%",
 				'@media (min-width: 650px)': {
 					width: '422px',
 					height: '100%',
@@ -61,7 +62,7 @@ export function BurnAssets(props: Props) {
 				flexDirection: 'column',
 				fontFamily: 'BeVietnamPro',
 				// borderLeft: '1px solid #E9EAEF',
-				borderLeft:isMobile?0: '1px solid #E9EAEF',
+				borderLeft: isMobile ? 0 : '1px solid #E9EAEF',
 			}}
 		>
 			<Item sx={{ mt: '0 !important' }}>
@@ -87,12 +88,12 @@ export function BurnAssets(props: Props) {
 				<Box>
 
 					<ValueItem>
-						<InputCustom type="number"  inputProps={{ min: 4, max: 10 }} value={burnNumber}  onChange={(e) => {
+						<InputCustom type="number" inputProps={{ min: 4, max: 10 }} value={burnNumber} onChange={(e) => {
 							if (parseInt(e.target.value) > parseInt(balanceFT)) {
 								setBurnNumber(parseInt(balanceFT));
-							} else  if(parseInt(e.target.value)<1 || e.target.value.trim()==='') {
+							} else if (parseInt(e.target.value) < 1 || e.target.value.trim() === '') {
 								setBurnNumber(1)
-							}else{
+							} else {
 
 								setBurnNumber(parseInt(e.target.value))
 							}
@@ -155,7 +156,7 @@ export function BurnAssets(props: Props) {
 			>
 				<MarketplaceButton
 					customStyle={{ width: '100%' }}
-					disabled={burnNumber?false:true}
+					disabled={burnNumber ? false : true}
 					title={'Confirm'}
 					handleOnClick={handleConfirm}
 				/>

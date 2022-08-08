@@ -23,15 +23,16 @@ export const Error = (props: Props) => {
 	return (
 		<Box
 			sx={{
+				width: "100%",
 				height: '375px',
 				'@media (min-width: 650px)': {
 					width: '422px',
-			
+
 					padding: '16px',
 				},
 				display: 'flex',
 				flexDirection: 'column',
-				borderLeft:isMobile?0: '1px solid #E9EAEF',
+				borderLeft: isMobile ? 0 : '1px solid #E9EAEF',
 			}}
 		>
 
