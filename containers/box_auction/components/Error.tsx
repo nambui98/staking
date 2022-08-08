@@ -20,15 +20,15 @@ export const Error = (props: Props) => {
 	const handleTryAgain = () => {
 		error.functionError();
 	};
+
 	return (
 		<Box
 			sx={{
 				width: "100%",
-				height: '375px',
+				height: '418px',
 				'@media (min-width: 650px)': {
 					width: '422px',
-
-					padding: '16px',
+					padding: isMobile ? '16px 0px' : '0 16px',
 				},
 				display: 'flex',
 				flexDirection: 'column',
