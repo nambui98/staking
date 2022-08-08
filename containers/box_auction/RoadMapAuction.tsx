@@ -43,7 +43,7 @@ export const RoadMapAuction = () => {
 									active={item.status.toString()}
 									isUpcomming={item.isUpcomming}
 								>
-									<Image sx={{ opacity: 1, alignSelf: 'end' }}>
+									<Image sx={{ opacity: 1, alignSelf: isMobile767 ? 'auto' : 'end' }}>
 										<img
 											src={
 												!item.isUpcomming || item.status
