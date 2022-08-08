@@ -55,7 +55,7 @@ export const BoxShoes: React.FC<IProps> = ({ shoeChoose, setShoeChoose, listShoe
 							</ShoeDetailsItem>
 							<ShoeDetailsItem>
 								<img src="assets/icons/shieldGreen.svg" style={{ float: 'left' }} />
-								<Box><Typography>Condition</Typography><Typography>{formatMoney(item.info?.condition, 3)}%</Typography></Box>
+								<Box><Typography>Condition</Typography><Typography>{formatMoney(item.info?.condition, 0)}%</Typography></Box>
 							</ShoeDetailsItem>
 							<ShoeDetailsItem>
 								<img src={`assets/icons/shoeMint${checkImageMint(item.info?.minted)}.svg`} style={{ float: 'left' }} />
@@ -91,7 +91,7 @@ export const BoxShoes: React.FC<IProps> = ({ shoeChoose, setShoeChoose, listShoe
 								</ShoeDetailsItem>
 								<ShoeDetailsItem>
 									<img src="assets/icons/shieldGreen.svg" style={{ float: 'left'}} />
-									<Box><Typography>{formatMoney(item.info?.condition, 3)}%</Typography></Box>
+									<Box><Typography>{formatMoney(item.info?.condition, 0)}%</Typography></Box>
 								</ShoeDetailsItem>
 								<ShoeDetailsItem>
 									<img src={`assets/icons/shoeMint${checkImageMint(item.info?.minted)}.svg`} style={{ float: 'left'}} />
