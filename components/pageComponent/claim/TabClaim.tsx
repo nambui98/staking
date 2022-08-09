@@ -288,7 +288,7 @@ export const TabClaim = () => {
       ])
     } else {
       setSelectItem([
-        { title: 'INO on website beFITTER', value: '8' }
+        { title: 'Website beFITTER', value: '8' }
       ])
     }
   }, [currentTab])
