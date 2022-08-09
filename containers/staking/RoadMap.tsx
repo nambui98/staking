@@ -34,8 +34,8 @@ export const RoadMap = () => {
 
 						{ROAD_MAP.items?.map((item, index) => (
 							<SwiperSlide key={index}>
-								<Item active={item.status.toString()} isUpcomming={item.isUpcomming}>
-									<Image sx={{ opacity: item.opacity || 1 }}><img src={!item.isUpcomming || item.status ? item.image : STAKING_IMAGE.boxGray} /></Image>
+								<Item status={item.status} isUpcomming={item.status === 1}>
+									<Image sx={{ opacity: 1 }}><img src={item.status !== 1 ? item.image : STAKING_IMAGE.boxGray} /></Image>
 									<Box sx={{
 										display: 'flex',
 										flexDirection: 'column',
@@ -46,9 +46,7 @@ export const RoadMap = () => {
 										}
 									}}>
 										<Name>{item.title}</Name>
-
-
-										<Status active={item.status.toString()} isUpcomming={item.isUpcomming}>{item.textStatus}</Status>
+										<Status status={item.status} isUpcomming={item.status === 1}>{item.textStatus}</Status>
 
 									</Box>
 								</Item>
@@ -79,13 +77,13 @@ const Title = styled(Typography)({
 	marginBottom: 16
 })
 type itemProps = BoxProps & {
-	active: string,
+	status: number,
 	isUpcomming: boolean
 }
 const Item = styled(Box)((props: itemProps) => ({
 	padding: 16,
 	borderRadius: 12,
-	backgroundColor: !props.isUpcomming ? '#FFE2D3' : '#F8F9FB',
+	backgroundColor: props.status === 2 ? '#FFE2D3' : props.status === 3 ? '#A7ACB8' : '#F8F9FB',
 	display: 'flex',
 	minHeight: 170,
 	flexDirection: 'column',
@@ -121,7 +119,7 @@ const Name = styled(Typography)({
 const Status = styled(Typography)((props: itemProps) => ({
 	padding: '4px 8px',
 	...TEXT_STYLE(14, 500, '#ffffff'),
-	backgroundColor: props.isUpcomming ? '#A7ACB8' : '#FF6F61',
+	backgroundColor: props.status === 1 ? '#A7ACB8' : props.status === 3 ? "#5A6178" : '#FF6F61',
 	textTransform: 'uppercase',
 	marginTop: 'auto',
 	display: 'inline-block'

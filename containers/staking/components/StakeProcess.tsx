@@ -165,7 +165,6 @@ export const StakeProcess = ({
 									setMessageError("Please enter a positive number")
 								}
 							} else {
-								debugger
 								setMessageError('Please enter valid number')
 								setValue(valueParse)
 

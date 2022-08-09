@@ -2,15 +2,18 @@
 import bfBox from '../abi/BeFitterBox.json';
 import bfClaimBox from '../abi/BeFitterClaim.json';
 import bfHeeToken from '../abi/BFHeeToken.json';
-import bfFiuToken from '../abi/BeFITTERTokenStaking.json';
+import bfFiuToken from '../abi/BeFITTERToken.json';
 import bfShoeItem from '../abi/BFShoeItem.json';
 import bfBusdToken from '../abi/BeFitterBusd.json';
 import bfShop from '../abi/BeFitterShop.json';
 import bfWallet from '../abi/BeFitterWallet.json'
-import beFITTERTokenStaking from '../abi/BeFITTERTokenStaking.json';
+import beFITTERTokenStaking from '../abi/BeFITTERToken.json';
 import beFitterPass from '../abi/BeFitterPass.json';
 import beFitterStake from '../abi/BeFitterStaking.json';
 import bfClaimToken from '../abi/BeFitterClaimFiu.json';
+//dev
+import bflockedPool from '../abi/FitterPassLockedPool.json';
+import bfBurningEvent from '../abi/FitterPassBurningEvent.json';
 
 //dev
 import bfBoxDev from '../abiDev/BeFitterBox.json';
@@ -51,5 +54,7 @@ export const bftFiuTokenStaking = { address: address.beFITTERTokenStaking, abi: 
 export const beFITTERPassStaking = { address: address.beFITTERPassStaking, abi: beFitterPass.abi }
 export const beFITTERStakeStaking = { address: address.beFITTERStakeStaking, abi: beFitterStake.abi }
 export const bftClaimToken = { address: address.bFclaimToken, abi: bfClaimToken.abi }
-export const bftWallet = {address: address.bFWallet, abi: bfWallet.abi}
+export const bftWallet = { address: address.bFWallet, abi: bfWallet.abi }
+export const beFITTERlockedPool = { address: address.beFITTERlockedPool, abi: bflockedPool.abi }
 export const bftClaimTokenAirdrop = { address: address.bFclaimTokenAirdrop, abi: bfClaimToken.abi }
+export const beFITTERBurningEvent = { address: address.beFITTERBurningEvent, abi: bfBurningEvent.abi }
