@@ -73,7 +73,7 @@ export default function userLockedHook(props: Props) {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
+		if (walletAccount && ethersSigner) {
 			const allowance = await getAllowanceStakingLocked(
 				walletAccount,
 				ethersSigner
@@ -92,7 +92,7 @@ export default function userLockedHook(props: Props) {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
+		if (walletAccount && ethersSigner) {
 			const data = await getAllUserStaking(
 				walletAccount,
 				ethersSigner

@@ -34,7 +34,7 @@ export default function userStakingHook(props: Props) {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
+		if (walletAccount && ethersSigner) {
 			const allowance = await getAllowanceStakingFiu(
 				walletAccount,
 				ethersSigner
@@ -57,7 +57,7 @@ export default function userStakingHook(props: Props) {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
+		if (walletAccount && ethersSigner) {
 			const balance = await getBalanceFiuStaking(walletAccount, ethersSigner);
 			setBalanceFiu(balance);
 		} else {
@@ -70,7 +70,9 @@ export default function userStakingHook(props: Props) {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
+		if (walletAccount && ethersSigner) {
+			debugger
+
 			const balance = await getStakingAmount(walletAccount, ethersSigner);
 			setBalanceSA(balance);
 		} else {
@@ -83,7 +85,7 @@ export default function userStakingHook(props: Props) {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
+		if (walletAccount && ethersSigner) {
 			const balance = await getCurrentProfit(walletAccount, ethersSigner);
 			setBalanceCP(balance);
 		} else {
@@ -96,7 +98,7 @@ export default function userStakingHook(props: Props) {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
+		if (walletAccount && ethersSigner) {
 			const balance = await getUnstakeAmount(walletAccount, ethersSigner);
 
 			setBalanceUS(balance);
@@ -110,7 +112,7 @@ export default function userStakingHook(props: Props) {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
+		if (walletAccount && ethersSigner) {
 			const balance = await toClaimableTime(walletAccount, ethersSigner);
 			setClaimableTime(balance);
 		} else {
@@ -122,7 +124,7 @@ export default function userStakingHook(props: Props) {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
+		if (walletAccount && ethersSigner) {
 			const balance = await getRemainingDelayTime(walletAccount, ethersSigner);
 			setRemainingDelayTime(balance);
 		} else {
@@ -185,7 +187,7 @@ export default function userStakingHook(props: Props) {
 	}, [walletAccount, refresh, ethersSigner]);
 	console.log(balanceUS);
 	useEffect(() => {
-		if (parseFloat(balanceSA) > 0 || parseFloat(balanceUS) > 0) {
+		if (parseFloat(balanceSA) > 0 || parseFloat(balanceUS) > 0 || parseFloat(balanceCP) > 0) {
 			setStateContentInit(StateStaking.Staked);
 		} else {
 			if (isEnable) {
