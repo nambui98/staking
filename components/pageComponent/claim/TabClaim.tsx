@@ -288,7 +288,7 @@ export const TabClaim = () => {
       ])
     } else {
       setSelectItem([
-        { title: 'Shoe Box NFT Sale on beFITTER Hub', value: '8' }
+        { title: 'NFT Box Sale on Hub', value: '8' }
       ])
     }
   }, [currentTab])
