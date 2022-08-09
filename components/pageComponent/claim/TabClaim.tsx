@@ -31,8 +31,7 @@ const bodyPopupTokenTime = () => {
 export const TabClaim = () => {
   const router = useRouter();
   const isMobile = useMediaQuery('(max-width: 767px)');
-  const { setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
-  const walletAccount = '0xcfef5bf5e5778fe33ed52d3c2bb5c29c324f0fd9'
+  const {walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
   const [currentTab, setCurrentTab] = useState<'box' | 'token' | 'fitterPass'>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [roundSelected, setRoundSelected] = useState<string>('');
