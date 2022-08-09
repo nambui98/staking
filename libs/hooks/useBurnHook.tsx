@@ -32,7 +32,7 @@ export default function userBurnHook(props: Props) {
 				walletAccount,
 				ethersSigner
 			);
-			
+
 			if (isApproved) {
 				setIsApproved(true);
 			} else {
@@ -71,12 +71,13 @@ export default function userBurnHook(props: Props) {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
+		if (ethersSigner) {
 			const balance = await balanceOf(ethersSigner);
 			setTotalStake(balance);
 		} else {
 			setTotalStake('0');
 		}
+
 	};
 	const getBalanceFitterPass = async () => {
 		if (!chainIdIsSupported) {
@@ -114,7 +115,7 @@ export default function userBurnHook(props: Props) {
 	useEffect(() => {
 		totalStakeGet();
 		getAll();
-		
+
 	}, [walletAccount, refresh, ethersSigner]);
 
 	return {

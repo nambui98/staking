@@ -214,6 +214,7 @@ export const WalletProvider: React.FC<IProps> = ({ children }) => {
 				setWalletAccount(utils.getAddress(accounts[0]));
 			};
 			const _ethersProvider = await new ethers.providers.Web3Provider(_ethereumProvider);
+			await _ethersProvider.send('eth_requestAccounts', []);
 			setEthersProvider(_ethersProvider);
 			const _ethersSigner = await _ethersProvider.getSigner();
 			setEthersSigner(_ethersSigner);
