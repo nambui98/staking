@@ -3,7 +3,8 @@ export const CLAIM_IMAGE = {
   box: 'assets/icons/boxIcon.svg',
   fiu: 'assets/icons/fiu.svg',
   boxSilver: 'assets/box-silver-small.png',
-  boxGold: 'assets/box-gold-small.png'
+  boxGold: 'assets/box-gold-small.png',
+  fitterPass: 'assets/fitterPass.png',
 }
 
 export const CLAIM_TOKEN_TIME = [

@@ -7,7 +7,7 @@ import { RECAPTCHA_SITE_KEY } from "../../../const";
 import { CLAIM_IMAGE, CLAIM_TOKEN_TIME } from "../../../constants/claim";
 import { PAGE } from "../../../constants/header";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
-import { checkClaimedToken, getClaimedBox, getClaimedToken, getLockedOf, handleClaimBox, handleClaimToken } from "../../../libs/claim";
+import { checkClaimedToken, getClaimedBox, getClaimedFitterPass, getClaimedToken, getLockedOf, handleClaimBox, handleClaimFitterPass, handleClaimToken } from "../../../libs/claim";
 import { bftClaimGamefi, bftClaimEnjin, bftClaimAlphaBeta, bftClaimOther, bftClaimAlphaBeta2, bftClaimTokenAirdrop, bftClaimToken } from "../../../libs/contracts";
 import { convertWalletAddress, formatNumberWithCommas } from "../../../libs/utils/utils";
 import { ClaimService } from "../../../services/claim.service";
@@ -31,7 +31,8 @@ const bodyPopupTokenTime = () => {
 export const TabClaim = () => {
   const router = useRouter();
   const isMobile = useMediaQuery('(max-width: 767px)');
-  const {walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
+  const { setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
+  const walletAccount = '0xcfef5bf5e5778fe33ed52d3c2bb5c29c324f0fd9'
   const [currentTab, setCurrentTab] = useState<'box' | 'token' | 'fitterPass'>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [roundSelected, setRoundSelected] = useState<string>('');
@@ -56,7 +57,7 @@ export const TabClaim = () => {
 
   const checkStatusButton = () => {
     if (dataClaim.totalBox > dataClaim.claimed && captchaToken.length && roundSelected.length && checkClaimed) {
-      
+
       return true
     }
     return false;
@@ -76,7 +77,7 @@ export const TabClaim = () => {
         const claimContractOther = await new ethers.Contract(bftClaimOther.address, bftClaimOther.abi, ethersSigner);
         const claimContractAlphaBeta2 = await new ethers.Contract(bftClaimAlphaBeta2.address, bftClaimAlphaBeta2.abi, ethersSigner);
         const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), roundSelected === '1' ? claimContractAlphaBeta : roundSelected === '2' ? claimContractOther : roundSelected === '6' ? claimContractAlphaBeta2 : roundSelected === "3" ? claimContractGamefi : claimContractEnjinstarter);
-        setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount }) 
+        setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount })
       } else {
         setDataClaim({ claimed: 0, totalBox: 0 })
       }
@@ -94,19 +95,8 @@ export const TabClaim = () => {
       const res: any = await ClaimService.getAmount((walletAccount.toLowerCase()), captchaToken, roundSelected, false);
       setCheckClaimed(true)
       if (res?.data?.status) {
-        const ContractINO = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
-        const ContractGamefi = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
-        const ContractẸninStarter = await new ethers.Contract(bftClaimAlphaBeta.address, bftClaimAlphaBeta.abi, ethersSigner);
-
-        const contract = () => {
-          switch (roundSelected) {
-            case '8': return ContractINO
-            case '9': return ContractGamefi
-            case '10': return ContractẸninStarter
-          }
-        }
-        const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), contract());
-        setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount }) 
+        const dataClaimed = await getClaimedFitterPass((walletAccount.toLowerCase()), ethersSigner);
+        setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount })
       } else {
         setDataClaim({ claimed: 0, totalBox: 0 })
       }
@@ -124,10 +114,10 @@ export const TabClaim = () => {
       const res: any = await ClaimService.getAmount((walletAccount.toLowerCase()), captchaToken, roundSelected, false);
       const dataLockedOf = await getLockedOf(walletAccount, ethersSigner, roundSelected === '5' ? bftClaimToken.address : bftClaimTokenAirdrop.address)
       const dataCheckClaimed = await checkClaimedToken(walletAccount, ethersSigner, roundSelected === '5' ? bftClaimToken.address : bftClaimTokenAirdrop.address)
-      if(parseFloat(ethers.utils.formatEther(dataLockedOf)) === 0){
+      if (parseFloat(ethers.utils.formatEther(dataLockedOf)) === 0) {
         setCheckClaimed(true)
       } else {
-        if(parseInt(ethers.utils.formatEther(dataCheckClaimed)) > 0){
+        if (parseInt(ethers.utils.formatEther(dataCheckClaimed)) > 0) {
           setCheckClaimed(true)
         } else {
           setCheckClaimed(false)
@@ -218,24 +208,12 @@ export const TabClaim = () => {
     }
   }
 
-  const handleClaimFitterPass = async () => {
+  const handleClaimFtpass = async () => {
     setStatusLoading(true)
     const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, true);
     if (res?.data?.status) {
-      const ContractINO = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
-      const ContractGamefi = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
-      const ContractẸninStarter = await new ethers.Contract(bftClaimAlphaBeta.address, bftClaimAlphaBeta.abi, ethersSigner);
-
-      const contract = () => {
-        switch (roundSelected) {
-          case '8': return ContractINO
-          case '9': return ContractGamefi
-          case '10': return ContractẸninStarter
-        }
-      }
-
       try {
-        const resultClaim: any = await handleClaimBox(walletAccount, contract(), res.data)
+        const resultClaim: any = await handleClaimFitterPass(walletAccount, ethersSigner, res.data)
         const checkStatus = setInterval(async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
           if (statusClaim?.status) {
@@ -264,12 +242,26 @@ export const TabClaim = () => {
   }
 
   const handleClaim = () => {
-    if(currentTab === 'box'){
+    if (currentTab === 'box') {
       handleClaimBoxShoe()
-    } else if(currentTab === 'token'){
+    } else if (currentTab === 'token') {
       handleClaimTokenButton()
     } else {
-      handleClaimFitterPass()
+      handleClaimFtpass()
+    }
+  }
+
+  const checkCurrentTab = () => {
+    return currentTab === 'box' ? 'box' : currentTab === 'token' ? 'token' : 'FitterPass'
+  }
+
+  const checkCurrentTabIcon = () => {
+    if (currentTab === 'token') {
+      return CLAIM_IMAGE.fiu
+    } else if (currentTab === 'fitterPass') {
+      return CLAIM_IMAGE.fitterPass
+    } else {
+      return (roundSelected === '1' || roundSelected === '2' || roundSelected === '6') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold
     }
   }
 
@@ -281,13 +273,13 @@ export const TabClaim = () => {
     setRoundSelected('')
   }, [currentTab])
 
-  useEffect(() => {   
+  useEffect(() => {
     if (currentTab === 'token') {
       setSelectItem([
         { title: 'Public Sale', value: '5' },
         { title: 'Airdrop FIU', value: '7' },
       ])
-    } else if(currentTab === 'box') {
+    } else if (currentTab === 'box') {
       setSelectItem([
         { title: 'GameFi.org', value: '3' },
         { title: 'Enjinstarter', value: '4' },
@@ -297,9 +289,7 @@ export const TabClaim = () => {
       ])
     } else {
       setSelectItem([
-        { title: 'INO on website beFITTER', value: '8' },
-        { title: 'Gamefi', value: '9' },
-        { title: 'EnjinStarter', value: '10' },
+        { title: 'INO on website beFITTER', value: '8' }
       ])
     }
   }, [currentTab])
@@ -315,7 +305,7 @@ export const TabClaim = () => {
         <Typography sx={{ ...TEXT_STYLE(14, 500), marginBottom: '12px', color: '#5A6178' }}>I want to claim</Typography>
         <BoxTab>
           <TabItem active={currentTab === 'box' ? true : false} onClick={() => setCurrentTab('box')}>Box</TabItem>
-          <TabItem  active={currentTab === 'token' ? true : false} onClick={() => setCurrentTab('token')}>Token</TabItem>
+          <TabItem active={currentTab === 'token' ? true : false} onClick={() => setCurrentTab('token')}>Token</TabItem>
           <TabItem active={currentTab === 'fitterPass' ? true : false} onClick={() => setCurrentTab('fitterPass')}>FitterPass</TabItem>
         </BoxTab>
         <Stack>
@@ -332,8 +322,8 @@ export const TabClaim = () => {
             </BoxSelect>
           </FormControl>
           {roundSelected && dataClaim ? <DataClaimBox>
-            <Typography>Total {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.totalBox} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2' || roundSelected === '6') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
-            <Typography sx={{ margin: '20px 0' }}>Claimed {currentTab === 'token' ? 'Token' : 'Box'} <span>{dataClaim.claimed} <img src={currentTab === 'token' ? CLAIM_IMAGE.fiu : (roundSelected === '1' || roundSelected === '2' || roundSelected === '6') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold} /></span></Typography>
+            <Typography>Total {checkCurrentTab()} <span>{dataClaim.totalBox} <img src={checkCurrentTabIcon()} /></span></Typography>
+            <Typography sx={{ margin: '20px 0' }}>Claimed {checkCurrentTab()} <span>{dataClaim.claimed} <img src={checkCurrentTabIcon()} /></span></Typography>
           </DataClaimBox> : <BoxBg><img src={CLAIM_IMAGE.bgClaim} /></BoxBg>}
           {roundSelected && <ReCAPTCHA
             ref={recaptchaRef}
@@ -359,7 +349,7 @@ export const TabClaim = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      {!isMobile && <ClockUtc/>}
+      {!isMobile && <ClockUtc />}
     </Wrap>
   )
 }
