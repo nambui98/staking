@@ -5,20 +5,22 @@ interface IProps {
   label: string
   type?: 'blue' | 'green'
   sx?: any
+  active: boolean
 }
 
-export const CheckboxMarketplace: React.FC<IProps> = ({label, type, sx}) => {
+export const CheckboxMarketplace: React.FC<IProps> = ({label, type, sx, active}) => {
   const greenStyle = {
-    backgroundColor: '#4FD19066',
+    backgroundColor: '#4FD190',
     '&:before': {
-      backgroundImage: 'url(assets/icons/tickGreen.svg)'
+      backgroundImage: 'url(assets/icons/tickGreen.svg)',
+      filter: 'invert(0%) sepia(0%) saturate(0%) hue-rotate(82deg) brightness(222%) contrast(136%)'
     }
   }
   return (
     <FormGroup sx={sx}>
       <CheckboxMarket 
-        control={<Checkbox icon={<BpIcon />} checkedIcon={<BpCheckedIcon sx={type === 'green' ? greenStyle : {}} />} sx={filterCheckbox} defaultChecked />} 
-        label={label} 
+        control={<Checkbox icon={<BpIcon />} checkedIcon={<BpCheckedIcon sx={type === 'green' ? greenStyle : {}} />} sx={filterCheckbox} checked={active}  />} 
+        label={''} 
       />
     </FormGroup>
   )
@@ -33,6 +35,7 @@ const BpIcon = styled('span')(({ theme }: any) => ({
   borderRadius: "7px",
   width: '20px',
   height: '20px',
+  background: '#fff',
   boxShadow: 'inset 0 0 0 2px #5A6178, inset 0 -2px 0 #5A6178',
   '.Mui-focusVisible &': {
     outlineOffset: 2,
@@ -49,8 +52,8 @@ const BpCheckedIcon = styled(BpIcon)({
   backgroundImage: '#ff8a506e',
   '&:before': {
     display: 'block',
-    width: 14,
-    height: 14,
+    width: 10,
+    height: 12,
     backgroundImage: 'url(assets/icons/tickBlue.svg)',
     content: '""',
     backgroundRepeat: 'no-repeat',
@@ -62,7 +65,7 @@ const BpCheckedIcon = styled(BpIcon)({
 const filterCheckbox = {
   color: '#5A6178',
   '&.Mui-checked': {
-    color: '#FF8A50',
+    color: '#4FD190',
   },
   '& .MuiSvgIcon-root': { fontSize: 22, borderRadius: 20 },
 }

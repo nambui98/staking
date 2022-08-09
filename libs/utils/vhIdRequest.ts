@@ -3,7 +3,6 @@ import { AnyAaaaRecord } from 'dns';
 // import { getLocalRefreshToken, updateLocalRefreshToken } from '../../services/token.service';
 
 const vhIdRequest = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_VHID_API_HOST || 'https://api.befitter.io/',
   headers: {
     "Content-Type": "application/json",
   },

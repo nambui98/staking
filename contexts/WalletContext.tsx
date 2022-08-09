@@ -3,6 +3,7 @@ import { createContext, ReactNode, useContext, useEffect, useMemo, useState } fr
 import detectEthereumProvider from '@metamask/detect-provider';
 import { UserService } from "../services/user.service";
 import { bftBox, bftClaimGamefi, bftFiuToken, bftHeetoken, bftShoeItem, bftBusdToken } from "../libs/contracts";
+import { ENVIRONMENT_SWITCH } from "../libs/common";
 
 interface Map {
 	[key: string]: any;
@@ -60,8 +61,8 @@ const networks: Map = {
 		blockExplorerUrls: ['']
 	}
 };
-const networkKey = process.env.NEXT_PUBLIC_NETWORK || 'bscMainnet';
-const network = networks['bscMainnet'];
+
+const network = networks[ENVIRONMENT_SWITCH === 'prod' ? 'bscMainnet' : 'bscTestnet'];
 const supportedChainIds = [network.chainId];
 
 interface wallerContextType {

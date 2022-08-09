@@ -1,23 +1,25 @@
-import { Box, BoxProps, Button, InputBase, Stack, styled, Typography, useMediaQuery } from "@mui/material"
+import { Box, BoxProps, Button, Stack, styled, Typography, useMediaQuery } from "@mui/material";
+import { ethers } from "ethers";
 import { useEffect, useState } from "react";
-import { BOX_DETAILS, ICON, IMAGE, TAB_ITEM, TAB_NAME } from "../../../constants/assetsWallet";
-import { useWalletContext } from "../../../contexts/WalletContext"
-import { getBoxType, getOwnedBox, getOwnedFitterPass } from "../../../libs/claim";
-import { MarketplaceService } from "../../../services/user.service";
-import { TEXT_STYLE } from "../../../styles/common/textStyles";
-import { FormInfomationPopup } from "../marketplace/FormInfomationPopup";
-import { BoxEmpty } from "./BoxEmpty";
-import { MysteryBoxTab } from "./MysteryBoxTab";
-import { TokenTab } from "./TokenTab";
 import addressBuyBox from '../../../abi/addressBuyBox.json';
+import { BOX_DETAILS, ICON, IMAGE, TAB_ITEM, TAB_NAME } from "../../../constants/assetsWallet";
 import { useCommonContext } from "../../../contexts/CommonContext";
-import { SendToSpending } from "./SenToSpending";
+import { useWalletContext } from "../../../contexts/WalletContext";
+import { getShoesDetails } from "../../../libs/apis/assets";
+import { getBalanceShoes, getListShoes } from "../../../libs/assets";
+import { getBoxType, getOwnedBox, getOwnedFitterPass } from "../../../libs/claim";
 import { bftBox } from "../../../libs/contracts";
 import { formatMoney } from "../../../libs/utils/utils";
-import { beFITTERPassStaking } from "../../../libs/contracts";
-import { ethers, utils } from "ethers"
-import { FitterPassTab } from "./FitterPass";
+import { MarketplaceService } from "../../../services/user.service";
+import { TEXT_STYLE } from "../../../styles/common/textStyles";
 import { ClockUtc } from "../../clockUtc";
+import { FormInfomationPopup } from "../marketplace/FormInfomationPopup";
+import { BoxEmpty } from "./BoxEmpty";
+import { BoxShoes } from "./BoxShoes";
+import { FitterPassTab } from "./FitterPass";
+import { MysteryBoxTab } from "./MysteryBoxTab";
+import { SendToSpending } from "./SenToSpending";
+import { TokenTab } from "./TokenTab";
 
 export const Boxtabs = () => {
   const {walletAccount, bnbBalance, fiuBalance, heeBalance, ethersSigner, boxBalance } = useWalletContext();
@@ -30,8 +32,10 @@ export const Boxtabs = () => {
   const [tokenChoose, setTokenChoose] = useState<string>('');
   const [boxChoose, setBoxChoose] = useState<string>('');
   const [listBoxType, setListBoxType] = useState<any[]>([]);
-  const [fitterPassBalance, setFitterPassBalance] = useState<any>(0)
-
+  const [fitterPassBalance, setFitterPassBalance] = useState<any>(0);
+  const [shoeChoose, setShoeChoose] = useState<string>('');
+  const [totalShoes, setTotalShoes] = useState<string>('0')
+  const [listShoes, setListShoes] = useState<any[]>([]);
 
   const handleSwitchTab = (tab: string) => {
     setCurrentTab(tab);
@@ -46,6 +50,8 @@ export const Boxtabs = () => {
         return <MysteryBoxTab boxChoose={boxChoose} setBoxChoose={setBoxChoose} listBoxType={listBoxType} currentTab={currentTab} />
       case TAB_NAME.fitterPass:
         return <FitterPassTab fitterPassBalance={fitterPassBalance} />
+      case TAB_NAME.shoe:
+        return <BoxShoes shoeChoose={shoeChoose} setShoeChoose={setShoeChoose} listShoes={listShoes} />  
       default:
         break;
     }
@@ -62,6 +68,27 @@ export const Boxtabs = () => {
     } catch (error) {
       setTotalBox(0)
     }
+  }
+
+  const getTotalShoes = async () => {
+    const res = await getBalanceShoes(ethersSigner, walletAccount);
+    res && setTotalShoes(ethers.utils.formatUnits(res, 'wei'))
+  }
+
+  const handleGetListShoes = async () => {
+    await getTotalShoes();
+    const res = await getListShoes(ethersSigner, walletAccount);
+    const listShoesId = await res?.map((item: any, index: number) => ethers.utils.formatUnits(item, 'wei'))
+
+    const listShoesDetails = listShoesId.map(async (item: any) => {
+      const response = await getShoesDetails(item);
+      if(response.status === 200 && response.data.meta.code === 0){
+        return response.data.data
+      }
+    })
+    Promise.all(listShoesDetails).then((value) => {
+      setListShoes(value)
+    })
   }
 
   const checkAddressBuyBox = async () => {
@@ -120,6 +147,13 @@ export const Boxtabs = () => {
       setFitterPassBalance(0)
     }
   }
+  const renderBalanceOf = (tabName: string) => {
+    switch (tabName) {
+      case 'Shoes': return totalShoes
+      case 'Mystery Boxes': return totalBox
+      case 'Fitter Pass': return fitterPassBalance
+    }
+  }
 
   useEffect(() => {
     getTotalBox();
@@ -129,6 +163,8 @@ export const Boxtabs = () => {
 
   useEffect(() => {
     getTotalFitterPass()
+    getTotalShoes()
+    handleGetListShoes()
   }, [walletAccount, currentTab])
 
   return (
@@ -145,7 +181,7 @@ export const Boxtabs = () => {
                 <img style={!item.active ? iconGray : {}} src={item.icon} />{!isMobile ?
                   <Typography sx={!item.active ? { color: '#A7ACB8 !important' } : {}}>{item.title}</Typography> : currentTab === item.title && <Typography>{item.title}</Typography>}
                 {!item.active && !isMobile && <span>Coming soon</span>}
-                {!isMobile && item.active && index > 0 && <Typography>{index === 4 ? fitterPassBalance : totalBox}</Typography>}
+                {!isMobile && item.active && index > 0 && <Typography>{renderBalanceOf(item.title)}</Typography>}
               </TabItem>
             ))}
           </TabBox>
@@ -159,7 +195,17 @@ export const Boxtabs = () => {
         <BodyContent>
           {currentTab.length ? renderBodyView() : <BoxEmpty icon={ICON.shoe} emptyText={'Select assets to continue'} />}
         </BodyContent>
-        {currentTab.length && currentTab !== TAB_NAME.fitterPass ? <SendToSpending setBoxChoose={setBoxChoose} currentTab={currentTab} tokenChoose={tokenChoose} boxChoose={boxChoose} getListBox={getListBox} /> : null}
+        {currentTab.length && currentTab !== TAB_NAME.fitterPass ? 
+        <SendToSpending 
+          setBoxChoose={setBoxChoose} 
+          currentTab={currentTab} 
+          tokenChoose={tokenChoose} 
+          boxChoose={boxChoose} 
+          getListBox={getListBox} 
+          shoesChoose={shoeChoose}
+          setShoeChoose={setShoeChoose}
+          getListShoes={handleGetListShoes} /> : 
+        null}
       </TabBody>
       <FormInfomationPopup status={popupFormInfo} handleToggleStatus={() => setPopupFormInfo(false)} />
       {statusBuyBox && isMobile && !statusFormGetBonus && <BoxBonus><ButtonBonus startIcon={<img src={ICON.gift} />} onClick={() => setPopupFormInfo(true)}>GET YOUR BONUS</ButtonBonus></BoxBonus>}
@@ -237,7 +283,7 @@ const BodyContent = styled(Box)({
     paddingRight: 9
   },
   '@media (max-width: 767px)': {
-    padding: '0 16px 16px',
+    padding: '0 8px 8px',
     borderRadius: '0 0 16px 16px',
     background: '#F8F9FB'
   }
