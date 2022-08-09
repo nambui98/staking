@@ -11,6 +11,7 @@ import beFITTERTokenStaking from '../abi/BeFITTERToken.json';
 import beFitterPass from '../abi/BeFitterPass.json';
 import beFitterStake from '../abi/BeFitterStaking.json';
 import bfClaimToken from '../abi/BeFitterClaimFiu.json';
+import bfClaimFitterPass from '../abi/FitterPassGiveAway.json'
 //dev
 import bflockedPool from '../abi/FitterPassLockedPool.json';
 import bfBurningEvent from '../abi/FitterPassBurningEvent.json';
@@ -58,3 +59,4 @@ export const bftWallet = { address: address.bFWallet, abi: bfWallet.abi }
 export const beFITTERlockedPool = { address: address.beFITTERlockedPool, abi: bflockedPool.abi }
 export const bftClaimTokenAirdrop = { address: address.bFclaimTokenAirdrop, abi: bfClaimToken.abi }
 export const beFITTERBurningEvent = { address: address.beFITTERBurningEvent, abi: bfBurningEvent.abi }
+export const bftClaimFitterPass = { address: address.bFclaimFitterPass, abi: bfClaimFitterPass.abi }
