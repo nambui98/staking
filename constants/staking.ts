@@ -1,6 +1,7 @@
 export const STAKING_ICON = {
 	search: 'assets/icons/search-normal.svg',
 	fiu: 'assets/icons/fiu.svg',
+	hee: 'assets/icons/hee.svg',
 	arrowLeftGray: 'assets/icons/arrow-left-gray.svg',
 };
 
@@ -9,6 +10,7 @@ export const STAKING_IMAGE = {
 	ftpass: 'assets/ftpass.png',
 	smartPhone: 'assets/smartphone.png',
 	boxGray: 'assets/3box-gray.png',
+	roadmapBurnHee: 'assets/roadmapBurnHee.png',
 };
 
 export const ROAD_MAP = {
@@ -64,6 +66,13 @@ export const ROAD_MAP_AUCTION = {
 			isUpcomming: false,
 			textStatus: 'LIVE',
 		},
+		// {
+		// 	image: STAKING_IMAGE.roadmapBurnHee,
+		// 	title: 'HEE Exchange - Win Fitter Pass',
+		// 	status: true,
+		// 	isUpcomming: false,
+		// 	textStatus: 'LIVE',
+		// },
 
 	]
 }

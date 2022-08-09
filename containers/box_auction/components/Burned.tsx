@@ -331,7 +331,7 @@ export function Burned(props: Props) {
 					}}
 				>
 					<Item sx={{ mt: '0 !important' }}>
-						<TitleItem>MY REFUND</TitleItem>
+						<TitleItem>REFUND</TitleItem>
 					</Item>
 					<Item sx={{ mt: '0 !important' }}>
 						<TitleItem>DATE</TitleItem>

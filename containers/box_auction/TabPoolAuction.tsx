@@ -23,7 +23,7 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { PopupMessage } from '../../components/pageComponent/claim/PopupMessage';
-import { StateStaking } from '../../const';
+import { StateBurnHEE, StateStaking } from '../../const';
 import { STAKING_ICON } from '../../constants/staking';
 import { changeNetwork, useWalletContext } from '../../contexts/WalletContext';
 import { ShowAction } from './components/ShowAction';
@@ -38,6 +38,8 @@ import MuiAccordionSummary, {
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import userBurnHook from '../../libs/hooks/useBurnHook';
 import { DialogLeaderBoard } from './components/DialogLeaderBoard';
+import DialogBurnHee from './burnHee/DialogBurnHee';
+import userBurnHeeHook from '../../libs/hooks/useBurnHeeHook';
 
 const Accordion = styled((props: AccordionProps) => (
 	<MuiAccordion disableGutters elevation={0} square {...props} />
@@ -111,10 +113,12 @@ function createData(
 export const TabPoolAuction = () => {
 	const [tabCurrent, setTabCurrent] = useState<number>(0);
 	const [showLeaderBoard, setShowLeaderBoard] = useState<boolean>(false);
+	const [showBurnHee, setShowBurnHee] = useState<boolean>(false);
 	const [statusPopup, setStatusPopup] = useState<any>({
 		status: false,
 		content: <Box></Box>,
 	});
+	const [stateContentBurnInit, setStateContentBurnInit] = useState<StateBurnHEE | null>();
 	const [isLoading, setIsLoading] = useState(false);
 	const {
 		totalStake,
@@ -125,6 +129,13 @@ export const TabPoolAuction = () => {
 		statusRow } = userBurnHook({
 			setIsLoading
 		})
+	// const {
+	// 	dataMyBurn,
+	// 	totalInPool,
+	// 	balanceHee } = userBurnHeeHook({
+	// 		setIsLoading,
+	// 		setStateContent: setStateContentBurnInit
+	// 	})
 	const rows = [
 		{
 			name: 'Fitter Pass',
@@ -141,8 +152,75 @@ export const TabPoolAuction = () => {
 			),
 		},
 	];
+	const rowBurn = {
+		name: 'Burn hee',
+		title: 'Box Auction',
+		isComingSoon: false,
+		data: createData(
+			statusRow,
+			'Fitter Pass',
+			'0',
+			'-',
+			'None',
+			'None',
+			`${totalStake} Fitter Passes`
+		),
+	};
+
 
 	const handleShowBurn = (e: React.MouseEvent) => {
+		e.stopPropagation();
+		setStatusPopup({
+			status: true,
+			content: (
+				<Box>
+					<ItemHowItWord>
+						<Typography mb={1}>1.</Typography>
+						<Typography mb={1} ml={1}>Burn Fitter Pass - Get Diamond and Gold Genesis NFT Box</Typography>
+					</ItemHowItWord>
+					<ItemHowItWord>
+						<Typography mb={1}>2.</Typography>
+						<Typography mb={1} ml={1}>You are required to burn 2 Fitter Passes to participate for the very first time</Typography>
+					</ItemHowItWord>
+					<ItemHowItWord>
+						<Typography mb={1}>3.</Typography>
+						<Typography mb={1} ml={1}>
+							The top 50 ranked participants who burn the largest number of Fitter Passes will each receive a Genesis NFT Box with estimated price no less than $500.
+						</Typography>
+					</ItemHowItWord>
+					<ItemHowItWord>
+						<Typography mb={1}>4.</Typography>
+						<Typography mb={1} ml={1}>
+							Event takes place in 12 days ( Aug 06 - Aug 19)
+						</Typography>
+					</ItemHowItWord>
+					<ItemHowItWord>
+						<Typography mb={1}>5.</Typography>
+						<Typography mb={1} ml={1}>
+							After this time, winner list will be determined.
+							<br />
+							Top 1-10: get 1 Diamond Box/each
+							<br />
+							Top 11-50: get 1 Gold Box/each
+							<br />
+							All Fitter Passes from this winner list will be burned
+							<br />
+							Participants who are not named in this list will get their Fitter Passes back, excluding the 2-Fitter Pass participation fee
+						</Typography>
+					</ItemHowItWord>
+					<ItemHowItWord>
+						<Typography mb={1}>6.</Typography>
+						<Typography mb={1} ml={1}>
+							Reward and refund will be paid to users after event is closed
+						</Typography>
+					</ItemHowItWord>
+
+
+				</Box>
+			),
+		});
+	};
+	const handleShowBurnHee = (e: React.MouseEvent) => {
 		e.stopPropagation();
 		setStatusPopup({
 			status: true,
@@ -265,7 +343,7 @@ export const TabPoolAuction = () => {
 																<TableCell align="left">Token remaining</TableCell>
 																<TableCell align="left">Lock-up time</TableCell>
 																<TableCell align="left">Withdrawal delay time</TableCell>
-																<TableCell align="left">Total staked</TableCell>
+																<TableCell align="left">Total IN POOL</TableCell>
 															</TableRow>
 														</TableHead>
 														<TableBody>
@@ -398,6 +476,57 @@ export const TabPoolAuction = () => {
 						</Accordion>
 
 					</Box>
+					{/* <Row onClick={() => {
+						setShowBurnHee(true)
+					}}>
+
+						<TableContainerCus sx={{ mt: 3 }} component={Paper}>
+							<Table sx={{ minWidth: 1020 }} aria-label="simple table">
+								<TableHead>
+									<TableRow>
+										<TableCell >Status</TableCell>
+										<TableCell align="left">Reward</TableCell>
+										<TableCell align="left">Earned</TableCell>
+										<TableCell align="left">Token remaining</TableCell>
+										<TableCell align="left">Lock-up time</TableCell>
+										<TableCell align="left">Withdrawal delay time</TableCell>
+										<TableCell align="left">Total IN POOL</TableCell>
+									</TableRow>
+								</TableHead>
+								<TableBody>
+									<TableRow
+										key={rowBurn.name}
+										sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+									>
+
+										<TableCell component="th" scope="row">
+											{rowBurn.data.status}
+										</TableCell>
+										<TableCell align="left">{rowBurn.data.reward}</TableCell>
+										<TableCell align="left">{rowBurn.data.earned}</TableCell>
+										<TableCell align="left">-</TableCell>
+										<TableCell align="left">None</TableCell>
+										<TableCell align="left">None</TableCell>
+										<TableCell align="left">{rowBurn.data.total}</TableCell>
+									</TableRow>
+								</TableBody>
+							</Table>
+
+						</TableContainerCus>
+
+						<TitleItem>
+							<img src={STAKING_ICON.hee} />HEE Exchange - Win Fitter Pass
+							<span
+								style={{ textDecoration: 'underline' }}
+								onClick={
+									(e: React.MouseEvent) => handleShowBurnHee(e)
+								}
+							>
+								How it works?
+							</span>
+						</TitleItem>
+
+					</Row> */}
 				</Body>
 			</Container>
 			<PopupMessage
@@ -422,6 +551,12 @@ export const TabPoolAuction = () => {
 					e.stopPropagation();
 					// debugger
 					setShowLeaderBoard(false)
+				}}
+			/>
+			<DialogBurnHee
+				status={showBurnHee}
+				handleToggle={() => {
+					setShowBurnHee(false)
 				}}
 			/>
 		</Wrap >
@@ -486,6 +621,20 @@ const ItemHowItWord = styled(Box)({
 	'& > p:first-child': {
 		paddingRight: "8px",
 		width: "14px"
+	}
+})
+const Row = styled(Box)({
+	overflowX: 'auto', borderRadius: '16px',
+	display: 'flex',
+	flexDirection: 'column',
+	width: '100%',
+	background: "#fff",
+	position: 'relative',
+	marginTop: '20px',
+	padding: "16px 16px 0 16px",
+	cursor: 'pointer',
+	'&:hover': {
+		background: '#FFE2D3'
 	}
 })
 

@@ -1,11 +1,11 @@
-import { Box, Stack, styled, useMediaQuery } from '@mui/material';
+import { Stack, styled, useMediaQuery } from '@mui/material';
 import { ClockUtc } from '../components/clockUtc';
 import MainLayout from '../components/layouts/MainLayout';
 import { RoadMapAuction } from '../containers/box_auction/RoadMapAuction';
 import { TabPoolAuction } from '../containers/box_auction/TabPoolAuction';
 
 const BoxAuction = () => {
-	// const isMobile = useMediaQuery('(max-width: 767px)');
+	const isMobile = useMediaQuery('(max-width: 767px)');
 	return (
 		<MainLayout
 			titlePage="beFITTER - Staking pools"
@@ -13,10 +13,9 @@ const BoxAuction = () => {
 		>
 			<Wrap>
 				<TabPoolAuction />
-
 				<RoadMapAuction />
+				{!isMobile && <ClockUtc />}
 			</Wrap>
-			{/* {!isMobile && <ClockUtc/>} */}
 		</MainLayout>
 	);
 };

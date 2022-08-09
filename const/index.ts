@@ -37,3 +37,11 @@ export enum BoxAuction {
 	Success,
 	Error,
 }
+export enum StateBurnHEE {
+	HeeExchange,
+	HeeExchangeFill,
+	HeeExchangeHistories,
+	Success,
+	Error,
+
+}
