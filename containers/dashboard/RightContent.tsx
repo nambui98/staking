@@ -93,7 +93,7 @@ export default function RightContent({ }: Props) {
 
 					<img src="assets/leaderboardBoxauction.png" alt="" />
 				</Box>
-				<Box sx={{ padding: '4px 8px', height: '26px', backgroundColor: '#FF6D24', mr: "8px", borderRadius: '8px', fontSize: '14px', fontWeight: '500', display: 'inline-block' }}>
+				<Box sx={{ padding: '4px 8px', height: '26px', color: "#fff", backgroundColor: '#FF6D24', mr: "8px", borderRadius: '8px', fontSize: '14px', fontWeight: '500', display: 'inline-block' }}>
 					Leadeboard
 				</Box>
 			</Top>
