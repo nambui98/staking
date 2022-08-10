@@ -18,7 +18,7 @@ const columns: readonly Column[] = [
 		id: 'tokenAmount',
 		label: 'BURNED',
 		minWidth: 80,
-		format: (value: number) => formatMoney(ethers.utils.formatEther(convertBigNumber(value))) + ' FIU',
+		format: (value: number) => formatMoney(ethers.utils.formatEther(convertBigNumber(value))) + ' HEE',
 	},
 	{
 		id: 'numberOfPass',

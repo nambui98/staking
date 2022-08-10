@@ -646,14 +646,12 @@ const Wrap = styled(Stack)({
 	},
 });
 const customWidthPopup = {
-	'@media (max-width: 650px)': {
-		marginBottom: '16px',
-		marginTop: '16px',
-		paddingTop: '0px',
-	},
+	padding: '0px 16px 0px 16px',
+	margin: '16px 0px 16px 0px',
 	'@media (min-width: 650px)': {
 		width: '541px !important',
-		paddingTop: '8px',
+		padding: '0px 24px 0px 24px',
+		margin: '24px 0px 24px 0px',
 	},
 	'@media (max-height: 720px)': {
 		overflowY: 'auto',

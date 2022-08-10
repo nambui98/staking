@@ -139,7 +139,6 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 					}}
 					sx={{
 						position: 'absolute',
-						top: isMobile ? '0' : '18px',
 						right: '18px',
 						cursor: 'pointer',
 					}}
@@ -199,13 +198,6 @@ const borderRadius = {
 	},
 };
 
-const closeIcon = {
-	position: 'absolute',
-	top: '18px',
-	right: '18px',
-	cursor: 'pointer',
-};
-
 const TitlePopup = styled(DialogTitle)({
 	fontSize: '16px !important',
 	fontWeight: '600',
@@ -226,19 +218,13 @@ type stackPropsNew = StackProps & {
 };
 const Wrap = styled(Stack)((props: stackPropsNew) => ({
 	position: 'relative',
-	padding: '16px 16px 0px 16px',
+	padding: '0px 16px 0px 16px',
+	margin: '16px 0px 16px 0px',
 	overflowY: 'auto',
 	overflowX: 'hidden',
 	width: 'calc(100vw - 32px)',
 	height: "auto",
-	// height: 'calc(100vh - 32px)',
 	'@media (min-width: 650px)': {
 		width: props.isBig ? '464px' : '360px',
-		// height: '490px',
-		padding: '16px',
-	},
-	'@media (max-width: 650px)': {
-		padding: '0px 16px 0px 16px',
-		margin: '16px 0px 16px 0px',
 	},
 }));

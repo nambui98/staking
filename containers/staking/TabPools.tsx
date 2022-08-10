@@ -233,13 +233,6 @@ export const TabPools = () => {
 			),
 		});
 	};
-	const handleShowPopupDetail = (title: String, content: any) => {
-		setShowDialogItem({
-			status: true,
-			title: title,
-			content: content,
-		});
-	};
 	return (
 		<Wrap>
 			<Container sx={{ maxWidth: 1120 }}>
@@ -442,12 +435,10 @@ export const TabPools = () => {
 			/>
 
 			<DialogsItemStaking
-				// status={showDialogItem.status}
 				isEnable={isEnable}
 				stateContentInit={stateContentInit}
 				dataActive={rows[activeItem]}
 				status={activeItem !== null}
-				// handleToggle={() => setShowDialogItem({ ...showDialogItem, status: false })}
 				handleToggle={() => setActiveItem(null)}
 				title={showDialogItem.title}
 				content={showDialogItem.content}
@@ -478,14 +469,12 @@ export const TabPools = () => {
 
 const Wrap = styled(Stack)({});
 const customWidthPopup = {
-	'@media (max-width: 650px)': {
-		marginBottom: '16px',
-		marginTop: '16px',
-		paddingTop: '0px',
-	},
+	padding: '0px 16px 0px 16px',
+	margin: '16px 0px 16px 0px',
 	'@media (min-width: 650px)': {
 		width: '541px !important',
-		paddingTop: '8px',
+		padding: '0px 24px 0px 24px',
+		margin: '24px 0px 24px 0px',
 	},
 	'@media (max-height: 720px)': {
 		overflowY: 'auto',

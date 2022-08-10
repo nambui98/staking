@@ -172,7 +172,6 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 					}}
 					sx={{
 						position: 'absolute',
-						top: isMobile ? '0' : '18px',
 						right: '18px',
 						cursor: 'pointer',
 					}}
@@ -339,59 +338,11 @@ const Search = styled(TextField)({
 		},
 	},
 });
-const ButtonPercent = styled(Button)({
-	color: '#55C8FC',
-	background: ' #D9F2FD',
-	borderRadius: '4px',
-	padding: '5px 5px',
-	minWidth: '35px',
-	textTransform: 'none',
-	':hover': {
-		background: ' #d0edfa',
-	},
-});
-const ButtonStakeMore = styled(Button)({
-	color: '#5A6178',
-	background: 'transparent',
-	borderRadius: '12px',
-	border: '1px solid #A7ACB8',
-	// padding: "5px 5px",
-	// minWidth: "35px",
-
-	height: '56px',
-	textTransform: 'none',
-	transition: 'all .3s',
-	':hover': {
-		background: '#FF8A50',
-		border: '0px',
-		color: '#fff',
-	},
-	':disabled': {},
-});
-const Item = styled(Box)({
-	display: 'flex',
-	alignItems: 'center',
-	justifyContent: 'space-between',
-	marginTop: '25px',
-});
-const TitleItem = styled(Typography)({
-	fontSize: '12px',
-	color: '#898E9E',
-	fontWeight: '500',
-	lineHeight: '18px',
-	textTransform: 'uppercase',
-});
-const ValueItem = styled(Typography)({
-	fontSize: '12px',
-	color: '#31373E',
-	fontWeight: '500',
-	lineHeight: '18px',
-});
 
 const Wrap = styled(Stack)({
 	position: 'relative',
-	padding: '16px 16px 0px 16px',
-	// margin: "16px 0px",
+	padding: '0px 16px 0px 16px',
+	margin: '16px 0px 16px 0px',
 	overflowY: 'auto',
 	overflowX: 'hidden',
 	width: 'calc(100vw - 32px)',
@@ -399,11 +350,6 @@ const Wrap = styled(Stack)({
 	'@media (min-width: 650px)': {
 		width: '360px',
 		height: '465px',
-		padding: '16px',
-	},
-	'@media (max-width: 650px)': {
-		padding: '0px 16px 0px 16px',
-		margin: '16px 0px 16px 0px',
 	},
 });
 const TitlePopup = styled(DialogTitle)({

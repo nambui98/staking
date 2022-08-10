@@ -19,18 +19,18 @@ const HeeExchange = (props: Props) => {
 			</Item>
 			<Item>
 				<TitleItem >START TIME JOIN</TitleItem>
-				<ValueItem>16:00 UTC 19/07/2022</ValueItem>
+				<ValueItem>00:00 UTC 10/08/2022</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem >End time JOIN</TitleItem>
-				<ValueItem>16:00 UTC 03/08/2022</ValueItem>
+				<ValueItem>00:00 UTC 19/08/2022</ValueItem>
 			</Item>
 			<Item>
-				<TitleItem >stake amount (min)</TitleItem>
-				<ValueItem>4000 FIU/1 person</ValueItem>
+				<TitleItem >required amount (min)</TitleItem>
+				<ValueItem>-</ValueItem>
 			</Item>
 			<Item>
-				<TitleItem >stake amount (mAX)</TitleItem>
+				<TitleItem >required amount (max)</TitleItem>
 				<ValueItem>-</ValueItem>
 			</Item>
 			<Item>

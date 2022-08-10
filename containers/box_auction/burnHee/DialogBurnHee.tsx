@@ -107,7 +107,6 @@ const DialogBurnHee = ({
 					}}
 					sx={{
 						position: 'absolute',
-						top: isMobile ? '0' : '18px',
 						right: '18px',
 						cursor: 'pointer',
 					}}
@@ -180,20 +179,38 @@ type stackPropsNew = StackProps & {
 };
 const Wrap = styled(Stack)((props: stackPropsNew) => ({
 	position: 'relative',
-	padding: '16px 16px 0px 16px',
 	overflowY: 'auto',
 	overflowX: 'hidden',
+	padding: '0px 16px 0px 16px',
+	margin: '16px 0px 16px 0px',
 	width: 'calc(100vw - 32px)',
 	height: 'calc(100vh - 32px)',
 	'@media (min-width: 650px)': {
 		width: props.isBig ? '464px' : '360px',
 		height: '490px',
-		padding: '16px',
 	},
-	'@media (max-width: 650px)': {
-		padding: '0px 16px 0px 16px',
-		margin: '16px 0px 16px 0px',
+	'&::-webkit-scrollbar': {
+		width: "5px",
+		borderRadius: "5px"
 	},
+
+	/* Track */
+	'&::-webkit-scrollbar-track': {
+		background: '#f1f1f1',
+		borderRadius: "5px"
+	}
+	,
+	/* Handle */
+	'&::-webkit-scrollbar-thumb': {
+		background: '#888',
+		borderRadius: "5px"
+	},
+
+	/* Handle on hover */
+	'&::-webkit-scrollbar-thumb:hover': {
+		background: '#555',
+		borderRadius: "5px"
+	}
 }));
 
 export default DialogBurnHee

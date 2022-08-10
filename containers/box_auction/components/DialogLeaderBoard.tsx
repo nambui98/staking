@@ -124,7 +124,6 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 					}}
 					sx={{
 						position: 'absolute',
-						top: isMobile ? '0' : '18px',
 						right: '18px',
 						cursor: 'pointer',
 					}}
@@ -178,7 +177,7 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 					</Box>
 					{/* table */}
 					<Paper sx={{ width: '100%', overflow: 'hidden', boxShadow: 'none' }}>
-						<TableContainer sx={{ maxHeight: 308, border: 'none' }}>
+						<TableContainerCus sx={{ maxHeight: 308, border: 'none' }}>
 							<Table stickyHeader aria-label="sticky table">
 								<TableHead>
 									<TableRow>
@@ -252,7 +251,7 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 									})}
 								</TableBody>
 							</Table>
-						</TableContainer>
+						</TableContainerCus>
 					</Paper>
 				</Box>
 			</Wrap>
@@ -260,6 +259,30 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 		</Dialog >
 	);
 };
+
+const TableContainerCus = styled(TableContainer)({
+	'&::-webkit-scrollbar': {
+		width: "5px",
+		borderRadius: "5px"
+	},
+
+	/* Track */
+	'&::-webkit-scrollbar-track': {
+		background: '#f1f1f1'
+	}
+	,
+	/* Handle */
+	'&::-webkit-scrollbar-thumb': {
+		background: '#888',
+		borderRadius: "5px"
+	},
+
+	/* Handle on hover */
+	'&::-webkit-scrollbar-thumb:hover': {
+		background: '#555',
+
+	}
+})
 type buttonNew = ButtonProps & {
 	isDisabled: boolean | null;
 };
@@ -325,19 +348,13 @@ const TitlePopup = styled(DialogTitle)({
 
 const Wrap = styled(Stack)((props: StackProps) => ({
 	position: 'relative',
-	padding: '16px 16px 0px 16px',
+	padding: '0px 16px 0px 16px',
+	margin: '16px 0px 16px 0px',
 	overflowY: 'auto',
 	overflowX: 'hidden',
 	width: 'calc(100vw - 32px)',
 	height: "auto",
-	// height: 'calc(100vh - 32px)',
 	'@media (min-width: 650px)': {
 		width: '560px',
-		// height: '490px',
-		padding: '16px',
-	},
-	'@media (max-width: 650px)': {
-		padding: '0px 16px 0px 16px',
-		margin: '16px 0px 16px 0px',
 	},
 }));
