@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import { Backdrop, Box, CircularProgress, Dialog, DialogTitle, Stack, StackProps } from '@mui/material';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StateBurnHEE } from '../../../const';
 import { STAKING_ICON, STAKING_IMAGE } from '../../../constants/staking';
-import userBurnHeeHook from '../../../libs/hooks/useBurnHeeHook';
+import userBurnHeeHook, { row } from '../../../libs/hooks/useBurnHeeHook';
 import { TEXT_STYLE } from '../../../styles/common/textStyles';
 import { Error } from '../../staking/components/Error';
 import { Success } from '../../staking/components/Success';
@@ -14,25 +14,30 @@ import HeeExchangeFillHistories from './HeeExchangeFillHistories';
 type Props = {
 	status: boolean;
 	handleToggle: () => any;
+	stateContentBurnInit: StateBurnHEE | null,
+	dataMyBurned: row[] | undefined;
+	totalInPool: string;
+	balanceHee: string;
+	isApproved: boolean;
+	allowance: number;
+	earned: string;
 }
 
 const DialogBurnHee = ({
 	status,
-	handleToggle
+	handleToggle,
+	stateContentBurnInit,
+	dataMyBurned,
+	totalInPool,
+	balanceHee,
+	isApproved,
+	allowance
 }: Props) => {
 
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [stateContent, setStateContent] = useState<StateBurnHEE | null>(
-		StateBurnHEE.HeeExchangeHistories
+		StateBurnHEE.HeeExchange
 	);
-	const {
-		dataMyBurn,
-		totalInPool,
-		balanceHee,
-		isApproved } = userBurnHeeHook({
-			setIsLoading,
-			setStateContent
-		})
 	const [success, setSuccess] = useState<any>({
 		titleSuccess: 'Staked successfully!',
 		functionSuccess: '',
@@ -42,6 +47,12 @@ const DialogBurnHee = ({
 		titleError: 'Something went wrong, please try again',
 		functionError: '',
 	});
+	useEffect(() => {
+		if (stateContent !== StateBurnHEE.Success && stateContent !== StateBurnHEE.Error) {
+
+			setStateContent(stateContentBurnInit);
+		}
+	}, [stateContentBurnInit]);
 	const handleClickSuccess = ({
 		titleSuccess = '',
 		functionSuccess = null,
@@ -116,9 +127,9 @@ const DialogBurnHee = ({
 						<HeeExchange />
 						:
 						stateContent == StateBurnHEE.HeeExchangeFill ?
-							<HeeExchangeFill {...propsCommon} balanceHee={balanceHee} isApproved={isApproved} /> :
+							<HeeExchangeFill {...propsCommon} balanceHee={balanceHee} isApproved={isApproved} allowance={allowance} /> :
 							stateContent == StateBurnHEE.HeeExchangeHistories ?
-								<HeeExchangeFillHistories {...propsCommon} dataMyBurn={dataMyBurn} /> :
+								<HeeExchangeFillHistories {...propsCommon} dataMyBurned={dataMyBurned} /> :
 
 								stateContent === StateBurnHEE.Success ? (
 									<Success success={success} setStateContent={setStateContent} />

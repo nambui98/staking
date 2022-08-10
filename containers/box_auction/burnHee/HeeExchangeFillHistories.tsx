@@ -7,7 +7,7 @@ import { StateBurnHEE } from '../../../const';
 import { convertBigNumber, row } from '../../../libs/hooks/useBurnHeeHook';
 import { formatMoney } from '../../../libs/utils/utils';
 interface Column {
-	id: 'tokenAmount' | 'lockedTime' | 'fpNum' | 'sId' | 'stakingTime' | 'widthdraw';
+	id: 'tokenAmount' | 'numberOfPass' | 'id';
 	label: string;
 	minWidth?: number;
 	align?: 'right';
@@ -16,26 +16,16 @@ interface Column {
 const columns: readonly Column[] = [
 	{
 		id: 'tokenAmount',
-		label: 'STAKING',
+		label: 'BURNED',
 		minWidth: 80,
 		format: (value: number) => formatMoney(ethers.utils.formatEther(convertBigNumber(value))) + ' FIU',
 	},
 	{
-		id: 'lockedTime',
-		label: 'LOCK DURATION',
-		minWidth: 120,
-		format: (value: number) => {
-			let lockDuration = value / 60 / 60 / 24;
-			return lockDuration.toString().length < 3 ? lockDuration.toString() : lockDuration.toFixed(4) + ' DAYS';
-		}
-	},
-	{
-		id: 'fpNum',
+		id: 'numberOfPass',
 		label: 'REWARDS',
 		minWidth: 120,
 		format: (value: number) => value.toString() + (value <= 1 ? ' FITTER PASS' : ' FITTER PASSES')
-	},
-	{ id: 'widthdraw', label: '' },
+	}
 ];
 interface Data {
 	tokenAmount: string;
@@ -44,30 +34,30 @@ interface Data {
 	widthdraw: string | null
 }
 type Props = {
-	dataMyBurn: row[] | undefined;
+	dataMyBurned: row[] | undefined;
 	setStateContent: Function;
 }
 
 const HeeExchangeFillHistories = ({
-	dataMyBurn,
+	dataMyBurned,
 	setStateContent
 }: Props) => {
 	const timeUTC = (timeStamp: number) => {
 		let time = new Date(timeStamp * 1000);
 		return moment(time).utc().format('DD MMMM YYYY');
 	}
-	const arrayDays = dataMyBurn?.map((item: row) => {
-		return timeUTC(parseInt(item.stakingTime.toString()))
+	const arrayDays = dataMyBurned?.map((item: row) => {
+		return timeUTC(parseInt(item.timestamp.toString()))
 	})
 	var arrayDaysUq = arrayDays?.filter((v, i: number, a) => a.indexOf(v) === i);
 	const newArrayDaysUq = arrayDaysUq?.map((time: string) => {
-		const items: row[] | undefined = dataMyBurn?.map((e) => {
+		const items: row[] | undefined = dataMyBurned?.map((e) => {
 			return {
 				...e,
 				// stakingTime: timeUTC(parseInt(e.stakingTime.toString())),
 				// lockedTime: e.lockedTime 
 			}
-		}).filter(e => timeUTC(parseInt(e.stakingTime.toString())) === time);
+		}).filter(e => timeUTC(parseInt(e.timestamp.toString())) === time);
 		return {
 			time,
 			rows: items
@@ -76,70 +66,70 @@ const HeeExchangeFillHistories = ({
 	const handleBurnMore = () => {
 		setStateContent(StateBurnHEE.HeeExchangeFill)
 	}
-	// const renderItem = () => {
-	// 	return newArrayDaysUq?.map((item, i) => {
-	// 		// createData()
-	// 		return (
-	// 			<Box key={i} sx={{ mt: '24px' }}>
-	// 				<Box
-	// 					sx={{
-	// 						fontSize: '12px',
-	// 						fontWeight: '500',
-	// 						lineHeight: '18px',
-	// 						textTransform: 'uppercase',
-	// 						background: '#FFE2D3',
-	// 						display: 'inline-block',
-	// 						padding: '4px 16px',
-	// 						marginLeft: '-24px',
-	// 						color: "#FF6D24"
-	// 					}}
-	// 				>
-	// 					{item.time}
-	// 				</Box>
-	// 				<TableContainer >
-	// 					<Table stickyHeader aria-label="sticky table">
-	// 						<TableHead>
-	// 							<TableRow>
-	// 								{columns.map((column) => (
-	// 									<TableCell
-	// 										sx={{ fontSize: '12px', padding: '8px 8px', fontWeight: '500', color: '#898E9E' }}
-	// 										key={column.id}
-	// 										align={column.align}
-	// 										style={{ minWidth: column.minWidth }}
-	// 									>
-	// 										{column.label}
-	// 									</TableCell>
-	// 								))}
-	// 							</TableRow>
-	// 						</TableHead>
-	// 						<TableBody>
-	// 							{item.rows && item.rows
-	// 								.map((row, index) => {
-	// 									return (
-	// 										<TableRow hover role="checkbox" tabIndex={-1} key={index}>
-	// 											{columns.map((column) => {
+	const renderItem = () => {
+		return newArrayDaysUq?.map((item, i) => {
+			// createData()
+			return (
+				<Box key={i} sx={{ mt: '24px' }}>
+					<Box
+						sx={{
+							fontSize: '12px',
+							fontWeight: '500',
+							lineHeight: '18px',
+							textTransform: 'uppercase',
+							background: '#FFE2D3',
+							display: 'inline-block',
+							padding: '4px 16px',
+							marginLeft: '-24px',
+							color: "#FF6D24"
+						}}
+					>
+						{item.time}
+					</Box>
+					<TableContainer >
+						<Table stickyHeader aria-label="sticky table">
+							<TableHead>
+								<TableRow>
+									{columns.map((column) => (
+										<TableCell
+											sx={{ fontSize: '12px', padding: '8px 8px', fontWeight: '500', color: '#898E9E' }}
+											key={column.id}
+											align={column.align}
+											style={{ minWidth: column.minWidth }}
+										>
+											{column.label}
+										</TableCell>
+									))}
+								</TableRow>
+							</TableHead>
+							<TableBody>
+								{item.rows && item.rows
+									.map((row, index) => {
+										return (
+											<TableRow hover role="checkbox" tabIndex={-1} key={index}>
+												{columns.map((column) => {
 
 
-	// 												const value = row[column.id];
-	// 												return (
-	// 													<TableCell sx={{ fontSize: '12px', padding: '8px 8px', color: '#31373E', fontWeight: '500', borderBottom: 'none' }} key={column.id} align={column.align}>
-	// 														{column.format && typeof value === 'number'
-	// 															? column.format(value)
-	// 															: value}
-	// 													</TableCell>
-	// 												);
+													const value = row[column.id];
+													return (
+														<TableCell sx={{ fontSize: '12px', padding: '8px 8px', color: '#31373E', fontWeight: '500', borderBottom: 'none' }} key={column.id} align={column.align}>
+															{column.format && typeof value === 'number'
+																? column.format(value)
+																: value}
+														</TableCell>
+													);
 
-	// 											})}
-	// 										</TableRow>
-	// 									);
-	// 								})}
-	// 						</TableBody>
-	// 					</Table>
-	// 				</TableContainer>
-	// 			</Box>
-	// 		);
-	// 	});
-	// };
+												})}
+											</TableRow>
+										);
+									})}
+							</TableBody>
+						</Table>
+					</TableContainer>
+				</Box>
+			);
+		});
+	};
 	return (
 		<Box sx={{ height: "465px" }}>
 			<ButtonOutline
@@ -149,7 +139,7 @@ const HeeExchangeFillHistories = ({
 			>
 				Burn more
 			</ButtonOutline>
-			{/* {renderItem()} */}
+			{renderItem()}
 		</Box>
 	);
 }

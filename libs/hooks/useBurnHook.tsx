@@ -27,7 +27,7 @@ export default function userBurnHook(props: Props) {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
+		if (walletAccount && ethersSigner) {
 			const isApproved = await isApprovedForAll(
 				walletAccount,
 				ethersSigner
@@ -48,7 +48,7 @@ export default function userBurnHook(props: Props) {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
+		if (walletAccount && ethersSigner) {
 			const checkIsRegistered = await isRegistered(
 				walletAccount,
 				ethersSigner
@@ -83,7 +83,7 @@ export default function userBurnHook(props: Props) {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
+		if (walletAccount && ethersSigner) {
 			const balance = await getBalanceFP(walletAccount, ethersSigner);
 			setBalanceFT(balance);
 		} else {
@@ -94,7 +94,7 @@ export default function userBurnHook(props: Props) {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
+		if (walletAccount && ethersSigner) {
 			const balance = await getNumberOfFP(walletAccount, ethersSigner);
 			setNumberBurned(balance);
 		} else {

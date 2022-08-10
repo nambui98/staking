@@ -23,6 +23,7 @@ import bfHeeTokenDev from '../abiDev/BFHeeToken.json';
 import bfFiuTokenDev from '../abiDev/BFFiuToken.json';
 import bfShoeItemDev from '../abiDev/BFShoeItem.json';
 import bfWalletDev from '../abiDev/BeFitterWallet.json'
+import ExchangeHeeForFitterPassDev from '../abiDev/ExchangeHeeForFitterPass.json'
 
 //contract
 import { CONTRACT_PROD } from './contract/prod';
@@ -34,7 +35,7 @@ interface Map {
 }
 
 const addresses: Map = {
-  ['prod']: CONTRACT_PROD,
+	['prod']: CONTRACT_PROD,
 	['dev']: CONTRACT_DEV,
 }
 
@@ -60,3 +61,4 @@ export const beFITTERlockedPool = { address: address.beFITTERlockedPool, abi: bf
 export const bftClaimTokenAirdrop = { address: address.bFclaimTokenAirdrop, abi: bfClaimToken.abi }
 export const beFITTERBurningEvent = { address: address.beFITTERBurningEvent, abi: bfBurningEvent.abi }
 export const bftClaimFitterPass = { address: address.bFclaimFitterPass, abi: bfClaimFitterPass.abi }
+export const bftBurnHee = { address: address.burnHeeAddress, abi: ExchangeHeeForFitterPassDev.abi }

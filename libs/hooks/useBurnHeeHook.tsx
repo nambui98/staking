@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { StateBurnHEE } from '../../const';
 import { changeNetwork, useWalletContext } from '../../contexts/WalletContext';
-import { getAllowanceBurnHee, getBalanceMyHee, getBalanceTotalInPool, getHistoriesBurnHee } from '../burnHee';
+import { getAllowanceBurnHee, getBalanceMyHee, getTotalTokenIn, getUserExchanges, getUserTokenOut } from '../burnHee';
 type Props = {
 	setIsLoading: Function;
 	setStateContent: Function
@@ -44,22 +44,21 @@ export const convertBigNumber = (number: any) => {
 	return number.toString();
 }
 export type row = {
-	sId: number,
-	lockedTime: number,
-	numberOfBlocks: number,
-	stakingTime: number | string,
+	id: number,
+	numberOfPass: number,
+	timestamp: number | string,
 	tokenAmount: number,
-	fpNum: number,
-	withdrawn: number
 }
 export default function userBurnHeeHook(props: Props) {
 	const { setIsLoading, setStateContent } = props;
-	const [isApproved, setIsApproved] = useState<boolean>(false);
+	const [isApprovedBurn, setIsApprovedBurn] = useState<boolean>(false);
+	const [allowance, setAllowance] = useState<number>(0);
 
 	const [balanceHee, setBalanceHee] = useState('');
 	const [statusRow, setStatusRow] = useState('-');
-	const [dataMyBurn, setDataMyBurn] = useState<row[]>();
+	const [dataMyBurned, setDataMyBurned] = useState<row[]>();
 	const [totalInPool, setTotalInPool] = useState("0");
+	const [earned, setEarned] = useState("0");
 	const {
 		setToggleActivePopup,
 		walletAccount,
@@ -74,94 +73,104 @@ export default function userBurnHeeHook(props: Props) {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
+		if (walletAccount && ethersSigner) {
 			const allowance = await getAllowanceBurnHee(
 				walletAccount,
 				ethersSigner
 			);
-			console.log(allowance);
-			// debugger
 			if (allowance > 0) {
-				setIsApproved(true);
+				debugger
+				setIsApprovedBurn(true);
+				setAllowance(allowance);
+
 			} else {
-				setIsApproved(false);
+				setIsApprovedBurn(false);
+				setAllowance(0);
 			}
 		} else {
 		}
 	};
-	const getAllUserS = async () => {
+	const getHistoriesBurnHee = async () => {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
-			const data = await getHistoriesBurnHee(
+		if (walletAccount && ethersSigner) {
+			const data = await getUserExchanges(
 				walletAccount,
 				ethersSigner
 			);
-			setDataMyBurn(convertData(data));
-			console.log(convertData(data));
-			// debugger
+			setDataMyBurned(convertData(data));
 			if (data.length > 0) {
 				setStateContent(StateBurnHEE.HeeExchangeHistories);
 			}
 		} else {
 		}
 	};
-	const getBalance = async () => {
+	const getBalanceTotalInPool = async () => {
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
 		if (ethersSigner) {
-			const data = await getBalanceTotalInPool(
-				ethersSigner
-			);
+			const data = await getTotalTokenIn(ethersSigner);
 			setTotalInPool(data);
+		} else {
+			setTotalInPool('0');
+		}
+
+	};
+	const getFitterPassEarned = async () => {
+		if (!chainIdIsSupported) {
+			await changeNetwork(provider);
+		}
+		if (ethersSigner && walletAccount) {
+			const data = await getUserTokenOut(walletAccount, ethersSigner);
+			setEarned(data);
+		} else {
+			setEarned('0')
 		}
 
 	};
 	const getBalanceHee = async () => {
-		// setIsLoading(true);
 		if (!chainIdIsSupported) {
 			await changeNetwork(provider);
 		}
-		if (walletAccount) {
+		if (walletAccount && ethersSigner) {
 			const balance = await getBalanceMyHee(walletAccount, ethersSigner);
 			setBalanceHee(balance);
 		} else {
 			setBalanceHee('0');
-			// setIsLoading(false);
 		}
 	};
 	const getAll = async () => {
 		setIsLoading(true);
 		await Promise.all([
-			// getAllowance(),
-			// getAllUserS(),
-			// getBalance(),
+			getAllowance(),
+			getHistoriesBurnHee(),
+			getBalanceTotalInPool(),
+			getFitterPassEarned(),
 			getBalanceHee()
 		]);
 		setIsLoading(false);
 	};
 	useEffect(() => {
 		getAll();
+
 	}, [walletAccount, refresh, ethersSigner]);
-
-	// useEffect(() => {
-	// 	if (walletAccount) {
-	// 		setStateContent(StateBurnHEE.HeeExchangeFill)
-	// 	} else {
-	// 		setStateContent(StateBurnHEE.HeeExchange)
-	// 	}
-	// }, [
-	// 	walletAccount,
-
-	// ]);
+	useEffect(() => {
+		if (walletAccount) {
+			setStateContent(StateBurnHEE.HeeExchangeFill);
+		} else {
+			setStateContent(StateBurnHEE.HeeExchange);
+		}
+	}, [walletAccount])
 
 	return {
-		isApproved,
-		dataMyBurn,
+		isApprovedBurn,
+		dataMyBurned,
 		totalInPool,
-		balanceHee
+		balanceHee,
+		earned,
+		allowance
 	}
 }
 

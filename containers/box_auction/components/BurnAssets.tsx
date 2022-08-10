@@ -88,7 +88,7 @@ export function BurnAssets(props: Props) {
 				<Box>
 
 					<ValueItem>
-						<InputCustom type="number" inputProps={{ min: 4, max: 10 }} value={burnNumber} onChange={(e) => {
+						<InputCustom type="number" value={burnNumber} onChange={(e) => {
 							if (parseInt(e.target.value) > parseInt(balanceFT)) {
 								setBurnNumber(parseInt(balanceFT));
 							} else if (parseInt(e.target.value) < 1 || e.target.value.trim() === '') {

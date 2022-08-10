@@ -118,7 +118,7 @@ export const TabPoolAuction = () => {
 		status: false,
 		content: <Box></Box>,
 	});
-	const [stateContentBurnInit, setStateContentBurnInit] = useState<StateBurnHEE | null>();
+	const [stateContentBurnInit, setStateContentBurnInit] = useState<StateBurnHEE | null>(StateBurnHEE.HeeExchange);
 	const [isLoading, setIsLoading] = useState(false);
 	const {
 		totalStake,
@@ -129,13 +129,16 @@ export const TabPoolAuction = () => {
 		statusRow } = userBurnHook({
 			setIsLoading
 		})
-	// const {
-	// 	dataMyBurn,
-	// 	totalInPool,
-	// 	balanceHee } = userBurnHeeHook({
-	// 		setIsLoading,
-	// 		setStateContent: setStateContentBurnInit
-	// 	})
+	const {
+		dataMyBurned,
+		totalInPool,
+		balanceHee,
+		earned,
+		isApprovedBurn,
+		allowance } = userBurnHeeHook({
+			setIsLoading,
+			setStateContent: setStateContentBurnInit
+		})
 	const rows = [
 		{
 			name: 'Fitter Pass',
@@ -157,13 +160,13 @@ export const TabPoolAuction = () => {
 		title: 'Box Auction',
 		isComingSoon: false,
 		data: createData(
-			statusRow,
+			parseInt(earned) > 0 ? 'Joined' : '-',
 			'Fitter Pass',
-			'0',
+			`${parseInt(earned) > 0 ? earned + ' Fitter Passes' : '0 Fitter Pass'} `,
 			'-',
 			'None',
 			'None',
-			`${totalStake} Fitter Passes`
+			`${totalInPool} HEE`
 		),
 	};
 
@@ -476,7 +479,7 @@ export const TabPoolAuction = () => {
 						</Accordion>
 
 					</Box>
-					{/* <Row onClick={() => {
+					<Row onClick={() => {
 						setShowBurnHee(true)
 					}}>
 
@@ -526,7 +529,7 @@ export const TabPoolAuction = () => {
 							</span>
 						</TitleItem>
 
-					</Row> */}
+					</Row>
 				</Body>
 			</Container>
 			<PopupMessage
@@ -555,6 +558,13 @@ export const TabPoolAuction = () => {
 			/>
 			<DialogBurnHee
 				status={showBurnHee}
+				stateContentBurnInit={stateContentBurnInit}
+				dataMyBurned={dataMyBurned}
+				totalInPool={totalInPool}
+				balanceHee={balanceHee}
+				earned={earned}
+				isApproved={isApprovedBurn}
+				allowance={allowance}
 				handleToggle={() => {
 					setShowBurnHee(false)
 				}}
