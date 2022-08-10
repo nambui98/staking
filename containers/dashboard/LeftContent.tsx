@@ -22,8 +22,15 @@ export default function LeftContent({ }: Props) {
 						</a>
 					</Event>
 				</Item>
+				<Item>
+					<Event href={'/burn'} >
+						<a>
+							<img src="assets/imageBoxBurnHee.png" width={"100%"} alt="" />
+						</a>
+					</Event>
+				</Item>
 			</GroupItem>
-			<GroupItem>
+			{/* <GroupItem>
 				<Title >
 					UPCOMING EVENT
 				</Title>
@@ -34,7 +41,7 @@ export default function LeftContent({ }: Props) {
 						</a>
 					</Event>
 				</Item>
-			</GroupItem>
+			</GroupItem> */}
 		</Wrap>
 	)
 }

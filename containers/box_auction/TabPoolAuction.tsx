@@ -230,7 +230,7 @@ export const TabPoolAuction = () => {
 			status: true,
 			content: (
 				<Box>
-					<Typography mb={1} fontSize="16px" fontWeight={600}>HEE BURNING TRAIL (Aug 10 - Aug 19)</Typography>
+					<Typography mb={1} fontSize="16px" fontWeight={600}>HEE EXCHANGE - WIN FITTER PASS (Aug 10 - Aug 19)</Typography>
 					<Typography mb={1}>Easiest way to get your own powerful NFT item - Fitter Pass</Typography>
 					<ItemHowItWord>
 						<Typography mb={1}>1.</Typography>
@@ -505,7 +505,7 @@ export const TabPoolAuction = () => {
 						</TableContainerCus>
 
 						<TitleItem>
-							<img src={STAKING_ICON.hee} />HEE Burning Trail
+							<img src={STAKING_ICON.hee} />HEE EXCHANGE - WIN FITTER PASS
 							<span
 								style={{ textDecoration: 'underline' }}
 								onClick={
@@ -653,7 +653,7 @@ const customWidthPopup = {
 	},
 	'@media (max-height: 720px)': {
 		overflowY: 'auto',
-		height: 'calc(100vh - 32px)',
+		// height: 'calc(100vh - 32px)',
 	},
 };
 const BodyPopup = styled(Box)({

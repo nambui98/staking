@@ -68,7 +68,7 @@ export const ROAD_MAP_AUCTION = {
 		},
 		{
 			image: STAKING_IMAGE.roadmapBurnHee,
-			title: 'HEE Burning Trail',
+			title: 'HEE EXCHANGE - WIN FITTER PASS',
 			status: true,
 			isUpcomming: false,
 			textStatus: 'LIVE',

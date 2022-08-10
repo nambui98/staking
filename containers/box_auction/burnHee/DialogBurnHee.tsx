@@ -124,7 +124,7 @@ const DialogBurnHee = ({
 						/>
 					)}
 					<img src={STAKING_ICON.hee} style={{ marginRight: "8px" }} alt="" />
-					HEE Burning Trail
+					HEE EXCHANGE
 				</TitlePopup>
 				{
 					stateContent == StateBurnHEE.HeeExchange ?
