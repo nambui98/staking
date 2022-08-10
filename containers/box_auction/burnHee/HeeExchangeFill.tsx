@@ -55,7 +55,6 @@ const HeeExchangeFill = ({
 	}
 	useEffect(() => {
 		if (allowance > 0) {
-
 			let numberFP = allowance / configBurnHEE.exchange;
 			setNumberFitterPass(numberFP);
 		}
@@ -102,7 +101,6 @@ const HeeExchangeFill = ({
 							setNumberFitterPass(null);
 						}
 						else if (Number.isInteger(parseFloat(e.target.value))) {
-							debugger
 							setNumberFitterPass(parseInt(e.target.value))
 						} else {
 							return;

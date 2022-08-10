@@ -40,6 +40,7 @@ import userBurnHook from '../../libs/hooks/useBurnHook';
 import { DialogLeaderBoard } from './components/DialogLeaderBoard';
 import DialogBurnHee from './burnHee/DialogBurnHee';
 import userBurnHeeHook from '../../libs/hooks/useBurnHeeHook';
+import { configBurnHEE } from '../../libs/burnHee';
 
 const Accordion = styled((props: AccordionProps) => (
 	<MuiAccordion disableGutters elevation={0} square {...props} />
@@ -229,46 +230,34 @@ export const TabPoolAuction = () => {
 			status: true,
 			content: (
 				<Box>
+					<Typography mb={1}>Easiest way to get your own powerful NFT item - Fitter Pass</Typography>
 					<ItemHowItWord>
 						<Typography mb={1}>1.</Typography>
-						<Typography mb={1} ml={1}>Burn Fitter Pass - Get Diamond and Gold Genesis NFT Box</Typography>
+						<Typography mb={1} ml={1}>Burn HEE - Get Fitter Pass</Typography>
 					</ItemHowItWord>
 					<ItemHowItWord>
 						<Typography mb={1}>2.</Typography>
-						<Typography mb={1} ml={1}>You are required to burn 2 Fitter Passes to participate for the very first time</Typography>
+						<Typography mb={1} ml={1}>{formatMoney(configBurnHEE.exchange.toString())} HEE is equivalent to 1 Fitter Pass</Typography>
 					</ItemHowItWord>
 					<ItemHowItWord>
 						<Typography mb={1}>3.</Typography>
-						<Typography mb={1} ml={1}>
-							The top 50 ranked participants who burn the largest number of Fitter Passes will each receive a Genesis NFT Box with estimated price no less than $500.
+						<Typography mb={1} ml={1} color="#31373E !important" fontWeight={600}>
+							Fitter Pass(es) will be immediately sent to your account right after you successfully confirm.
 						</Typography>
 					</ItemHowItWord>
 					<ItemHowItWord>
 						<Typography mb={1}>4.</Typography>
 						<Typography mb={1} ml={1}>
-							Event takes place in 5 days ( Aug 06 - Aug 12)
+							Unlimited burning amount. The more you burn, the more you earn.
 						</Typography>
 					</ItemHowItWord>
 					<ItemHowItWord>
 						<Typography mb={1}>5.</Typography>
 						<Typography mb={1} ml={1}>
-							After this time, winner list will be determined.
-							<br />
-							Top 1-10: get 1 Diamond Box/each
-							<br />
-							Top 11-50: get 1 Gold Box/each
-							<br />
-							All Fitter Passes from this winner list will be burned
-							<br />
-							Participants who are not named in this list will get their Fitter Passes back, excluding the 2-Fitter Pass participation fee
+							Use Fitter Pass(es) to participate in Box Auction events or other upcoming special campaign/features/...
 						</Typography>
 					</ItemHowItWord>
-					<ItemHowItWord>
-						<Typography mb={1}>6.</Typography>
-						<Typography mb={1} ml={1}>
-							Reward and refund will be paid to users after event is closed
-						</Typography>
-					</ItemHowItWord>
+
 
 
 				</Box>
@@ -631,6 +620,9 @@ const ItemHowItWord = styled(Box)({
 	'& > p:first-child': {
 		paddingRight: "8px",
 		width: "14px"
+	},
+	'& p': {
+		color: "#5A6178"
 	}
 })
 const Row = styled(Box)({

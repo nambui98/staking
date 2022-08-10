@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Backdrop, Box, CircularProgress, Dialog, DialogTitle, Stack, StackProps } from '@mui/material';
+import { Backdrop, Box, CircularProgress, Dialog, DialogTitle, Stack, StackProps, useMediaQuery } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { StateBurnHEE } from '../../../const';
 import { STAKING_ICON, STAKING_IMAGE } from '../../../constants/staking';
@@ -33,7 +33,7 @@ const DialogBurnHee = ({
 	isApproved,
 	allowance
 }: Props) => {
-
+	const isMobile = useMediaQuery('(max-width: 767px)');
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [stateContent, setStateContent] = useState<StateBurnHEE | null>(
 		StateBurnHEE.HeeExchange
@@ -94,7 +94,7 @@ const DialogBurnHee = ({
 		<Dialog
 			sx={borderRadius}
 			onClose={() => {
-				// setStateContent(stateContentInit);
+				setStateContent(stateContentBurnInit);
 				handleToggle();
 			}}
 			open={status}
@@ -102,10 +102,15 @@ const DialogBurnHee = ({
 			<Wrap isBig={stateContent === StateBurnHEE.HeeExchangeHistories}>
 				<Box
 					onClick={() => {
-						// setStateContent(stateContentInit);
+						setStateContent(stateContentBurnInit);
 						handleToggle();
 					}}
-					sx={closeIcon}
+					sx={{
+						position: 'absolute',
+						top: isMobile ? '0' : '18px',
+						right: '18px',
+						cursor: 'pointer',
+					}}
 				>
 					<img src={'assets/icons/close.svg'} />
 				</Box>
@@ -153,13 +158,6 @@ const borderRadius = {
 		margin: '0 !important',
 		overflow: 'visible',
 	},
-};
-
-const closeIcon = {
-	position: 'absolute',
-	top: '18px',
-	right: '18px',
-	cursor: 'pointer',
 };
 
 const TitlePopup = styled(DialogTitle)({
