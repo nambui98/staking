@@ -230,6 +230,7 @@ export const TabPoolAuction = () => {
 			status: true,
 			content: (
 				<Box>
+					<Typography mb={1} fontSize="16px" fontWeight={600}>HEE BURNING TRAIL (Aug 10 - Aug 19)</Typography>
 					<Typography mb={1}>Easiest way to get your own powerful NFT item - Fitter Pass</Typography>
 					<ItemHowItWord>
 						<Typography mb={1}>1.</Typography>
@@ -257,9 +258,6 @@ export const TabPoolAuction = () => {
 							Use Fitter Pass(es) to participate in Box Auction events or other upcoming special campaign/features/...
 						</Typography>
 					</ItemHowItWord>
-
-
-
 				</Box>
 			),
 		});
