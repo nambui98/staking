@@ -199,8 +199,8 @@ const Item = styled(Box)({
 	alignItems: "center",
 	justifyContent: "space-between",
 	marginTop: "25px",
-	'@media (max-width: 650px)': {
-		marginRight: '-16px !important',
-		marginLeft: "-16px !important",
-	}
+	// '@media (max-width: 650px)': {
+	// 	marginRight: '-16px !important',
+	// 	marginLeft: "-16px !important",
+	// }
 })

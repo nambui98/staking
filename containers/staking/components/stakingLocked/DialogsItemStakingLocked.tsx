@@ -15,6 +15,7 @@ import {
 	styled,
 	TextField,
 	Typography,
+	useMediaQuery,
 } from '@mui/material';
 
 import { Success } from './Success';
@@ -62,6 +63,8 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 		titleError: 'Something went wrong, please try again',
 		functionError: '',
 	});
+
+	const isMobile = useMediaQuery('(max-width: 767px)');
 	const [warning, setWarning] = useState<any>({
 		titleWarning: '',
 		titleButton: '',
@@ -134,7 +137,12 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 						setStateContent(stateContentInit);
 						handleToggle();
 					}}
-					sx={closeIcon}
+					sx={{
+						position: 'absolute',
+						top: isMobile ? '0' : '18px',
+						right: '18px',
+						cursor: 'pointer',
+					}}
 				>
 					<img src={'assets/icons/close.svg'} />
 				</Box>

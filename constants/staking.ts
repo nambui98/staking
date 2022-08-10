@@ -66,13 +66,13 @@ export const ROAD_MAP_AUCTION = {
 			isUpcomming: false,
 			textStatus: 'LIVE',
 		},
-		// {
-		// 	image: STAKING_IMAGE.roadmapBurnHee,
-		// 	title: 'HEE Exchange - Win Fitter Pass',
-		// 	status: true,
-		// 	isUpcomming: false,
-		// 	textStatus: 'LIVE',
-		// },
+		{
+			image: STAKING_IMAGE.roadmapBurnHee,
+			title: 'HEE Burning Trail',
+			status: true,
+			isUpcomming: false,
+			textStatus: 'LIVE',
+		},
 
 	]
 }

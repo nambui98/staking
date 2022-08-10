@@ -353,7 +353,7 @@ export const TabPoolAuction = () => {
 																	<TableCell align="left">-</TableCell>
 																	<TableCell align="left">None</TableCell>
 																	<TableCell align="left">None</TableCell>
-																	<TableCell align="left">		{formatMoney(item.data.total)} Fitter Passes</TableCell>
+																	<TableCell align="left">{parseInt(item.data.total) > 0 ? formatMoney(item.data.total) + ' Fitter Passes' : '0 Fitter Pass'}	</TableCell>
 																</TableRow>
 															))}
 														</TableBody>
@@ -499,7 +499,7 @@ export const TabPoolAuction = () => {
 										<TableCell align="left">-</TableCell>
 										<TableCell align="left">None</TableCell>
 										<TableCell align="left">None</TableCell>
-										<TableCell align="left">{rowBurn.data.total}</TableCell>
+										<TableCell align="left">{formatMoney(rowBurn.data.total)} HEE</TableCell>
 									</TableRow>
 								</TableBody>
 							</Table>
@@ -507,7 +507,7 @@ export const TabPoolAuction = () => {
 						</TableContainerCus>
 
 						<TitleItem>
-							<img src={STAKING_ICON.hee} />HEE Exchange - Win Fitter Pass
+							<img src={STAKING_ICON.hee} />HEE Burning Trail
 							<span
 								style={{ textDecoration: 'underline' }}
 								onClick={

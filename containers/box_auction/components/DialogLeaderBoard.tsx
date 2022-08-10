@@ -122,7 +122,12 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 					onClick={(e: React.MouseEvent) => {
 						handleToggle(e);
 					}}
-					sx={closeIcon}
+					sx={{
+						position: 'absolute',
+						top: isMobile ? '0' : '18px',
+						right: '18px',
+						cursor: 'pointer',
+					}}
 				>
 					<img src={'assets/icons/close.svg'} />
 				</Box>

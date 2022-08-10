@@ -246,7 +246,8 @@ const Search = styled(TextField)({
 	},
 	'& fieldset': { display: 'none' },
 	'@media (max-width: 767px)': {
-		width: '100%',
+		width: '150px',
+		// paddingLeft: '10px',
 		'& .MuiOutlinedInput-root': {
 			width: '100%',
 			height: 35

@@ -95,7 +95,7 @@ const HeeExchangeFill = ({
 			</Item>
 			<Item sx={{ mt: '16px!important', flexDirection: 'column' }}>
 				<TitleItem sx={{ mr: "auto" }}>AMOUNT OF FITTER PASS(ES) YOU WANT TO GET:</TitleItem>
-				<ValueItem sx={{ flex: 1, width: "100%" }}>
+				<ValueItem sx={{ pointerEvents: isApproved ? "none" : 'auto', flex: 1, width: "100%" }}>
 					<Field type={'number'} value={numberFitterPass} onChange={(e) => {
 						if (e.target.value.trim() === '') {
 							setNumberFitterPass(null);

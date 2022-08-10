@@ -43,7 +43,7 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 	const handleClose = () => {
 		setActiveProverAddress(null);
 	};
-	
+
 	const handleClickLogo = (link: string) => {
 		let a = document.createElement('a');
 		// a.target = '_blank';
@@ -59,11 +59,12 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 
 
 	return (
-		<Box component={'header'} sx={{ marginBottom: '125px', 
-		'@media (min-width: 1100px)': {marginBottom: '62px'},
-		'@media (max-width: 767px)': {
-			marginBottom: '170px'
-		} 
+		<Box component={'header'} sx={{
+			marginBottom: '125px',
+			'@media (min-width: 1100px)': { marginBottom: '62px' },
+			'@media (max-width: 767px)': {
+				marginBottom: '170px'
+			}
 		}}>
 			<AppBar
 				color="transparent"
@@ -100,7 +101,7 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 							</Link>
 							<Link href={'https://www.securichain.io/audits/2022/beFITTERTokenAudit_Public.pdf'}><BoxSecurichain>{<img src={SECURICHAIN_LOGO} />}</BoxSecurichain></Link>
 						</BoxLogo>
-						{isMobile && <ClockUtc/>}
+						{isMobile && <ClockUtc />}
 						<BoxMenuItem>
 							{MAIN_PAGE.map((item, index) => (
 								<Link key={index} href={item.active ? item.link : '#'}>
@@ -111,7 +112,7 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 						{walletAccount ?
 							<WalletAccount>
 								<WalletAccountChain>BSC Mainnet</WalletAccountChain>
-								<WalletAccountAddress>{bnbBalance?.length && parseFloat(bnbBalance) > 0 ? formatMoney(bnbBalance) : '0.00'} <img src={HEADER_ICON_BNB} />									
+								<WalletAccountAddress>{bnbBalance?.length && parseFloat(bnbBalance) > 0 ? formatMoney(bnbBalance) : '0.00'} <img src={HEADER_ICON_BNB} />
 									<ButtonAddress onClick={handleClick}>{convertWalletAddress(walletAccount, 6, 3)}</ButtonAddress>
 									<ActiveProver
 										open={open}
@@ -123,7 +124,10 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 										}}
 									>
 										{/* <ProverItem sx={{marginBottom: '20px'}}><img style={{marginRight: 10}} src={HEADER_ICON.user} /><Link href={PAGE.WALLET.link}>{PAGE.WALLET.title}</Link></ProverItem> */}
-										<ProverItem onClick={() => setWalletAccount(null)} sx={{color: '#FF6F61'}}><img style={{marginRight: 10}} src={HEADER_ICON.logout} /> Disconnect wallet</ProverItem>
+										<ProverItem onClick={() => {
+											setActiveProverAddress(null);
+											setWalletAccount(null)
+										}} sx={{ color: '#FF6F61' }}><img style={{ marginRight: 10 }} src={HEADER_ICON.logout} /> Disconnect wallet</ProverItem>
 									</ActiveProver>
 								</WalletAccountAddress>
 							</WalletAccount> : <ConnectButton variant="contained" onClick={() => setToggleActivePopup(true)}>Connect wallet</ConnectButton>
@@ -159,7 +163,7 @@ const BoxMenuItem = styled(Stack)({
 	alignItems: 'center',
 	'@media (max-width: 1100px)': {
 		width: '100%',
-		order: 3, 
+		order: 3,
 		justifyContent: 'center',
 		marginTop: 10,
 		overflow: 'auto'

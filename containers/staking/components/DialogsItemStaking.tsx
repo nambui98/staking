@@ -8,6 +8,7 @@ import {
 	styled,
 	TextField,
 	Typography,
+	useMediaQuery,
 } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -152,7 +153,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 			functionCancel: functionCancel,
 		});
 	};
-	console.log(stateContent);
+	const isMobile = useMediaQuery('(max-width: 767px)');
 
 	return (
 		<Dialog
@@ -169,7 +170,12 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 						setStateContent(stateContentInit);
 						handleToggle();
 					}}
-					sx={closeIcon}
+					sx={{
+						position: 'absolute',
+						top: isMobile ? '0' : '18px',
+						right: '18px',
+						cursor: 'pointer',
+					}}
 				>
 					<img src={'assets/icons/close.svg'} />
 				</Box>

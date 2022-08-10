@@ -94,16 +94,16 @@ const DialogBurnHee = ({
 		<Dialog
 			sx={borderRadius}
 			onClose={() => {
-				setStateContent(stateContentBurnInit);
 				handleToggle();
+				setStateContent(stateContentBurnInit);
 			}}
 			open={status}
 		>
 			<Wrap isBig={stateContent === StateBurnHEE.HeeExchangeHistories}>
 				<Box
 					onClick={() => {
-						setStateContent(stateContentBurnInit);
 						handleToggle();
+						setStateContent(stateContentBurnInit);
 					}}
 					sx={{
 						position: 'absolute',
@@ -125,7 +125,7 @@ const DialogBurnHee = ({
 						/>
 					)}
 					<img src={STAKING_ICON.hee} style={{ marginRight: "8px" }} alt="" />
-					Fitter Pass- Hee Exchange
+					HEE Burning Trail
 				</TitlePopup>
 				{
 					stateContent == StateBurnHEE.HeeExchange ?
