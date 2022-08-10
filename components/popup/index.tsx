@@ -33,11 +33,11 @@ export const Popup: React.FC<IProps> = ({ status, handleToggle, title, children,
 
 const Wrap = styled(Stack)({
 	position: 'relative',
-	padding: '0 16px 16px',
+	padding: ' 16px 16px',
 	width: 'calc(100vw - 32px)',
 	'@media (min-width: 650px)': {
 		width: '352px',
-		padding: '0 24px 24px',
+		padding: '24px 24px',
 	}
 })
 const TitlePopup = styled(DialogTitle)({
@@ -54,7 +54,7 @@ const TitlePopup = styled(DialogTitle)({
 })
 const closeIcon = {
 	position: 'absolute',
-	top: '18px',
+	// top: '18px',
 	right: '18px',
 	cursor: 'pointer',
 }

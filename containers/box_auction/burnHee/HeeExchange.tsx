@@ -19,11 +19,11 @@ const HeeExchange = (props: Props) => {
 			</Item>
 			<Item>
 				<TitleItem >START TIME JOIN</TitleItem>
-				<ValueItem>09:00 UTC 10/08/2022</ValueItem>
+				<ValueItem>10:00 UTC 10/08/2022</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem >End time JOIN</TitleItem>
-				<ValueItem>09:00 UTC 19/08/2022</ValueItem>
+				<ValueItem>10:00 UTC 19/08/2022</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem >required amount (min)</TitleItem>

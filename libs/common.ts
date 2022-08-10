@@ -1,1 +1,1 @@
-export const ENVIRONMENT_SWITCH: 'prod' | 'dev' = 'dev'
+export const ENVIRONMENT_SWITCH: 'prod' | 'dev' = 'prod'

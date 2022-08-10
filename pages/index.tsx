@@ -1,3 +1,3 @@
-import Staking from './staking';
+import Dashboard from './dashboard';
 
-export default Staking;
+export default Dashboard;
