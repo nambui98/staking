@@ -84,7 +84,7 @@ const ContentBox = function (props: { open: boolean }) {
 					sx={{ mr: '24px', '@media (max-width: 767px)': { mt: '30px' } }}
 				>
 					<TitleSwap>Diamond Mystery Box</TitleSwap>
-					<img src="assets/icons/2 9.svg" alt="" />
+					<img height={"80px"} src="assets/icons/dimondBox.svg" alt="" />
 					<BoxContainer>
 						{listShoeM.map((item, index) => (
 							<BoxMystery key={index} linear={item.linear}>
@@ -169,8 +169,7 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 		// setIsLoading(true);
 		axios
 			.get(
-				`https://leaderboard.befitter.io/fitter/leaderboard?limit=${
-					limit === 50 ? 40 : 10
+				`https://leaderboard.befitter.io/fitter/leaderboard?limit=${limit === 50 ? 40 : 10
 				}&offset=${limit === 50 ? 10 : 0}`,
 				{
 					headers: {

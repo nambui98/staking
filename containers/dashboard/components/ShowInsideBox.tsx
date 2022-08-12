@@ -139,7 +139,7 @@ export default function ShowInsideBoxPopup(props: {
 						sx={{ mr: '24px', '@media (max-width: 767px)': { mt: '30px' } }}
 					>
 						<TitleSwap>Diamond Mystery Box</TitleSwap>
-						<img src="assets/icons/2 9.svg" alt="" />
+						<img height={"80px"} src="assets/icons/dimondBox.svg" alt="" />
 						<BoxContainer>
 							{listShoeM.map((item, index) => (
 								<BoxMystery key={index} linear={item.linear}>
