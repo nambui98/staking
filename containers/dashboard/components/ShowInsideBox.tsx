@@ -20,7 +20,7 @@ export const listShoe = [
 	{
 		icon: 'assets/icons/iconic.svg',
 		name: 'Iconic Shoe',
-		des: '40% chance',
+		des: '10% chance',
 		linear:
 			'linear-gradient(90deg, rgba(255, 111, 97, 0) 0%, #FF6F61 53.12%, rgba(255, 111, 97, 0) 100%)',
 	},
@@ -34,7 +34,7 @@ export const listShoe = [
 	{
 		icon: 'assets/icons/standard.svg',
 		name: 'Standard Shoe',
-		des: '10% chance',
+		des: '40% chance',
 		linear:
 			'linear-gradient(90deg, rgba(167, 172, 184, 0) 0%, #A7ACB8 53.12%, rgba(167, 172, 184, 0) 100%)',
 	},
@@ -43,7 +43,7 @@ export const listShoeM = [
 	{
 		icon: 'assets/icons/iconic.svg',
 		name: 'Iconic Shoe',
-		des: '0% chance',
+		des: '10% chance',
 		linear:
 			'linear-gradient(90deg, rgba(255, 111, 97, 0) 0%, #FF6F61 53.12%, rgba(255, 111, 97, 0) 100%)',
 	},
@@ -57,7 +57,7 @@ export const listShoeM = [
 	{
 		icon: 'assets/icons/standard.svg',
 		name: 'Standard Shoe',
-		des: '10% chance',
+		des: '0% chance',
 		linear:
 			'linear-gradient(90deg, rgba(167, 172, 184, 0) 0%, #A7ACB8 53.12%, rgba(167, 172, 184, 0) 100%)',
 	},

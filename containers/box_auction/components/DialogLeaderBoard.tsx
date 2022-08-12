@@ -203,7 +203,6 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 			sx={borderRadius}
 			onClose={(e: React.MouseEvent) => {
 				handleToggle(e);
-				setShowInsideBox(false);
 			}}
 			open={status}
 		>
@@ -211,7 +210,6 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 				<Box
 					onClick={(e: React.MouseEvent) => {
 						handleToggle(e);
-						setShowInsideBox(false);
 					}}
 					sx={{
 						position: 'absolute',
@@ -262,7 +260,6 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 								}}
 								onClick={() => {
 									setLimit(50);
-
 									setShowInsideBox(false);
 								}}
 							>
