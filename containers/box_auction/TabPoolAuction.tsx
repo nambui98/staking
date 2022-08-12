@@ -41,7 +41,7 @@ import { DialogLeaderBoard } from './components/DialogLeaderBoard';
 import DialogBurnHee from './burnHee/DialogBurnHee';
 import userBurnHeeHook from '../../libs/hooks/useBurnHeeHook';
 import { configBurnHEE } from '../../libs/burnHee';
-import ShowInsideBox from '../dashboard/components/ShowInsideBox';
+import ShowInsideBoxPopup from '../dashboard/components/ShowInsideBox';
 
 const Accordion = styled((props: AccordionProps) => (
 	<MuiAccordion disableGutters elevation={0} square {...props} />
@@ -587,12 +587,12 @@ export const TabPoolAuction = () => {
 					// debugger
 					setShowLeaderBoard(false);
 				}}
-				setShowInsideBox={setShowInsideBox}
+				// setShowInsideBox={setShowInsideBox}
 			/>
-			<ShowInsideBox
+			{/* <ShowInsideBoxPopup
 				status={showInsideBox}
 				setShowInsideBox={setShowInsideBox}
-			/>
+			/> */}
 			<DialogBurnHee
 				status={showBurnHee}
 				stateContentBurnInit={stateContentBurnInit}
