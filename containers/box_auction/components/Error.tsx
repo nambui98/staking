@@ -1,9 +1,8 @@
 import { Box, Typography, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/styles';
-import React, { useState } from 'react';
+import React from 'react';
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
 import { MARKETPLACE_ICON } from '../../../constants/marketplace';
-import { useWalletContext } from '../../../contexts/WalletContext';
 
 type Props = {
 	setStateContent: Function;

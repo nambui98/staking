@@ -41,6 +41,7 @@ import { DialogLeaderBoard } from './components/DialogLeaderBoard';
 import DialogBurnHee from './burnHee/DialogBurnHee';
 import userBurnHeeHook from '../../libs/hooks/useBurnHeeHook';
 import { configBurnHEE } from '../../libs/burnHee';
+import ShowInsideBoxPopup from '../dashboard/components/ShowInsideBox';
 
 const Accordion = styled((props: AccordionProps) => (
 	<MuiAccordion disableGutters elevation={0} square {...props} />
@@ -113,13 +114,15 @@ function createData(
 
 export const TabPoolAuction = () => {
 	const [tabCurrent, setTabCurrent] = useState<number>(0);
+	const [showInsideBox, setShowInsideBox] = useState<boolean>(false);
 	const [showLeaderBoard, setShowLeaderBoard] = useState<boolean>(false);
 	const [showBurnHee, setShowBurnHee] = useState<boolean>(false);
 	const [statusPopup, setStatusPopup] = useState<any>({
 		status: false,
 		content: <Box></Box>,
 	});
-	const [stateContentBurnInit, setStateContentBurnInit] = useState<StateBurnHEE | null>(StateBurnHEE.HeeExchange);
+	const [stateContentBurnInit, setStateContentBurnInit] =
+		useState<StateBurnHEE | null>(StateBurnHEE.HeeExchange);
 	const [isLoading, setIsLoading] = useState(false);
 	const {
 		totalStake,
@@ -127,19 +130,21 @@ export const TabPoolAuction = () => {
 		numberBurned,
 		isApproved,
 		isRegister,
-		statusRow } = userBurnHook({
-			setIsLoading
-		})
+		statusRow,
+	} = userBurnHook({
+		setIsLoading,
+	});
 	const {
 		dataMyBurned,
 		totalInPool,
 		balanceHee,
 		earned,
 		isApprovedBurn,
-		allowance } = userBurnHeeHook({
-			setIsLoading,
-			setStateContent: setStateContentBurnInit
-		})
+		allowance,
+	} = userBurnHeeHook({
+		setIsLoading,
+		setStateContent: setStateContentBurnInit,
+	});
 	const rows = [
 		{
 			name: 'Fitter Pass',
@@ -171,7 +176,6 @@ export const TabPoolAuction = () => {
 		),
 	};
 
-
 	const handleShowBurn = (e: React.MouseEvent) => {
 		e.stopPropagation();
 		setStatusPopup({
@@ -180,16 +184,23 @@ export const TabPoolAuction = () => {
 				<Box>
 					<ItemHowItWord>
 						<Typography mb={1}>1.</Typography>
-						<Typography mb={1} ml={1}>Burn Fitter Pass - Get Diamond and Gold Genesis NFT Box</Typography>
+						<Typography mb={1} ml={1}>
+							Burn Fitter Pass - Get Diamond and Gold Genesis NFT Box
+						</Typography>
 					</ItemHowItWord>
 					<ItemHowItWord>
 						<Typography mb={1}>2.</Typography>
-						<Typography mb={1} ml={1}>You are required to burn 2 Fitter Passes to participate for the very first time</Typography>
+						<Typography mb={1} ml={1}>
+							You are required to burn 2 Fitter Passes to participate for the
+							very first time
+						</Typography>
 					</ItemHowItWord>
 					<ItemHowItWord>
 						<Typography mb={1}>3.</Typography>
 						<Typography mb={1} ml={1}>
-							The top 50 ranked participants who burn the largest number of Fitter Passes will each receive a Genesis NFT Box with estimated price no less than $500.
+							The top 50 ranked participants who burn the largest number of
+							Fitter Passes will each receive a Genesis NFT Box with estimated
+							price no less than $500.
 						</Typography>
 					</ItemHowItWord>
 					<ItemHowItWord>
@@ -209,7 +220,8 @@ export const TabPoolAuction = () => {
 							<br />
 							All Fitter Passes from this winner list will be burned
 							<br />
-							Participants who are not named in this list will get their Fitter Passes back, excluding the 2-Fitter Pass participation fee
+							Participants who are not named in this list will get their Fitter
+							Passes back, excluding the 2-Fitter Pass participation fee
 						</Typography>
 					</ItemHowItWord>
 					<ItemHowItWord>
@@ -218,8 +230,6 @@ export const TabPoolAuction = () => {
 							Reward and refund will be paid to users after event is closed
 						</Typography>
 					</ItemHowItWord>
-
-
 				</Box>
 			),
 		});
@@ -230,20 +240,39 @@ export const TabPoolAuction = () => {
 			status: true,
 			content: (
 				<Box>
-					<Typography mb={1} fontSize={{ xs: "16px", sm: '16px' }} fontWeight={600}>HEE EXCHANGE - WIN FITTER PASS (Aug 10 - Aug 19)</Typography>
-					<Typography mb={1}>Easiest way to get your own powerful NFT item - Fitter Pass</Typography>
+					<Typography
+						mb={1}
+						fontSize={{ xs: '16px', sm: '16px' }}
+						fontWeight={600}
+					>
+						HEE EXCHANGE - WIN FITTER PASS (Aug 10 - Aug 19)
+					</Typography>
+					<Typography mb={1}>
+						Easiest way to get your own powerful NFT item - Fitter Pass
+					</Typography>
 					<ItemHowItWord>
 						<Typography mb={1}>1.</Typography>
-						<Typography mb={1} ml={1}>Burn HEE - Get Fitter Pass</Typography>
+						<Typography mb={1} ml={1}>
+							Burn HEE - Get Fitter Pass
+						</Typography>
 					</ItemHowItWord>
 					<ItemHowItWord>
 						<Typography mb={1}>2.</Typography>
-						<Typography mb={1} ml={1}>{formatMoney(configBurnHEE.exchange.toString())} HEE is equivalent to 1 Fitter Pass</Typography>
+						<Typography mb={1} ml={1}>
+							{formatMoney(configBurnHEE.exchange.toString())} HEE is equivalent
+							to 1 Fitter Pass
+						</Typography>
 					</ItemHowItWord>
 					<ItemHowItWord>
 						<Typography mb={1}>3.</Typography>
-						<Typography mb={1} ml={1} color="#31373E !important" fontWeight={600}>
-							Fitter Pass(es) will be immediately sent to your account right after you successfully confirm.
+						<Typography
+							mb={1}
+							ml={1}
+							color="#31373E !important"
+							fontWeight={600}
+						>
+							Fitter Pass(es) will be immediately sent to your account right
+							after you successfully confirm.
 						</Typography>
 					</ItemHowItWord>
 					<ItemHowItWord>
@@ -255,10 +284,11 @@ export const TabPoolAuction = () => {
 					<ItemHowItWord>
 						<Typography mb={1}>5.</Typography>
 						<Typography mb={1} ml={1}>
-							Use Fitter Pass(es) to participate in Box Auction events or other upcoming special campaign/features/...
+							Use Fitter Pass(es) to participate in Box Auction events or other
+							upcoming special campaign/features/...
 						</Typography>
 					</ItemHowItWord>
-				</Box >
+				</Box>
 			),
 		});
 	};
@@ -292,8 +322,7 @@ export const TabPoolAuction = () => {
 				</Top>
 				<Body>
 					<Box sx={{ overflowX: 'auto', borderRadius: '16px' }}>
-
-						<Accordion onChange={() => { }}>
+						<Accordion onChange={() => {}}>
 							{rows.map((item, index) => {
 								return (
 									<AccordionSummary
@@ -301,8 +330,8 @@ export const TabPoolAuction = () => {
 										id="panel1d-header"
 										key={index}
 										sx={{
-											height: "180px",
-											paddingBottom: "50px",
+											height: '180px',
+											paddingBottom: '50px',
 											// display: 'flex',
 											// flexDirection: 'column',
 											overflowX: 'auto',
@@ -310,52 +339,70 @@ export const TabPoolAuction = () => {
 												// width: '0px',
 												' .MuiAccordionSummary-content': {
 													width: '0px',
-
 												},
 											},
 										}}
 									>
-										<Box sx={{
-											display: 'flex',
-											flexDirection: 'column',
-											overflowX: 'auto',
-											width: '100%',
-										}}>
-
+										<Box
+											sx={{
+												display: 'flex',
+												flexDirection: 'column',
+												overflowX: 'auto',
+												width: '100%',
+											}}
+										>
 											<Box>
 												<TableContainerCus component={Paper}>
-													<Table sx={{ minWidth: 1020 }} aria-label="simple table">
+													<Table
+														sx={{ minWidth: 1020 }}
+														aria-label="simple table"
+													>
 														<TableHead>
 															<TableRow>
-																<TableCell >Status</TableCell>
+																<TableCell>Status</TableCell>
 																<TableCell align="left">Reward</TableCell>
 																<TableCell align="left">Earned</TableCell>
-																<TableCell align="left">Token remaining</TableCell>
+																<TableCell align="left">
+																	Token remaining
+																</TableCell>
 																<TableCell align="left">Lock-up time</TableCell>
-																<TableCell align="left">Withdrawal delay time</TableCell>
-																<TableCell align="left">Total IN POOL</TableCell>
+																<TableCell align="left">
+																	Withdrawal delay time
+																</TableCell>
+																<TableCell align="left">
+																	Total IN POOL
+																</TableCell>
 															</TableRow>
 														</TableHead>
 														<TableBody>
 															{rows.map((row) => (
 																<TableRow
 																	key={row.name}
-																	sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+																	sx={{
+																		'&:last-child td, &:last-child th': {
+																			border: 0,
+																		},
+																	}}
 																>
-
 																	<TableCell component="th" scope="row">
 																		{statusRow}
 																	</TableCell>
-																	<TableCell align="left">Mystery Box</TableCell>
+																	<TableCell align="left">
+																		Mystery Box
+																	</TableCell>
 																	<TableCell align="left">0</TableCell>
 																	<TableCell align="left">-</TableCell>
 																	<TableCell align="left">None</TableCell>
 																	<TableCell align="left">None</TableCell>
-																	<TableCell align="left">{parseInt(item.data.total) > 0 ? formatMoney(item.data.total) + ' Fitter Passes' : '0 Fitter Pass'}	</TableCell>
+																	<TableCell align="left">
+																		{parseInt(item.data.total) > 0
+																			? formatMoney(item.data.total) +
+																			  ' Fitter Passes'
+																			: '0 Fitter Pass'}{' '}
+																	</TableCell>
 																</TableRow>
 															))}
 														</TableBody>
-
 
 														{/* {item.isComingSoon && (
 																		<ComingSoon
@@ -371,8 +418,8 @@ export const TabPoolAuction = () => {
 														<img src={STAKING_ICON.fiu} /> {item.title}{' '}
 														<span
 															style={{ textDecoration: 'underline' }}
-															onClick={
-																(e: React.MouseEvent) => handleShowBurn(e)
+															onClick={(e: React.MouseEvent) =>
+																handleShowBurn(e)
 															}
 														>
 															How it works?
@@ -440,13 +487,12 @@ export const TabPoolAuction = () => {
 												</Table> */}
 											</Box>
 											<Box>
-
 												<ButtonOutline
 													onClick={(e: React.MouseEvent) => {
 														e.stopPropagation();
-														setShowLeaderBoard(true)
+														setShowLeaderBoard(true);
 													}}
-													sx={{ width: "150px", maxHeight: "28px" }}
+													sx={{ width: '150px', maxHeight: '28px' }}
 													variant="text"
 												>
 													View Leaderboard
@@ -461,20 +507,21 @@ export const TabPoolAuction = () => {
 									isApproved={isApproved}
 									isRegister={isRegister}
 									balanceFT={balanceFT}
-									numberBurned={numberBurned}></ShowAction>
+									numberBurned={numberBurned}
+								></ShowAction>
 							</AccordionDetails>
 						</Accordion>
-
 					</Box>
-					<Row onClick={() => {
-						setShowBurnHee(true)
-					}}>
-
+					<Row
+						onClick={() => {
+							setShowBurnHee(true);
+						}}
+					>
 						<TableContainerCus sx={{ mt: 3 }} component={Paper}>
 							<Table sx={{ minWidth: 1020 }} aria-label="simple table">
 								<TableHead>
 									<TableRow>
-										<TableCell >Status</TableCell>
+										<TableCell>Status</TableCell>
 										<TableCell align="left">Reward</TableCell>
 										<TableCell align="left">Earned</TableCell>
 										<TableCell align="left">Token remaining</TableCell>
@@ -488,7 +535,6 @@ export const TabPoolAuction = () => {
 										key={rowBurn.name}
 										sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 									>
-
 										<TableCell component="th" scope="row">
 											{rowBurn.data.status}
 										</TableCell>
@@ -497,25 +543,24 @@ export const TabPoolAuction = () => {
 										<TableCell align="left">-</TableCell>
 										<TableCell align="left">None</TableCell>
 										<TableCell align="left">None</TableCell>
-										<TableCell align="left">{formatMoney(rowBurn.data.total)} HEE</TableCell>
+										<TableCell align="left">
+											{formatMoney(rowBurn.data.total)} HEE
+										</TableCell>
 									</TableRow>
 								</TableBody>
 							</Table>
-
 						</TableContainerCus>
 
 						<TitleItem>
-							<img src={STAKING_ICON.hee} />HEE Exchange - Win Fitter Pass
+							<img src={STAKING_ICON.hee} />
+							HEE Exchange - Win Fitter Pass
 							<span
 								style={{ textDecoration: 'underline' }}
-								onClick={
-									(e: React.MouseEvent) => handleShowBurnHee(e)
-								}
+								onClick={(e: React.MouseEvent) => handleShowBurnHee(e)}
 							>
 								How it works?
 							</span>
 						</TitleItem>
-
 					</Row>
 				</Body>
 			</Container>
@@ -540,9 +585,14 @@ export const TabPoolAuction = () => {
 				handleToggle={(e: React.MouseEvent) => {
 					e.stopPropagation();
 					// debugger
-					setShowLeaderBoard(false)
+					setShowLeaderBoard(false);
 				}}
+				// setShowInsideBox={setShowInsideBox}
 			/>
+			{/* <ShowInsideBoxPopup
+				status={showInsideBox}
+				setShowInsideBox={setShowInsideBox}
+			/> */}
 			<DialogBurnHee
 				status={showBurnHee}
 				stateContentBurnInit={stateContentBurnInit}
@@ -553,42 +603,42 @@ export const TabPoolAuction = () => {
 				isApproved={isApprovedBurn}
 				allowance={allowance}
 				handleToggle={() => {
-					setShowBurnHee(false)
+					setShowBurnHee(false);
 				}}
 			/>
-		</Wrap >
+		</Wrap>
 	);
 };
 type tableContainerProps = TableContainerProps & {
 	component: any;
 };
-const TableContainerCus = styled(TableContainer)((props: tableContainerProps) => ({
-	background: 'transparent',
-	boxShadow: 'none',
-	marginTop: "50px",
-	'& .MuiTableHead-root': {
-
-		'& .MuiTableCell-root': {
-			border: 'none',
-			color: "#898E9E",
-			fontFamily: 'BeVietnamPro',
-			fontWeight: 500,
-			fontSize: '12px',
-			textTransform: 'uppercase',
-		}
-	},
-	'& .MuiTableBody-root': {
-
-		'& .MuiTableCell-root': {
-			paddingTop: "0px",
-			border: 'none',
-			color: "#31373E",
-			fontFamily: 'BeVietnamPro',
-			fontWeight: 500,
-			fontSize: '14px',
-		}
-	}
-}));
+const TableContainerCus = styled(TableContainer)(
+	(props: tableContainerProps) => ({
+		background: 'transparent',
+		boxShadow: 'none',
+		marginTop: '50px',
+		'& .MuiTableHead-root': {
+			'& .MuiTableCell-root': {
+				border: 'none',
+				color: '#898E9E',
+				fontFamily: 'BeVietnamPro',
+				fontWeight: 500,
+				fontSize: '12px',
+				textTransform: 'uppercase',
+			},
+		},
+		'& .MuiTableBody-root': {
+			'& .MuiTableCell-root': {
+				paddingTop: '0px',
+				border: 'none',
+				color: '#31373E',
+				fontFamily: 'BeVietnamPro',
+				fontWeight: 500,
+				fontSize: '14px',
+			},
+		},
+	})
+);
 const ButtonOutline = styled(Button)({
 	color: '#5A6178',
 	background: 'transparent',
@@ -600,7 +650,7 @@ const ButtonOutline = styled(Button)({
 	minHeight: '28px',
 	textTransform: 'none',
 	transition: 'all .3s',
-	fontSize: "12px",
+	fontSize: '12px',
 	fontWeight: 600,
 	'&:hover': {
 		background: '#FF8A50',
@@ -612,31 +662,32 @@ const ButtonOutline = styled(Button)({
 const ItemHowItWord = styled(Box)({
 	display: 'flex',
 	alignItems: 'flex-start',
-	color: "#31373E",
-	fontWeight: "500",
-	fontSize: "14px",
+	color: '#31373E',
+	fontWeight: '500',
+	fontSize: '14px',
 	'& > p:first-child': {
-		paddingRight: "8px",
-		width: "14px"
+		paddingRight: '8px',
+		width: '14px',
 	},
 	'& p': {
-		color: "#5A6178"
-	}
-})
+		color: '#5A6178',
+	},
+});
 const Row = styled(Box)({
-	overflowX: 'auto', borderRadius: '16px',
+	overflowX: 'auto',
+	borderRadius: '16px',
 	display: 'flex',
 	flexDirection: 'column',
 	width: '100%',
-	background: "#fff",
+	background: '#fff',
 	position: 'relative',
 	marginTop: '20px',
-	padding: "16px 16px 0 16px",
+	padding: '16px 16px 0 16px',
 	cursor: 'pointer',
 	'&:hover': {
-		background: '#FFE2D3'
-	}
-})
+		background: '#FFE2D3',
+	},
+});
 
 const Wrap = styled(Stack)({
 	'@media (min-width: 900px)': {

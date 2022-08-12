@@ -37,7 +37,8 @@ export const ShowAction: React.FC<IProps> = ({
 	isApproved,
 	isRegister,
 	balanceFT,
-	numberBurned }) => {
+	numberBurned,
+}) => {
 	const [stateContent, setStateContent] = useState<BoxAuction | null>(null);
 	// stateContentInit
 	const [success, setSuccess] = useState<any>({
@@ -66,7 +67,6 @@ export const ShowAction: React.FC<IProps> = ({
 				if (parseInt(numberBurned) > 0) {
 					setStateContent(BoxAuction.Burned);
 				} else {
-
 					setStateContent(BoxAuction.BurnAssets);
 				}
 			} else {
@@ -150,29 +150,18 @@ export const ShowAction: React.FC<IProps> = ({
 					backgroundColor: '#FFFFFF',
 					display: 'flex',
 					'@media (max-width: 767px)': {
-						flexDirection: "column"
-
+						flexDirection: 'column',
 					},
 				}}
 			>
-				<Wrap isborder={stateContent === null}>
-					<EnablePool
-						{...propsPass}
-						isApproved={isApproved}
-					/>
+				<Wrap isBorder={stateContent === null}>
+					<EnablePool {...propsPass} isApproved={isApproved} />
 				</Wrap>
-				<Wrap isborder={false} sx={{ flex: 1 }}>
-
+				<Wrap isBorder={false} sx={{ flex: 1 }}>
 					{stateContent === BoxAuction.AssetsEvent ? (
-						<AssetsEvent
-							{...propsPass}
-							balanceFT={balanceFT}
-						/>
+						<AssetsEvent {...propsPass} balanceFT={balanceFT} />
 					) : stateContent === BoxAuction.BurnAssets ? (
-						<BurnAssets
-							{...propsPass}
-							balanceFT={balanceFT}
-						/>
+						<BurnAssets {...propsPass} balanceFT={balanceFT} />
 					) : stateContent === BoxAuction.Burned ? (
 						<Burned
 							setStateContent={setStateContent}
@@ -250,9 +239,9 @@ const ButtonStakeMore = styled(Button)({
 	':disabled': {},
 });
 type stackPropsNew = StackProps & {
-	isborder: boolean;
+	isBorder: boolean;
 };
-const Wrap = styled(Stack)(({ isborder }: stackPropsNew) => ({
+const Wrap = styled(Stack)(({ isBorder }: stackPropsNew) => ({
 	position: 'relative',
 	padding: '16px 16px 0px 16px',
 
@@ -261,7 +250,7 @@ const Wrap = styled(Stack)(({ isborder }: stackPropsNew) => ({
 	overflowX: 'hidden',
 	// width: 'calc(100vw - 32px)',
 	// height: 'calc(100vh - 32px)',
-	width: "100%",
+	width: '100%',
 	'@media (min-width: 650px)': {
 		width: '422px',
 		height: '450px',
@@ -271,7 +260,7 @@ const Wrap = styled(Stack)(({ isborder }: stackPropsNew) => ({
 		padding: '0px 16px 0px 16px',
 		margin: '16px 0px 16px 0px',
 	},
-	borderRight: isborder ? '0.5px solid #E9EAEF' : '0',
+	borderRight: isBorder ? '0.5px solid #E9EAEF' : '0',
 }));
 
 // const borderRadius = {

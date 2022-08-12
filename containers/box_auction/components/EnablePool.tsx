@@ -12,13 +12,12 @@ type Props = {
 	setIsLoading: Function;
 	handleClickError: Function;
 	handleClickSuccess: Function;
-	// setStateContentInit: Function;
 	stateContent: BoxAuction | null;
 	isApproved: boolean;
 };
 
-export const EnablePool = (props: Props) => {
-	const { setStateContent, setIsLoading, handleClickSuccess, handleClickError, isApproved } = props;
+export function EnablePool(props: Props) {
+	const { setStateContent, setIsLoading, isApproved } = props;
 	const [error, setError] = useState<string>('')
 	const { setToggleActivePopup, walletAccount, ethersSigner, setRefresh, refresh } =
 		useWalletContext();
