@@ -17,7 +17,7 @@ import { borderRadius } from '@mui/system';
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { convertWalletAddress } from '../../libs/utils/utils';
-import ShowInsideBox from './components/ShowInsideBox';
+import ShowInsideBoxPopup from '../dashboard/components/ShowInsideBox';
 
 type Props = {};
 interface Column {
@@ -284,13 +284,12 @@ export default function RightContent({}: Props) {
 				}}
 				onClick={() => setShowInsideBox(true)}
 			>
-				What's inside the box?
+				What&apos;s inside the box?
 			</Box>
-			<ShowInsideBox
+			<ShowInsideBoxPopup
 				status={showInsideBox}
 				setShowInsideBox={setShowInsideBox}
 			/>
-			;
 		</Wrap>
 	);
 }

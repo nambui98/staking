@@ -16,7 +16,7 @@ import {
 
 import { IconImage } from '../../../components/styled';
 
-const listShoe = [
+export const listShoe = [
 	{
 		icon: 'assets/icons/iconic.svg',
 		name: 'Iconic Shoe',
@@ -39,7 +39,7 @@ const listShoe = [
 			'linear-gradient(90deg, rgba(167, 172, 184, 0) 0%, #A7ACB8 53.12%, rgba(167, 172, 184, 0) 100%)',
 	},
 ];
-const listShoeM = [
+export const listShoeM = [
 	{
 		icon: 'assets/icons/iconic.svg',
 		name: 'Iconic Shoe',
@@ -63,7 +63,7 @@ const listShoeM = [
 	},
 ];
 
-export default function ShowInsideBox(props: {
+export default function ShowInsideBoxPopup(props: {
 	status: boolean;
 	setShowInsideBox: Function;
 }) {
@@ -80,7 +80,7 @@ export default function ShowInsideBox(props: {
 			<Wrap>
 				<Box
 					onClick={() => {
-						setShowInsideBox(false);
+						setShowInsideBox && setShowInsideBox(false);
 					}}
 					sx={{
 						position: 'absolute',
@@ -88,7 +88,7 @@ export default function ShowInsideBox(props: {
 						cursor: 'pointer',
 					}}
 				>
-					<img src={'assets/icons/close.svg'} />
+					<img src={'assets/icons/close.svg'} alt="" />
 				</Box>
 				<Box
 					sx={{
@@ -101,7 +101,7 @@ export default function ShowInsideBox(props: {
 						fontFamily: 'BeVietnamPro',
 					}}
 				>
-					What's inside the box?
+					What&apos;s inside the box?
 				</Box>
 				<Box
 					sx={{
@@ -171,8 +171,8 @@ const Wrap = styled(Stack)({
 	padding: '16px',
 	overflowY: 'auto',
 	overflowX: 'hidden',
-	width: 'calc(100vw - 32px)',
-	height: 'calc(100vh - 32px)',
+	width: '100%',
+	height: '100%',
 	'@media (min-width: 650px)': {
 		width: '544px',
 		height: '400px',

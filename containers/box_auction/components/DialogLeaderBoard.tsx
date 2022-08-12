@@ -22,11 +22,94 @@ import {
 	TableRow,
 	TextField,
 	Typography,
+	Icon,
 	useMediaQuery,
 } from '@mui/material';
 import axios from 'axios';
 import { TEXT_STYLE } from '../../../styles/common/textStyles';
 import { convertWalletAddress } from '../../../libs/utils/utils';
+import { IconImage } from '../../../components/styled';
+import { listShoe, listShoeM } from '../../dashboard/components/ShowInsideBox';
+
+const ContentBox = function (props: { open: boolean }) {
+	return (
+		<WrapBox sx={{ display: props.open ? 'block' : 'none' }}>
+			<Box
+				sx={{
+					color: '#31373E',
+					fontSize: '16px',
+					lineHeight: '22px',
+					fontWeight: '600',
+					textAlign: 'center',
+					mt: '8px',
+					fontFamily: 'BeVietnamPro',
+					// display: open ? 'none' : 'block',
+				}}
+			>
+				What&apos;s inside the box?
+			</Box>
+			<Box
+				sx={{
+					display: 'flex',
+					mt: '24px',
+					'@media (max-width: 767px)': {
+						flexDirection: 'column',
+					},
+				}}
+			>
+				<BoxSwap sx={{ mr: '24px' }}>
+					<TitleSwap>Gold Mystery Box</TitleSwap>
+					<img src="assets/icons/asset 021.svg" alt="" />
+					<BoxContainer>
+						{listShoe.map((item, index) => (
+							<BoxMystery key={index} linear={item.linear}>
+								<Icon>
+									<IconImage src={item.icon} />
+								</Icon>
+								<Box sx={{ textAlign: 'left', ml: '18px' }}>
+									<TitleSwap
+										sx={{
+											marginBottom: 0,
+										}}
+									>
+										{item.name}
+									</TitleSwap>
+									<Details>{item.des}</Details>
+								</Box>
+							</BoxMystery>
+						))}
+					</BoxContainer>
+				</BoxSwap>
+				<BoxSwap
+					sx={{ mr: '24px', '@media (max-width: 767px)': { mt: '30px' } }}
+				>
+					<TitleSwap>Diamond Mystery Box</TitleSwap>
+					<img src="assets/icons/2 9.svg" alt="" />
+					<BoxContainer>
+						{listShoeM.map((item, index) => (
+							<BoxMystery key={index} linear={item.linear}>
+								<Icon>
+									<IconImage src={item.icon} />
+								</Icon>
+								<Box sx={{ textAlign: 'left', ml: '18px' }}>
+									<TitleSwap
+										sx={{
+											marginBottom: 0,
+										}}
+									>
+										{item.name}
+									</TitleSwap>
+									<Details>{item.des}</Details>
+								</Box>
+							</BoxMystery>
+						))}
+					</BoxContainer>
+				</BoxSwap>
+			</Box>
+		</WrapBox>
+	);
+};
+
 interface Column {
 	id: 'rank' | 'walletAddress' | 'amount' | 'prize';
 	label: string;
@@ -63,7 +146,7 @@ const columns: readonly Column[] = [
 interface IProps {
 	status: boolean;
 	handleToggle: (e: React.MouseEvent) => any;
-	setShowInsideBox: Function;
+	// setShowInsideBox: Function;
 }
 type row = {
 	id: string;
@@ -74,11 +157,12 @@ type row = {
 export const DialogLeaderBoard: React.FC<IProps> = ({
 	status,
 	handleToggle,
-	setShowInsideBox,
+	// setShowInsideBox,
 }) => {
 	const isMobile = useMediaQuery('(max-width: 767px)');
 	const [limit, setLimit] = useState<number>(10);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [showBox, setShowInsideBox] = useState<boolean>(false);
 
 	const [dataLeaderBoard, setDataLeaderBoard] = useState<row[]>();
 	const getData = useCallback(() => {
@@ -103,7 +187,7 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 	}, [limit]);
 
 	useEffect(() => {
-		getData();
+		limit && getData();
 	}, [limit]);
 	const getPize = (value: number) => {
 		if (value < 11) {
@@ -119,6 +203,7 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 			sx={borderRadius}
 			onClose={(e: React.MouseEvent) => {
 				handleToggle(e);
+				// setShowInsideBox(false);
 			}}
 			open={status}
 		>
@@ -126,6 +211,7 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 				<Box
 					onClick={(e: React.MouseEvent) => {
 						handleToggle(e);
+						// setShowInsideBox(false);
 					}}
 					sx={{
 						position: 'absolute',
@@ -159,7 +245,10 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 									height: '26px',
 									mr: '8px',
 								}}
-								onClick={() => setLimit(10)}
+								onClick={() => {
+									setLimit(10);
+									setShowInsideBox(false);
+								}}
 							>
 								Top 10
 							</ButtonCustom>
@@ -171,13 +260,16 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 									width: '55px',
 									height: '26px',
 								}}
-								onClick={() => setLimit(50)}
+								onClick={() => {
+									setLimit(50);
+									setShowInsideBox(false);
+								}}
 							>
 								Top 50
 							</ButtonCustom>
 
 							<ButtonCustom
-								isDisabled={limit === 50 || limit === 10}
+								isDisabled={limit !== 0}
 								variant="text"
 								// disabled
 								sx={{
@@ -187,10 +279,10 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 								}}
 								onClick={(e: React.MouseEvent) => {
 									setShowInsideBox(true);
-									handleToggle(e);
+									setLimit(0);
 								}}
 							>
-								What's inside the box?
+								What&apos;s inside the box?
 							</ButtonCustom>
 						</Box>{' '}
 					</Box>
@@ -200,25 +292,27 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 							<Table stickyHeader aria-label="sticky table">
 								<TableHead>
 									<TableRow>
-										{columns.map((column) => (
-											<TableCell
-												key={column.id}
-												align={column.align}
-												style={{ minWidth: column.minWidth }}
-												sx={{
-													fontSize: '12px',
-													color: '#5A6178',
-													padding: 0,
-													border: 'none',
-												}}
-											>
-												{column.label}
-											</TableCell>
-										))}
+										{!showBox &&
+											columns.map((column) => (
+												<TableCell
+													key={column.id}
+													align={column.align}
+													style={{ minWidth: column.minWidth }}
+													sx={{
+														fontSize: '12px',
+														color: '#5A6178',
+														padding: 0,
+														border: 'none',
+													}}
+												>
+													{column.label}
+												</TableCell>
+											))}
 									</TableRow>
 								</TableHead>
 								<TableBody>
-									{dataLeaderBoard &&
+									{!showBox &&
+										dataLeaderBoard &&
 										dataLeaderBoard?.map((row) => {
 											return (
 												<TableRow
@@ -274,6 +368,7 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 							</Table>
 						</TableContainerCus>
 					</Paper>
+					<ContentBox open={showBox} />
 				</Box>
 			</Wrap>
 		</Dialog>
@@ -375,3 +470,67 @@ const Wrap = styled(Stack)((props: StackProps) => ({
 		width: '560px',
 	},
 }));
+
+const WrapBox = styled(Stack)({
+	position: 'relative',
+	padding: '16px',
+	overflowY: 'auto',
+	overflowX: 'hidden',
+	width: '100%',
+	height: '100%',
+	'@media (min-width: 650px)': {
+		width: '544px',
+		height: '400px',
+	},
+});
+
+const TitleSwap = styled(Typography)({
+	fontSize: '14px',
+	fontWeight: '600',
+	lineHight: '22px',
+	color: '#31373E',
+	marginBottom: '24px',
+});
+
+const BoxSwap = styled(Box)({
+	textAlign: 'center',
+	margin: '0 0 0 8px',
+	width: '232px',
+	minWidth: '232px',
+	height: '60px',
+	'@media (max-width: 767px)': {
+		width: '100%',
+		height: '100%',
+		margin: '0 8px 0 0',
+	},
+});
+
+const BoxContainer = styled(Box)({
+	marginTop: '16px',
+});
+
+const BoxMystery = styled(Box)((props: { linear: string }) => ({
+	display: 'flex',
+	height: '60px',
+	alignItems: 'center',
+	position: 'relative',
+	'&:before': {
+		position: 'absolute',
+		background: props.linear,
+		opacity: '0.3',
+		inset: 0,
+		content: '""',
+	},
+}));
+
+const Details = styled(Typography)({
+	background: 'linear-gradient(180deg, #FF8A50 2.08%, #FF6D24 66.9%)',
+	'-webkit-background-clip': 'text',
+	'-webkit-text-fill-color': 'transparent',
+	'background-clip': 'text',
+	'text-fill-color': 'transparent',
+	fontSize: '12px',
+	fontWeight: '600',
+	lineHight: '18px',
+	marginTop: '4px',
+});
