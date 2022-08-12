@@ -171,7 +171,7 @@ const Wrap = styled(Stack)({
 	padding: '16px',
 	overflowY: 'auto',
 	overflowX: 'hidden',
-	width: '100%',
+	width: 'calc(100vw - 32px)',
 	height: '100%',
 	'@media (min-width: 650px)': {
 		width: '544px',
