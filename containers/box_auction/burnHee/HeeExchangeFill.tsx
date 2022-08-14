@@ -1,12 +1,23 @@
-import styled from '@emotion/styled'
-import { Box, Button, InputAdornment, TextField, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton'
-import { StateBurnHEE } from '../../../const'
-import { useWalletContext } from '../../../contexts/WalletContext'
-import { approveBurnHee, configBurnHEE, exchangeHeeForFitterPass } from '../../../libs/burnHee'
-import { formatMoney } from '../../../libs/utils/utils'
-import { TEXT_STYLE } from '../../../styles/common/textStyles'
+import styled from '@emotion/styled';
+import {
+	Box,
+	Button,
+	InputAdornment,
+	TextField,
+	Typography,
+} from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
+import { StateBurnHEE } from '../../../const';
+import { useWalletContext } from '../../../contexts/WalletContext';
+import {
+	approveBurnHee,
+	configBurnHEE,
+	exchangeHeeForFitterPass,
+} from '../../../libs/burnHee';
+import { formatMoney } from '../../../libs/utils/utils';
+import { TEXT_STYLE } from '../../../styles/common/textStyles';
+import Paper from '@mui/material/Paper';
 
 type Props = {
 	isApproved: boolean;
@@ -17,7 +28,7 @@ type Props = {
 	handleClickError: Function;
 	balanceHee: string;
 	allowance: number;
-}
+};
 
 const HeeExchangeFill = ({
 	isApproved,
@@ -27,17 +38,17 @@ const HeeExchangeFill = ({
 	handleClickSuccess,
 	handleClickError,
 	balanceHee,
-	allowance }: Props) => {
+	allowance,
+}: Props) => {
 	const [numberFitterPass, setNumberFitterPass] = useState<number | null>(null);
 	// const [numberFitterPass, setIs] = useState<boolean>(false);
-
 
 	const { ethersSigner, setRefresh, refresh } = useWalletContext();
 	const handleApprove = async () => {
 		setIsLoading(true);
 		try {
 			const res = await approveBurnHee(tokenRequired.toString(), ethersSigner);
-			setIsLoading(false)
+			setIsLoading(false);
 			if (res?.status) {
 				setRefresh(!refresh);
 			}
@@ -52,20 +63,23 @@ const HeeExchangeFill = ({
 				stateContentNew: StateBurnHEE.Error,
 			});
 		}
-	}
+	};
 	useEffect(() => {
 		if (allowance > 0) {
 			let numberFP = allowance / configBurnHEE.exchange;
 			setNumberFitterPass(numberFP);
 		}
-	}, [allowance])
+	}, [allowance]);
 	const handleGetFitterPass = async () => {
 		setIsLoading(true);
 		try {
-			const res = await exchangeHeeForFitterPass(numberFitterPass ? numberFitterPass?.toString() : "0", ethersSigner);
-			setIsLoading(false)
+			const res = await exchangeHeeForFitterPass(
+				numberFitterPass ? numberFitterPass?.toString() : '0',
+				ethersSigner
+			);
+			setIsLoading(false);
 			if (res?.status) {
-				setRefresh(!refresh)
+				setRefresh(!refresh);
 				handleClickSuccess({
 					titleSuccess: 'Confirmed successfully!',
 					functionSuccess: () => {
@@ -85,46 +99,58 @@ const HeeExchangeFill = ({
 				stateContentNew: StateBurnHEE.Error,
 			});
 		}
-	}
-	const tokenRequired = numberFitterPass ? numberFitterPass * configBurnHEE.exchange : 0;
+	};
+	const tokenRequired = numberFitterPass
+		? numberFitterPass * configBurnHEE.exchange
+		: 0;
 	return (
-		<>
-			<Item sx={{ mt: '16px!important' }}>
+		<Item>
+			<ItemBox sx={{ mt: '0 !important' }}>
 				<TitleItem>your current balance</TitleItem>
 				<ValueItem>{formatMoney(balanceHee)} HEE</ValueItem>
-			</Item>
-			<Item sx={{ mt: '16px!important', flexDirection: 'column' }}>
-				<TitleItem sx={{ mr: "auto" }}>AMOUNT OF FITTER PASS(ES) YOU WANT TO GET:</TitleItem>
-				<ValueItem sx={{ pointerEvents: isApproved ? "none" : 'auto', flex: 1, width: "100%" }}>
-					<Field type={'number'} value={numberFitterPass} onChange={(e) => {
-						if (e.target.value.trim() === '') {
-							setNumberFitterPass(null);
-						}
-						else if (Number.isInteger(parseFloat(e.target.value))) {
-							setNumberFitterPass(parseInt(e.target.value))
-						} else {
-							return;
-						}
-					}} InputProps={{
-						endAdornment: (
-							<InputAdornment position="start">
-								<Typography sx={{ color: '#A7ACB8', fontSize: '12px' }}>
-									FITTER PASS(ES)
-
-								</Typography>
-							</InputAdornment>
-						),
-					}} placeholder="" />
+			</ItemBox>
+			<ItemBox sx={{ mt: '16px!important', flexDirection: 'column' }}>
+				<TitleItem sx={{ mr: 'auto' }}>
+					AMOUNT OF FITTER PASS(ES) YOU WANT TO GET:
+				</TitleItem>
+				<ValueItem
+					sx={{
+						pointerEvents: isApproved ? 'none' : 'auto',
+						flex: 1,
+						width: '100%',
+					}}
+				>
+					<Field
+						type={'number'}
+						value={numberFitterPass}
+						onChange={(e) => {
+							if (e.target.value.trim() === '') {
+								setNumberFitterPass(null);
+							} else if (Number.isInteger(parseFloat(e.target.value))) {
+								setNumberFitterPass(parseInt(e.target.value));
+							} else {
+								return;
+							}
+						}}
+						InputProps={{
+							endAdornment: (
+								<InputAdornment position="start">
+									<Typography sx={{ color: '#A7ACB8', fontSize: '12px' }}>
+										FITTER PASS(ES)
+									</Typography>
+								</InputAdornment>
+							),
+						}}
+						placeholder=""
+					/>
 				</ValueItem>
+			</ItemBox>
 
-			</Item >
-
-			<Item sx={{ mt: '8px!important' }}>
+			<ItemBox sx={{ mt: '8px!important' }}>
 				<TitleItem>Token required</TitleItem>
 				<ValueItem>{formatMoney(tokenRequired.toString())} HEE</ValueItem>
-			</Item>
-			{
-				tokenRequired > parseFloat(balanceHee) &&
+			</ItemBox>
+			{tokenRequired > parseFloat(balanceHee) && (
 				<Box
 					sx={{
 						textAlign: 'end',
@@ -137,49 +163,65 @@ const HeeExchangeFill = ({
 				>
 					You don’t have enough token
 				</Box>
-			}
+			)}
 
-			<Item sx={{ mt: '18px !important' }}>
-				<TitleItem>
-
-				</TitleItem>
-				<ValueItem
-					sx={{ display: 'flex', alignItems: 'center' }}
-				>
+			<ItemBox sx={{ mt: '18px !important' }}>
+				<TitleItem></TitleItem>
+				<ValueItem sx={{ display: 'flex', alignItems: 'center' }}>
 					{formatMoney(configBurnHEE.exchange.toString())} HEE = 1 FITTER PASS
 				</ValueItem>
-			</Item>
+			</ItemBox>
 
-			<Box mt="auto" width={"100%"} sx={{ paddingTop: "16px", borderTop: "1px solid #E9EAEF" }}>
-				{
-					!isApproved ? <MarketplaceButton customStyle={{ width: "100%" }} disabled={tokenRequired > parseFloat(balanceHee) || !numberFitterPass} title={"Approve"} handleOnClick={handleApprove} />
-						: <MarketplaceButton customStyle={{ width: "100%" }} disabled={tokenRequired > parseFloat(balanceHee) || !numberFitterPass || !isApproved} title={"GET FITTER PASS"} handleOnClick={handleGetFitterPass} />
-				}
-
+			<Box
+				mt="auto"
+				width={'100%'}
+				sx={{ paddingTop: '16px', borderTop: '1px solid #E9EAEF' }}
+			>
+				{!isApproved ? (
+					<MarketplaceButton
+						customStyle={{ width: '100%' }}
+						disabled={
+							tokenRequired > parseFloat(balanceHee) || !numberFitterPass
+						}
+						title={'Approve'}
+						handleOnClick={handleApprove}
+					/>
+				) : (
+					<MarketplaceButton
+						customStyle={{ width: '100%' }}
+						disabled={
+							tokenRequired > parseFloat(balanceHee) ||
+							!numberFitterPass ||
+							!isApproved
+						}
+						title={'GET FITTER PASS'}
+						handleOnClick={handleGetFitterPass}
+					/>
+				)}
 			</Box>
-		</>
-	)
-}
+		</Item>
+	);
+};
 const ButtonPercent = styled(Button)({
-	color: "#55C8FC",
-	background: " #D9F2FD",
-	borderRadius: "4px",
-	padding: "5px 5px",
-	minWidth: "35px",
-	height: "26px",
-	textTransform: "none",
-	fontSize: "12px",
-	fontWeight: "500",
-	"&:hover": {
-		background: " #d0edfa !important",
+	color: '#55C8FC',
+	background: ' #D9F2FD',
+	borderRadius: '4px',
+	padding: '5px 5px',
+	minWidth: '35px',
+	height: '26px',
+	textTransform: 'none',
+	fontSize: '12px',
+	fontWeight: '500',
+	'&:hover': {
+		background: ' #d0edfa !important',
 	},
 	'&:disabled': {
 		background: '#E9EAEF',
 		'&>svg': {
-			stroke: "#A7ACB8"
-		}
-	}
-})
+			stroke: '#A7ACB8',
+		},
+	},
+});
 const ButtonCustom = styled(Button)({
 	color: '#55C8FC',
 	background: ' #D9F2FD',
@@ -189,12 +231,12 @@ const ButtonCustom = styled(Button)({
 	height: '16px',
 	border: 'none',
 	textTransform: 'none',
-	display: "flex",
+	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'center',
 	'&>svg': {
-		pointerEvents: "none",
-		stroke: "#55C8FC",
+		pointerEvents: 'none',
+		stroke: '#55C8FC',
 	},
 	'&:hover': {
 		background: ' #d0edfa !important',
@@ -202,12 +244,12 @@ const ButtonCustom = styled(Button)({
 	'&:disabled': {
 		background: '#E9EAEF',
 		'&>svg': {
-			stroke: "#A7ACB8"
-		}
-	}
+			stroke: '#A7ACB8',
+		},
+	},
 });
 const Field = styled(TextField)({
-	width: "100%",
+	width: '100%',
 	marginTop: '8px',
 	'& .MuiOutlinedInput-root': {
 		padding: '8px 16px',
@@ -229,8 +271,8 @@ const Field = styled(TextField)({
 			// webkitAppearance: 'none',
 			' -webkit-appearance': 'none',
 			//  - webkit - appearance: none;
-			margin: 0
-		}
+			margin: 0,
+		},
 	},
 	'& fieldset': { display: 'none' },
 	'@media (max-width: 767px)': {
@@ -242,7 +284,7 @@ const Field = styled(TextField)({
 	},
 });
 
-const Item = styled(Box)({
+const ItemBox = styled(Box)({
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'space-between',
@@ -262,4 +304,20 @@ const ValueItem = styled(Typography)({
 	lineHeight: '18px',
 });
 
-export default HeeExchangeFill
+const Item = styled(Paper)(({ theme }) => ({
+	textAlign: 'center',
+	width: '360px',
+	boxShadow: 'none',
+	padding: '16px',
+	display: 'flex',
+	flexDirection: 'column',
+	borderRight: '1px solid #E9EAEF',
+	'@media (max-width: 767px)': {
+		border: '1px solid #E9EAEF',
+		width: '100%',
+		marginBottom: '40px',
+		height: '350px',
+	},
+}));
+
+export default HeeExchangeFill;
