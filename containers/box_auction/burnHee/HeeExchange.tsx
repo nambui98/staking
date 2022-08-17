@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Link } from '@mui/material';
 import React from 'react';
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
 import { StateBurnHEE } from '../../../const';
@@ -43,11 +43,32 @@ const HeeExchange = (props: Props) => {
 				sx={{ paddingTop: '16px', borderTop: '1px solid #E9EAEF' }}
 			>
 				{walletAccount ? (
-					<MarketplaceButton
-						customStyle={{ width: '100%' }}
-						disabled={true}
-						title={'Connect Wallet'}
-					/>
+					<Link
+						sx={{
+							height: '56px',
+							display: 'flex',
+							justifyContent: 'center',
+							alignItems: 'center',
+							'&:hover': {
+								textDecorationColor: '#55C8FC',
+							},
+						}}
+						underline="hover"
+						href="https://bscscan.com/address/0x237ad3ceaaf631b90fd8949f3417e658abc6957a"
+						target="_blank"
+					>
+						<img src="assets/icons/export.svg" alt="export" />
+						<Typography
+							sx={{
+								color: '#55C8FC',
+								fontSize: '16px',
+								fontWeight: '600',
+								ml: '10px',
+							}}
+						>
+							View contract
+						</Typography>
+					</Link>
 				) : (
 					<MarketplaceButton
 						customStyle={{ width: '100%' }}
@@ -93,7 +114,8 @@ const Item = styled(Paper)(({ theme }) => ({
 		width: '100%',
 		marginBottom: '40px',
 		borderBottom: '1px solid #E9EAEF',
-		borderLeft: '1px solid #E9EAEF',
+		// borderLeft: '1px solid #E9EAEF',
+		borderRight: 'none',
 		height: '350px',
 	},
 }));

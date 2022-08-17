@@ -51,7 +51,6 @@ const DialogBurnHee = ({
 	);
 
 	const { walletAccount } = useWalletContext();
-	console.log('dhfiusdafas', walletAccount);
 
 	const [success, setSuccess] = useState<any>({
 		titleSuccess: 'Staked successfully!',

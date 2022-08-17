@@ -238,7 +238,7 @@ const Item = styled(Paper)(({ theme }) => ({
 	'@media (max-width: 768px)': {
 		width: '100%',
 		marginBottom: '40px',
-		border: '1px solid #E9EAEF',
+		borderTop: '1px solid #E9EAEF',
 		height: '350px',
 	},
 }));

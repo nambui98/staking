@@ -5,9 +5,12 @@ import {
 	styled,
 	Typography,
 	useMediaQuery,
+	Link,
 } from '@mui/material';
+import { ReactNode } from 'react';
 import { useState, ChangeEvent, useEffect, useCallback } from 'react';
 import { BoxAuction } from '../../../const';
+import { ethers } from 'ethers';
 
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -19,40 +22,83 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
 import axios from 'axios';
-import { convertWalletAddress } from '../../../libs/utils/utils';
+import { convertWalletAddress, formatMoney } from '../../../libs/utils/utils';
 import { useWalletContext } from '../../../contexts/WalletContext';
 import { StateBurnHEE } from '../../../const';
+import moment from 'moment';
+import { convertBigNumber } from '../../../libs/hooks/useBurnHeeHook';
+
+const timeUTC = (timeStamp: string) => {
+	let nowTime: number = Number(moment(new Date())); //todays date
+	let endTime: number = Number(moment(new Date(Number(timeStamp) * 1000))); // another date
+
+	let duration = Math.floor((nowTime - endTime) / 1000);
+
+	duration = Number(duration);
+	var d = Math.floor(duration / (3600 * 24));
+	var h = Math.floor((duration % (3600 * 24)) / 3600);
+	var m = Math.floor((duration % 3600) / 60);
+	var s = Math.floor(duration % 60);
+
+	var dDisplay = d > 0 ? d + (d == 1 ? ' day ' : ' ds ') : '';
+	var hDisplay = h > 0 ? h + (h == 1 ? ' hr ' : ' hrs ') : '';
+	var mDisplay = m > 0 ? m + (m == 1 ? ' min ' : ' mins ') : '';
+	var sDisplay = s > 0 ? s + (s == 1 ? ' sec' : ' secs') : '';
+
+	const timeDisplay = dDisplay + hDisplay + mDisplay + sDisplay;
+
+	const splitTime = timeDisplay.split(' ');
+
+	if (splitTime.length <= 4) return timeDisplay + ' ago';
+	splitTime.length = 4;
+
+	return splitTime.join(' ') + ' ago';
+};
 
 interface Column {
-	id: 'rank' | 'walletAddress' | 'amount' | 'earned';
+	id: 'blockTimestamp' | 'heeBurned' | 'transactionHash';
 	label: string;
 	minWidth?: number;
 	align?: 'right' | 'left';
-	format?: (value: string) => string;
+	format: (value: string) => string | ReactNode | number;
 }
 
 const columns: readonly Column[] = [
-	{ id: 'rank', label: 'RANK', minWidth: 50, align: 'left' },
 	{
-		id: 'walletAddress',
-		label: 'WALLET ID',
+		id: 'blockTimestamp',
+		label: 'TIME',
+		minWidth: 130,
+		align: 'left',
+		format: timeUTC,
+	},
+	{
+		id: 'heeBurned',
+		label: 'HEE BURNED',
+		minWidth: 90,
+		align: 'left',
+		format: (value: string) =>
+			formatMoney(ethers.utils.formatEther(convertBigNumber(Number(value)))),
+	},
+	{
+		id: 'transactionHash',
+		label: 'TXN HASH',
 		minWidth: 100,
 		align: 'left',
-		format: (value: string) => convertWalletAddress(value.toString(), 6, 3),
-	},
-	{
-		id: 'amount',
-		label: 'HEE BURNED',
-		minWidth: 103,
-		align: 'left',
-		format: (value: string) => value.toString(),
-	},
-	{
-		id: 'earned',
-		label: 'EARNED',
-		minWidth: 35,
-		align: 'left',
-		format: (value: string) => value.toString(),
+		format: (value) => (
+			<Link
+				sx={{
+					color: '#55C8FC',
+					'&:hover': {
+						textDecorationColor: '#55C8FC',
+					},
+				}}
+				href={`https://bscscan.com/tx/${value.toString()}`}
+				target="_blank"
+				underline="hover"
+			>
+				{convertWalletAddress(value.toString(), 6, 3, '***')}
+			</Link>
+		),
 	},
 ];
 
@@ -60,10 +106,6 @@ interface Data {
 	rank: number;
 	wallet: string;
 	filterPass: number;
-}
-
-function createData(rank: number, wallet: string, filterPass: number): Data {
-	return { rank, wallet, filterPass };
 }
 
 type Props = {
@@ -77,40 +119,23 @@ type Props = {
 type row = {
 	id: string;
 	walletAddress: string;
-	amount: string;
-	rank: string;
+	heeBurned: number;
+	transactionHash: string;
+	blockTimestamp: number;
 };
 export function HeeBurnRank(props: Props) {
 	const { stateContent } = props;
 	const { walletAccount } = useWalletContext();
-	const [limit, setLimit] = useState<number>(10);
+	const [limit, setLimit] = useState<number>(50);
 	const [page, setPage] = useState(0);
 	const [dataLeaderBoard, setDataLeaderBoard] = useState<row[]>();
 	const [dataMe, setDataMe] = useState<row>();
 	const [rowsPerPage, setRowsPerPage] = useState(10);
 
-	const getDataMe = useCallback(() => {
-		axios
-			.get(
-				`https://leaderboard.befitter.io/fitter/leaderboard/me?walletAddress=${walletAccount}`,
-				{
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				}
-			)
-			.then((res) => {
-				if (res.status === 200) {
-					setDataMe(res.data.data);
-				}
-			});
-	}, [walletAccount]);
 	const getData = useCallback(() => {
 		axios
 			.get(
-				`https://leaderboard.befitter.io/fitter/leaderboard?limit=${
-					limit === 50 ? 40 : 10
-				}&offset=${limit === 50 ? 10 : 0}`,
+				`https://leaderboard.befitter.io/fitter/burning-hee-history?limit=100&offset=0`,
 				{
 					headers: {
 						'Content-Type': 'application/json',
@@ -122,25 +147,12 @@ export function HeeBurnRank(props: Props) {
 					setDataLeaderBoard(res.data.data);
 				}
 			});
-	}, [limit]);
+	}, []);
 
 	useEffect(() => {
 		getData();
-		getDataMe();
-	}, [limit]);
+	}, [getData]);
 
-	const handleChangePage = (event: unknown, newPage: number) => {
-		setPage(newPage);
-	};
-
-	const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
-		setRowsPerPage(+event.target.value);
-		setPage(0);
-	};
-
-	const handleEnable = () => {
-		// setStateContent(BoxAuction.BurnAssets);
-	};
 	const isMobile = useMediaQuery('(max-width: 767px)');
 
 	const getPize = (value: number) => {
@@ -157,6 +169,7 @@ export function HeeBurnRank(props: Props) {
 		}
 		return '-';
 	};
+
 	return (
 		<Box
 			sx={{
@@ -164,15 +177,14 @@ export function HeeBurnRank(props: Props) {
 				flexDirection: isMobile ? 'column' : 'row',
 				flex: 1,
 				borderLeft: isMobile ? 0 : '1px solid #E9EAEF',
-				position: 'relative',
 			}}
 		>
 			<Box
 				sx={{
 					width: isMobile ? 'auto' : '100%',
-					padding: isMobile ? '16px' : '8px 16px',
+					padding: isMobile ? '16px' : '8px 16px 16px 16px',
 					'@media (max-width: 767px)': {
-						border: '1px solid #E9EAEF',
+						borderTop: '1px solid #E9EAEF',
 					},
 				}}
 			>
@@ -182,7 +194,14 @@ export function HeeBurnRank(props: Props) {
 						stateContent === StateBurnHEE.HeeExchangeHistories ? true : false
 					}
 				>
-					<TableContainer sx={{ maxHeight: '340px', border: 'none' }}>
+					<TableContainer
+						sx={{
+							maxHeight: '326px',
+							border: 'none',
+							overflowX: 'visible',
+							'@media (max-width: 768px)': { overflowX: 'auto' },
+						}}
+					>
 						<Table stickyHeader aria-label="sticky table">
 							<TableHead>
 								<TableRow>
@@ -211,7 +230,7 @@ export function HeeBurnRank(props: Props) {
 												hover
 												role="checkbox"
 												tabIndex={-1}
-												key={row.rank}
+												key={row.id}
 												sx={{
 													'&:nth-of-type(even)': {
 														backgroundColor: '#F8F9FB',
@@ -219,26 +238,7 @@ export function HeeBurnRank(props: Props) {
 												}}
 											>
 												{columns.map((column) => {
-													if (column.id === 'earned') {
-														return (
-															<TableCell
-																key={column.id}
-																align={column.align}
-																sx={{
-																	borderBottom: 'none',
-																	padding: '6px 0',
-																	fontSize: '12px',
-																	color: '#31373E',
-																	fontWeight: '500',
-																	fontFamily: 'BeVietNamPro',
-																}}
-															>
-																{row.rank ? getPize(parseInt(row.rank)) : '-'}
-																{/* <img src="images/box.svg" alt="box" /> */}
-															</TableCell>
-														);
-													}
-													const value = row[column.id];
+													const value = row[column.id].toString();
 													return (
 														<TableCell
 															key={column.id}
@@ -250,11 +250,10 @@ export function HeeBurnRank(props: Props) {
 																color: '#31373E',
 																fontWeight: '500',
 																fontFamily: 'BeVietNamPro',
+																lineHeight: '22px',
 															}}
 														>
-															{column.format && typeof value === 'string'
-																? column.format(value)
-																: value}
+															{column.format(value)}
 														</TableCell>
 													);
 												})}
@@ -266,52 +265,19 @@ export function HeeBurnRank(props: Props) {
 					</TableContainer>
 				</BoxPaper>
 			</Box>
-			<Box
-				sx={{
-					position: 'absolute',
-					bottom: '0',
-					left: '-1px',
-					right: '0',
-					height: '62px',
-					backgroundColor: '#D9CDF1',
-					borderRadius: '0px 0px 8px 8px',
-					textAlign: 'center',
-					display:
-						stateContent == StateBurnHEE.HeeExchangeHistories
-							? 'block'
-							: 'none',
-				}}
-			>
-				<Item>
-					<Box>
-						<TitleItem>Your rank</TitleItem>
-						<ValueItem>99</ValueItem>
-					</Box>
-					<Box>
-						<TitleItem>HEE Burned</TitleItem>
-						<ValueItem>25,000</ValueItem>
-					</Box>
-					<Box>
-						<TitleItem>Earned</TitleItem>
-						<ValueItem>5 FITTER PASS</ValueItem>
-					</Box>
-				</Item>
-			</Box>
 		</Box>
 	);
 }
 
 const BoxPaper = styled(Paper)((props: { isBurnMore: boolean }) => ({
-	height: !props.isBurnMore ? 'inherit' : '278px',
-	overflow: !props.isBurnMore ? 'hidden' : 'auto',
+	// height: !props.isBurnMore ? 'inherit' : '278px',
+	overflowY: 'auto',
 	boxShadow: 'none',
 	width: '100%',
+
 	'&::-webkit-scrollbar': {
 		width: '5px',
 		borderRadius: '5px',
-	},
-	'@media (max-width: 767px)': {
-		height: '358px',
 	},
 
 	/* Track */
@@ -330,28 +296,4 @@ const BoxPaper = styled(Paper)((props: { isBurnMore: boolean }) => ({
 		background: '#555',
 		borderRadius: '5px',
 	},
-	overflowY: 'auto',
 }));
-
-const Item = styled(Box)({
-	display: 'flex',
-	alignItems: 'center',
-	justifyContent: 'space-around',
-	height: '100%',
-});
-
-const TitleItem = styled(Typography)({
-	fontSize: '12px',
-	color: '#5A6178',
-	fontWeight: '500',
-	lineHeight: '18px',
-	textTransform: 'uppercase',
-	textAlign: 'left',
-});
-const ValueItem = styled(Typography)({
-	fontSize: '16px',
-	textAlign: 'left',
-	color: '#7165E3',
-	fontWeight: '500',
-	lineHeight: '24px',
-});

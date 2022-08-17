@@ -313,10 +313,11 @@ const Item = styled(Paper)(({ theme }) => ({
 	flexDirection: 'column',
 	borderRight: '1px solid #E9EAEF',
 	'@media (max-width: 767px)': {
-		border: '1px solid #E9EAEF',
+		borderTop: '1px solid #E9EAEF',
 		width: '100%',
 		marginBottom: '40px',
 		height: '350px',
+		borderRight: 'none',
 	},
 }));
 

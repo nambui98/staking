@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Paper } from '@mui/material';
 import { styled } from '@mui/styles';
 import React, { useState } from 'react';
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
@@ -27,9 +27,14 @@ export const Error = (props: Props) => {
 					flexDirection: 'column',
 					alignItems: 'center',
 					height: '100%',
+					width: '100%',
 				}}
 			>
-				<Box sx={{ textAlign: 'center' }}>
+				<Box
+					sx={{
+						textAlign: 'center',
+					}}
+				>
 					<Box>
 						<img src={MARKETPLACE_ICON.CLOSE_ICON} alt="" />
 					</Box>
@@ -47,18 +52,15 @@ export const Error = (props: Props) => {
 	);
 };
 
-const ItemBox = styled(Box)(({ theme }) => ({
+const ItemBox = styled(Box)({
+	width: '360px',
 	boxShadow: 'none',
 	padding: '16px',
-	width: '100%',
 	display: 'flex',
-	height: '350px',
 	flexDirection: 'column',
-	marginBottom: '40px',
-	borderRight: '0',
-	'@media (min-width: 768px)': {
-		borderRight: '1px solid #E9EAEF',
-		height: '100%',
-		width: '360px',
+	'@media (max-width: 768px)': {
+		width: '100%',
+		height: '350px',
+		marginBottom: '40px',
 	},
-}));
+});
