@@ -2,25 +2,22 @@ import styled from '@emotion/styled';
 import {
 	Backdrop,
 	Box,
-	CircularProgress,
-	Dialog,
-	DialogTitle,
+	CircularProgress, DialogTitle,
 	Stack,
 	StackProps,
-	useMediaQuery,
+	useMediaQuery
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StateBurnHEE } from '../../../const';
-import { STAKING_ICON, STAKING_IMAGE } from '../../../constants/staking';
-import userBurnHeeHook, { row } from '../../../libs/hooks/useBurnHeeHook';
+import { useWalletContext } from '../../../contexts/WalletContext';
+import { row } from '../../../libs/hooks/useBurnHeeHook';
 import { TEXT_STYLE } from '../../../styles/common/textStyles';
 import { Error } from '../../staking/components/Error';
 import { Success } from '../../staking/components/Success';
+import { HeeBurnRank } from './HeeBurnRank';
 import HeeExchange from './HeeExchange';
 import HeeExchangeFill from './HeeExchangeFill';
 import HeeExchangeFillHistories from './HeeExchangeFillHistories';
-import { HeeBurnRank } from './HeeBurnRank';
-import { useWalletContext } from '../../../contexts/WalletContext';
 
 type Props = {
 	status: boolean;
@@ -109,11 +106,11 @@ const DialogBurnHee = ({
 	return (
 		<Box
 			sx={borderRadius}
-			// onClose={() => {
-			// 	handleToggle();
-			// 	setStateContent(stateContentBurnInit);
-			// }}
-			// open={status}
+		// onClose={() => {
+		// 	handleToggle();
+		// 	setStateContent(stateContentBurnInit);
+		// }}
+		// open={status}
 		>
 			<Wrap
 				isBig={stateContent === StateBurnHEE.HeeExchangeHistories}
