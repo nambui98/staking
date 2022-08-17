@@ -49,7 +49,7 @@ export type row = {
 	timestamp: number | string,
 	tokenAmount: number,
 }
-export default function userBurnHeeHook(props: Props) {
+export default function useBurnHeeHook(props: Props) {
 	const { setIsLoading, setStateContent } = props;
 	const [isApprovedBurn, setIsApprovedBurn] = useState<boolean>(false);
 	const [allowance, setAllowance] = useState<number>(0);

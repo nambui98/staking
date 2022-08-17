@@ -23,9 +23,9 @@ import { toast } from 'react-toastify';
 import { PopupMessage } from '../../components/pageComponent/claim/PopupMessage';
 import { StateStaking, StateStakingLocked } from '../../const';
 import { STAKING_ICON } from '../../constants/staking';
-import userLockedHook from '../../libs/hooks/useLockedHook';
+import useLockedHook from '../../libs/hooks/useLockedHook';
 import lockedHook, { row } from '../../libs/hooks/useLockedHook';
-import userStakingHook from '../../libs/hooks/userStakingHook';
+import useStakingHook from '../../libs/hooks/useStakingHook';
 import { formatMoney } from '../../libs/utils/utils';
 import { TEXT_STYLE } from '../../styles/common/textStyles';
 import { DialogsItemStaking } from './components/DialogsItemStaking';
@@ -72,11 +72,11 @@ export const TabPools = () => {
 		totalStakingToken,
 		claimableTime,
 		remainingDelayTime,
-		statusRow } = userStakingHook({
+		statusRow } = useStakingHook({
 			setIsLoading,
 			setStateContentInit
 		})
-	const { dataMyStakingLock, totalInPool } = userLockedHook({
+	const { dataMyStakingLock, totalInPool } = useLockedHook({
 		setIsLoading,
 		setStateContentInitLocked
 	})

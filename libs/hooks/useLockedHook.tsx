@@ -53,7 +53,7 @@ export type row = {
 	fpNum: number,
 	withdrawn: number
 }
-export default function userLockedHook(props: Props) {
+export default function useLockedHook(props: Props) {
 	const { setIsLoading, setStateContentInitLocked } = props;
 	const [statusRow, setStatusRow] = useState('-');
 	const [dataMyStakingLock, setDataMyStakingLock] = useState<row[]>();
