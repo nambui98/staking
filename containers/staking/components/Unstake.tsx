@@ -49,7 +49,7 @@ export const Unstake = (props: Props) => {
 		balanceCP,
 		balanceUS,
 		setUnStakePrice } = props;
-	const [value, setValue] = useState('');
+	const [value, setValue] = useState(balanceSA);
 	const [messageError, setMessageError] = useState('');
 	const { ethersSigner, ethersProvider, setRefresh, refresh } = useWalletContext();
 
@@ -93,7 +93,7 @@ export const Unstake = (props: Props) => {
 			</Item>
 			<Item>
 				<TitleItem>unstake amount</TitleItem>
-				<ValueItem>	<Search
+				<ValueItem sx={{ pointerEvents: "none" }}>	<Search
 					// value={value && value !== '-' ? formatMoney(value) : ''}
 					value={value}
 
@@ -138,7 +138,7 @@ export const Unstake = (props: Props) => {
 				<TitleItem ></TitleItem>
 				<ValueItem sx={{ display: "flex", gap: "8px" }}>
 					{
-						percents.map((item, i) => <ButtonPercent onClick={() => handleValueWithPercent(item.value)} key={i} variant="text">
+						percents.map((item, i) => <ButtonPercent disabled onClick={() => handleValueWithPercent(item.value)} key={i} variant="text">
 							{item.name}
 						</ButtonPercent>)
 					}

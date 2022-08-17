@@ -1,12 +1,6 @@
 import { ethers } from "ethers";
-import { bftBusdToken, bftShop, bftFiuTokenStaking, beFITTERPassStaking, beFITTERStakeStaking } from "./contracts";
+import { bftBusdToken, bftShop, bftFiuTokenStaking, beFITTERPassStaking, beFITTERStakeStaking, beFITTERStakeUserError } from "./contracts";
 
-export const getBoxPrice = async (boxType: string, ethersSigner: any) => {
-	const shopContract = new ethers.Contract(bftShop.address, bftShop.abi, ethersSigner);
-	const res = await shopContract.getBoxPrice(boxType, bftBusdToken.address);
-	const convertPrice = parseFloat(ethers.utils.formatUnits(res));
-	return convertPrice;
-}
 
 export const getAllowanceStakingFiu = async (walletAddress: string, ethersSigner: any) => {
 	const bftFiuTokenStakingContract = new ethers.Contract(bftFiuTokenStaking.address, bftFiuTokenStaking.abi, ethersSigner);
@@ -21,11 +15,7 @@ export const approveStakingFiu = async (ethersSigner: any) => {
 	const res = await bftFiuTokenStakingContract.approve(beFITTERStakeStaking.address, parsePrice);
 	return res;
 }
-export const purchaseBox = async (boxType: string, ethersSigner: any) => {
-	const shopContract = new ethers.Contract(bftShop.address, bftShop.abi, ethersSigner);
-	const res = await shopContract.purchaseBoxByToken(boxType, bftBusdToken.address);
-	return res;
-}
+
 export const getBalanceFiuStaking = async (walletAccount: any, ethersSigner: any) => {
 	const bftFiuTokenStakingContract = new ethers.Contract(bftFiuTokenStaking.address, bftFiuTokenStaking.abi, ethersSigner);
 
@@ -69,6 +59,14 @@ export const unStake = async (price: string, ethersSigner: any) => {
 	const beFITTERStakeStakingContract = new ethers.Contract(beFITTERStakeStaking.address, beFITTERStakeStaking.abi, ethersSigner);
 	const parsePrice = ethers.utils.parseUnits(price)
 	const res = await beFITTERStakeStakingContract.unstake(parsePrice)
+
+	return res.wait();
+}
+export const unStakeForUserError = async (price: string, ethersSigner: any) => {
+	console.log(beFITTERStakeUserError.address)
+	const beFITTERStakeUserErrorContract = new ethers.Contract(beFITTERStakeUserError.address, beFITTERStakeUserError.abi, ethersSigner);
+	const parsePrice = ethers.utils.parseUnits(price)
+	const res = await beFITTERStakeUserErrorContract.unstake(parsePrice)
 
 	return res.wait();
 }
