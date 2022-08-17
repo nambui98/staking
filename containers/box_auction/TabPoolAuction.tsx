@@ -145,6 +145,9 @@ export const TabPoolAuction = () => {
 		setIsLoading,
 		setStateContent: setStateContentBurnInit,
 	});
+
+	const [expanded, setExpanded] = useState<string | false>(false);
+
 	const rows = [
 		{
 			name: 'Fitter Pass',
@@ -161,6 +164,7 @@ export const TabPoolAuction = () => {
 			),
 		},
 	];
+
 	const rowBurn = {
 		name: 'Burn hee',
 		title: 'Box Auction',
@@ -175,6 +179,11 @@ export const TabPoolAuction = () => {
 			`${totalInPool} HEE`
 		),
 	};
+
+	const handleChangeTab =
+		(panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+			setExpanded(isExpanded ? panel : false);
+		};
 
 	const handleShowBurn = (e: React.MouseEvent) => {
 		e.stopPropagation();
@@ -322,7 +331,10 @@ export const TabPoolAuction = () => {
 				</Top>
 				<Body>
 					<Box sx={{ overflowX: 'auto', borderRadius: '16px' }}>
-						<Accordion onChange={() => {}}>
+						<Accordion
+							expanded={expanded === 'BOX-AUCTION'}
+							onChange={handleChangeTab('BOX-AUCTION')}
+						>
 							{rows.map((item, index) => {
 								return (
 									<AccordionSummary
@@ -512,7 +524,141 @@ export const TabPoolAuction = () => {
 							</AccordionDetails>
 						</Accordion>
 					</Box>
-					<Row
+					<Box
+						sx={{
+							overflowX: 'auto',
+							borderRadius: '16px',
+							mt: '20px',
+						}}
+					>
+						<Accordion
+							expanded={expanded === 'HEE'}
+							onChange={handleChangeTab('HEE')}
+						>
+							{rows.map((item, index) => {
+								return (
+									<AccordionSummary
+										aria-controls="panel1d-content"
+										id="panel1d-header"
+										key={index}
+										sx={{
+											height: '140px',
+											paddingBottom: '50px',
+											// display: 'flex',
+											// flexDirection: 'column',
+											overflowX: 'auto',
+											'@media (max-width: 767px)': {
+												// width: '0px',
+												' .MuiAccordionSummary-content': {
+													width: '0px',
+												},
+											},
+										}}
+									>
+										<Box
+											sx={{
+												display: 'flex',
+												flexDirection: 'column',
+												overflowX: 'auto',
+												width: '100%',
+											}}
+										>
+											<Box>
+												<TableContainerCus component={Paper}>
+													<Table
+														sx={{ minWidth: 1020 }}
+														aria-label="simple table"
+													>
+														<TableHead>
+															<TableRow>
+																<TableCell>Status</TableCell>
+																<TableCell align="left">Reward</TableCell>
+																<TableCell align="left">Earned</TableCell>
+																<TableCell align="left">
+																	Token remaining
+																</TableCell>
+																<TableCell align="left">Lock-up time</TableCell>
+																<TableCell align="left">
+																	Withdrawal delay time
+																</TableCell>
+																<TableCell align="left">
+																	Total IN POOL
+																</TableCell>
+															</TableRow>
+														</TableHead>
+														<TableBody>
+															<TableRow
+																key={rowBurn.name}
+																sx={{
+																	'&:last-child td, &:last-child th': {
+																		border: 0,
+																	},
+																}}
+															>
+																<TableCell component="th" scope="row">
+																	{rowBurn.data.status}
+																</TableCell>
+																<TableCell align="left">
+																	{rowBurn.data.reward}
+																</TableCell>
+																<TableCell align="left">
+																	{rowBurn.data.earned}
+																</TableCell>
+																<TableCell align="left">-</TableCell>
+																<TableCell align="left">None</TableCell>
+																<TableCell align="left">None</TableCell>
+																<TableCell align="left">
+																	{formatMoney(rowBurn.data.total)} HEE
+																</TableCell>
+															</TableRow>
+														</TableBody>
+
+														{/* {item.isComingSoon && (
+																		<ComingSoon
+																			sx={{
+																				top: index === 0 ? '0 !important' : 4,
+																			}}
+																		>
+																			coming soon
+																		</ComingSoon>
+																	)} */}
+													</Table>
+													<TitleItem>
+														<img src={STAKING_ICON.hee} />
+														HEE Exchange - Win Fitter Pass
+														<span
+															style={{ textDecoration: 'underline' }}
+															onClick={(e: React.MouseEvent) =>
+																handleShowBurnHee(e)
+															}
+														>
+															How it works?
+														</span>
+													</TitleItem>
+												</TableContainerCus>
+											</Box>
+										</Box>
+									</AccordionSummary>
+								);
+							})}
+							<AccordionDetails>
+								<DialogBurnHee
+									status={showBurnHee}
+									stateContentBurnInit={stateContentBurnInit}
+									dataMyBurned={dataMyBurned}
+									totalInPool={totalInPool}
+									balanceHee={balanceHee}
+									earned={earned}
+									isApproved={isApprovedBurn}
+									allowance={allowance}
+									handleToggle={() => {
+										setShowBurnHee(false);
+									}}
+								/>
+							</AccordionDetails>
+						</Accordion>
+					</Box>
+					{/* <Row
 						onClick={() => {
 							setShowBurnHee(true);
 						}}
@@ -550,7 +696,6 @@ export const TabPoolAuction = () => {
 								</TableBody>
 							</Table>
 						</TableContainerCus>
-
 						<TitleItem>
 							<img src={STAKING_ICON.hee} />
 							HEE Exchange - Win Fitter Pass
@@ -561,7 +706,7 @@ export const TabPoolAuction = () => {
 								How it works?
 							</span>
 						</TitleItem>
-					</Row>
+					</Row> */}
 				</Body>
 			</Container>
 			<PopupMessage
@@ -588,23 +733,6 @@ export const TabPoolAuction = () => {
 					setShowLeaderBoard(false);
 				}}
 				// setShowInsideBox={setShowInsideBox}
-			/>
-			{/* <ShowInsideBoxPopup
-				status={showInsideBox}
-				setShowInsideBox={setShowInsideBox}
-			/> */}
-			<DialogBurnHee
-				status={showBurnHee}
-				stateContentBurnInit={stateContentBurnInit}
-				dataMyBurned={dataMyBurned}
-				totalInPool={totalInPool}
-				balanceHee={balanceHee}
-				earned={earned}
-				isApproved={isApprovedBurn}
-				allowance={allowance}
-				handleToggle={() => {
-					setShowBurnHee(false);
-				}}
 			/>
 		</Wrap>
 	);

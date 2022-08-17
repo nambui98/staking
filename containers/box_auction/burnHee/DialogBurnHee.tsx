@@ -1,6 +1,15 @@
 import styled from '@emotion/styled';
-import { Backdrop, Box, CircularProgress, Dialog, DialogTitle, Stack, StackProps, useMediaQuery } from '@mui/material';
-import React, { useEffect, useState } from 'react'
+import {
+	Backdrop,
+	Box,
+	CircularProgress,
+	Dialog,
+	DialogTitle,
+	Stack,
+	StackProps,
+	useMediaQuery,
+} from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { StateBurnHEE } from '../../../const';
 import { STAKING_ICON, STAKING_IMAGE } from '../../../constants/staking';
 import userBurnHeeHook, { row } from '../../../libs/hooks/useBurnHeeHook';
@@ -10,18 +19,20 @@ import { Success } from '../../staking/components/Success';
 import HeeExchange from './HeeExchange';
 import HeeExchangeFill from './HeeExchangeFill';
 import HeeExchangeFillHistories from './HeeExchangeFillHistories';
+import { HeeBurnRank } from './HeeBurnRank';
+import { useWalletContext } from '../../../contexts/WalletContext';
 
 type Props = {
 	status: boolean;
 	handleToggle: () => any;
-	stateContentBurnInit: StateBurnHEE | null,
+	stateContentBurnInit: StateBurnHEE | null;
 	dataMyBurned: row[] | undefined;
 	totalInPool: string;
 	balanceHee: string;
 	isApproved: boolean;
 	allowance: number;
 	earned: string;
-}
+};
 
 const DialogBurnHee = ({
 	status,
@@ -31,13 +42,16 @@ const DialogBurnHee = ({
 	totalInPool,
 	balanceHee,
 	isApproved,
-	allowance
+	allowance,
 }: Props) => {
 	const isMobile = useMediaQuery('(max-width: 767px)');
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [stateContent, setStateContent] = useState<StateBurnHEE | null>(
 		StateBurnHEE.HeeExchange
 	);
+
+	const { walletAccount } = useWalletContext();
+
 	const [success, setSuccess] = useState<any>({
 		titleSuccess: 'Staked successfully!',
 		functionSuccess: '',
@@ -48,8 +62,10 @@ const DialogBurnHee = ({
 		functionError: '',
 	});
 	useEffect(() => {
-		if (stateContent !== StateBurnHEE.Success && stateContent !== StateBurnHEE.Error) {
-
+		if (
+			stateContent !== StateBurnHEE.Success &&
+			stateContent !== StateBurnHEE.Error
+		) {
 			setStateContent(stateContentBurnInit);
 		}
 	}, [stateContentBurnInit]);
@@ -89,58 +105,45 @@ const DialogBurnHee = ({
 		setSuccess,
 		handleClickSuccess,
 		handleClickError,
-	}
+	};
 	return (
-		<Dialog
+		<Box
 			sx={borderRadius}
-			onClose={() => {
-				handleToggle();
-				setStateContent(stateContentBurnInit);
-			}}
-			open={status}
+			// onClose={() => {
+			// 	handleToggle();
+			// 	setStateContent(stateContentBurnInit);
+			// }}
+			// open={status}
 		>
-			<Wrap isBig={stateContent === StateBurnHEE.HeeExchangeHistories}>
-				<Box
-					onClick={() => {
-						handleToggle();
-						setStateContent(stateContentBurnInit);
-					}}
-					sx={{
-						position: 'absolute',
-						right: '18px',
-						cursor: 'pointer',
-					}}
-				>
-					<img src={'assets/icons/close.svg'} />
-				</Box>
-				<TitlePopup>
-					{stateContent === StateBurnHEE.HeeExchangeHistories && (
-						<img
-							src={STAKING_ICON.arrowLeftGray}
-							height="24px"
-							style={{ marginRight: "8px", cursor: 'pointer', }}
-							alt=""
-							onClick={() => setStateContent(StateBurnHEE.HeeExchangeFill)}
-						/>
-					)}
-					<img src={STAKING_ICON.hee} style={{ marginRight: "8px" }} alt="" />
-					HEE EXCHANGE
-				</TitlePopup>
-				{
-					stateContent == StateBurnHEE.HeeExchange ?
-						<HeeExchange />
-						:
-						stateContent == StateBurnHEE.HeeExchangeFill ?
-							<HeeExchangeFill {...propsCommon} balanceHee={balanceHee} isApproved={isApproved} allowance={allowance} /> :
-							stateContent == StateBurnHEE.HeeExchangeHistories ?
-								<HeeExchangeFillHistories {...propsCommon} dataMyBurned={dataMyBurned} /> :
-
-								stateContent === StateBurnHEE.Success ? (
-									<Success success={success} setStateContent={setStateContent} />
-								) : stateContent === StateBurnHEE.Error ? (
-									<Error setStateContent={setStateContent} error={error} />
-								) : <Box></Box>
-				}
+			<Wrap
+				isBig={stateContent === StateBurnHEE.HeeExchangeHistories}
+				direction={isMobile ? 'column' : 'row'}
+			>
+				<HeeExchange />
+				{walletAccount && stateContent == StateBurnHEE.HeeExchangeFill ? (
+					<HeeExchangeFill
+						{...propsCommon}
+						balanceHee={balanceHee}
+						isApproved={isApproved}
+						allowance={allowance}
+					/>
+				) : stateContent == StateBurnHEE.HeeExchangeHistories ? (
+					<HeeExchangeFillHistories
+						{...propsCommon}
+						dataMyBurned={dataMyBurned}
+					/>
+				) : stateContent === StateBurnHEE.Success ? (
+					<Success
+						success={success}
+						setStateContent={setStateContent}
+						isBorderTop
+					/>
+				) : stateContent === StateBurnHEE.Error ? (
+					<Error setStateContent={setStateContent} error={error} />
+				) : (
+					<Box></Box>
+				)}
+				{walletAccount && <HeeBurnRank stateContent={stateContent} />}
 			</Wrap>
 			<Backdrop
 				sx={{ color: '#FF6D24', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -148,9 +151,9 @@ const DialogBurnHee = ({
 			>
 				<CircularProgress color="inherit" />
 			</Backdrop>
-		</Dialog >
-	)
-}
+		</Box>
+	);
+};
 const borderRadius = {
 	'& .MuiDialog-paper': {
 		borderRadius: '16px',
@@ -179,38 +182,37 @@ type stackPropsNew = StackProps & {
 };
 const Wrap = styled(Stack)((props: stackPropsNew) => ({
 	position: 'relative',
-	overflowY: 'auto',
-	overflowX: 'hidden',
-	padding: '0px 16px 0px 16px',
-	margin: '16px 0px 16px 0px',
-	width: 'calc(100vw - 32px)',
-	height: 'calc(100vh - 32px)',
+	// overflowY: 'auto',
+	// overflowX: 'hidden',
+
+	// width: 'calc(100vw - 32px)',
+	// height: '100%',
 	'@media (min-width: 650px)': {
-		width: props.isBig ? '464px' : '360px',
-		height: '490px',
+		// width: props.isBig ? '464px' : '360px',
+		width: '100%',
+		height: '350px',
 	},
-	'&::-webkit-scrollbar': {
-		width: "5px",
-		borderRadius: "5px"
-	},
+	// '&::-webkit-scrollbar': {
+	// 	width: '5px',
+	// 	borderRadius: '5px',
+	// },
 
-	/* Track */
-	'&::-webkit-scrollbar-track': {
-		background: '#f1f1f1',
-		borderRadius: "5px"
-	}
-	,
-	/* Handle */
-	'&::-webkit-scrollbar-thumb': {
-		background: '#888',
-		borderRadius: "5px"
-	},
+	// /* Track */
+	// '&::-webkit-scrollbar-track': {
+	// 	background: '#f1f1f1',
+	// 	borderRadius: '5px',
+	// },
+	// /* Handle */
+	// '&::-webkit-scrollbar-thumb': {
+	// 	background: '#888',
+	// 	borderRadius: '5px',
+	// },
 
-	/* Handle on hover */
-	'&::-webkit-scrollbar-thumb:hover': {
-		background: '#555',
-		borderRadius: "5px"
-	}
+	// /* Handle on hover */
+	// '&::-webkit-scrollbar-thumb:hover': {
+	// 	background: '#555',
+	// 	borderRadius: '5px',
+	// },
 }));
 
-export default DialogBurnHee
+export default DialogBurnHee;
