@@ -25,16 +25,13 @@ import axios from 'axios';
 import { convertWalletAddress, formatMoney } from '../../../libs/utils/utils';
 import { useWalletContext } from '../../../contexts/WalletContext';
 import { StateBurnHEE } from '../../../const';
-import moment from 'moment';
 import { convertBigNumber } from '../../../libs/hooks/useBurnHeeHook';
+import moment from 'moment';
 
 const timeUTC = (timeStamp: string) => {
-	let nowTime: number = Number(moment(new Date())); //todays date
-	let endTime: number = Number(moment(new Date(Number(timeStamp) * 1000))); // another date
-
+	let nowTime: number = Date.now(); //todays date
+	let endTime: number = parseInt(timeStamp) * 1000; // another date
 	let duration = Math.floor((nowTime - endTime) / 1000);
-
-	duration = Number(duration);
 	var d = Math.floor(duration / (3600 * 24));
 	var h = Math.floor((duration % (3600 * 24)) / 3600);
 	var m = Math.floor((duration % 3600) / 60);
