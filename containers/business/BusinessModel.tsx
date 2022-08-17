@@ -42,7 +42,7 @@ export const BusinessModel = () => {
 					{BUSINESS_MODEL.body2}
 				</Item>
 				{isMobile && (
-					<Item sx={{ ...itemImage1, marginBottom: '40px' }} key={index}>
+					<Item sx={{ ...itemImage1, marginBottom: '40px' }}>
 						<img src={BUSINESS_IMAGE.shoeDouble} />
 					</Item>
 				)}
