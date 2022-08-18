@@ -36,10 +36,10 @@ import MuiAccordionSummary, {
 	AccordionSummaryProps,
 } from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
-import userBurnHook from '../../libs/hooks/useBurnHook';
+import useBurnHook from '../../libs/hooks/useBurnHook';
 import { DialogLeaderBoard } from './components/DialogLeaderBoard';
 import DialogBurnHee from './burnHee/DialogBurnHee';
-import userBurnHeeHook from '../../libs/hooks/useBurnHeeHook';
+import useBurnHeeHook from '../../libs/hooks/useBurnHeeHook';
 import { configBurnHEE } from '../../libs/burnHee';
 import ShowInsideBoxPopup from '../dashboard/components/ShowInsideBox';
 
@@ -131,7 +131,7 @@ export const TabPoolAuction = () => {
 		isApproved,
 		isRegister,
 		statusRow,
-	} = userBurnHook({
+	} = useBurnHook({
 		setIsLoading,
 	});
 	const {
@@ -141,7 +141,7 @@ export const TabPoolAuction = () => {
 		earned,
 		isApprovedBurn,
 		allowance,
-	} = userBurnHeeHook({
+	} = useBurnHeeHook({
 		setIsLoading,
 		setStateContent: setStateContentBurnInit,
 	});
@@ -409,7 +409,7 @@ export const TabPoolAuction = () => {
 																	<TableCell align="left">
 																		{parseInt(item.data.total) > 0
 																			? formatMoney(item.data.total) +
-																			  ' Fitter Passes'
+																			' Fitter Passes'
 																			: '0 Fitter Pass'}{' '}
 																	</TableCell>
 																</TableRow>
@@ -732,7 +732,7 @@ export const TabPoolAuction = () => {
 					// debugger
 					setShowLeaderBoard(false);
 				}}
-				// setShowInsideBox={setShowInsideBox}
+			// setShowInsideBox={setShowInsideBox}
 			/>
 		</Wrap>
 	);

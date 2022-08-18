@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { StateStaking } from '../../const';
 import { changeNetwork, useWalletContext } from '../../contexts/WalletContext';
-import { getAllowanceStakingFiu, getBalanceFiuStaking, getCurrentProfit, getRemainingDelayTime, getStakingAmount, getStakingStatus, getTotalStakingToken, getUnstakeAmount, toClaimableTime } from '../staking';
+import { getAllowanceStakingFiu, getBalanceFiuStaking, getCurrentProfit, getCurrentProfitError, getRemainingDelayTime, getRemainingDelayTimeError, getStakingAmount, getStakingAmountError, getStakingStatus, getStakingStatusError, getTotalStakingToken, getUnstakeAmount, getUnstakeAmountError, toClaimableTime, toClaimableTimeError, walletError } from '../staking';
 type Props = {
 	setIsLoading: Function;
 	setStateContentInit: Function
 };
 
-export default function userStakingHook(props: Props) {
+export default function useStakingHook(props: Props) {
 	const { setIsLoading, setStateContentInit } = props;
 
 	const [balanceFiu, setBalanceFiu] = useState('');
@@ -71,9 +71,12 @@ export default function userStakingHook(props: Props) {
 			await changeNetwork(provider);
 		}
 		if (walletAccount && ethersSigner) {
-			debugger
-
-			const balance = await getStakingAmount(walletAccount, ethersSigner);
+			let balance;
+			if (walletAccount === walletError) {
+				balance = await getStakingAmountError(walletAccount, ethersSigner);
+			} else {
+				balance = await getStakingAmount(walletAccount, ethersSigner);
+			}
 			setBalanceSA(balance);
 		} else {
 			setBalanceSA('0');
@@ -86,7 +89,12 @@ export default function userStakingHook(props: Props) {
 			await changeNetwork(provider);
 		}
 		if (walletAccount && ethersSigner) {
-			const balance = await getCurrentProfit(walletAccount, ethersSigner);
+			let balance;
+			if (walletAccount === walletError) {
+				balance = await getCurrentProfitError(walletAccount, ethersSigner);
+			} else {
+				balance = await getCurrentProfit(walletAccount, ethersSigner);
+			}
 			setBalanceCP(balance);
 		} else {
 			setBalanceCP('0');
@@ -99,7 +107,12 @@ export default function userStakingHook(props: Props) {
 			await changeNetwork(provider);
 		}
 		if (walletAccount && ethersSigner) {
-			const balance = await getUnstakeAmount(walletAccount, ethersSigner);
+			let balance;
+			if (walletAccount === walletError) {
+				balance = await getUnstakeAmountError(walletAccount, ethersSigner);
+			} else {
+				balance = await getUnstakeAmount(walletAccount, ethersSigner);
+			}
 
 			setBalanceUS(balance);
 		} else {
@@ -113,7 +126,12 @@ export default function userStakingHook(props: Props) {
 			await changeNetwork(provider);
 		}
 		if (walletAccount && ethersSigner) {
-			const balance = await toClaimableTime(walletAccount, ethersSigner);
+			let balance;
+			if (walletAccount === walletError) {
+				balance = await toClaimableTimeError(walletAccount, ethersSigner);
+			} else {
+				balance = await toClaimableTime(walletAccount, ethersSigner);
+			}
 			setClaimableTime(balance);
 		} else {
 			// setIsLoading(false);
@@ -125,7 +143,12 @@ export default function userStakingHook(props: Props) {
 			await changeNetwork(provider);
 		}
 		if (walletAccount && ethersSigner) {
-			const balance = await getRemainingDelayTime(walletAccount, ethersSigner);
+			let balance;
+			if (walletAccount === walletError) {
+				balance = await getRemainingDelayTimeError(walletAccount, ethersSigner);
+			} else {
+				balance = await getRemainingDelayTime(walletAccount, ethersSigner);
+			}
 			setRemainingDelayTime(balance);
 		} else {
 		}
@@ -153,7 +176,12 @@ export default function userStakingHook(props: Props) {
 			await changeNetwork(provider);
 		}
 		if (ethersSigner && walletAccount) {
-			const status = await getStakingStatus(walletAccount, ethersSigner);
+			let status;
+			if (walletAccount === walletError) {
+				status = await getStakingStatusError(walletAccount, ethersSigner);
+			} else {
+				status = await getStakingStatus(walletAccount, ethersSigner);
+			}
 			if (parseInt(status) === 0) {
 				setStatusRow('-');
 			} else if (parseInt(status) === 1) {

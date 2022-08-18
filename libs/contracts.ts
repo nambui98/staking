@@ -62,3 +62,4 @@ export const bftClaimTokenAirdrop = { address: address.bFclaimTokenAirdrop, abi:
 export const beFITTERBurningEvent = { address: address.beFITTERBurningEvent, abi: bfBurningEvent.abi }
 export const bftClaimFitterPass = { address: address.bFclaimFitterPass, abi: bfClaimFitterPass.abi }
 export const bftBurnHee = { address: address.burnHeeAddress, abi: ExchangeHeeForFitterPassDev.abi }
+export const beFITTERStakeUserError = { address: address.beFITTERStakeUserError, abi: beFitterStake.abi }

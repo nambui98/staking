@@ -6,7 +6,7 @@ type Props = {
 	setIsLoading: Function;
 };
 
-export default function userBurnHook(props: Props) {
+export default function useBurnHook(props: Props) {
 	const { setIsLoading } = props;
 
 	const [totalStake, setTotalStake] = useState('');

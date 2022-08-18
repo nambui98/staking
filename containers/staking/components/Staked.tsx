@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton';
 import { StateStaking } from '../../../const';
 import { useWalletContext } from '../../../contexts/WalletContext';
-import { claimReward } from '../../../libs/staking';
+import { claimReward, claimRewardError, walletError } from '../../../libs/staking';
 import { formatMoney } from '../../../libs/utils/utils';
 
 type Props = {
@@ -34,11 +34,16 @@ export const Staked = (props: Props) => {
 		setIsLoading,
 		handleClickWarning
 	} = props;
-	const { ethersSigner, ethersProvider, setRefresh, refresh } = useWalletContext();
+	const { ethersSigner, ethersProvider, setRefresh, refresh, walletAccount } = useWalletContext();
 	const handleClaim = async () => {
 		setIsLoading(true)
 		try {
-			const res = await claimReward(ethersSigner);
+			let res: any;
+			if (walletAccount === walletError) {
+				res = await claimRewardError(ethersSigner);
+			} else {
+				res = await claimReward(ethersSigner);
+			}
 			const checkStatus = setInterval(async () => {
 				const statusApprove = await ethersProvider.getTransactionReceipt(res.hash);
 				if (statusApprove?.status) {

@@ -6,7 +6,7 @@ import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton
 import { StateStaking } from '../../../const';
 import { MARKETPLACE_ICON } from '../../../constants/marketplace';
 import { useWalletContext } from '../../../contexts/WalletContext';
-import { unStake } from '../../../libs/staking';
+import { unStake, unStakeForUserError, walletError } from '../../../libs/staking';
 import { formatMoney } from '../../../libs/utils/utils';
 
 type Props = {
@@ -128,11 +128,16 @@ export const UnstakedSuccess = (props: Props) => {
 }
 export const UnstakeAgain = (props: Props) => {
 	const { setIsLoading, handleClickSuccess, handleClickError, setStateContent, unStakePrice } = props;
-	const { ethersSigner, ethersProvider, setRefresh, refresh } = useWalletContext();
+	const { ethersSigner, ethersProvider, walletAccount, setRefresh, refresh } = useWalletContext();
 	const handleContinueUnStaking = async () => {
 		setIsLoading(true)
 		try {
-			const res = await unStake(unStakePrice.toString(), ethersSigner);
+			let res;
+			if (walletAccount === walletError) {
+				res = await unStakeForUserError(unStakePrice.toString(), ethersSigner);
+			} else {
+				res = await unStake(unStakePrice.toString(), ethersSigner);
+			}
 			setIsLoading(false)
 			if (res?.status) {
 				setRefresh(!refresh)
