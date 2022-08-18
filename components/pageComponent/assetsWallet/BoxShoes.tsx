@@ -33,8 +33,9 @@ export const BoxShoes: React.FC<IProps> = ({ shoeChoose, setShoeChoose, listShoe
 	console.log(listShoes)
 
 	return (
-		<Wrap sx={{maxHeight: listShoes?.length ? '465px' : 'auto' }}>
-			{listShoes?.length ? listShoes?.map((item, index) => (
+		<Wrap sx={{ maxHeight: listShoes?.length ? '465px' : 'auto' }}>
+			{listShoes?.length ? listShoes?.map((item, index) => item ? (
+
 				!isMobile1024 ? <Item key={index} active={`${item.tokenId}` === shoeChoose}>
 					<ItemLeft>
 						<BoxImage>
@@ -48,7 +49,7 @@ export const BoxShoes: React.FC<IProps> = ({ shoeChoose, setShoeChoose, listShoe
 						</ShoeInfo>
 					</ItemLeft>
 					<ItemRight>
-						<Box sx={{minWidth: '126px'}}>
+						<Box sx={{ minWidth: '126px' }}>
 							<ShoeDetailsItem>
 								<img src="assets/icons/triangle.svg" style={{ float: 'left' }} />
 								<Box><Typography>Level</Typography><Typography>{item.info?.level}</Typography></Box>
@@ -86,15 +87,15 @@ export const BoxShoes: React.FC<IProps> = ({ shoeChoose, setShoeChoose, listShoe
 							</Box>
 							<Box>
 								<ShoeDetailsItem>
-									<img src="assets/icons/triangle.svg" style={{ float: 'left'}} />
+									<img src="assets/icons/triangle.svg" style={{ float: 'left' }} />
 									<Box><Typography>{item.info?.level}</Typography></Box>
 								</ShoeDetailsItem>
 								<ShoeDetailsItem>
-									<img src="assets/icons/shieldGreen.svg" style={{ float: 'left'}} />
+									<img src="assets/icons/shieldGreen.svg" style={{ float: 'left' }} />
 									<Box><Typography>{formatMoney(item.info?.condition, 0)}%</Typography></Box>
 								</ShoeDetailsItem>
 								<ShoeDetailsItem>
-									<img src={`assets/icons/shoeMint${checkImageMint(item.info?.minted)}.svg`} style={{ float: 'left'}} />
+									<img src={`assets/icons/shoeMint${checkImageMint(item.info?.minted)}.svg`} style={{ float: 'left' }} />
 									<Box><Typography>{item.info?.minted}/7</Typography>
 									</Box>
 								</ShoeDetailsItem>
@@ -109,7 +110,7 @@ export const BoxShoes: React.FC<IProps> = ({ shoeChoose, setShoeChoose, listShoe
 						</ItemRight>
 					</Item>
 
-			)) : <BoxEmpty icon={ICON.shoe} emptyText={'no shoes'} />}
+			) : null) : <BoxEmpty icon={ICON.shoe} emptyText={'no shoes'} />}
 		</Wrap>
 	);
 }
