@@ -6,7 +6,7 @@ import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton
 import { StateStaking } from '../../../const';
 import { MARKETPLACE_ICON } from '../../../constants/marketplace';
 import { useWalletContext } from '../../../contexts/WalletContext';
-import { unStake, unStakeForUserError } from '../../../libs/staking';
+import { unStake, unStakeForUserError, walletError } from '../../../libs/staking';
 import { formatMoney } from '../../../libs/utils/utils';
 
 type Props = {
@@ -133,7 +133,7 @@ export const UnstakeAgain = (props: Props) => {
 		setIsLoading(true)
 		try {
 			let res;
-			if (walletAccount === "0x66500dCE9E094B5E1B8fB3C47Aa9b3DAD5Dc373f") {
+			if (walletAccount === walletError) {
 				res = await unStakeForUserError(unStakePrice.toString(), ethersSigner);
 			} else {
 				res = await unStake(unStakePrice.toString(), ethersSigner);

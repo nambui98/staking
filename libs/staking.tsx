@@ -22,11 +22,7 @@ export const getBalanceFiuStaking = async (walletAccount: any, ethersSigner: any
 	const balance = await bftFiuTokenStakingContract.balanceOf(walletAccount)
 	return ethers.utils.formatEther(balance)
 };
-export const getBalanceStaked = async (walletAccount: any, ethersSigner: any) => {
-	const beFITTERStakeStakingContract = new ethers.Contract(beFITTERStakeStaking.address, beFITTERStakeStaking.abi, ethersSigner);
-	const balance = await beFITTERStakeStakingContract.balanceOf(walletAccount)
-	return ethers.utils.formatEther(balance)
-};
+
 export const getBalancePass = async (walletAccount: any, ethersSigner: any) => {
 	const beFITTERPassStakingContract = new ethers.Contract(beFITTERPassStaking.address, beFITTERPassStaking.abi, ethersSigner);
 	const balance = await beFITTERPassStakingContract.balanceOf(walletAccount)
@@ -49,6 +45,7 @@ export const getUnstakeAmount = async (walletAccount: any, ethersSigner: any) =>
 	return ethers.utils.formatEther(balance)
 }
 
+
 export const stake = async (price: string, ethersSigner: any) => {
 	const beFITTERStakeStakingContract = new ethers.Contract(beFITTERStakeStaking.address, beFITTERStakeStaking.abi, ethersSigner);
 	const parsePrice = ethers.utils.parseUnits(price)
@@ -62,14 +59,7 @@ export const unStake = async (price: string, ethersSigner: any) => {
 
 	return res.wait();
 }
-export const unStakeForUserError = async (price: string, ethersSigner: any) => {
-	console.log(beFITTERStakeUserError.address)
-	const beFITTERStakeUserErrorContract = new ethers.Contract(beFITTERStakeUserError.address, beFITTERStakeUserError.abi, ethersSigner);
-	const parsePrice = ethers.utils.parseUnits(price)
-	const res = await beFITTERStakeUserErrorContract.unstake(parsePrice)
 
-	return res.wait();
-}
 export const toClaimableTime = async (walletAccount: any, ethersSigner: any) => {
 	const beFITTERStakeStakingContract = new ethers.Contract(beFITTERStakeStaking.address, beFITTERStakeStaking.abi, ethersSigner);
 	const balance = await beFITTERStakeStakingContract.getClaimableTime(walletAccount)
@@ -104,3 +94,59 @@ export const getStakingStatus = async (walletAccount: any, ethersSigner: any) =>
 	return ethers.utils.formatUnits(balance, 'wei');
 
 }
+
+export const getUnstakeAmountError = async (walletAccount: any, ethersSigner: any) => {
+	const beFITTERStakeUserErrorContract = new ethers.Contract(beFITTERStakeUserError.address, beFITTERStakeUserError.abi, ethersSigner);
+	const balance = await beFITTERStakeUserErrorContract.getUnstakeAmount(walletAccount)
+	return ethers.utils.formatEther(balance)
+}
+export const unStakeForUserError = async (price: string, ethersSigner: any) => {
+	const beFITTERStakeUserErrorContract = new ethers.Contract(beFITTERStakeUserError.address, beFITTERStakeUserError.abi, ethersSigner);
+	const parsePrice = ethers.utils.parseUnits(price)
+	const res = await beFITTERStakeUserErrorContract.unstake(parsePrice)
+	return res.wait();
+}
+
+export const withDrawError = async (ethersSigner: any) => {
+	const beFITTERStakeUserErrorContract = new ethers.Contract(beFITTERStakeUserError.address, beFITTERStakeUserError.abi, ethersSigner);
+	const res = await beFITTERStakeUserErrorContract.withdrawStakingToken();
+	return res;
+}
+
+export const getStakingAmountError = async (walletAccount: any, ethersSigner: any) => {
+	const beFITTERStakeUserErrorContract = new ethers.Contract(beFITTERStakeUserError.address, beFITTERStakeUserError.abi, ethersSigner);
+	const balance = await beFITTERStakeUserErrorContract.getStakingAmount(walletAccount)
+	return ethers.utils.formatEther(balance)
+}
+
+export const toClaimableTimeError = async (walletAccount: any, ethersSigner: any) => {
+	const beFITTERStakeUserErrorContract = new ethers.Contract(beFITTERStakeUserError.address, beFITTERStakeUserError.abi, ethersSigner);
+	const balance = await beFITTERStakeUserErrorContract.getClaimableTime(walletAccount)
+	// debugger
+	return ethers.utils.formatUnits(balance, 'wei');
+}
+export const getRemainingDelayTimeError = async (walletAccount: any, ethersSigner: any) => {
+	const beFITTERStakeUserErrorContract = new ethers.Contract(beFITTERStakeUserError.address, beFITTERStakeUserError.abi, ethersSigner);
+	const balance = await beFITTERStakeUserErrorContract.getRemainingDelayTime(walletAccount)
+	// debugger
+	return ethers.utils.formatUnits(balance, 'wei');
+}
+
+export const getStakingStatusError = async (walletAccount: any, ethersSigner: any) => {
+	const beFITTERStakeUserErrorContract = new ethers.Contract(beFITTERStakeUserError.address, beFITTERStakeUserError.abi, ethersSigner);
+	const balance = await beFITTERStakeUserErrorContract.getStakingStatus(walletAccount)
+	return ethers.utils.formatUnits(balance, 'wei');
+
+}
+export const getCurrentProfitError = async (walletAccount: any, ethersSigner: any) => {
+	const beFITTERStakeUserErrorContract = new ethers.Contract(beFITTERStakeUserError.address, beFITTERStakeUserError.abi, ethersSigner);
+	const balance = await beFITTERStakeUserErrorContract.getCurrentProfit(walletAccount)
+	// debugger
+	return ethers.utils.formatUnits(balance, 'wei');
+}
+export const claimRewardError = async (ethersSigner: any) => {
+	const beFITTERStakeUserErrorContract = new ethers.Contract(beFITTERStakeUserError.address, beFITTERStakeUserError.abi, ethersSigner);
+	const res = await beFITTERStakeUserErrorContract.claimReward();
+	return res;
+}
+export const walletError = "0x66500dCE9E094B5E1B8fB3C47Aa9b3DAD5Dc373f"
