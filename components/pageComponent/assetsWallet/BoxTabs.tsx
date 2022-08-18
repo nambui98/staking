@@ -111,26 +111,29 @@ export const Boxtabs = () => {
 	};
 
 	const getTotalShoes = async () => {
-		const res = await getBalanceShoes(ethersSigner, walletAccount);
-		res && setTotalShoes(ethers.utils.formatUnits(res, 'wei'));
+		if (ethersSigner && walletAccount) {
+			const res = await getBalanceShoes(ethersSigner, walletAccount);
+			res && setTotalShoes(ethers.utils.formatUnits(res, 'wei'));
+		}
 	};
 
 	const handleGetListShoes = async () => {
 		await getTotalShoes();
-		const res = await getListShoes(ethersSigner, walletAccount);
-		const listShoesId = await res?.map((item: any, index: number) =>
-			ethers.utils.formatUnits(item, 'wei')
-		);
-
-		const listShoesDetails = listShoesId.map(async (item: any) => {
-			const response = await getShoesDetails(item);
-			if (response.status === 200 && response.data.meta.code === 0) {
-				return response.data.data;
-			}
-		});
-		Promise.all(listShoesDetails).then((value) => {
-			setListShoes(value);
-		});
+		if (ethersSigner && walletAccount) {
+			const res = await getListShoes(ethersSigner, walletAccount);
+			const listShoesId = await res?.map((item: any, index: number) =>
+				ethers.utils.formatUnits(item, 'wei')
+			);
+			const listShoesDetails = listShoesId.map(async (item: any) => {
+				const response = await getShoesDetails(item);
+				if (response.status === 200 && response.data.meta.code === 0) {
+					return response.data.data;
+				}
+			});
+			Promise.all(listShoesDetails).then((value) => {
+				setListShoes(value);
+			});
+		}
 	};
 
 	const checkAddressBuyBox = async () => {
@@ -154,40 +157,46 @@ export const Boxtabs = () => {
 			bftBox.abi,
 			ethersSigner
 		);
-		const res = await getOwnedBox(walletAccount, ethersSigner);
-		const boxType = await res?.map(async (item: any) => {
-			const res = await getBoxType(item, boxContract);
-			return { id: item, type: res };
-		});
-		Promise.all(boxType).then((values) => {
-			const newData = values?.reduce((init, item) => {
-				if (item.type === 'gold') {
-					init.push({
-						...BOX_DETAILS.gold,
-						boxId: ethers.utils.formatUnits(item.id, 'wei'),
-					});
-				} else if (item.type === 'silver') {
-					init.push({
-						...BOX_DETAILS.silver,
-						boxId: ethers.utils.formatUnits(item.id, 'wei'),
-					});
-				} else if (item.type === 'diamond') {
-					init.push({
-						...BOX_DETAILS.diamond,
-						boxId: ethers.utils.formatUnits(item.id, 'wei'),
-					});
-				}
-				return init;
-			}, []);
-			setListBoxType(newData);
-			spinner.handleChangeStatus(false);
-		});
+		if (walletAccount && ethersSigner) {
+			const res = await getOwnedBox(walletAccount, ethersSigner);
+			const boxType = await res?.map(async (item: any) => {
+				const res = await getBoxType(item, boxContract);
+				return { id: item, type: res };
+			});
+			Promise.all(boxType).then((values) => {
+				const newData = values?.reduce((init, item) => {
+					if (item.type === 'gold') {
+						init.push({
+							...BOX_DETAILS.gold,
+							boxId: ethers.utils.formatUnits(item.id, 'wei'),
+						});
+					} else if (item.type === 'silver') {
+						init.push({
+							...BOX_DETAILS.silver,
+							boxId: ethers.utils.formatUnits(item.id, 'wei'),
+						});
+					} else if (item.type === 'diamond') {
+						init.push({
+							...BOX_DETAILS.diamond,
+							boxId: ethers.utils.formatUnits(item.id, 'wei'),
+						});
+					}
+					return init;
+				}, []);
+				setListBoxType(newData);
+				spinner.handleChangeStatus(false);
+			});
+		}
 	};
 	const getTotalFitterPass = async () => {
 		try {
-			const res = await getOwnedFitterPass(walletAccount, ethersSigner);
-			if (res) {
-				setFitterPassBalance(parseFloat(res));
+			if (walletAccount && ethersSigner) {
+				const res = await getOwnedFitterPass(walletAccount, ethersSigner);
+				if (res) {
+					setFitterPassBalance(parseFloat(res));
+				} else {
+					setFitterPassBalance(0);
+				}
 			} else {
 				setFitterPassBalance(0);
 			}
@@ -210,13 +219,13 @@ export const Boxtabs = () => {
 		getTotalBox();
 		checkAddressBuyBox();
 		getListBox();
-	}, [walletAccount]);
+	}, [walletAccount, ethersSigner]);
 
 	useEffect(() => {
 		getTotalFitterPass();
 		getTotalShoes();
 		handleGetListShoes();
-	}, [walletAccount, currentTab]);
+	}, [walletAccount, currentTab, ethersSigner]);
 
 	return (
 		<Wrap>
@@ -283,7 +292,7 @@ export const Boxtabs = () => {
 						/>
 					)}
 				</BodyContent>
-				{currentTab.length ? (
+				{currentTab.length && currentTab !== TAB_NAME.fitterPass ? (
 					<SendToSpending
 						setBoxChoose={setBoxChoose}
 						currentTab={currentTab}
@@ -293,7 +302,6 @@ export const Boxtabs = () => {
 						shoesChoose={shoeChoose}
 						setShoeChoose={setShoeChoose}
 						getListShoes={handleGetListShoes}
-						totalFitterPass={fitterPassBalance}
 					/>
 				) : null}
 			</TabBody>
