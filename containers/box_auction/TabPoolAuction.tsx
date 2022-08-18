@@ -371,7 +371,7 @@ export const TabPoolAuction = () => {
 													>
 														<TableHead>
 															<TableRow>
-																<TableCell>Status</TableCell>
+																<TableCell sx={{ paddingLeft: 0 }}>Status</TableCell>
 																<TableCell align="left">Reward</TableCell>
 																<TableCell align="left">Earned</TableCell>
 																<TableCell align="left">
@@ -396,7 +396,7 @@ export const TabPoolAuction = () => {
 																		},
 																	}}
 																>
-																	<TableCell component="th" scope="row">
+																	<TableCell sx={{ paddingLeft: 0 }} component="th" scope="row">
 																		{statusRow}
 																	</TableCell>
 																	<TableCell align="left">
@@ -571,7 +571,7 @@ export const TabPoolAuction = () => {
 													>
 														<TableHead>
 															<TableRow>
-																<TableCell>Status</TableCell>
+																<TableCell sx={{ paddingLeft: 0 }}>Status</TableCell>
 																<TableCell align="left">Reward</TableCell>
 																<TableCell align="left">Earned</TableCell>
 																<TableCell align="left">
@@ -590,12 +590,13 @@ export const TabPoolAuction = () => {
 															<TableRow
 																key={rowBurn.name}
 																sx={{
+
 																	'&:last-child td, &:last-child th': {
 																		border: 0,
 																	},
 																}}
 															>
-																<TableCell component="th" scope="row">
+																<TableCell sx={{ paddingLeft: 0 }} component="th" scope="row">
 																	{rowBurn.data.status}
 																</TableCell>
 																<TableCell align="left">
@@ -942,7 +943,7 @@ const TitleItem = styled(Box)({
 	top: 0,
 	borderBottom: 0,
 	padding: 0,
-	margin: '16px 0 0 8px',
+	margin: '16px 0 0 0px',
 	display: 'flex',
 	alignItems: 'center',
 	...TEXT_STYLE(16, 600, '#31373E'),
