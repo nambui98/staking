@@ -124,7 +124,7 @@ export function Burned(props: Props) {
 		let interval = setInterval(() => {
 			getData();
 			getDataMe();
-		}, 5000);
+		}, 120000);
 		return () => clearInterval(interval);
 
 	}, [limit])
