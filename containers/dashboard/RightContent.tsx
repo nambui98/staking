@@ -59,7 +59,7 @@ type row = {
 	rank: string;
 };
 
-export default function RightContent({}: Props) {
+export default function RightContent({ }: Props) {
 	const isMobile = useMediaQuery('(max-width: 767px)');
 	const [limit, setLimit] = useState<number>(10);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -71,8 +71,7 @@ export default function RightContent({}: Props) {
 		// setIsLoading(true);
 		axios
 			.get(
-				`https://leaderboard.befitter.io/fitter/leaderboard?limit=${
-					limit === 50 ? 40 : 10
+				`https://leaderboard.befitter.io/fitter/leaderboard?limit=${limit === 50 ? 40 : 10
 				}&offset=${limit === 50 ? 10 : 0}`,
 				{
 					headers: {
@@ -90,6 +89,10 @@ export default function RightContent({}: Props) {
 
 	useEffect(() => {
 		getData();
+		let interval = setInterval(() => {
+			getData();
+		}, 60000);
+		return () => clearInterval(interval);
 	}, [limit]);
 	const getPize = (value: number) => {
 		if (value < 11) {

@@ -121,6 +121,12 @@ export function Burned(props: Props) {
 	useEffect(() => {
 		getData();
 		getDataMe();
+		let interval = setInterval(() => {
+			getData();
+			getDataMe();
+		}, 5000);
+		return () => clearInterval(interval);
+
 	}, [limit])
 
 

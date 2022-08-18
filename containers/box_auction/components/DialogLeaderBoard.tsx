@@ -186,7 +186,14 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 	}, [limit]);
 
 	useEffect(() => {
-		limit && getData();
+		if (limit) {
+			getData();
+			let interval = setInterval(() => {
+				getData();
+			}, 60000);
+			return () => clearInterval(interval);
+
+		}
 	}, [limit]);
 	const getPize = (value: number) => {
 		if (value < 11) {
