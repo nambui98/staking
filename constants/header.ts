@@ -22,6 +22,15 @@ export const MAIN_PAGE = [
 	{ title: 'Dashboard', link: '/', icon: 'assets/icons/Dashboard.svg', active: true },
 	{ title: 'Assets', link: '/assets', icon: 'assets/icons/box.svg', active: true },
 	{ title: 'Claim', link: '/claim', icon: 'assets/icons/3d-cube-scan.svg', active: true },
-	{ title: 'Staking', link: '/staking', icon: 'assets/icons/staking.svg', active: true },
+	{
+		title: 'Pools', link: '/staking', icon: 'assets/icons/staking.svg', active: true, subMenu: [
+			{
+				title: 'Earn', link: '/staking', icon: 'assets/icons/staking.svg', active: true,
+			},
+			{
+				title: 'Burn', link: '/burn', icon: 'assets/icons/broken.svg', active: true,
+			}
+		]
+	},
 ]
 export const SECURICHAIN_LOGO = 'assets/securichain.png';

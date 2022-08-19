@@ -128,7 +128,7 @@ export const TabPoolAuction = () => {
 			title: 'HEE Exchange - Win Fitter Pass',
 			status: moment('2022-08-19T10:00:00.000Z') >= moment(Date.now()) ? 2 : 3,
 			endTime: '2022-08-19T10:00:00.000Z',
-			statusAction: moment('2022-08-19T10:00:00.000Z') >= moment(Date.now()) ? 1 : 2,
+			statusAction: 1,
 			howItWork: (e: React.MouseEvent) => handleShowBurnHee(e),
 			onClick: () => handleChangeTab('HEE'),
 			data: createData(
