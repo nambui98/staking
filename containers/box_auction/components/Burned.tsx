@@ -392,6 +392,7 @@ export function Burned(props: Props) {
 						customStyle={{ width: '100%' }}
 						title={'BURN MORE'}
 						handleOnClick={handleEnable}
+						disabled
 					// disabled={stateContent ? true : false}
 					/>
 				</Box>

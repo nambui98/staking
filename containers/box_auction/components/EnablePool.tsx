@@ -101,7 +101,7 @@ export function EnablePool(props: Props) {
 						customStyle={{ width: '100%' }}
 						title={isApproved ? 'Approved' : 'Approve'}
 						handleOnClick={handleApprove}
-						disabled={isApproved ? true : false}
+						disabled={true}
 					/>
 				) : (
 					<MarketplaceButton

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Box, Container, Stack, Typography } from '@mui/material'
+import moment from 'moment';
 import Link from 'next/link';
 import React from 'react'
 import Countdown from '../../components/sections/Countdown';
@@ -7,7 +8,7 @@ import Countdown from '../../components/sections/Countdown';
 type Props = {}
 
 export default function LeftContent({ }: Props) {
-	const data = [
+	const data: any = [
 		{
 			image: "assets/imageBoxAuction.png",
 			link: '/burn',
@@ -19,14 +20,24 @@ export default function LeftContent({ }: Props) {
 			endTime: '2022-08-19T10:00:00.000Z'
 		},
 	]
+	const dataNew = data.filter((e: any) => moment(e.endTime) >= moment(Date.now()));
 	return (
 		<Wrap>
 			<GroupItem>
-				<Title >
-					ONGOING EVENT
-				</Title>
 				{
-					data.map((item, index) => (
+					dataNew.length <= 0 ? <Title
+					>
+						There are no events going on
+					</Title>
+						:
+						<Title >
+							ONGOING EVENT
+						</Title>
+				}
+				{
+					dataNew.length > 0 &&
+					dataNew.map((item: any, index: number) => moment(item.endTime) >= moment(Date.now()) ? (
+
 						<Item key={index}>
 							<Event href={item.link} >
 								<a>
@@ -37,7 +48,7 @@ export default function LeftContent({ }: Props) {
 								Event end in: <Countdown endDate={item.endTime} />
 							</CountDownWrap>
 						</Item>
-					))
+					) : null)
 				}
 			</GroupItem>
 		</Wrap>
