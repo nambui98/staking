@@ -119,9 +119,8 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 									<MenuItem><MainMenuButton disabledBtn={!item.active} active={asPath === item.link ? true : false} title={item.title} iconLink={item.icon} /></MenuItem>
 								</Link>
 							) : <Box>
-
-								<MenuItem aria-haspopup="true"
-
+								<MenuItem
+									aria-haspopup="true"
 									onMouseEnter={handlePopoverOpen}
 									onMouseLeave={handlePopoverClose}
 								><MainMenuButton aria-owns={open ? 'mouse-over-popover' : undefined}
@@ -150,7 +149,7 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 											{
 												item.subMenu?.map((e, i) =>
 													<Link key={i} href={e.active ? e.link : '#'}>
-														<MenuItem sx={{ mt: 1 }}><MainMenuButton disabledBtn={!e.active} active={asPath === e.link ? true : false} title={e.title} iconLink={e.icon} /></MenuItem>
+														<MenuItem sx={{ mt: 1, mr: 0 }}><MainMenuButton sx={{ padding: '8px 50px', }} disabledBtn={!e.active} active={asPath === e.link ? true : false} title={e.title} /></MenuItem>
 													</Link>
 												)
 											}
