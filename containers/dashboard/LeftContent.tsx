@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Box, Container, Stack, Typography } from '@mui/material'
 import Link from 'next/link';
 import React from 'react'
-import Countdown from '../../components/sections/countdown';
+import Countdown from '../../components/sections/Countdown';
 
 type Props = {}
 
