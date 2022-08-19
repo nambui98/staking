@@ -119,7 +119,7 @@ export const TabPoolAuction = () => {
 				'-',
 				'None',
 				'None',
-				`${totalStake} Fitter Passes`
+				`${formatMoney(totalStake)} Fitter Passes`
 			),
 		},
 		{
@@ -138,7 +138,7 @@ export const TabPoolAuction = () => {
 				'-',
 				'None',
 				'None',
-				`${totalInPool} HEE`
+				`${formatMoney(totalInPool)} HEE`
 			),
 		}
 	];
@@ -370,10 +370,7 @@ export const TabPoolAuction = () => {
 																<TableCell width={'130px'} align="left">{item.data.lockUpTime}</TableCell>
 																<TableCell width={'200px'} align="left">{item.data.delayTime}</TableCell>
 																<TableCell width={'200px'} align="left">
-																	{parseInt(item.data.total) > 0
-																		? formatMoney(item.data.total) +
-																		' Fitter Passes'
-																		: '0 Fitter Pass'}{' '}
+																	{item.data.total}
 																</TableCell>
 															</TableRow>
 
