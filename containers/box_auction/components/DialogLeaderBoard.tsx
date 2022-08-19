@@ -190,7 +190,7 @@ export const DialogLeaderBoard: React.FC<IProps> = ({
 			getData();
 			let interval = setInterval(() => {
 				getData();
-			}, 60000);
+			}, 30000);
 			return () => clearInterval(interval);
 
 		}

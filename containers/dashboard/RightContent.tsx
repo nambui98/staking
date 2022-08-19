@@ -91,7 +91,7 @@ export default function RightContent({ }: Props) {
 		getData();
 		let interval = setInterval(() => {
 			getData();
-		}, 60000);
+		}, 30000);
 		return () => clearInterval(interval);
 	}, [limit]);
 	const getPize = (value: number) => {
