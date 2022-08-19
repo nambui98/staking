@@ -208,7 +208,31 @@ export function Burned(props: Props) {
 				</Box>
 				{/* table */}
 				<Paper sx={{ width: '100%', overflow: 'hidden', boxShadow: 'none' }}>
-					<TableContainer sx={{ maxHeight: "380px", border: 'none' }}>
+					<TableContainer sx={{
+						maxHeight: "380px", border: 'none',
+						'&::-webkit-scrollbar': {
+							width: '5px',
+							height: '5px',
+							borderRadius: '5px',
+						},
+
+						/* Track */
+						'&::-webkit-scrollbar-track': {
+							background: '#f1f1f1',
+							borderRadius: '5px',
+						},
+						/* Handle */
+						'&::-webkit-scrollbar-thumb': {
+							background: '#888',
+							borderRadius: '5px',
+						},
+
+						/* Handle on hover */
+						'&::-webkit-scrollbar-thumb:hover': {
+							background: '#555',
+							borderRadius: '5px',
+						},
+					}}>
 						<Table stickyHeader aria-label="sticky table">
 							<TableHead>
 								<TableRow>
