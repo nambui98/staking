@@ -2,46 +2,44 @@ import styled from '@emotion/styled';
 import { Box, Container, Stack, Typography } from '@mui/material'
 import Link from 'next/link';
 import React from 'react'
+import Countdown from '../../components/sections/countdown';
 
 type Props = {}
 
 export default function LeftContent({ }: Props) {
+	const data = [
+		{
+			image: "assets/imageBoxAuction.png",
+			link: '/burn',
+			endTime: '2022-08-19T09:00:00.000Z'
+		},
+		{
+			image: "assets/imageBoxBurnHee.png",
+			link: '/burn',
+			endTime: '2022-08-19T10:00:00.000Z'
+		},
+	]
 	return (
 		<Wrap>
-
 			<GroupItem>
 				<Title >
 					ONGOING EVENT
 				</Title>
-				<Item>
-					<Event href={'/burn'} >
-						<a
-
-						>
-							<img src="assets/imageBoxAuction.png" width={"100%"} alt="" />
-						</a>
-					</Event>
-				</Item>
-				<Item>
-					<Event href={'/burn'} >
-						<a>
-							<img src="assets/imageBoxBurnHee.png" width={"100%"} alt="" />
-						</a>
-					</Event>
-				</Item>
+				{
+					data.map((item, index) => (
+						<Item key={index}>
+							<Event href={item.link} >
+								<a>
+									<img src={item.image} width={"100%"} alt="" />
+								</a>
+							</Event>
+							<CountDownWrap>
+								Event end in: <Countdown endDate={item.endTime} />
+							</CountDownWrap>
+						</Item>
+					))
+				}
 			</GroupItem>
-			{/* <GroupItem>
-				<Title >
-					UPCOMING EVENT
-				</Title>
-				<Item>
-					<Event href={'/burn'} >
-						<a>
-							<img src="assets/imageBoxBurnHee.png" width={"100%"} alt="" />
-						</a>
-					</Event>
-				</Item>
-			</GroupItem> */}
 		</Wrap>
 	)
 }
@@ -51,7 +49,19 @@ const GroupItem = styled(Box)({
 })
 const Item = styled(Box)({
 	marginTop: "16px",
-	marginBottom: "24px"
+	// marginBottom: "16px",
+	marginBottom: "40px",
+	position: 'relative'
+})
+const CountDownWrap = styled(Box)({
+	position: 'absolute',
+	backgroundColor: '#FFC83A',
+	color: "#000",
+	fontWeight: '500',
+	bottom: '-21px',
+	right: '20px',
+	padding: '4px 8px',
+	borderRadius: '0px 0px 4px 4px'
 })
 const Event = styled(Link)({
 	width: "100%",
