@@ -18,6 +18,7 @@ import {
 import { formatMoney } from '../../../libs/utils/utils';
 import { TEXT_STYLE } from '../../../styles/common/textStyles';
 import Paper from '@mui/material/Paper';
+import moment from 'moment';
 
 type Props = {
 	isApproved: boolean;
@@ -42,7 +43,7 @@ const HeeExchangeFill = ({
 }: Props) => {
 	const [numberFitterPass, setNumberFitterPass] = useState<number | null>(null);
 	// const [numberFitterPass, setIs] = useState<boolean>(false);
-
+	let isCloseEvent = moment('2022-08-19T10:00:00.000Z') < moment(Date.now());
 	const { ethersSigner, setRefresh, refresh } = useWalletContext();
 	const handleApprove = async () => {
 		setIsLoading(true);
@@ -115,7 +116,7 @@ const HeeExchangeFill = ({
 				</TitleItem>
 				<ValueItem
 					sx={{
-						pointerEvents: isApproved ? 'none' : 'auto',
+						pointerEvents: isCloseEvent ? 'none' : isApproved ? 'none' : 'auto',
 						flex: 1,
 						width: '100%',
 					}}
@@ -180,9 +181,7 @@ const HeeExchangeFill = ({
 				{!isApproved ? (
 					<MarketplaceButton
 						customStyle={{ width: '100%' }}
-						disabled={
-							tokenRequired > parseFloat(balanceHee) || !numberFitterPass
-						}
+						disabled={isCloseEvent ? true : (tokenRequired > parseFloat(balanceHee) || !numberFitterPass)}
 						title={'Approve'}
 						handleOnClick={handleApprove}
 					/>

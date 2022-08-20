@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const STAKING_ICON = {
 	search: 'assets/icons/search-normal.svg',
 	fiu: 'assets/icons/fiu.svg',
@@ -62,16 +64,14 @@ export const ROAD_MAP_AUCTION = {
 		{
 			image: STAKING_IMAGE.box,
 			title: 'Box Auction',
-			status: true,
-			isUpcomming: false,
-			textStatus: 'LIVE',
+			status: moment('2022-08-19T09:00:00.000Z') >= moment(Date.now()) ? 2 : 3,
+			textStatus: moment('2022-08-19T09:00:00.000Z') >= moment(Date.now()) ? 'LIVE' : 'Closed'
 		},
 		{
 			image: STAKING_IMAGE.roadmapBurnHee,
 			title: 'HEE Exchange - Win Fitter Pass',
-			status: true,
-			isUpcomming: false,
-			textStatus: 'LIVE',
+			status: moment('2022-08-19T10:00:00.000Z') >= moment(Date.now()) ? 2 : 3,
+			textStatus: moment('2022-08-19T10:00:00.000Z') >= moment(Date.now()) ? 'LIVE' : 'Closed'
 		},
 
 	]

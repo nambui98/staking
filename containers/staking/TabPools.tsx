@@ -236,14 +236,8 @@ export const TabPools = () => {
 	return (
 		<Wrap>
 			<Container sx={{ maxWidth: 1120 }}>
-				<Event href={'/burn'} >
-					<a
 
-					>
-						<img src="assets/staking/bannerBurn.png" width={"100%"} alt="" />
-					</a>
-				</Event>
-				<Top sx={{ mt: 2 }}>
+				<Top>
 					<BoxTabs value={tabCurrent}>
 						<TabItem
 							className={tabCurrent === 0 ? 'Mui-selected' : ''}
@@ -463,7 +457,7 @@ export const TabPools = () => {
 			<Backdrop sx={{ zIndex: 1100, color: '#FF6D24' }} open={isLoading}>
 				<CircularProgress color="inherit" />
 			</Backdrop>
-		</Wrap>
+		</Wrap >
 	);
 };
 

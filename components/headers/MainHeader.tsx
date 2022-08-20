@@ -12,7 +12,8 @@ import {
 	Tooltip,
 	useMediaQuery,
 	Popover,
-	LinkProps
+	LinkProps,
+	MenuList
 } from '@mui/material';
 import MenuButton from '../buttons/MenuButton';
 import { HEADER_ICON, HEADER_ICON_BNB, HOME_LOGO, LOGO, MAIN_PAGE, PAGE } from '../../constants/header';
@@ -57,7 +58,17 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 		}
 	}, [])
 
+	const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 
+	const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handlePopoverClose = () => {
+		setAnchorEl(null);
+	};
+
+	const open2 = Boolean(anchorEl);
 	return (
 		<Box component={'header'} sx={{
 			marginBottom: '125px',
@@ -103,11 +114,49 @@ const MainHeader: React.FC<any> = ({ sxProps, children }) => {
 						</BoxLogo>
 						{isMobile && <ClockUtc />}
 						<BoxMenuItem>
-							{MAIN_PAGE.map((item, index) => (
+							{MAIN_PAGE.map((item, index) => !item.subMenu || item.subMenu?.length <= 0 ? (
 								<Link key={index} href={item.active ? item.link : '#'}>
 									<MenuItem><MainMenuButton disabledBtn={!item.active} active={asPath === item.link ? true : false} title={item.title} iconLink={item.icon} /></MenuItem>
 								</Link>
-							))}
+							) : <Box>
+								<MenuItem
+									aria-haspopup="true"
+									onMouseEnter={handlePopoverOpen}
+									onMouseLeave={handlePopoverClose}
+								><MainMenuButton aria-owns={open ? 'mouse-over-popover' : undefined}
+									disabledBtn={!item.active} active={item.subMenu.some(e => e.link === asPath) ? true : false} title={item.title} iconLink={item.icon} />
+
+									<ActiveProver
+										id="mouse-over-popover"
+										open={open2}
+										anchorEl={anchorEl}
+										sx={{
+											'& .MuiPaper-root': {
+												padding: '0px  10px 5px 10px',
+											}
+										}}
+										anchorOrigin={{
+											vertical: 'bottom',
+											horizontal: 'left',
+										}}
+										transformOrigin={{
+											vertical: 'top',
+											horizontal: 'left',
+										}}
+										onClose={handlePopoverClose}
+									>
+										<MenuList >
+											{
+												item.subMenu?.map((e, i) =>
+													<Link key={i} href={e.active ? e.link : '#'}>
+														<MenuItem sx={{ mt: 1, mr: 0 }}><MainMenuButton sx={{ padding: '8px 50px', }} disabledBtn={!e.active} active={asPath === e.link ? true : false} title={e.title} /></MenuItem>
+													</Link>
+												)
+											}
+										</MenuList>
+									</ActiveProver>
+								</MenuItem>
+							</Box>)}
 						</BoxMenuItem>
 						{walletAccount ?
 							<WalletAccount>

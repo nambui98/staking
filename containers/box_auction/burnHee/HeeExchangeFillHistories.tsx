@@ -51,6 +51,7 @@ type Props = {
 };
 
 const HeeExchangeFillHistories = ({ dataMyBurned, setStateContent }: Props) => {
+	let isCloseEvent = moment('2022-08-19T10:00:00.000Z') < moment(Date.now());
 	const timeUTC = (timeStamp: number) => {
 		let time = new Date(timeStamp * 1000);
 		return moment(time).utc().format('DD MMMM YYYY');
@@ -201,6 +202,7 @@ const HeeExchangeFillHistories = ({ dataMyBurned, setStateContent }: Props) => {
 			>
 				<ButtonOutline
 					onClick={handleBurnMore}
+					disabled={isCloseEvent}
 					sx={{ width: '100%' }}
 					variant="text"
 				>

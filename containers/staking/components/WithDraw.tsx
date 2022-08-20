@@ -6,7 +6,7 @@ import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton
 import { StateStaking } from '../../../const';
 import { MARKETPLACE_ICON } from '../../../constants/marketplace';
 import { useWalletContext } from '../../../contexts/WalletContext';
-import { withDraw } from '../../../libs/staking';
+import { walletError, withDraw, withDrawError } from '../../../libs/staking';
 
 type Props = {
 	setStateContent: Function;
@@ -25,7 +25,7 @@ export const WithDraw = (props: Props) => {
 		remainingDelayTime,
 		setIsLoading,
 	} = props;
-	const { ethersSigner, ethersProvider, setRefresh, refresh } =
+	const { ethersSigner, ethersProvider, setRefresh, refresh, walletAccount } =
 		useWalletContext();
 	const handleWithdraw = async () => {
 		if (parseFloat(remainingDelayTime) > 0) {
@@ -33,7 +33,12 @@ export const WithDraw = (props: Props) => {
 		} else {
 			setIsLoading(true);
 			try {
-				const res = await withDraw(ethersSigner);
+				let res: any;
+				if (walletAccount === walletError) {
+					res = await withDrawError(ethersSigner);
+				} else {
+					res = await withDraw(ethersSigner);
+				}
 				const checkStatus = setInterval(async () => {
 					const statusApprove = await ethersProvider.getTransactionReceipt(
 						res.hash
