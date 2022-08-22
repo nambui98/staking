@@ -5,6 +5,7 @@ export const CLAIM_IMAGE = {
   boxSilver: 'assets/box-silver-small.png',
   boxGold: 'assets/box-gold-small.png',
   fitterPass: 'assets/fitterPass.png',
+  boxDiamond: 'assets/icons/box-icon-diamond.svg',
 }
 
 export const CLAIM_TOKEN_TIME = [

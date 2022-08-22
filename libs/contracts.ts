@@ -24,6 +24,7 @@ import bfFiuTokenDev from '../abiDev/BFFiuToken.json';
 import bfShoeItemDev from '../abiDev/BFShoeItem.json';
 import bfWalletDev from '../abiDev/BeFitterWallet.json'
 import ExchangeHeeForFitterPassDev from '../abiDev/ExchangeHeeForFitterPass.json'
+import bfClaimFitterPassDev from '../abiDev/BeFitterClaim.json';
 
 //contract
 import { CONTRACT_PROD } from './contract/prod';
@@ -63,3 +64,6 @@ export const beFITTERBurningEvent = { address: address.beFITTERBurningEvent, abi
 export const bftClaimFitterPass = { address: address.bFclaimFitterPass, abi: bfClaimFitterPass.abi }
 export const bftBurnHee = { address: address.burnHeeAddress, abi: ExchangeHeeForFitterPassDev.abi }
 export const beFITTERStakeUserError = { address: address.beFITTERStakeUserError, abi: beFitterStake.abi }
+export const bftClaimBoxEventRewardDiamond = { address: address.bfClaimBoxEventRewardDiamond, abi: bfClaimBox.abi }
+export const bftClaimBoxEventRewardGold = { address: address.bfClaimBoxEventRewardGold, abi: bfClaimBox.abi }
+export const bftClaimFitterPassEventRefund = { address: address.bfClaimFitterPassEventRefund, abi: bfClaimFitterPass.abi }
