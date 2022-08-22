@@ -15,7 +15,7 @@ import {
 	TableRowProps,
 	Tabs,
 	TextField,
-	Typography
+	Typography,
 } from '@mui/material';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -60,11 +60,11 @@ export const TabPools = () => {
 	const [stateContentInit, setStateContentInit] = useState<StateStaking>(
 		StateStaking.StakeProcess
 	);
-	const [stateContentInitLocked, setStateContentInitLocked] = useState<StateStakingLocked>(
-		StateStakingLocked.LockedStakeProcess
-	);
+	const [stateContentInitLocked, setStateContentInitLocked] =
+		useState<StateStakingLocked>(StateStakingLocked.LockedStakeProcess);
 	const [isLoading, setIsLoading] = useState(false);
-	const { balanceFiu,
+	const {
+		balanceFiu,
 		balanceSA,
 		balanceCP,
 		balanceUS,
@@ -72,14 +72,15 @@ export const TabPools = () => {
 		totalStakingToken,
 		claimableTime,
 		remainingDelayTime,
-		statusRow } = useStakingHook({
-			setIsLoading,
-			setStateContentInit
-		})
+		statusRow,
+	} = useStakingHook({
+		setIsLoading,
+		setStateContentInit,
+	});
 	const { dataMyStakingLock, totalInPool } = useLockedHook({
 		setIsLoading,
-		setStateContentInitLocked
-	})
+		setStateContentInitLocked,
+	});
 	const [showDialogItem, setShowDialogItem] = useState<any>({
 		status: false,
 		title: '',
@@ -87,10 +88,14 @@ export const TabPools = () => {
 	});
 	const [activeItem, setActiveItem] = useState<any>(null);
 	const [activeItemLocked, setActiveItemLocked] = useState<any>(null);
-	const totalFitterPassLocked = dataMyStakingLock && dataMyStakingLock?.length > 0 ? dataMyStakingLock?.reduce(
-		(previousValue, currentValue: row) => previousValue + currentValue.fpNum,
-		0
-	) : 0;
+	const totalFitterPassLocked =
+		dataMyStakingLock && dataMyStakingLock?.length > 0
+			? dataMyStakingLock?.reduce(
+					(previousValue, currentValue: row) =>
+						previousValue + currentValue.fpNum,
+					0
+			  )
+			: 0;
 	//status = 1: coming soon, 2: active, 3: closed
 	const rows = [
 		{
@@ -110,8 +115,18 @@ export const TabPools = () => {
 		{
 			name: 'Fitter Pass - Locked',
 			title: 'Fitter Pass Drops - Locked',
-			status: 2,
-			data: createData(`${dataMyStakingLock && dataMyStakingLock?.length > 0 ? 'Staking' : '-'}`, 'Fitter Pass', `${totalFitterPassLocked}`, '-', '3 - 30 days', '7 days', `${totalInPool} FIU`),
+			status: 3,
+			data: createData(
+				`${
+					dataMyStakingLock && dataMyStakingLock?.length > 0 ? 'Staking' : '-'
+				}`,
+				'Fitter Pass',
+				`${totalFitterPassLocked}`,
+				'-',
+				'3 - 30 days',
+				'7 days',
+				`${totalInPool} FIU`
+			),
 		},
 		{
 			name: 'FIU - Shared Pool',
@@ -196,8 +211,12 @@ export const TabPools = () => {
 					</Typography>
 					<Typography mb={1}>1.Stake FIU, minimum 1000 FIU.</Typography>
 					<Typography mb={1}>2.Earn FIU</Typography>
-					<Typography mb={1}>3.High-yield in return, take place in 1 month</Typography>
-					<Typography mb={1}>4.Unlimited number of stakers and token</Typography>
+					<Typography mb={1}>
+						3.High-yield in return, take place in 1 month
+					</Typography>
+					<Typography mb={1}>
+						4.Unlimited number of stakers and token
+					</Typography>
 					<Typography mb={1}>
 						5.In the first 3 days from this campaign begin, you have chance to
 						get double the reward.
@@ -220,14 +239,23 @@ export const TabPools = () => {
 						<b>Fitter Pass - Locked: </b>
 					</Typography>
 					<Typography mb={1}>1. Stake FIU - Earn Fitter Pass</Typography>
-					<Typography mb={1}>2. Stake amount is calculated by block unit. 1 block is equivalent to 40,000 FIU </Typography>
-					<Typography mb={1}>3. Minimum stake amount required is 1 block;  maximum 12 blocks</Typography>
-					<Typography mb={1}>4. Minimum lock-up duration is 3 days ; maximum 30 days</Typography>
-					<Typography fontWeight={600} mb={1}>
-						5. Fitter Pass(es) will be immediately sent to your account right after you successfully stake.
+					<Typography mb={1}>
+						2. Stake amount is calculated by block unit. 1 block is equivalent
+						to 40,000 FIU{' '}
 					</Typography>
 					<Typography mb={1}>
-						6.Staking reward has its limit with maximum of 31 Fitter Passes per one staking action
+						3. Minimum stake amount required is 1 block; maximum 12 blocks
+					</Typography>
+					<Typography mb={1}>
+						4. Minimum lock-up duration is 3 days ; maximum 30 days
+					</Typography>
+					<Typography fontWeight={600} mb={1}>
+						5. Fitter Pass(es) will be immediately sent to your account right
+						after you successfully stake.
+					</Typography>
+					<Typography mb={1}>
+						6.Staking reward has its limit with maximum of 31 Fitter Passes per
+						one staking action
 					</Typography>
 				</Box>
 			),
@@ -236,7 +264,6 @@ export const TabPools = () => {
 	return (
 		<Wrap>
 			<Container sx={{ maxWidth: 1120 }}>
-
 				<Top>
 					<BoxTabs value={tabCurrent}>
 						<TabItem
@@ -275,7 +302,9 @@ export const TabPools = () => {
 												}}
 												key={index}
 												sx={{
-													'&:last-child td, &:last-child th': { borderRadius: "8px" },
+													'&:last-child td, &:last-child th': {
+														borderRadius: '8px',
+													},
 													background: index === activeItem ? '#FFE2D3' : '#fff',
 												}}
 											>
@@ -286,10 +315,11 @@ export const TabPools = () => {
 														onClick={
 															index === 0
 																? (e: React.MouseEvent) =>
-																	handleShowPopupPass(e)
-																: index === 1 ? (e: React.MouseEvent) =>
-																	handleShowPopupLocked(e)
-																	: (e: React.MouseEvent) =>
+																		handleShowPopupPass(e)
+																: index === 1
+																? (e: React.MouseEvent) =>
+																		handleShowPopupLocked(e)
+																: (e: React.MouseEvent) =>
 																		handleShowPopupShared(e)
 														}
 													>
@@ -320,7 +350,8 @@ export const TabPools = () => {
 													<Box>{item.data.reward}</Box>
 												</Item>
 												<Item align="left">
-													{index === 1 ? 'EARNED' : "CLAIMABLE"}	 <Box>{item.data.earned}</Box>
+													{index === 1 ? 'EARNED' : 'CLAIMABLE'}{' '}
+													<Box>{item.data.earned}</Box>
 												</Item>
 												<Item align="left">
 													Token remaining <Box>{item.data.tokenRemaining}</Box>
@@ -332,7 +363,8 @@ export const TabPools = () => {
 													Withdrawal delay time <Box>{item.data.delayTime}</Box>
 												</Item>
 												<Item align="left">
-													Total in pool<Box>{formatMoney(item.data.total)} FIU</Box>
+													Total in pool
+													<Box>{formatMoney(item.data.total)} FIU</Box>
 												</Item>
 											</BoxTr>
 										);
@@ -347,7 +379,9 @@ export const TabPools = () => {
 												}}
 												key={index}
 												sx={{
-													'&:last-child td, &:last-child th': { borderRadius: "8px" },
+													'&:last-child td, &:last-child th': {
+														borderRadius: '8px',
+													},
 													background: index === activeItem ? '#FFE2D3' : '#fff',
 												}}
 											>
@@ -358,10 +392,12 @@ export const TabPools = () => {
 														onClick={
 															index === 0
 																? (e: React.MouseEvent) =>
-																	handleShowPopupPass(e)
-																: index === 1 ? (e: React.MouseEvent) =>
-																	handleShowPopupLocked(e)
-																	: (e: React.MouseEvent) => handleShowPopupShared(e)
+																		handleShowPopupPass(e)
+																: index === 1
+																? (e: React.MouseEvent) =>
+																		handleShowPopupLocked(e)
+																: (e: React.MouseEvent) =>
+																		handleShowPopupShared(e)
 														}
 													>
 														How it works?
@@ -391,7 +427,8 @@ export const TabPools = () => {
 													<Box>{item.data.reward}</Box>
 												</Item>
 												<Item align="left">
-													{index === 1 ? 'EARNED' : "CLAIMABLE"} <Box>{item.data.earned}</Box>
+													{index === 1 ? 'EARNED' : 'CLAIMABLE'}{' '}
+													<Box>{item.data.earned}</Box>
 												</Item>
 												<Item align="left">
 													Token remaining <Box>{item.data.tokenRemaining}</Box>
@@ -403,7 +440,12 @@ export const TabPools = () => {
 													Withdrawal delay time <Box>{item.data.delayTime}</Box>
 												</Item>
 												<Item align="left">
-													Total in pool<Box>{item.data.total ? formatMoney(item.data.total) + ' FIU' : '-'} </Box>
+													Total in pool
+													<Box>
+														{item.data.total
+															? formatMoney(item.data.total) + ' FIU'
+															: '-'}{' '}
+													</Box>
 												</Item>
 											</BoxTr>
 										);
@@ -457,7 +499,7 @@ export const TabPools = () => {
 			<Backdrop sx={{ zIndex: 1100, color: '#FF6D24' }} open={isLoading}>
 				<CircularProgress color="inherit" />
 			</Backdrop>
-		</Wrap >
+		</Wrap>
 	);
 };
 
@@ -557,7 +599,7 @@ const Body = styled(Box)({
 	// }
 });
 const Event = styled(Link)({
-	width: "100%",
+	width: '100%',
 });
 type itemProps = TableRowProps & {
 	status: number;
