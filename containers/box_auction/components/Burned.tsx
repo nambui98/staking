@@ -1,4 +1,11 @@
-import { Box, Button, ButtonProps, styled, Typography, useMediaQuery } from '@mui/material';
+import {
+	Box,
+	Button,
+	ButtonProps,
+	styled,
+	Typography,
+	useMediaQuery,
+} from '@mui/material';
 import { useState, ChangeEvent, useEffect, useCallback } from 'react';
 import { BoxAuction } from '../../../const';
 
@@ -14,6 +21,7 @@ import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton
 import axios from 'axios';
 import { convertWalletAddress } from '../../../libs/utils/utils';
 import { useWalletContext } from '../../../contexts/WalletContext';
+import { useRouter } from 'next/router';
 
 interface Column {
 	id: 'rank' | 'walletAddress' | 'amount' | 'prize';
@@ -26,8 +34,11 @@ interface Column {
 const columns: readonly Column[] = [
 	{ id: 'rank', label: 'RANK', minWidth: 50, align: 'left' },
 	{
-		id: 'walletAddress', label: 'WALLET ID', minWidth: 100, align: 'left',
-		format: (value: string) => convertWalletAddress(value.toString(), 6, 3)
+		id: 'walletAddress',
+		label: 'WALLET ID',
+		minWidth: 100,
+		align: 'left',
+		format: (value: string) => convertWalletAddress(value.toString(), 6, 3),
 	},
 	{
 		id: 'amount',
@@ -51,14 +62,9 @@ interface Data {
 	filterPass: number;
 }
 
-function createData(
-	rank: number,
-	wallet: string,
-	filterPass: number,
-): Data {
+function createData(rank: number, wallet: string, filterPass: number): Data {
 	return { rank, wallet, filterPass };
 }
-
 
 type Props = {
 	setStateContent: Function;
@@ -66,57 +72,65 @@ type Props = {
 	// handleClickError: Function;
 	// setStateContentInit: Function;
 	stateContent: BoxAuction | null;
-	numberBurned: string
+	numberBurned: string;
 };
 type row = {
 	id: string;
 	walletAddress: string;
 	amount: string;
 	rank: string;
-}
+};
 export function Burned(props: Props) {
 	const { setStateContent, stateContent, numberBurned } = props;
-	const { walletAccount } = useWalletContext();
+	var { walletAccount } = useWalletContext();
 	const [limit, setLimit] = useState<number>(10);
 	const [page, setPage] = useState(0);
 	const [dataLeaderBoard, setDataLeaderBoard] = useState<row[]>();
 	const [dataMe, setDataMe] = useState<row>();
 	const [rowsPerPage, setRowsPerPage] = useState(10);
+	const [enableClaimBox, setEnableClaimBox] = useState<boolean>(false);
+	const router = useRouter();
 
-	const getDataMe = useCallback(
-		() => {
-			axios.get(
-				`https://leaderboard.befitter.io/fitter/leaderboard/me?walletAddress=${walletAccount}`, {
-				headers: {
-					"Content-Type": "application/json"
+	const getDataMe = useCallback(() => {
+		axios
+			.get(
+				`https://leaderboard.befitter.io/fitter/leaderboard/me?walletAddress=${walletAccount}`,
+				{
+					headers: {
+						'Content-Type': 'application/json',
+					},
 				}
-			}
-			).then((res) => {
+			)
+			.then((res) => {
 				if (res.status === 200) {
-
 					setDataMe(res.data.data);
+
+					if (res.data.data?.rank < 50) {
+						setEnableClaimBox(true);
+					} else {
+						setEnableClaimBox(false);
+					}
 				}
-			})
-		},
-		[walletAccount],
-	)
-	const getData = useCallback(
-		() => {
-			axios.get(
-				`https://leaderboard.befitter.io/fitter/leaderboard?limit=${limit === 50 ? 40 : 10}&offset=${limit === 50 ? 10 : 0}`, {
-				headers: {
-					"Content-Type": "application/json"
+			});
+	}, [walletAccount]);
+	const getData = useCallback(() => {
+		axios
+			.get(
+				`https://leaderboard.befitter.io/fitter/leaderboard?limit=${
+					limit === 50 ? 40 : 10
+				}&offset=${limit === 50 ? 10 : 0}`,
+				{
+					headers: {
+						'Content-Type': 'application/json',
+					},
 				}
-			}
-			).then((res) => {
+			)
+			.then((res) => {
 				if (res.status === 200) {
 					setDataLeaderBoard(res.data.data);
 				}
-			})
-		},
-		[limit],
-	)
-
+			});
+	}, [limit]);
 
 	useEffect(() => {
 		getData();
@@ -126,9 +140,7 @@ export function Burned(props: Props) {
 			getDataMe();
 		}, 30000);
 		return () => clearInterval(interval);
-
-	}, [limit])
-
+	}, [limit]);
 
 	const handleChangePage = (event: unknown, newPage: number) => {
 		setPage(newPage);
@@ -146,16 +158,28 @@ export function Burned(props: Props) {
 
 	const getPize = (value: number) => {
 		if (value < 11) {
-			return <img src="assets/box-diamond-small.png" alt="box" />
+			return <img src="assets/box-diamond-small.png" alt="box" />;
 		}
 		if (value < 51) {
-			return <img src="assets/box-gold-small.png" alt="box" />
+			return <img src="assets/box-gold-small.png" alt="box" />;
 		}
-		return '-'
-	}
+		return '-';
+	};
 	return (
-		<Box sx={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', flex: 1, borderLeft: isMobile ? 0 : '1px solid #E9EAEF' }}>
-			<Box sx={{ width: isMobile ? 'auto' : '372px', padding: isMobile ? '16px 0' : '0px 16px' }}>
+		<Box
+			sx={{
+				display: 'flex',
+				flexDirection: isMobile ? 'column' : 'row',
+				flex: 1,
+				borderLeft: isMobile ? 0 : '1px solid #E9EAEF',
+			}}
+		>
+			<Box
+				sx={{
+					width: isMobile ? 'auto' : '372px',
+					padding: isMobile ? '16px 0' : '0px 16px',
+				}}
+			>
 				<Box
 					sx={{
 						display: 'flex',
@@ -186,7 +210,7 @@ export function Burned(props: Props) {
 							sx={{
 								width: '55px',
 								height: '26px',
-								mr: "8px"
+								mr: '8px',
 							}}
 							onClick={() => setLimit(10)}
 						>
@@ -198,7 +222,7 @@ export function Burned(props: Props) {
 							// disabled
 							sx={{
 								width: '55px',
-								height: '26px'
+								height: '26px',
 							}}
 							onClick={() => setLimit(50)}
 						>
@@ -208,31 +232,34 @@ export function Burned(props: Props) {
 				</Box>
 				{/* table */}
 				<Paper sx={{ width: '100%', overflow: 'hidden', boxShadow: 'none' }}>
-					<TableContainer sx={{
-						maxHeight: "380px", border: 'none',
-						'&::-webkit-scrollbar': {
-							width: '5px',
-							height: '5px',
-							borderRadius: '5px',
-						},
+					<TableContainer
+						sx={{
+							maxHeight: '380px',
+							border: 'none',
+							'&::-webkit-scrollbar': {
+								width: '5px',
+								height: '5px',
+								borderRadius: '5px',
+							},
 
-						/* Track */
-						'&::-webkit-scrollbar-track': {
-							background: '#f1f1f1',
-							borderRadius: '5px',
-						},
-						/* Handle */
-						'&::-webkit-scrollbar-thumb': {
-							background: '#888',
-							borderRadius: '5px',
-						},
+							/* Track */
+							'&::-webkit-scrollbar-track': {
+								background: '#f1f1f1',
+								borderRadius: '5px',
+							},
+							/* Handle */
+							'&::-webkit-scrollbar-thumb': {
+								background: '#888',
+								borderRadius: '5px',
+							},
 
-						/* Handle on hover */
-						'&::-webkit-scrollbar-thumb:hover': {
-							background: '#555',
-							borderRadius: '5px',
-						},
-					}}>
+							/* Handle on hover */
+							'&::-webkit-scrollbar-thumb:hover': {
+								background: '#555',
+								borderRadius: '5px',
+							},
+						}}
+					>
 						<Table stickyHeader aria-label="sticky table">
 							<TableHead>
 								<TableRow>
@@ -254,71 +281,79 @@ export function Burned(props: Props) {
 								</TableRow>
 							</TableHead>
 							<TableBody>
-								{dataLeaderBoard && dataLeaderBoard?.map((row) => {
-									return (
-										<TableRow
-											hover
-											role="checkbox"
-											tabIndex={-1}
-											key={row.rank}
-										>
-											{columns.map((column) => {
-												if (column.id === "prize") {
-													return <TableCell
-														key={column.id}
-														align={column.align}
-														sx={{
-															borderBottom: 'none',
-															padding: '4px 0',
-															fontSize: '12px',
-															color: '#31373E',
-															fontWeight: '500',
-															fontFamily: 'BeVietNamPro',
-														}}
-													>
-														{row.rank ? getPize(parseInt(row.rank)) : '-'}
-														{/* <img src="images/box.svg" alt="box" /> */}
-													</TableCell>
-												}
-												const value = row[column.id];
-												return (
-													<TableCell
-														key={column.id}
-														align={column.align}
-														sx={{
-															borderBottom: 'none',
-															padding: '4px 0',
-															fontSize: '12px',
-															color: '#31373E',
-															fontWeight: '500',
-															fontFamily: 'BeVietNamPro',
-														}}
-													>
-														{column.format && typeof value === 'string'
-															? column.format(value)
-															: value}
-													</TableCell>
-												);
-											})}
-										</TableRow>
-									);
-								})}
+								{dataLeaderBoard &&
+									dataLeaderBoard?.map((row) => {
+										return (
+											<TableRow
+												hover
+												role="checkbox"
+												tabIndex={-1}
+												key={row.rank}
+											>
+												{columns.map((column) => {
+													if (column.id === 'prize') {
+														return (
+															<TableCell
+																key={column.id}
+																align={column.align}
+																sx={{
+																	borderBottom: 'none',
+																	padding: '4px 0',
+																	fontSize: '12px',
+																	color: '#31373E',
+																	fontWeight: '500',
+																	fontFamily: 'BeVietNamPro',
+																}}
+															>
+																{row?.rank ? getPize(parseInt(row?.rank)) : '-'}
+															</TableCell>
+														);
+													}
+													const value = row[column.id];
+													return (
+														<TableCell
+															key={column.id}
+															align={column.align}
+															sx={{
+																borderBottom: 'none',
+																padding: '4px 0',
+																fontSize: '12px',
+																color: '#31373E',
+																fontWeight: '500',
+																fontFamily: 'BeVietNamPro',
+															}}
+														>
+															{column.format && typeof value === 'string'
+																? column.format(value)
+																: value}
+														</TableCell>
+													);
+												})}
+											</TableRow>
+										);
+									})}
 							</TableBody>
 						</Table>
 					</TableContainer>
 				</Paper>
 			</Box>
-			<Box sx={{ borderLeft: isMobile ? '0px' : '1px solid #E9EAEF', display: 'flex', flexDirection: "column" }}>
+			<Box
+				sx={{
+					borderLeft: isMobile ? '0px' : '1px solid #E9EAEF',
+					display: 'flex',
+					flexDirection: 'column',
+				}}
+			>
 				<Box
 					sx={{
 						'@media (min-width: 650px)': {
 							width: '306px',
 							height: '160px',
-							padding: isMobile ? '16px 0' : '0px 16px'
+							padding: isMobile ? '16px 0' : '0px 16px',
 						},
 						display: 'flex',
 						flexDirection: 'column',
-						borderBottom: isMobile ? 0 : '1px solid #E9EAEF'
+						borderBottom: isMobile ? 0 : '1px solid #E9EAEF',
 					}}
 				>
 					<Item sx={{ mt: '0 !important' }}>
@@ -331,11 +366,13 @@ export function Burned(props: Props) {
 					</Item>
 					<Item sx={{ mt: '0 !important', mb: '8px' }}>
 						<TitleItem>PRIZE</TitleItem>
-						<ValueItem>{dataMe?.rank ? getPize(parseInt(dataMe?.rank)) : '-'}</ValueItem>
+						<ValueItem>
+							{dataMe?.rank ? getPize(parseInt(dataMe?.rank)) : '-'}
+						</ValueItem>
 					</Item>
 					<ButtonCustom
-						isDisabled={true}
-						disabled
+						isDisabled={enableClaimBox ? false : true}
+						disabled={enableClaimBox ? false : true}
 						variant="text"
 						sx={{
 							width: '72px',
@@ -343,6 +380,7 @@ export function Burned(props: Props) {
 
 							alignSelf: 'end',
 						}}
+						onClick={() => router.push('/claim?tabClaim=box&round=9')}
 					>
 						CLAIM
 					</ButtonCustom>
@@ -351,12 +389,13 @@ export function Burned(props: Props) {
 					sx={{
 						'@media (min-width: 650px)': {
 							width: '306px',
-							height: '160px',
-							padding: '16px',
+							height: '190px',
+							padding: '16px 16px 0 16px',
 						},
 						display: 'flex',
 						flexDirection: 'column',
-						paddingBottom: "16px",
+						paddingBottom: '16px',
+						// marginTop: '8px',
 						borderBottom: '1px solid #E9EAEF',
 					}}
 				>
@@ -370,30 +409,40 @@ export function Burned(props: Props) {
 					</Item>
 					<Item sx={{ mt: '0 !important', mb: '8px' }}>
 						{/* <TitleItem>PRIZE</TitleItem> */}
-						<ValueItem>-</ValueItem>
-						<ValueItem>-</ValueItem>
-						<ValueItem>-</ValueItem>
+						<ValueItem>
+							09:00 UTC <br></br> 22/08/2022
+						</ValueItem>
+						<ValueItem sx={{ flex: 1, ml: '27px' }}>Fitter Pass</ValueItem>
+						<ValueItem>
+							{Number(dataMe?.rank) < 50 ? '-' : dataMe?.amount}
+						</ValueItem>
 					</Item>
 					<ButtonCustom
-						isDisabled={true}
-						disabled
+						isDisabled={enableClaimBox ? true : false}
+						disabled={enableClaimBox ? true : false}
 						variant="text"
 						sx={{
 							width: '72px',
 							height: '34px',
 							alignSelf: 'end',
 						}}
+						onClick={() => router.push('/claim?tabClaim=fitterPass&round=10')}
 					>
 						CLAIM
 					</ButtonCustom>
 				</Box>
-				<Box sx={{ padding: isMobile ? '16px 0px 0 0px' : '16px 16px 0 16px', mt: "auto" }}>
+				<Box
+					sx={{
+						padding: isMobile ? '16px 0px 0 0px' : '0 16px 0 16px',
+						mt: 'auto',
+					}}
+				>
 					<MarketplaceButton
 						customStyle={{ width: '100%' }}
 						title={'BURN MORE'}
 						handleOnClick={handleEnable}
 						disabled
-					// disabled={stateContent ? true : false}
+						// disabled={stateContent ? true : false}
 					/>
 				</Box>
 			</Box>
@@ -404,35 +453,34 @@ export function Burned(props: Props) {
 type buttonNew = ButtonProps & {
 	isDisabled: boolean | null;
 };
-const ButtonCustom = styled(Button)
-	((props: buttonNew) => ({
-		color: props.isDisabled ? "#A7ACB8" : "#55C8FC",
-		background: props.isDisabled ? "#E9EAEF" : "#D9F2FD",
-		borderRadius: '4px',
-		padding: '0px !important',
-		minWidth: '32px !important',
-		height: '16px',
-		border: 'none',
-		textTransform: 'none',
-		display: "flex",
-		alignItems: 'center',
-		justifyContent: 'center',
-		fontSize: '12px',
+const ButtonCustom = styled(Button)((props: buttonNew) => ({
+	color: props.isDisabled ? '#A7ACB8' : '#55C8FC',
+	background: props.isDisabled ? '#E9EAEF' : '#D9F2FD',
+	borderRadius: '4px',
+	padding: '0px !important',
+	minWidth: '32px !important',
+	height: '16px',
+	border: 'none',
+	textTransform: 'none',
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'center',
+	fontSize: '12px',
+	'&>svg': {
+		pointerEvents: 'none',
+		stroke: props.isDisabled ? '#A7ACB8' : '#55C8FC',
+	},
+	'&:hover': {
+		background: ' #d0edfa !important',
+		color: '#55C8FC',
+	},
+	'&:disabled': {
+		background: '#E9EAEF',
 		'&>svg': {
-			pointerEvents: "none",
-			stroke: props.isDisabled ? "#A7ACB8" : "#55C8FC",
+			stroke: '#A7ACB8',
 		},
-		'&:hover': {
-			background: ' #d0edfa !important',
-			color: "#55C8FC",
-		},
-		'&:disabled': {
-			background: '#E9EAEF',
-			'&>svg': {
-				stroke: "#A7ACB8"
-			}
-		}
-	}));
+	},
+}));
 
 const Item = styled(Box)({
 	display: 'flex',
