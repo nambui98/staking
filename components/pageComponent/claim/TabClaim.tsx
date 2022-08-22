@@ -39,7 +39,8 @@ type row = {
 export const TabClaim = () => {
   const router = useRouter();
   const isMobile = useMediaQuery('(max-width: 767px)');
-  const {walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
+  const {setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
+  const walletAccount = '0xa478f79f010935d514c46d3e932a1331433fe8c4'
   const [currentTab, setCurrentTab] = useState<string>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [roundSelected, setRoundSelected] = useState<string>('');
@@ -102,7 +103,7 @@ export const TabClaim = () => {
 				}
 			})
 		},
-		[walletAccount, currentTab, roundSelected],
+		[walletAccount],
 	)
 
   const getClaimedBoxNumber = async () => {
