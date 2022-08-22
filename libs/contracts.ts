@@ -63,3 +63,5 @@ export const beFITTERBurningEvent = { address: address.beFITTERBurningEvent, abi
 export const bftClaimFitterPass = { address: address.bFclaimFitterPass, abi: bfClaimFitterPass.abi }
 export const bftBurnHee = { address: address.burnHeeAddress, abi: ExchangeHeeForFitterPassDev.abi }
 export const beFITTERStakeUserError = { address: address.beFITTERStakeUserError, abi: beFitterStake.abi }
+export const bftClaimBoxEventReward = { address: address.bfClaimBoxEventReward, abi: bfClaimBoxDev.abi }
+export const bftClaimFitterPassEventRefund = { address: address.bfClaimFitterPassEventRefund, abi: bfClaimBoxDev.abi }

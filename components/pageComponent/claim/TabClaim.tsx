@@ -8,7 +8,7 @@ import { CLAIM_IMAGE, CLAIM_TOKEN_TIME } from "../../../constants/claim";
 import { PAGE } from "../../../constants/header";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { checkClaimedToken, getClaimedBox, getClaimedFitterPass, getClaimedToken, getLockedOf, handleClaimBox, handleClaimFitterPass, handleClaimToken } from "../../../libs/claim";
-import { bftClaimGamefi, bftClaimEnjin, bftClaimAlphaBeta, bftClaimOther, bftClaimAlphaBeta2, bftClaimTokenAirdrop, bftClaimToken } from "../../../libs/contracts";
+import { bftClaimGamefi, bftClaimEnjin, bftClaimAlphaBeta, bftClaimOther, bftClaimAlphaBeta2, bftClaimTokenAirdrop, bftClaimToken, bftClaimBoxEventReward, bftClaimFitterPass, bftClaimFitterPassEventRefund } from "../../../libs/contracts";
 import { convertWalletAddress, formatNumberWithCommas } from "../../../libs/utils/utils";
 import { ClaimService } from "../../../services/claim.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
@@ -32,7 +32,7 @@ export const TabClaim = () => {
   const router = useRouter();
   const isMobile = useMediaQuery('(max-width: 767px)');
   const {walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
-  const [currentTab, setCurrentTab] = useState<'box' | 'token' | 'fitterPass'>('box');
+  const [currentTab, setCurrentTab] = useState<string>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [roundSelected, setRoundSelected] = useState<string>('');
   const [captchaToken, setCaptchaToken] = useState('');
@@ -62,6 +62,13 @@ export const TabClaim = () => {
     return false;
   }
 
+  const checkContractClaimFtpass = () => {
+    switch (roundSelected) {
+      case '8': return bftClaimFitterPass.address;
+      case '10': return bftClaimFitterPassEventRefund.address;
+    }
+  }
+
   const getClaimedBoxNumber = async () => {
     if (!chainIdIsSupported) {
       await changeNetwork(provider)
@@ -75,7 +82,19 @@ export const TabClaim = () => {
         const claimContractAlphaBeta = await new ethers.Contract(bftClaimAlphaBeta.address, bftClaimAlphaBeta.abi, ethersSigner);
         const claimContractOther = await new ethers.Contract(bftClaimOther.address, bftClaimOther.abi, ethersSigner);
         const claimContractAlphaBeta2 = await new ethers.Contract(bftClaimAlphaBeta2.address, bftClaimAlphaBeta2.abi, ethersSigner);
-        const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), roundSelected === '1' ? claimContractAlphaBeta : roundSelected === '2' ? claimContractOther : roundSelected === '6' ? claimContractAlphaBeta2 : roundSelected === "3" ? claimContractGamefi : claimContractEnjinstarter);
+        const claimContractBoxEventReward = await new ethers.Contract(bftClaimBoxEventReward.address, bftClaimBoxEventReward.abi, ethersSigner);
+
+        const contractClaimBox = () => {
+          switch (roundSelected) {
+            case '1': return claimContractAlphaBeta;
+            case '2': return claimContractOther;
+            case '3': return claimContractGamefi;
+            case '4': return claimContractEnjinstarter;
+            case '6': return claimContractAlphaBeta2;  
+            case '9': return claimContractBoxEventReward;       
+          }
+        }
+        const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), contractClaimBox());
         setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount })
       } else {
         setDataClaim({ claimed: 0, totalBox: 0 })
@@ -94,7 +113,7 @@ export const TabClaim = () => {
       const res: any = await ClaimService.getAmount((walletAccount.toLowerCase()), captchaToken, roundSelected, false);
       setCheckClaimed(true)
       if (res?.data?.status) {
-        const dataClaimed = await getClaimedFitterPass((walletAccount.toLowerCase()), ethersSigner);
+        const dataClaimed = await getClaimedFitterPass((walletAccount.toLowerCase()), ethersSigner, checkContractClaimFtpass());
         setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount })
       } else {
         setDataClaim({ claimed: 0, totalBox: 0 })
@@ -143,8 +162,21 @@ export const TabClaim = () => {
       const claimContractAlphaBeta = await new ethers.Contract(bftClaimAlphaBeta.address, bftClaimAlphaBeta.abi, ethersSigner);
       const claimContractOther = await new ethers.Contract(bftClaimOther.address, bftClaimOther.abi, ethersSigner);
       const claimContractAlphaBeta2 = await new ethers.Contract(bftClaimAlphaBeta2.address, bftClaimAlphaBeta2.abi, ethersSigner);
+      const claimContractBoxEventReward = await new ethers.Contract(bftClaimBoxEventReward.address, bftClaimBoxEventReward.abi, ethersSigner);
+
+      const contractClaimBox = () => {
+        switch (roundSelected) {
+          case '1': return claimContractAlphaBeta;
+          case '2': return claimContractOther;
+          case '3': return claimContractGamefi;
+          case '4': return claimContractEnjinstarter;
+          case '6': return claimContractAlphaBeta2;  
+          case '9': return claimContractBoxEventReward;       
+        }
+      }
+
       try {
-        const resultClaim: any = await handleClaimBox(walletAccount, roundSelected === '6' ? claimContractAlphaBeta2 : roundSelected === '1' ? claimContractAlphaBeta : roundSelected === '2' ? claimContractOther : roundSelected === '3' ? claimContractGamefi : claimContractEnjinstarter, res.data)
+        const resultClaim: any = await handleClaimBox(walletAccount, contractClaimBox(), res.data)
         const checkStatus = setInterval(async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
           if (statusClaim?.status) {
@@ -181,7 +213,6 @@ export const TabClaim = () => {
         const checkStatus = setInterval(async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
           if (statusClaim?.status) {
-            console.log(statusClaim)
             setPopupSuccess(true);
             setStatusLoading(false);
             getClaimedBoxNumber();
@@ -212,7 +243,7 @@ export const TabClaim = () => {
     const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, true);
     if (res?.data?.status) {
       try {
-        const resultClaim: any = await handleClaimFitterPass(walletAccount, ethersSigner, res.data)
+        const resultClaim: any = await handleClaimFitterPass(walletAccount, ethersSigner, res.data, checkContractClaimFtpass())
         const checkStatus = setInterval(async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
           if (statusClaim?.status) {
@@ -285,13 +316,29 @@ export const TabClaim = () => {
         { title: 'Alpha, Beta Test Reward', value: '1' },
         { title: 'Alpha, Beta Test Reward Extra', value: '6' },
         { title: 'Other Events', value: '2' },
+        { title: 'Box Auction Event Reward', value: '9' },
       ])
     } else {
       setSelectItem([
-        { title: 'NFT Box Sale on Hub', value: '8' }
+        { title: 'NFT Box Sale on Hub', value: '8' },
+        { title: 'Box Auction Event Refund', value: '10' }
       ])
     }
   }, [currentTab])
+
+  useEffect(() => {
+    if (window.performance) {
+      if (performance.navigation.type == 1) {
+        setCurrentTab('box')
+        setRoundSelected('')
+      } else {
+        if(router.query?.round && router.query?.tabClaim){
+          setCurrentTab(router.query?.tabClaim as string)
+          setRoundSelected(router.query?.round as string)
+        }
+      }
+    }
+  }, [router])
 
   return (
     <Wrap>

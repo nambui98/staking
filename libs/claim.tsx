@@ -60,14 +60,14 @@ export const getOwnedFitterPass = async (walletAddress: string, ethersSigner: an
   return formatBalance;
 }
 
-export const getClaimedFitterPass = async (walletAddress: string, ethersSigner: any) => {
-  const contract = new ethers.Contract(bftClaimFitterPass.address, bftClaimFitterPass.abi, ethersSigner);
+export const getClaimedFitterPass = async (walletAddress: string, ethersSigner: any, contractAddress: string) => {
+  const contract = new ethers.Contract(contractAddress, bftClaimFitterPass.abi, ethersSigner);
   const dataClaim = await contract?.getNumberOfClaimedItem(walletAddress);
   return dataClaim
 }
 
-export const handleClaimFitterPass = async (walletAddress: string, ethersSigner: any, AddressAmount: any) => {
-  const contract = new ethers.Contract(bftClaimFitterPass.address, bftClaimFitterPass.abi, ethersSigner);
+export const handleClaimFitterPass = async (walletAddress: string, ethersSigner: any, AddressAmount: any, contractAddress: string) => {
+  const contract = new ethers.Contract(contractAddress, bftClaimFitterPass.abi, ethersSigner);
   const claim = await contract.claim(walletAddress, AddressAmount.amount, AddressAmount.proof);
   return claim
 }
