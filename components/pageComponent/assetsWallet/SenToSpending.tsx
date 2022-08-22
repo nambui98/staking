@@ -36,7 +36,7 @@ interface IProps {
 	shoesChoose: string;
 	getListShoes: () => any;
 	setShoeChoose: (data: string) => any;
-	totalFitterPass: number;
+	totalFitterPass?: number;
 }
 
 export const SendToSpending: React.FC<IProps> = ({
@@ -94,7 +94,7 @@ export const SendToSpending: React.FC<IProps> = ({
 					return true;
 				}
 			} else if (currentTab === TAB_NAME.fitterPass) {
-				if (totalFitterPass >= parseFloat(amount)) {
+				if (totalFitterPass && totalFitterPass >= parseFloat(amount)) {
 					return true;
 				}
 			} else {
