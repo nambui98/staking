@@ -6,7 +6,7 @@ import {
 	styled,
 	Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { TAB_NAME } from '../../../constants/assetsWallet';
 import { useCommonContext } from '../../../contexts/CommonContext';
 import { useWalletContext } from '../../../contexts/WalletContext';
@@ -63,6 +63,10 @@ export const SendToSpending: React.FC<IProps> = ({
 	const [textEmail, setTextEmail] = useState<string>('');
 	const [amount, setAmount] = useState<string>('');
 	const [statusButtonSent, setStatusButtonSent] = useState<boolean>(false);
+	const [approvedFiu, setApprovedFiu] = useState<boolean>(false);
+	const [approvedHee, setApprovedHee] = useState<boolean>(false);
+	const [amountApprovedFiu, setAmountApprovedFiu] = useState<number>(0);
+	const [amountApprovedHee, setAmountApprovedHee] = useState<number>(0);
 
 	const checkEmail = async () => {
 		const res = await checkVerifyEmail(textEmail);
@@ -75,17 +79,29 @@ export const SendToSpending: React.FC<IProps> = ({
 	const handleCheckEmailAmount = async () => {
 		if (await checkEmail()) {
 			if (currentTab === TAB_NAME.token) {
-				if (
-					tokenChoose === 'hee' &&
-					parseFloat(heeBalance) >= parseFloat(amount)
-				) {
-					return true;
+				if (tokenChoose === 'hee') {
+					if (approvedHee) {
+						const heeApproved = await getAllowance(
+							walletAccount,
+							ethersSigner,
+							bftHeetoken
+						);
+						if (heeApproved >= amountApprovedHee) return true;
+					} else {
+						if (parseFloat(heeBalance) >= parseFloat(amount)) return true;
+					}
 				}
-				if (
-					tokenChoose === 'fiu' &&
-					parseFloat(fiuBalance) >= parseFloat(amount)
-				) {
-					return true;
+				if (tokenChoose === 'fiu') {
+					if (approvedFiu) {
+						const fiuApproved = await getAllowance(
+							walletAccount,
+							ethersSigner,
+							bftFiuToken
+						);
+						if (fiuApproved >= amountApprovedFiu) return true;
+					} else {
+						if (parseFloat(fiuBalance) >= parseFloat(amount)) return true;
+					}
 				}
 				if (
 					tokenChoose === 'bnb' &&
@@ -128,6 +144,18 @@ export const SendToSpending: React.FC<IProps> = ({
 		tokenId?: string
 	) => {
 		spinner.handleChangeStatus(true);
+
+		const checkSendWithToken = () => {
+			if (approvedFiu && tokenChoose === 'fiu') {
+				return amountApprovedFiu.toString();
+			}
+			if (approvedHee && tokenChoose === 'hee') {
+				return amountApprovedHee.toString();
+			}
+
+			return amount;
+		};
+
 		try {
 			const resDeposit =
 				type === 'bnb'
@@ -135,21 +163,61 @@ export const SendToSpending: React.FC<IProps> = ({
 					: await handleDeposit(
 							ethersSigner,
 							abiDetail.address,
-							amount,
+							checkSendWithToken(),
 							textEmail,
 							type,
 							tokenId
 					  );
+
 			const checkStatus = setInterval(async () => {
 				const statusApprove = await ethersProvider.getTransactionReceipt(
 					resDeposit.hash
 				);
+
 				if (statusApprove?.status) {
 					spinner.handleChangeStatus(false);
 					updateBnbBalance();
 					type === 'box' && getListBox();
 					type === 'shoes' && getListShoes();
-					if (tokenChoose !== 'bnb') {
+					if (currentTab === TAB_NAME.token) {
+						if (tokenChoose === 'fiu') {
+							const fiuApproved = await getAllowance(
+								walletAccount,
+								ethersSigner,
+								bftFiuToken
+							);
+
+							if (fiuApproved > 0) {
+								setAmountApprovedFiu(fiuApproved);
+								setApprovedFiu(true);
+								setStatusButtonSent(true);
+							} else {
+								setApprovedFiu(false);
+								setAmountApprovedFiu(0);
+								setStatusButtonSent(false);
+							}
+						}
+						if (tokenChoose === 'hee') {
+							const heeApproved = await getAllowance(
+								walletAccount,
+								ethersSigner,
+								bftHeetoken
+							);
+
+							if (heeApproved > 0) {
+								setAmountApprovedHee(heeApproved);
+								setApprovedHee(true);
+								setStatusButtonSent(true);
+							} else if (heeApproved === 0) {
+								setApprovedHee(false);
+								setAmountApprovedHee(0);
+								setStatusButtonSent(false);
+							}
+						}
+						if (tokenChoose === 'bnb') {
+							setStatusButtonSent(true);
+						}
+					} else {
 						setStatusButtonSent(false);
 					}
 					setTextEmail('');
@@ -223,17 +291,11 @@ export const SendToSpending: React.FC<IProps> = ({
 		const abiDetail = tokenChoose === 'fiu' ? bftFiuToken : bftHeetoken;
 		try {
 			const resApprove = await handleApprove(amount, ethersSigner, abiDetail);
-			const checkStatus = setInterval(async () => {
-				const statusApprove = await ethersProvider.getTransactionReceipt(
-					resApprove.hash
-				);
-				if (statusApprove?.status) {
-					spinner.handleChangeStatus(false);
-					updateBnbBalance();
-					clearInterval(checkStatus);
-					setStatusButtonSent(true);
-				}
-			}, 1000);
+			if (resApprove?.status) {
+				spinner.handleChangeStatus(false);
+				updateBnbBalance();
+				setStatusButtonSent(true);
+			}
 		} catch (error: any) {
 			spinner.handleChangeStatus(false);
 			popupNoti.handleToggleStatus({
@@ -289,13 +351,11 @@ export const SendToSpending: React.FC<IProps> = ({
 				beFITTERlockedPool,
 				'fitterPass'
 			);
-			console.log('ieuriwefa', resApprove);
 			const checkStatus = setInterval(async () => {
 				const statusApprove = await ethersProvider.getTransactionReceipt(
 					resApprove.hash
 				);
 				if (statusApprove?.status) {
-					console.log('eiwruweqr', statusApprove);
 					updateBnbBalance();
 					clearInterval(checkStatus);
 					setStatusButtonSent(true);
@@ -332,6 +392,7 @@ export const SendToSpending: React.FC<IProps> = ({
 		popupNoti.handleToggleStatus({
 			status: true,
 			title: 'Sending item',
+
 			message: (
 				<Box>
 					<TitleConfirm>
@@ -342,7 +403,7 @@ export const SendToSpending: React.FC<IProps> = ({
 							<Typography>Item</Typography>
 							<Box>
 								{currentTab === TAB_NAME.token
-									? amount
+									? handleCheckAmount()
 									: `#${currentTab === TAB_NAME.box ? boxChoose : shoesChoose}`}
 								<img
 									src={`assets/icons/${
@@ -369,8 +430,11 @@ export const SendToSpending: React.FC<IProps> = ({
 		});
 	};
 	const checkStatusSendButton = () => {
-		if (currentTab === TAB_NAME.token && tokenChoose && textEmail && amount) {
-			return true;
+		if (currentTab === TAB_NAME.token && tokenChoose && textEmail) {
+			if (amount) return true;
+
+			if (approvedFiu && amountApprovedFiu > 0) return true;
+			if (approvedHee && amountApprovedHee > 0) return true;
 		} else if (currentTab === TAB_NAME.box && boxChoose && textEmail) {
 			return true;
 		} else if (currentTab === TAB_NAME.shoe && shoesChoose && textEmail) {
@@ -405,11 +469,105 @@ export const SendToSpending: React.FC<IProps> = ({
 	}, [currentTab]);
 
 	useEffect(() => {
-		setStatusButtonSent(false);
-		if (currentTab === TAB_NAME.token && tokenChoose === 'bnb') {
-			setStatusButtonSent(true);
+		async function getAllowanceToken() {
+			if (tokenChoose === 'fiu') {
+				const fiuApproved = await getAllowance(
+					walletAccount,
+					ethersSigner,
+					bftFiuToken
+				);
+				if (fiuApproved > 0) {
+					setApprovedFiu(true);
+					setAmountApprovedFiu(fiuApproved);
+					setStatusButtonSent(true);
+				} else {
+					setStatusButtonSent(false);
+					setAmountApprovedFiu(0);
+					setApprovedFiu(false);
+				}
+			} else if (tokenChoose === 'hee') {
+				const heeApproved = await getAllowance(
+					walletAccount,
+					ethersSigner,
+					bftHeetoken
+				);
+				if (heeApproved > 0) {
+					setApprovedHee(true);
+					setAmountApprovedHee(heeApproved);
+					setStatusButtonSent(true);
+				} else {
+					setStatusButtonSent(false);
+					setApprovedHee(false);
+					setAmountApprovedHee(0);
+				}
+			} else if (!tokenChoose) {
+				setStatusButtonSent(false);
+			}
 		}
-	}, [tokenChoose, currentTab]);
+
+		if (currentTab === TAB_NAME.token) {
+			if (tokenChoose === 'bnb') {
+				setStatusButtonSent(true);
+			} else {
+				getAllowanceToken();
+			}
+		} else {
+			setStatusButtonSent(false);
+		}
+	}, [tokenChoose, currentTab, walletAccount, ethersSigner]);
+
+	const handleCheckAmount = useCallback(() => {
+		if (currentTab === TAB_NAME.token && tokenChoose === 'fiu') {
+			if (approvedFiu) {
+				return amountApprovedFiu;
+			} else {
+				return amount;
+			}
+		}
+
+		if (currentTab === TAB_NAME.token && tokenChoose === 'hee') {
+			if (approvedHee) {
+				return amountApprovedHee;
+			} else {
+				return amount;
+			}
+		}
+
+		return amount;
+	}, [
+		currentTab,
+		tokenChoose,
+		amount,
+		approvedFiu,
+		amountApprovedFiu,
+		approvedHee,
+		amountApprovedHee,
+	]);
+
+	const handleChangeMount = (mount: any): void => {
+		if (currentTab === TAB_NAME.token && tokenChoose === 'fiu') {
+			if (approvedFiu) {
+				setAmountApprovedFiu(mount);
+			} else {
+				setAmount(mount);
+			}
+		}
+
+		if (currentTab === TAB_NAME.token && tokenChoose === 'hee') {
+			if (approvedHee) {
+				setAmountApprovedHee(mount);
+			} else {
+				setAmount(mount);
+			}
+		}
+		if (currentTab === TAB_NAME.token && tokenChoose === 'bnb') {
+			setAmount(mount);
+		}
+
+		if (currentTab !== TAB_NAME.token) {
+			setAmount(mount);
+		}
+	};
 
 	return (
 		<SendSpending>
@@ -432,9 +590,9 @@ export const SendToSpending: React.FC<IProps> = ({
 							fullWidth
 							required
 							type="number"
-							value={amount}
+							value={handleCheckAmount()}
 							placeholder={'Amount'}
-							onChange={(e: any) => setAmount(e.target.value)}
+							onChange={(e: any) => handleChangeMount(e.target.value)}
 						/>
 					</InputBottom>
 				)}

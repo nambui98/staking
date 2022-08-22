@@ -14,11 +14,8 @@ export const handleApprove = async (
 	);
 	const parsePrice =
 		type === 'box' || type === 'shoes' ? price : ethers.utils.parseUnits(price);
-	console.log('eihfuas', price);
-
-	console.log('ewihruiewq', ethers.utils.parseUnits(price));
 	const res = await Contract.approve(bftWallet.address, parsePrice);
-	return res;
+	return res.wait();
 };
 
 export const getAllowance = async (
@@ -53,6 +50,7 @@ export const handleDeposit = async (
 		(type === 'box' || type === 'shoes') && boxId
 			? boxId
 			: ethers.utils.parseUnits(amount);
+
 	const res =
 		(await type) === 'token'
 			? walletContract.depositToken(tokenAddress, parsePrice, email)
