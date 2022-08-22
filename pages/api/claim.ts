@@ -8,8 +8,9 @@ import AlphaBetaData2 from "../../abi/merkle-alpha-beta-boxes-2.json";
 import PublicSaleData from "../../abi/merkle-claim-fiu.json"
 import Airdrop from "../../abi/merkle-claim-fiu-airdrop.json"
 import INOWeb from "../../abi/merkle-buybox-giveaway.json"
-import BoxEventReward from "../../abi/merkle-buybox-giveaway.json"
-import BoxPassEventRefund from "../../abi/merkle-buybox-giveaway.json"
+import BoxEventRewardDiamond from "../../abi/merkle-diamond-box-auction.json"
+import BoxEventRewardGold from "../../abi/merkle-gold-box-auction.json"
+import BoxPassEventRefund from "../../abi/merkle-fp-box-auction.json"
 
 const { serverRuntimeConfig } = getConfig();
 
@@ -21,7 +22,7 @@ export default async function handler(req: any, res: any) {
 		message: 'fail'
 	}
 	if (req.method === 'POST') {
-		const { walletAddress, captchaToken, round, requireCaptcha } = req.body;
+		const { walletAddress, captchaToken, round, requireCaptcha, rank } = req.body;
 		if (!walletAddress || !round) {
 			return res.json(responseFail);
 		}
@@ -47,7 +48,7 @@ export default async function handler(req: any, res: any) {
 					case '6': return AlphaBetaData2
 					case '7': return Airdrop
 					case '8': return INOWeb
-					case '9': return BoxEventReward
+					case '9': return (rank && parseInt(rank) <= 10) ? BoxEventRewardDiamond : BoxEventRewardGold
 					case '10': return BoxPassEventRefund
 					default:
 						break;
