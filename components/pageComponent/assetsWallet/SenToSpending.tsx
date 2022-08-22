@@ -94,7 +94,7 @@ export const SendToSpending: React.FC<IProps> = ({
 					return true;
 				}
 			} else if (currentTab === TAB_NAME.fitterPass) {
-				if (totalFitterPass >= parseFloat(amount)) {
+				if (totalFitterPass && totalFitterPass >= parseFloat(amount)) {
 					return true;
 				}
 			} else {
