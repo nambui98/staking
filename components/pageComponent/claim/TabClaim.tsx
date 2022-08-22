@@ -1,14 +1,15 @@
 import { Backdrop, Box, Button, ButtonProps, CircularProgress, FormControl, InputLabel, MenuItem, Select, Stack, styled, Typography, useMediaQuery } from "@mui/material"
+import axios from "axios";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { RECAPTCHA_SITE_KEY } from "../../../const";
 import { CLAIM_IMAGE, CLAIM_TOKEN_TIME } from "../../../constants/claim";
 import { PAGE } from "../../../constants/header";
 import { changeNetwork, useWalletContext } from "../../../contexts/WalletContext"
 import { checkClaimedToken, getClaimedBox, getClaimedFitterPass, getClaimedToken, getLockedOf, handleClaimBox, handleClaimFitterPass, handleClaimToken } from "../../../libs/claim";
-import { bftClaimGamefi, bftClaimEnjin, bftClaimAlphaBeta, bftClaimOther, bftClaimAlphaBeta2, bftClaimTokenAirdrop, bftClaimToken, bftClaimBoxEventReward, bftClaimFitterPass, bftClaimFitterPassEventRefund } from "../../../libs/contracts";
+import { bftClaimGamefi, bftClaimEnjin, bftClaimAlphaBeta, bftClaimOther, bftClaimAlphaBeta2, bftClaimTokenAirdrop, bftClaimToken, bftClaimBoxEventRewardDiamond, bftClaimFitterPass, bftClaimFitterPassEventRefund, bftClaimBoxEventRewardGold } from "../../../libs/contracts";
 import { convertWalletAddress, formatNumberWithCommas } from "../../../libs/utils/utils";
 import { ClaimService } from "../../../services/claim.service";
 import { TEXT_STYLE } from "../../../styles/common/textStyles";
@@ -28,10 +29,18 @@ const bodyPopupTokenTime = () => {
   </BodyPopupTokenTime>
 }
 
+type row = {
+	id: string;
+	walletAddress: string;
+	amount: string;
+	rank: number;
+}
+
 export const TabClaim = () => {
   const router = useRouter();
   const isMobile = useMediaQuery('(max-width: 767px)');
-  const {walletAccount, setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
+  const {setWalletAccount, ethersSigner, ethersProvider, updateBnbBalance, chainIdIsSupported, provider } = useWalletContext();
+  const walletAccount = '0x97fbee6a9a5f74df4214d306a95cba229816ff18'
   const [currentTab, setCurrentTab] = useState<string>('box');
   const [selecItem, setSelectItem] = useState<{ title: string, value: string }[]>([]);
   const [roundSelected, setRoundSelected] = useState<string>('');
@@ -45,7 +54,7 @@ export const TabClaim = () => {
   const [statusLoading, setStatusLoading] = useState<boolean>(false);
   const [checkClaimed, setCheckClaimed] = useState<boolean>(false);
   const [tokenTimeStatus, setTokenTimeStatus] = useState<boolean>(false);
-  const [claimAble, setClaimAble] = useState<any>('')
+  const [dataMe, setDataMe] = useState<row>();
 
   const onReCAPTCHAChange = async (captchaCode: any) => {
     if (!captchaCode) {
@@ -64,37 +73,48 @@ export const TabClaim = () => {
 
   const checkContractClaimFtpass = () => {
     switch (roundSelected) {
-      case '8': return bftClaimFitterPass.address;
-      case '10': return bftClaimFitterPassEventRefund.address;
+      case '8': return bftClaimFitterPass;
+      case '10': return bftClaimFitterPassEventRefund;
     }
   }
+
+  const contractClaimBox = () => {
+    switch (roundSelected) {
+      case '1': return bftClaimAlphaBeta;
+      case '2': return bftClaimOther;
+      case '3': return bftClaimGamefi;
+      case '4': return bftClaimEnjin;
+      case '6': return bftClaimAlphaBeta2;  
+      case '9': return (dataMe?.rank && dataMe?.rank <= 10) ? bftClaimBoxEventRewardDiamond : bftClaimBoxEventRewardGold;       
+    }
+  }
+
+  const getDataMe = useCallback(
+		() => {
+			axios.get(
+				`https://leaderboard.befitter.io/fitter/leaderboard/me?walletAddress=${walletAccount}`, {
+				headers: {
+					"Content-Type": "application/json"
+				}
+			}
+			).then((res) => {
+				if (res.status === 200) {
+					setDataMe(res.data.data);
+				}
+			})
+		},
+		[walletAccount],
+	)
 
   const getClaimedBoxNumber = async () => {
     if (!chainIdIsSupported) {
       await changeNetwork(provider)
     }
     try {
-      const res: any = await ClaimService.getAmount((walletAccount.toLowerCase()), captchaToken, roundSelected, false);
+      const res: any = await ClaimService.getAmount((walletAccount.toLowerCase()), captchaToken, roundSelected, false, dataMe?.rank);
       setCheckClaimed(true)
       if (res?.data?.status) {
-        const claimContractGamefi = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
-        const claimContractEnjinstarter = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
-        const claimContractAlphaBeta = await new ethers.Contract(bftClaimAlphaBeta.address, bftClaimAlphaBeta.abi, ethersSigner);
-        const claimContractOther = await new ethers.Contract(bftClaimOther.address, bftClaimOther.abi, ethersSigner);
-        const claimContractAlphaBeta2 = await new ethers.Contract(bftClaimAlphaBeta2.address, bftClaimAlphaBeta2.abi, ethersSigner);
-        const claimContractBoxEventReward = await new ethers.Contract(bftClaimBoxEventReward.address, bftClaimBoxEventReward.abi, ethersSigner);
-
-        const contractClaimBox = () => {
-          switch (roundSelected) {
-            case '1': return claimContractAlphaBeta;
-            case '2': return claimContractOther;
-            case '3': return claimContractGamefi;
-            case '4': return claimContractEnjinstarter;
-            case '6': return claimContractAlphaBeta2;  
-            case '9': return claimContractBoxEventReward;       
-          }
-        }
-        const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), contractClaimBox());
+        const dataClaimed = await getClaimedBox((walletAccount.toLowerCase()), ethersSigner, contractClaimBox());
         setDataClaim({ claimed: parseInt(ethers.utils.formatUnits(dataClaimed, 'wei')), totalBox: res.data.amount })
       } else {
         setDataClaim({ claimed: 0, totalBox: 0 })
@@ -155,28 +175,10 @@ export const TabClaim = () => {
 
   const handleClaimBoxShoe = async () => {
     setStatusLoading(true)
-    const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, true);
+    const res: any = await ClaimService.getAmount(walletAccount, captchaToken, roundSelected, true, dataMe?.rank);
     if (res?.data?.status) {
-      const claimContractGamefi = await new ethers.Contract(bftClaimGamefi.address, bftClaimGamefi.abi, ethersSigner);
-      const claimContractEnjinstarter = await new ethers.Contract(bftClaimEnjin.address, bftClaimEnjin.abi, ethersSigner);
-      const claimContractAlphaBeta = await new ethers.Contract(bftClaimAlphaBeta.address, bftClaimAlphaBeta.abi, ethersSigner);
-      const claimContractOther = await new ethers.Contract(bftClaimOther.address, bftClaimOther.abi, ethersSigner);
-      const claimContractAlphaBeta2 = await new ethers.Contract(bftClaimAlphaBeta2.address, bftClaimAlphaBeta2.abi, ethersSigner);
-      const claimContractBoxEventReward = await new ethers.Contract(bftClaimBoxEventReward.address, bftClaimBoxEventReward.abi, ethersSigner);
-
-      const contractClaimBox = () => {
-        switch (roundSelected) {
-          case '1': return claimContractAlphaBeta;
-          case '2': return claimContractOther;
-          case '3': return claimContractGamefi;
-          case '4': return claimContractEnjinstarter;
-          case '6': return claimContractAlphaBeta2;  
-          case '9': return claimContractBoxEventReward;       
-        }
-      }
-
       try {
-        const resultClaim: any = await handleClaimBox(walletAccount, contractClaimBox(), res.data)
+        const resultClaim: any = await handleClaimBox(walletAccount, ethersSigner, contractClaimBox(), res.data)
         const checkStatus = setInterval(async () => {
           const statusClaim = await ethersProvider.getTransactionReceipt(resultClaim.hash);
           if (statusClaim?.status) {
@@ -291,7 +293,11 @@ export const TabClaim = () => {
     } else if (currentTab === 'fitterPass') {
       return CLAIM_IMAGE.fitterPass
     } else {
-      return (roundSelected === '1' || roundSelected === '2' || roundSelected === '6') ? CLAIM_IMAGE.boxSilver : CLAIM_IMAGE.boxGold
+      if(roundSelected === '1' || roundSelected === '2' || roundSelected === '6'){
+        return CLAIM_IMAGE.boxSilver
+      } else {
+        return (dataMe?.rank && dataMe.rank <= 10 && roundSelected === '9') ? CLAIM_IMAGE.boxDiamond : CLAIM_IMAGE.boxGold
+      }
     }
   }
 
@@ -333,13 +339,18 @@ export const TabClaim = () => {
         setRoundSelected('')
       } else {
         if(router.query?.round && router.query?.tabClaim){
-          setCurrentTab(router.query?.tabClaim as string)
-          setRoundSelected(router.query?.round as string)
+          setCurrentTab(router.query.tabClaim as string)
+          setRoundSelected(router.query.round as string)
+          console.log(router.query?.round, router.query?.tabClaim)
         }
       }
     }
   }, [router])
 
+  useEffect(() => {
+    getDataMe()
+  }, [walletAccount])
+  console.log( roundSelected, 123123)
   return (
     <Wrap>
       <Title>beFITTER - Claim Portal</Title>
