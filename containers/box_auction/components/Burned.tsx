@@ -380,7 +380,7 @@ export function Burned(props: Props) {
 
 							alignSelf: 'end',
 						}}
-						onClick={() => router.push('/claim?tabClaim=box?round=8')}
+						onClick={() => router.push('/claim?tabClaim=box?round=9')}
 					>
 						CLAIM
 					</ButtonCustom>
