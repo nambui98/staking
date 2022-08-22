@@ -36,7 +36,7 @@ interface IProps {
 	shoesChoose: string;
 	getListShoes: () => any;
 	setShoeChoose: (data: string) => any;
-	totalFitterPass: number;
+	totalFitterPass?: number;
 }
 
 export const SendToSpending: React.FC<IProps> = ({
@@ -110,7 +110,7 @@ export const SendToSpending: React.FC<IProps> = ({
 					return true;
 				}
 			} else if (currentTab === TAB_NAME.fitterPass) {
-				if (totalFitterPass >= parseFloat(amount)) {
+				if (totalFitterPass && totalFitterPass >= parseFloat(amount)) {
 					return true;
 				}
 			} else {
@@ -161,13 +161,13 @@ export const SendToSpending: React.FC<IProps> = ({
 				type === 'bnb'
 					? await handleDepositBnb(ethersSigner, textEmail, amount)
 					: await handleDeposit(
-							ethersSigner,
-							abiDetail.address,
-							checkSendWithToken(),
-							textEmail,
-							type,
-							tokenId
-					  );
+						ethersSigner,
+						abiDetail.address,
+						checkSendWithToken(),
+						textEmail,
+						type,
+						tokenId
+					);
 
 			const checkStatus = setInterval(async () => {
 				const statusApprove = await ethersProvider.getTransactionReceipt(
@@ -232,9 +232,8 @@ export const SendToSpending: React.FC<IProps> = ({
 						message:
 							currentTab === TAB_NAME.token
 								? null
-								: `Please check the item in your inventory on beFITTER app ${
-										currentTab === TAB_NAME.box ? 'for unboxing.' : ''
-								  }`,
+								: `Please check the item in your inventory on beFITTER app ${currentTab === TAB_NAME.box ? 'for unboxing.' : ''
+								}`,
 					});
 					clearInterval(checkStatus);
 				}
@@ -406,15 +405,14 @@ export const SendToSpending: React.FC<IProps> = ({
 									? handleCheckAmount()
 									: `#${currentTab === TAB_NAME.box ? boxChoose : shoesChoose}`}
 								<img
-									src={`assets/icons/${
-										currentTab === TAB_NAME.token
-											? tokenChoose === 'fiu'
-												? 'fiu'
-												: 'hee'
-											: currentTab === TAB_NAME.box
+									src={`assets/icons/${currentTab === TAB_NAME.token
+										? tokenChoose === 'fiu'
+											? 'fiu'
+											: 'hee'
+										: currentTab === TAB_NAME.box
 											? 'box-classic'
 											: 'shoe-standard'
-									}.svg`}
+										}.svg`}
 								/>
 							</Box>
 						</Box>
@@ -584,18 +582,18 @@ export const SendToSpending: React.FC<IProps> = ({
 				</InputBottom>
 				{(currentTab === TAB_NAME.token ||
 					currentTab === TAB_NAME.fitterPass) && (
-					<InputBottom>
-						<Label>Amount to send</Label>
-						<CustomInput
-							fullWidth
-							required
-							type="number"
-							value={handleCheckAmount()}
-							placeholder={'Amount'}
-							onChange={(e: any) => handleChangeMount(e.target.value)}
-						/>
-					</InputBottom>
-				)}
+						<InputBottom>
+							<Label>Amount to send</Label>
+							<CustomInput
+								fullWidth
+								required
+								type="number"
+								value={handleCheckAmount()}
+								placeholder={'Amount'}
+								onChange={(e: any) => handleChangeMount(e.target.value)}
+							/>
+						</InputBottom>
+					)}
 				<ButtonSendSpending
 					sx={{
 						background: checkStatusSendButton()
