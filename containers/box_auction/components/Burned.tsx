@@ -413,7 +413,9 @@ export function Burned(props: Props) {
 							09:00 UTC <br></br> 22/08/2022
 						</ValueItem>
 						<ValueItem sx={{ flex: 1, ml: '27px' }}>Fitter Pass</ValueItem>
-						<ValueItem>{dataMe?.amount}</ValueItem>
+						<ValueItem>
+							{Number(dataMe?.rank) < 50 ? '-' : dataMe?.amount}
+						</ValueItem>
 					</Item>
 					<ButtonCustom
 						isDisabled={enableClaimBox ? true : false}
