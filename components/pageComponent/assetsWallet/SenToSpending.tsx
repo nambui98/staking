@@ -36,7 +36,7 @@ interface IProps {
 	shoesChoose: string;
 	getListShoes: () => any;
 	setShoeChoose: (data: string) => any;
-	totalFitterPass: number;
+	totalFitterPass?: number;
 }
 
 export const SendToSpending: React.FC<IProps> = ({
