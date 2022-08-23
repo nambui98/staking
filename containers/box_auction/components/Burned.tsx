@@ -105,7 +105,7 @@ export function Burned(props: Props) {
 				if (res.status === 200) {
 					setDataMe(res.data.data);
 
-					if (res.data.data?.rank < 50) {
+					if (res.data.data?.rank <= 50) {
 						setEnableClaimBox(true);
 					} else {
 						setEnableClaimBox(false);
