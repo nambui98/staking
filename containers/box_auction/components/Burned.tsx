@@ -414,7 +414,7 @@ export function Burned(props: Props) {
 						</ValueItem>
 						<ValueItem sx={{ flex: 1, ml: '27px' }}>Fitter Pass</ValueItem>
 						<ValueItem>
-							{Number(dataMe?.rank) < 50 ? '-' : dataMe?.amount}
+							{Number(dataMe?.rank) <= 50 ? '-' : dataMe?.amount}
 						</ValueItem>
 					</Item>
 					<ButtonCustom
