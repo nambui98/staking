@@ -35,7 +35,7 @@ export const UnstakedSuccess = (props: Props) => {
 		balanceUS,
 		claimableTime,
 		dataActive } = props;
-
+	const { ethersSigner, ethersProvider, setRefresh, refresh, } = useWalletContext();
 	const handleUnStake = () => {
 		setStateContent(StateStaking.Unstake)
 	}
@@ -86,6 +86,37 @@ export const UnstakedSuccess = (props: Props) => {
 			},
 		})
 	}
+	const handleClaim = async () => {
+		setIsLoading(true)
+		try {
+			const res = await dataActive.info.claimReward(ethersSigner);
+			const checkStatus = setInterval(async () => {
+				const statusApprove = await ethersProvider.getTransactionReceipt(res.hash);
+				if (statusApprove?.status) {
+					setIsLoading(false)
+					setRefresh(!refresh)
+					handleClickSuccess({
+						titleSuccess: 'Claim successfully!',
+						functionSuccess: () => {
+							setStateContent(StateStaking.Staked)
+						},
+						stateContentNew: StateStaking.Success
+					})
+					clearInterval(checkStatus)
+				}
+			}, 1000);
+		} catch (error: any) {
+			const message = error.reason || "Something went wrong, please try again";
+			setIsLoading(false);
+			handleClickError({
+				titleError: message,
+				functionError: () => {
+					setStateContent(StateStaking.Staked)
+				},
+				stateContentNew: StateStaking.Error
+			})
+		}
+	}
 	return (
 		<>
 			<ButtonOutline disabled={(dataActive && dataActive.status == 3) || parseFloat(balanceSA) >= 40000} onClick={handleStakeMore} sx={{ marginTop: "25px" }} variant="text">
@@ -94,14 +125,26 @@ export const UnstakedSuccess = (props: Props) => {
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>STAKING</Typography>
 			<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={600} mt="8px" textTransform={"uppercase"}>{formatMoney(balanceSA)} FIU</Typography>
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>current  PROFIT</Typography>
-			<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>{balanceCP} FITTER PASS</Typography>
+			{
+				// parseFloat(claimableTime) <= 0 &&
+				parseFloat(balanceCP) > 0 ?
+					<Typography fontSize={16} color="#1DB268" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>+{balanceCP} FITTER PASS</Typography>
+					: <Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>{balanceCP} FITTER PASS</Typography>
+			}
 			{parseFloat(balanceCP) <= 0 && parseFloat(balanceSA) > 0 && <Item sx={{
 				background: "#E9EAEF", marginRight: '-24px', marginLeft: "-24px", padding: "5px", justifyContent: "center !important",
 			}}>
 				<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="8px">Available to claim at {timeUTC()} UTC</Typography>
 			</Item>
 			}
-
+			{
+				// parseFloat(claimableTime) <= 0 && 
+				parseFloat(balanceCP) > 0 && <Item sx={{
+					justifyContent: "center !important",
+				}}>
+					<MarketplaceButton customStyle={{ width: "160px" }} title={"Claim"} handleOnClick={handleClaim} />
+				</Item>
+			}
 
 			<Item sx={{ gap: "8px", mt: "auto !important" }}>
 				<ButtonOutline disabled={parseFloat(balanceSA) <= 0} onClick={handleUnStake} sx={{ marginTop: "25px", color: "#31373E", minHeight: "38px !important", flex: 1, borderColor: "#E9EAEF" }} variant="text">

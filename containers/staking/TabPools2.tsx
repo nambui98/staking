@@ -474,7 +474,7 @@ export const TabPools2 = () => {
 																},
 															}}
 														>
-															<TableCell width={'70px'} sx={{ paddingLeft: 0 }} component="th" scope="row">
+															<TableCell width={'100px'} sx={{ paddingLeft: 0 }} component="th" scope="row">
 																{item.data.status}
 															</TableCell>
 															<TableCell width={'140px'} align="left">
