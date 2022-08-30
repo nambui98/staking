@@ -135,8 +135,8 @@ export const TabPools2 = () => {
 				startTime: '16:00 UTC 29/08/2022',
 				endTime: '16:00 UTC 19/09/2022',
 				reward: 'Fitter Pass',
-				stakeMinAmount: 4000,
-				stakeMaxAmount: '-',
+				stakeMinAmount: `${formatMoney('4000')}/1 persion`,
+				stakeMaxAmount: `${formatMoney('40000')}/1 persion`,
 				approveFiu: approveFlexible2,
 				stake: stakeFlexible2,
 				unStake: unStakeFlexible2,
@@ -167,7 +167,7 @@ export const TabPools2 = () => {
 				startTime: '16:00 UTC 19/07/2022',
 				endTime: '16:00 UTC 03/08/2022',
 				reward: 'Fitter Pass',
-				stakeMinAmount: 4000,
+				stakeMinAmount: `${formatMoney('4000')}/1 persion`,
 				stakeMaxAmount: '-',
 				approveFiu: approveStakingFiu,
 				stake: stake,
@@ -321,8 +321,7 @@ export const TabPools2 = () => {
 							<br />
 							For every {formatMoney('40000')} FIU staked per 24h, you earn one Fitter Pass.
 							<br />
-							For every {formatMoney('80000')} FIU staked per 24h, you earn 2 Fitter Passes,....
-							<br />
+
 							The more token you stake, the more reward you will receiv
 							<br />
 							Please make sure that the total amount of tokens you stake is enough to earn at least a Fitter Pass before this pool is closed.

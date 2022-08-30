@@ -138,7 +138,7 @@ export const StakeProcess = ({
 									} else {
 										if ((parseFloat(valueParse) + parseFloat(balanceSA)) < 4000) {
 											setValue(valueParse)
-											setMessageError("You need to stake minimum 4000")
+											setMessageError(`You need to stake minimum ${formatMoney('4000')}`)
 										} else {
 											if (parseFloat(valueParse) > parseFloat(balanceFiu)) {
 												setValue(valueParse)

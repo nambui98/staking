@@ -5,6 +5,7 @@ import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton
 import { StateStaking } from '../../../const';
 import { useWalletContext } from '../../../contexts/WalletContext';
 import { approveStakingFiu } from '../../../libs/staking';
+import { formatMoney } from '../../../libs/utils/utils';
 
 type Props = {
 	setStateContent: Function
@@ -66,7 +67,7 @@ export const EnablePool = (props: Props) => {
 			</Item>
 			<Item>
 				<TitleItem >stake amount (min)</TitleItem>
-				<ValueItem>{dataActive && dataActive.info.stakeMinAmount} FIU/1 person</ValueItem>
+				<ValueItem>{dataActive && dataActive.info.stakeMinAmount}</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem >stake amount (mAX)</TitleItem>

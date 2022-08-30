@@ -95,7 +95,7 @@ export const Unstake = (props: Props) => {
 			</Item>
 			<Item>
 				<TitleItem>unstake amount</TitleItem>
-				<ValueItem>	<Search
+				<ValueItem sx={{ pointerEvents: "none" }}>	<Search
 					// value={value && value !== '-' ? formatMoney(value) : ''}
 					value={value}
 
@@ -136,7 +136,7 @@ export const Unstake = (props: Props) => {
 					</ValueItem>
 				</Item>
 			}
-			<Item sx={{ mt: "8px !important" }}>
+			{/* <Item sx={{ mt: "8px !important" }}>
 				<TitleItem ></TitleItem>
 				<ValueItem sx={{ display: "flex", gap: "8px" }}>
 					{
@@ -145,7 +145,7 @@ export const Unstake = (props: Props) => {
 						</ButtonPercent>)
 					}
 				</ValueItem>
-			</Item>
+			</Item> */}
 
 			<Box mt="auto" width={"100%"} sx={{ paddingTop: "16px", borderTop: "1px solid #E9EAEF" }}>
 				<MarketplaceButton

@@ -116,6 +116,7 @@ export const Staked = (props: Props) => {
 			},
 		})
 	}
+	console.log(parseFloat(balanceCP) <= 0 && parseFloat(balanceSA) > 0)
 	return (
 		<>
 			<ButtonOutline disabled={dataActive && dataActive.status == 3} onClick={handleStakeMore} sx={{ marginTop: "25px" }} variant="text">
@@ -133,15 +134,13 @@ export const Staked = (props: Props) => {
 					<Typography fontSize={16} color="#1DB268" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>+{balanceCP} FITTER PASS</Typography>
 					: <Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>{balanceCP} FITTER PASS</Typography>
 			}
-			{parseFloat(balanceCP) <= 0 && <Item sx={{
+			{parseFloat(balanceCP) <= 0 && parseFloat(balanceSA) > 0 && <Item sx={{
 				background: "#E9EAEF", marginRight: '-24px', marginLeft: "-24px", padding: "5px", justifyContent: "center !important",
-				// '@media (max-width: 650px)': {
-				// 	marginRight: '-16px !important',
-				// 	marginLeft: "-16px !important",
-				// }
 			}}>
+
 				<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="8px">Available to claim at {timeUTC()} UTC</Typography>
-			</Item>}
+			</Item>
+			}
 
 			{
 				// parseFloat(claimableTime) <= 0 && 

@@ -95,15 +95,15 @@ export const UnstakedSuccess = (props: Props) => {
 			<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={600} mt="8px" textTransform={"uppercase"}>{formatMoney(balanceSA)} FIU</Typography>
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>current  PROFIT</Typography>
 			<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>{balanceCP} FITTER PASS</Typography>
-			<Item sx={{
+			{parseFloat(balanceCP) <= 0 && parseFloat(balanceSA) > 0 && <Item sx={{
 				background: "#E9EAEF", marginRight: '-24px', marginLeft: "-24px", padding: "5px", justifyContent: "center !important",
 			}}>
 				<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="8px">Available to claim at {timeUTC()} UTC</Typography>
 			</Item>
+			}
 
 
-
-			<Item sx={{ gap: "8px", mt: "0px" }}>
+			<Item sx={{ gap: "8px", mt: "auto !important" }}>
 				<ButtonOutline disabled={parseFloat(balanceSA) <= 0} onClick={handleUnStake} sx={{ marginTop: "25px", color: "#31373E", minHeight: "38px !important", flex: 1, borderColor: "#E9EAEF" }} variant="text">
 					Unstake
 				</ButtonOutline>
