@@ -92,7 +92,7 @@ export const StakeProcess = ({
 
 			if ((percent * parseFloat(balanceFiu)) > (40000 - parseFloat(balanceSA))) {
 				setValue((percent * parseFloat(balanceFiu)).toString());
-				setMessageError("Your maximum stake amount is 40.000")
+				setMessageError(`Your maximum stake amount is ${formatMoney('40000')}`)
 			} else {
 				setValue((percent * parseFloat(balanceFiu)).toString());
 				setMessageError("")
@@ -129,7 +129,7 @@ export const StakeProcess = ({
 										} else {
 											if (parseFloat(valueParse) > (40000 - parseFloat(balanceSA))) {
 												setValue(valueParse)
-												setMessageError("Your maximum stake amount is 40.000")
+												setMessageError(`Your maximum stake amount is ${formatMoney('40000')}`)
 											} else {
 												setValue(valueParse)
 												setMessageError("")
@@ -143,6 +143,9 @@ export const StakeProcess = ({
 											if (parseFloat(valueParse) > parseFloat(balanceFiu)) {
 												setValue(valueParse)
 												setMessageError("Insufficient balance")
+											} else if (parseFloat(valueParse) > (40000 - parseFloat(balanceSA))) {
+												setValue(valueParse)
+												setMessageError(`Your maximum stake amount is ${formatMoney('40000')}`)
 											} else {
 												setValue(valueParse)
 												setMessageError("")

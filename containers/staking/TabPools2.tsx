@@ -228,7 +228,7 @@ export const TabPools2 = () => {
 						<b>Fitter Pass:</b>
 					</Typography>
 
-					<Typography mb={1}>1.Stake FIU, minimum 4000 FIU.</Typography>
+					<Typography mb={1}>1.Stake FIU, minimum {formatMoney('4000')} FIU.</Typography>
 
 					<Typography mb={1}>2.Earn Fitter Pass.</Typography>
 
@@ -242,15 +242,15 @@ export const TabPools2 = () => {
 					</Typography>
 
 					<Typography mb={1}>
-						5.For every 4000 FIU staked per 240h, you earn one Fitter Pass.
+						5.For every {formatMoney('4000')} FIU staked per 240h, you earn one Fitter Pass.
 					</Typography>
 
 					<Typography mb={1}>
-						For every 40.000 FIU staked per 24h, you earn one Fitter Pass.
+						For every {formatMoney('40000')} FIU staked per 24h, you earn one Fitter Pass.
 					</Typography>
 
 					<Typography mb={1}>
-						For every 80.000 FIU staked per 24h, you earn 2 Fitter Passes,....
+						For every {formatMoney('80000')} FIU staked per 24h, you earn 2 Fitter Passes,....
 					</Typography>
 
 					<Typography mb={1}>
@@ -263,7 +263,7 @@ export const TabPools2 = () => {
 					</Typography>
 
 					<Typography mb={1}>
-						Ex: With 20.000 FIU staked per 24h, you earn 1 Fitter Passes.
+						Ex: With {formatMoney('20000')} FIU staked per 24h, you earn 1 Fitter Passes.
 					</Typography>
 
 					<Typography mb={1}>
@@ -293,7 +293,7 @@ export const TabPools2 = () => {
 					<ItemHowItWord>
 						<Typography mb={1}>1.</Typography>
 						<Typography mb={1} ml={1}>
-							Stake FIU, minimum 4000 FIU - maximum 40.000 FIU
+							Stake FIU, minimum {formatMoney('4000')} FIU - maximum {formatMoney('40000')} FIU
 						</Typography>
 					</ItemHowItWord>
 					<ItemHowItWord>
@@ -317,11 +317,11 @@ export const TabPools2 = () => {
 					<ItemHowItWord>
 						<Typography mb={1}>5.</Typography>
 						<Typography mb={1} ml={1}>
-							For every 4.000 FIU staked per 240h, you earn one Fitter Pass.
+							For every {formatMoney('4000')} FIU staked per 240h, you earn one Fitter Pass.
 							<br />
-							For every 40.000 FIU staked per 24h, you earn one Fitter Pass.
+							For every {formatMoney('40000')} FIU staked per 24h, you earn one Fitter Pass.
 							<br />
-							For every 80.000 FIU staked per 24h, you earn 2 Fitter Passes,....
+							For every {formatMoney('80000')} FIU staked per 24h, you earn 2 Fitter Passes,....
 							<br />
 							The more token you stake, the more reward you will receiv
 							<br />
