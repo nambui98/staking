@@ -166,7 +166,8 @@ export default function useStakeFlexibleHook(props: Props) {
 	}, [walletAccount, refresh, ethersSigner]);
 
 	useEffect(() => {
-		if (parseFloat(balanceSAFlexible2) > 0 || parseFloat(balanceCPFlexible2) > 0) {
+		if (parseFloat(balanceSAFlexible2) > 0 || parseFloat(balanceUSFlexible2) > 0 || parseFloat(balanceCPFlexible2) > 0) {
+			debugger
 
 			setStateContentInitFlexible2(StateStaking.Staked);
 		} else {
