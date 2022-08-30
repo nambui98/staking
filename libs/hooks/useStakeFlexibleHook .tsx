@@ -38,7 +38,6 @@ export default function useStakeFlexibleHook(props: Props) {
 				walletAccount,
 				ethersSigner
 			);
-			debugger
 			if (allowance > 0) {
 				setIsEnableFlexible2(true);
 			} else {
@@ -136,7 +135,6 @@ export default function useStakeFlexibleHook(props: Props) {
 		}
 		if (ethersSigner && walletAccount) {
 			let status = await getStakingStatus(walletAccount, ethersSigner);
-			debugger
 			if (parseInt(status) === 0) {
 				setStatusRowFlexible2('-');
 			} else if (parseInt(status) === 1) {
@@ -168,10 +166,10 @@ export default function useStakeFlexibleHook(props: Props) {
 	}, [walletAccount, refresh, ethersSigner]);
 
 	useEffect(() => {
-		if (parseFloat(balanceSAFlexible2) > 0 || parseFloat(balanceUSFlexible2) > 0 || parseFloat(balanceCPFlexible2) > 0) {
+		if (parseFloat(balanceSAFlexible2) > 0 || parseFloat(balanceCPFlexible2) > 0) {
+
 			setStateContentInitFlexible2(StateStaking.Staked);
 		} else {
-			debugger
 			if (isEnableFlexible2) {
 				setStateContentInitFlexible2(StateStaking.StakeProcess);
 			} else {
@@ -186,7 +184,6 @@ export default function useStakeFlexibleHook(props: Props) {
 		balanceUSFlexible2,
 		claimableTimeFlexible2,
 		walletAccount,
-		isEnableFlexible2
 	]);
 
 	return {

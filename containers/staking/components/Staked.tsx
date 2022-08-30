@@ -119,7 +119,7 @@ export const Staked = (props: Props) => {
 	console.log(parseFloat(balanceCP) <= 0 && parseFloat(balanceSA) > 0)
 	return (
 		<>
-			<ButtonOutline disabled={dataActive && dataActive.status == 3} onClick={handleStakeMore} sx={{ marginTop: "25px" }} variant="text">
+			<ButtonOutline disabled={(dataActive && dataActive.status == 3) || parseFloat(balanceSA) >= 40000} onClick={handleStakeMore} sx={{ marginTop: "25px" }} variant="text">
 				Stake more
 			</ButtonOutline>
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>STAKING</Typography>

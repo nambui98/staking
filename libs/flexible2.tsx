@@ -63,8 +63,9 @@ export const unStakeFlexible2 = async (price: string, ethersSigner: any) => {
 
 export const toClaimableTime = async (walletAccount: any, ethersSigner: any) => {
 	const beFITTERFlexible2Contract = new ethers.Contract(beFITTERFlexible2.address, beFITTERFlexible2.abi, ethersSigner);
+	debugger
 	const balance = await beFITTERFlexible2Contract.getClaimableTime(walletAccount)
-	// debugger
+	debugger
 	return ethers.utils.formatUnits(balance, 'wei');
 }
 export const getRemainingDelayTime = async (walletAccount: any, ethersSigner: any) => {
