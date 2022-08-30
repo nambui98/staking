@@ -26,6 +26,7 @@ type Props = {
 		functionWarning: () => any
 		functionCancel: () => any
 	};
+	dataActive: any
 }
 export const UnstakeWarrning = (props: Props) => {
 	const { setStateContent,

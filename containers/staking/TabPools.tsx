@@ -91,10 +91,10 @@ export const TabPools = () => {
 	const totalFitterPassLocked =
 		dataMyStakingLock && dataMyStakingLock?.length > 0
 			? dataMyStakingLock?.reduce(
-					(previousValue, currentValue: row) =>
-						previousValue + currentValue.fpNum,
-					0
-			  )
+				(previousValue, currentValue: row) =>
+					previousValue + currentValue.fpNum,
+				0
+			)
 			: 0;
 	//status = 1: coming soon, 2: active, 3: closed
 	const rows = [
@@ -117,8 +117,7 @@ export const TabPools = () => {
 			title: 'Fitter Pass Drops - Locked',
 			status: 3,
 			data: createData(
-				`${
-					dataMyStakingLock && dataMyStakingLock?.length > 0 ? 'Staking' : '-'
+				`${dataMyStakingLock && dataMyStakingLock?.length > 0 ? 'Staking' : '-'
 				}`,
 				'Fitter Pass',
 				`${totalFitterPassLocked}`,
@@ -315,11 +314,11 @@ export const TabPools = () => {
 														onClick={
 															index === 0
 																? (e: React.MouseEvent) =>
-																		handleShowPopupPass(e)
+																	handleShowPopupPass(e)
 																: index === 1
-																? (e: React.MouseEvent) =>
+																	? (e: React.MouseEvent) =>
 																		handleShowPopupLocked(e)
-																: (e: React.MouseEvent) =>
+																	: (e: React.MouseEvent) =>
 																		handleShowPopupShared(e)
 														}
 													>
@@ -392,11 +391,11 @@ export const TabPools = () => {
 														onClick={
 															index === 0
 																? (e: React.MouseEvent) =>
-																		handleShowPopupPass(e)
+																	handleShowPopupPass(e)
 																: index === 1
-																? (e: React.MouseEvent) =>
+																	? (e: React.MouseEvent) =>
 																		handleShowPopupLocked(e)
-																: (e: React.MouseEvent) =>
+																	: (e: React.MouseEvent) =>
 																		handleShowPopupShared(e)
 														}
 													>

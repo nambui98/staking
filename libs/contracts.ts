@@ -12,6 +12,7 @@ import beFitterPass from '../abi/BeFitterPass.json';
 import beFitterStake from '../abi/BeFitterStaking.json';
 import bfClaimToken from '../abi/BeFitterClaimFiu.json';
 import bfClaimFitterPass from '../abi/FitterPassGiveAway.json'
+import bfFlexible2 from '../abi/StakeFiuEarnFitterPass.json'
 //dev
 import bflockedPool from '../abi/FitterPassLockedPool.json';
 import bfBurningEvent from '../abi/FitterPassBurningEvent.json';
@@ -67,3 +68,4 @@ export const beFITTERStakeUserError = { address: address.beFITTERStakeUserError,
 export const bftClaimBoxEventRewardDiamond = { address: address.bfClaimBoxEventRewardDiamond, abi: bfClaimBox.abi }
 export const bftClaimBoxEventRewardGold = { address: address.bfClaimBoxEventRewardGold, abi: bfClaimBox.abi }
 export const bftClaimFitterPassEventRefund = { address: address.bfClaimFitterPassEventRefund, abi: bfClaimFitterPass.abi }
+export const beFITTERFlexible2 = { address: address.beFITTERFlexible2, abi: bfFlexible2.abi }

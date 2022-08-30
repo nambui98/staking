@@ -19,6 +19,7 @@ type Props = {
 	balanceUS: string
 	claimableTime: string
 	setIsLoading: Function
+	dataActive: any
 }
 
 export const Staked = (props: Props) => {
@@ -32,18 +33,14 @@ export const Staked = (props: Props) => {
 		handleClickSuccess,
 		handleClickError,
 		setIsLoading,
-		handleClickWarning
+		handleClickWarning,
+		dataActive
 	} = props;
 	const { ethersSigner, ethersProvider, setRefresh, refresh, walletAccount } = useWalletContext();
 	const handleClaim = async () => {
 		setIsLoading(true)
 		try {
-			let res: any;
-			if (walletAccount === walletError) {
-				res = await claimRewardError(ethersSigner);
-			} else {
-				res = await claimReward(ethersSigner);
-			}
+			const res = await dataActive.info.claimReward(ethersSigner);
 			const checkStatus = setInterval(async () => {
 				const statusApprove = await ethersProvider.getTransactionReceipt(res.hash);
 				if (statusApprove?.status) {
@@ -121,7 +118,7 @@ export const Staked = (props: Props) => {
 	}
 	return (
 		<>
-			<ButtonOutline disabled onClick={handleStakeMore} sx={{ marginTop: "25px" }} variant="text">
+			<ButtonOutline disabled={dataActive && dataActive.status == 3} onClick={handleStakeMore} sx={{ marginTop: "25px" }} variant="text">
 				Stake more
 			</ButtonOutline>
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>STAKING</Typography>
@@ -195,7 +192,7 @@ const ButtonOutline = styled(Button)({
 		border: "0px",
 		color: '#fff'
 	},
-	':disabled': {
+	'&:disabled': {
 
 	}
 })

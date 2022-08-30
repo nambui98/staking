@@ -21,9 +21,11 @@ import { useWalletContext } from '../../../contexts/WalletContext';
 import { TEXT_STYLE } from '../../../styles/common/textStyles';
 import { EnablePool } from './EnablePool';
 import { Error } from './Error';
+import { Error2 } from './Error2';
 import { Staked } from './Staked';
 import { StakeProcess } from './StakeProcess';
 import { Success } from './Success';
+import { Success2 } from './Success2';
 import { TransactionHistory } from './TransactionHistory';
 import { Unstake } from './Unstake';
 import { UnstakeAgain, UnstakedSuccess } from './UnstakedSuccess';
@@ -70,6 +72,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 	totalStakingToken,
 	setStateContentInit,
 }) => {
+	console.log(dataActive);
 	const [stateContent, setStateContent] = useState<StateStaking | null>(
 		stateContentInit
 	);
@@ -195,6 +198,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 						setStateContent={setStateContent}
 						setIsLoading={setIsLoading}
 						handleClickError={handleClickError}
+						dataActive={dataActive ? dataActive : null}
 					/>
 				) : stateContent === StateStaking.StakeProcess ? (
 					<StakeProcess
@@ -206,6 +210,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 						setStateContent={setStateContent}
 						handleClickSuccess={handleClickSuccess}
 						handleClickError={handleClickError}
+						dataActive={dataActive ? dataActive : null}
 					/>
 				) : stateContent === StateStaking.Staked ? (
 					<Staked
@@ -219,6 +224,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 						handleClickSuccess={handleClickSuccess}
 						handleClickError={handleClickError}
 						handleClickWarning={handleClickWarning}
+						dataActive={dataActive ? dataActive : null}
 					/>
 				) : stateContent === StateStaking.UnstakeWarrning ? (
 					<UnstakeWarrning
@@ -232,6 +238,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 						setStateContent={setStateContent}
 						handleClickSuccess={handleClickSuccess}
 						handleClickError={handleClickError}
+						dataActive={dataActive ? dataActive : null}
 					/>
 				) : stateContent === StateStaking.UnstakedSuccess ? (
 					<UnstakedSuccess
@@ -246,6 +253,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 						handleClickSuccess={handleClickSuccess}
 						handleClickError={handleClickError}
 						handleClickWarning={handleClickWarning}
+						dataActive={dataActive ? dataActive : null}
 					/>
 				) : stateContent === StateStaking.Unstake ? (
 					<Unstake
@@ -258,6 +266,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 						setStateContent={setStateContent}
 						handleClickSuccess={handleClickSuccess}
 						handleClickError={handleClickError}
+						dataActive={dataActive ? dataActive : null}
 					/>
 				) : stateContent === StateStaking.WithDraw ? (
 					<WithDraw
@@ -267,6 +276,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 						setStateContent={setStateContent}
 						handleClickSuccess={handleClickSuccess}
 						handleClickError={handleClickError}
+						dataActive={dataActive ? dataActive : null}
 					/>
 				) : stateContent === StateStaking.UnstakeAgain ? (
 					<UnstakeAgain
@@ -281,6 +291,7 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 						handleClickSuccess={handleClickSuccess}
 						handleClickError={handleClickError}
 						handleClickWarning={handleClickWarning}
+						dataActive={dataActive ? dataActive : null}
 					/>
 				) : stateContent === StateStaking.WithDrawWarning ? (
 					<WithDrawWarning
@@ -290,13 +301,14 @@ export const DialogsItemStaking: React.FC<IProps> = ({
 						setStateContent={setStateContent}
 						handleClickSuccess={handleClickSuccess}
 						handleClickError={handleClickError}
+						dataActive={dataActive ? dataActive : null}
 					/>
 				) : stateContent === StateStaking.TransactionHistory ? (
 					<TransactionHistory setStateContent={setStateContent} />
 				) : stateContent === StateStaking.Success ? (
-					<Success success={success} setStateContent={setStateContent} />
+					<Success2 success={success} setStateContent={setStateContent} />
 				) : stateContent === StateStaking.Error ? (
-					<Error setStateContent={setStateContent} error={error} />
+					<Error2 setStateContent={setStateContent} error={error} />
 				) : (
 					<Box></Box>
 				)}

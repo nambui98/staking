@@ -21,6 +21,7 @@ type Props = {
 	balanceUS: string
 	claimableTime: string
 	unStakePrice: number
+	dataActive: any
 }
 export const UnstakedSuccess = (props: Props) => {
 	const { setStateContent,
@@ -32,7 +33,8 @@ export const UnstakedSuccess = (props: Props) => {
 		balanceSA,
 		balanceCP,
 		balanceUS,
-		claimableTime } = props;
+		claimableTime,
+		dataActive } = props;
 
 	const handleUnStake = () => {
 		setStateContent(StateStaking.Unstake)
@@ -86,7 +88,7 @@ export const UnstakedSuccess = (props: Props) => {
 	}
 	return (
 		<>
-			<ButtonOutline disabled onClick={handleStakeMore} sx={{ marginTop: "25px" }} variant="text">
+			<ButtonOutline disabled={dataActive && dataActive.status == 3} onClick={handleStakeMore} sx={{ marginTop: "25px" }} variant="text">
 				Stake more
 			</ButtonOutline>
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>STAKING</Typography>
@@ -109,35 +111,18 @@ export const UnstakedSuccess = (props: Props) => {
 					Withdraw
 				</ButtonOutline>
 			</Item>
-			{/* <Item onClick={() => {
-				setStateContent(StateStaking.TransactionHistory);
-			}} sx={{
-				justifyContent: "center !important",
-				mt: "8px !important",
-				cursor: 'pointer'
-			}}>
-				<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={600} mt="8px" sx={{
-					textDecoration: "underline"
-				}}>Transaction history</Typography>
-			</Item> */}
-
-
 
 		</>
 	)
 }
 export const UnstakeAgain = (props: Props) => {
-	const { setIsLoading, handleClickSuccess, handleClickError, setStateContent, unStakePrice } = props;
-	const { ethersSigner, ethersProvider, walletAccount, setRefresh, refresh } = useWalletContext();
+	const { setIsLoading, handleClickSuccess, handleClickError, setStateContent, unStakePrice, dataActive } = props;
+	const { ethersSigner, setRefresh, refresh } = useWalletContext();
 	const handleContinueUnStaking = async () => {
 		setIsLoading(true)
 		try {
-			let res;
-			if (walletAccount === walletError) {
-				res = await unStakeForUserError(unStakePrice.toString(), ethersSigner);
-			} else {
-				res = await unStake(unStakePrice.toString(), ethersSigner);
-			}
+			const res = await dataActive.info.unStake(unStakePrice.toString(), ethersSigner);
+
 			setIsLoading(false)
 			if (res?.status) {
 				setRefresh(!refresh)
@@ -168,9 +153,9 @@ export const UnstakeAgain = (props: Props) => {
 	}
 	const time = () => {
 		let time = new Date();
-		return moment(time.setDate(7)).utc().format('HH:mm DD/MM/yyyy');
+
+		return moment(time.setDate(time.getDate() + 7)).utc().format('HH:mm DD/MM/yyyy');
 	}
-	console.log(time());
 
 	return (
 		<>

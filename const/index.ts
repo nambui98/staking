@@ -45,3 +45,11 @@ export enum StateBurnHEE {
 	Error,
 
 }
+export enum Events {
+	null,
+	Flexible2,
+	Locked,
+	Shared,
+	Flexible,
+}
+

@@ -15,6 +15,7 @@ type Props = {
 	setIsLoading: Function;
 	balanceUS: string;
 	remainingDelayTime: string;
+	dataActive: any
 };
 export const WithDraw = (props: Props) => {
 	const {
@@ -24,21 +25,16 @@ export const WithDraw = (props: Props) => {
 		handleClickError,
 		remainingDelayTime,
 		setIsLoading,
+		dataActive
 	} = props;
-	const { ethersSigner, ethersProvider, setRefresh, refresh, walletAccount } =
-		useWalletContext();
+	const { ethersSigner, ethersProvider, setRefresh, refresh } = useWalletContext();
 	const handleWithdraw = async () => {
 		if (parseFloat(remainingDelayTime) > 0) {
 			setStateContent(StateStaking.WithDrawWarning);
 		} else {
 			setIsLoading(true);
 			try {
-				let res: any;
-				if (walletAccount === walletError) {
-					res = await withDrawError(ethersSigner);
-				} else {
-					res = await withDraw(ethersSigner);
-				}
+				const res = await dataActive.info.withDraw(ethersSigner);
 				const checkStatus = setInterval(async () => {
 					const statusApprove = await ethersProvider.getTransactionReceipt(
 						res.hash
@@ -160,6 +156,7 @@ export const WithDrawWarning = (props: Props) => {
 		handleClickError,
 		remainingDelayTime,
 		setIsLoading,
+		dataActive
 	} = props;
 
 	const { ethersProvider, ethersSigner, setRefresh, refresh } =
@@ -168,7 +165,7 @@ export const WithDrawWarning = (props: Props) => {
 	const handleWithdraw = async () => {
 		setIsLoading(true);
 		try {
-			const res = await withDraw(ethersSigner);
+			const res = await dataActive.info.withDraw(ethersSigner);
 			const checkStatus = setInterval(async () => {
 				const statusApprove = await ethersProvider.getTransactionReceipt(
 					res.hash
@@ -224,7 +221,7 @@ export const WithDrawWarning = (props: Props) => {
 						mt="28px"
 					>
 						If you want to withdraw immediately, you have to pay a penalty that
-						will <span style={{ color: '#FF6F61' }}>cost 16% </span> of your
+						will <span style={{ color: '#FF6F61' }}>cost {dataActive && dataActive.info.cost} </span> of your
 						staked amount to skip the delay time. Are you sure want to continue?
 					</Typography>
 				</Box>

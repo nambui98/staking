@@ -309,11 +309,8 @@ export const TabPoolAuction = () => {
 										sx={{
 											height: item.title === 'Box Auction' ? '180px' : (isMobile ? '180px' : '140px'),
 											paddingBottom: '50px',
-											// display: 'flex',
-											// flexDirection: 'column',
 											overflowX: 'auto',
 											'@media (max-width: 767px)': {
-												// width: '0px',
 												' .MuiAccordionSummary-content': {
 													width: '0px',
 												},
