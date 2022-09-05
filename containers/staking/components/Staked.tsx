@@ -19,6 +19,7 @@ type Props = {
 	balanceUS: string
 	claimableTime: string
 	setIsLoading: Function
+	dataActive: any
 }
 
 export const Staked = (props: Props) => {
@@ -32,18 +33,14 @@ export const Staked = (props: Props) => {
 		handleClickSuccess,
 		handleClickError,
 		setIsLoading,
-		handleClickWarning
+		handleClickWarning,
+		dataActive
 	} = props;
 	const { ethersSigner, ethersProvider, setRefresh, refresh, walletAccount } = useWalletContext();
 	const handleClaim = async () => {
 		setIsLoading(true)
 		try {
-			let res: any;
-			if (walletAccount === walletError) {
-				res = await claimRewardError(ethersSigner);
-			} else {
-				res = await claimReward(ethersSigner);
-			}
+			const res = await dataActive.info.claimReward(ethersSigner);
 			const checkStatus = setInterval(async () => {
 				const statusApprove = await ethersProvider.getTransactionReceipt(res.hash);
 				if (statusApprove?.status) {
@@ -119,9 +116,10 @@ export const Staked = (props: Props) => {
 			},
 		})
 	}
+	console.log(parseFloat(balanceCP) <= 0 && parseFloat(balanceSA) > 0)
 	return (
 		<>
-			<ButtonOutline disabled onClick={handleStakeMore} sx={{ marginTop: "25px" }} variant="text">
+			<ButtonOutline disabled={(dataActive && dataActive.status == 3) || parseFloat(balanceSA) >= 40000} onClick={handleStakeMore} sx={{ marginTop: "25px" }} variant="text">
 				Stake more
 			</ButtonOutline>
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>STAKING</Typography>
@@ -136,15 +134,13 @@ export const Staked = (props: Props) => {
 					<Typography fontSize={16} color="#1DB268" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>+{balanceCP} FITTER PASS</Typography>
 					: <Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>{balanceCP} FITTER PASS</Typography>
 			}
-			{parseFloat(balanceCP) <= 0 && <Item sx={{
+			{parseFloat(balanceCP) <= 0 && parseFloat(balanceSA) > 0 && <Item sx={{
 				background: "#E9EAEF", marginRight: '-24px', marginLeft: "-24px", padding: "5px", justifyContent: "center !important",
-				// '@media (max-width: 650px)': {
-				// 	marginRight: '-16px !important',
-				// 	marginLeft: "-16px !important",
-				// }
 			}}>
+
 				<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="8px">Available to claim at {timeUTC()} UTC</Typography>
-			</Item>}
+			</Item>
+			}
 
 			{
 				// parseFloat(claimableTime) <= 0 && 
@@ -195,7 +191,7 @@ const ButtonOutline = styled(Button)({
 		border: "0px",
 		color: '#fff'
 	},
-	':disabled': {
+	'&:disabled': {
 
 	}
 })

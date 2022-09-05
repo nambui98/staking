@@ -35,7 +35,7 @@ interface IProps {
 	dataActive: any;
 	setStateContentInit: Function;
 	stateContentInit: StateStakingLocked;
-	dataMyStakingLock: row[] | undefined
+	dataMyStakingLock: row[] | undefined;
 }
 
 export const DialogItemStakingLocked: React.FC<IProps> = ({
@@ -45,7 +45,7 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 	dataActive,
 	stateContentInit,
 	setStateContentInit,
-	dataMyStakingLock
+	dataMyStakingLock,
 }) => {
 	const [stateContent, setStateContent] = useState<StateStakingLocked | null>(
 		stateContentInit
@@ -75,8 +75,10 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 	});
 
 	useEffect(() => {
-		if (stateContent !== StateStakingLocked.Success && stateContent !== StateStakingLocked.Error) {
-
+		if (
+			stateContent !== StateStakingLocked.Success &&
+			stateContent !== StateStakingLocked.Error
+		) {
 			setStateContent(stateContentInit);
 		}
 	}, [stateContentInit]);
@@ -120,8 +122,9 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 		handleClickError,
 		dataMyStakingLock,
 		setRow,
-		row
+		row,
 	};
+
 	return (
 		<Dialog
 			sx={borderRadius}
@@ -150,7 +153,7 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 						<img
 							src={STAKING_ICON.arrowLeftGray}
 							height="24px"
-							style={{ marginRight: "8px", cursor: 'pointer', }}
+							style={{ marginRight: '8px', cursor: 'pointer' }}
 							alt=""
 							onClick={() => setStateContent(StateStakingLocked.LockedList)}
 						/>
@@ -158,27 +161,26 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 					<img src="assets/icons/fiu.svg" alt="" />
 					{dataActive && dataActive.name}
 				</TitlePopup>
-				{
-					stateContent == StateStakingLocked.Locked ?
-						<Locked
-							setStateContentInit={setStateContentInit}
-							setStateContent={setStateContent}
-							setIsLoading={setIsLoading}
-							handleClickError={handleClickError}
-						/> :
-						stateContent == StateStakingLocked.LockedStakeProcess ?
-							<LockedStakeProcess  {...propsPass} /> :
-							stateContent == StateStakingLocked.LockedList ?
-								<LockedList  {...propsPass} /> :
-								stateContent === StateStakingLocked.WithDraw ? (
-									<WithDraw {...propsPass} />
-								) :
-									stateContent === StateStakingLocked.Success ? (
-										<Success success={success} setStateContent={setStateContent} />
-									) : stateContent === StateStakingLocked.Error ? (
-										<Error setStateContent={setStateContent} error={error} />
-									) : <Box></Box>
-				}
+				{stateContent == StateStakingLocked.Locked ? (
+					<Locked
+						setStateContentInit={setStateContentInit}
+						setStateContent={setStateContent}
+						setIsLoading={setIsLoading}
+						handleClickError={handleClickError}
+					/>
+				) : stateContent == StateStakingLocked.LockedStakeProcess ? (
+					<LockedStakeProcess {...propsPass} />
+				) : stateContent == StateStakingLocked.LockedList ? (
+					<LockedList {...propsPass} />
+				) : stateContent === StateStakingLocked.WithDraw ? (
+					<WithDraw {...propsPass} />
+				) : stateContent === StateStakingLocked.Success ? (
+					<Success success={success} setStateContent={setStateContent} />
+				) : stateContent === StateStakingLocked.Error ? (
+					<Error setStateContent={setStateContent} error={error} />
+				) : (
+					<Box></Box>
+				)}
 			</Wrap>
 			<Backdrop
 				sx={{ color: '#FF6D24', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -186,7 +188,7 @@ export const DialogItemStakingLocked: React.FC<IProps> = ({
 			>
 				<CircularProgress color="inherit" />
 			</Backdrop>
-		</Dialog >
+		</Dialog>
 	);
 };
 
@@ -223,7 +225,7 @@ const Wrap = styled(Stack)((props: stackPropsNew) => ({
 	overflowY: 'auto',
 	overflowX: 'hidden',
 	width: 'calc(100vw - 32px)',
-	height: "auto",
+	height: 'auto',
 	'@media (min-width: 650px)': {
 		width: props.isBig ? '464px' : '360px',
 	},

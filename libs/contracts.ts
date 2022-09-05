@@ -12,6 +12,7 @@ import beFitterPass from '../abi/BeFitterPass.json';
 import beFitterStake from '../abi/BeFitterStaking.json';
 import bfClaimToken from '../abi/BeFitterClaimFiu.json';
 import bfClaimFitterPass from '../abi/FitterPassGiveAway.json'
+import bfFlexible2 from '../abi/StakeFiuEarnFitterPass.json'
 //dev
 import bflockedPool from '../abi/FitterPassLockedPool.json';
 import bfBurningEvent from '../abi/FitterPassBurningEvent.json';
@@ -24,6 +25,7 @@ import bfFiuTokenDev from '../abiDev/BFFiuToken.json';
 import bfShoeItemDev from '../abiDev/BFShoeItem.json';
 import bfWalletDev from '../abiDev/BeFitterWallet.json'
 import ExchangeHeeForFitterPassDev from '../abiDev/ExchangeHeeForFitterPass.json'
+import bfClaimFitterPassDev from '../abiDev/BeFitterClaim.json';
 
 //contract
 import { CONTRACT_PROD } from './contract/prod';
@@ -63,3 +65,7 @@ export const beFITTERBurningEvent = { address: address.beFITTERBurningEvent, abi
 export const bftClaimFitterPass = { address: address.bFclaimFitterPass, abi: bfClaimFitterPass.abi }
 export const bftBurnHee = { address: address.burnHeeAddress, abi: ExchangeHeeForFitterPassDev.abi }
 export const beFITTERStakeUserError = { address: address.beFITTERStakeUserError, abi: beFitterStake.abi }
+export const bftClaimBoxEventRewardDiamond = { address: address.bfClaimBoxEventRewardDiamond, abi: bfClaimBox.abi }
+export const bftClaimBoxEventRewardGold = { address: address.bfClaimBoxEventRewardGold, abi: bfClaimBox.abi }
+export const bftClaimFitterPassEventRefund = { address: address.bfClaimFitterPassEventRefund, abi: bfClaimFitterPass.abi }
+export const beFITTERFlexible2 = { address: address.beFITTERFlexible2, abi: bfFlexible2.abi }

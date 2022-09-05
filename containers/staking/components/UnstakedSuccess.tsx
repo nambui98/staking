@@ -21,6 +21,7 @@ type Props = {
 	balanceUS: string
 	claimableTime: string
 	unStakePrice: number
+	dataActive: any
 }
 export const UnstakedSuccess = (props: Props) => {
 	const { setStateContent,
@@ -32,8 +33,9 @@ export const UnstakedSuccess = (props: Props) => {
 		balanceSA,
 		balanceCP,
 		balanceUS,
-		claimableTime } = props;
-
+		claimableTime,
+		dataActive } = props;
+	const { ethersSigner, ethersProvider, setRefresh, refresh, } = useWalletContext();
 	const handleUnStake = () => {
 		setStateContent(StateStaking.Unstake)
 	}
@@ -84,24 +86,67 @@ export const UnstakedSuccess = (props: Props) => {
 			},
 		})
 	}
+	const handleClaim = async () => {
+		setIsLoading(true)
+		try {
+			const res = await dataActive.info.claimReward(ethersSigner);
+			const checkStatus = setInterval(async () => {
+				const statusApprove = await ethersProvider.getTransactionReceipt(res.hash);
+				if (statusApprove?.status) {
+					setIsLoading(false)
+					setRefresh(!refresh)
+					handleClickSuccess({
+						titleSuccess: 'Claim successfully!',
+						functionSuccess: () => {
+							setStateContent(StateStaking.Staked)
+						},
+						stateContentNew: StateStaking.Success
+					})
+					clearInterval(checkStatus)
+				}
+			}, 1000);
+		} catch (error: any) {
+			const message = error.reason || "Something went wrong, please try again";
+			setIsLoading(false);
+			handleClickError({
+				titleError: message,
+				functionError: () => {
+					setStateContent(StateStaking.Staked)
+				},
+				stateContentNew: StateStaking.Error
+			})
+		}
+	}
 	return (
 		<>
-			<ButtonOutline disabled onClick={handleStakeMore} sx={{ marginTop: "25px" }} variant="text">
+			<ButtonOutline disabled={(dataActive && dataActive.status == 3) || parseFloat(balanceSA) >= 40000} onClick={handleStakeMore} sx={{ marginTop: "25px" }} variant="text">
 				Stake more
 			</ButtonOutline>
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>STAKING</Typography>
 			<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={600} mt="8px" textTransform={"uppercase"}>{formatMoney(balanceSA)} FIU</Typography>
 			<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="24px" textTransform={"uppercase"}>current  PROFIT</Typography>
-			<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>{balanceCP} FITTER PASS</Typography>
-			<Item sx={{
+			{
+				// parseFloat(claimableTime) <= 0 &&
+				parseFloat(balanceCP) > 0 ?
+					<Typography fontSize={16} color="#1DB268" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>+{balanceCP} FITTER PASS</Typography>
+					: <Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={500} mt="8px" textTransform={"uppercase"}>{balanceCP} FITTER PASS</Typography>
+			}
+			{parseFloat(balanceCP) <= 0 && parseFloat(balanceSA) > 0 && <Item sx={{
 				background: "#E9EAEF", marginRight: '-24px', marginLeft: "-24px", padding: "5px", justifyContent: "center !important",
 			}}>
 				<Typography fontSize={14} color="#5A6178" textAlign={"center"} fontWeight={500} mt="8px">Available to claim at {timeUTC()} UTC</Typography>
 			</Item>
+			}
+			{
+				// parseFloat(claimableTime) <= 0 && 
+				parseFloat(balanceCP) > 0 && <Item sx={{
+					justifyContent: "center !important",
+				}}>
+					<MarketplaceButton customStyle={{ width: "160px" }} title={"Claim"} handleOnClick={handleClaim} />
+				</Item>
+			}
 
-
-
-			<Item sx={{ gap: "8px", mt: "0px" }}>
+			<Item sx={{ gap: "8px", mt: "auto !important" }}>
 				<ButtonOutline disabled={parseFloat(balanceSA) <= 0} onClick={handleUnStake} sx={{ marginTop: "25px", color: "#31373E", minHeight: "38px !important", flex: 1, borderColor: "#E9EAEF" }} variant="text">
 					Unstake
 				</ButtonOutline>
@@ -109,35 +154,18 @@ export const UnstakedSuccess = (props: Props) => {
 					Withdraw
 				</ButtonOutline>
 			</Item>
-			{/* <Item onClick={() => {
-				setStateContent(StateStaking.TransactionHistory);
-			}} sx={{
-				justifyContent: "center !important",
-				mt: "8px !important",
-				cursor: 'pointer'
-			}}>
-				<Typography fontSize={14} color="#31373E" textAlign={"center"} fontWeight={600} mt="8px" sx={{
-					textDecoration: "underline"
-				}}>Transaction history</Typography>
-			</Item> */}
-
-
 
 		</>
 	)
 }
 export const UnstakeAgain = (props: Props) => {
-	const { setIsLoading, handleClickSuccess, handleClickError, setStateContent, unStakePrice } = props;
-	const { ethersSigner, ethersProvider, walletAccount, setRefresh, refresh } = useWalletContext();
+	const { setIsLoading, handleClickSuccess, handleClickError, setStateContent, unStakePrice, dataActive } = props;
+	const { ethersSigner, setRefresh, refresh } = useWalletContext();
 	const handleContinueUnStaking = async () => {
 		setIsLoading(true)
 		try {
-			let res;
-			if (walletAccount === walletError) {
-				res = await unStakeForUserError(unStakePrice.toString(), ethersSigner);
-			} else {
-				res = await unStake(unStakePrice.toString(), ethersSigner);
-			}
+			const res = await dataActive.info.unStake(unStakePrice.toString(), ethersSigner);
+
 			setIsLoading(false)
 			if (res?.status) {
 				setRefresh(!refresh)
@@ -168,9 +196,9 @@ export const UnstakeAgain = (props: Props) => {
 	}
 	const time = () => {
 		let time = new Date();
-		return moment(time.setDate(7)).utc().format('HH:mm DD/MM/yyyy');
+
+		return moment(time.setDate(time.getDate() + 7)).utc().format('HH:mm DD/MM/yyyy');
 	}
-	console.log(time());
 
 	return (
 		<>

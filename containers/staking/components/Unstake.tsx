@@ -19,6 +19,7 @@ type Props = {
 	balanceCP: string
 	balanceUS: string
 	setUnStakePrice: Function
+	dataActive: any
 }
 const percents = [
 	{
@@ -48,6 +49,7 @@ export const Unstake = (props: Props) => {
 		balanceSA,
 		balanceCP,
 		balanceUS,
+		dataActive,
 		setUnStakePrice } = props;
 	const [value, setValue] = useState(balanceSA);
 	const [messageError, setMessageError] = useState('');
@@ -134,16 +136,16 @@ export const Unstake = (props: Props) => {
 					</ValueItem>
 				</Item>
 			}
-			<Item sx={{ mt: "8px !important" }}>
+			{/* <Item sx={{ mt: "8px !important" }}>
 				<TitleItem ></TitleItem>
 				<ValueItem sx={{ display: "flex", gap: "8px" }}>
 					{
-						percents.map((item, i) => <ButtonPercent disabled onClick={() => handleValueWithPercent(item.value)} key={i} variant="text">
+						percents.map((item, i) => <ButtonPercent disabled={dataActive && dataActive.status == 3} onClick={() => handleValueWithPercent(item.value)} key={i} variant="text">
 							{item.name}
 						</ButtonPercent>)
 					}
 				</ValueItem>
-			</Item>
+			</Item> */}
 
 			<Box mt="auto" width={"100%"} sx={{ paddingTop: "16px", borderTop: "1px solid #E9EAEF" }}>
 				<MarketplaceButton

@@ -18,26 +18,10 @@ type Props = {
 	balanceFiu: string
 	balanceSA: string
 	balanceCP: string
+	dataActive: any
 }
 
-const percents = [
-	{
-		name: "25%",
-		value: 0.25
-	},
-	{
-		name: "50%",
-		value: 0.5
-	},
-	{
-		name: "75%",
-		value: 0.75
-	},
-	{
-		name: "Max",
-		value: 1
-	},
-]
+
 
 export const StakeProcess = ({
 	balanceFiu,
@@ -46,16 +30,34 @@ export const StakeProcess = ({
 	handleClickSuccess,
 	setStateContent,
 	setIsLoading,
-	handleClickError
+	handleClickError,
+	dataActive
 }: Props) => {
 	const [value, setValue] = useState('');
 	const [messageError, setMessageError] = useState('');
 	const { ethersSigner, ethersProvider, setRefresh, refresh } = useWalletContext();
-	console.log(balanceFiu);
+	const percents = [
+		{
+			name: "25%",
+			value: 0.25
+		},
+		{
+			name: "50%",
+			value: 0.5
+		},
+		{
+			name: "75%",
+			value: 0.75
+		},
+		{
+			name: "Max",
+			value: 1
+		},
+	]
 	const handleStake = async () => {
 		setIsLoading(true)
 		try {
-			const res = await stake(value, ethersSigner);
+			const res = await dataActive.info.stake(value, ethersSigner);
 			const checkStatus = setInterval(async () => {
 				const statusApprove = await ethersProvider.getTransactionReceipt(res.hash);
 				if (statusApprove?.status) {
@@ -87,8 +89,14 @@ export const StakeProcess = ({
 	const handleValueWithPercent = (percent: number) => {
 		let valueCal = percent * parseFloat(balanceFiu);
 		if (valueCal <= parseFloat(balanceFiu) && valueCal != 0) {
-			setValue((percent * parseFloat(balanceFiu)).toString());
-			setMessageError("")
+
+			if ((percent * parseFloat(balanceFiu)) > (40000 - parseFloat(balanceSA))) {
+				setValue((percent * parseFloat(balanceFiu)).toString());
+				setMessageError(`Your maximum stake amount is ${formatMoney('40000')}`)
+			} else {
+				setValue((percent * parseFloat(balanceFiu)).toString());
+				setMessageError("")
+			}
 		} else {
 			setValue(valueCal.toString())
 			setMessageError("Insufficient balance")
@@ -119,17 +127,25 @@ export const StakeProcess = ({
 											setValue(valueParse)
 											setMessageError("Insufficient balance")
 										} else {
-											setValue(valueParse)
-											setMessageError("")
+											if (parseFloat(valueParse) > (40000 - parseFloat(balanceSA))) {
+												setValue(valueParse)
+												setMessageError(`Your maximum stake amount is ${formatMoney('40000')}`)
+											} else {
+												setValue(valueParse)
+												setMessageError("")
+											}
 										}
 									} else {
 										if ((parseFloat(valueParse) + parseFloat(balanceSA)) < 4000) {
 											setValue(valueParse)
-											setMessageError("You need to stake minimum 4000")
+											setMessageError(`You need to stake minimum ${formatMoney('4000')}`)
 										} else {
 											if (parseFloat(valueParse) > parseFloat(balanceFiu)) {
 												setValue(valueParse)
 												setMessageError("Insufficient balance")
+											} else if (parseFloat(valueParse) > (40000 - parseFloat(balanceSA))) {
+												setValue(valueParse)
+												setMessageError(`Your maximum stake amount is ${formatMoney('40000')}`)
 											} else {
 												setValue(valueParse)
 												setMessageError("")

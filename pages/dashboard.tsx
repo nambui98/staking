@@ -12,7 +12,6 @@ const Dashboard = () => {
 			<Wrap>
 				<Container sx={{ maxWidth: 1120 }}>
 					<Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: isCloseEventBoxAuction ? 'row' : (isMobile ? 'column' : 'row') }}>
-
 						<LeftContent />
 						{
 							!isCloseEventBoxAuction &&

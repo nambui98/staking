@@ -5,16 +5,18 @@ import { MarketplaceButton } from '../../../components/buttons/MarketplaceButton
 import { StateStaking } from '../../../const';
 import { useWalletContext } from '../../../contexts/WalletContext';
 import { approveStakingFiu } from '../../../libs/staking';
+import { formatMoney } from '../../../libs/utils/utils';
 
 type Props = {
 	setStateContent: Function
 	setIsLoading: Function
 	handleClickError: Function
 	setStateContentInit: Function
+	dataActive: any
 }
 
 export const EnablePool = (props: Props) => {
-	const { setIsLoading, handleClickError, setStateContentInit } = props;
+	const { setIsLoading, handleClickError, setStateContentInit, dataActive } = props;
 	const { setToggleActivePopup, walletAccount, ethersSigner, ethersProvider } = useWalletContext();
 
 	const [continueToStake, setContinueToStake] = useState<Boolean>(false);
@@ -26,7 +28,7 @@ export const EnablePool = (props: Props) => {
 	const handleEnable = async () => {
 		setIsLoading(true)
 		try {
-			const res = await approveStakingFiu(ethersSigner);
+			const res = await dataActive.info.approveFiu(ethersSigner);
 			const checkStatus = setInterval(async () => {
 				const statusApprove = await ethersProvider.getTransactionReceipt(res.hash);
 				if (statusApprove?.status) {
@@ -36,8 +38,6 @@ export const EnablePool = (props: Props) => {
 					clearInterval(checkStatus)
 				}
 			}, 1000);
-
-
 		} catch (error: any) {
 			const message = error.reason || "Something went wrong, please try again";
 			setIsLoading(false);
@@ -58,30 +58,31 @@ export const EnablePool = (props: Props) => {
 			</Item>
 			<Item>
 				<TitleItem >START TIME JOIN</TitleItem>
-				<ValueItem>16:00 UTC 19/07/2022</ValueItem>
+				<ValueItem>{dataActive && dataActive.info.startTime}</ValueItem>
+
 			</Item>
 			<Item>
 				<TitleItem >End time JOIN</TitleItem>
-				<ValueItem>16:00 UTC 03/08/2022</ValueItem>
+				<ValueItem>{dataActive && dataActive.info.endTime}</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem >stake amount (min)</TitleItem>
-				<ValueItem>4000 FIU/1 person</ValueItem>
+				<ValueItem>{dataActive && dataActive.info.stakeMinAmount}</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem >stake amount (mAX)</TitleItem>
-				<ValueItem>-</ValueItem>
+				<ValueItem>{dataActive && dataActive.info.stakeMaxAmount}</ValueItem>
 			</Item>
 			<Item>
 				<TitleItem >REWARD</TitleItem>
 				<ValueItem>
-					Fitter Pass
+					{dataActive && dataActive.info.reward}
 				</ValueItem>
 			</Item>
 			<Box mt="auto" width={"100%"} sx={{ paddingTop: "16px", borderTop: "1px solid #E9EAEF" }}>
 				{walletAccount ?
-					continueToStake ? <MarketplaceButton customStyle={{ width: "100%" }} disabled title={"Continue to stake"} handleOnClick={handleContinueToStake} /> :
-						<MarketplaceButton customStyle={{ width: "100%" }} disabled title={"Enable"} handleOnClick={handleEnable} /> : <MarketplaceButton disabled customStyle={{ width: "100%" }} title={"Connect Wallet"} handleOnClick={() => { setToggleActivePopup(true) }} />
+					continueToStake ? <MarketplaceButton customStyle={{ width: "100%" }} disabled={dataActive && dataActive.status == 3} title={"Continue to stake"} handleOnClick={handleContinueToStake} /> :
+						<MarketplaceButton customStyle={{ width: "100%" }} disabled={dataActive && dataActive.status == 3} title={"Enable"} handleOnClick={handleEnable} /> : <MarketplaceButton disabled={dataActive && dataActive.status == 3} customStyle={{ width: "100%" }} title={"Connect Wallet"} handleOnClick={() => { setToggleActivePopup(true) }} />
 				}
 			</Box>
 		</>

@@ -1,4 +1,14 @@
-import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import {
+	Box,
+	Button,
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow,
+	Typography,
+} from '@mui/material';
 import { styled } from '@mui/styles';
 import { ethers } from 'ethers';
 import moment from 'moment';
@@ -22,16 +32,21 @@ type Props = {
 	// claimableTime: string;
 	setIsLoading: Function;
 	setRow: Function;
-	dataMyStakingLock: row[] | undefined
+	dataMyStakingLock: row[] | undefined;
 };
 
 const arrJuly = ['2nd July 2022', '3rd July 2022'];
 
 const arrTitleStakingLocked = ['STAKING', 'Lock Duration', 'Rewards'];
 
-
 interface Column {
-	id: 'tokenAmount' | 'lockedTime' | 'fpNum' | 'sId' | 'stakingTime' | 'widthdraw';
+	id:
+		| 'tokenAmount'
+		| 'lockedTime'
+		| 'fpNum'
+		| 'sId'
+		| 'stakingTime'
+		| 'widthdraw';
 	label: string;
 	minWidth?: number;
 	align?: 'right';
@@ -42,7 +57,8 @@ const columns: readonly Column[] = [
 		id: 'tokenAmount',
 		label: 'STAKING',
 		minWidth: 80,
-		format: (value: number) => formatMoney(ethers.utils.formatEther(convertBigNumber(value))) + ' FIU',
+		format: (value: number) =>
+			formatMoney(ethers.utils.formatEther(convertBigNumber(value))) + ' FIU',
 	},
 	{
 		id: 'lockedTime',
@@ -50,14 +66,17 @@ const columns: readonly Column[] = [
 		minWidth: 120,
 		format: (value: number) => {
 			let lockDuration = value / 60 / 60 / 24;
-			return lockDuration.toString().length < 3 ? lockDuration.toString() : lockDuration.toFixed(4) + ' DAYS';
-		}
+			return lockDuration.toString().length < 3
+				? lockDuration.toString()
+				: lockDuration.toFixed(4) + ' DAYS';
+		},
 	},
 	{
 		id: 'fpNum',
 		label: 'REWARDS',
 		minWidth: 120,
-		format: (value: number) => value.toString() + (value <= 1 ? ' FITTER PASS' : ' FITTER PASSES')
+		format: (value: number) =>
+			value.toString() + (value <= 1 ? ' FITTER PASS' : ' FITTER PASSES'),
 	},
 	{ id: 'widthdraw', label: '' },
 ];
@@ -65,21 +84,20 @@ interface Data {
 	tokenAmount: string;
 	lockedTime: string;
 	rewards: string;
-	widthdraw: string | null
+	widthdraw: string | null;
 }
 
 function createData(
 	tokenAmount: string,
 	lockedTime: string,
 	rewards: string,
-	widthdraw: string | null,
-
+	widthdraw: string | null
 ): Data {
 	return {
 		tokenAmount,
 		lockedTime,
 		rewards,
-		widthdraw
+		widthdraw,
 	};
 }
 
@@ -90,7 +108,7 @@ export const LockedList = (props: Props) => {
 		handleClickError,
 		setIsLoading,
 		dataMyStakingLock,
-		setRow
+		setRow,
 	} = props;
 	const { ethersSigner, ethersProvider, setRefresh, refresh } =
 		useWalletContext();
@@ -98,30 +116,31 @@ export const LockedList = (props: Props) => {
 	const timeUTC = (timeStamp: number) => {
 		let time = new Date(timeStamp * 1000);
 		return moment(time).utc().format('DD MMMM YYYY');
-	}
+	};
 	const arrayDays = dataMyStakingLock?.map((item: row) => {
-		return timeUTC(parseInt(item.stakingTime.toString()))
-	})
+		return timeUTC(parseInt(item.stakingTime.toString()));
+	});
 	var arrayDaysUq = arrayDays?.filter((v, i: number, a) => a.indexOf(v) === i);
 	const newArrayDaysUq = arrayDaysUq?.map((time: string) => {
-		const items: row[] | undefined = dataMyStakingLock?.map((e) => {
-			return {
-				...e,
-				// stakingTime: timeUTC(parseInt(e.stakingTime.toString())),
-				// lockedTime: e.lockedTime 
-			}
-		}).filter(e => timeUTC(parseInt(e.stakingTime.toString())) === time);
+		const items: row[] | undefined = dataMyStakingLock
+			?.map((e) => {
+				return {
+					...e,
+					// stakingTime: timeUTC(parseInt(e.stakingTime.toString())),
+					// lockedTime: e.lockedTime
+				};
+			})
+			.filter((e) => timeUTC(parseInt(e.stakingTime.toString())) === time);
 		return {
 			time,
-			rows: items
-		}
-	})
+			rows: items,
+		};
+	});
 
 	const handleWithDraw = (row: row) => {
 		setRow(row);
 		setStateContent(StateStakingLocked.WithDraw);
 	};
-
 
 	const handleStakeMore = () => {
 		setStateContent(StateStakingLocked.LockedStakeProcess);
@@ -141,18 +160,23 @@ export const LockedList = (props: Props) => {
 							display: 'inline-block',
 							padding: '4px 16px',
 							marginLeft: '-24px',
-							color: "#FF6D24"
+							color: '#FF6D24',
 						}}
 					>
 						{item.time}
 					</Box>
-					<TableContainer >
+					<TableContainer>
 						<Table stickyHeader aria-label="sticky table">
 							<TableHead>
 								<TableRow>
 									{columns.map((column) => (
 										<TableCell
-											sx={{ fontSize: '12px', padding: '8px 8px', fontWeight: '500', color: '#898E9E' }}
+											sx={{
+												fontSize: '12px',
+												padding: '8px 8px',
+												fontWeight: '500',
+												color: '#898E9E',
+											}}
 											key={column.id}
 											align={column.align}
 											style={{ minWidth: column.minWidth }}
@@ -163,27 +187,59 @@ export const LockedList = (props: Props) => {
 								</TableRow>
 							</TableHead>
 							<TableBody>
-								{item.rows && item.rows
-									.map((row, index) => {
+								{item.rows &&
+									item.rows.map((row, index) => {
 										return (
 											<TableRow hover role="checkbox" tabIndex={-1} key={index}>
 												{columns.map((column) => {
 													if (column.id == 'widthdraw') {
 														if (!row.withdrawn) {
-
-															return <TableCell onClick={() => handleWithDraw(row)} sx={{ fontSize: '12px', color: "#55C8FC", padding: '8px 8px', borderBottom: 'none', cursor: 'pointer' }} key={column.id} align={column.align}>
-																Withdraw
-															</TableCell>
+															return (
+																<TableCell
+																	onClick={() => handleWithDraw(row)}
+																	sx={{
+																		fontSize: '12px',
+																		color: '#55C8FC',
+																		padding: '8px 8px',
+																		borderBottom: 'none',
+																		cursor: 'pointer',
+																	}}
+																	key={column.id}
+																	align={column.align}
+																>
+																	Withdraw
+																</TableCell>
+															);
 														} else {
-															return <TableCell sx={{ fontSize: '12px', color: '#898E9E', padding: '8px 8px', borderBottom: 'none' }} key={column.id} align={column.align}>
-																Withdrawn
-															</TableCell>
+															return (
+																<TableCell
+																	sx={{
+																		fontSize: '12px',
+																		color: '#898E9E',
+																		padding: '8px 8px',
+																		borderBottom: 'none',
+																	}}
+																	key={column.id}
+																	align={column.align}
+																>
+																	Withdrawn
+																</TableCell>
+															);
 														}
 													} else {
-
 														const value = row[column.id];
 														return (
-															<TableCell sx={{ fontSize: '12px', padding: '8px 8px', color: '#31373E', fontWeight: '500', borderBottom: 'none' }} key={column.id} align={column.align}>
+															<TableCell
+																sx={{
+																	fontSize: '12px',
+																	padding: '8px 8px',
+																	color: '#31373E',
+																	fontWeight: '500',
+																	borderBottom: 'none',
+																}}
+																key={column.id}
+																align={column.align}
+															>
 																{column.format && typeof value === 'number'
 																	? column.format(value)
 																	: value}
@@ -202,11 +258,12 @@ export const LockedList = (props: Props) => {
 		});
 	};
 	return (
-		<Box sx={{ height: "465px" }}>
+		<Box sx={{ height: '465px' }}>
 			<ButtonOutline
 				onClick={handleStakeMore}
-				sx={{ marginTop: '25px', width: "100%" }}
+				sx={{ marginTop: '25px', width: '100%' }}
 				variant="text"
+				disabled={true}
 			>
 				Stake more
 			</ButtonOutline>

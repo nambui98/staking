@@ -198,7 +198,7 @@ export default function useStakingHook(props: Props) {
 	const getAll = async () => {
 		setIsLoading(true);
 		await Promise.all([
-			getStakingS(),
+			// getStakingS(),
 			getAllowance(),
 			getBalanceFiu(),
 			getBalanceSA(),
